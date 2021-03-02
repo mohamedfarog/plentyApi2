@@ -149,9 +149,9 @@ class OrderController extends Controller
 
                     for ($i = 0; $i  < count($orderdetails['addons']); $i++) {
                         if ($ii == count($orderdetails['addons'])) {
-                            $ids .= $orderdetails['addons'][$i];
+                            $ids .= strval($orderdetails['addons'][$i]);
                         } else {
-                            $ids .= $orderdetails['addons'][$i] . ",";
+                            $ids .= strval($orderdetails['addons'][$i]) . ",";
                         }
 
                         $ii++;
