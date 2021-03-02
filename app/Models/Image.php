@@ -12,4 +12,13 @@ class Image extends Model
     protected $fillable = [
         'product_id', 'url',
     ];
+
+    protected $hidden = ['created_at', 'updated_at', 'url'];
+    protected $appends = ['imgurl'];
+    public function getImgurlAttribute()
+    {
+        if ($this->url != null) {
+            return env('PRODUCTURL') . $this->url;
+        }
+    }
 }

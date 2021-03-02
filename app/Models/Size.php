@@ -12,12 +12,5 @@ class Size extends Model
         'product_id', 'value', 'others','price'
     ];
 
-    protected $hidden = ['created_at', 'updated_at','url'];
-
-    public function getImgurlAttribute()
-    {
-        if($this->url != null){
-            return env('PRODUCTURL').$this->url;
-        }
-    }
+   
 }
