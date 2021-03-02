@@ -18,10 +18,9 @@ class CatController extends Controller
     public function index()
     {
         //
-        $cats = Cat::with(['shops'=>function($shop){
-            $shops = $shop->with(['style'])->get();
-             $products = Product::where('shop_id', $shops[0]->id)->orderBy('sales', 'desc')->get();
-            return $shop->with(['style'])->merge($products);
+        $cats = Cat::with(['shops' => function ($shop) {
+
+            return $shop->with(['style', 'popularitems']);
         }])->get();
 
         return $cats;
@@ -81,7 +80,7 @@ class CatController extends Controller
             $validator = Validator::make($request->all(), [
                 "name_en" => "required",
             ]);
-    
+
             if ($validator->fails()) {
                 return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
             }

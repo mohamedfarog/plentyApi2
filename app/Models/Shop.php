@@ -22,4 +22,9 @@ class Shop extends Model
     {
         return $this->hasOne(Style::class);
     }
+
+    public function popularitems()
+    {
+        return Product::where('shop_id',$this->id)->orderBy('sales','desc')->get();
+    }
 }
