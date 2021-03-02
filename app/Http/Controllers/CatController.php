@@ -20,7 +20,7 @@ class CatController extends Controller
     {
         //
         $cats = Cat::with(['shops' => function ($shop) {
-            $shops = $shop->with(['style'])->first();
+            $shops = $shop->with(['style'])[0];
             return [$shop->with(['style']),  (new Shop())->popularitems($shops->id)];
         }])->get();
 
