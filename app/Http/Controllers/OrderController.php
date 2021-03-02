@@ -114,7 +114,7 @@ class OrderController extends Controller
             if (isset($request->delivery_charge)) {
                 $data['delivery_charge'] = $request->delivery_charge;
             }
-            
+
 
             $order = Order::create($data);
             foreach ($request->orderdetails as $orderdetails) {
@@ -144,7 +144,19 @@ class OrderController extends Controller
                     $arr['booking_time'] = $orderdetails['booking_time'];
                 }
                 if (isset($orderdetails['addons'])) {
-                    $arr['addons'] = implode(',', $orderdetails['addons']);
+                    $ids = '';
+                    $ii = 0;
+
+                    for ($i = 0; $i  < count($orderdetails['addons']); $i++) {
+                        if ($ii == count($orderdetails['addons'])) {
+                            $ids .= $orderdetails['addons'][$i];
+                        } else {
+                            $ids .= $orderdetails['addons'][$i] . ",";
+                        }
+
+                        $ii++;
+                    }
+                    $arr['addons'] = implode('',);
                 }
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
