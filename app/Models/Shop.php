@@ -12,7 +12,7 @@ class Shop extends Model
         'name_en', 'name_ar', 'desc_en', 'desc_ar', 'cat_id', 'active', 'status',
     ];
     protected $hidden = ['created_at', 'updated_at'];
-
+    protected $appends = ['popularitems'];
     public function cat()
     {
         return $this->belongsTo(Cat::class);
@@ -23,8 +23,8 @@ class Shop extends Model
         return $this->hasOne(Style::class);
     }
 
-    public static function popularitems($id)
+    public function getPopularitemsAttribute()
     {
-        return Product::where('shop_id', $id)->orderBy('sales', 'desc')->get();
+        return Product::where('shop_id', $this->id)->orderBy('sales', 'desc')->get();
     }
 }
