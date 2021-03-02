@@ -16,7 +16,9 @@ class ProdcatController extends Controller
     public function index(Request $request)
     {
         //
-        $cats = Prodcat::with(['products'])->where('shop_id', $request->shop_id)->get();
+        $cats = Prodcat::with(['products'=>function($prod){
+            return $prod->with(['sizes', 'colors', 'addons']);
+        }])->where('shop_id', $request->shop_id)->get();
         return $cats;
     }
 

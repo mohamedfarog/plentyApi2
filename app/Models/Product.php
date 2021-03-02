@@ -11,4 +11,19 @@ class Product extends Model
     protected $fillable = [
         'name_en', 'name_ar', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id','prodcat_id'
     ];
+
+    public function sizes()
+    {
+        return $this->hasMany(Size::class);
+    }
+
+    public function addons()
+    {
+        return $this->hasMany(Addon::class);
+    }
+
+    public function colors()
+    {
+        return $this->hasMany(Color::class);
+    }
 }
