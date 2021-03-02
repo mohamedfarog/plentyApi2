@@ -144,19 +144,8 @@ class OrderController extends Controller
                     $arr['booking_time'] = $orderdetails['booking_time'];
                 }
                 if (isset($orderdetails['addons'])) {
-                    $ids = '';
-                    $ii = 1;
-
-                    for ($i = 0; $i  < count($orderdetails['addons']); $i++) {
-                        if ($ii == count($orderdetails['addons'])) {
-                            $ids .= strval($orderdetails['addons'][$i]);
-                        } else {
-                            $ids .= strval($orderdetails['addons'][$i]) . ",";
-                        }
-
-                        $ii++;
-                    }
-                    $arr['addons'] = strval($ids);
+                    
+                    $arr['addons'] = $orderdetails['addons'];
                 }
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
