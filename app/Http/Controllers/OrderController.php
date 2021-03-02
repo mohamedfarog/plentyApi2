@@ -145,7 +145,7 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['addons'])) {
                     
-                    $arr['addons'] = $orderdetails['addons'];
+                    $arr['addons'] = implode(',', $orderdetails['addons']);
                 }
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
