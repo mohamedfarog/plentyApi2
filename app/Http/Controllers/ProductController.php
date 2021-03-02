@@ -150,7 +150,7 @@ class ProductController extends Controller
                     }
                     
                     $arr['desc_en'] = $addon['desc_en'];
-                    if($addon['desc_ar']){
+                    if(isset($addon['desc_ar'])){
 
                         $arr['desc_ar'] = $addon['desc_ar'];
                     }
