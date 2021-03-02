@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
@@ -43,7 +44,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('prodcat', ProdcatController::class);
     Route::resource('products', ProductController::class);
-    
+    Route::resource('orders', OrderController::class);
 });
 
 

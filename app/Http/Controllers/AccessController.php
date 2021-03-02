@@ -92,46 +92,41 @@ class AccessController extends Controller
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
         }
-$settings = Project::first();
-        $user = User::where('invitation_code',$request->invitation_code)->first();
-        if($settings->currentinv < $settings->invlimit){
-            if($user->invites < $settings->invperuser){
+        $settings = Project::first();
+        $user = User::where('invitation_code', $request->invitation_code)->first();
+        if ($settings->currentinv < $settings->invlimit) {
+            if ($user->invites < $settings->invperuser) {
                 $data = array();
-                $data['inviter_id']= $user->id;
+                $data['inviter_id'] = $user->id;
                 $data['invitee_id'] = $loggeduser->id;
                 $data['invcode'] = $request->invitation_code;
                 $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
-                if($accessuser != null){
-                    return response()->json(['error'=>'You have already been invited by another user.']);
-                 
-                }else{
+                if ($accessuser != null) {
+                    return response()->json(['error' => 'You have already been invited by another user.']);
+                } else {
                     $access = Access::create($data);
                     $msg = 'You have been invited successfully! You now have access.';
-                    $user->invites +=1;
+                    $user->invites += 1;
+                    $user->points += $settings->invitepts;
                     $settings->currentinv += 1;
                     $settings->save();
                     $user->save();
-    
+
                     return response()->json(['success' => !!$access, 'message' => $msg]);
                 }
-                
-    
-               
-            }else{
-                return response()->json(['error'=>'This invitation code is not valid.']);
-    
+            } else {
+                return response()->json(['error' => 'This invitation code is not valid.']);
             }
-        }else{
-            return response()->json(['error'=>'Sorry, the Plenty Gold Access list is currently full.']);
+        } else {
+            return response()->json(['error' => 'Sorry, the Plenty Gold Access list is currently full.']);
         }
-       
     }
 
     public function checkList(Request $request)
     {
         $settings = Project::first();
-        
-        return response()->json(['available'=>$settings->currentinv < $settings->invlimit]);
+
+        return response()->json(['available' => $settings->currentinv < $settings->invlimit]);
     }
 
     public function checkAccess(Request $request)
@@ -139,21 +134,18 @@ $settings = Project::first();
         $user = Auth::user();
         $access = Access::where('invitee_id', $user->id)->first();
 
-        if($access){
-            return response()->json(['available'=>true]);
-        }else{
-            return response()->json(['available'=>false]);
-
+        if ($access) {
+            return response()->json(['available' => true]);
+        } else {
+            return response()->json(['available' => false]);
         }
     }
 
     public function info(Request $request)
     {
         $user = Auth::user();
-        if(isset($request->user_id)){
-
-        }else{
-            
+        if (isset($request->user_id)) {
+        } else {
         }
     }
 
