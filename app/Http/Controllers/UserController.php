@@ -180,9 +180,9 @@ class UserController extends Controller
                     if(isset($request->bday)){
                         $user->bday = $request->bday;
                     }
-                    if(isset($request->contact)){
-                        $user->contact = $request->contact;
-                    }
+                    // if(isset($request->contact)){
+                    //     $user->contact = $request->contact;
+                    // }
                     if(isset($request->gender)){
                         $user->gender = $request->gender;
                     }
