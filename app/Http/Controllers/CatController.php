@@ -19,9 +19,9 @@ class CatController extends Controller
     {
         //
         $cats = Cat::with(['shops'=>function($shop){
-            $shops = $shop->with(['style']);
+            $shops = $shop->with(['style'])->get();
              $products = Product::where('shop_id', $shops[0]->id)->orderBy('sales', 'desc')->get();
-            return $shops->concat($products);
+            return $shop->with(['style'])->concat($products);
         }])->get();
 
         return $cats;
