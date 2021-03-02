@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\UploadHelper;
+use App\Models\Addon;
 use App\Models\Color;
 use App\Models\Image;
 use App\Models\Product;
@@ -132,10 +133,23 @@ class ProductController extends Controller
                 foreach ($request->sizes as $size) {
                     $arr = array();
                     $arr['product_id'] = $product->id;
-                    $arr['value'] = $size;
-                    
-
+                    $arr['value'] = $size['value'];
+                    $arr['others'] = $size['others'];
+                    $arr['price'] = $size['price'];
                     $sizes = Size::create($arr);
+                }
+            }
+            if(isset($request->addons)){
+                foreach ($request->addons as $addon) {
+                    $arr = array();
+                    $arr['product_id'] = $product->id;
+                    $arr['name_en'] = $addon['name_en'];
+                    $arr['name_ar'] = $addon['name_ar'];
+                    $arr['desc_en'] = $addon['desc_en'];
+                    $arr['desc_ar'] = $addon['desc_ar'];
+                    $arr['others'] = $addon['others'];
+                    $arr['price'] = $addon['price'];
+                    $sizes = Addon::create($arr);
                 }
             }
             if(isset($request->colors)){
@@ -158,16 +172,7 @@ class ProductController extends Controller
                     $sizes = Image::create($arr);
                 }
             }
-            // if(isset($request->addons)){
-            //     foreach ($request->addons as $addon) {
-            //         $arr = array();
-            //         $arr['product_id'] = $product->id;
-            //         $arr['name_en'] = $addon;
-                    
-
-            //         $sizes = Image::create($arr);
-            //     }
-            // }
+         
             
             $msg = 'Product has been added';
             return response()->json(['success' => !!$product, 'message' => $msg]);
