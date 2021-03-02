@@ -128,6 +128,9 @@ class ProductController extends Controller
             if(isset($request->prodcat_id)){
                 $data['prodcat_id'] = $request->prodcat_id;
             }
+            if(isset($request->shop_id)){
+                $data['shop_id'] = $request->shop_id;
+            }
             $product = Product::create($data);
 
             if(isset($request->sizes)){
@@ -174,7 +177,7 @@ class ProductController extends Controller
                 foreach ($request->images as $image) {
                     $arr = array();
                     $arr['product_id'] = $product->id;
-                    $arr['url'] = $helper->store($image);
+                    $arr['url'] = $helper->store($image['img']);
                     
 
                     $sizes = Image::create($arr);
