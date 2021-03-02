@@ -13,10 +13,12 @@ class Cat extends Model
     ];
 
     protected $appends = [
-        'imgurl'
-    ];
-    protected $hidden = ['created_at', 'updated_at', 'img'];
+        'imgurl',
 
+    ];
+
+    protected $hidden = ['created_at', 'updated_at', 'img'];
+    
     public function shops()
     {
         return $this->hasMany(Shop::class);
@@ -28,4 +30,5 @@ class Cat extends Model
             return env('CATURL') . $this->img;
         }
     }
+    
 }

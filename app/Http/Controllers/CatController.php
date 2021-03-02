@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\UploadHelper;
 use App\Models\Cat;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,6 +19,7 @@ class CatController extends Controller
     {
         //
         $cats = Cat::with(['shops'=>function($shop){
+            $products = Product::where('shop_id')->orderBy('sales', 'desc')->get();
             return $shop->with(['style']);
         }])->get();
 

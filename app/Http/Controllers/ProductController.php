@@ -80,6 +80,7 @@ class ProductController extends Controller
                     if (isset($request->shop_id)) {
                         $product->shop_id = $request->shop_id;
                     }
+                    
                     $msg = 'Product has been updated';
 
                     $product->save();
