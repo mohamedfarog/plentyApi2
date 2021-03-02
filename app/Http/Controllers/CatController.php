@@ -23,7 +23,7 @@ class CatController extends Controller
         //     return $shop->with(['style']);
         // }])->get();
 
-        $cats = Cat::all()->shops();
+        $cats = Cat::shops();
 
         return $cats;
     }
