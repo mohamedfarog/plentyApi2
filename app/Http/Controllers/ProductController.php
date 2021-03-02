@@ -144,9 +144,16 @@ class ProductController extends Controller
                     $arr = array();
                     $arr['product_id'] = $product->id;
                     $arr['name_en'] = $addon['name_en'];
-                    $arr['name_ar'] = $addon['name_ar'];
+                    if($addon['name_ar']){
+
+                        $arr['name_ar'] = $addon['name_ar'];
+                    }
+                    
                     $arr['desc_en'] = $addon['desc_en'];
-                    $arr['desc_ar'] = $addon['desc_ar'];
+                    if($addon['desc_ar']){
+
+                        $arr['desc_ar'] = $addon['desc_ar'];
+                    }
                     $arr['others'] = $addon['others'];
                     $arr['price'] = $addon['price'];
                     $sizes = Addon::create($arr);
