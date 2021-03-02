@@ -71,6 +71,9 @@ class CatController extends Controller
                     if (isset($request->img)) {
                         $cat->img = $helper->store($request->img, 'shops');
                     }
+                    if (isset($request->backgroundvid)) {
+                        $cat->backgroundvid = $helper->store($request->backgroundvid, 'shops');
+                    }
                     $msg = 'Cat has been updated';
                     $cat->save();
                     return response()->json(['success' => !!$cat, 'message' => $msg]);
@@ -99,6 +102,9 @@ class CatController extends Controller
             }
             if (isset($request->img)) {
                 $data['img'] = $helper->store($request->img, 'shops');
+            }
+            if (isset($request->backgroundvid)) {
+                $data['backgroundvid'] = $helper->store($request->backgroundvid, 'shops');
             }
             $cat = Cat::create($data);
             $msg = 'Cat has been added';
