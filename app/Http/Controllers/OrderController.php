@@ -114,6 +114,7 @@ class OrderController extends Controller
             if (isset($request->delivery_charge)) {
                 $data['delivery_charge'] = $request->delivery_charge;
             }
+            
 
             $order = Order::create($data);
             foreach ($request->orderdetails as $orderdetails) {
@@ -126,9 +127,6 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['shop_id'])) {
                     $arr['shop_id'] = $orderdetails['shop_id'];
-                }
-                if (isset($orderdetails['order_id'])) {
-                    $arr['order_id'] = $orderdetails['order_id'];
                 }
                 if (isset($orderdetails['price'])) {
                     $arr['price'] = $orderdetails['price'];
