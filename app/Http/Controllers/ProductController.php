@@ -144,7 +144,7 @@ class ProductController extends Controller
                     $arr = array();
                     $arr['product_id'] = $product->id;
                     $arr['name_en'] = $addon['name_en'];
-                    if($addon['name_ar']){
+                    if(isset($addon['name_ar'])){
 
                         $arr['name_ar'] = $addon['name_ar'];
                     }
