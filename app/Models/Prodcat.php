@@ -13,8 +13,8 @@ class Prodcat extends Model
         'name_en', 'name_ar', 'desc_en', 'desc_ar', 'shop_id',
     ];
 
-    public function shops()
+    public function products()
     {
-        return $this->hasMany(Shop::class);
+        return $this->hasMany(Product::class);
     }
 }
