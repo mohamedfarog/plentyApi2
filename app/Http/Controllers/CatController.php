@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\UploadHelper;
 use App\Models\Cat;
 use App\Models\Product;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,8 +20,8 @@ class CatController extends Controller
     {
         //
         $cats = Cat::with(['shops' => function ($shop) {
-
-            return $shop->with(['style'])->popularitems();
+            $shops = $shop->with(['style'])->first();
+            return [$shop->with(['style']),  (new Shop())->popularitems($shops->id)];
         }])->get();
 
         return $cats;
