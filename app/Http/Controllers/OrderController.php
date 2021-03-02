@@ -145,7 +145,7 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['addons'])) {
                     $ids = '';
-                    $ii = 0;
+                    $ii = 1;
 
                     for ($i = 0; $i  < count($orderdetails['addons']); $i++) {
                         if ($ii == count($orderdetails['addons'])) {
@@ -156,7 +156,7 @@ class OrderController extends Controller
 
                         $ii++;
                     }
-                    $arr['addons'] = $ids;
+                    $arr['addons'] = strval($ids);
                 }
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
