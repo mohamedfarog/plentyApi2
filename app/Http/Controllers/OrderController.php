@@ -156,7 +156,7 @@ class OrderController extends Controller
 
                         $ii++;
                     }
-                    $arr['addons'] = implode('',);
+                    $arr['addons'] = $ids;
                 }
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
