@@ -137,18 +137,18 @@ class AccessController extends Controller
         $project = Project::first();
         $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
         $pass = new PassGenerator($pass_identifier);
-
+        
         $pass_definition = [
-            "description"       =>  $project->passldesc,
+            "description"       =>  $project->passadesc,
             "formatVersion"     => 1,
             "organizationName"  => $project->passorgname,
             "passTypeIdentifier" => $project->passtypeid,
             "serialNumber"      =>  $pass_identifier,
             "teamIdentifier"    => $project->teamid,
             // "logoText" => "Loyalty Card",
-            "foregroundColor"   => $project->loyaltyfcolor,
-            "backgroundColor"   => $project->loyaltybcolor,
-            "labelColor" => $project->loyaltyfcolor,
+            "foregroundColor"   => $project->accessfcolor,
+            "backgroundColor"   => $project->accessbcolor,
+            "labelColor" => $project->accessfcolor,
             "barcode" => [
                 "message"   => $pass_identifier,
                 "format"    => $project->barcodeformat,
@@ -220,6 +220,7 @@ class AccessController extends Controller
         $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
         $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
         $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+        
         $pkpass = $pass->create();
 
         $user->accessidentifier = $pass_identifier.'.pkpass';
