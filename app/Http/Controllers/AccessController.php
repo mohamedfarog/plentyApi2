@@ -110,7 +110,7 @@ class AccessController extends Controller
                         $access = Access::create($data);
                         if($myuser->accessidentifier == null){
 
-                            $this->createPass($myuser, $user);
+                            $this->createPass($myuser);
                         }
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;
@@ -134,7 +134,7 @@ class AccessController extends Controller
         
     }
 
-    function createPass(User $user, User $inviter){
+    function createPass(User $user){
         $project = Project::first();
         $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
         $pass = new PassGenerator($pass_identifier);
@@ -178,7 +178,7 @@ class AccessController extends Controller
                     [
                         "key"=>"c-name",
                         "label"=>"Invited by",
-                        "value"=>$inviter->name
+                        "value"=>"ME"
                     ],
                     [
                         "key"=>"c-balance",
