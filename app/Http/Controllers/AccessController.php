@@ -194,7 +194,7 @@ class AccessController extends Controller
                     [
                         "key"=>"c-txt",
                         "label"=>"Description",
-                        "value"=>"This is on an access card for electronic benefits."
+                        "value"=>"This is only an access card for electronic benefits."
                     ],
                     
                     [

@@ -140,6 +140,8 @@ class ProductController extends Controller
                     $arr['value'] = $size['value'];
                     $arr['others'] = $size['others'];
                     $arr['price'] = $size['price'];
+                    $arr['stocks'] = $size['stocks'];
+
                     $sizes = Size::create($arr);
                 }
             }

@@ -83,6 +83,9 @@ class SizeController extends Controller
             if (isset($request->others)) {
                 $data['others'] = $request->others;
             }
+            if (isset($request->stocks)) {
+                $data['stocks'] = $request->stocks;
+            }
             $size = Size::create($data);
             $msg = 'Size has been added';
             return response()->json(['success' => !!$size, 'message' => $msg]);
