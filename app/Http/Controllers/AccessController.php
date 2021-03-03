@@ -131,7 +131,7 @@ class AccessController extends Controller
         $pass = new PassGenerator($pass_identifier);
 
         $pass_definition = [
-            "description"       =>  $project->passldesc,
+            "description"       =>  $project->passadesc,
             "formatVersion"     => 1,
             "organizationName"  => $project->passorgname,
             "passTypeIdentifier" => $project->passtypeid,
@@ -149,13 +149,13 @@ class AccessController extends Controller
             ],
 
             "storeCard" => [
-                // "headerFields" => [
-                //     [
-                //         "key" => "points",
-                //         "label" => "POINTS",
-                //         "value" => $user->points
-                //     ]
-                // ],
+                "headerFields" => [
+                    [
+                        "key" => "points",
+                        "label" => "",
+                        "value" =>""
+                    ]
+                ],
 
                 "secondaryFields" => [
                     [
@@ -166,6 +166,12 @@ class AccessController extends Controller
                     ],
                 ],
                 "backFields" => [
+                    
+                    [
+                        "key" => "type",
+                        "label" => "Member Type",
+                        "value" => "Gold Member"
+                    ],
                     [
                         "key" => "c-name",
                         "label" => "Invited By",
@@ -174,7 +180,7 @@ class AccessController extends Controller
                     [
                         "key" => "c-txt",
                         "label" => "Description",
-                        "value" => "Official Golden Access Card of Plenty of Things members."
+                        "value" => "This is only an access card for electronic benefits."
                     ],
 
                     [
@@ -192,15 +198,15 @@ class AccessController extends Controller
 
 
         $pass->setPassDefinition($pass_definition);
-        $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/icon@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
         $pkpass = $pass->create();
 
         $user->accessidentifier = $pass_identifier . '.pkpass';
