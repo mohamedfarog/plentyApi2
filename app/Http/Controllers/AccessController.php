@@ -159,13 +159,7 @@ class AccessController extends Controller
             ],
     
             "storeCard" => [
-                // "headerFields" => [
-                //     [
-                //         "key" => "points",
-                //         "label" => "POINTS",
-                //         "value" => $user->points
-                //     ]
-                // ],
+            
               
                 "secondaryFields" => [
                     [
@@ -228,101 +222,6 @@ class AccessController extends Controller
         $user->accessidentifier = $pass_identifier.'.pkpass';
         $user->save();
     }
-
-    function createPass1(User $user, User $inviter)
-    {
-        $project = Project::first();
-        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
-        $pass = new PassGenerator($pass_identifier);
-
-        $pass_definition = [
-            "description"       =>  $project->passadesc,
-            "formatVersion"     => 1,
-            "organizationName"  => $project->passorgname,
-            "passTypeIdentifier" => $project->passtypeid,
-            "serialNumber"      =>  $pass_identifier,
-            "teamIdentifier"    => $project->teamid,
-            // "logoText" => "Loyalty Card",
-            "foregroundColor"   => $project->accessfcolor,
-            "backgroundColor"   => $project->accessbcolor,
-            "labelColor" => $project->accessfcolor,
-            "barcode" => [
-                "message"   => $pass_identifier,
-                "format"    => $project->barcodeformat,
-                "altText"   => $pass_identifier,
-                "messageEncoding" => $project->barcodemsgencoding,
-            ],
-
-            "storeCard" => [
-                "headerFields" => [
-                    [
-                        "key" => "points",
-                        "label" => "points",
-                        "value" =>$user->points
-                    ]
-                ],
-
-                "secondaryFields" => [
-                    [
-                        "key" => "cust-name",
-                        "label" => "Name",
-                        "value" => $user->name,
-
-                    ],
-                ],
-                "backFields" => [
-                    
-                    [
-                        "key" => "c-type",
-                        "label" => "Member Type",
-                        "value" => "Gold Member"
-                    ],
-                    [
-                        "key" => "c-name",
-                        "label" => "Invited By",
-                        "value" => $inviter->name
-                    ],
-                    [
-                        "key" => "c-status",
-                        "label" => "Status",
-                        "value" => "Active"
-                    ],
-                    [
-                        "key" => "c-txt",
-                        "label" => "Description",
-                        "value" => "This is only an access card for electronic benefits."
-                    ],
-
-                    [
-                        "key" => "c-txt2",
-                        "label" => "For more information visit",
-                        "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
-                    ],
-                ],
-
-
-
-            ]
-
-        ];
-
-
-        $pass->setPassDefinition($pass_definition);
-        $pass->addAsset(base_path('resources/assets/access/icon.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip.png'));
-        $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
-        $pkpass = $pass->create();
-
-        $user->accessidentifier = $pass_identifier . '.pkpass';
-        $user->save();
-    }
-
 
     public function checkList(Request $request)
     {

@@ -36,14 +36,14 @@ Route::post('verify', [OtpController::class, 'verify']);
 Route::post('register', [UserController::class, 'register']);
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
+Route::resource('prodcat', ProdcatController::class);
+Route::resource('products', ProductController::class);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
-    Route::resource('prodcat', ProdcatController::class);
-    Route::resource('products', ProductController::class);
     Route::resource('orders', OrderController::class);
 });
 
