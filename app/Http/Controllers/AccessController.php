@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Thenextweb\PassGenerator;
 
 class AccessController extends Controller
 {
@@ -111,6 +112,7 @@ class AccessController extends Controller
                     $settings->currentinv += 1;
                     $settings->save();
                     $user->save();
+                    $this->createPass($loggeduser, $user);
 
                     return response()->json(['success' => !!$access, 'message' => $msg]);
                 }
@@ -121,6 +123,90 @@ class AccessController extends Controller
             return response()->json(['error' => 'Sorry, the Plenty Gold Access list is currently full.']);
         }
     }
+
+    function createPass(User $user, User $inviter)
+    {
+        $project = Project::first();
+        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
+        $pass = new PassGenerator($pass_identifier);
+
+        $pass_definition = [
+            "description"       =>  $project->passldesc,
+            "formatVersion"     => 1,
+            "organizationName"  => $project->passorgname,
+            "passTypeIdentifier" => $project->passtypeid,
+            "serialNumber"      =>  $pass_identifier,
+            "teamIdentifier"    => $project->teamid,
+            // "logoText" => "Loyalty Card",
+            "foregroundColor"   => $project->accessfcolor,
+            "backgroundColor"   => $project->accessbcolor,
+            "labelColor" => $project->accessfcolor,
+            "barcode" => [
+                "message"   => $pass_identifier,
+                "format"    => $project->barcodeformat,
+                "altText"   => $pass_identifier,
+                "messageEncoding" => $project->barcodemsgencoding,
+            ],
+
+            "storeCard" => [
+                // "headerFields" => [
+                //     [
+                //         "key" => "points",
+                //         "label" => "POINTS",
+                //         "value" => $user->points
+                //     ]
+                // ],
+
+                "secondaryFields" => [
+                    [
+                        "key" => "cust-name",
+                        "label" => "Name",
+                        "value" => $user->name,
+
+                    ],
+                ],
+                "backFields" => [
+                    [
+                        "key" => "c-name",
+                        "label" => "Invited By",
+                        "value" => $inviter->name
+                    ],
+                    [
+                        "key" => "c-txt",
+                        "label" => "Description",
+                        "value" => "Official Golden Access Card of Plenty of Things members."
+                    ],
+
+                    [
+                        "key" => "c-txt2",
+                        "label" => "For more information visit",
+                        "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
+                    ],
+                ],
+
+
+
+            ]
+
+        ];
+
+
+        $pass->setPassDefinition($pass_definition);
+        $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/strip.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/icon@2x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/logo@2x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/strip@2x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+        $pkpass = $pass->create();
+
+        $user->accessidentifier = $pass_identifier . '.pkpass';
+        $user->save();
+    }
+
 
     public function checkList(Request $request)
     {
