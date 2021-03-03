@@ -222,7 +222,7 @@ class AccessController extends Controller
         $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
         $pkpass = $pass->create();
 
-        $user->loyaltyidentifier = $pass_identifier.'.pkpass';
+        $user->accessidentifier = $pass_identifier.'.pkpass';
         $user->save();
     }
 
