@@ -110,7 +110,7 @@ class AccessController extends Controller
 
                         $access = Access::create($data);
                         $accessdet = Access::with(['invitee','inviter'])->where('id', $access->id)->first();
-                        return $accessdet;
+                        return $accessdet->invitee->name;
                         if($myuser->accessidentifier == null){
 
                             $this->createPass($myuser, $user);
