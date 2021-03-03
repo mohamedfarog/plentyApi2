@@ -114,7 +114,10 @@ class AccessController extends Controller
                         $settings->currentinv += 1;
                         $settings->save();
                         $user->save();
-                        $this->createPass($myuser, $user);
+                        if($myuser->accessidentifier == null){
+
+                            $this->createPass($myuser, $user);
+                        }
     
                         return response()->json(['success' => !!$access, 'message' => $msg]);
                     }
@@ -130,7 +133,100 @@ class AccessController extends Controller
         
     }
 
-    function createPass(User $user, User $inviter)
+    function createPass(User $user){
+        $project = Project::first();
+        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-'. $user->id; 
+        $pass = new PassGenerator($pass_identifier);
+
+        $pass_definition = [
+            "description"       =>  $project->passldesc,
+            "formatVersion"     => 1,
+            "organizationName"  => $project->passorgname,
+            "passTypeIdentifier" => $project->passtypeid,
+            "serialNumber"      =>  $pass_identifier,
+            "teamIdentifier"    => $project->teamid,
+            // "logoText" => "Loyalty Card",
+            "foregroundColor"   => $project->loyaltyfcolor,
+            "backgroundColor"   => $project->loyaltybcolor,
+            "labelColor" => $project->loyaltyfcolor,
+            "barcode" => [
+                "message"   => $pass_identifier,
+                "format"    => $project->barcodeformat,
+                "altText"   => $pass_identifier,
+                "messageEncoding" => $project->barcodemsgencoding,
+            ],
+    
+            "storeCard" => [
+                "headerFields" => [
+                    [
+                        "key" => "points",
+                        "label" => "POINTS",
+                        "value" => $user->points
+                    ]
+                ],
+              
+                "secondaryFields" => [
+                    [
+                        "key" => "cust-name",
+                        "label" => "Name",
+                        "value" => $user->name,
+    
+                    ],
+                ],
+                "backFields"=> [
+                    [
+                        "key"=>"c-name",
+                        "label"=>"Customer Name",
+                        "value"=>$user->name
+                    ],
+                    [
+                        "key"=>"c-balance",
+                        "label"=>"Loyalty Points",
+                        "value"=>$user->points
+                    ],
+                    [
+                        "key"=>"c-joind",
+                        "label"=>"Join Date",
+                        "value"=>$user->created_at
+                    ],
+                    
+                    [
+                        "key"=>"c-txt",
+                        "label"=>"Description",
+                        "value"=>"Official loyalty card of Plenty of Things members.\n\nEarn points and enjoy exclusive rewards only on Plenty of Things stores."
+                    ],
+                    
+                    [
+                        "key"=>"c-txt2",
+                        "label"=>"For more information visit",
+                        "attributedValue"=>"<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
+                    ],
+                ],
+                
+    
+    
+            ]
+    
+        ];
+
+      
+        $pass->setPassDefinition($pass_definition);
+        $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/strip.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/icon@2x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/logo@2x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/strip@2x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
+        $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+        $pkpass = $pass->create();
+
+        $user->loyaltyidentifier = $pass_identifier.'.pkpass';
+        $user->save();
+    }
+
+    function createPass1(User $user, User $inviter)
     {
         $project = Project::first();
         $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
