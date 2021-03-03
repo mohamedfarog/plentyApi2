@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Access;
 use App\Models\Project;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -109,11 +110,11 @@ class AccessController extends Controller
                     } else {
 
                         $access = Access::create($data);
-                        $accessdet = Access::with(['invitee','inviter'])->where('id', $access->id)->first();
-                        return $accessdet->invitee->name;
+                        
+
                         if($myuser->accessidentifier == null){
 
-                            $this->createPass($myuser, $user);
+                            $this->createPass($access->id);
                         }
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;
@@ -137,9 +138,11 @@ class AccessController extends Controller
         
     }
 
-    function createPass(User $user, User $inviter){
+    function createPass($id){
         $project = Project::first();
-        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
+        $access = Access::with(['invitee','inviter'])->where('id', $id)->first();
+
+        $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
         $pass = new PassGenerator($pass_identifier);
         
         $pass_definition = [
@@ -167,7 +170,7 @@ class AccessController extends Controller
                     [
                         "key" => "cust-name",
                         "label" => "Name",
-                        "value" => $user->name,
+                        "value" => $access->invitee->name,
     
                     ],
                 ],
@@ -175,7 +178,7 @@ class AccessController extends Controller
                     [
                         "key"=>"c-name",
                         "label"=>"Invited by",
-                        "value"=>$inviter->name
+                        "value"=>$access->inviter->name
                     ],
                     [
                         "key"=>"c-type",
@@ -185,7 +188,7 @@ class AccessController extends Controller
                     [
                         "key"=>"c-joind",
                         "label"=>"Invited on",
-                        "value"=>$user->created_at
+                        "value"=>Carbon::parse($access->created_at)->format('m/Y')
                     ],
                     
                     [
@@ -220,7 +223,7 @@ class AccessController extends Controller
         $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
         
         $pkpass = $pass->create();
-
+        $user = User::where('id', $access->invitee->id)->first();
         $user->accessidentifier = $pass_identifier.'.pkpass';
         $user->save();
     }
