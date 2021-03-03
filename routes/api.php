@@ -7,6 +7,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
