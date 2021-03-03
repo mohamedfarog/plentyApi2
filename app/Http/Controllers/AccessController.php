@@ -107,6 +107,7 @@ class AccessController extends Controller
                     if ($accessuser != null) {
                         return response()->json(['error' => 'You have already been invited by another user.']);
                     } else {
+                        return $user;
                         $access = Access::create($data);
                         if($myuser->accessidentifier == null){
 
