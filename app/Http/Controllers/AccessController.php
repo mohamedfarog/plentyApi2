@@ -135,7 +135,7 @@ class AccessController extends Controller
 
     function createPass(User $user){
         $project = Project::first();
-        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-'. $user->id; 
+        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
         $pass = new PassGenerator($pass_identifier);
 
         $pass_definition = [
