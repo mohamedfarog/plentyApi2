@@ -133,7 +133,7 @@ class AccessController extends Controller
         
     }
 
-    function createPass(User $user){
+    function createPass(User $user, User $inviter){
         $project = Project::first();
         $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
         $pass = new PassGenerator($pass_identifier);
@@ -176,8 +176,8 @@ class AccessController extends Controller
                 "backFields"=> [
                     [
                         "key"=>"c-name",
-                        "label"=>"Customer Name",
-                        "value"=>$user->name
+                        "label"=>"Invited by",
+                        "value"=>$inviter->name
                     ],
                     [
                         "key"=>"c-balance",
@@ -186,14 +186,14 @@ class AccessController extends Controller
                     ],
                     [
                         "key"=>"c-joind",
-                        "label"=>"Join Date",
+                        "label"=>"Invited on",
                         "value"=>$user->created_at
                     ],
                     
                     [
                         "key"=>"c-txt",
                         "label"=>"Description",
-                        "value"=>"Official loyalty card of Plenty of Things members.\n\nEarn points and enjoy exclusive rewards only on Plenty of Things stores."
+                        "value"=>"This is on an access card for electronic benefits."
                     ],
                     
                     [
@@ -211,15 +211,15 @@ class AccessController extends Controller
 
       
         $pass->setPassDefinition($pass_definition);
-        $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/icon@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
         
         $pkpass = $pass->create();
 
