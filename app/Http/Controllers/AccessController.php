@@ -107,11 +107,11 @@ class AccessController extends Controller
                     if ($accessuser != null) {
                         return response()->json(['error' => 'You have already been invited by another user.']);
                     } else {
-                        return $user;
+
                         $access = Access::create($data);
                         if($myuser->accessidentifier == null){
 
-                            $this->createPass($myuser);
+                            $this->createPass($myuser, $user);
                         }
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;
@@ -135,7 +135,7 @@ class AccessController extends Controller
         
     }
 
-    function createPass(User $user){
+    function createPass(User $user, User $inviter){
         $project = Project::first();
         $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $user->id;
         $pass = new PassGenerator($pass_identifier);
@@ -179,7 +179,7 @@ class AccessController extends Controller
                     [
                         "key"=>"c-name",
                         "label"=>"Invited by",
-                        "value"=>"ME"
+                        "value"=>$inviter->name
                     ],
                     [
                         "key"=>"c-type",
