@@ -158,13 +158,13 @@ class AccessController extends Controller
             ],
     
             "storeCard" => [
-                "headerFields" => [
-                    [
-                        "key" => "points",
-                        "label" => "POINTS",
-                        "value" => $user->points
-                    ]
-                ],
+                // "headerFields" => [
+                //     [
+                //         "key" => "points",
+                //         "label" => "POINTS",
+                //         "value" => $user->points
+                //     ]
+                // ],
               
                 "secondaryFields" => [
                     [
@@ -181,9 +181,9 @@ class AccessController extends Controller
                         "value"=>"ME"
                     ],
                     [
-                        "key"=>"c-balance",
-                        "label"=>"Loyalty Points",
-                        "value"=>$user->points
+                        "key"=>"c-type",
+                        "label"=>"Member Type",
+                        "value"=>"Gold Member"
                     ],
                     [
                         "key"=>"c-joind",
