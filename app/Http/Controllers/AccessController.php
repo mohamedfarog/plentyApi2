@@ -86,6 +86,7 @@ class AccessController extends Controller
     public function invite(Request $request)
     {
         $loggeduser = Auth::user();
+        $myuser = User::where('id', $loggeduser->id)->first();
         $validator = Validator::make($request->all(), [
             "invitation_code" => "required",
         ]);
@@ -95,33 +96,38 @@ class AccessController extends Controller
         }
         $settings = Project::first();
         $user = User::where('invitation_code', $request->invitation_code)->first();
-        if ($settings->currentinv < $settings->invlimit) {
-            if ($user->invites < $settings->invperuser) {
-                $data = array();
-                $data['inviter_id'] = $user->id;
-                $data['invitee_id'] = $loggeduser->id;
-                $data['invcode'] = $request->invitation_code;
-                $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
-                if ($accessuser != null) {
-                    return response()->json(['error' => 'You have already been invited by another user.']);
+        if($user){
+            if ($settings->currentinv < $settings->invlimit) {
+                if ($user->invites < $settings->invperuser) {
+                    $data = array();
+                    $data['inviter_id'] = $user->id;
+                    $data['invitee_id'] = $loggeduser->id;
+                    $data['invcode'] = $request->invitation_code;
+                    $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
+                    if ($accessuser != null) {
+                        return response()->json(['error' => 'You have already been invited by another user.']);
+                    } else {
+                        $access = Access::create($data);
+                        $msg = 'You have been invited successfully! You now have access.';
+                        $user->invites += 1;
+                        $user->points += $settings->invitepts;
+                        $settings->currentinv += 1;
+                        $settings->save();
+                        $user->save();
+                        $this->createPass($myuser, $user);
+    
+                        return response()->json(['success' => !!$access, 'message' => $msg]);
+                    }
                 } else {
-                    $access = Access::create($data);
-                    $msg = 'You have been invited successfully! You now have access.';
-                    $user->invites += 1;
-                    $user->points += $settings->invitepts;
-                    $settings->currentinv += 1;
-                    $settings->save();
-                    $user->save();
-                    $this->createPass($loggeduser, $user);
-
-                    return response()->json(['success' => !!$access, 'message' => $msg]);
+                    return response()->json(['error' => 'This invitation code is not valid.']);
                 }
             } else {
-                return response()->json(['error' => 'This invitation code is not valid.']);
+                return response()->json(['error' => 'Sorry, the Plenty Gold Access list is currently full.']);
             }
-        } else {
-            return response()->json(['error' => 'Sorry, the Plenty Gold Access list is currently full.']);
+        }else {
+            return response()->json(['error' => 'This invitation code is not valid.']);
         }
+        
     }
 
     function createPass(User $user, User $inviter)
@@ -152,8 +158,8 @@ class AccessController extends Controller
                 "headerFields" => [
                     [
                         "key" => "points",
-                        "label" => "",
-                        "value" =>""
+                        "label" => "points",
+                        "value" =>$user->points
                     ]
                 ],
 
@@ -168,7 +174,7 @@ class AccessController extends Controller
                 "backFields" => [
                     
                     [
-                        "key" => "type",
+                        "key" => "c-type",
                         "label" => "Member Type",
                         "value" => "Gold Member"
                     ],
@@ -176,6 +182,11 @@ class AccessController extends Controller
                         "key" => "c-name",
                         "label" => "Invited By",
                         "value" => $inviter->name
+                    ],
+                    [
+                        "key" => "c-status",
+                        "label" => "Status",
+                        "value" => "Active"
                     ],
                     [
                         "key" => "c-txt",
