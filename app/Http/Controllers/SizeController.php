@@ -104,7 +104,7 @@ class SizeController extends Controller
         }
         $size = Size::where('id', $request->size_id)->first();
         if(isset($request->qty)){
-            return $request->qty <= $size->stocks;
+            return response()->json(['available' =>!!($request->qty <= $size->stocks)]);
         }
     }
 
