@@ -262,7 +262,7 @@ class UserController extends Controller
                     [
                         "key"=>"c-joind",
                         "label"=>"Join Date",
-                        "value"=>Carbon::parse($user->created_at)->format('M/YYYY')
+                        "value"=>Carbon::parse($user->created_at)->format('m/Y')
                     ],
                     
                     [
