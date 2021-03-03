@@ -25,6 +25,6 @@ class Shop extends Model
 
     public function getPopularitemsAttribute()
     {
-        return Product::where('shop_id', $this->id)->orderBy('sales', 'desc')->limit(10)->get();
+        return Product::with(['sizes', 'colors', 'addons', 'images'])->where('shop_id', $this->id)->orderBy('sales', 'desc')->limit(10)->get();
     }
 }
