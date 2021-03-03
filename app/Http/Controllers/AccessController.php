@@ -109,7 +109,7 @@ class AccessController extends Controller
                     } else {
 
                         $access = Access::create($data);
-                        $accessdet = Access::with(['invitee','inviter'])->where('id', $access->id);
+                        $accessdet = Access::with(['invitee','inviter'])->where('id', $access->id)->first();
                         return $accessdet;
                         if($myuser->accessidentifier == null){
 
