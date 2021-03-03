@@ -38,6 +38,7 @@ Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
 Route::resource('products', ProductController::class);
+Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);

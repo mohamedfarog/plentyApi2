@@ -92,6 +92,22 @@ class SizeController extends Controller
         }
     }
 
+    public function checkStock(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "size_id" => "required",
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+        }
+        $size = Size::where('id', $request->size_id)->first();
+        if(isset($request->qty)){
+            return $request->qty <= $size->stocks;
+        }
+    }
+
     /**
      * Display the specified resource.
      *
