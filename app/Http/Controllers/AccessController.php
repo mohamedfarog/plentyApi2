@@ -108,16 +108,17 @@ class AccessController extends Controller
                         return response()->json(['error' => 'You have already been invited by another user.']);
                     } else {
                         $access = Access::create($data);
+                        if($myuser->accessidentifier == null){
+
+                            $this->createPass($myuser, $user);
+                        }
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;
                         $user->points += $settings->invitepts;
                         $settings->currentinv += 1;
                         $settings->save();
                         $user->save();
-                        if($myuser->accessidentifier == null){
-
-                            $this->createPass($myuser, $user);
-                        }
+                       
     
                         return response()->json(['success' => !!$access, 'message' => $msg]);
                     }
