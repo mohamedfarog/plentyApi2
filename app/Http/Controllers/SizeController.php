@@ -102,12 +102,19 @@ class SizeController extends Controller
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
         }
-        $size = Size::where('id', $request->size_id)->first();
+        if($request->size_id == "-1"){
+            return response()->json(['available' =>true]);
+        }else{
+            $size = Size::where('id', $request->size_id)->first();
+
         if(isset($request->qty)){
             return response()->json(['available' =>!!($request->qty <= $size->stocks), 'currentqty'=>$size->stocks]);
         }
+        }
+        
     }
 
+    
     /**
      * Display the specified resource.
      *
