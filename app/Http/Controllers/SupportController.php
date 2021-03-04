@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Support;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SupportController extends Controller
 {
@@ -37,6 +39,7 @@ class SupportController extends Controller
     public function store(Request $request)
     {
         //
+        $user = Auth::user();
         $support = '';
         $msg = '';
         if (isset($request->id)) {
@@ -86,10 +89,27 @@ class SupportController extends Controller
             if (isset($request->status)) {
                 $data['status'] = $request->status;
             }
+            $data['user_id'] = $user->id;
             $support = Support::create($data);
+
+            $suppordet = Support::with(['user'])->where('id', $support->id)->first();
+            $this->sendMail('support',$suppordet,'Plenty Support Request', 'Plenty User', 'noreply@plentyapp.mvp-apps.ae');
             $msg = 'Support has been added';
             return response()->json(['success' => !!$support, 'message' => $msg]);
         }
+    }
+
+    function sendMail($view, $data, $subject, $displayname, $to)
+    {
+        Mail::send($view, ["data"=>$data], function ($m) use ($data, $subject, $displayname,$to) {
+            if ($data->user) {
+
+                $m->from($data->user->email, $displayname);
+            } else {
+                $m->from($data->email, $displayname);
+            }
+            $m->to($to)->subject($subject);
+        });
     }
 
     public function sendWhatsapp(Request $request)

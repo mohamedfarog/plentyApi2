@@ -9,6 +9,11 @@ class Support extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'type', 'priority', 'description', 'status',
+        'title', 'type', 'priority', 'description', 'status','user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
