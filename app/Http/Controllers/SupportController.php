@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Support;
 use Illuminate\Http\Request;
 
@@ -89,6 +90,13 @@ class SupportController extends Controller
             $msg = 'Support has been added';
             return response()->json(['success' => !!$support, 'message' => $msg]);
         }
+    }
+
+    public function sendWhatsapp(Request $request)
+    {
+        $settings = Project::first();
+
+        return response()->json(['whatsapp' => $settings->whatsapp]);
     }
 
     /**
