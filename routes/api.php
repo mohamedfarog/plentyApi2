@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,6 +43,7 @@ Route::resource('products', ProductController::class);
 Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
 Route::get('invnum', [AccessController::class, 'accessNumber']);
+Route::get('support', [SupportController::class, 'sendWhatsapp']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
