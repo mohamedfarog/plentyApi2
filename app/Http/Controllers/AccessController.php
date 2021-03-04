@@ -138,6 +138,13 @@ class AccessController extends Controller
         
     }
 
+    public function accessNumber(Request $request)
+    {
+        $project = Project::first();
+
+        return response()->json(['invlength'=>$project->invcode]);
+    }
+
     function createPass($id){
         $project = Project::first();
         $access = Access::with(['invitee','inviter'])->where('id', $id)->first();

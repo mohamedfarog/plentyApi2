@@ -63,6 +63,13 @@ class OtpController extends Controller
         return response()->json(['success' => $verified, 'message'=>$msg]);
     }
 
+    public function otpNumber(Request $request)
+    {
+        $project = Project::first();
+
+        return response()->json(['otplength'=>$project->otp]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
