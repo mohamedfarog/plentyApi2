@@ -17,7 +17,7 @@ class ProdcatController extends Controller
     {
         //
         $cats = Prodcat::with(['products'=>function($prod){
-            return $prod->with(['sizes', 'colors', 'addons', 'images']);
+            return $prod->with(['sizes', 'colors', 'addons', 'images', 'designer']);
         }])->where('shop_id', $request->shop_id)->get();
         return $cats;
     }

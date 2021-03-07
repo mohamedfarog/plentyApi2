@@ -27,6 +27,10 @@ class Product extends Model
         return $this->hasMany(Color::class);
     }
 
+    public function designer()
+    {
+        return $this->belongsTo(Designer::class);
+    }
 
 
     public function images()
