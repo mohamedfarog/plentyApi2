@@ -53,7 +53,7 @@ class UserController extends Controller
         }
     }
 
-    
+
 
     public function register(Request $request)
     {
@@ -63,18 +63,18 @@ class UserController extends Controller
         $settings = Project::first();
 
 
-        if($user){
+        if ($user) {
             $dbUser = Auth::login($user);
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User already exists.';
-        }else{
+        } else {
             $validator = Validator::make($request->all(), [
                 "contact" => "required",
 
-    
+
             ]);
-    
+
             if ($validator->fails()) {
                 return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
             }
@@ -125,25 +125,25 @@ class UserController extends Controller
                 $data['invites'] = $request->invites;
             }
 
-            $start='1';
+            $start = '1';
             $end = '';
-            for ($i = 0; $i < $settings->invcode -1; $i++) {
-                
+            for ($i = 0; $i < $settings->invcode - 1; $i++) {
+
                 $start .= '0';
             }
             for ($i = 0; $i < $settings->invcode; $i++) {
-                
+
                 $end .= '9';
             }
             $run = true;
-            $code = 'P-'.rand(intval($start), intval($end));
+            $code = 'P-' . rand(intval($start), intval($end));
 
             while ($run) {
-               
+
                 $user = User::where('invitation_code', $code)->first();
-                if($user !=null){
-                    $code = 'P-'.rand(intval($start), intval($end));
-                }else{
+                if ($user != null) {
+                    $code = 'P-' . rand(intval($start), intval($end));
+                } else {
                     $data['invitation_code'] = $code;
                     $run = false;
                 }
@@ -151,50 +151,49 @@ class UserController extends Controller
             $data['points'] = $settings->registerpts;
 
             $user = User::create($data);
-           
+
             $dbUser = Auth::login($user);
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User has been added';
         }
-       
-            return response()->json(['success' => !!$user, 'message' => $msg, 'token'=>$token, 'user'=>$user]);
+
+        return response()->json(['success' => !!$user, 'message' => $msg, 'token' => $token, 'user' => $user]);
     }
 
     public function myProfile(Request $request)
     {
         $user = Auth::user();
-        if(isset($request->action)){
-            switch($request->action){
+        if (isset($request->action)) {
+            switch ($request->action) {
                 case 'get':
                     return $user;
                     break;
 
                 case 'update':
                     $msg = '';
-                    if(isset($request->name)){
+                    if (isset($request->name)) {
                         $user->name = $request->name;
                     }
-                    if(isset($request->email)){
+                    if (isset($request->email)) {
                         $user->email = $request->email;
                     }
-                    if(isset($request->bday)){
+                    if (isset($request->bday)) {
                         $user->bday = $request->bday;
                     }
                     // if(isset($request->contact)){
                     //     $user->contact = $request->contact;
                     // }
-                    if(isset($request->gender)){
+                    if (isset($request->gender)) {
                         $user->gender = $request->gender;
                     }
 
                     $user->save();
-                    if($user->loyaltyidentifier ==null){
-                        $this->createPass($user);
-                    }
-                   
+
+                    $this->createPass($user);
+
                     $msg = 'Account details updated successfully.';
-                    return response()->json(['success' => !!$user, 'message'=>$msg, 'user'=>$user]);
+                    return response()->json(['success' => !!$user, 'message' => $msg, 'user' => $user]);
                     break;
             }
         }
@@ -207,11 +206,12 @@ class UserController extends Controller
         return response()->json(['user' => $user]);
     }
 
-    
-    function createPass(User $user){
+
+    function createPass(User $user)
+    {
         $project = Project::first();
-        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-'. $user->id; 
-        $pass = new PassGenerator($pass_identifier);
+        $pass_identifier = $user->invitation_code . '-' . $project->passserial . '-' . $user->id;
+        $pass = new PassGenerator($pass_identifier, true);
 
         $pass_definition = [
             "description"       =>  $project->passldesc,
@@ -230,7 +230,7 @@ class UserController extends Controller
                 "altText"   => $pass_identifier,
                 "messageEncoding" => $project->barcodemsgencoding,
             ],
-    
+
             "storeCard" => [
                 "headerFields" => [
                     [
@@ -239,52 +239,52 @@ class UserController extends Controller
                         "value" => $user->points
                     ]
                 ],
-              
+
                 "secondaryFields" => [
                     [
                         "key" => "cust-name",
                         "label" => "Name",
                         "value" => $user->name,
-    
+
                     ],
                 ],
-                "backFields"=> [
+                "backFields" => [
                     [
-                        "key"=>"c-name",
-                        "label"=>"Customer Name",
-                        "value"=>$user->name
+                        "key" => "c-name",
+                        "label" => "Customer Name",
+                        "value" => $user->name
                     ],
                     [
-                        "key"=>"c-balance",
-                        "label"=>"Loyalty Points",
-                        "value"=>$user->points
+                        "key" => "c-balance",
+                        "label" => "Loyalty Points",
+                        "value" => $user->points
                     ],
                     [
-                        "key"=>"c-joind",
-                        "label"=>"Join Date",
-                        "value"=>Carbon::parse($user->created_at)->format('m/Y')
+                        "key" => "c-joind",
+                        "label" => "Join Date",
+                        "value" => Carbon::parse($user->created_at)->format('m/Y')
                     ],
-                    
+
                     [
-                        "key"=>"c-txt",
-                        "label"=>"Description",
-                        "value"=>"Official loyalty card of Plenty of Things members.\n\nEarn points and enjoy exclusive rewards only on Plenty of Things stores."
+                        "key" => "c-txt",
+                        "label" => "Description",
+                        "value" => "Official loyalty card of Plenty of Things members.\n\nEarn points and enjoy exclusive rewards only on Plenty of Things stores."
                     ],
-                    
+
                     [
-                        "key"=>"c-txt2",
-                        "label"=>"For more information visit",
-                        "attributedValue"=>"<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
+                        "key" => "c-txt2",
+                        "label" => "For more information visit",
+                        "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
                     ],
                 ],
-                
-    
-    
+
+
+
             ]
-    
+
         ];
 
-      
+
         $pass->setPassDefinition($pass_definition);
         $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
         $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
@@ -297,7 +297,7 @@ class UserController extends Controller
         $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
         $pkpass = $pass->create();
 
-        $user->loyaltyidentifier = $pass_identifier.'.pkpass';
+        $user->loyaltyidentifier = $pass_identifier . '.pkpass';
         $user->save();
     }
     /**
@@ -432,7 +432,7 @@ class UserController extends Controller
     {
         //
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.

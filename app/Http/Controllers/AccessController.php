@@ -97,7 +97,7 @@ class AccessController extends Controller
         }
         $settings = Project::first();
         $user = User::where('invitation_code', $request->invitation_code)->first();
-        if($user){
+        if ($user) {
             if ($settings->currentinv < $settings->invlimit) {
                 if ($user->invites < $settings->invperuser) {
                     $data = array();
@@ -110,20 +110,20 @@ class AccessController extends Controller
                     } else {
 
                         $access = Access::create($data);
-                        
 
-                        if($myuser->accessidentifier == null){
 
-                            $this->createPass($access->id);
-                        }
+
+
+                        $this->createPass($access->id);
+
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;
                         $user->points += $settings->invitepts;
                         $settings->currentinv += 1;
                         $settings->save();
                         $user->save();
-                       
-    
+
+
                         return response()->json(['success' => !!$access, 'message' => $msg]);
                     }
                 } else {
@@ -132,26 +132,26 @@ class AccessController extends Controller
             } else {
                 return response()->json(['error' => 'Sorry, the Plenty Gold Access list is currently full.']);
             }
-        }else {
+        } else {
             return response()->json(['error' => 'This invitation code is not valid.']);
         }
-        
     }
 
     public function accessNumber(Request $request)
     {
         $project = Project::first();
 
-        return response()->json(['invlength'=>$project->invcode]);
+        return response()->json(['invlength' => $project->invcode]);
     }
 
-    function createPass($id){
+    function createPass($id)
+    {
         $project = Project::first();
-        $access = Access::with(['invitee','inviter'])->where('id', $id)->first();
+        $access = Access::with(['invitee', 'inviter'])->where('id', $id)->first();
 
         $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
-        $pass = new PassGenerator($pass_identifier);
-        
+        $pass = new PassGenerator($pass_identifier, true);
+
         $pass_definition = [
             "description"       =>  $project->passadesc,
             "formatVersion"     => 1,
@@ -169,55 +169,55 @@ class AccessController extends Controller
                 "altText"   => $pass_identifier,
                 "messageEncoding" => $project->barcodemsgencoding,
             ],
-    
+
             "storeCard" => [
-            
-              
+
+
                 "secondaryFields" => [
                     [
                         "key" => "cust-name",
                         "label" => "Name",
                         "value" => $access->invitee->name,
-    
+
                     ],
                 ],
-                "backFields"=> [
+                "backFields" => [
                     [
-                        "key"=>"c-name",
-                        "label"=>"Invited by",
-                        "value"=>$access->inviter->name
+                        "key" => "c-name",
+                        "label" => "Invited by",
+                        "value" => $access->inviter->name
                     ],
                     [
-                        "key"=>"c-type",
-                        "label"=>"Member Type",
-                        "value"=>"Gold Member"
+                        "key" => "c-type",
+                        "label" => "Member Type",
+                        "value" => "Gold Member"
                     ],
                     [
-                        "key"=>"c-joind",
-                        "label"=>"Invited on",
-                        "value"=>Carbon::parse($access->created_at)->format('m/Y')
+                        "key" => "c-joind",
+                        "label" => "Invited on",
+                        "value" => Carbon::parse($access->created_at)->format('m/Y')
                     ],
-                    
+
                     [
-                        "key"=>"c-txt",
-                        "label"=>"Description",
-                        "value"=>"This is only an access card for electronic benefits."
+                        "key" => "c-txt",
+                        "label" => "Description",
+                        "value" => "This is only an access card for electronic benefits."
                     ],
-                    
+
                     [
-                        "key"=>"c-txt2",
-                        "label"=>"For more information visit",
-                        "attributedValue"=>"<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
+                        "key" => "c-txt2",
+                        "label" => "For more information visit",
+                        "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
                     ],
                 ],
-                
-    
-    
+
+
+
             ]
-    
+
         ];
 
-      
+
         $pass->setPassDefinition($pass_definition);
         $pass->addAsset(base_path('resources/assets/access/icon.png'));
         $pass->addAsset(base_path('resources/assets/access/logo.png'));
@@ -228,10 +228,10 @@ class AccessController extends Controller
         $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
         $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
         $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
-        
+
         $pkpass = $pass->create();
         $user = User::where('id', $access->invitee->id)->first();
-        $user->accessidentifier = $pass_identifier.'.pkpass';
+        $user->accessidentifier = $pass_identifier . '.pkpass';
         $user->save();
     }
 
