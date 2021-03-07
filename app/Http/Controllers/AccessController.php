@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Access;
+use App\Models\ApplePass;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
@@ -110,11 +111,7 @@ class AccessController extends Controller
                     } else {
 
                         $access = Access::create($data);
-
-
-
-
-                        $this->createPass($access->id);
+                        (new ApplePass())->createAccessPass($access->id);
 
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;
@@ -142,99 +139,6 @@ class AccessController extends Controller
         $project = Project::first();
 
         return response()->json(['invlength' => $project->invcode]);
-    }
-
-    function createPass($id)
-    {
-        $project = Project::first();
-        $access = Access::with(['invitee', 'inviter'])->where('id', $id)->first();
-
-        $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
-        $pass = new PassGenerator($pass_identifier, true);
-
-        $pass_definition = [
-            "description"       =>  $project->passadesc,
-            "formatVersion"     => 1,
-            "organizationName"  => $project->passorgname,
-            "passTypeIdentifier" => $project->passtypeid,
-            "serialNumber"      =>  $pass_identifier,
-            "teamIdentifier"    => $project->teamid,
-            // "logoText" => "Loyalty Card",
-            "foregroundColor"   => $project->accessfcolor,
-            "backgroundColor"   => $project->accessbcolor,
-            "labelColor" => $project->accessfcolor,
-            "barcode" => [
-                "message"   => $pass_identifier,
-                "format"    => $project->barcodeformat,
-                "altText"   => $pass_identifier,
-                "messageEncoding" => $project->barcodemsgencoding,
-            ],
-
-            "storeCard" => [
-
-
-                "secondaryFields" => [
-                    [
-                        "key" => "cust-name",
-                        "label" => "Name",
-                        "value" => $access->invitee->name,
-
-                    ],
-                ],
-                "backFields" => [
-                    [
-                        "key" => "c-name",
-                        "label" => "Invited by",
-                        "value" => $access->inviter->name
-                    ],
-                    [
-                        "key" => "c-type",
-                        "label" => "Member Type",
-                        "value" => "Gold Member"
-                    ],
-                    [
-                        "key" => "c-joind",
-                        "label" => "Invited on",
-                        "value" => Carbon::parse($access->created_at)->format('m/Y')
-                    ],
-
-                    [
-                        "key" => "c-txt",
-                        "label" => "Description",
-                        "value" => "This is only an access card for electronic benefits."
-                    ],
-
-                    [
-                        "key" => "c-txt2",
-                        "label" => "For more information visit",
-                        "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
-                    ],
-                ],
-
-
-
-            ]
-
-        ];
-
-
-        $pass->setPassDefinition($pass_definition);
-        $pass->addAsset(base_path('resources/assets/access/icon.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip.png'));
-        $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
-
-        $pkpass = $pass->create();
-        $user = User::where('id', $access->invitee->id)->first();
-        $user->accessidentifier = $pass_identifier . '.pkpass';
-        $user->save();
-
-
     }
 
     public function checkList(Request $request)
