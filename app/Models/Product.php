@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_en', 'name_ar', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id','prodcat_id', 'sales'
+        'name_en', 'name_ar', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id', 'prodcat_id', 'sales', 'designer_id'
     ];
 
     public function sizes()
@@ -26,6 +26,8 @@ class Product extends Model
     {
         return $this->hasMany(Color::class);
     }
+
+
 
     public function images()
     {

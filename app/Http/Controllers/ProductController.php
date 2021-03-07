@@ -80,6 +80,9 @@ class ProductController extends Controller
                     if (isset($request->shop_id)) {
                         $product->shop_id = $request->shop_id;
                     }
+                    if (isset($request->designer_id)) {
+                        $product->designer_id = $request->designer_id;
+                    }
                     
                     $msg = 'Product has been updated';
 
@@ -130,6 +133,9 @@ class ProductController extends Controller
             }
             if(isset($request->shop_id)){
                 $data['shop_id'] = $request->shop_id;
+            }
+            if(isset($request->designer_id)){
+                $data['designer_id'] = $request->designer_id;
             }
             $product = Product::create($data);
 
