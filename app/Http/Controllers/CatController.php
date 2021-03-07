@@ -20,7 +20,7 @@ class CatController extends Controller
     {
         //
         $cats = Cat::with(['shops' => function ($shop) {
-            return $shop->with(['style']);
+            return $shop->with(['style','designers']);
         }])->get();
 
         return $cats;

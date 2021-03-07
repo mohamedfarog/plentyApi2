@@ -22,6 +22,10 @@ class Shop extends Model
     {
         return $this->hasOne(Style::class);
     }
+    public function designers()
+    {
+        return $this->hasMany(Designer::class);
+    }
 
     public function getPopularitemsAttribute()
     {

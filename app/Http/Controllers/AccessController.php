@@ -233,6 +233,8 @@ class AccessController extends Controller
         $user = User::where('id', $access->invitee->id)->first();
         $user->accessidentifier = $pass_identifier . '.pkpass';
         $user->save();
+
+
     }
 
     public function checkList(Request $request)

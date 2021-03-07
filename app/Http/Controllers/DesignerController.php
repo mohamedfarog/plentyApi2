@@ -60,6 +60,9 @@ class DesignerController extends Controller
                     if (isset($request->desc_ar)) {
                         $designer->desc_ar = $request->desc_ar;
                     }
+                    if (isset($request->shop_id)) {
+                        $designer->shop_id = $request->shop_id;
+                    }
                     $msg = 'Designer has been updated';
 
                     $designer->save();
@@ -83,6 +86,9 @@ class DesignerController extends Controller
             }
             if (isset($request->desc_ar)) {
                 $data['desc_ar'] = $request->desc_ar;
+            }
+            if (isset($request->shop_id)) {
+                $data['shop_id'] = $request->shop_id;
             }
             $designer = Designer::create($data);
             $msg = 'Designer has been added';

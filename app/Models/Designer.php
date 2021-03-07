@@ -9,6 +9,6 @@ class Designer extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_en', 'name_ar', 'desc_en', 'desc_ar',
+        'name_en', 'name_ar', 'desc_en', 'desc_ar','shop_id'
     ];
 }
