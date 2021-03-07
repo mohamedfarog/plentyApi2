@@ -193,6 +193,7 @@ class UserController extends Controller
 
                     $this->createPass($user);
                     if($user->accessidentifier != null){
+
                         $this->createAccessPass($user->id);
                     }
 
@@ -308,7 +309,7 @@ class UserController extends Controller
     function createAccessPass($id)
     {
         $project = Project::first();
-        $access = Access::with(['invitee', 'inviter'])->where('id', $id)->first();
+        $access = Access::with(['invitee', 'inviter'])->where('invitee_id', $id)->first();
 
         $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
         $pass = new PassGenerator($pass_identifier, true);
