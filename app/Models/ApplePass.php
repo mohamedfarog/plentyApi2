@@ -105,10 +105,16 @@ class ApplePass extends Model
         $user->save();
     }
 
-    public static function createAccessPassAlt($id)
+    public static function createAccessPass($invitee_id = null, $id = null)
     {
         $project = Project::first();
-        $access = Access::with(['invitee', 'inviter'])->where('invitee_id', $id)->first();
+        $access = '';
+        if ($invitee_id != null) {
+            $access = Access::with(['invitee', 'inviter'])->where('invitee_id', $invitee_id)->first();
+        }
+        if ($id != null) {
+            $access = Access::with(['invitee', 'inviter'])->where('id', $id)->first();
+        }
 
         $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
         $pass = new PassGenerator($pass_identifier, true);
@@ -196,97 +202,94 @@ class ApplePass extends Model
         $user->save();
     }
 
-    public static function createAccessPass($id)
-    {
-        $project = Project::first();
-        $access = Access::with(['invitee', 'inviter'])->where('id', $id)->first();
-
-        $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
-        $pass = new PassGenerator($pass_identifier, true);
-
-        $pass_definition = [
-            "description"       =>  $project->passadesc,
-            "formatVersion"     => 1,
-            "organizationName"  => $project->passorgname,
-            "passTypeIdentifier" => $project->passtypeid,
-            "serialNumber"      =>  $pass_identifier,
-            "teamIdentifier"    => $project->teamid,
-            // "logoText" => "Loyalty Card",
-            "foregroundColor"   => $project->accessfcolor,
-            "backgroundColor"   => $project->accessbcolor,
-            "labelColor" => $project->accessfcolor,
-            "barcode" => [
-                "message"   => $pass_identifier,
-                "format"    => $project->barcodeformat,
-                "altText"   => $pass_identifier,
-                "messageEncoding" => $project->barcodemsgencoding,
-            ],
-
-            "storeCard" => [
+    // public static function createAccessPass($id)
+    // {
+    //     $project = Project::first();
 
 
-                "secondaryFields" => [
-                    [
-                        "key" => "cust-name",
-                        "label" => "Name",
-                        "value" => $access->invitee->name,
+    //     $pass_identifier = $access->invitee->invitation_code . '-' . $project->passserial . '-' . 'G' . '-' . $access->invitee->id;
+    //     $pass = new PassGenerator($pass_identifier, true);
 
-                    ],
-                ],
-                "backFields" => [
-                    [
-                        "key" => "c-name",
-                        "label" => "Invited by",
-                        "value" => $access->inviter->name
-                    ],
-                    [
-                        "key" => "c-type",
-                        "label" => "Member Type",
-                        "value" => "Gold Member"
-                    ],
-                    [
-                        "key" => "c-joind",
-                        "label" => "Invited on",
-                        "value" => Carbon::parse($access->created_at)->format('m/Y')
-                    ],
+    //     $pass_definition = [
+    //         "description"       =>  $project->passadesc,
+    //         "formatVersion"     => 1,
+    //         "organizationName"  => $project->passorgname,
+    //         "passTypeIdentifier" => $project->passtypeid,
+    //         "serialNumber"      =>  $pass_identifier,
+    //         "teamIdentifier"    => $project->teamid,
+    //         // "logoText" => "Loyalty Card",
+    //         "foregroundColor"   => $project->accessfcolor,
+    //         "backgroundColor"   => $project->accessbcolor,
+    //         "labelColor" => $project->accessfcolor,
+    //         "barcode" => [
+    //             "message"   => $pass_identifier,
+    //             "format"    => $project->barcodeformat,
+    //             "altText"   => $pass_identifier,
+    //             "messageEncoding" => $project->barcodemsgencoding,
+    //         ],
 
-                    [
-                        "key" => "c-txt",
-                        "label" => "Description",
-                        "value" => "This is only an access card for electronic benefits."
-                    ],
-
-                    [
-                        "key" => "c-txt2",
-                        "label" => "For more information visit",
-                        "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
-                    ],
-                ],
+    //         "storeCard" => [
 
 
+    //             "secondaryFields" => [
+    //                 [
+    //                     "key" => "cust-name",
+    //                     "label" => "Name",
+    //                     "value" => $access->invitee->name,
 
-            ]
+    //                 ],
+    //             ],
+    //             "backFields" => [
+    //                 [
+    //                     "key" => "c-name",
+    //                     "label" => "Invited by",
+    //                     "value" => $access->inviter->name
+    //                 ],
+    //                 [
+    //                     "key" => "c-type",
+    //                     "label" => "Member Type",
+    //                     "value" => "Gold Member"
+    //                 ],
+    //                 [
+    //                     "key" => "c-joind",
+    //                     "label" => "Invited on",
+    //                     "value" => Carbon::parse($access->created_at)->format('m/Y')
+    //                 ],
 
-        ];
+    //                 [
+    //                     "key" => "c-txt",
+    //                     "label" => "Description",
+    //                     "value" => "This is only an access card for electronic benefits."
+    //                 ],
+
+    //                 [
+    //                     "key" => "c-txt2",
+    //                     "label" => "For more information visit",
+    //                     "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
+    //                 ],
+    //             ],
 
 
-        $pass->setPassDefinition($pass_definition);
-        $pass->addAsset(base_path('resources/assets/access/icon.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip.png'));
-        $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
-        $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
-        $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
-        $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
 
-        $pkpass = $pass->create();
-        $user = User::where('id', $access->invitee->id)->first();
-        $user->accessidentifier = $pass_identifier . '.pkpass';
-        $user->save();
-    }
+    //         ]
 
-    
+    //     ];
 
+
+    //     $pass->setPassDefinition($pass_definition);
+    //     $pass->addAsset(base_path('resources/assets/access/icon.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/logo.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/strip.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
+    //     $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
+
+    //     $pkpass = $pass->create();
+    //     $user = User::where('id', $access->invitee->id)->first();
+    //     $user->accessidentifier = $pass_identifier . '.pkpass';
+    //     $user->save();
+    // }
 }

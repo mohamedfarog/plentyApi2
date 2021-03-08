@@ -111,7 +111,7 @@ class AccessController extends Controller
                     } else {
 
                         $access = Access::create($data);
-                        (new ApplePass())->createAccessPass($access->id);
+                        (new ApplePass())->createAccessPass(null,$access->id);
 
                         $msg = 'You have been invited successfully! You now have access.';
                         $user->invites += 1;

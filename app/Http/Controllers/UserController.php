@@ -193,7 +193,7 @@ class UserController extends Controller
                     $user->save();
                     (new ApplePass())->createLoyaltyPass($user);
                     if ($user->accessidentifier != null) {
-                        (new ApplePass())->createAccessPassAlt($user->id);
+                        (new ApplePass())->createAccessPass($user->id, null);
                     }
 
                     $msg = 'Account details updated successfully.';
