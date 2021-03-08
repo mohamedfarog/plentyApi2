@@ -55,6 +55,15 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('orders', OrderController::class);
 });
 
+Route::get('generate', function(Request $request){
+    $len = 24;
+    if(isset($request->length)){
+        $len = $request->length;
+    }
+
+    return Str::random($len);
+});
+
 Route::prefix('v1')->group(function () {
     Route::post('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'registerDevice']);
     Route::get('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}',[PassController::class, 'getPasses']);
@@ -65,11 +74,11 @@ Route::prefix('v1')->group(function () {
 
 
 Route::post('hello', function (Request $request) {
-    Mail::send('support', [
-        'shop_email' => "riveraeric19@gmail.com", 'shopname_en' => "Eric", 'shopname_ar' => "Eric", 'shop_tel' => "0566419450", 'type' => "Bug", 'body' => "Hello"
-    ], function ($m) {
-        $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
+    // Mail::send('support', [
+    //     'shop_email' => "riveraeric19@gmail.com", 'shopname_en' => "Eric", 'shopname_ar' => "Eric", 'shop_tel' => "0566419450", 'type' => "Bug", 'body' => "Hello"
+    // ], function ($m) {
+    //     $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
 
-        $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
-    });
+    //     $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
+    // });
 });
