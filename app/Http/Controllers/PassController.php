@@ -98,9 +98,31 @@ class PassController extends Controller
         }
     }
 
-    public function registerDevice(Type $var = null)
+    public function registerDevice($deviceLibraryIdentifier,$passTypeIdentifier, $serialNumber, Request $request)
     {
-        # code...
+        $pass = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('serialNumber', $serialNumber)->first();
+        if($pass){
+            return response()->json(['error'=>'This pass is already registered with the same device'], 200);
+        }else{
+            $arr = array();
+            $arr['pushToken'] = $request->pushToken;
+            $arr['deviceLibraryIdentifier'] = $deviceLibraryIdentifier;
+            $arr['passTypeIdentifier'] = $passTypeIdentifier;
+            $arr['serialNumber'] = $serialNumber;
+            $cpass = Pass::create($arr);
+
+            return response()->json(['success'=>!!$cpass, 'message'=>'Device successfully registered!'], 201);
+        }
+    }
+
+    public function getPasses($deviceLibraryIdentifier, $passTypeIdentifier, Request $request)
+    {
+        $serials = '';
+        if(isset($request->passesUpdatedSince)){
+
+        }else{
+            $serials
+        }
     }
 
     /**
