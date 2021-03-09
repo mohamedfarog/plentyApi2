@@ -138,7 +138,7 @@ class PassController extends Controller
     }
     public function getPass($passTypeIdentifier, $serialNumber)
     {
-        $pkpass = PassGenerator::getPass($serialNumber . '.pkpass');
+        $pkpass = PassGenerator::getPass($serialNumber);
         
         return new Response($pkpass, 200, [
             'Content-Transfer-Encoding' => 'binary',
