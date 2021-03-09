@@ -68,8 +68,11 @@ class UserController extends Controller
         if ($user) {
             $dbUser = Auth::login($user);
             $dbUser = Auth::user();
-            $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User already exists.';
+            $token = $dbUser->createToken('MyApp')->accessToken;
+            if ($dbUser->name == null || $dbUser->email == null) {
+                $msg = 'User profile not updated.';
+            }
         } else {
             $validator = Validator::make($request->all(), [
                 "contact" => "required",
