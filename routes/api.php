@@ -82,6 +82,6 @@ Route::post('hello', function (Request $request) {
 
     //     $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
     // });
-    $pkpass = PassGenerator::getPass('1234ABNJ.pkpass');
+    $pkpass = PassGenerator::getPass('P-108428-091492-71.pkpass');
     return $pkpass;
 });
