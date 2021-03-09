@@ -67,8 +67,8 @@ Route::get('generate', function(Request $request){
 Route::prefix('v1')->group(function () {
     Route::post('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'registerDevice'])->middleware('passed');
     Route::get('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}',[PassController::class, 'getPasses']);
-    Route::get('/passes/{passTypeIdentifier}/{serialNumber}',[PassController::class, 'getPass']);
-    Route::delete('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'deletePass']);
+    Route::get('/passes/{passTypeIdentifier}/{serialNumber}',[PassController::class, 'getPass'])->middleware('passed');
+    Route::delete('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'deletePass'])->middleware('passed');
     Route::post('/log', [PassController::class, 'logIt']);
 });
 

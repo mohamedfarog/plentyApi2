@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Pass;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use PDO;
+use Thenextweb\PassGenerator;
 
 class PassController extends Controller
 {
@@ -98,12 +102,12 @@ class PassController extends Controller
         }
     }
 
-    public function registerDevice($deviceLibraryIdentifier,$passTypeIdentifier, $serialNumber, Request $request)
+    public function registerDevice($deviceLibraryIdentifier, $passTypeIdentifier, $serialNumber, Request $request)
     {
         $pass = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('serialNumber', $serialNumber)->first();
-        if($pass){
-            return response()->json(['error'=>'This pass is already registered with the same device'], 200);
-        }else{
+        if ($pass) {
+            return response()->json(['error' => 'This pass is already registered with the same device'], 200);
+        } else {
             $arr = array();
             $arr['pushToken'] = $request->pushToken;
             $arr['deviceLibraryIdentifier'] = $deviceLibraryIdentifier;
@@ -111,18 +115,54 @@ class PassController extends Controller
             $arr['serialNumber'] = $serialNumber;
             $cpass = Pass::create($arr);
 
-            return response()->json(['success'=>!!$cpass, 'message'=>'Device successfully registered!'], 201);
+            return response()->json(['success' => !!$cpass, 'message' => 'Device successfully registered!'], 201);
         }
     }
 
     public function getPasses($deviceLibraryIdentifier, $passTypeIdentifier, Request $request)
     {
-        $serials = '';
-        if(isset($request->passesUpdatedSince)){
-
-        }else{
-            $serials
+        $serials = array();
+        if (isset($request->passesUpdatedSince)) {
+            //
+        } else {
+            $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->get();
+            if (count($passes) > 0) {
+                foreach ($passes as $pass) {
+                    array_push($serials, $pass->serialNumber);
+                }
+                return response()->json(['lastUpdated' => now(), 'serialNumbers' => $serials], 200);
+            } else {
+                return response()->json(['message' => 'No passes registered with this device.'], 204);
+            }
         }
+    }
+    public function getPass($passTypeIdentifier, $serialNumber)
+    {
+        $pkpass = PassGenerator::getPass($serialNumber . '.pkpass');
+        return new Response($pkpass, 200, [
+            'Content-Transfer-Encoding' => 'binary',
+            'Content-Description' => 'File Transfer',
+            'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+            'Content-length' => strlen($pkpass),
+            'Content-Type' => PassGenerator::getPassMimeType(),
+            'Pragma' => 'no-cache',
+        ]);
+    }
+
+    public function deletePass($deviceLibraryIdentifier,$passTypeIdentifier,$serialNumber)
+    {
+        $delpass = Pass::where('deviceLibraryIdentifier',$deviceLibraryIdentifier)->delete();
+        return response()->json(['success' => !!$delpass, 'message' => "Unregistered!"], 200);
+    }
+
+    public function logIt(Request $request)
+    {
+        $arr = array();
+        $arr['message'] = $request->log;
+        $arr['action'] = 'insert';
+        $arr['user'] = 'ApplePass';
+        $log = Log::create($arr);
+        return response()->json(['success'=>!!$log], 200);
     }
 
     /**
