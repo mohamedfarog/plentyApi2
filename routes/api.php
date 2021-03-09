@@ -74,7 +74,7 @@ Route::prefix('v1')->group(function () {
 });
 
 
-Route::post('hello', function (Request $request, $serialNumber) {
+Route::post('hello', function (Request $request) {
     // Mail::send('support', [
     //     'shop_email' => "riveraeric19@gmail.com", 'shopname_en' => "Eric", 'shopname_ar' => "Eric", 'shop_tel' => "0566419450", 'type' => "Bug", 'body' => "Hello"
     // ], function ($m) {
@@ -82,6 +82,6 @@ Route::post('hello', function (Request $request, $serialNumber) {
 
     //     $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
     // });
-    $pkpass = PassGenerator::getPass($serialNumber . '.pkpass');
+    $pkpass = PassGenerator::getPass($request->serialNumber . '.pkpass');
     return $pkpass;
 });
