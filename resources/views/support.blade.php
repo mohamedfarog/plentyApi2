@@ -215,7 +215,7 @@
                                                                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                                                                        <![endif]-->
                                                                                        <div style="font-size:1px;line-height:22px">&nbsp;</div>
-                                                                                       <img alt="I'm an image" class="center autowidth" src="../assets/supportimages/logo.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 149px; display: block;" title="I'm an image" width="149" border="0" align="middle">
+                                                                                       <img alt="Plenty" class="center autowidth" src="../assets/supportimages/logo.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 149px; display: block;" title="Plenty" width="149" border="0" align="middle">
                                                                                        <div style="font-size:1px;line-height:25px">&nbsp;</div>
                                                                                        <!--[if mso]>
                                                                                     </td>
@@ -342,7 +342,7 @@
                                                                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                                                                  <tr style="line-height:0px">
                                                                                     <td style="padding-right: 40px;padding-left: 40px;" align="center">
-                                                                                       <![endif]--><img alt="I'm an image" class="center fixedwidth" src="../assets/supportimages/Img3_2x.jpg" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="I'm an image" width="352" border="0" align="middle">
+                                                                                       <![endif]--><img alt="You have a message" class="center fixedwidth" src="https://plentyapp.mvp-apps.ae/assets/supportimages/Img3_2x.jpg" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="You have a message" width="352" border="0" align="middle">
                                                                                        <!--[if mso]>
                                                                                     </td>
                                                                                  </tr>
