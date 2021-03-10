@@ -80,6 +80,7 @@ class ApplePass extends Model
                     [
                         "key" => "c-txt2",
                         "label" => "For more information visit",
+                        "value"=>"www.plentyofthings.com",
                         "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
                     ],
                 ],
@@ -178,6 +179,7 @@ class ApplePass extends Model
                     [
                         "key" => "c-txt2",
                         "label" => "For more information visit",
+                        "value" =>"www.plentyofthings.com",
                         "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
                     ],
                 ],
