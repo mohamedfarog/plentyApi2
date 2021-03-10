@@ -130,7 +130,14 @@ class PassController extends Controller
                 foreach ($passes as $pass) {
                     array_push($serials, $pass->serialNumber);
                 }
-                return response()->json(['lastUpdated' => now(), 'serialNumbers' => $serials], 200, ['Content-Type' => 'application/json',]);
+
+                return new Response(['lastUpdated' => now(), 'serialNumbers' => $serials], 200, [
+                    'Content-Transfer-Encoding' => 'binary',
+                    'Content-Description' => 'File Transfer',
+                    'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                    'Content-Type' => 'application/json',
+                    'Pragma' => 'no-cache',
+                ]);
             } else {
                 return response()->json(['message' => 'No passes registered with this device.'], 204);
             }
