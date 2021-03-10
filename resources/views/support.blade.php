@@ -345,7 +345,7 @@
                                                                                        
                                                                                        <![endif]-->
                                                                                        <?php $url = asset('/supportimages/Img3_2x.jpg'); ?>
-                                                                                       <img alt="You have a message" class="center fixedwidth" src="{{base64_encode(file_get_contents($url))}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="You have a message" width="352" border="0" align="middle">
+                                                                                       <img alt="You have a message" class="center fixedwidth" src="data:image/png;base64, {{base64_encode(file_get_contents($url))}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="You have a message" width="352" border="0" align="middle">
                                                                                        <!--[if mso]>
                                                                                     </td>
                                                                                  </tr>
