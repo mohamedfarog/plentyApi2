@@ -15,7 +15,7 @@ class ChangelengthLogs extends Migration
     {
         Schema::table('logs', function (Blueprint $table) {
             //
-            $table->string('message',65535)->nullable()->change();
+            $table->dropColumn(['message']);
         });
     }
 
