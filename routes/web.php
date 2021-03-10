@@ -18,18 +18,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/supportimages/{filename}', function($filename){
-//     $path = resource_path() . '/assets/supportimages/' . $filename;
+Route::get('/supportimages/{filename}', function($filename){
+    $path = resource_path() . '/assets/supportimages/' . $filename;
 
-//     if(!File::exists($path)) {
-//         return response()->json(['message' => 'Image not found.'], 404);
-//     }
+    if(!File::exists($path)) {
+        return response()->json(['message' => 'Image not found.'], 404);
+    }
 
-//     $file = File::get($path);
-//     $type = File::mimeType($path);
+    $file = File::get($path);
+    $type = File::mimeType($path);
 
-//     $response = Response::make($file, 200);
-//     $response->header("Content-Type", $type);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
 
-//     return $response;
-// });
+    return $response;
+});
