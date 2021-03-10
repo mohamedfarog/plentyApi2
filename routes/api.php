@@ -85,12 +85,12 @@ Route::post('test', function (Request $request) {
 
                 $m->from($suppordet->user->email, 'Plenty Support Request');
             } else {
-                $m->from($suppordet->email, 'Plenty User');
+                $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
             }
             $m->to('riveraeric19@gmail.com')->subject('Plenty Support Request');
         });
 
-        return $mail;
+        return $suppordet;
     }
 
     if (isset($request->pass)) {
