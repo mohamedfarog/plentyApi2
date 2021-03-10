@@ -80,9 +80,7 @@ Route::post('test', function (Request $request) {
     if (isset($request->mail)) {
 
         $suppordet = Support::with(['user'])->where('id', $request->id)->first();
-
-
-        Mail::send('support', ["data" => $suppordet], function ($m) use ($suppordet) {
+        $mail = Mail::send('support', ["data" => $suppordet], function ($m) use ($suppordet) {
             if ($suppordet->user) {
 
                 $m->from($suppordet->user->email, 'Plenty Support Request');
@@ -91,6 +89,8 @@ Route::post('test', function (Request $request) {
             }
             $m->to('riveraeric19@gmail.com')->subject('Plenty Support Request');
         });
+
+        return $mail;
     }
 
     if (isset($request->pass)) {
