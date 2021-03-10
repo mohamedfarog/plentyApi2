@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
@@ -76,9 +77,10 @@ Route::prefix('v1')->group(function () {
 
 Route::post('test', function (Request $request) {
     if (isset($request->mail)) {
+        $user = User::first();
         Mail::send('support', [
             "data" =>
-            ['user' => ["name" => 'eric', "email" => 'riveraeric19@gmail.com', 'contact' => "97156812391"], 'type' => "Bug", 'priority' => "High", 'description' => "test email"]
+            ['user' => $user, 'type' => "Bug", 'priority' => "High", 'description' => "test email"]
         ], function ($m) {
             $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
 
