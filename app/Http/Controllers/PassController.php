@@ -160,17 +160,17 @@ class PassController extends Controller
     {
         $arr = array();
         if (is_array($request->log)) {
-            foreach ($request->log as $key => $value) {
-                $arr['message'] = $key . " --- " . $value;
+            foreach ($request->log as $log) {
+                $arr['message'] = $log;
                 $arr['action'] = 'insert';
                 $arr['user'] = 'ApplePass';
                 $log = Log::create($arr);
             }
-        }else{
+        } else {
             $arr['message'] = $request->log;
-                $arr['action'] = 'insert';
-                $arr['user'] = 'ApplePass';
-                $log = Log::create($arr);
+            $arr['action'] = 'insert';
+            $arr['user'] = 'ApplePass';
+            $log = Log::create($arr);
         }
 
         return response()->json(['success' => !!$log], 200);
