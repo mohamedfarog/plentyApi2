@@ -158,15 +158,17 @@ class PassController extends Controller
 
     public function logIt(Request $request)
     {
-        $arr = array();
+        $log = '';
         if (is_array($request->log)) {
             foreach ($request->log as $log) {
+                $arr = array();
                 $arr['message'] = $log;
                 $arr['action'] = 'insert';
                 $arr['user'] = 'ApplePass';
                 $log = Log::create($arr);
             }
         } else {
+            $arr = array();
             $arr['message'] = $request->log;
             $arr['action'] = 'insert';
             $arr['user'] = 'ApplePass';
