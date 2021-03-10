@@ -344,7 +344,7 @@
                                                                                     <td style="padding-right: 40px;padding-left: 40px;" align="center">
                                                                                        
                                                                                        <![endif]-->
-                                                                                       <?php $url = asset('supportimages/Img3_2x.jpg'); ?>
+                                                                                       <?php $url = asset('/supportimages/Img3_2x.jpg'); ?>
                                                                                        <img alt="You have a message" class="center fixedwidth" src="{{$url}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="You have a message" width="352" border="0" align="middle">
                                                                                        <!--[if mso]>
                                                                                     </td>
