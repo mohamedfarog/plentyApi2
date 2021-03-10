@@ -56,9 +56,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('orders', OrderController::class);
 });
 
-Route::get('generate', function(Request $request){
+Route::get('generate', function (Request $request) {
     $len = 24;
-    if(isset($request->length)){
+    if (isset($request->length)) {
         $len = $request->length;
     }
 
@@ -67,21 +67,26 @@ Route::get('generate', function(Request $request){
 
 Route::prefix('v1')->group(function () {
     Route::post('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'registerDevice'])->middleware('passed');
-    Route::get('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}',[PassController::class, 'getPasses']);
-    Route::get('/passes/{passTypeIdentifier}/{serialNumber}',[PassController::class, 'getPass'])->middleware('passed');
+    Route::get('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}', [PassController::class, 'getPasses']);
+    Route::get('/passes/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'getPass'])->middleware('passed');
     Route::delete('/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}', [PassController::class, 'deletePass'])->middleware('passed');
     Route::post('/log', [PassController::class, 'logIt']);
 });
 
 
-Route::post('hello', function (Request $request) {
-    // Mail::send('support', [
-    //     'shop_email' => "riveraeric19@gmail.com", 'shopname_en' => "Eric", 'shopname_ar' => "Eric", 'shop_tel' => "0566419450", 'type' => "Bug", 'body' => "Hello"
-    // ], function ($m) {
-    //     $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
+Route::post('test', function (Request $request) {
+    if (isset($request->mail)) {
+        Mail::send('support', [
+            'shop_email' => "riveraeric19@gmail.com", 'shopname_en' => "Eric", 'shopname_ar' => "Eric", 'shop_tel' => "0566419450", 'type' => "Bug", 'body' => "Hello"
+        ], function ($m) {
+            $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
 
-    //     $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
-    // });
-    $pkpass = PassGenerator::getPass('1234ABNJ');
-    return $pkpass;
+            $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
+        });
+    }
+
+    if (isset($request->pass)) {
+        $pkpass = PassGenerator::getPass('1234ABNJ');
+        return $pkpass;
+    }
 });
