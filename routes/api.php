@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
+use App\Models\Support;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -77,15 +78,9 @@ Route::prefix('v1')->group(function () {
 
 Route::post('test', function (Request $request) {
     if (isset($request->mail)) {
-        $user = User::first();
-        Mail::send('support', [
-            "data" =>
-            ['user' => $user, 'type' => "Bug", 'priority' => "High", 'description' => "test email"]
-        ], function ($m) {
-            $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
 
-            $m->to('noreply@plentyapp.mvp-apps.ae')->subject('Plenty Support Request');
-        });
+        $suppordet = Support::with(['user'])->where('id', $request->id)->first();
+        $this->sendMail('support', $suppordet, 'Plenty Support Request', 'Plenty User', 'riveraeric19@gmail.com');
     }
 
     if (isset($request->pass)) {
@@ -93,3 +88,16 @@ Route::post('test', function (Request $request) {
         return $pkpass;
     }
 });
+
+function sendMail($view, $data, $subject, $displayname, $to)
+{
+    Mail::send($view, ["data" => $data], function ($m) use ($data, $subject, $displayname, $to) {
+        if ($data->user) {
+
+            $m->from($data->user->email, $displayname);
+        } else {
+            $m->from($data->email, $displayname);
+        }
+        $m->to($to)->subject($subject);
+    });
+}
