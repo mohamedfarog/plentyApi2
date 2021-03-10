@@ -77,7 +77,8 @@ Route::prefix('v1')->group(function () {
 Route::post('test', function (Request $request) {
     if (isset($request->mail)) {
         Mail::send('support', [
-            'shop_email' => "riveraeric19@gmail.com", 'shopname_en' => "Eric", 'shopname_ar' => "Eric", 'shop_tel' => "0566419450", 'type' => "Bug", 'body' => "Hello"
+            "data" =>
+            ['user' => ["name" => 'eric', "email" => 'riveraeric19@gmail.com', 'contact' => "97156812391"], 'type' => "Bug", 'priority' => "High", 'description' => "test email"]
         ], function ($m) {
             $m->from("riveraeric19@gmail.com", 'Plenty Support Request');
 
