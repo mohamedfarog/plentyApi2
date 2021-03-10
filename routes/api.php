@@ -80,7 +80,17 @@ Route::post('test', function (Request $request) {
     if (isset($request->mail)) {
 
         $suppordet = Support::with(['user'])->where('id', $request->id)->first();
-        $this->sendMail('support', $suppordet, 'Plenty Support Request', 'Plenty User', 'riveraeric19@gmail.com');
+
+
+        Mail::send('support', ["data" => $suppordet], function ($m) use ($suppordet) {
+            if ($suppordet->user) {
+
+                $m->from($suppordet->user->email, 'Plenty Support Request');
+            } else {
+                $m->from($suppordet->email, 'Plenty User');
+            }
+            $m->to('riveraeric19@gmail.com')->subject('Plenty Support Request');
+        });
     }
 
     if (isset($request->pass)) {
@@ -88,16 +98,3 @@ Route::post('test', function (Request $request) {
         return $pkpass;
     }
 });
-
-function sendMail($view, $data, $subject, $displayname, $to)
-{
-    Mail::send($view, ["data" => $data], function ($m) use ($data, $subject, $displayname, $to) {
-        if ($data->user) {
-
-            $m->from($data->user->email, $displayname);
-        } else {
-            $m->from($data->email, $displayname);
-        }
-        $m->to($to)->subject($subject);
-    });
-}
