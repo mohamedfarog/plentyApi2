@@ -98,3 +98,25 @@ Route::post('test', function (Request $request) {
         return $pkpass;
     }
 });
+Route::get('test', function (Request $request) {
+    if (isset($request->mail)) {
+
+        $suppordet = Support::with(['user'])->where('id', $request->id)->first();
+        $mail = Mail::send('support', ["data" => $suppordet], function ($m) use ($suppordet) {
+            if ($suppordet->user) {
+
+                $m->from('noreply@plenty.mvp-apps.ae', 'Plenty Support Request');
+            } else {
+                $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
+            }
+            $m->to('riveraeric19@gmail.com')->subject('Plenty Support Request');
+        });
+
+        return $suppordet;
+    }
+
+    if (isset($request->pass)) {
+        $pkpass = PassGenerator::getPass('1234ABNJ');
+        return $pkpass;
+    }
+});
