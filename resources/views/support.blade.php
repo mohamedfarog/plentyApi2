@@ -342,7 +342,7 @@
                                                                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                                                                  <tr style="line-height:0px">
                                                                                     <td style="padding-right: 40px;padding-left: 40px;" align="center">
-                                                                                       <![endif]--><img alt="You have a message" class="center fixedwidth" src="https://plentyapp.mvp-apps.ae/assets/supportimages/Img3_2x.jpg" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="You have a message" width="352" border="0" align="middle">
+                                                                                       <![endif]--><img alt="You have a message" class="center fixedwidth" src="asset('supportimages/Img3_2x.jpg')" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 352px; display: block;" title="You have a message" width="352" border="0" align="middle">
                                                                                        <!--[if mso]>
                                                                                     </td>
                                                                                  </tr>
