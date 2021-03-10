@@ -83,7 +83,7 @@ Route::post('test', function (Request $request) {
         $mail = Mail::send('support', ["data" => $suppordet], function ($m) use ($suppordet) {
             if ($suppordet->user) {
 
-                $m->from($suppordet->user->email, 'Plenty Support Request');
+                $m->from('noreply@plenty.mvp-apps.ae', 'Plenty Support Request');
             } else {
                 $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
             }
