@@ -130,7 +130,7 @@ class PassController extends Controller
                 foreach ($passes as $pass) {
                     array_push($serials, $pass->serialNumber);
                 }
-                return response()->json(['lastUpdated' => now(), 'serialNumbers' => $serials], 200,['Content-Type' =>'application/json',]);
+                return response()->json(['lastUpdated' => now(), 'serialNumbers' => $serials], 200, ['Content-Type' => 'application/json',]);
             } else {
                 return response()->json(['message' => 'No passes registered with this device.'], 204);
             }
@@ -139,7 +139,7 @@ class PassController extends Controller
     public function getPass($passTypeIdentifier, $serialNumber)
     {
         $pkpass = PassGenerator::getPass($serialNumber);
-        
+
         return new Response($pkpass, 200, [
             'Content-Transfer-Encoding' => 'binary',
             'Content-Description' => 'File Transfer',
@@ -150,20 +150,30 @@ class PassController extends Controller
         ]);
     }
 
-    public function deletePass($deviceLibraryIdentifier,$passTypeIdentifier,$serialNumber)
+    public function deletePass($deviceLibraryIdentifier, $passTypeIdentifier, $serialNumber)
     {
-        $delpass = Pass::where('deviceLibraryIdentifier',$deviceLibraryIdentifier)->delete();
+        $delpass = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->delete();
         return response()->json(['success' => !!$delpass, 'message' => "Unregistered!"], 200);
     }
 
     public function logIt(Request $request)
     {
         $arr = array();
-        $arr['message'] = $request->log;
-        $arr['action'] = 'insert';
-        $arr['user'] = 'ApplePass';
-        $log = Log::create($arr);
-        return response()->json(['success'=>!!$log], 200);
+        if (is_array($request->log)) {
+            foreach ($request->log as $key => $value) {
+                $arr['message'] = $key . " --- " . $value;
+                $arr['action'] = 'insert';
+                $arr['user'] = 'ApplePass';
+                $log = Log::create($arr);
+            }
+        }else{
+            $arr['message'] = $request->log;
+                $arr['action'] = 'insert';
+                $arr['user'] = 'ApplePass';
+                $log = Log::create($arr);
+        }
+
+        return response()->json(['success' => !!$log], 200);
     }
 
     /**
