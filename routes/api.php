@@ -113,7 +113,7 @@ Route::get('test', function (Request $request) {
 
     if(isset($request->orders)){
         $orders = Order::with(['details'])->where('id', $request->id)->first();
-
+        $orders = Order::where('id', $request->id)->first();
         return $orders;
     }
 });
