@@ -98,22 +98,16 @@ Route::post('test', function (Request $request) {
         $pkpass = PassGenerator::getPass('1234ABNJ');
         return $pkpass;
     }
+    if(isset($request->orders)){
+        $orders = Order::with(['details'])->where('id', $request->id)->first();
+        $orders = Order::where('id', $request->id)->first();
+        return $orders;
+    }
 });
 Route::get('test', function (Request $request) {
     if (isset($request->mail)) {
 
         $suppordet = Support::with(['user'])->where('id', $request->id)->first();
         return view('support', ["data" => $suppordet]);
-    }
-
-    if (isset($request->pass)) {
-        $pkpass = PassGenerator::getPass('1234ABNJ');
-        return $pkpass;
-    }
-
-    if(isset($request->orders)){
-        $orders = Order::with(['details'])->where('id', $request->id)->first();
-        $orders = Order::where('id', $request->id)->first();
-        return $orders;
     }
 });
