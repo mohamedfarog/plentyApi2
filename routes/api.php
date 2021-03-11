@@ -99,7 +99,9 @@ Route::post('test', function (Request $request) {
         return $pkpass;
     }
     if(isset($request->orderdetails)){
-        $orders = Order::with(['details'])->where('id', $request->id)->first();
+        $orders = Order::with(['details'=>function($details){
+            return $details->with(['product', 'size', 'color']);
+        }])->where('id', $request->id)->first();
         return $orders;
     }
     if(isset($request->order)){

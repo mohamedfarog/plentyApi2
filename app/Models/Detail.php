@@ -15,4 +15,20 @@ class Detail extends Model
     {
         return $this->belongsTo(Order::class);
     }
+    public function color()
+    {
+        return $this->hasOne(Color::class);
+    }
+
+    public function size()
+    {
+        return $this->hasOne(Size::class);
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
+
+    
 }
