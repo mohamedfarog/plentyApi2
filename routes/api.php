@@ -98,8 +98,11 @@ Route::post('test', function (Request $request) {
         $pkpass = PassGenerator::getPass('1234ABNJ');
         return $pkpass;
     }
-    if(isset($request->orders)){
+    if(isset($request->orderdetails)){
         $orders = Order::with(['details'])->where('id', $request->id)->first();
+        return $orders;
+    }
+    if(isset($request->order)){
         $orders = Order::where('id', $request->id)->first();
         return $orders;
     }
