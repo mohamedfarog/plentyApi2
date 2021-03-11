@@ -17,17 +17,17 @@ class Detail extends Model
     }
     public function color()
     {
-        return $this->hasOne(Color::class);
+        return $this->belongsTo(Color::class);
     }
 
     public function size()
     {
-        return $this->hasOne(Size::class);
+        return $this->belongsTo(Size::class);
     }
 
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
     
