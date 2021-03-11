@@ -101,7 +101,7 @@ Route::post('test', function (Request $request) {
     if(isset($request->orderdetails)){
         $orders = Order::with(['details'=>function($details){
             return $details->with(['product', 'size', 'color']);
-        }])->where('id', $request->id)->first();
+        }, 'user'])->where('id', $request->id)->first();
         return $orders;
     }
     if(isset($request->order)){
