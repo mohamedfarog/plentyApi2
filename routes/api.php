@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
+use App\Models\Order;
 use App\Models\Support;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -108,5 +109,11 @@ Route::get('test', function (Request $request) {
     if (isset($request->pass)) {
         $pkpass = PassGenerator::getPass('1234ABNJ');
         return $pkpass;
+    }
+
+    if(isset($request->orders)){
+        $orders = Order::with(['details'])->where('id', $request->id)->first();
+
+        return $orders;
     }
 });

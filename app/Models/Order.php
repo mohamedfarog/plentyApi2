@@ -11,4 +11,9 @@ class Order extends Model
     protected $fillable = [
         'ref', 'total_amount', 'amount_due', 'order_status', 'payment_method', 'tax', 'delivery_charge', 'delivery_location', 'user_id',
     ];
+
+    public function details()
+    {
+        return $this->hasMany(Detail::class);
+    }
 }
