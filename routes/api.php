@@ -114,7 +114,7 @@ Route::post('test', function (Request $request) {
                     return response()->json(['message' => 'No changed passes available.'], 304);
                 } else {
                     // if($pass->passesUpdatedSince == null)
-                    return !!(Carbon::parse($pass->passesUpdatedSince)->lt(Carbon::now()));
+                    return (Carbon::parse($pass->passesUpdatedSince)->lt(Carbon::now()));
                     return Carbon::parse($pass->passesUpdatedSince) . '   ------   '. Carbon::now();
                     if (Carbon::parse($pass->passesUpdatedSince)->lt(Carbon::now())) {
                         return response()->json(['message' => 'No changed passes available.'], 304);
