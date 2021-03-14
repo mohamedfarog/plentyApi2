@@ -106,6 +106,9 @@ class ApplePass extends Model
 
         $user->loyaltyidentifier = $pass_identifier . '.pkpass';
         $user->save();
+
+        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now()->timestamp]);
+
     }
 
     public static function createAccessPass($invitee_id = null, $id = null)
@@ -206,6 +209,9 @@ class ApplePass extends Model
         $user = User::where('id', $access->invitee->id)->first();
         $user->accessidentifier = $pass_identifier . '.pkpass';
         $user->save();
+
+        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now()->timestamp]);
+
     }
 
     // public static function createAccessPass($id)
