@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Models\Pass;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use PDO;
@@ -147,15 +148,30 @@ class PassController extends Controller
     {
         $pkpass = PassGenerator::getPass($serialNumber);
 
-        return new Response($pkpass, 200, [
-            'Content-Transfer-Encoding' => 'binary',
-            'Content-Description' => 'File Transfer',
-            'Content-Disposition' => 'attachment; filename="pass.pkpass"',
-            'Content-length' => strlen($pkpass),
-            "Last-Modified"=> now(),
-            'Content-Type' => PassGenerator::getPassMimeType(),
-            'Pragma' => 'no-cache',
-        ]);
+        $pass = Pass::where('serialNumber', $serialNumber)->first();
+        $arr = array();
+        if ($pass) {
+            if ($pass->passesUpdatedSince == null) {
+                return response()->json(['message' => 'No changed passes available.'], 304);
+            } else {
+                // if($pass->passesUpdatedSince == null)
+                if ($pass->passesUpdatedSince->lt(Carbon::now()->timestamp)) {
+                    return response()->json(['message' => 'No changed passes available.'], 304);
+                } else {
+                    return new Response($pkpass, 200, [
+                        'Content-Transfer-Encoding' => 'binary',
+                        'Content-Description' => 'File Transfer',
+                        'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                        'Content-length' => strlen($pkpass),
+                        "Last-Modified" => Carbon::now()->timestamp,
+                        'Content-Type' => PassGenerator::getPassMimeType(),
+                        'Pragma' => 'no-cache',
+                    ]);
+                }
+            }
+        } else {
+            return response()->json(['message' => 'No passes were found.'], 400);
+        }
     }
 
     public function deletePass($deviceLibraryIdentifier, $passTypeIdentifier, $serialNumber)
