@@ -155,7 +155,7 @@ class PassController extends Controller
                 return response()->json(['message' => 'No changed passes available.'], 304);
             } else {
                 // if($pass->passesUpdatedSince == null)
-                if ($pass->passesUpdatedSince->lt(Carbon::now()->timestamp)) {
+                if ($pass->passesUpdatedSince->lt(Carbon::now())) {
                     return response()->json(['message' => 'No changed passes available.'], 304);
                 } else {
                     return new Response($pkpass, 200, [
