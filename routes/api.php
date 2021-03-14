@@ -12,8 +12,10 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
+use App\Models\Pass;
 use App\Models\Support;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
@@ -95,16 +97,22 @@ Route::post('test', function (Request $request) {
     }
 
     if (isset($request->pass)) {
-        $pkpass = PassGenerator::getPass('1234ABNJ');
-        return $pkpass;
+        if (isset($request->serial)) {
+            $pkpass = PassGenerator::getPass($request->serial);
+            return $pkpass;
+        }
+        if (isset($request->passid)) {
+            $passes = Pass::where('serialNumber', $request->passid)->update(['passesUpdatedSince' => Carbon::now()->timestamp]);
+            return $passes;
+        }
     }
-    if(isset($request->orderdetails)){
-        $orders = Order::with(['details'=>function($details){
+    if (isset($request->orderdetails)) {
+        $orders = Order::with(['details' => function ($details) {
             return $details->with(['product', 'size', 'color']);
         }, 'user'])->where('id', $request->id)->first();
         return $orders;
     }
-    if(isset($request->order)){
+    if (isset($request->order)) {
         $orders = Order::where('id', $request->id)->first();
         return $orders;
     }
