@@ -124,7 +124,7 @@ Route::post('test', function (Request $request) {
                             'Content-Description' => 'File Transfer',
                             'Content-Disposition' => 'attachment; filename="pass.pkpass"',
                             'Content-length' => strlen($pkpass),
-                            "Last-Modified" => $pass->passesUpdatedSince,
+                            "Last-Modified" => Carbon::now(),
                             'Content-Type' => PassGenerator::getPassMimeType(),
                             'Pragma' => 'no-cache',
                         ]);
