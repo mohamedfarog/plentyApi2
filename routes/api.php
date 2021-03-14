@@ -105,6 +105,33 @@ Route::post('test', function (Request $request) {
             $passes = Pass::where('serialNumber', $request->passid)->update(['passesUpdatedSince' => Carbon::now()]);
             return $passes;
         }
+        if (isset($request->getpass)) {
+            $pkpass = PassGenerator::getPass($request->passid);
+            $pass = Pass::where('serialNumber', $request->passid)->first();
+            $arr = array();
+            if ($pass) {
+                if ($pass->passesUpdatedSince == null) {
+                    return response()->json(['message' => 'No changed passes available.'], 304);
+                } else {
+                    // if($pass->passesUpdatedSince == null)
+                    if ($pass->passesUpdatedSince->lt(Carbon::now())) {
+                        return response()->json(['message' => 'No changed passes available.'], 304);
+                    } else {
+                        return new Response($pkpass, 200, [
+                            'Content-Transfer-Encoding' => 'binary',
+                            'Content-Description' => 'File Transfer',
+                            'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                            'Content-length' => strlen($pkpass),
+                            "Last-Modified" => $pass->passesUpdatedSince,
+                            'Content-Type' => PassGenerator::getPassMimeType(),
+                            'Pragma' => 'no-cache',
+                        ]);
+                    }
+                }
+            } else {
+                return response()->json(['message' => 'No passes were found.'], 400);
+            }
+        }
     }
     if (isset($request->orderdetails)) {
         $orders = Order::with(['details' => function ($details) {
