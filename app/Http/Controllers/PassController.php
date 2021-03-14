@@ -163,7 +163,7 @@ class PassController extends Controller
                         'Content-Description' => 'File Transfer',
                         'Content-Disposition' => 'attachment; filename="pass.pkpass"',
                         'Content-length' => strlen($pkpass),
-                        "Last-Modified" => Carbon::now()->timestamp,
+                        "Last-Modified" => $pass->passesUpdatedSince,
                         'Content-Type' => PassGenerator::getPassMimeType(),
                         'Pragma' => 'no-cache',
                     ]);
