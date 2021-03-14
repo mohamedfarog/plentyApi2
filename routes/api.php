@@ -102,7 +102,7 @@ Route::post('test', function (Request $request) {
             return $pkpass;
         }
         if (isset($request->passid)) {
-            $passes = Pass::where('serialNumber', $request->passid)->update(['passesUpdatedSince' => Carbon::now()->timestamp]);
+            $passes = Pass::where('serialNumber', $request->passid)->update(['passesUpdatedSince' => Carbon::now()]);
             return $passes;
         }
     }
