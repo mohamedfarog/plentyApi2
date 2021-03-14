@@ -106,7 +106,7 @@ Route::post('test', function (Request $request) {
             return $passes;
         }
         if (isset($request->getpass)) {
-            $pkpass = PassGenerator::getPass($request->passid);
+            $pkpass = PassGenerator::getPass($request->passide);
             $pass = Pass::where('serialNumber', $request->passid)->first();
             $arr = array();
             if ($pass) {
