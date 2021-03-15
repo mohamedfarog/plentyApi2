@@ -107,7 +107,7 @@ class ApplePass extends Model
         $user->loyaltyidentifier = $pass_identifier . '.pkpass';
         $user->save();
 
-        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now()]);
+        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now(),'updateTag'=>'changed']);
 
     }
 
@@ -210,7 +210,7 @@ class ApplePass extends Model
         $user->accessidentifier = $pass_identifier . '.pkpass';
         $user->save();
 
-        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now()]);
+        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now(), 'updateTag'=>'changed']);
 
     }
 
