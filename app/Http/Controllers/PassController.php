@@ -125,26 +125,42 @@ class PassController extends Controller
         $serials = array();
         if (isset($request->passesUpdatedSince)) {
             //
-            if($request->passesUpdatedSince != null){
-                
-                $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('passesUpdatedSince',">=",$request->passesUpdatedSince)->get();
-            if (count($passes) > 0) {
-                foreach ($passes as $pass) {
-                    array_push($serials, $pass->serialNumber);
-                }
+            if ($request->passesUpdatedSince != null) {
 
-                return new Response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
-                    'Content-Transfer-Encoding' => 'binary',
-                    'Content-Description' => 'File Transfer',
-                    'Content-Disposition' => 'attachment; filename="pass.pkpass"',
-                    'Content-Type' => 'application/json',
-                    'Pragma' => 'no-cache',
-                ]);
+                $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('passesUpdatedSince', ">=", $request->passesUpdatedSince)->get();
+                if (count($passes) > 0) {
+                    foreach ($passes as $pass) {
+                        array_push($serials, $pass->serialNumber);
+                    }
+
+                    return new Response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
+                        'Content-Transfer-Encoding' => 'binary',
+                        'Content-Description' => 'File Transfer',
+                        'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                        'Content-Type' => 'application/json',
+                        'Pragma' => 'no-cache',
+                    ]);
+                } else {
+                    return response()->json(['message' => 'No passes registered with this device.'], 204);
+                }
             } else {
-                return response()->json(['message' => 'No passes registered with this device.'], 204);
+                $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->get();
+                if (count($passes) > 0) {
+                    foreach ($passes as $pass) {
+                        array_push($serials, $pass->serialNumber);
+                    }
+
+                    return new Response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
+                        'Content-Transfer-Encoding' => 'binary',
+                        'Content-Description' => 'File Transfer',
+                        'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                        'Content-Type' => 'application/json',
+                        'Pragma' => 'no-cache',
+                    ]);
+                } else {
+                    return response()->json(['message' => 'No passes registered with this device.'], 204);
+                }
             }
-            }
-            
         } else {
             $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->get();
             if (count($passes) > 0) {
