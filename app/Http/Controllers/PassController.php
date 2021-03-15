@@ -125,7 +125,9 @@ class PassController extends Controller
         $serials = array();
         if (isset($request->passesUpdatedSince)) {
             //
-            $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('passesUpdatedSince',">=",$request->passesUpdatedSince)->get();
+            if($request->passesUpdatedSince != null){
+                
+                $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('passesUpdatedSince',">=",$request->passesUpdatedSince)->get();
             if (count($passes) > 0) {
                 foreach ($passes as $pass) {
                     array_push($serials, $pass->serialNumber);
@@ -141,6 +143,8 @@ class PassController extends Controller
             } else {
                 return response()->json(['message' => 'No passes registered with this device.'], 204);
             }
+            }
+            
         } else {
             $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->get();
             if (count($passes) > 0) {
