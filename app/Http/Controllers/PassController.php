@@ -127,7 +127,7 @@ class PassController extends Controller
             //
             if ($request->passesUpdatedSince != null) {
 
-                $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('passesUpdatedSince', ">=", $request->passesUpdatedSince)->get();
+                $passes = Pass::where('deviceLibraryIdentifier', $deviceLibraryIdentifier)->where('passesUpdatedSince', ">=", Carbon::parse($request->passesUpdatedSince))->get();
                 if (count($passes) > 0) {
                     foreach ($passes as $pass) {
                         array_push($serials, $pass->serialNumber);
