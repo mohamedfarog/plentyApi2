@@ -134,6 +134,10 @@ Route::post('test', function (Request $request) {
                 return response()->json(['message' => 'No passes were found.'], 400);
             }
         }
+        if(isset($request->passupdated)){
+            $passes = Pass::where('deviceLibraryIdentifier', $request->passupdated)->where('passesUpdatedSince',">=",$request->passesUpdatedSince)->get();
+            return $passes;
+        }
     }
     if (isset($request->orderdetails)) {
         $orders = Order::with(['details' => function ($details) {
