@@ -188,19 +188,15 @@ class PassController extends Controller
                 // if($pass->passesUpdatedSince == null)
 
 
-                if (Carbon::parse($pass->passesUpdatedSince)->lt(Carbon::now())) {
-                    return response()->json(['message' => 'No changed passes available.'], 304);
-                } else {
-                    return new Response($pkpass, 200, [
-                        'Content-Transfer-Encoding' => 'binary',
-                        'Content-Description' => 'File Transfer',
-                        'Content-Disposition' => 'attachment; filename="pass.pkpass"',
-                        'Content-length' => strlen($pkpass),
-                        "Last-Modified" => $pass->passesUpdatedSince,
-                        'Content-Type' => PassGenerator::getPassMimeType(),
-                        'Pragma' => 'no-cache',
-                    ]);
-                }
+                return new Response($pkpass, 200, [
+                    'Content-Transfer-Encoding' => 'binary',
+                    'Content-Description' => 'File Transfer',
+                    'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                    'Content-length' => strlen($pkpass),
+                    "Last-Modified" => $pass->passesUpdatedSince,
+                    'Content-Type' => PassGenerator::getPassMimeType(),
+                    'Pragma' => 'no-cache',
+                ]);
             }
         } else {
             return response()->json(['message' => 'No passes were found.'], 400);
