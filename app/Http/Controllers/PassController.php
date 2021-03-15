@@ -133,10 +133,7 @@ class PassController extends Controller
                         array_push($serials, $pass->serialNumber);
                     }
 
-                    return new Response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
-                        'Content-Transfer-Encoding' => 'binary',
-                        'Content-Description' => 'File Transfer',
-                        'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                    return new Response(['lastUpdated' => $passes[0]->passesUpdatedSince, 'serialNumbers' => $serials], 200, [
                         'Content-Type' => 'application/json',
                         'Pragma' => 'no-cache',
                     ]);
@@ -150,10 +147,8 @@ class PassController extends Controller
                         array_push($serials, $pass->serialNumber);
                     }
 
-                    return new Response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
-                        'Content-Transfer-Encoding' => 'binary',
-                        'Content-Description' => 'File Transfer',
-                        'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                    return new Response(['lastUpdated' => $passes[0]->passesUpdatedSince, 'serialNumbers' => $serials], 200, [
+                        
                         'Content-Type' => 'application/json',
                         'Pragma' => 'no-cache',
                     ]);
@@ -168,10 +163,8 @@ class PassController extends Controller
                     array_push($serials, $pass->serialNumber);
                 }
 
-                return new Response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
-                    'Content-Transfer-Encoding' => 'binary',
-                    'Content-Description' => 'File Transfer',
-                    'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+                return new Response(['lastUpdated' => $passes[0]->passesUpdatedSince, 'serialNumbers' => $serials], 200, [
+                   
                     'Content-Type' => 'application/json',
                     'Pragma' => 'no-cache',
                 ]);
