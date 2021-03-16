@@ -216,6 +216,13 @@ class UserController extends Controller
 
     public function dashLogin(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            "type" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+        }
         switch ($request->type) {
             case 'email':
                 $validator = Validator::make($request->all(), [
