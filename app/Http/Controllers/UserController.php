@@ -245,7 +245,7 @@ class UserController extends Controller
                         $success["token"] = $user->createToken('MyApp')->accessToken;
                         $u = User::find($user->id);
 
-                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                        return response()->json(["success" => $success, "user" => $u]);
                     } else {
                         return response()->json(["error" => "Please verify the email"]);
                     }
@@ -291,7 +291,7 @@ class UserController extends Controller
                     }
                 }
         
-                return response()->json(['success' => $verified, 'result'=>$success]);
+                return response()->json(['success' => $verified, 'result'=>$success, 'user'=>$user]);
                 break;
             default:
                 # code...
