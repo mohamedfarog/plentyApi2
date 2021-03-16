@@ -29,7 +29,14 @@ class UserController extends Controller
         $user = Auth::user();
         switch ($user->typeofuser) {
             case 'S':
-                return User::paginate();
+                $perpage = 15;
+                if(isset($request->perpage)){
+                    $perpage = $request->perpage;
+                }
+                if(isset($request->all)){
+                    return User::all();
+                }
+                return User::paginate($perpage);
                 break;
 
             default:
