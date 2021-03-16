@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 use Thenextweb\PassGenerator;
 
 class ApplePass extends Model
@@ -212,6 +213,22 @@ class ApplePass extends Model
 
         $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now(), 'updateTag'=>'changed']);
 
+    }
+
+    public function sendNotif($pushToken)
+    {
+        $response = Http::post("gateway.push.apple.com", [
+            'AppSid' => env('APPSID'),
+            'SenderID' => env('SENDERID'),
+            'Body' => $body,
+            'Recipient' => $recipient
+        ]);
+
+        if($response['success'] == true){
+            return 'An OTP was sent to +' . $recipient.'.';
+        }else{
+            return 'Please enter a valid KSA phone number.';
+        }
     }
 
     // public static function createAccessPass($id)

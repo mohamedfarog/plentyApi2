@@ -148,7 +148,7 @@ class PassController extends Controller
                     }
 
                     return new Response(['lastUpdated' => $passes[0]->passesUpdatedSince, 'serialNumbers' => $serials], 200, [
-                        
+
                         'Content-Type' => 'application/json',
                         'Pragma' => 'no-cache',
                     ]);
@@ -164,7 +164,7 @@ class PassController extends Controller
                 }
 
                 return new Response(['lastUpdated' => $passes[0]->passesUpdatedSince, 'serialNumbers' => $serials], 200, [
-                   
+
                     'Content-Type' => 'application/json',
                     'Pragma' => 'no-cache',
                 ]);
@@ -183,6 +183,9 @@ class PassController extends Controller
             if ($pass->passesUpdatedSince == null) {
                 return response()->json(['message' => 'No changed passes available.'], 304);
             } else {
+                // if($pass->passesUpdatedSince == null)
+
+
                 if ($pass->updateTag == "changed") {
                     $pass->updateTag = "unchanged";
                     $pass->save();
@@ -195,7 +198,7 @@ class PassController extends Controller
                         'Content-Type' => PassGenerator::getPassMimeType(),
                         'Pragma' => 'no-cache',
                     ]);
-                } else if ($pass->updateTag == "unchanged"){
+                } else if ($pass->updateTag == "unchanged") {
                     return response()->json(['message' => 'No changed passes available.'], 304);
                 }
             }

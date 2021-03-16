@@ -156,4 +156,11 @@ Route::get('test', function (Request $request) {
         $suppordet = Support::with(['user'])->where('id', $request->id)->first();
         return view('support', ["data" => $suppordet]);
     }
+    if (isset($request->order)) {
+
+        $order = Order::with(['details' => function ($details) {
+            return $details->with(['product', 'size', 'color']);
+        }, 'user'])->where('id', $request->id)->first();
+        return view('bill', ["data" => $order]);
+    }
 });
