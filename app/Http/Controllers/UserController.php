@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Access;
 use App\Models\ApplePass;
+use App\Models\Otp;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
@@ -211,6 +212,80 @@ class UserController extends Controller
         $user = Auth::user();
 
         return response()->json(['user' => $user]);
+    }
+
+    public function dashLogin(Request $request)
+    {
+        switch ($request->type) {
+            case 'email':
+                $validator = Validator::make($request->all(), [
+                    "email" => "required",
+                    "password" => "required",
+        
+                ]);
+        
+                if ($validator->fails()) {
+                    return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+                }
+                if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                    $user = Auth::user();
+                    if ($user->email_verified_at != NULL) {
+                        $success["message"] = "Login successful";
+                        $success["token"] = $user->createToken('MyApp')->accessToken;
+                        $u = User::find($user->id);
+
+                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                    } else {
+                        return response()->json(["error" => "Please verify the email"]);
+                    }
+                } else {
+                    return response()->json(["error" => "Invalid Email/Password"], 400);
+                }
+                break;
+            case 'phone':
+                $validator = Validator::make($request->all(), [
+                    "contact" => "required",
+                    "otp" => "required",
+        
+                ]);
+        
+                if ($validator->fails()) {
+                    return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+                }
+                $otp = Otp::where('contact',$request->contact)->where('verified',0)->first();
+                $verified = false;
+                $msg = '';
+                $success = array();
+                if($otp != null){
+                    if(isset($request->otp)){
+                        if($otp->otp == $request->otp){
+                            $verified  = true;
+                            $otp->verified = true;
+                            $msg = 'OTP has been verified. Login successful.';
+                            $otp->save();
+
+                            $user = User::where('contact', $request->contact)->first();
+                            Auth::login($user);
+                            $loggeduser = Auth::user();
+                            if($user){
+                                $success['message']= $msg;
+                                $success['token'] =$loggeduser->createToken('MyApp')->accessToken;
+                            }
+                        }else{
+                            $verified = false;
+                            $msg = 'OTP entered is incorrect.';
+                            $success['message']= $msg;
+                        }
+                      
+                    }
+                }
+        
+                return response()->json(['success' => $verified, 'result'=>$success]);
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 
 

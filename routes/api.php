@@ -51,6 +51,7 @@ Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
 Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
+Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
