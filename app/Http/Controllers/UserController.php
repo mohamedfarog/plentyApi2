@@ -194,6 +194,10 @@ class UserController extends Controller
                         $user->gender = $request->gender;
                     }
 
+                    if(isset($request->password)){
+                        $user->password = bcrypt($request->password);
+                    }
+
                     $user->save();
                     (new ApplePass())->createLoyaltyPass($user);
                     if ($user->accessidentifier != null) {
