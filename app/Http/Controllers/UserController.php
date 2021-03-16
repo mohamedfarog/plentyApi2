@@ -214,6 +214,7 @@ class UserController extends Controller
                     }
 
                     $user->save();
+                    
                     (new ApplePass())->createLoyaltyPass($user);
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
@@ -388,8 +389,11 @@ class UserController extends Controller
                             $msg = 'User has been updated';
                             $user->save();
                             $newuser = User::where('id',$user->id)->first();
+                            if(!is_null($newuser->name) && !is_null($newuser->contact) && !is_null($newuser->email)){
+                                
                                 (new ApplePass())->createLoyaltyPass($newuser);
 
+                            }
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
                     }
@@ -466,7 +470,11 @@ class UserController extends Controller
                     $data['points'] = $settings->registerpts;
                     $user = User::create($data);
                     $msg = 'User has been added';
-                    (new ApplePass())->createLoyaltyPass($user);
+                    if(!is_null($user->name) && !is_null($user->contact) && !is_null($user->email)){
+                                
+                        (new ApplePass())->createLoyaltyPass($user);
+
+                    }
                     return response()->json(['success' => !!$user, 'message' => $msg]);
                 }
                 break;
