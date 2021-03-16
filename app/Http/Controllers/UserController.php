@@ -289,6 +289,8 @@ class UserController extends Controller
                         }
                       
                     }
+                }else{
+                    return response()->json(["error" => "Invalid OTP entered."], 400);
                 }
         
                 return response()->json(['success' => $verified, 'result'=>$success, 'user'=>$user]);
