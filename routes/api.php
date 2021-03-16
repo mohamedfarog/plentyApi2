@@ -46,7 +46,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
-Route::resource('products', ProductController::class);
+
 Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
 Route::get('invnum', [AccessController::class, 'accessNumber']);
@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('support', SupportController::class);
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('products', ProductController::class);
+
 });
 
 Route::get('generate', function (Request $request) {

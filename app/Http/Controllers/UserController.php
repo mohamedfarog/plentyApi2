@@ -346,7 +346,7 @@ class UserController extends Controller
                                 $user->email = $request->email;
                             }
                             if (isset($request->password)) {
-                                $user->password = $request->password;
+                                $user->password = bcrypt($request->password);
                             }
                             if (isset($request->contact)) {
                                 $user->contact = $request->contact;
@@ -386,6 +386,7 @@ class UserController extends Controller
                             }
                             $msg = 'User has been updated';
                             $user->save();
+                            (new ApplePass())->createLoyaltyPass($user);
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
                     }
