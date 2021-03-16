@@ -151,7 +151,7 @@
 <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:20px; padding-bottom:20px; padding-right: 0px; padding-left: 0px;">
 <!--<![endif]-->
 <div class="img-container center autowidth" style="padding-right: 0px;padding-left: 0px;" align="center">
-<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]--><a href="http://www.example.com/" style="outline:none" tabindex="-1" target="_blank"><img alt="Logo" class="center autowidth" src="data:image/png;base64, {{base64_encode(file_get_contents(asset('/orderimages/logo_5.png')))}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 251px; display: block;" title="Logo" width="251" border="0" align="middle"></a>
+<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]--><a href="http://www.example.com/" style="outline:none" tabindex="-1" target="_blank"><img alt="Logo" class="center autowidth" src="data:image/png;base64, {{base64_encode(file_get_contents(asset('/supportimages/logo.png')))}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 251px; display: block;" title="Logo" width="251" border="0" align="middle"></a>
 <!--[if mso]></td></tr></table><![endif]-->
 </div>
 <!--[if (!mso)&(!IE)]><!-->
