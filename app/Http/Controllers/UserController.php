@@ -30,10 +30,10 @@ class UserController extends Controller
         switch ($user->typeofuser) {
             case 'S':
                 $perpage = 15;
-                if(isset($request->perpage)){
+                if (isset($request->perpage)) {
                     $perpage = $request->perpage;
                 }
-                if(isset($request->all)){
+                if (isset($request->all)) {
                     return User::all();
                 }
                 return User::paginate($perpage);
@@ -326,6 +326,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $logged = Auth::user();
+        $settings = Project::first();
         switch ($logged->typeofuser) {
             case 'S':
                 $user = '';
@@ -386,7 +387,9 @@ class UserController extends Controller
                             }
                             $msg = 'User has been updated';
                             $user->save();
-                            (new ApplePass())->createLoyaltyPass($user);
+                            $newuser = User::where('id',$user->id)->first();
+                                (new ApplePass())->createLoyaltyPass($newuser);
+
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
                     }
@@ -437,8 +440,33 @@ class UserController extends Controller
                     if (isset($request->invites)) {
                         $data['invites'] = $request->invites;
                     }
+                    $start = '1';
+                    $end = '';
+                    for ($i = 0; $i < $settings->invcode - 1; $i++) {
+
+                        $start .= '0';
+                    }
+                    for ($i = 0; $i < $settings->invcode; $i++) {
+
+                        $end .= '9';
+                    }
+                    $run = true;
+                    $code = 'P-' . rand(intval($start), intval($end));
+
+                    while ($run) {
+
+                        $user = User::where('invitation_code', $code)->first();
+                        if ($user != null) {
+                            $code = 'P-' . rand(intval($start), intval($end));
+                        } else {
+                            $data['invitation_code'] = $code;
+                            $run = false;
+                        }
+                    }
+                    $data['points'] = $settings->registerpts;
                     $user = User::create($data);
                     $msg = 'User has been added';
+                    (new ApplePass())->createLoyaltyPass($user);
                     return response()->json(['success' => !!$user, 'message' => $msg]);
                 }
                 break;
