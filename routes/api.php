@@ -161,6 +161,6 @@ Route::get('test', function (Request $request) {
         $order = Order::with(['details' => function ($details) {
             return $details->with(['product', 'size', 'color']);
         }, 'user'])->where('id', $request->id)->first();
-        return view('bill');
+        return view('bill', ["data" => $order]);
     }
 });
