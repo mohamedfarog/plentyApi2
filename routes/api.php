@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
+    Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
 });
 

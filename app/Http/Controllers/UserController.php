@@ -26,6 +26,16 @@ class UserController extends Controller
     {
         //
 
+        $user = Auth::user();
+        switch ($user->typeofuser) {
+            case 'S':
+                return User::paginate();
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     /**
@@ -77,8 +87,6 @@ class UserController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 "contact" => "required",
-
-
             ]);
 
             if ($validator->fails()) {
@@ -92,7 +100,7 @@ class UserController extends Controller
                 $data['email'] = $request->email;
             }
             if (isset($request->password)) {
-                $data['password'] = $request->password;
+                $data['password'] = bcrypt($request->password);
             }
             if (isset($request->contact)) {
                 $data['contact'] = $request->contact;
@@ -194,7 +202,7 @@ class UserController extends Controller
                         $user->gender = $request->gender;
                     }
 
-                    if(isset($request->password)){
+                    if (isset($request->password)) {
                         $user->password = bcrypt($request->password);
                     }
 
@@ -232,9 +240,9 @@ class UserController extends Controller
                 $validator = Validator::make($request->all(), [
                     "email" => "required",
                     "password" => "required",
-        
+
                 ]);
-        
+
                 if ($validator->fails()) {
                     return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
                 }
@@ -257,19 +265,19 @@ class UserController extends Controller
                 $validator = Validator::make($request->all(), [
                     "contact" => "required",
                     "otp" => "required",
-        
+
                 ]);
-        
+
                 if ($validator->fails()) {
                     return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
                 }
-                $otp = Otp::where('contact',$request->contact)->where('verified',0)->first();
+                $otp = Otp::where('contact', $request->contact)->where('verified', 0)->first();
                 $verified = false;
                 $msg = '';
                 $success = array();
-                if($otp != null){
-                    if(isset($request->otp)){
-                        if($otp->otp == $request->otp){
+                if ($otp != null) {
+                    if (isset($request->otp)) {
+                        if ($otp->otp == $request->otp) {
                             $verified  = true;
                             $otp->verified = true;
                             $msg = 'OTP has been verified. Login successful.';
@@ -278,22 +286,21 @@ class UserController extends Controller
                             $user = User::where('contact', $request->contact)->first();
                             Auth::login($user);
                             $loggeduser = Auth::user();
-                            if($user){
-                                $success['message']= $msg;
-                                $success['token'] =$loggeduser->createToken('MyApp')->accessToken;
+                            if ($user) {
+                                $success['message'] = $msg;
+                                $success['token'] = $loggeduser->createToken('MyApp')->accessToken;
                             }
-                        }else{
+                        } else {
                             $verified = false;
                             $msg = 'OTP entered is incorrect.';
-                            $success['message']= $msg;
+                            $success['message'] = $msg;
                         }
-                      
                     }
-                }else{
+                } else {
                     return response()->json(["error" => "Invalid OTP entered."], 400);
                 }
-        
-                return response()->json(['success' => $verified, 'result'=>$success, 'user'=>$user]);
+
+                return response()->json(['success' => $verified, 'result' => $success, 'user' => $user]);
                 break;
             default:
                 # code...
@@ -311,117 +318,126 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = '';
-        $msg = '';
-        if (isset($request->id)) {
-            $user = User::where('id', $request->id)->first();
-            switch ($request->action) {
-                case 'delete':
-                    $user->delete();
-                    $msg = 'User has been deleted';
-                    return response()->json(['success' => !!$user, 'message' => $msg]);
-                    break;
-                case 'update':
+        $logged = Auth::user();
+        switch ($logged->typeofuser) {
+            case 'S':
+                $user = '';
+                $msg = '';
+                if (isset($request->id)) {
+                    $user = User::where('id', $request->id)->first();
+                    switch ($request->action) {
+                        case 'delete':
+                            $user->delete();
+                            $msg = 'User has been deleted';
+                            return response()->json(['success' => !!$user, 'message' => $msg]);
+                            break;
+                        case 'update':
+                            if (isset($request->name)) {
+                                $user->name = $request->name;
+                            }
+                            if (isset($request->email)) {
+                                $user->email = $request->email;
+                            }
+                            if (isset($request->password)) {
+                                $user->password = $request->password;
+                            }
+                            if (isset($request->contact)) {
+                                $user->contact = $request->contact;
+                            }
+                            if (isset($request->eid)) {
+                                $user->eid = $request->eid;
+                            }
+                            if (isset($request->passport)) {
+                                $user->passport = $request->passport;
+                            }
+                            if (isset($request->others)) {
+                                $user->others = $request->others;
+                            }
+                            if (isset($request->apple_id)) {
+                                $user->apple_id = $request->apple_id;
+                            }
+                            if (isset($request->google_id)) {
+                                $user->google_id = $request->google_id;
+                            }
+                            if (isset($request->active)) {
+                                $user->active = $request->active;
+                            }
+                            if (isset($request->verified)) {
+                                $user->verified = $request->verified;
+                            }
+                            if (isset($request->typeofuser)) {
+                                $user->typeofuser = $request->typeofuser;
+                            }
+                            if (isset($request->gender)) {
+                                $user->gender = $request->gender;
+                            }
+                            if (isset($request->invitationcode)) {
+                                $user->invitationcode = $request->invitationcode;
+                            }
+                            if (isset($request->invites)) {
+                                $user->invites = $request->invites;
+                            }
+                            $msg = 'User has been updated';
+                            $user->save();
+                            return response()->json(['success' => !!$user, 'message' => $msg]);
+                            break;
+                    }
+                } else {
+                    $data = array();
                     if (isset($request->name)) {
-                        $user->name = $request->name;
+                        $data['name'] = $request->name;
                     }
                     if (isset($request->email)) {
-                        $user->email = $request->email;
+                        $data['email'] = $request->email;
                     }
                     if (isset($request->password)) {
-                        $user->password = $request->password;
+                        $data['password'] = bcrypt($request->password);
                     }
                     if (isset($request->contact)) {
-                        $user->contact = $request->contact;
+                        $data['contact'] = $request->contact;
                     }
                     if (isset($request->eid)) {
-                        $user->eid = $request->eid;
+                        $data['eid'] = $request->eid;
                     }
                     if (isset($request->passport)) {
-                        $user->passport = $request->passport;
+                        $data['passport'] = $request->passport;
                     }
                     if (isset($request->others)) {
-                        $user->others = $request->others;
+                        $data['others'] = $request->others;
                     }
                     if (isset($request->apple_id)) {
-                        $user->apple_id = $request->apple_id;
+                        $data['apple_id'] = $request->apple_id;
                     }
                     if (isset($request->google_id)) {
-                        $user->google_id = $request->google_id;
+                        $data['google_id'] = $request->google_id;
                     }
                     if (isset($request->active)) {
-                        $user->active = $request->active;
+                        $data['active'] = $request->active;
                     }
                     if (isset($request->verified)) {
-                        $user->verified = $request->verified;
+                        $data['verified'] = $request->verified;
                     }
                     if (isset($request->typeofuser)) {
-                        $user->typeofuser = $request->typeofuser;
+                        $data['typeofuser'] = $request->typeofuser;
                     }
                     if (isset($request->gender)) {
-                        $user->gender = $request->gender;
+                        $data['gender'] = $request->gender;
                     }
                     if (isset($request->invitationcode)) {
-                        $user->invitationcode = $request->invitationcode;
+                        $data['invitationcode'] = $request->invitationcode;
                     }
                     if (isset($request->invites)) {
-                        $user->invites = $request->invites;
+                        $data['invites'] = $request->invites;
                     }
-                    $msg = 'User has been updated';
-                    $user->save();
+                    $user = User::create($data);
+                    $msg = 'User has been added';
                     return response()->json(['success' => !!$user, 'message' => $msg]);
-                    break;
-            }
-        } else {
-            $data = array();
-            if (isset($request->name)) {
-                $data['name'] = $request->name;
-            }
-            if (isset($request->email)) {
-                $data['email'] = $request->email;
-            }
-            if (isset($request->password)) {
-                $data['password'] = $request->password;
-            }
-            if (isset($request->contact)) {
-                $data['contact'] = $request->contact;
-            }
-            if (isset($request->eid)) {
-                $data['eid'] = $request->eid;
-            }
-            if (isset($request->passport)) {
-                $data['passport'] = $request->passport;
-            }
-            if (isset($request->others)) {
-                $data['others'] = $request->others;
-            }
-            if (isset($request->apple_id)) {
-                $data['apple_id'] = $request->apple_id;
-            }
-            if (isset($request->google_id)) {
-                $data['google_id'] = $request->google_id;
-            }
-            if (isset($request->active)) {
-                $data['active'] = $request->active;
-            }
-            if (isset($request->verified)) {
-                $data['verified'] = $request->verified;
-            }
-            if (isset($request->typeofuser)) {
-                $data['typeofuser'] = $request->typeofuser;
-            }
-            if (isset($request->gender)) {
-                $data['gender'] = $request->gender;
-            }
-            if (isset($request->invitationcode)) {
-                $data['invitationcode'] = $request->invitationcode;
-            }
-            if (isset($request->invites)) {
-                $data['invites'] = $request->invites;
-            }
-            $user = User::create($data);
-            $msg = 'User has been added';
-            return response()->json(['success' => !!$user, 'message' => $msg]);
+                }
+                break;
+
+            default:
+                # code...
+                break;
         }
     }
 
