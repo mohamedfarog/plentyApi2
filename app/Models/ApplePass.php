@@ -217,18 +217,18 @@ class ApplePass extends Model
 
     public function sendNotif($pushToken)
     {
-        $response = Http::post("gateway.push.apple.com", [
-            'AppSid' => env('APPSID'),
-            'SenderID' => env('SENDERID'),
-            'Body' => $body,
-            'Recipient' => $recipient
-        ]);
+        // $response = Http::post("gateway.push.apple.com", [
+        //     'AppSid' => env('APPSID'),
+        //     'SenderID' => env('SENDERID'),
+        //     'Body' => $body,
+        //     'Recipient' => $recipient
+        // ]);
 
-        if($response['success'] == true){
-            return 'An OTP was sent to +' . $recipient.'.';
-        }else{
-            return 'Please enter a valid KSA phone number.';
-        }
+        // if($response['success'] == true){
+        //     return 'An OTP was sent to +' . $recipient.'.';
+        // }else{
+        //     return 'Please enter a valid KSA phone number.';
+        // }
     }
 
     // public static function createAccessPass($id)

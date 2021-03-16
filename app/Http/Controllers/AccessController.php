@@ -100,31 +100,61 @@ class AccessController extends Controller
         $user = User::where('invitation_code', $request->invitation_code)->first();
         if ($user) {
             if ($settings->currentinv < $settings->invlimit) {
-                if ($user->invites < $settings->invperuser) {
-                    $data = array();
-                    $data['inviter_id'] = $user->id;
-                    $data['invitee_id'] = $loggeduser->id;
-                    $data['invcode'] = $request->invitation_code;
-                    $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
-                    if ($accessuser != null) {
-                        return response()->json(['error' => 'You have already been invited by another user.']);
-                    } else {
+                switch ($user->typeofuser) {
+                    case 'S':
+                        $data = array();
+                        $data['inviter_id'] = $user->id;
+                        $data['invitee_id'] = $loggeduser->id;
+                        $data['invcode'] = $request->invitation_code;
+                        $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
+                        if ($accessuser != null) {
+                            return response()->json(['error' => 'You have already been invited by another user.']);
+                        } else {
 
-                        $access = Access::create($data);
-                        (new ApplePass())->createAccessPass(null,$access->id);
+                            $access = Access::create($data);
+                            (new ApplePass())->createAccessPass(null, $access->id);
 
-                        $msg = 'You have been invited successfully! You now have access.';
-                        $user->invites += 1;
-                        $user->points += $settings->invitepts;
-                        $settings->currentinv += 1;
-                        $settings->save();
-                        $user->save();
+                            $msg = 'You have been invited successfully! You now have access.';
+                            $user->invites += 1;
+                            $user->points += $settings->invitepts;
+                            $settings->currentinv += 1;
+                            $settings->save();
+                            $user->save();
 
 
-                        return response()->json(['success' => !!$access, 'message' => $msg]);
-                    }
-                } else {
-                    return response()->json(['error' => 'This invitation code is not valid.']);
+                            return response()->json(['success' => !!$access, 'message' => $msg]);
+                        }
+                        break;
+                    case 'U':
+                        if ($user->invites < $settings->invperuser) {
+                            $data = array();
+                            $data['inviter_id'] = $user->id;
+                            $data['invitee_id'] = $loggeduser->id;
+                            $data['invcode'] = $request->invitation_code;
+                            $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
+                            if ($accessuser != null) {
+                                return response()->json(['error' => 'You have already been invited by another user.']);
+                            } else {
+
+                                $access = Access::create($data);
+                                (new ApplePass())->createAccessPass(null, $access->id);
+
+                                $msg = 'You have been invited successfully! You now have access.';
+                                $user->invites += 1;
+                                $user->points += $settings->invitepts;
+                                $settings->currentinv += 1;
+                                $settings->save();
+                                $user->save();
+
+
+                                return response()->json(['success' => !!$access, 'message' => $msg]);
+                            }
+                        } else {
+                            return response()->json(['error' => 'This invitation code is not valid.']);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             } else {
                 return response()->json(['error' => 'Sorry, the Plenty Gold Access list is currently full.']);
