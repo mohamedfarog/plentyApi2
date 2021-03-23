@@ -17,7 +17,7 @@ class TierController extends Controller
     public function index()
     {
         //
-        $tiers = Tier::all()->orderBy('requirement', 'ASC');
+        $tiers = Tier::orderBy('requirement', 'ASC')->all();
         return $tiers;
     }
 
