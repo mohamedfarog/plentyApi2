@@ -39,7 +39,7 @@ class TierController extends Controller
      */
     public function store(Request $request, UploadHelper $helper)
     {
-       
+
         $tier = '';
         $msg = '';
         if (isset($request->id)) {
@@ -83,9 +83,9 @@ class TierController extends Controller
                 "requirement" => "required",
                 "value" => "required",
                 "badge" => "required",
-    
+
             ]);
-    
+
             if ($validator->fails()) {
                 return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
             }
@@ -108,8 +108,17 @@ class TierController extends Controller
             if (isset($request->badge)) {
                 $data['badge'] = $helper->store($request->badge, 'tier');
             }
-            $tier = Tier::create($data);
-            $msg = 'Tier has been added';
+            $tiercheck = Tier::where('requirement', $request->requirement)->first();
+            if ($tiercheck) {
+                $tier = false;
+                $msg = 'The tier with '. $request->requirement . ' is already in the system.';
+                return response()->json(['success' => $tier, 'message' => $msg]);
+            } else {
+                $tier = Tier::create($data);
+                $msg = 'Tier has been added';
+            }
+
+
             return response()->json(['success' => !!$tier, 'message' => $msg]);
         }
     }
