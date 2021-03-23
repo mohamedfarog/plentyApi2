@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TierController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
 use App\Models\Pass;
@@ -62,8 +63,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('products', ProductController::class);
-
-});
+    Route::post('tier', [TierController::class, 'store']);
+}); 
 
 Route::get('generate', function (Request $request) {
     $len = 24;
