@@ -12,6 +12,7 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\UserController;
+use App\Models\Addon;
 use App\Models\Cat;
 use App\Models\Color;
 use App\Models\Designer;
@@ -182,6 +183,6 @@ Route::get('test', function (Request $request) {
 });
 
 Route::get('models', function (Request $request){
-   return response()->json(['category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(),]) ;
+   return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(),]) ;
     
 });
