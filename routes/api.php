@@ -12,8 +12,17 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\UserController;
+use App\Models\Cat;
+use App\Models\Color;
+use App\Models\Designer;
+use App\Models\Image;
 use App\Models\Order;
 use App\Models\Pass;
+use App\Models\Prodcat;
+use App\Models\Product;
+use App\Models\Shop;
+use App\Models\Size;
+use App\Models\Style;
 use App\Models\Support;
 use App\Models\User;
 use Carbon\Carbon;
@@ -168,4 +177,11 @@ Route::get('test', function (Request $request) {
         }, 'user'])->where('id', $request->id)->first();
         return view('bill', ["data" => $order]);
     }
+    return  $user =User::with(['tier'])->where('id', $request->userid)->first();
+    
+});
+
+Route::get('models', function (Request $request){
+   return response()->json(['category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(),]) ;
+    
 });

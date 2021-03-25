@@ -34,9 +34,9 @@ class UserController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                    return User::all();
+                    return User::with(['tier'])->get();
                 }
-                return User::paginate($perpage);
+                return User::with(['tier'])->paginate($perpage);
                 break;
 
             default:
@@ -259,7 +259,7 @@ class UserController extends Controller
                     if ($user->email_verified_at != NULL) {
                         $success["message"] = "Login successful";
                         $success["token"] = $user->createToken('MyApp')->accessToken;
-                        $u = User::find($user->id);
+                        $u = User::with(['tier'])->find($user->id);
 
                         return response()->json(["success" => $success, "user" => $u]);
                     } else {
@@ -291,7 +291,7 @@ class UserController extends Controller
                             $msg = 'OTP has been verified. Login successful.';
                             $otp->save();
 
-                            $user = User::where('contact', $request->contact)->first();
+                            $user = User::with(['tier'])->where('contact', $request->contact)->first();
                             Auth::login($user);
                             $loggeduser = Auth::user();
                             if ($user) {
