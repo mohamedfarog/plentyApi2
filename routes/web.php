@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +15,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
+Route::get('/', function () {  
+    return view('/home');
 });
 
-Route::get('/#', function () {
-    return redirect('/home');
+Route::get('/delicacy', function () {  
+    return view('/delicacy');
+});
+
+Route::get('/product', function () {  
+    return view('/product');
+});
+
+Route::get('/#', function () { 
+    return redirect('/');
 });
 
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/lang', function () {
+    $locale = App::currentLocale();
+    if ($locale == 'en'){
+        App::setLocale('ar');
+        App::setLocale('ar');
+        App::setLocale('ar');
+        App::setLocale('ar');
+        App::setLocale('ar');
+        return view('/home');
+    }
+    else if ($locale == 'ar'){
+        App::setLocale('en');
+        App::setLocale('en');
+        App::setLocale('en');
+        App::setLocale('en');
+        return redirect('/');
+    }
+
 }); 

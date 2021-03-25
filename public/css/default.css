@@ -701,7 +701,7 @@ button {
     margin: 0 0 20px;
 }
 .s-price-box {
-  font-family: 'Avenir Next LT Pro', sans-serif;
+  font-family: 'Avenir', sans-serif;
     font-size: 20px;
 }
 .s-price-box .old-price {
@@ -718,7 +718,7 @@ button {
 }
 .modal-product .product-info .price-box .special-price {
     color: #83cbdc;
-    font-family: 'Avenir Next LT Pro', sans-serif;
+    font-family: 'Avenir', sans-serif;
     font-size: 24px;
     font-weight: 400;
 }

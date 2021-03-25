@@ -10,17 +10,17 @@
     <meta name="description" content="">
 
     <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:400,400i,600,700'
+    <!-- <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:400,400i,600,700'
         rel='stylesheet'>
-
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'> -->
     <!-- Css -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/magnific-popup.css" />
     <link rel="stylesheet" href="css/font-icons.css" />
     <link rel="stylesheet" href="css/sliders.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
 
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
@@ -34,7 +34,8 @@
     <link rel="stylesheet" href="lib/css/nivo-slider.css">
     <link rel="stylesheet" href="lib/css/preview.css">
     <!-- slick css -->
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
     <!-- lightbox css -->
     <link rel="stylesheet" href="css/lightbox.min.css">
     <!-- material-design-iconic-font css -->
@@ -44,6 +45,7 @@
     <!-- style css -->
     <link rel="stylesheet" href="style.css">
     <!-- shortcode css -->
+    <link rel="stylesheet" href="css/shortcode.css">
     <link rel="stylesheet" href="css/shortcode.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -55,6 +57,72 @@
     <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style type="text/css">
+ 
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;  
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      opacity: 1;
+    }
+    
+    .slick-active {
+      opacity: 1;
+    }
+
+    .slick-current {
+      opacity: 1;
+    }
+    .slick-track {
+        margin: 20px 0;
+    }
+    .bottomtitleheader{
+       text-transform: uppercase !important;
+       font-size:12px !important;
+       font-weight:500 !important;
+       margin-bottom:0 !important;
+
+    }
+    p, .navigation.sticky .navbar-nav > li > a{
+        color:#001b71;
+    }
+    .socialfooter{
+        width:25px;
+    }
+    .bottomtitleheader::after{ 
+        margin: 10px 0 !important;
+        border-color: #001b71 !important;
+        width: 90% !important;
+    }
+    ul.list-no-dividers > li > a {
+        text-transform:uppercase;
+        color: #001b71 !important;
+        font-size:12px !important;
+    }
+    @media only screen and (max-width: 600px) { 
+ 
+        .footer-widgets {
+            padding: 0;
+            margin: 20px;
+        }
+        .footer-widgets .row > div {
+            margin-bottom: 0;
+        }
+ 
+    }
+  </style>
 </head>
 
 <body class="relative">
@@ -128,11 +196,11 @@
                                     <ul class="nav navbar-nav">
 
                                         <li class="">
-                                            <a href="#">Home</a> 
+                                            <a href="/">Home</a> 
                                         </li>
  
                                         <li class="">
-                                            <a href="#">Delicacy</a>
+                                            <a href="/delicacy">Delicacy</a>
                                     
                                         </li> <!-- end elements -->
                                         <li class="">
@@ -157,7 +225,7 @@
                                             <form method="get" class="mobile-search">
                                                 <input type="search" class="form-control" placeholder="Search...">
                                                 <button type="submit" class="search-button">
-                                                    <i class="fa fa-search"></i>
+                                                    <img src="img/nav/search.png" style="width:30px;height:30px">
                                                 </button>
                                             </form>
                                         </li>
@@ -170,14 +238,15 @@
                                 <ul>
 
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger">
-                                            <img src="img/nav/search.png" style="width:50px;height:50px;">
+                                        <a href="#" class="nav-search search-trigger imgicon"  >
+                                            <img class="imgicon" src="img/nav/search.png">
                                         </a>
                                     </li>
                                     <li class="nav-cart">
                                         <div class="nav-cart-outer">
                                             <div class="nav-cart-inner">
-                                                <a href="#" class="nav-cart-icon">
+                                               <a href="#" class="nav-search search-trigger imgicon"  >
+                                        <img class="imgicon" src="img/nav/bag.png">
 
                                                 </a>
                                             </div>
@@ -241,27 +310,27 @@
                                         </div> -->
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger">
-                                            <i class="fa fa-heart"></i>
+                                    <a href="#" class="nav-search search-trigger imgicon"  >
+                                        <img class="imgicon" src="img/nav/fav.png">
                                         </a>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger">
-                                            <i class="fa fa-user"></i>
+                                    <a href="#" class="nav-search search-trigger imgicon"  >
+                                        <img class="imgicon" src="img/nav/user.png">
                                         </a>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger">
-                                            <i class="fa fa-globe"></i>
+                                    <a href="#" class="nav-search search-trigger imgicon"  >
+                                        <img class="imgicon" src="img/nav/lang.png">
                                            
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                    <a href="#" class="menufont">ENG</a>
+                                    <a href="#" class="menufont">{{ __('website.currentlanguage') }}</a>
                                       
                                       <ul class="dropdown-menu">
                                       
-                                        <li><a href="index-2.html">Arabic</a></li> 
+                                        <li><a href="/lang">{{ __('website.changetolanguage') }}</a></li> 
                                       </ul>
                                       <li class="">
                                           <i class="fa fa-angle-down dropdown-trigger"></i> 
@@ -287,6 +356,90 @@
     </main> <!-- end main wrapper -->
 
     <!-- jQuery Scripts -->
+
+
+
+<!-- Footer Type-1 -->
+<footer class="footer footer-type-1">
+    <div class="container" style="width:95%">
+        <div class="footer-widgets">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="widget footer-about-us" style="text-align:center;">
+                        <img src="img/logo_dark.png" alt="" class="logo" style="height:150px;max-height:100%;">
+                      
+                        <div class="footer-socials">
+                            <div class="social-icons nobase" style="padding:0 20px;">
+                                <a href="#"><img class="socialfooter" src="img/social/whatsapp.png"></a>
+                                <a href="#"><img class="socialfooter" src="img/social/facebook.png"></a>
+                                <a href="#"><img class="socialfooter" src="img/social/instagram.png"></a>
+                                <a href="#"><img class="socialfooter" src="img/social/twitter.png"></a>
+                                
+                            </div>
+                        </div>
+                        <p class="" style="margin-top: 10px;margin-bottom:0;line-height: 20px;">Tel: +966 50 123 3344</p>
+                        <p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p>
+                    </div>
+                </div> <!-- end about us -->
+
+                <div class="col-md-2 col-sm-6 col-xs-6"  style="padding-top:5%;">
+                    <div class="widget footer-links">
+                        <h5 class="widget-title bottom-line left-align grey bottomtitleheader" >Help & Information</h5>
+                        <ul class="list-no-dividers">
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Track Order</a></li> 
+                            <li><a href="#">Delivery & Returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-6 col-xs-6"  style="padding-top:5%;">
+                    <div class="widget footer-links">
+                        <h5 class="widget-title bottom-line left-align grey bottomtitleheader">About Plenty</h5>
+                        <ul class="list-no-dividers">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Corporate Responsibility</a></li>
+                            <li><a href="#">Investors Site</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-6 col-xs-6"  style="padding-top:5%;">
+                    <div class="widget footer-links" style="">
+                        <h5 class="widget-title bottom-line left-align grey bottomtitleheader">More From Plenty</h5>
+                        <ul class="list-no-dividers">
+                            <li><a href="#">Plenty Mobile App</a></li>
+                            <li><a href="#">Plenty Marketplace</a></li>
+                            <li><a href="#">Plenty Loyalty Points</a></li>
+                            <li><a href="#">Rewards</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6" >
+                    <div class="widget footer-links">
+                        <img class="" src="img/bottom/app.png" style="width:80%;display:block;margin:auto;margin-bottom:20px">
+                    </div>
+                    <div class="row" style="justify-content:space-between;display:flex;">
+                    <img class="" src="img/bottom/googleplay.png" style="width:40%;float:left">
+     
+                    <img class="" src="img/bottom/appleapp.png" style="width:40%;float:left">
+                    </div>
+                </div>
+                 
+
+            </div>
+        </div>
+    </div> <!-- end container -->
+
+ 
+</footer> <!-- end footer -->
+
+<div id="back-to-top">
+    <a href="#top"><i class="fa fa-angle-up"></i></a>
+</div>
+
 
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
@@ -316,7 +469,77 @@
     <script src="js/plugins.js"></script>
     <!-- main js -->
     <script src="js/main.js"></script>
-
+    <script>
+        $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1, 
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }
+   
+  ]
+});
+		
+      $(".brandsslider").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,  
+        autoplaySpeed: 2000,
+        responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }
+   
+  ]
+});
+      </script>
 </body>
 
 </html>
