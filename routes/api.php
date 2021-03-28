@@ -183,6 +183,6 @@ Route::get('test', function (Request $request) {
 });
 
 Route::get('models', function (Request $request){
-   return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(),]) ;
+   return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(), 'user'=>User::first()]) ;
     
 });
