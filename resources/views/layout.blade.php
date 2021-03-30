@@ -15,42 +15,41 @@
         <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'> -->
     <!-- Css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" />
-    <link rel="stylesheet" href="css/font-icons.css" />
-    <link rel="stylesheet" href="css/sliders.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" defer />
+    <link rel="stylesheet" href="css/magnific-popup.css" defer />
+    <link rel="stylesheet" href="css/font-icons.css" defer />
+    <link rel="stylesheet" href="css/sliders.css" defer />
+    <link rel="stylesheet" href="css/style.css" defer />
 
 
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/animate.css" defer>
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" defer>
     <!-- meanmenu css -->
-    <link rel="stylesheet" href="css/meanmenu.min.css">
+    <link rel="stylesheet" href="css/meanmenu.min.css" defer>
     <!-- nivo-slider css -->
-    <link rel="stylesheet" href="lib/css/nivo-slider.css">
-    <link rel="stylesheet" href="lib/css/preview.css">
+    <link rel="stylesheet" href="lib/css/nivo-slider.css" defer>
+    <link rel="stylesheet" href="lib/css/preview.css" defer>
     <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="css/slick.css">
-    <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css" defer>
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" defer>
     <!-- lightbox css -->
-    <link rel="stylesheet" href="css/lightbox.min.css">
+    <link rel="stylesheet" href="css/lightbox.min.css" defer>
     <!-- material-design-iconic-font css -->
-    <link rel="stylesheet" href="css/material-design-iconic-font.css">
+    <link rel="stylesheet" href="css/material-design-iconic-font.css" defer>
     <!-- All common css of theme -->
-    <link rel="stylesheet" href="css/default.css">
-    <!-- style css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/default.css" defer>
+
     <!-- shortcode css -->
-    <link rel="stylesheet" href="css/shortcode.css">
-    <link rel="stylesheet" href="css/shortcode.css">
+    <link rel="stylesheet" href="css/shortcode.css" defer>
+    <link rel="stylesheet" href="css/shortcode.css" defer>
     <!-- responsive css -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css" defer>
     <!-- modernizr css -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="js/vendor/modernizr-2.8.3.min.js" defer></script>
     <!-- Favicons -->
     <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -58,71 +57,79 @@
     <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style type="text/css">
- 
     .slick-slide {
-      margin: 0px 20px;
+        margin: 0px 20px;
     }
 
     .slick-slide img {
-      width: 100%;  
+        width: 100%;
     }
 
     .slick-prev:before,
     .slick-next:before {
-      color: black;
+        color: black;
     }
 
 
     .slick-slide {
-      transition: all ease-in-out .3s;
-      opacity: 1;
+        transition: all ease-in-out .3s;
+        opacity: 1;
     }
-    
+
     .slick-active {
-      opacity: 1;
+        opacity: 1;
     }
 
     .slick-current {
-      opacity: 1;
+        opacity: 1;
     }
+
     .slick-track {
         margin: 20px 0;
     }
-    .bottomtitleheader{
-       text-transform: uppercase !important;
-       font-size:12px !important;
-       font-weight:500 !important;
-       margin-bottom:0 !important;
+
+    .bottomtitleheader {
+        text-transform: uppercase !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        margin-bottom: 0 !important;
 
     }
-    p, .navigation.sticky .navbar-nav > li > a{
-        color:#001b71;
+
+    p,
+    .navigation.sticky .navbar-nav>li>a {
+        color: #001b71;
     }
-    .socialfooter{
-        width:25px;
+
+    .socialfooter {
+        width: 25px;
     }
-    .bottomtitleheader::after{ 
+
+    .bottomtitleheader::after {
         margin: 10px 0 !important;
         border-color: #001b71 !important;
         width: 90% !important;
     }
-    ul.list-no-dividers > li > a {
-        text-transform:uppercase;
+
+    ul.list-no-dividers>li>a {
+        text-transform: uppercase;
         color: #001b71 !important;
-        font-size:12px !important;
+        font-size: 12px !important;
     }
-    @media only screen and (max-width: 600px) { 
- 
+
+    @media only screen and (max-width: 600px) {
+
         .footer-widgets {
             padding: 0;
             margin: 20px;
         }
-        .footer-widgets .row > div {
+
+        .footer-widgets .row>div {
             margin-bottom: 0;
         }
- 
+
     }
-  </style>
+    </style>
 </head>
 
 <body class="relative">
@@ -196,30 +203,30 @@
                                     <ul class="nav navbar-nav">
 
                                         <li class="">
-                                            <a href="/">Home</a> 
+                                            <a href="/">Home</a>
                                         </li>
- 
+
                                         <li class="">
                                             <a href="/delicacy">Delicacy</a>
-                                    
+
                                         </li> <!-- end elements -->
                                         <li class="">
                                             <a href="#">Beauty</a>
-                                           
-                                        </li> <!-- end elements --> 
+
+                                        </li> <!-- end elements -->
                                         <li class="">
                                             <a href="#">Fashion</a>
-                                           
+
                                         </li> <!-- end elements -->
                                         <li class="">
                                             <a href="#">Featured</a>
-                                            
+
                                         </li> <!-- end elements -->
                                         <li class="">
                                             <a href="#">Brands</a>
-                                            
+
                                         </li> <!-- end elements -->
-   
+
                                         <!-- Mobile search -->
                                         <li id="mobile-search" class="hidden-lg hidden-md">
                                             <form method="get" class="mobile-search">
@@ -238,15 +245,15 @@
                                 <ul>
 
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger imgicon"  >
+                                        <a href="#" class="nav-search search-trigger imgicon">
                                             <img class="imgicon" src="img/nav/search.png">
                                         </a>
                                     </li>
                                     <li class="nav-cart">
                                         <div class="nav-cart-outer">
                                             <div class="nav-cart-inner">
-                                               <a href="#" class="nav-search search-trigger imgicon"  >
-                                        <img class="imgicon" src="img/nav/bag.png">
+                                                <a href="#" class="nav-search search-trigger imgicon">
+                                                    <img class="imgicon" src="img/nav/bag.png">
 
                                                 </a>
                                             </div>
@@ -310,30 +317,30 @@
                                         </div> -->
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                    <a href="#" class="nav-search search-trigger imgicon"  >
-                                        <img class="imgicon" src="img/nav/fav.png">
+                                        <a href="#" class="nav-search search-trigger imgicon">
+                                            <img class="imgicon" src="img/nav/fav.png">
                                         </a>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                    <a href="#" class="nav-search search-trigger imgicon"  >
-                                        <img class="imgicon" src="img/nav/user.png">
+                                        <a href="#" class="nav-search search-trigger imgicon">
+                                            <img class="imgicon" src="img/nav/user.png">
                                         </a>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                    <a href="#" class="nav-search search-trigger imgicon"  >
-                                        <img class="imgicon" src="img/nav/lang.png">
-                                           
+                                        <a href="#" class="nav-search search-trigger imgicon">
+                                            <img class="imgicon" src="img/nav/lang.png">
+
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                    <a href="#" class="menufont">{{ __('website.currentlanguage') }}</a>
-                                      
-                                      <ul class="dropdown-menu">
-                                      
-                                        <li><a href="/lang">{{ __('website.changetolanguage') }}</a></li> 
-                                      </ul>
-                                      <li class="">
-                                          <i class="fa fa-angle-down dropdown-trigger"></i> 
+                                        <a href="#" class="menufont">{{ __('website.currentlanguage') }}</a>
+
+                                        <ul class="dropdown-menu">
+
+                                            <li><a href="/lang">{{ __('website.changetolanguage') }}</a></li>
+                                        </ul>
+                                    <li class="">
+                                        <i class="fa fa-angle-down dropdown-trigger"></i>
                                     </li>
                                     </li>
 
@@ -359,91 +366,94 @@
 
 
 
-<!-- Footer Type-1 -->
-<footer class="footer footer-type-1">
-    <div class="container" style="width:95%">
-        <div class="footer-widgets">
-            <div class="row">
+    <!-- Footer Type-1 -->
+    <footer class="footer footer-type-1">
+        <div class="container" style="width:95%">
+            <div class="footer-widgets">
+                <div class="row">
 
-                <div class="col-md-3 col-sm-12 col-xs-12">
-                    <div class="widget footer-about-us" style="text-align:center;">
-                        <img src="img/logo_dark.png" alt="" class="logo" style="height:150px;max-height:100%;">
-                      
-                        <div class="footer-socials">
-                            <div class="social-icons nobase" style="padding:0 20px;">
-                                <a href="#"><img class="socialfooter" src="img/social/whatsapp.png"></a>
-                                <a href="#"><img class="socialfooter" src="img/social/facebook.png"></a>
-                                <a href="#"><img class="socialfooter" src="img/social/instagram.png"></a>
-                                <a href="#"><img class="socialfooter" src="img/social/twitter.png"></a>
-                                
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="widget footer-about-us" style="text-align:center;">
+                            <img src="img/logo_dark.png" alt="" class="logo" style="height:150px;max-height:100%;">
+
+                            <div class="footer-socials">
+                                <div class="social-icons nobase" style="padding:0 20px;">
+                                    <a href="#"><img class="socialfooter" src="img/social/whatsapp.png"></a>
+                                    <a href="#"><img class="socialfooter" src="img/social/facebook.png"></a>
+                                    <a href="#"><img class="socialfooter" src="img/social/instagram.png"></a>
+                                    <a href="#"><img class="socialfooter" src="img/social/twitter.png"></a>
+
+                                </div>
                             </div>
+                            <p class="" style="margin-top: 10px;margin-bottom:0;line-height: 20px;">Tel: +966 50 123
+                                3344</p>
+                            <p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p>
                         </div>
-                        <p class="" style="margin-top: 10px;margin-bottom:0;line-height: 20px;">Tel: +966 50 123 3344</p>
-                        <p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p>
-                    </div>
-                </div> <!-- end about us -->
+                    </div> <!-- end about us -->
 
-                <div class="col-md-2 col-sm-6 col-xs-6"  style="padding-top:5%;">
-                    <div class="widget footer-links">
-                        <h5 class="widget-title bottom-line left-align grey bottomtitleheader" >Help & Information</h5>
-                        <ul class="list-no-dividers">
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Track Order</a></li> 
-                            <li><a href="#">Delivery & Returns</a></li>
-                        </ul>
+                    <div class="col-md-2 col-sm-6 col-xs-6" style="padding-top:5%;">
+                        <div class="widget footer-links">
+                            <h5 class="widget-title bottom-line left-align grey bottomtitleheader">Help & Information
+                            </h5>
+                            <ul class="list-no-dividers">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Track Order</a></li>
+                                <li><a href="#">Delivery & Returns</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-2 col-sm-6 col-xs-6"  style="padding-top:5%;">
-                    <div class="widget footer-links">
-                        <h5 class="widget-title bottom-line left-align grey bottomtitleheader">About Plenty</h5>
-                        <ul class="list-no-dividers">
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Corporate Responsibility</a></li>
-                            <li><a href="#">Investors Site</a></li>
-                        </ul>
+                    <div class="col-md-2 col-sm-6 col-xs-6" style="padding-top:5%;">
+                        <div class="widget footer-links">
+                            <h5 class="widget-title bottom-line left-align grey bottomtitleheader">About Plenty</h5>
+                            <ul class="list-no-dividers">
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Corporate Responsibility</a></li>
+                                <li><a href="#">Investors Site</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-2 col-sm-6 col-xs-6"  style="padding-top:5%;">
-                    <div class="widget footer-links" style="">
-                        <h5 class="widget-title bottom-line left-align grey bottomtitleheader">More From Plenty</h5>
-                        <ul class="list-no-dividers">
-                            <li><a href="#">Plenty Mobile App</a></li>
-                            <li><a href="#">Plenty Marketplace</a></li>
-                            <li><a href="#">Plenty Loyalty Points</a></li>
-                            <li><a href="#">Rewards</a></li>
-                        </ul>
+                    <div class="col-md-2 col-sm-6 col-xs-6" style="padding-top:5%;">
+                        <div class="widget footer-links" style="">
+                            <h5 class="widget-title bottom-line left-align grey bottomtitleheader">More From Plenty</h5>
+                            <ul class="list-no-dividers">
+                                <li><a href="#">Plenty Mobile App</a></li>
+                                <li><a href="#">Plenty Marketplace</a></li>
+                                <li><a href="#">Plenty Loyalty Points</a></li>
+                                <li><a href="#">Rewards</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6" >
-                    <div class="widget footer-links">
-                        <img class="" src="img/bottom/app.png" style="width:80%;display:block;margin:auto;margin-bottom:20px">
-                    </div>
-                    <div class="row" style="justify-content:space-between;display:flex;">
-                    <img class="" src="img/bottom/googleplay.png" style="width:40%;float:left">
-     
-                    <img class="" src="img/bottom/appleapp.png" style="width:40%;float:left">
-                    </div>
-                </div>
-                 
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="widget footer-links">
+                            <img class="" src="img/bottom/app.png"
+                                style="width:80%;display:block;margin:auto;margin-bottom:20px">
+                        </div>
+                        <div class="row" style="justify-content:space-between;display:flex;">
+                            <img class="" src="img/bottom/googleplay.png" style="width:40%;float:left">
 
+                            <img class="" src="img/bottom/appleapp.png" style="width:40%;float:left">
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-        </div>
-    </div> <!-- end container -->
-
- 
-</footer> <!-- end footer -->
-
-<div id="back-to-top">
-    <a href="#top"><i class="fa fa-angle-up"></i></a>
-</div>
+        </div> <!-- end container -->
 
 
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
+    </footer> <!-- end footer -->
+
+    <div id="back-to-top">
+        <a href="#top"><i class="fa fa-angle-up"></i></a>
+    </div>
+
+
+    <script type="text/javascript" src="js/bootstrap.min.js" defer></script>
+    <script type="text/javascript" src="js/plugins.js" defer></script>
+    <script type="text/javascript" src="js/scripts.js" defer></script>
 
     <!-- bootstrap js -->
     <!-- jquery.meanmenu js -->
@@ -469,77 +479,111 @@
     <script src="js/plugins.js"></script>
     <!-- main js -->
     <script src="js/main.js"></script>
+
     <script>
-        $(".regular").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1, 
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    }
-   
-  ]
-});
-		
-      $(".brandsslider").slick({
+    $(".regular").slick({
         dots: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
-        autoplay: true,  
+        autoplay: true,
         autoplaySpeed: 2000,
-        responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            }
+
+        ]
+    });
+
+    $(".brandsslider").slick({
+        dots: true,
         infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    }
-   
-  ]
-});
-      </script>
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            }
+
+        ]
+    });
+
+    $(".tryprodslider").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        arrows: false,
+        autoplaySpeed: 2000,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            }
+
+        ]
+    });
+    </script>
 </body>
 
 </html>

@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </section> <!-- end hero slider -->
 
 <!-- Promo Banners -->
@@ -164,13 +164,7 @@
                     <div class="-">
                         <div class="tab-pane active" id="new-arrivals">
                             <div class="row">
-                                <!-- Single-product start -->
 
-                                <!-- Single-product end -->
-                                <!-- Single-product start -->
-
-
-                                <!-- Single-product end -->
 
                             </div>
                         </div>
@@ -186,7 +180,29 @@
 <section class="regular slider" style="width:90%;text-align:center;margin:auto">
     <div class="single-product  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
+            <div class="product-action clearfix">
+
+            </div>
+        </div>
+        <div class="product-info clearfix">
+            <div class="fix">
+                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
+                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
+            </div>
+            <div class="fix featlineicons">
+                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                </span>
+                <span class="pro-rating floatright">
+                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
+        <div class="product-img">
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -200,7 +216,7 @@
                 <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
                 </span>
                 <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png">
+                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
                 </span>
             </div>
         </div>
@@ -208,7 +224,7 @@
 
     <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -219,10 +235,10 @@
                 <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
             </div>
             <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
+                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
                 </span>
                 <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png">
+                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
                 </span>
             </div>
         </div>
@@ -230,7 +246,7 @@
 
     <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -241,10 +257,10 @@
                 <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
             </div>
             <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
+                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
                 </span>
                 <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png">
+                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
                 </span>
             </div>
         </div>
@@ -252,7 +268,7 @@
 
     <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -263,29 +279,7 @@
                 <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
             </div>
             <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png">
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
+                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
                 </span>
                 <span class="pro-rating floatright">
                     <img class="featicons" src="img/nav/bag.png">
@@ -297,47 +291,41 @@
 </section>
 
 <div class="purchase-online-area ">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <h2 class="title-border">Brands</h2>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h2 class="title-border">Brands</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <!-- Nav tabs -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <!-- Nav tabs -->
 
-                </div>
-                <div class="col-lg-12">
-                    <!-- Tab panes -->
-                    <div class="-">
-                        <div class="tab-pane active" id="new-arrivals">
-                            <div class="row">
-                                <!-- Single-product start -->
-
-                                <!-- Single-product end -->
-                                <!-- Single-product start -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Tab panes -->
+                <div class="-">
+                    <div class="tab-pane active" id="new-arrivals">
+                        <div class="row">
 
 
-                                <!-- Single-product end -->
-
-                            </div>
                         </div>
-
-
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <section class="brandsslider slider" style="width:90%;text-align:center;margin:auto">
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -346,7 +334,7 @@
 
     <div class="brand-slide    col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -355,7 +343,7 @@
 
     <div class="brand-slide   col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html">
+            <a href="/product">
                 <img src="img/product/8.jpg" alt="" /></a>
             <div class="product-action clearfix">
 
@@ -365,7 +353,7 @@
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
             <div class="product-action clearfix">
 
             </div>
@@ -374,13 +362,13 @@
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="single-product.html"><img src="img/product/8.jpg" alt="" /></a>
+            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
             <div class="product-action clearfix">
 
             </div>
         </div>
     </div>
- 
+
 </section>
 
 <section style="height:50px;">
@@ -392,8 +380,10 @@
             <div class="col-sm-12 text-center">
                 <h4 style="text-transform: uppercase;font-family:'Avenir Bold'">Get the latest updates</h4>
                 <form class="relative newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Email here" style="border: 2px solid #001b71;font-size:14px;">
-                    <input type="submit" class="btn btn-lg btn-dark newsletter-submit" value="Subscribe" style="font-weight:500;font-size:14px">
+                    <input type="email" class="newsletter-input" placeholder="Email here"
+                        style="border: 2px solid #001b71;font-size:14px;">
+                    <input type="submit" class="btn btn-lg btn-dark newsletter-submit" value="Subscribe"
+                        style="font-weight:500;font-size:14px">
                 </form>
             </div>
         </div>
@@ -416,18 +406,28 @@ $(document).ready(function() {
         $(this).css("opacity", "0.6");
     });
 
-    $('.featlineicons').css({'visibility':'hidden'});
+    $('.featlineicons').css({
+        'visibility': 'hidden'
+    });
     $(".single-product").hover(function() {
-        $(this).children(".product-info").children(".featlineicons").css({'visibility':'visible'});
+        $(this).children(".product-info").children(".featlineicons").css({
+            'visibility': 'visible'
+        });
     }, function() {
-        $(this).children(".product-info").children(".featlineicons").css({'visibility':'hidden'});
+        $(this).children(".product-info").children(".featlineicons").css({
+            'visibility': 'hidden'
+        });
     });
 
-  
+
     $(".brand-slide").hover(function() {
-        $(this).css({'transform':'scale(1.2)'});
+        $(this).css({
+            'transform': 'scale(1.2)'
+        });
     }, function() {
-        $(this).css({'transform':'scale(1)'});
+        $(this).css({
+            'transform': 'scale(1)'
+        });
     });
 });
 </script>
