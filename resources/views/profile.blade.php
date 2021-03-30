@@ -2,7 +2,7 @@
 @section('content')
 <link rel="stylesheet" href="css/hurst.css">
 <section style="text-align:center;">
-    <img src="img/profile/profilepic.png">
+    <img src="img/profile/profilepic.png" style="width:100px;">
     <h1 style="font-weight:100">Welcome, <span style="font-weight:400;font-family:'Avenir Bold'">Jake Hazim</span></h1>
 </section>
 <section>
