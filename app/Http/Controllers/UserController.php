@@ -79,7 +79,7 @@ class UserController extends Controller
     {
         $msg = '';
         $token = '';
-        $user = User::where('contact', $request->contact)->first();
+        $user = User::with(['tier'])->where('contact', $request->contact)->first();
         $settings = Project::first();
 
 
