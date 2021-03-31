@@ -188,7 +188,8 @@ class UserController extends Controller
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'get':
-                    return $user;
+                    $users = User::with(['tier'])->find($user->id);
+                    return $users;
                     break;
 
                 case 'update':
@@ -230,7 +231,7 @@ class UserController extends Controller
     public function autologin(Request $request)
     {
         $user = Auth::user();
-
+        $user = User::with(['tier'])->find($user->id);
         return response()->json(['user' => $user]);
     }
 
