@@ -406,7 +406,6 @@
 
     var month;
     var year;
-    var booked = [1, 2, 3, 4]
 
     var Cal = function(divId) {
 
@@ -523,16 +522,15 @@
             var chk = new Date();
             var chkY = chk.getFullYear();
             var chkM = chk.getMonth();
-            console.log(parseInt(i))
             if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
-                if (parseInt(i) in booked) {
+                if (i in ['1', '2', '3', '4']) {
                     html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
                     html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
                 }
 
             } else {
-                if (parseInt(i) in booked) {
+                if (i in ['1', '2', '3', '4']) {
                     html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
                     html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
