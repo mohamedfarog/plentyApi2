@@ -214,10 +214,11 @@ class ProductController extends Controller
                             $sizes = Image::create($arr);
                         }
                     }
-
+                    
+                    $product = Product::with(['addons', 'sizes','colors','designer','images'])->find($product->id);
 
                     $msg = 'Product has been added';
-                    return response()->json(['success' => !!$product, 'message' => $msg]);
+                    return response()->json(['success' => !!$product, 'message' => $msg, 'product'=>$product]);
                 }
                 break;
 

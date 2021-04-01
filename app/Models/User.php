@@ -33,7 +33,9 @@ class User extends Authenticatable
         'gender',
         'invitation_code',
         'invites',
-        'points'
+        'points',
+        'totalpurchases',
+        'tier_id'
     ];
 
     protected $appends = [
@@ -41,6 +43,10 @@ class User extends Authenticatable
         'accesspass'
     ];
 
+    public function tier()
+    {
+        return $this->belongsTo(Tier::class);
+    }
 
 
     public function getLoyaltypassAttribute()
@@ -48,6 +54,7 @@ class User extends Authenticatable
         if($this->loyaltyidentifier){
             return env('PASSURL'). $this->loyaltyidentifier;
         }
+        
     }
     public function getAccesspassAttribute()
     {

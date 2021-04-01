@@ -34,9 +34,9 @@ class UserController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                    return User::all();
+                    return User::with(['tier'])->get();
                 }
-                return User::paginate($perpage);
+                return User::with(['tier'])->paginate($perpage);
                 break;
 
             default:
@@ -79,7 +79,7 @@ class UserController extends Controller
     {
         $msg = '';
         $token = '';
-        $user = User::where('contact', $request->contact)->first();
+        $user = User::with(['tier'])->where('contact', $request->contact)->first();
         $settings = Project::first();
 
 
@@ -172,8 +172,9 @@ class UserController extends Controller
             $data['points'] = $settings->registerpts;
 
             $user = User::create($data);
-
             $dbUser = Auth::login($user);
+            $user = User::with(['tier'])->find($user->id);
+
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User has been added';
@@ -188,7 +189,8 @@ class UserController extends Controller
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'get':
-                    return $user;
+                    $users = User::with(['tier'])->find($user->id);
+                    return $users;
                     break;
 
                 case 'update':
@@ -230,7 +232,7 @@ class UserController extends Controller
     public function autologin(Request $request)
     {
         $user = Auth::user();
-
+        $user = User::with(['tier'])->find($user->id);
         return response()->json(['user' => $user]);
     }
 
@@ -259,7 +261,7 @@ class UserController extends Controller
                     if ($user->email_verified_at != NULL) {
                         $success["message"] = "Login successful";
                         $success["token"] = $user->createToken('MyApp')->accessToken;
-                        $u = User::find($user->id);
+                        $u = User::with(['tier'])->find($user->id);
 
                         return response()->json(["success" => $success, "user" => $u]);
                     } else {
@@ -291,7 +293,7 @@ class UserController extends Controller
                             $msg = 'OTP has been verified. Login successful.';
                             $otp->save();
 
-                            $user = User::where('contact', $request->contact)->first();
+                            $user = User::with(['tier'])->where('contact', $request->contact)->first();
                             Auth::login($user);
                             $loggeduser = Auth::user();
                             if ($user) {

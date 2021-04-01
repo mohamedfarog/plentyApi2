@@ -10,9 +10,20 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TierController;
 use App\Http\Controllers\UserController;
+use App\Models\Addon;
+use App\Models\Cat;
+use App\Models\Color;
+use App\Models\Designer;
+use App\Models\Image;
 use App\Models\Order;
 use App\Models\Pass;
+use App\Models\Prodcat;
+use App\Models\Product;
+use App\Models\Shop;
+use App\Models\Size;
+use App\Models\Style;
 use App\Models\Support;
 use App\Models\User;
 use Carbon\Carbon;
@@ -46,7 +57,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
-
+Route::get('tiers', [TierController::class, 'index']);
 Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
 Route::get('invnum', [AccessController::class, 'accessNumber']);
@@ -62,8 +73,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('products', ProductController::class);
-
-});
+    Route::post('tier', [TierController::class, 'store']);
+}); 
 
 Route::get('generate', function (Request $request) {
     $len = 24;
@@ -167,4 +178,11 @@ Route::get('test', function (Request $request) {
         }, 'user'])->where('id', $request->id)->first();
         return view('bill', ["data" => $order]);
     }
+    return  $user =User::with(['tier'])->where('id', $request->userid)->first();
+    
+});
+
+Route::get('models', function (Request $request){
+   return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(), 'user'=>User::first()]) ;
+    
 });
