@@ -24,7 +24,11 @@
         font-family: 'Avenir Bold', sans-serif;
         font-weight: 100;
     }
-
+@media only screen and (max-width: 600px) {
+  .mobilefix {
+    width:90% !important;
+  }
+}
 </style>
 
 <section style="text-align:center;">
@@ -39,7 +43,7 @@
     <!-- HEADING-BANNER END -->
     <!-- MY-ACCOUNT-AREA START -->
     <div class="my-account-area  pt-80">
-        <div class="container">
+        <div class="container mobilefix">
             <div class="my-account">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
