@@ -24,11 +24,13 @@
         font-family: 'Avenir Bold', sans-serif;
         font-weight: 100;
     }
-@media only screen and (max-width: 600px) {
-  .mobilefix {
-    width:90% !important;
-  }
-}
+
+    @media only screen and (max-width: 600px) {
+        .mobilefix {
+            width: 90% !important;
+        }
+    }
+
 </style>
 
 <section style="text-align:center;">

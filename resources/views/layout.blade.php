@@ -57,78 +57,79 @@
     <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style type="text/css">
-    .slick-slide {
-        margin: 0px 20px;
-    }
-
-    .slick-slide img {
-        width: 100%;
-    }
-
-    .slick-prev:before,
-    .slick-next:before {
-        color: black;
-    }
-
-
-    .slick-slide {
-        transition: all ease-in-out .3s;
-        opacity: 1;
-    }
-
-    .slick-active {
-        opacity: 1;
-    }
-
-    .slick-current {
-        opacity: 1;
-    }
-
-    .slick-track {
-        margin: 20px 0;
-    }
-
-    .bottomtitleheader {
-        text-transform: uppercase !important;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-        margin-bottom: 0 !important;
-
-    }
-
-    p,
-    .navigation.sticky .navbar-nav>li>a {
-        color: #001b71;
-    }
-
-    .socialfooter {
-        width: 25px;
-    }
-
-    .bottomtitleheader::after {
-        margin: 10px 0 !important;
-        border-color: #001b71 !important;
-        width: 90% !important;
-    }
-
-    ul.list-no-dividers>li>a {
-        text-transform: uppercase;
-        color: #001b71 !important;
-        font-size: 12px !important;
-    }
-
-    @media only screen and (max-width: 600px) {
-
-        .footer-widgets {
-            padding: 0;
-            margin: 20px;
+        .slick-slide {
+            margin: 0px 20px;
         }
 
-        .footer-widgets .row>div {
-            margin-bottom: 0;
+        .slick-slide img {
+            width: 100%;
         }
 
-    }
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+
+
+        .slick-slide {
+            transition: all ease-in-out .3s;
+            opacity: 1;
+        }
+
+        .slick-active {
+            opacity: 1;
+        }
+
+        .slick-current {
+            opacity: 1;
+        }
+
+        .slick-track {
+            margin: 20px 0;
+        }
+
+        .bottomtitleheader {
+            text-transform: uppercase !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            margin-bottom: 0 !important;
+
+        }
+
+        p,
+        .navigation.sticky .navbar-nav>li>a {
+            color: #001b71;
+        }
+
+        .socialfooter {
+            width: 25px;
+        }
+
+        .bottomtitleheader::after {
+            margin: 10px 0 !important;
+            border-color: #001b71 !important;
+            width: 90% !important;
+        }
+
+        ul.list-no-dividers>li>a {
+            text-transform: uppercase;
+            color: #001b71 !important;
+            font-size: 12px !important;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            .footer-widgets {
+                padding: 0;
+                margin: 20px;
+            }
+
+            .footer-widgets .row>div {
+                margin-bottom: 0;
+            }
+
+        }
+
     </style>
 </head>
 
@@ -173,13 +174,11 @@
                                 <div class="logo-container">
                                     <div class="logo-wrap">
                                         <a href="index.html">
-                                            <img class="logo-dark" src="img/logo_dark.png" alt="logo"
-                                                style="max-height:80%;">
+                                            <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
                                         </a>
                                     </div>
                                 </div>
-                                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                    data-target="#navbar-collapse">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                                     <span class="sr-only">Toggle navigation</span>
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
@@ -428,8 +427,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">
                         <div class="widget footer-links">
-                            <img class="" src="img/bottom/app.png"
-                                style="width:80%;display:block;margin:auto;margin-bottom:20px">
+                            <img class="" src="img/bottom/app.png" style="width:80%;display:block;margin:auto;margin-bottom:20px">
                         </div>
                         <div class="row" style="justify-content:space-between;display:flex;">
                             <img class="" src="img/bottom/googleplay.png" style="width:40%;float:left">
@@ -481,108 +479,109 @@
     <script src="js/main.js"></script>
 
     <script>
-    $(".regular").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
+        $(".regular").slick({
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
+                    }
                 }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                , {
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
+                    }
                 }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                , {
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
+                    }
                 }
-            }
 
-        ]
-    });
+            ]
+        });
 
-    $(".brandsslider").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
+        $(".brandsslider").slick({
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
+                    }
                 }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                , {
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
+                    }
                 }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                , {
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
+                    }
                 }
-            }
 
-        ]
-    });
+            ]
+        });
 
-    $(".tryprodslider").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        arrows: false,
-        autoplaySpeed: 2000,
-        responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
+        $(".tryprodslider").slick({
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , arrows: false
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
+                    }
                 }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                , {
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
+                    }
                 }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                , {
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
+                    }
                 }
-            }
 
-        ]
-    });
+            ]
+        });
+
     </script>
 </body>
 

@@ -94,8 +94,7 @@
                 <a href="#">
                     <div style="">
                     </div>
-                    <video playsinline="" autoplay="" muted="" loop=""
-                        style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/dine.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -111,8 +110,7 @@
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
 
                 <a href="#">
-                    <video playsinline="" autoplay="" muted="" loop=""
-                        style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/beauty.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -125,8 +123,7 @@
 
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
                 <a href="#">
-                    <video playsinline="" autoplay="" muted="" loop=""
-                        style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -297,41 +294,41 @@
 </section>
 
 <div class="purchase-online-area ">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <h2 class="title-border">Brands</h2>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h2 class="title-border">Brands</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <!-- Nav tabs -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <!-- Nav tabs -->
 
-                </div>
-                <div class="col-lg-12">
-                    <!-- Tab panes -->
-                    <div class="-">
-                        <div class="tab-pane active" id="new-arrivals">
-                            <div class="row">
-                                <!-- Single-product start -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Tab panes -->
+                <div class="-">
+                    <div class="tab-pane active" id="new-arrivals">
+                        <div class="row">
+                            <!-- Single-product start -->
 
-                                <!-- Single-product end -->
-                                <!-- Single-product start -->
+                            <!-- Single-product end -->
+                            <!-- Single-product start -->
 
 
-                                <!-- Single-product end -->
+                            <!-- Single-product end -->
 
-                            </div>
                         </div>
-
-
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <section class="brandsslider slider" style="width:90%;text-align:center;margin:auto">
 
@@ -380,7 +377,7 @@
             </div>
         </div>
     </div>
- 
+
 </section>
 
 <section style="height:50px;">
@@ -391,32 +388,43 @@
 
 
 <script>
-$(document).ready(function() {
-    $(".promo-inner").hover(function() {
-        $(this).siblings(".categoverlay").css("opacity", "0.2");
-    }, function() {
-        $(this).siblings(".categoverlay").css("opacity", "0.6");
-    });
-    $(".categoverlay").hover(function() {
-        $(this).css("opacity", "0.2");
-    }, function() {
-        $(this).css("opacity", "0.6");
+    $(document).ready(function() {
+        $(".promo-inner").hover(function() {
+            $(this).siblings(".categoverlay").css("opacity", "0.2");
+        }, function() {
+            $(this).siblings(".categoverlay").css("opacity", "0.6");
+        });
+        $(".categoverlay").hover(function() {
+            $(this).css("opacity", "0.2");
+        }, function() {
+            $(this).css("opacity", "0.6");
+        });
+
+        $('.featlineicons').css({
+            'visibility': 'hidden'
+        });
+        $(".single-product").hover(function() {
+            $(this).children(".product-info").children(".featlineicons").css({
+                'visibility': 'visible'
+            });
+        }, function() {
+            $(this).children(".product-info").children(".featlineicons").css({
+                'visibility': 'hidden'
+            });
+        });
+
+
+        $(".brand-slide").hover(function() {
+            $(this).css({
+                'transform': 'scale(1.2)'
+            });
+        }, function() {
+            $(this).css({
+                'transform': 'scale(1)'
+            });
+        });
     });
 
-    $('.featlineicons').css({'visibility':'hidden'});
-    $(".single-product").hover(function() {
-        $(this).children(".product-info").children(".featlineicons").css({'visibility':'visible'});
-    }, function() {
-        $(this).children(".product-info").children(".featlineicons").css({'visibility':'hidden'});
-    });
-
-  
-    $(".brand-slide").hover(function() {
-        $(this).css({'transform':'scale(1.2)'});
-    }, function() {
-        $(this).css({'transform':'scale(1)'});
-    });
-});
 </script>
 
 @endsection

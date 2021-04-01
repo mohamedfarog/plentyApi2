@@ -94,8 +94,7 @@
                 <a href="#">
                     <div style="">
                     </div>
-                    <video playsinline="" autoplay="" muted="" loop=""
-                        style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/dine.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -111,8 +110,7 @@
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
 
                 <a href="#">
-                    <video playsinline="" autoplay="" muted="" loop=""
-                        style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/beauty.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -125,8 +123,7 @@
 
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
                 <a href="#">
-                    <video playsinline="" autoplay="" muted="" loop=""
-                        style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -380,10 +377,8 @@
             <div class="col-sm-12 text-center">
                 <h4 style="text-transform: uppercase;font-family:'Avenir Bold'">Get the latest updates</h4>
                 <form class="relative newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Email here"
-                        style="border: 2px solid #001b71;font-size:14px;">
-                    <input type="submit" class="btn btn-lg btn-dark newsletter-submit" value="Subscribe"
-                        style="font-weight:500;font-size:14px">
+                    <input type="email" class="newsletter-input" placeholder="Email here" style="border: 2px solid #001b71;font-size:14px;">
+                    <input type="submit" class="btn btn-lg btn-dark newsletter-submit" value="Subscribe" style="font-weight:500;font-size:14px">
                 </form>
             </div>
         </div>
@@ -394,42 +389,43 @@
 
 
 <script>
-$(document).ready(function() {
-    $(".promo-inner").hover(function() {
-        $(this).siblings(".categoverlay").css("opacity", "0.2");
-    }, function() {
-        $(this).siblings(".categoverlay").css("opacity", "0.6");
-    });
-    $(".categoverlay").hover(function() {
-        $(this).css("opacity", "0.2");
-    }, function() {
-        $(this).css("opacity", "0.6");
-    });
-
-    $('.featlineicons').css({
-        'visibility': 'hidden'
-    });
-    $(".single-product").hover(function() {
-        $(this).children(".product-info").children(".featlineicons").css({
-            'visibility': 'visible'
+    $(document).ready(function() {
+        $(".promo-inner").hover(function() {
+            $(this).siblings(".categoverlay").css("opacity", "0.2");
+        }, function() {
+            $(this).siblings(".categoverlay").css("opacity", "0.6");
         });
-    }, function() {
-        $(this).children(".product-info").children(".featlineicons").css({
+        $(".categoverlay").hover(function() {
+            $(this).css("opacity", "0.2");
+        }, function() {
+            $(this).css("opacity", "0.6");
+        });
+
+        $('.featlineicons').css({
             'visibility': 'hidden'
         });
-    });
+        $(".single-product").hover(function() {
+            $(this).children(".product-info").children(".featlineicons").css({
+                'visibility': 'visible'
+            });
+        }, function() {
+            $(this).children(".product-info").children(".featlineicons").css({
+                'visibility': 'hidden'
+            });
+        });
 
 
-    $(".brand-slide").hover(function() {
-        $(this).css({
-            'transform': 'scale(1.2)'
-        });
-    }, function() {
-        $(this).css({
-            'transform': 'scale(1)'
+        $(".brand-slide").hover(function() {
+            $(this).css({
+                'transform': 'scale(1.2)'
+            });
+        }, function() {
+            $(this).css({
+                'transform': 'scale(1)'
+            });
         });
     });
-});
+
 </script>
 
 @endsection
