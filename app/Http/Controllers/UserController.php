@@ -172,8 +172,9 @@ class UserController extends Controller
             $data['points'] = $settings->registerpts;
 
             $user = User::create($data);
-
             $dbUser = Auth::login($user);
+            $user = Userr::with(['tier'])->find($user->id);
+
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User has been added';
