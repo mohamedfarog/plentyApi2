@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout1')
 @section('content')
 <style>
     .sizestyle {
@@ -86,6 +86,8 @@
         </div>
     </div>
 </div>
+@if(isset($product))
+@foreach($product as $prd)
 <div class="product-area single-pro-area pt-30 pb-30 product-style-2">
     <div class="container contmobile" style="background-color:#f2f3f8">
         <div class="row shop-list single-pro-info no-sidebar">
@@ -96,16 +98,20 @@
                     <div class="col-lg-4">
                         <div class="single-pro-slider single-big-photo view-lightbox slider-for" style="width:100% !important">
                             <div>
-                                <img src="img/product/Main.png" alt="" />
-                            </div>
 
+                                @if ($prd->image)
+                                <img src="{{$prd->image}}" alt="" loading=lazy />
+                                @else
+                                <img src="img/product/Main.png" alt="" />
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <!-- Single-pro-slider Big-photo end -->
                     <div class="product-info mt-50" style="padding:0 15px">
                         <div class="fix">
                             <h4 class="post-title floatleft" style="font-size:24px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;">
-                                HOT CHOCO</h4>
+                                {{$prd->name_en}}</h4>
                             <!-- <span class="pro-rating floatright">
 											<a href="#"><i class="zmdi zmdi-star"></i></a>
 											<a href="#"><i class="zmdi zmdi-star"></i></a>
@@ -117,13 +123,10 @@
                         </div>
                         <div class="fix mb-30">
                             <span class="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
-                                20</span>
+                                {{$prd->price}}</span>
                         </div>
                         <div class="product-description">
-                            <p style="font-size:18px;color:black;">There are many variations of passages of Lorem Ipsum
-                                available, but the majority have be suffered alteration in some form, by injected humou
-                                or randomised words which donot look even slightly believable. If you are going to use a
-                                passage of Lorem Ipsum. </p>
+                            <p style="font-size:18px;color:black;"> {{$prd->desc_en}}</p>
                         </div>
                         <!-- color start -->
 
@@ -174,7 +177,8 @@
         <!-- single-product-tab end -->
     </div>
 </div>
-
+@endforeach
+@endif
 
 <section style="width:90%;text-align:left;margin:auto; background-color:#f2f3f8">
     <h1 style="padding: 30px;margin-bottom: 0;padding-bottom:0;font-size:28px;color:black;font-weight: lighter;">
@@ -183,36 +187,7 @@
 </section>
 <section class="tryprodslider slider" style="width:90%;text-align:center;margin:auto; background-color:#f2f3f8">
 
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="product.html"><img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
-
-            </div>
-            <h4 class="tryitheader" style="text-align:left;padding:10px;"> Summer Muffin</h4>
-        </div>
-    </div>
-
-    <div class="brand-slide    col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="product.html"><img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
-
-            </div>
-            <h4 class="tryitheader" style="text-align:left;padding:10px;"> Tiramisu</h4>
-        </div>
-    </div>
-
-    <div class="brand-slide   col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="product.html">
-                <img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
-
-            </div>
-            <h4 class="tryitheader" style="text-align:left;padding:10px;">Dark Chocolate</h4>
-        </div>
-    </div>
+    @foreach($addons as $addon)
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
@@ -220,19 +195,13 @@
             <div class="product-action clearfix">
 
             </div>
-            <h4 class="tryitheader" style="text-align:left;padding:10px;"> Matcha</h4>
+            <h4 class="tryitheader" style="text-align:left;padding:10px;"> {{$addon->name_en}}</h4>
         </div>
     </div>
 
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="product.html"><img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
+    @endforeach
 
-            </div>
-            <h4 class="tryitheader" style=""> Vanilla Latte</h4>
-        </div>
-    </div>
+
 
 </section>
 <script>

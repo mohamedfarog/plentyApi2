@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+
+use App\Http\Controllers\WebsiteHomeController;
+use App\Http\Controllers\WebsiteProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,43 +18,52 @@ use Illuminate\Support\Facades\App;
 |
 */
 
-Route::get('/', function () {  
+Route::get('/', function () {
     return view('/home');
 });
 
-Route::get('/delicacy', function () {  
+Route::get('/delicacy', function () {
     return view('/delicacy');
 });
 
-Route::get('/product', function () {  
+Route::get('/product', function () {
     return view('/product');
 });
 
-Route::get('/profile', function () {  
+Route::get('/profile', function () {
     return view('/profile');
 });
 
-Route::get('/#', function () { 
+Route::get('/#', function () {
     return redirect('/');
 });
 
-
+Route::get('/signup', function () {
+    return view('/signup');
+});
+Route::get('/login', function () {
+    return view('/login');
+});
+Route::get('/booking', function () {
+    return view('/booking');
+});
 Route::get('/lang', function () {
     $locale = App::currentLocale();
-    if ($locale == 'en'){
+    if ($locale == 'en') {
         App::setLocale('ar');
         App::setLocale('ar');
         App::setLocale('ar');
         App::setLocale('ar');
         App::setLocale('ar');
         return view('/home');
-    }
-    else if ($locale == 'ar'){
+    } else if ($locale == 'ar') {
         App::setLocale('en');
         App::setLocale('en');
         App::setLocale('en');
         App::setLocale('en');
         return redirect('/');
     }
+});
 
-}); 
+Route::get('/home1',  [WebsiteHomeController::class, 'home']);
+Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);

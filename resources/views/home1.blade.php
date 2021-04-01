@@ -1,4 +1,4 @@
-@extends('../layout')
+@extends('../layout1')
 @section('content')
 
 <!-- Hero Slider -->
@@ -175,17 +175,23 @@
 </section> <!-- end trendy products -->
 
 <section class="regular slider" style="width:90%;text-align:center;margin:auto">
+    @foreach($featured_products as $product)
     <div class="single-product  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
+            @if ($product->image)
+            <a href="{{ url('/product1/' . $product->id) }}"><img src="{{$product->image}}" alt="" loading=lazy /></a>
+            @else
+            <a href="{{ url('/product1/' . $product->id) }}"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
+            @endif
+
             <div class="product-action clearfix">
 
             </div>
         </div>
         <div class="product-info clearfix">
             <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
+                <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product1/' . $product->id) }}">{{$product->name_en}}</a></h4>
+                <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
             </div>
             <div class="fix featlineicons">
                 <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
@@ -196,94 +202,10 @@
             </div>
         </div>
     </div>
+    @endforeach
+</section>
 
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
 
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png">
-                </span>
-            </div>
-        </div>
-    </div>
 
 </section>
 
@@ -387,7 +309,6 @@
 
 
 
-
 <script>
     $(document).ready(function() {
         $(".promo-inner").hover(function() {
@@ -425,10 +346,6 @@
             });
         });
     });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 </script>
 
 @endsection
