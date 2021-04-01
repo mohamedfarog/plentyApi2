@@ -1,185 +1,221 @@
 @extends('layout')
 @section('content')
+
 <link rel="stylesheet" href="css/hurst.css">
+<style>
+    .norm-text {
+        font-family: 'Avenir', sans-serif;
+        color: #001b71;
+        line-height: 1;
+        text-transform: none;
+        font-size: 18px;
+        font-weight: 100 !important;
+    }
+
+    .leftpane {
+        width: 100%;
+        padding: 20px 20px;
+        background: white;
+
+
+    }
+
+    .bold-text {
+        font-family: 'Avenir Bold', sans-serif;
+        font-weight: 100;
+    }
+
+</style>
+
 <section style="text-align:center;">
-    <img src="img/profile/profilepic.png" style="width:100px;">
+    <img src="img/profile/profilepic.png" style="width:100px;margin-bottom:20px;">
+
     <h1 style="font-weight:100">Welcome, <span style="font-weight:400;font-family:'Avenir Bold'">Jake Hazim</span></h1>
 </section>
 <section>
-<!-- Mobile-menu end -->
-			<!-- HEADING-BANNER START -->
-			
-			<!-- HEADING-BANNER END -->
-			<!-- MY-ACCOUNT-AREA START -->
-			<div class="my-account-area  pt-80 pb-80">
-				<div class="container">	
-					<div class="my-account">
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="panel-group" id="accordion">
-									<div class="panel">
-                                        <div>
-                                            <span style="text-transform:underline">edit</span>
+    <!-- Mobile-menu end -->
+    <!-- HEADING-BANNER START -->
+
+    <!-- HEADING-BANNER END -->
+    <!-- MY-ACCOUNT-AREA START -->
+    <div class="my-account-area  pt-80">
+        <div class="container">
+            <div class="my-account">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                        <div class="panel-group" id="accordion">
+                            <div class="panel" style="text-align:right">
+                                <div style="margin-bottom:20px;">
+                                    <a href="#">
+                                        <h1 style=" text-decoration: underline;font-size:16px;font-weight:400;">edit
+                                        </h1>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="leftpane" style="padding-top:0;">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                        <h3 class="norm-text">Membership:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                        <h2 class="norm-text" style="color:#daa900">VIP / Elite Member</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="leftpane" style="background:#f2f3f8">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3 class="norm-text">Email:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="norm-text">jakehazim@gmail.com</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leftpane">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3 class="norm-text">Mobile Phone:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="norm-text">+966 1234 56 789</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="leftpane" style="background:#f2f3f8">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3 class="norm-text">Mailing Address:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="norm-text"> 1st Street, Saudi Arabia</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="leftpane">
+
+                            </div>
+
+                            <div class="" style="text-align:center">
+                                <div class="" style="padding-bottom:10px;">
+                                    <img src="img/profile/acfront.png" style="width:75%;">
+                                    <h3 class="norm-text" style="padding:20px;color:#daa900">VIP / Elite Access Card</h3>
+                                </div>
+                            </div>
+                            <div class="" style="text-align:center">
+                                <div class="" style="padding-bottom:10px;">
+                                    <img src="img/profile/lcfront.png" style="width:75%;margin-bottom;20px;">
+                                    <h3 class="norm-text" style="padding:20px;">Membership Rewards Card</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                        <div class="panel-group" id="accordion">
+                            <div class="panel" style="text-align:right">
+                                <div style="margin-bottom:20px;">
+                                    <a href="#">
+                                        <h1 style=" text-decoration: underline;font-size:16px;font-weight:400;color:white">.
+                                        </h1>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="leftpane" style="padding-top:0;">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3 class="norm-text">My Wallet:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="norm-text" style="text-decoration: underline;">view details</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="leftpane" style="background:#f2f3f8">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3 class="norm-text">Track My Order:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="norm-text"> Delivering</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="leftpane" style="padding:20px;">
+                                <div class="row" style=" ">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3 class="norm-text">My Bookings:</h3>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="norm-text" style="text-decoration: underline;">add booking</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="leftpane" style="padding:0;">
+                                <img src="img/profile/calendar.png" style="width:100%;">
+                            </div>
+
+                            <div style="background:#f2f3f8;height:300px;">
+                                <div class="leftpane" style="padding:20px;background:#f2f3f8;">
+                                    <div class="" style="padding-bottom:10px;">
+                                        <div style="width:40%;float:left;">
+                                            <h3 class="norm-text bold-text">Shave</h3>
+                                            <h3 class="norm-text">Manners</h3>
+                                            <h3 class="norm-text">Thursday, 18 March</h3>
+                                            <h3 class="norm-text">4:30 p.m.</h3>
                                         </div>
-										<div class="my-account-menu" >
-											<a  data-toggle="collapse" data-parent="#accordion" href="#my-info" >
-											My Personal Information
-											</a>
-										</div>
-										<div id="my-info" class="panel-collapse collapse in" >
-											<div class="panel-body">
-												<div class="billing-details shop-cart-table">
-													
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="panel">
-										<div class="my-account-menu">
-											<a class="collapsed" data-parent="#accordion"  data-toggle="collapse"  href="#my-billing" >
-											My Billing address
-											</a>
-										</div>
-										<div id="my-billing" class="panel-collapse collapse" >
-											<div class="panel-body">
-												<div class="billing-details shop-cart-table">
-													<input type="text" placeholder="Your name here...">
-													<input type="text" placeholder="Email address here...">
-													<input type="text" placeholder="Phone here...">
-													<input type="text" placeholder="Company neme here...">
-													<select class="custom-select mb-15">
-														<option>Contry</option>
-														<option>Bangladesh</option>
-														<option>United States</option>
-														<option>united Kingdom</option>
-														<option>Australia</option>
-														<option>Canada</option>
-													</select>
-													<select class="custom-select mb-15">
-														<option>State</option>
-														<option>Dhaka</option>
-														<option>New York</option>
-														<option>London</option>
-														<option>Melbourne</option>
-														<option>Ottawa</option>
-													</select>
-													<select class="custom-select mb-15">
-														<option>Town / City</option>
-														<option>Dhaka</option>
-														<option>New York</option>
-														<option>London</option>
-														<option>Melbourne</option>
-														<option>Ottawa</option>
-													</select>
-													<textarea placeholder="Your address here..." class="custom-textarea"></textarea>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="panel">
-										<div class="my-account-menu">
-											<a class="collapsed" data-parent="#accordion"  data-toggle="collapse"  href="#my-order" >
-											Order history and details
-											</a>
-										</div>
-										<div id="my-order" class="panel-collapse collapse" >
-											<div class="panel-body">
-												<div class="our-order payment-details shop-cart-table">
-													<table>
-														<thead>
-															<tr>
-																<th><strong>Product</strong></th>
-																<th class="text-right"><strong>Total</strong></th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>Dummy Product Name  x 2</td>
-																<td class="text-right">$86.00</td>
-															</tr>
-															<tr>
-																<td>Dummy Product Name  x 1</td>
-																<td class="text-right">$69.00</td>
-															</tr>
-															<tr>
-																<td>Cart Subtotal</td>
-																<td class="text-right">$155.00</td>
-															</tr>
-															<tr>
-																<td>Shipping and Handing</td>
-																<td class="text-right">$15.00</td>
-															</tr>
-															<tr>
-																<td>Vat</td>
-																<td class="text-right">$00.00</td>
-															</tr>
-															<tr>
-																<td>Order Total</td>
-																<td class="text-right">$170.00</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>					
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<div class="panel-group" id="accordion-2">
-									<div class="panel">
-										<div class="my-account-menu" >
-											<a  data-toggle="collapse" data-parent="#accordion-2" href="#my-payment-method" >
-											My Payment Method
-											</a>
-										</div>
-										<div id="my-payment-method" class="panel-collapse collapse in" >
-											<div class="panel-body">
-												<div class="payment-method  shop-cart-table">
-													<div class="payment-accordion">
-														<!-- Accordion start  -->
-														<h3 class="payment-accordion-toggle active">Direct Bank Transfer</h3>
-														<div class="payment-content default">
-															<p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won't be shipped until the funds have cleared in our account.</p>
-														</div> 
-														<!-- Accordion end -->
-														<!-- Accordion start -->
-														<h3 class="payment-accordion-toggle">Cheque Payment</h3>
-														<div class="payment-content">
-															<p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-														</div>
-														<!-- Accordion end -->
-														<!-- Accordion start -->
-														<h3 class="payment-accordion-toggle">PayPal</h3>
-														<div class="payment-content">
-															<p>Pay via PayPal; you can pay with your credit card if you don�t have a PayPal account.</p>
-															<a href="#"><img alt="" src="img/payment/1.png"></a>
-															<a href="#"><img alt="" src="img/payment/2.png"></a>
-															<a href="#"><img alt="" src="img/payment/3.png"></a>
-															<a href="#"><img alt="" src="img/payment/4.png"></a>
-														</div>
-														<!-- Accordion end --> 
-														<button type="submit" data-text="place order" class="button-one submit-button mt-15">place order</button>			
-													</div>															
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="panel">
-										<div class="my-account-menu my-account-menu-2" >
-											<a  href="wishlist.html" >
-											My Wishlist
-											</a>
-										</div>
-									</div>
-								</div>								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- MY-ACCOUNT-CART-AREA END -->
-			<!-- FOOTER START -->
+                                        <div style="width:60%;float:left;text-align:right">
+                                            <h2 class="norm-text" style="text-decoration: underline;">edit</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br> <br><br>
+                                <div class="leftpane" style="padding:20px;background:#f2f3f8;">
+                                    <div class="" style="padding-bottom:10px;">
+                                        <div style="width:40%;float:left;">
+                                            <h3 class="norm-text bold-text">Hair Cut</h3>
+                                            <h3 class="norm-text">Manners</h3>
+                                            <h3 class="norm-text">Friday, 19 March</h3>
+                                            <h3 class="norm-text">3:30 p.m.</h3>
+                                        </div>
+                                        <div style="width:60%;float:left;text-align:right">
+                                            <a href="#">
+                                                <h2 class="norm-text" style="text-decoration: underline;">edit</h2>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="" style="background:#f2f3f8;text-align:center;padding-bottom:20px;">
+                                <a href="#">
+                                    <h2 class="norm-text" style="text-decoration: underline;">view all</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MY-ACCOUNT-CART-AREA END -->
+    <!-- FOOTER START -->
 
 </section>
 
@@ -188,3 +224,4 @@
 
 
 @endsection
+
