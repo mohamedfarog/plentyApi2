@@ -173,7 +173,7 @@ class UserController extends Controller
 
             $user = User::create($data);
             $dbUser = Auth::login($user);
-            $user = Userr::with(['tier'])->find($user->id);
+            $user = User::with(['tier'])->find($user->id);
 
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
