@@ -20,7 +20,9 @@ class OrderController extends Controller
     {
         //
         $user = Auth::user();
-        $orders = Order::with(['details','user'])->where('user_id', $user->id)->paginate();
+        $orders = Order::with(['details' => function($details){
+            return $details->with(['product','size', 'color']);
+        },'user'])->where('user_id', $user->id)->paginate();
         return $orders;
     }
 
