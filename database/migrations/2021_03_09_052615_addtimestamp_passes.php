@@ -15,7 +15,7 @@ class AddtimestampPasses extends Migration
     {
         Schema::table('passes', function (Blueprint $table) {
             //
-            $table->timestamp('passesUpdatedSince')->nullable();
+            // $table->timestamp('passesUpdatedSince')->nullable();
         });
     }
 

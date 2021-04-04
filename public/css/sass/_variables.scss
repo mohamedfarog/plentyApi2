@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Avenir';
+    src: url('../../fonts/AvenirNextLTPro-Regular.eot');
+    src: url('../../fonts/AvenirNextLTPro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/AvenirNextLTPro-Regular.woff2') format('woff2'),
+        url('../../fonts/AvenirNextLTPro-Regular.woff') format('woff'),
+        url('../../fonts/AvenirNextLTPro-Regular.ttf') format('truetype'),
+        url('../../fonts/AvenirNextLTPro-Regular.svg#AvenirNextLTPro-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+// Colors
+$text-color: #7f7f7f;
+$heading-color: #000;
+$nav-color: #000;
+$bg-light: #f7f8f9;
+$bg-dark: #171717;
+$dark-grey: #424242;
+$light-grey: #a3a3a3;
+$border-color: #ebebeb;
+$main-color: #b79d82;
+
+
+
+// Fonts
+$body-font: 'Avenir', sans-serif;
+$heading-font: 'Avenir', sans-serif;
+$alt-font: 'Noto Serif', serif;

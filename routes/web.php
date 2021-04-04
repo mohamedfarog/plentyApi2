@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
+use App\Http\Controllers\WebsiteHomeController;
+use App\Http\Controllers\WebsiteProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,36 +19,51 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/home');
 });
-Route::get('/supportimages/{filename}', function($filename){
-    $path = resource_path() . '/assets/supportimages/' . $filename;
 
-    if(!File::exists($path)) {
-        return response()->json(['message' => 'Image not found.'], 404);
+Route::get('/delicacy', function () {
+    return view('/delicacy');
+});
+
+Route::get('/product', function () {
+    return view('/product');
+});
+
+Route::get('/profile', function () {
+    return view('/profile');
+});
+
+Route::get('/#', function () {
+    return redirect('/');
+});
+
+Route::get('/signup', function () {
+    return view('/signup');
+});
+Route::get('/login', function () {
+    return view('/login');
+});
+Route::get('/booking', function () {
+    return view('/booking');
+});
+Route::get('/lang', function () {
+    $locale = App::currentLocale();
+    if ($locale == 'en') {
+        App::setLocale('ar');
+        App::setLocale('ar');
+        App::setLocale('ar');
+        App::setLocale('ar');
+        App::setLocale('ar');
+        return view('/home');
+    } else if ($locale == 'ar') {
+        App::setLocale('en');
+        App::setLocale('en');
+        App::setLocale('en');
+        App::setLocale('en');
+        return redirect('/');
     }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
 });
 
-Route::get('/orderimages/{filename}', function($filename){
-    $path = resource_path() . '/assets/orderimages/' . $filename;
-
-    if(!File::exists($path)) {
-        return response()->json(['message' => 'Image not found.'], 404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
+Route::get('/home1',  [WebsiteHomeController::class, 'home']);
+Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);
