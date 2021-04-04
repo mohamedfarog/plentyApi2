@@ -1,4 +1,4 @@
 @extends('layout')
 @section('content')
- hello
+hello
 @endsection

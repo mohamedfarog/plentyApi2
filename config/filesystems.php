@@ -71,6 +71,9 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('storage/passgenerator') => storage_path('passgenerator'),
+        public_path('storage/products') => storage_path('products'),
+        public_path('storage/shops') => storage_path('shops'),
+        public_path('storage/styles') => storage_path('styles'),
     ],
 
 ];

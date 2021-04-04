@@ -65,6 +65,7 @@
         }
 
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/product/Banner.png') no-repeat scroll center center / cover;">
@@ -209,6 +210,7 @@
         console.log("ready!");
         $(".active").css("background-color", "black");
     });
+
 </script>
 <script src="js/prodjs.js"></script>
 @endsection

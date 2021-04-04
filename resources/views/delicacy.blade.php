@@ -35,8 +35,8 @@
         height: 100%;
         margin: 0;
         font-family: Arial;
-    }
-
+    } 
+    
     /* Style tab links */
     .tablink {
         background-color: #b9b9b9;
@@ -442,3 +442,4 @@
 </script>
 <script src="js/prodjs.js"></script>
 @endsection
+

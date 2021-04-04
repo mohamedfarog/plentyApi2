@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
-use App\Http\Controllers\WebsiteHomeController;
-use App\Http\Controllers\WebsiteProductController;
+use App\Http\Controllers\WebsiteHomeController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +17,8 @@ use App\Http\Controllers\WebsiteProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('/home');
-});
+Route::get('/',  [WebsiteHomeController::class, 'home']);
+Route::get('/home',  [WebsiteHomeController::class, 'home']);
 
 Route::get('/delicacy', function () {
     return view('/delicacy');
@@ -65,5 +63,4 @@ Route::get('/lang', function () {
     }
 });
 
-Route::get('/home1',  [WebsiteHomeController::class, 'home']);
-Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);
+Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);

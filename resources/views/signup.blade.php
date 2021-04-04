@@ -166,6 +166,7 @@
     .modal-body button {
         border-radius: 30px;
     }
+
 </style>
 
 <script>
@@ -173,8 +174,8 @@
         var smsCodes = $('.smsCode');
 
         function goToNextInput(e) {
-            var key = e.which,
-                t = $(e.target),
+            var key = e.which
+                , t = $(e.target),
                 // Get the next input
                 sib = t.closest('div').next().find('.smsCode');
 
@@ -231,13 +232,13 @@
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
-            type: 'POST',
-            url: 'https://plentyapp.mvp-apps.ae/api/otp',
-            data: {
+            type: 'POST'
+            , url: 'https://plentyapp.mvp-apps.ae/api/otp'
+            , data: {
                 contact: form.get('contact')
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 $('#otpModal').modal('show');
                 console.log(data)
             }
@@ -247,14 +248,14 @@
     function verifyOTP() {
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
-            type: 'POST',
-            url: 'https://plentyapp.mvp-apps.ae/api/verify',
-            data: {
-                contact: form.get('contact'),
-                otp: parseInt(combineSMSCodes())
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'POST'
+            , url: 'https://plentyapp.mvp-apps.ae/api/verify'
+            , data: {
+                contact: form.get('contact')
+                , otp: parseInt(combineSMSCodes())
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.success) {
                     //do registration
                 } else {
@@ -266,6 +267,7 @@
             }
         });
     }
+
 </script>
 
 @endsection
