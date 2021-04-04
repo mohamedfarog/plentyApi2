@@ -21,7 +21,9 @@ class OrderController extends Controller
         //
         $user = Auth::user();
         $orders = Order::with(['details' => function($details){
-            return $details->with(['product','size', 'color']);
+            return $details->with(['product'=>function($product){
+                return $product->with(['images']);
+            },'size', 'color']);
         },'user'])->where('user_id', $user->id)->paginate();
         return $orders;
     }
