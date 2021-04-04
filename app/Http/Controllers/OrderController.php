@@ -19,6 +19,9 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
+        $orders = Order::with(['details','user'])->where('user_id', $user->id)->paginate();
+        return $orders;
     }
 
     /**

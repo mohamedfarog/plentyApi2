@@ -198,7 +198,8 @@ class ProductController extends Controller
                         foreach ($request->colors as $color) {
                             $arr = array();
                             $arr['product_id'] = $product->id;
-                            $arr['value'] = $color;
+                            $arr['value'] = $color['value'];
+                            $arr['others'] = $color['others'];
 
 
                             $sizes = Color::create($arr);
@@ -210,8 +211,10 @@ class ProductController extends Controller
                             $arr['product_id'] = $product->id;
                             $arr['url'] = $helper->store($image['img']);
 
-
+                        
                             $sizes = Image::create($arr);
+                    // return response()->json(['Sizes' => !!$sizes , 'message' => $msg, 'Size'=>$sizes]);
+
                         }
                     }
                     
