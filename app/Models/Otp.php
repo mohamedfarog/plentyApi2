@@ -9,6 +9,6 @@ class Otp extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'contact', 'otp', 'verified',
+        'contact', 'otp', 'verified','code'
     ];
 }

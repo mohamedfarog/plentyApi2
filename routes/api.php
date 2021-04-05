@@ -53,7 +53,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);
-Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register'])->middleware('registration');;
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
