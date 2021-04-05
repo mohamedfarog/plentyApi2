@@ -125,6 +125,21 @@ class WebsiteHomeController extends Controller
         return view('/delicacy')->with($data);
     }
 
+
+    //API for filtering products
+    /**
+     * @param  prodcat_id
+     * @return products
+     */
+    public function getDineProduct($prodcat_id)
+    {
+        $products = DB::table('products')
+            ->leftjoin('images', 'images.product_id', '=', 'products.id')
+            ->where('prodcat_id', $prodcat_id)->get();
+        return $products;
+    }
+
+
     //API for getting best seller
     /**
      * @param  shop_id
@@ -142,7 +157,7 @@ class WebsiteHomeController extends Controller
 
         $no_products = $popular_products->count();
 
-        // if not getting products by sales
+        // if not getting products then by sales
         if ($no_products < 8) {
             $topsale_products = DB::table('products')
                 ->orderBy('sales', 'DESC')
@@ -174,6 +189,4 @@ class WebsiteHomeController extends Controller
 
         return view('/product')->with($data);
     }
-
-    //
 }

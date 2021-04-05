@@ -73,7 +73,7 @@ Route::get('/lang', function () {
 Route::get('/home1',  [WebsiteHomeController::class, 'home'])->middleware(AuthTest::class);
 Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
-Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getProduct']);
+Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getDineProduct']);
 Route::get('/best-seller/{id}',  [WebsiteHomeController::class, 'getBestSellers']);
 
 // For cookies controller
