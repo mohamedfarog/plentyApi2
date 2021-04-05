@@ -116,7 +116,7 @@ class WebsiteHomeController extends Controller
      * @param  prodcat_id
      * @return products
      */
-    public function getProduct($prodcat_id, Request $request)
+    public function getProduct($prodcat_id)
     {
         $products = DB::table('products')
             ->leftjoin('images', 'images.product_id', '=', 'products.id')
@@ -142,7 +142,7 @@ class WebsiteHomeController extends Controller
 
         $no_products = $popular_products->count();
 
-        // if not getting products by sales
+        // if not getting products then by sales
         if ($no_products < 8) {
             $topsale_products = DB::table('products')
                 ->orderBy('sales', 'DESC')
@@ -174,6 +174,4 @@ class WebsiteHomeController extends Controller
 
         return view('/product')->with($data);
     }
-
-    //
 }
