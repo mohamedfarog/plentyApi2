@@ -228,6 +228,8 @@
 
 
 
-
+<div>
+    @include('footer')
+</div>
 @endsection
 

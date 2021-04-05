@@ -426,6 +426,8 @@
     });
 
 </script>
-
+<div>
+    @include('footer')
+</div>
 @endsection
 

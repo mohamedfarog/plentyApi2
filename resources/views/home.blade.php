@@ -15,7 +15,9 @@
         display: block;
         margin: 0 auto;
     }
-
+    .ssproduct{
+        margin: 0 5px;
+    }
 </style>
 
 <!-- Hero Slider -->
@@ -146,12 +148,10 @@
                     </video>
                     <div class="overlay categoverlay"></div>
                     <div class="promo-inner valign">
-                        <h2>FASHION</h2>
-
+                        <h2>FASHION</h2> 
                     </div>
                 </a>
-            </div>
-
+            </div> 
         </div>
     </div>
 </section> <!-- end promo banners -->
@@ -195,7 +195,7 @@
     @if(isset($featured_products))
     @foreach($featured_products as $product)
 
-    <div class="single-product  col-lg-4 col-xs-12 hidden-md hidden-sm">
+    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm" >
         <div class="product-img frame">
 
             @if ($product->image)
@@ -263,7 +263,7 @@
     $primary = $hb->primary;
     $primarycolor = substr($primary, -6);
     ?>
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
+    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
         <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
             <a href="/product">
                 <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:90%;min-width:80%;" />

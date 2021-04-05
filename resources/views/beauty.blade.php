@@ -1,5 +1,8 @@
 @extends('layout')
 @section('content')
-hello
+beauty
+<div>
+    @include('footer')
+</div>
 @endsection
 

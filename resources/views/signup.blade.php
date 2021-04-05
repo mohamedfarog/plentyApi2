@@ -1,86 +1,5 @@
-@extends('../layout2')
+@extends('../layout')
 @section('content')
-
-<section class="signup container">
-    <div class="signup-logo">
-        <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
-    </div>
-
-    <form class="signup-form" id="signup-form">
-
-
-        <input type="text" name="contact" placeholder="MOBILE NO." />
-
-        <!-- 2 column grid layout for inline styling -->
-        <div>
-            <div class="justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked />
-                    <label class="form-check-label" for="form2Example3">I've read and accept the <a href="#">Terms and Condition</a></label>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Submit button -->
-        <button onclick="generateOTP(event)" class="btn btn-primary btn-block mb-4">CREATE</button>
-
-
-    </form>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="otpModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div>
-                    <h1>Verification Account</h1>
-                </div>
-                <div>
-                    <p>
-                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to +919239739
-                    </p>
-                </div>
-                <div class="modal-body">
-                    <div class="row otp">
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-
-                    </div>
-                    <div>
-                        <p>
-                            Didn't recieve any code? <a href="#">Resend</a>
-                        </p>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block" onclick="verifyOTP()">Submit</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-
-</section>
-
-
 <style>
     .signup {
         background-color: #f1f1f1;
@@ -107,7 +26,9 @@
     .modal {
         text-align: center;
     }
-
+.smsCode{
+    width:40px !important;
+}
     @media screen and (min-width: 768px) {
         .modal:before {
             display: inline-block;
@@ -166,6 +87,190 @@
     .modal-body button {
         border-radius: 30px;
     }
+
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #272c65 !important;
+        opacity: 1;
+        /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #272c65 !important;
+    }
+
+    ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #272c65 !important;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        background: #f6f6f6 none repeat scroll 0 0;
+        border: medium none;
+        box-shadow: none;
+        color: #272c65;
+        height: 50px;
+        margin-bottom: 30px;
+        padding: 0 30px;
+        transition: all 0.5s ease 0s;
+        width: 100%;
+        outline: none;
+    }
+
+    .loginlogo {
+        max-height: 70%;
+        margin-bottom: 50px;
+    }
+
+    body {
+        font-family: 'Avenir', sans-serif;
+
+    }
+
+    .signupbutton {
+        background: #272c65 !important;
+        font-family: 'Avenir', sans-serif;
+        font-weight: 100;
+        font-size: 14px !important;
+        margin-bottom: 30px;
+    }
+
+    .centertxt {
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: 'Avenir', sans-serif;
+        font-weight: 100;
+        font-size: 14px !important;
+    }
+
+    .forgotpass {}
+
+    .clickunderline {
+        text-decoration: underline;
+        color: #272c65 !important;
+    }
+
+    .login {
+        background-color: #f1f1f1;
+    }
+
+    .signup-form {
+        color: red;
+        margin: auto;
+        max-width: 400px;
+    }
+
+    .login-logo {
+        text-align: center;
+    }
+
+    .login-form input {
+        border-radius: 20px;
+    }
+
+    .login-form button {
+        border-radius: 20px;
+    }
+
+    .socialfooter {
+        width: 40px;
+    }
+
+    .sfa {
+        margin-right: 5px !important;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .contymobile {
+            width: 90%;
+        }
+    }
+
+</style>
+<section class="signup container" style="background:transparent">
+    <div class="signup-logo">
+        <img class="logo-dark loginlogo" src="img/logo_dark.png" alt="logo">
+    </div>
+
+    <form class="signup-form" id="signup-form">
+
+
+        <input type="text" name="contact" placeholder="MOBILE NO." />
+
+        <!-- 2 column grid layout for inline styling -->
+        <div>
+            <div class="justify-content-center mb-40" style="text-align:center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked />
+                    <label class="form-check-label" for="form2Example3">I've read and accept the <a href="#" class="clickunderline">Terms and Condition</a></label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submit button -->
+        <button onclick="generateOTP(event)" class="btn btn-primary btn-block mb-4 signupbutton">CREATE</button>
+
+
+    </form>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="otpModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div>
+                    <h1>Verification Account</h1>
+                </div>
+                <div>
+                    <p>
+                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to +919239739
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <div class="row otp">
+                        <div class="otp-field">
+                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+                        <div class="otp-field">
+                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+                        <div class="otp-field">
+                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+                        <div class="otp-field">
+                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+
+                    </div>
+                    <div>
+                        <p>
+                            Didn't recieve any code? <a href="#">Resend</a>
+                        </p>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" onclick="verifyOTP()">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</section>
+
+
+<style>
 
 </style>
 
@@ -271,3 +376,4 @@
 </script>
 
 @endsection
+

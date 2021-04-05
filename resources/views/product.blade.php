@@ -1,4 +1,4 @@
-@extends('layout1')
+@extends('layout')
 @section('content')
 <style>
     .frame {
@@ -13,7 +13,7 @@
         max-width: 100%;
         max-height: 100%;
         display: block;
-        margin: 0 auto; 
+        margin: 0 auto;
     }
 
     .sizestyle {
@@ -153,7 +153,7 @@
                             <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
                                 <ul>
                                     <li class="sizestyle">
-                                        <a href="#" class="sizestylea">S</a>
+                                        <a href="/" class="sizestylea">S</a>
                                     </li>
                                     <li class="sizestyle active">
                                         <a href="#" class="sizestylea">M</a>
@@ -206,22 +206,22 @@
         @if(isset($trywith))
         @foreach($trywith as $tw)
 
-        <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
+        <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="border:2px solid transparent;">
             <div class="product-img">
-            <div class="frame">
-                @if ($tw->image)
-                <a href="{{ url('/product/' . $tw->id) }}">
-                    <img class="imgz" src="storage/products/{{$tw->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy />
-                </a>
-                @else
-                <a href="{{ url('/product/' . $tw->id) }}">
-                    <img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy />
-                </a>
-                @endif
-                <div class="product-action clearfix">
+                <div class="frame">
+                    @if ($tw->image)
+                    <a href="{{ url('/product/' . $tw->id) }}">
+                        <img class="imgz" src="storage/products/{{$tw->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy />
+                    </a>
+                    @else
+                    <a href="{{ url('/product/' . $tw->id) }}">
+                        <img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy />
+                    </a>
+                    @endif
+                    <div class="product-action clearfix">
 
+                    </div>
                 </div>
-            </div>
                 <h4 class="tryitheader" style="text-align:left;padding:10px;"> {{$tw->name_en}}</h4>
             </div>
         </div>
@@ -233,11 +233,21 @@
     </section>
     <script>
         $(document).ready(function() {
-            console.log("ready!");
-            $(".active").css("background-color", "black");
+            $(".brand-slide").hover(function() {
+                $(this).css({
+                    'border': '2px solid black'
+                });
+            }, function() {
+                $(this).css({
+                    'border': '2px solid transparent'
+                });
+            });
         });
 
     </script>
     <script src="js/prodjs.js"></script>
+    <div>
+    @include('footer')
+</div>
     @endsection
 

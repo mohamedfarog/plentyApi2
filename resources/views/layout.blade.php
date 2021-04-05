@@ -4,6 +4,8 @@
 <head>
     <title>Plenty of Things</title>
 
+    <!-- for minimizing styling issues-->
+    <base href="/public">
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -186,7 +188,7 @@
                                 <!-- Logo -->
                                 <div class="logo-container">
                                     <div class="logo-wrap">
-                                        <a href="index.html">
+                                        <a href="/">
                                             <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
                                         </a>
                                     </div>
@@ -334,7 +336,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger imgicon">
+                                        <a href="/login" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
                                     </li>

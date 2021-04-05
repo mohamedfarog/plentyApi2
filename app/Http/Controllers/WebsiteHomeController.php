@@ -20,7 +20,7 @@ class WebsiteHomeController extends Controller
             products.price as price,
             images.url as image'))
             ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('products.featured', '==', 1)
+            ->where('products.featured', '==', 1)->limit(12)
             ->get();
     }
     private function homebrands()
