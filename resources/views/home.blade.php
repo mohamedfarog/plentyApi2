@@ -190,7 +190,6 @@
         </div>
     </div>
 </section> <!-- end trendy products -->
-
 <section class="regular slider" style="width:90%;text-align:center;margin:auto">
     @if(isset($featured_products))
     @foreach($featured_products as $product)
@@ -342,4 +341,4 @@
     @include('footer')
 </div>
 @endsection
-
+ 
