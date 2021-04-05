@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Otp;
 use App\Models\Project;
 use App\Models\SMS;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -53,6 +55,15 @@ class OtpController extends Controller
                     $otp->verified = true;
                     $msg = 'OTP has been verified.';
                     $otp->save();
+
+                    $user = User::where('contact', $request->contact)->first();
+                    Auth::login($user);
+                    $dbuser = Auth::user();
+                    $token = $dbuser->createToken('MyApp')->accessToken;
+                    if($user){
+                        return response()->json(['success' => $verified, 'message'=>$msg, 'user'=>$user, 'token'=> $token]);
+                    }
+                    return response()->json(['success' => $verified, 'message'=>$msg, 'authtoken'=>$otp->code]);
                 }else{
                     $verified = false;
                     $msg = 'OTP entered is incorrect.';
@@ -60,8 +71,8 @@ class OtpController extends Controller
               
             }
         }
-
         return response()->json(['success' => $verified, 'message'=>$msg]);
+       
     }
 
     public function otpNumber(Request $request)
