@@ -32,14 +32,14 @@ class WebsiteHomeController extends Controller
     {
         return  DB::table('shops')
             ->select(DB::raw('styles.brandheader,styles.primary'))
-            ->join('styles', 'styles.shop_id', '=', 'shops.id') 
+            ->join('styles', 'styles.shop_id', '=', 'shops.id')
             ->get();
     }
 
 
     public function home(Request $request)
-    {   
-         
+    {
+
         $data['featured_products'] = $this->featuredItems();
         $data['homebrands'] = $this->homebrands();
         return view('home')->with($data);
@@ -47,19 +47,20 @@ class WebsiteHomeController extends Controller
 
     //  product
 
-
-    //API for filtering products
-    /**
-     * @param  prodcat_id
-     * @return products
-     */
-    public function getProduct($prodcat_id, Request $request)
-    {
-        $products = DB::table('products')
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('prodcat_id', $prodcat_id)->get();
-        return $products;
-    }
+    // private function getProduct($id)
+    // {
+    //     return  DB::table('products')
+    //         ->select(DB::raw(' products.id as id,
+    //             products.name_ar as name_ar,
+    //             products.name_en as name_en,
+    //             products.price as price,
+    //             products.desc_en as desc_en,
+    //             products.desc_ar as desc_ar,
+    //             images.url as image'))
+    //         ->leftjoin('images', 'images.product_id', '=', 'products.id')
+    //         ->where('products.id', '=', $id)
+    //         ->get();
+    // }
 
 
     // private function getProduct($id)
@@ -89,7 +90,7 @@ class WebsiteHomeController extends Controller
                 images.url as image'))
             ->leftjoin('images', 'images.product_id', '=', 'products.id')
             ->where('products.id', '!=', $id)
-           ->inRandomOrder()->limit(8)->get();
+            ->inRandomOrder()->limit(8)->get();
     }
 
 
@@ -102,25 +103,6 @@ class WebsiteHomeController extends Controller
             ->get();
     }
 
-    private function getshopname($id)
-    { 
-        return  DB::table('products')
-        ->select(DB::raw('shops.name_en as shopsname'))
-        ->leftjoin('shops', 'shops.id', '=', 'products.id')
-        ->where('products.id', '=', $id)
-        ->get();
-    }
-
-    public function product(Request $request, $id)
-    {
-        $data['shopname'] = $this->getshopname($id);
-        $data['product'] = $this->getProduct($id);
-        $data['addons'] = $this->getAddons($id);
-        $data['trywith'] = $this->gettry($id);
-
-        return view('/product')->with($data);
-    }
- 
     //  Delicacy 
     public function delicacy($shop = null, $category = null, Request $request)
     {
@@ -174,4 +156,24 @@ class WebsiteHomeController extends Controller
         $products = $popular_products->concat($topsale_products);
         return $products;
     }
+    private function getshopname($id)
+    {
+        return  DB::table('products')
+            ->select(DB::raw('shops.name_en as shopsname'))
+            ->leftjoin('shops', 'shops.id', '=', 'products.id')
+            ->where('products.id', '=', $id)
+            ->get();
+    }
+
+    public function product(Request $request, $id)
+    {
+        $data['shopname'] = $this->getshopname($id);
+        $data['product'] = $this->getProduct($id);
+        $data['addons'] = $this->getAddons($id);
+        $data['trywith'] = $this->gettry($id);
+
+        return view('/product')->with($data);
+    }
+
+    //
 }

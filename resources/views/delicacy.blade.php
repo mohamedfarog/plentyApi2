@@ -35,7 +35,7 @@
         height: 100%;
         margin: 0;
         font-family: Arial;
-    } 
+    }
 
     /* Style tab links */
     .tablink {
@@ -354,3 +354,4 @@
 </div>
   
 @endsection
+ 

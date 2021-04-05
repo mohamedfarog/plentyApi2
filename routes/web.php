@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
- 
-use App\Http\Controllers\WebsiteHomeController;
-use App\Http\Controllers\WebsiteProductController;
+   
 
 use App\Http\Controllers\CookieController;
 use App\Http\Middleware\AuthTest;
+  
+use App\Http\Controllers\WebsiteHomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,3 +80,4 @@ Route::get('/best-seller/{id}',  [WebsiteHomeController::class, 'getBestSellers'
 Route::get('/cookie/set', [CookieController::class, 'setCookie']);
 Route::get('/cookie/get', [CookieController::class, 'getCookie']);
 Route::get('/cookie/remove', [CookieController::class, 'removeCookie']);
+Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);

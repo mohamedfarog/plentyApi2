@@ -15,7 +15,8 @@
         display: block;
         margin: 0 auto;
     }
-    .ssproduct{
+
+    .ssproduct {
         margin: 0 5px;
     }
 </style>
@@ -148,10 +149,10 @@
                     </video>
                     <div class="overlay categoverlay"></div>
                     <div class="promo-inner valign">
-                        <h2>FASHION</h2> 
+                        <h2>FASHION</h2>
                     </div>
                 </a>
-            </div> 
+            </div>
         </div>
     </div>
 </section> <!-- end promo banners -->
@@ -194,7 +195,7 @@
     @if(isset($featured_products))
     @foreach($featured_products as $product)
 
-    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm" >
+    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img frame">
 
             @if ($product->image)
@@ -335,10 +336,9 @@
             });
         });
     });
-
 </script>
 <div>
     @include('footer')
 </div>
 @endsection
- 
+  
