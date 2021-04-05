@@ -4,6 +4,8 @@
 <head>
     <title>Plenty of Things</title>
 
+    <!-- for minimizing styling issues-->
+    <base href="/public">
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -51,10 +53,23 @@
     <!-- modernizr css -->
     <script src="js/vendor/modernizr-2.8.3.min.js" defer></script>
     <!-- Favicons -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style type="text/css">
         .slick-slide {
@@ -173,7 +188,7 @@
                                 <!-- Logo -->
                                 <div class="logo-container">
                                     <div class="logo-wrap">
-                                        <a href="index.html">
+                                        <a href="/">
                                             <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
                                         </a>
                                     </div>
@@ -321,7 +336,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger imgicon">
+                                        <a href="/login" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
                                     </li>
@@ -366,83 +381,6 @@
 
 
     <!-- Footer Type-1 -->
-    <footer class="footer footer-type-1">
-        <div class="container" style="width:95%">
-            <div class="footer-widgets">
-                <div class="row">
-
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="widget footer-about-us" style="text-align:center;">
-                            <img src="img/logo_dark.png" alt="" class="logo" style="height:150px;max-height:100%;">
-
-                            <div class="footer-socials">
-                                <div class="social-icons nobase" style="padding:0 20px;">
-                                    <a href="#"><img class="socialfooter" src="img/social/whatsapp.png"></a>
-                                    <a href="#"><img class="socialfooter" src="img/social/facebook.png"></a>
-                                    <a href="#"><img class="socialfooter" src="img/social/instagram.png"></a>
-                                    <a href="#"><img class="socialfooter" src="img/social/twitter.png"></a>
-
-                                </div>
-                            </div>
-                            <p class="" style="margin-top: 10px;margin-bottom:0;line-height: 20px;">Tel: +966 50 123
-                                3344</p>
-                            <p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p>
-                        </div>
-                    </div> <!-- end about us -->
-
-                    <div class="col-md-2 col-sm-6 col-xs-6" style="padding-top:5%;">
-                        <div class="widget footer-links">
-                            <h5 class="widget-title bottom-line left-align grey bottomtitleheader">Help & Information
-                            </h5>
-                            <ul class="list-no-dividers">
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Track Order</a></li>
-                                <li><a href="#">Delivery & Returns</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-sm-6 col-xs-6" style="padding-top:5%;">
-                        <div class="widget footer-links">
-                            <h5 class="widget-title bottom-line left-align grey bottomtitleheader">About Plenty</h5>
-                            <ul class="list-no-dividers">
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Corporate Responsibility</a></li>
-                                <li><a href="#">Investors Site</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-sm-6 col-xs-6" style="padding-top:5%;">
-                        <div class="widget footer-links" style="">
-                            <h5 class="widget-title bottom-line left-align grey bottomtitleheader">More From Plenty</h5>
-                            <ul class="list-no-dividers">
-                                <li><a href="#">Plenty Mobile App</a></li>
-                                <li><a href="#">Plenty Marketplace</a></li>
-                                <li><a href="#">Plenty Loyalty Points</a></li>
-                                <li><a href="#">Rewards</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-6">
-                        <div class="widget footer-links">
-                            <img class="" src="img/bottom/app.png" style="width:80%;display:block;margin:auto;margin-bottom:20px">
-                        </div>
-                        <div class="row" style="justify-content:space-between;display:flex;">
-                            <img class="" src="img/bottom/googleplay.png" style="width:40%;float:left">
-
-                            <img class="" src="img/bottom/appleapp.png" style="width:40%;float:left">
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div> <!-- end container -->
-
-
-    </footer> <!-- end footer -->
 
     <div id="back-to-top">
         <a href="#top"><i class="fa fa-angle-up"></i></a>
@@ -586,3 +524,4 @@
 </body>
 
 </html>
+

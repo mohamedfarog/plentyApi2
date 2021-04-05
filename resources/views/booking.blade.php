@@ -435,13 +435,7 @@
 
         // Days of week, starting on Sunday
         this.DaysOfWeek = [
-            'Sun',
-            'Mon',
-            'Tue',
-            'Wed',
-            'Thu',
-            'Fri',
-            'Sat'
+            'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
         ];
 
         // Months, stating on January

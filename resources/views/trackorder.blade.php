@@ -1,7 +1,8 @@
 @extends('layout')
 @section('content')
-fashion
+track order
 <div>
     @include('footer')
 </div>
 @endsection
+

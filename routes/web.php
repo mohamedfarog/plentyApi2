@@ -5,11 +5,9 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
-use App\Http\Controllers\WebsiteHomeController;
-use App\Http\Controllers\WebsiteProductController;
-
 use App\Http\Controllers\CookieController;
 use App\Http\Middleware\AuthTest;
+use App\Http\Controllers\WebsiteHomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +19,8 @@ use App\Http\Middleware\AuthTest;
 |
 */
 
-Route::get('/', function () {
-    return view('/home');
-});
+Route::get('/',  [WebsiteHomeController::class, 'home']);
+Route::get('/home',  [WebsiteHomeController::class, 'home']);
 
 /*
 Route::get('/delicacy', function () {
@@ -80,3 +77,4 @@ Route::get('/best-seller/{id}',  [WebsiteHomeController::class, 'getBestSellers'
 Route::get('/cookie/set', [CookieController::class, 'setCookie']);
 Route::get('/cookie/get', [CookieController::class, 'getCookie']);
 Route::get('/cookie/remove', [CookieController::class, 'removeCookie']);
+Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);

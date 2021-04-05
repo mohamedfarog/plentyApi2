@@ -349,4 +349,8 @@
     }
 </script>
 <script src="js/prodjs.js"></script>
+
+<div>
+    @include('footer')
+</div>
 @endsection
