@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\App;
 
 use App\Http\Controllers\WebsiteHomeController;
 use App\Http\Controllers\WebsiteProductController;
+
+use App\Http\Controllers\CookieController;
+use App\Http\Middleware\AuthTest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +25,11 @@ Route::get('/', function () {
     return view('/home');
 });
 
+/*
 Route::get('/delicacy', function () {
     return view('/delicacy');
 });
+*/
 
 Route::get('/product', function () {
     return view('/product');
@@ -65,5 +70,13 @@ Route::get('/lang', function () {
     }
 });
 
-Route::get('/home1',  [WebsiteHomeController::class, 'home']);
+Route::get('/home1',  [WebsiteHomeController::class, 'home'])->middleware(AuthTest::class);
 Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);
+Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
+Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getProduct']);
+Route::get('/best-seller/{id}',  [WebsiteHomeController::class, 'getBestSellers']);
+
+// For cookies controller
+Route::get('/cookie/set', [CookieController::class, 'setCookie']);
+Route::get('/cookie/get', [CookieController::class, 'getCookie']);
+Route::get('/cookie/remove', [CookieController::class, 'removeCookie']);

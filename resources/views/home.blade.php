@@ -173,7 +173,6 @@
         </div>
     </div>
 </section> <!-- end trendy products -->
-
 <section class="regular slider" style="width:90%;text-align:center;margin:auto">
     <div class="single-product  col-lg-4 col-xs-12 hidden-md hidden-sm">
         <div class="product-img">
@@ -424,11 +423,15 @@
                 'transform': 'scale(1)'
             });
         });
-    });
-<<<<<<< Updated upstream
+    }); <<
+    <<
+    << < Updated upstream
 
-=======
->>>>>>> Stashed changes
+        ===
+        ===
+        = >>>
+        >>>
+        > Stashed changes
 </script>
 
 @endsection

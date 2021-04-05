@@ -70,29 +70,33 @@
     /*  calendar styling*/
     .calendar-wrapper {
         margin: 3em auto;
-        padding: 50px;
+        padding: 20px 50px 10px 50px;
         border: 1px solid #dcdcff;
         border-radius: 20px;
         background: #fff;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         z-index: 100;
         position: relative;
+
+
     }
 
     .calendar-wrapper table {
-        width: 100%;
+        width: 400px;
+        height: 300px;
         padding: 50px;
         border-radius: 3px;
         border-collapse: collapse;
         color: #444;
         font-size: 15px;
         font-weight: 800;
+        margin: auto;
 
     }
 
     .calendar-wrapper td {
-        height: 48px;
+        height: 30px;
         text-align: center;
         vertical-align: middle;
         width: 14.285714285714%;
@@ -104,13 +108,11 @@
     }
 
 
-    .calendar-col:hover {
+
+    .calendar-wrapper .today:hover,
+    .calendar-wrapper .normal:hover {
         background-color: palevioletred;
         border-radius: 50%;
-        padding: 20px;
-        width: 100px;
-        height: 100px;
-
     }
 
     .calendar-wrapper td.not-current {
@@ -126,7 +128,6 @@
     .calendar-wrapper thead td {
         border: none;
         color: #c31c4a;
-        text-transform: uppercase;
         font-size: 1.5em;
     }
 
@@ -137,7 +138,7 @@
 
     .calendar-wrapper #btnPrev:before {
         content: '';
-        background-image: url('img/Lightbox/prev.png');
+        background-image: url('img/Lightbox/prev-gray.png');
         font-family: FontAwesome;
         padding-right: 4px;
         background-size: 100% 100%;
@@ -155,7 +156,7 @@
 
     .calendar-wrapper #btnNext:after {
         content: '';
-        background-image: url('img/Lightbox/next.png');
+        background-image: url('img/Lightbox/next-gray.png');
         padding-left: 4px;
         width: 100px;
         background-size: 100% 100%;
@@ -171,22 +172,21 @@
         background: transparent;
         border: none;
         outline: none;
-        font-size: 1em;
+        font-size: 15px;
         color: #c0c0c0;
         cursor: pointer;
-        font-family: "Roboto Condensed", sans-serif;
-        text-transform: uppercase;
         transition: all 0.3s ease;
-
+        =
     }
 
     .calendar-wrapper #btnPrev {
         position: absolute;
+        left: 100px;
     }
 
     .calendar-wrapper #btnNext {
         position: absolute;
-        right: 60px;
+        right: 100px;
     }
 
     .calendar-wrapper #btnPrev:hover,
@@ -205,8 +205,8 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         position: relative;
-        top: -70px;
-        padding: 80px 50px 50px 50px;
+        top: -60px;
+        padding: 60px 50px 150px 50px;
 
     }
 
@@ -216,22 +216,24 @@
 
     .time-shedule {
         padding: 10px;
-        height: 100px;
+        height: 110px;
         overflow-y: scroll;
     }
 
     .time-btn {
         position: relative;
-        padding: 15px 32px;
+        text-align: center;
         text-align: center;
         text-decoration: none;
         font-size: 16px;
         cursor: pointer;
+        width: 150px;
+        height: 40px;
         background-color: white;
         color: black;
         border: 2px solid pink;
         border-radius: 30px;
-        margin: 5px 10px;
+        margin: 5px 5px;
 
     }
 
@@ -265,7 +267,7 @@
 
     .booking-item span {
         font-size: 20px;
-        color: pink;
+        color: #edbddb;
     }
 
     .day-status {
@@ -288,6 +290,14 @@
         background-color: #c31c4a;
         color: white
     }
+
+    .calendar-btn-left {
+        margin-left: 30px
+    }
+
+    .calendar-btn-right {
+        margin-right: 30px
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/booking/skirts.png') no-repeat scroll center center / cover;">
@@ -309,11 +319,20 @@
         </div>
     </div>
 </div>
-<div class="container contmobile" style="background-color:#f2f3f8">
+<div class="container contmobile" style="background-color:#f2f3f8;padding-top:50px;margin-top:20px">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-7">
+                <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
+                    GEL NAILS <span style="color:#edbddb">SAR 50</span></h4>
+            </div>
+        </div>
+    </div>
     <div class="row no-sidebar">
         <!-- Booking section start here -->
         <div class="col-lg-12" style="padding:0;">
-            <div class="clearfix" style="background-color:#f2f3f8;padding: 10px;">
+            <div class="clearfix" style="background-color:#f2f3f8;">
 
                 <div class="col-lg-5">
 
@@ -326,8 +345,7 @@
                 </div>
 
                 <div class="col-lg-7" style="padding:0 15px">
-                    <h4 class="floatleft" style="font-size:24px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;">
-                        GEL NAILS <span>SAR 50</span></h4>
+
                     <div class="calendar-wrapper">
                         <button id="btnPrev" type="button"></button>
                         <button id="btnNext" type="button"></button>
@@ -351,6 +369,8 @@
                             <button class="time-btn">10:30 AM</button>
                             <button class="time-btn">11: 00 AM</button>
                             <button class="time-btn">10: 00 AM </button>
+
+
                         </div>
 
                     </div>
@@ -380,11 +400,11 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <button class=" addtobagbtn floatright" style="margin-top: 40px;border-color:red">
-                    <span class="addtobagheader" style="padding-top:10px !important; color:red">
+                <button class=" addtobagbtn floatright" style="margin-top: 40px;border-color:#c31c4a">
+                    <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a">
                         Add to Bag
                     </span>
-                    <img src="img/product/bag.png" style="width:30px;">
+                    <img src="img/product/bag-red.png" style="width:30px;">
 
                 </button>
             </div>
@@ -406,6 +426,7 @@
 
     var month;
     var year;
+    var booked = [1, 16, 21]
 
     var Cal = function(divId) {
 
@@ -523,14 +544,14 @@
             var chkY = chk.getFullYear();
             var chkM = chk.getMonth();
             if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
-                if (i in ['1', '2', '3', '4']) {
+                if (booked.includes(i)) {
                     html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
                     html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
                 }
 
             } else {
-                if (i in ['1', '2', '3', '4']) {
+                if (booked.includes(i)) {
                     html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
                     html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
@@ -605,8 +626,9 @@
 
         }
 
-        document.getElementById('btnPrev').innerHTML = this.Months[previousMonth];
-        document.getElementById('btnNext').innerHTML = this.Months[nextMonth];
+        document.getElementById('btnPrev').innerHTML = '<span class="calendar-btn-left"> ' + this.Months[previousMonth] + '</span>';
+        document.getElementById('btnNext').innerHTML = '<span class="calendar-btn-right">' +
+            this.Months[nextMonth] + '</span>';
     }
 
     function dayClicked(id) {
