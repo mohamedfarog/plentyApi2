@@ -19,11 +19,16 @@ class registration
     {
         $otp = Otp::where('contact', $request->contact)->first();
         if ($request->header('AuthRegister') != null) {
-            if ($request->header('AuthRegister') == $otp->code) {
-                return $next($request);
+            if($otp){
+                if ($request->header('AuthRegister') == $otp->code) {
+                    return $next($request);
+                }else {
+                    return response()->json(['error' => 'Unauthorized client!'], 401);
+                }
             }else {
                 return response()->json(['error' => 'Unauthorized client!'], 401);
             }
+            
         }  else {
             return response()->json(['error' => 'Unauthorized client!'], 401);
         }
