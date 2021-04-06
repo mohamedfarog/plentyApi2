@@ -97,13 +97,15 @@ class AccessController extends Controller
             return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
         }
         $settings = Project::first();
-        $user = User::where('invitation_code', $request->invitation_code)->first();
-        if ($user) {
+        $inviter = User::where('invitation_code', $request->invitation_code)->first();
+        $invitee = User::where('invitation_code', $request->invitation_code)->first();
+
+        if ($inviter) {
             if ($settings->currentinv < $settings->invlimit) {
-                switch ($user->typeofuser) {
+                switch ($inviter->typeofuser) {
                     case 'S':
                         $data = array();
-                        $data['inviter_id'] = $user->id;
+                        $data['inviter_id'] = $inviter->id;
                         $data['invitee_id'] = $loggeduser->id;
                         $data['invcode'] = $request->invitation_code;
                         $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
@@ -115,20 +117,22 @@ class AccessController extends Controller
                             (new ApplePass())->createAccessPass(null, $access->id);
 
                             $msg = 'You have been invited successfully! You now have access.';
-                            $user->invites += 1;
-                            $user->points += $settings->invitepts;
+                            $inviter->invites += 1;
+                            $inviter->points += $settings->invitepts;
                             $settings->currentinv += 1;
+                            $invitee->points += $settings->invitee_pts;
+                            $invitee->save();
                             $settings->save();
-                            $user->save();
+                            $inviter->save();
 
 
                             return response()->json(['success' => !!$access, 'message' => $msg]);
                         }
                         break;
                     case 'U':
-                        if ($user->invites < $settings->invperuser) {
+                        if ($inviter->invites < $settings->invperuser) {
                             $data = array();
-                            $data['inviter_id'] = $user->id;
+                            $data['inviter_id'] = $inviter->id;
                             $data['invitee_id'] = $loggeduser->id;
                             $data['invcode'] = $request->invitation_code;
                             $accessuser = Access::where('invitee_id', $loggeduser->id)->first();
@@ -140,11 +144,13 @@ class AccessController extends Controller
                                 (new ApplePass())->createAccessPass(null, $access->id);
 
                                 $msg = 'You have been invited successfully! You now have access.';
-                                $user->invites += 1;
-                                $user->points += $settings->invitepts;
+                                $inviter->invites += 1;
+                                $inviter->points += $settings->invitepts;
                                 $settings->currentinv += 1;
+                                $invitee->points += $settings->invitee_pts;
+                                $invitee->save();
                                 $settings->save();
-                                $user->save();
+                                $inviter->save();
 
 
                                 return response()->json(['success' => !!$access, 'message' => $msg]);
