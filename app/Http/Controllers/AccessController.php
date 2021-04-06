@@ -98,7 +98,7 @@ class AccessController extends Controller
         }
         $settings = Project::first();
         $inviter = User::where('invitation_code', $request->invitation_code)->first();
-        $invitee = User::where('invitation_code', $request->invitation_code)->first();
+        $invitee = User::find($loggeduser->id);
 
         if ($inviter) {
             if ($settings->currentinv < $settings->invlimit) {
