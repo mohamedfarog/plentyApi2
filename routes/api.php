@@ -11,6 +11,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TierController;
+use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\UserController;
 use App\Models\Addon;
 use App\Models\Cat;
@@ -63,6 +64,7 @@ Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
 Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
+Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);

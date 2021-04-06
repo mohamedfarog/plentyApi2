@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Timeslot;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TimeslotController extends Controller
@@ -14,7 +15,9 @@ class TimeslotController extends Controller
      */
     public function index()
     {
-        //
+        $day = Carbon::today()->format('Y-m-d');
+        $timeslots = Timeslot::where('sched', $day)->get();
+        return response()->json(['success' => !!$timeslots, 'timeslots' => $timeslots]);
     }
 
     /**

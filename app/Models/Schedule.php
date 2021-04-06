@@ -16,52 +16,72 @@ class Schedule extends Model
     public static function generateTimes()
     {
         $day = Carbon::now()->format('l');
+        $date = Carbon::today()->format('Y-m-d');
         $sched = Schedule::where('day', $day)->first();
         if ($sched) {
-            $from = explode(":", $sched->opening);
-            $to = explode(":", $sched->closing);
-            $fromhour = $from[0];
-            $duration = $sched->interval;
-            $fromminute = $from[1];
-            $tohour = $to[0];
-            $tominute = $to[1];
-            $arr = array();
-            if ($fromhour > $tohour) {
-              
-                while ($fromhour > $tohour || $fromhour < $tohour || (($fromhour == $tohour) && ($fromminute <= $tominute))) {
-                    
-                    $p = ($fromhour <10 && $fromhour >0 ? "0".$fromhour : $fromhour) . ':' . $fromminute;
-                    $fromminute += $duration;
-                    while ($fromminute >= 60) {
-                        $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
-                        $fromhour++;
+            if($sched->opening != null && $sched->closing != null){
+                $from = explode(":", $sched->opening);
+                $to = explode(":", $sched->closing);
+                $fromhour = $from[0];
+                $duration = $sched->interval;
+                $fromminute = $from[1];
+                $tohour = $to[0];
+                $tominute = $to[1];
+                $arr = array();
+                if ($fromhour > $tohour) {
+    
+                    while ($fromhour > $tohour || $fromhour < $tohour || (($fromhour == $tohour) && ($fromminute <= $tominute))) {
+    
+                        // $p = ($fromhour < 10 && $fromhour > 0 ? "0" . $fromhour : $fromhour) . ':' . $fromminute;
+                        $p =  $fromhour . ':' . $fromminute;
+
+                        $fromminute += $duration;
+                        while ($fromminute >= 60) {
+                            $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
+                            $fromhour++;
+                        }
+                        if ($fromhour >= 24) {
+                            $fromhour = "00";
+                        }
+                        $newarr = array();
+                        $newarr['timeslot'] = $p;
+                        $newarr['sched'] = $date;
+                        array_push($arr, $newarr);
                     }
-                    if ($fromhour >= 24) {
-                        $fromhour = "00";
+                } else {
+                    while ($fromhour < $tohour || ($fromhour == $tohour && $fromminute <= $tominute)) {
+                        // $p = ($fromhour < 10 && $fromhour > 0 ? "0" . $fromhour : $fromhour) . ':' . $fromminute;
+                        $p =  $fromhour . ':' . $fromminute;
+
+                        $fromminute += $duration;
+                        if ($fromminute >= 60) {
+                            $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
+                            $fromhour++;
+                        }
+                        if ($fromhour >= 24) {
+                            $fromhour = "00";
+                        }
+                        $newarr = array();
+                        $newarr['timeslot'] = $p;
+                        $newarr['sched'] = $date;
+                        array_push($arr, $newarr);
                     }
-                    $newarr = array();
-                    $newarr['timeslot'] = $p;
-                    $newarr['sched'] = $day;
-                    $newarr['avaialble']
-                    array_push($arr, $p);
                 }
-            } else {
-                while ($fromhour < $tohour || ($fromhour == $tohour && $fromminute <= $tominute)) {
-                    $p = ($fromhour <10 && $fromhour >0 ? "0".$fromhour : $fromhour) . ':' . $fromminute;
-                    $fromminute += $duration;
-                    if ($fromminute >= 60) {
-                        $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
-                        $fromhour++;
+    
+                if(count($arr) > 0){
+                    $success = 0;
+                    foreach ($arr as $timeslot) {
+                        $time = Timeslot::create($timeslot);
+                        if (!!$time) {
+                            $success++;
+                        }
                     }
-                    if ($fromhour >= 24) {
-                        $fromhour = "00";
-                    }
-                    array_push($arr, $p);
+        
+                    return $success . "/" . count($arr) . " timeslots added successfully!";
                 }
             }
-
-
-            return $arr;
+           
+            return "No timeslots for today!";
         }
     }
 }
