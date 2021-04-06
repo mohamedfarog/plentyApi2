@@ -21,6 +21,7 @@ use App\Models\Order;
 use App\Models\Pass;
 use App\Models\Prodcat;
 use App\Models\Product;
+use App\Models\Schedule;
 use App\Models\Shop;
 use App\Models\Size;
 use App\Models\Style;
@@ -178,6 +179,9 @@ Route::get('test', function (Request $request) {
         }, 'user'])->where('id', $request->id)->first();
         return view('bill', ["data" => $order]);
     }
+    if(isset($request->timeslot)){
+        return (new Schedule())->generateTimes();
+    }
     return  $user =User::with(['tier'])->where('id', $request->userid)->first();
     
 });
@@ -186,3 +190,4 @@ Route::get('models', function (Request $request){
    return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(), 'user'=>User::first()]) ;
     
 });
+
