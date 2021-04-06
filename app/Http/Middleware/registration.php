@@ -19,7 +19,7 @@ class registration
     {
         $otp = Otp::where('contact', $request->contact)->first();
         if ($request->header('AuthRegister') != null) {
-            if($otp && $otp->verified == 0){
+            if($otp){
                 if ($request->header('AuthRegister') == $otp->code) {
                     return $next($request);
                 }else {
