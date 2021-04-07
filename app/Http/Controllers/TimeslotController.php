@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detail;
+use App\Models\Project;
 use App\Models\Timeslot;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
