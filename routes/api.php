@@ -34,6 +34,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Thenextweb\Definitions\StoreCard;
 use Thenextweb\PassGenerator;
@@ -184,6 +185,8 @@ Route::get('test', function (Request $request) {
     if(isset($request->timeslot)){
         return (new Schedule())->generateTimes();
     }
+
+
     return  $user =User::with(['tier'])->where('id', $request->userid)->first();
     
 });
@@ -192,4 +195,10 @@ Route::get('models', function (Request $request){
    return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(), 'user'=>User::first()]) ;
     
 });
+
+Route::get('/updates', function () {
+    $output = shell_exec('cd ../ && git pull && php artisan migrate');
+    echo "<pre>$output</pre>";;
+});
+
 
