@@ -16,9 +16,15 @@ class TimeslotController extends Controller
     public function index()
     {
         $day = Carbon::today()->format('Y-m-d');
+
+        
         $timeslots = Timeslot::where('sched', $day)->get();
+
+
         return response()->json(['success' => !!$timeslots, 'timeslots' => $timeslots]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.

@@ -17,6 +17,7 @@ use App\Models\Addon;
 use App\Models\Cat;
 use App\Models\Color;
 use App\Models\Designer;
+use App\Models\Detail;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\Pass;
@@ -27,6 +28,7 @@ use App\Models\Shop;
 use App\Models\Size;
 use App\Models\Style;
 use App\Models\Support;
+use App\Models\Timeslot;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -182,7 +184,29 @@ Route::get('test', function (Request $request) {
         return view('bill', ["data" => $order]);
     }
     if(isset($request->timeslot)){
-        return (new Schedule())->generateTimes();
+
+        $timeslots= Timeslot::where('product_id', $request->product_id)->get();
+        $slotsarray= array();
+        foreach($timeslots as $timeslot){
+            $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->count();
+            $timeslot->setAttribute('bookingcount',$bookingcount);
+            array_push($slotsarray, $timeslot);
+        
+        }
+        return $slotsarray;
+
+
+        //timeslot_id
+        // Date, PRODUCT ID
+        // Get the day and find the count of booking for each timeslot
+        //bookignd_date, booking_time, booking_
+        //timeslot_id
+        //
+        // if(iss)
+
+
+
+     
     }
     return  $user =User::with(['tier'])->where('id', $request->userid)->first();
     
