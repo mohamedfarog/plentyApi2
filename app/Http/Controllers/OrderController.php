@@ -147,8 +147,8 @@ class OrderController extends Controller
                 if (isset($orderdetails['booking_date'])) {
                     $arr['booking_date'] = $orderdetails['booking_date'];
                 }
-                if (isset($orderdetails['booking_time'])) {
-                    $arr['booking_time'] = $orderdetails['booking_time'];
+                if (isset($orderdetails['timeslot_id'])) {
+                    $arr['timeslot_id'] = $orderdetails['timeslot_id'];
                 }
                 if (isset($orderdetails['addons'])) {
                     
