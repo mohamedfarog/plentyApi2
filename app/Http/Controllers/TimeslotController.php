@@ -24,7 +24,7 @@ class TimeslotController extends Controller
 
             $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->count();
             $timeslot->setAttribute('bookingcount',$bookingcount);
-            $timeslot->setAttribute('available',$bookingcount<=$settings->reserve);
+            $timeslot->setAttribute('available',$bookingcount<$settings->reserve);
             array_push($slotsarray, $timeslot);
         
         }
