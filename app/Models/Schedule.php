@@ -70,14 +70,25 @@ class Schedule extends Model
     
                 if(count($arr) > 0){
                     $success = 0;
-                    foreach ($arr as $timeslot) {
-                        $time = Timeslot::create($timeslot);
-                        if (!!$time) {
-                            $success++;
+                    $services = Product::where('isservice', 1)->get();
+                    if($services){
+                        foreach ($services as $service) {
+
+                            foreach ($arr as $timeslot) {
+                                $timeslot['product_id'] = $service->id;
+                                $time = Timeslot::create($timeslot);
+                                if (!!$time) {
+                                    $success++;
+                                }
+                            }
                         }
+                        
+            
+                        return $success . "/" . (count($services)*count($arr)) . " timeslots added successfully!";
+                    }else{
+                        return "No timeslots for today!";
                     }
-        
-                    return $success . "/" . count($arr) . " timeslots added successfully!";
+                    
                 }
             }
            

@@ -9,6 +9,6 @@ class Timeslot extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'timeslot', 'sched', 'bookings', 'available',
+        'timeslot', 'sched', 'bookings', 'available','product_id'
     ];
 }
