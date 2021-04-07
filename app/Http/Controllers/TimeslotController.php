@@ -17,6 +17,7 @@ class TimeslotController extends Controller
     public function index(Request $request)
     {
         $timeslots= Timeslot::where('product_id', $request->product_id)->get();
+        return '';
         $slotsarray= array();
         foreach($timeslots as $timeslot){
             $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->count();
