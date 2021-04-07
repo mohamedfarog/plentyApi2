@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css" defer />
     <link rel="stylesheet" href="css/font-icons.css" defer />
     <link rel="stylesheet" href="css/sliders.css" defer />
-    <link rel="stylesheet" href="css/style.css" defer /> 
+    <link rel="stylesheet" href="css/style.css" defer />
 
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
@@ -143,7 +143,6 @@
             }
 
         }
-
     </style>
 </head>
 
@@ -271,63 +270,65 @@
                                                 </a>
                                             </div>
                                         </div>
-                                       <div class="nav-cart-container">
-                                            <div class="nav-cart-items">
+                                        <div class="nav-cart-container">
 
-                                                <div class="nav-cart-item clearfix">
-                                                    <div class="nav-cart-img">
-                                                        <a href="#">
-                                                            <img src="img/shop/shop_item_1.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="nav-cart-title">
-                                                        <a href="#">
-                                                            Ladies Bag
-                                                        </a>
-                                                        <div class="nav-cart-price">
-                                                            <span>1 x</span>
-                                                            <span>1250.00</span>
+                                            <div class="nav-cart-container">
+
+                                                <div class="nav-cart-items">
+
+                                                    <div class="nav-cart-item clearfix">
+                                                        <div class="nav-cart-img">
+                                                            <a href="#">
+                                                                <img src="img/shop/shop_item_1.jpg" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="nav-cart-title">
+                                                            <a href="#">
+                                                                Ladies Bag
+                                                            </a>
+                                                            <div class="nav-cart-price">
+                                                                <span>1 x</span>
+                                                                <span>1250.00</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="nav-cart-remove">
+                                                            <a href="#" class="remove"><i class="ui-close"></i></a>
                                                         </div>
                                                     </div>
-                                                    <div class="nav-cart-remove">
-                                                        <a href="#" class="remove"><i class="ui-close"></i></a>
-                                                    </div>
-                                                </div>
 
-                                                <div class="nav-cart-item clearfix">
-                                                    <div class="nav-cart-img">
-                                                        <a href="#">
-                                                            <img src="img/shop/shop_item_2.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="nav-cart-title">
-                                                        <a href="#">
-                                                            Sequin Suit longer title
-                                                        </a>
-                                                        <div class="nav-cart-price">
-                                                            <span>1 x</span>
-                                                            <span>1250.00</span>
+                                                    <div class="nav-cart-item clearfix">
+                                                        <div class="nav-cart-img">
+                                                            <a href="#">
+                                                                <img src="img/shop/shop_item_2.jpg" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="nav-cart-title">
+                                                            <a href="#">
+                                                                Sequin Suit longer title
+                                                            </a>
+                                                            <div class="nav-cart-price">
+                                                                <span>1 x</span>
+                                                                <span>1250.00</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="nav-cart-remove">
+                                                            <a href="#" class="remove"><i class="ui-close"></i></a>
                                                         </div>
                                                     </div>
-                                                    <div class="nav-cart-remove">
-                                                        <a href="#" class="remove"><i class="ui-close"></i></a>
-                                                    </div>
+
+                                                </div>
+                                                <div class="nav-cart-summary">
+                                                    <span>Cart Subtotal</span>
+                                                    <span class="total-price">$1799.00</span>
                                                 </div>
 
-                                            </div>  
-                                            <div class="nav-cart-summary">
-                                                <span>Cart Subtotal</span>
-                                                <span class="total-price">$1799.00</span>
-                                            </div>
+                                                <div class="nav-cart-actions mt-20">
+                                                    <a href="{{url('/cart')}}" class="btn btn-md btn-dark"><span>View
+                                                            Cart</span></a>
+                                                    <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
+                                                            Checkout</span></a>
+                                                </div>
 
-                                            <div class="nav-cart-actions mt-20">
-                                                <a href="shop-cart.html" class="btn btn-md btn-dark"><span>View
-                                                        Cart</span></a>
-                                                <a href="shop-checkout.html"
-                                                    class="btn btn-md btn-color mt-10"><span>Proceed to
-                                                        Checkout</span></a>
-                                            </div>
-                                        </div> 
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
@@ -417,33 +418,31 @@
 
     <script>
         $(".regular").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
-                }
-                , {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
-                }
-                , {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -451,33 +450,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
-                }
-                , {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
-                }
-                , {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -485,44 +482,101 @@
         });
 
         $(".tryprodslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
-                }
-                , {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
-                }
-                , {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
             ]
         });
 
-      
 
+
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+
+        // // cart manager
+
+        function Cart() {
+            this.cart_subtotal = 0;
+            this.order_total = 0;
+            this.cart_items = [];
+
+        }
+
+        Cart.prototype.addItem = function(cartItem) {
+            this.cart_items.push(cartItem)
+        }
+        Cart.prototype.removeItem = function(cartItem) {
+            this.cart_items.filter(item => item.id != cartItem.id);
+        }
+
+        Cart.prototype.viewCartItems = function() {
+            console.log(this.cart_items)
+            return this.cart_items
+        }
+
+        // Cart item start here
+        function CartItem(id, price, quantity, name = null, size = null, color = null) {
+            this.id = id;
+            this.price = price;
+            this.name = name;
+            this.size = size;
+            this.color = color;
+            this.quantity = quantity;
+            this.total_price = function() {
+                return this.quantity * this.price;
+            }
+        }
+
+        CartItem.prototype.addQuantity = function() {
+            this.quantity = this.quantity + 1
+            console.log(this.quantity)
+        }
+        CartItem.prototype.substractQuantity = function() {
+            this.quantity = this.quantity - 1
+            console.log(this.quantity)
+        }
+        // cart item end here
+
+        // cart manager end here
     </script>
 </body>
 
 </html>
-
