@@ -189,8 +189,7 @@ Route::get('test', function (Request $request) {
         $timeslots= Timeslot::where('product_id', $request->product_id)->get();
         $slotsarray= array();
         foreach($timeslots as $timeslot){
-            return response()->json(['date'=>$request->date, 'pid'=>$request->product_id]);
-            $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->get();
+            $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->get();
             $timeslot->setAttribute('bookingcount',$bookingcount);
             array_push($slotsarray, $timeslot);
         
