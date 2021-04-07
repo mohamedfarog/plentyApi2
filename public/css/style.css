@@ -4295,7 +4295,7 @@ table th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  border-top: 1px solid #ebebeb;
+  border-top: 2px solid #b2bad4;
   padding: 10px;
 }
 
@@ -4314,7 +4314,7 @@ table th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #ebebeb;
+  border: 2px solid #b2bad4;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
@@ -5478,7 +5478,7 @@ input[type=number] {
 }
 
 .shop_table.cart tr:last-child {
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 2px solid #b2bad4;
 }
 
 .shop_table .product-thumbnail {
