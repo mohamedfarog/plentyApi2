@@ -51,6 +51,8 @@ Route::get('/login', function () {
 Route::get('/booking', function () {
     return view('/booking');
 });
+
+
 Route::get('/lang', function () {
     $locale = App::currentLocale();
     if ($locale == 'en') {

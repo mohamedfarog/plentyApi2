@@ -19,7 +19,9 @@
     .ssproduct {
         margin: 0 5px;
     }
-
+    .featicons {
+        width:25px !important;
+    }
 </style>
 
 <!-- Hero Slider -->
