@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detail;
 use App\Models\Timeslot;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,15 +14,29 @@ class TimeslotController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $day = Carbon::today()->format('Y-m-d');
+        $timeslots= Timeslot::where('product_id', $request->product_id)->get();
+        $slotsarray= array();
+        foreach($timeslots as $timeslot){
+            $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->count();
+            $timeslot->setAttribute('bookingcount',$bookingcount);
+            array_push($slotsarray, $timeslot);
+        
+        }
+        return $slotsarray;
+
+
+
+
+
+        // $day = Carbon::today()->format('Y-m-d');
 
         
-        $timeslots = Timeslot::where('sched', $day)->get();
+        // $timeslots = Timeslot::where('sched', $day)->get();
 
 
-        return response()->json(['success' => !!$timeslots, 'timeslots' => $timeslots]);
+        // return response()->json(['success' => !!$timeslots, 'timeslots' => $timeslots]);
     }
 
 
