@@ -18,9 +18,12 @@ class TimeslotController extends Controller
     {
         $timeslots= Timeslot::where('product_id', $request->product_id)->get();
         $slotsarray= array();
+        $settings= Project::first();
         foreach($timeslots as $timeslot){
+
             $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->count();
             $timeslot->setAttribute('bookingcount',$bookingcount);
+            $timeslot->setAttribute('available',$bookingcount<=$settings->reserve);
             array_push($slotsarray, $timeslot);
         
         }
