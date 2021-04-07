@@ -4,12 +4,18 @@
     body {
         color: #001b71;
     }
-    .totalcolorblue{
-        color: #001b71 !important; 
+
+    .totalcolorblue {
+        color: #001b71 !important;
     }
+
     .amount {
         color: #001b71 !important;
-        font-weight: 600 !important;
+        font-weight: 400 !important;
+    }
+
+    .totalamount {
+        font-weight: 900 !important;
     }
 
     .colorgrey {
@@ -50,10 +56,45 @@
         font-size: 14px;
         font-weight: 100 !important;
     }
-    .proceedbtn{
+
+    .proceedbtn {
         font-weight: 100 !important;
         font-size: 14px;
     }
+
+    @media only screen and (max-width: 600px) {
+        .tablemobile {
+            width: 95% !important;
+        }
+
+        .shop_table .product-thumbnail {
+            padding: 10px;
+            width: 150px;
+            max-width: 150px;
+            min-width: 150px;
+        }
+
+        .product-name {
+            padding: 10px;
+            width: 150px;
+            max-width: 150px;
+            min-width: 150px;
+        }
+
+        .additembtn {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .checkoutbtn {
+            width: 100%;
+        }
+
+        .chkbtn {
+            width: 100%;
+        }
+    }
+
 </style>
 
 <section class="page-title text-center bg-light">
@@ -71,7 +112,7 @@
 
     <!-- Cart -->
     <section class="section-wrap shopping-cart">
-        <div class="container relative">
+        <div class="container relative tablemobile">
             <div class="row">
 
                 <div class="col-md-12">
@@ -165,11 +206,13 @@
 
                     </div>
 
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12">
                         <div class="actions">
+
                             <input type="submit" name="update_cart" value="ADD ITEM" class="btn btn-lg btn-stroke additembtn">
-                            <div class="wc-proceed-to-checkout">
-                                <a href="checkout.html" class="btn btn-lg btn-dark"><span class="proceedbtn">proceed to checkout</span></a>
+
+                            <div class="wc-proceed-to-checkout checkoutbtn">
+                                <a href="checkout.html" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
                             </div>
                         </div>
                     </div>
@@ -204,7 +247,7 @@
                             <tr class="order-total">
                                 <th class="totalcolorblue">Order Total</th>
                                 <td>
-                                    <strong><span class="amount">SAR 1490.00</span></strong>
+                                    <strong><span class="amount totalamount">SAR 1490.00</span></strong>
                                 </td>
                             </tr>
                         </tbody>

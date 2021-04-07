@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css" defer />
     <link rel="stylesheet" href="css/font-icons.css" defer />
     <link rel="stylesheet" href="css/sliders.css" defer />
-    <link rel="stylesheet" href="css/style.css" defer /> 
+    <link rel="stylesheet" href="css/style.css" defer />
 
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
@@ -265,13 +265,13 @@
                                     <li class="nav-cart">
                                         <div class="nav-cart-outer">
                                             <div class="nav-cart-inner">
-                                                <a href="#" class="nav-search search-trigger imgicon">
+                                                <a href="/cart" class="nav-search imgicon">
                                                     <img class="imgicon" src="img/nav/bag.png">
 
                                                 </a>
                                             </div>
                                         </div>
-                                       <div class="nav-cart-container">
+                                        <div class="nav-cart-container">
                                             <div class="nav-cart-items">
 
                                                 <div class="nav-cart-item clearfix">
@@ -314,20 +314,19 @@
                                                     </div>
                                                 </div>
 
-                                            </div>  
+                                            </div>
                                             <div class="nav-cart-summary">
                                                 <span>Cart Subtotal</span>
                                                 <span class="total-price">$1799.00</span>
                                             </div>
 
                                             <div class="nav-cart-actions mt-20">
-                                                <a href="shop-cart.html" class="btn btn-md btn-dark"><span>View
+                                                <a href="/cart" class="btn btn-md btn-dark"><span>View
                                                         Cart</span></a>
-                                                <a href="shop-checkout.html"
-                                                    class="btn btn-md btn-color mt-10"><span>Proceed to
+                                                <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
                                                         Checkout</span></a>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
@@ -518,8 +517,6 @@
 
             ]
         });
-
-      
 
     </script>
 </body>
