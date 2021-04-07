@@ -26,9 +26,12 @@
     .modal {
         text-align: center;
     }
-.smsCode{
-    width:40px !important;
-}
+    .smsCode{
+        width:40px !important;
+    }
+    input:focus {
+       background: grey !important;
+    }
     @media screen and (min-width: 768px) {
         .modal:before {
             display: inline-block;

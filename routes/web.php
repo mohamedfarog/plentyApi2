@@ -45,6 +45,7 @@ Route::get('/#', function () {
 Route::get('/signup', function () {
     return view('/signup');
 });
+
 Route::get('/login', function () {
     return view('/login');
 });
@@ -83,3 +84,6 @@ Route::get('/cookie/set', [CookieController::class, 'setCookie']);
 Route::get('/cookie/get', [CookieController::class, 'getCookie']);
 Route::get('/cookie/remove', [CookieController::class, 'removeCookie']);
 Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
+Route::get('/cart', function () {
+    return view('/cart');
+});

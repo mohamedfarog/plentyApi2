@@ -271,7 +271,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <!-- <div class="nav-cart-container">
+                                       <div class="nav-cart-container">
                                             <div class="nav-cart-items">
 
                                                 <div class="nav-cart-item clearfix">
@@ -327,7 +327,7 @@
                                                     class="btn btn-md btn-color mt-10"><span>Proceed to
                                                         Checkout</span></a>
                                             </div>
-                                        </div> -->
+                                        </div> 
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
