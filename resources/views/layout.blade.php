@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css" defer />
     <link rel="stylesheet" href="css/font-icons.css" defer />
     <link rel="stylesheet" href="css/sliders.css" defer />
-    <link rel="stylesheet" href="css/style.css" defer />
-
+    <link rel="stylesheet" href="css/style.css" defer /> 
 
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
@@ -519,6 +518,8 @@
 
             ]
         });
+
+      
 
     </script>
 </body>

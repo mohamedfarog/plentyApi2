@@ -19,6 +19,7 @@
     .ssproduct {
         margin: 0 5px;
     }
+
 </style>
 
 <!-- Hero Slider -->
@@ -266,7 +267,7 @@
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
         <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
             <a href="/product">
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:90%;min-width:80%;" />
+                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
             </a>
             <div class="product-action clearfix">
 
@@ -336,9 +337,9 @@
             });
         });
     });
+
 </script>
 <div>
     @include('footer')
 </div>
 @endsection
-  

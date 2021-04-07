@@ -63,20 +63,20 @@ class WebsiteHomeController extends Controller
     // }
 
 
-    // private function getProduct($id)
-    // {
-    //     return  DB::table('products')
-    //         ->select(DB::raw(' products.id as id,
-    //             products.name_ar as name_ar,
-    //             products.name_en as name_en,
-    //             products.price as price,
-    //             products.desc_en as desc_en,
-    //             products.desc_ar as desc_ar,
-    //             images.url as image'))
-    //         ->leftjoin('images', 'images.product_id', '=', 'products.id')
-    //         ->where('products.id', '=', $id)
-    //         ->get();
-    // }
+    private function getProduct($id)
+    {
+        return  DB::table('products')
+            ->select(DB::raw(' products.id as id,
+                products.name_ar as name_ar,
+                products.name_en as name_en,
+                products.price as price,
+                products.desc_en as desc_en,
+                products.desc_ar as desc_ar,
+                images.url as image'))
+            ->leftjoin('images', 'images.product_id', '=', 'products.id')
+            ->where('products.id', '=', $id)
+            ->get();
+    }
 
     private function gettry($id)
     {
