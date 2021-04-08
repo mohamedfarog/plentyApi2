@@ -14,8 +14,14 @@ class CouponController extends Controller
     public function index(Request $request)
     {
         $today = Carbon::now();
+        if(isset($request->code)){
+            $couponexist= Coupon::where('code',strtoupper($request->code))->first();
 
-        $couponexist= Coupon::where('code',strtoupper($request->code))->first();
+        }
+        else{
+            return response()->json(['Response'=>false,   'Coupon'=>'Coupon Code is required']);
+
+        }
         if(!$couponexist){
             return response()->json(['Response'=>false,   'Coupon'=>'Coupon Code does not exist']);
 
