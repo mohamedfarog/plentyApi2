@@ -16,6 +16,10 @@ class EventController extends Controller
     public function index()
     {
         //
+
+        $events = Event::with(['categories'])->paginate();
+
+        return $events;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eventcat;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class EventcatController extends Controller
@@ -12,9 +13,14 @@ class EventcatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $shops = Shop::whereNotNull('eventcat_id', null)->get();
+        if (isset($request->cat_id)) {
+            $shops = Shop::where('eventcat_id', $request->cat_id)->get();
+        }
+        return $shops;
     }
 
     /**

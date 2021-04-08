@@ -3,6 +3,8 @@
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\EventcatController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
@@ -56,6 +58,8 @@ use Thenextweb\PassGenerator;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('events',[EventController::class, 'index']);
+Route::get('eventshops',[EventcatController::class, 'index']);
 
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);

@@ -11,4 +11,9 @@ class Eventcat extends Model
     protected $fillable = [
         'name_en', 'name_ar', 'image', 'event_id',
     ];
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
 }
