@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('orders', OrderController::class);
     Route::resource('products', ProductController::class);
     Route::post('tier', [TierController::class, 'store']);
+    Route::resource('coupons', CouponController::class);
 }); 
 
 Route::get('generate', function (Request $request) {

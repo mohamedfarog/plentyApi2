@@ -43,9 +43,22 @@ class Schedule extends Model
                         if ($fromhour >= 24) {
                             $fromhour = "00";
                         }
+
+                        if($fromhour<12){
+                            $sched= 'M';
+                         }
+                         else if($fromhour<=17 && $fromhour>12){
+                            $sched= 'A';
+                         }
+                         else{
+                             $sched='E';
+                         }
+
+
                         $newarr = array();
                         $newarr['timeslot'] = $p;
-                        $newarr['sched'] = $date;
+                        $newarr['sched'] = $sched;
+
                         array_push($arr, $newarr);
                     }
                 } else {
@@ -61,9 +74,19 @@ class Schedule extends Model
                         if ($fromhour >= 24) {
                             $fromhour = "00";
                         }
+                        if($fromhour<12){
+                            $sched= 'M';
+                         }
+                         else if($fromhour<=17 && $fromhour>12){
+                            $sched= 'A';
+                         }
+                         else{
+                             $sched='E';
+                         }
+
                         $newarr = array();
                         $newarr['timeslot'] = $p;
-                        $newarr['sched'] = $date;
+                        $newarr['sched'] = $sched;
                         array_push($arr, $newarr);
                     }
                 }
