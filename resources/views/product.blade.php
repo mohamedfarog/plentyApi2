@@ -60,6 +60,10 @@
         font-weight: lighter;
     }
 
+    .addtobagbtn :hover {
+        cursor: pointer;
+    }
+
 
 
     @media only screen and (max-width: 600px) {
@@ -81,7 +85,6 @@
             text-align: center;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/product/Banner.png') no-repeat scroll center center / cover;">
@@ -95,12 +98,10 @@
                     <div class="breadcumbs pb-15">
                         <ul>
                             <li><a href="index.html">DELICACY</a></li>
-                            @if(isset($shopname))
-                            @foreach($shopname as $sp)
-
-                            <li>{{$sp->shopsname}}</li>
-                            @endforeach
+                            @if(isset($shop->name_en))
+                            <li>{{$shop->name_en}}</li>
                             @endif
+
                         </ul>
                     </div>
                 </div>
@@ -108,8 +109,10 @@
         </div>
     </div>
 </div>
+
+
+
 @if(isset($product))
-@foreach($product as $prd)
 <div class="product-area single-pro-area pt-30 pb-30 product-style-2">
     <div class="container contmobile" style="background-color:#f2f3f8">
         <div class="row shop-list single-pro-info no-sidebar">
@@ -121,9 +124,9 @@
                         <div class="single-pro-slider single-big-photo view-lightbox slider-for frame" style="width:100% !important">
                             <div>
 
-                                @if ($prd->image)
+                                @if ($product->image)
                                 <div class="frame">
-                                    <img class="imgz" src="storage/products/{{$prd->image}}" alt="" loading=lazy />
+                                    <img class="imgz" src="storage/products/{{$product->image}}" alt="" loading=lazy />
                                 </div>
                                 @else
                                 <div class="frame">
@@ -136,53 +139,75 @@
                         <div class="product-info mt-50" style="padding:0 15px">
                             <div class="fix">
                                 <h4 class="post-title floatleft" style="font-size:24px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;">
-                                    {{$prd->name_en}}</h4>
+                                    {{$product->name_en}}</h4>
                             </div>
                             <div class="fix mb-30">
-                                <span class="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
-                                    {{$prd->price}}</span>
+                                @if($sizes->count())
+                                <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                                    {{$sizes->first()->price}}</span>
+                                @else
+                                <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                                    {{$product->price}}</span>
+                                @endif
                             </div>
                             <div class="product-description">
-                                <p style="font-size:18px;color:black;"> {{$prd->desc_en}}</p>
+                                <p style="font-size:18px;color:black;"> {{$product->desc_en}}</p>
                             </div>
                             <!-- color start -->
 
                             <!-- color end -->
                             <!-- Size start -->
                             <span class="color-title text-capitalize mb-20" style="font-size:18px;text-transform:uppercase">size</span>
-                            <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
-                                <ul>
-                                    <li class="sizestyle">
-                                        <a href="/" class="sizestylea">S</a>
-                                    </li>
-                                    <li class="sizestyle active">
-                                        <a href="#" class="sizestylea">M</a>
-                                    </li>
-                                    <li class="sizestyle">
-                                        <a href="#" class="sizestylea">L</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="clearfix">
-                                <div class="cart-plus-minus" style="width:50%;background:#e1e0e5;">
-                                    <div class="dec qtybutton">-</div>
-                                    <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box" style="background: #e1e0e5 none repeat scroll 0 0;">
-                                    <div class="inc qtybutton">+</div>
+                            <form id="product-form">
+                                <input type="hidden" id="name" name="name" value="{{$product->name_en}}">
+                                <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+                                <input type="hidden" id="image_url" name="image_url" value="{{$product->image}}">
+                                @if($shop->cat_id)
+                                <input type="hidden" id="cat_id" name="cat_id" value="{{$shop->cat_id}}">
+                                @endif
+                                @if($sizes->count())
+                                <input type="hidden" id="size_id" name="size_id" value="{{$sizes->first()->id}}">
+                                <input type="hidden" id="size" name="size" value="{{$sizes->first()->value}}">
+                                <input type="hidden" id="price" name="price" value="{{$sizes->first()->price}}">
+                                <input type="hidden" id="is_product_variant" name="is_product_variant" value=true>
+                                <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
+                                    <ul>
+                                        <select name="sizes" id="sizes" onchange="changePriceOnSize({{$sizes}})">
+                                            @foreach($sizes as $size)
+                                            @if ($loop->first)
+                                            <option value="{{$size->id}}" selected>{{$size->value }}</option>
+                                            @else
+                                            <option value="{{$size->id}}">{{$size->value }}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </ul>
                                 </div>
-                            </div>
-                            <!-- Size end -->
-                            <div style="height:30px;">
-                            </div>
-                            <div class="centermobile">
-                                <button class=" addtobagbtn">
-                                    <span class="addtobagheader" style="padding-top:10px !important;">
-                                        Add to Bag
-                                    </span>
-                                    <img src="img/product/bag.png" style="width:30px;">
+                                @else
 
-                                </button>
-                            </div>
+                                <input type="hidden" id="price" name="price" value="{{$product->price}}">
 
+                                @endif
+                                <div class="clearfix">
+                                    <div class="cart-plus-minus" style="width:50%;background:#e1e0e5;">
+                                        <div class="dec qtybutton" onclick="substractQuantity()">-</div>
+                                        <input type="text" id="quantity" value="1" name="quantity" class="cart-plus-minus-box" style="background: #e1e0e5 none repeat scroll 0 0;">
+                                        <div class="inc qtybutton" onclick="addQuantity()">+</div>
+                                    </div>
+                                </div>
+                                <!-- Size end -->
+                                <div style="height:30px;">
+                                </div>
+                                <div class="centermobile">
+                                    <a class=" addtobagbtn" onclick="addProductBag()">
+                                        <span class="addtobagheader" style="padding-top:10px !important;">
+                                            Add to Bag
+                                        </span>
+                                        <img src="img/product/bag.png" style="width:30px;">
+
+                                    </a>
+                                </div>
+                            </form>
                             <!-- Single-pro-slider Small-photo end -->
                         </div>
                     </div>
@@ -194,7 +219,6 @@
             <!-- single-product-tab end -->
         </div>
     </div>
-    @endforeach
     @endif
 
     <section style="width:90%;text-align:left;margin:auto; background-color:#f2f3f8">
@@ -244,10 +268,101 @@
             });
         });
 
+        function substractQuantity() {
+            const current = parseInt(document.getElementById("quantity").value)
+            if (current > 1) {
+                document.getElementById("quantity").value = current - 1
+            }
+
+
+        }
+
+        function addQuantity() {
+            const current = parseInt(document.getElementById("quantity").value)
+            document.getElementById("quantity").value = current + 1
+        }
+
+        function addProductBag() {
+            const form = new FormData(document.getElementById("product-form"))
+
+            let shop_id = function() {
+                const cat_id = form.get('cat_id')
+                return cat_id;
+            }
+            let is_variant = function() {
+                const cat_id = form.get('cat_id')
+                return cat_id;
+            }
+
+            let shop_category = JSON.parse(localStorage.getItem('shop_category')).filter(function(category) {
+                return category.id == shop_id();
+            });
+            let item = {
+                id: form.get('product_id'),
+                price: form.get('price'),
+                name: form.get('name'),
+                image_url: form.get('image_url') || null,
+                is_product_variant: form.get('is_product_variant') || false,
+                size: form.get('size') || null,
+                size_id: form.get('size_id') || null,
+                color: form.get('color') || null,
+                color_id: form.get('color_id') || null,
+                quantity: form.get('quantity') || null,
+                date: form.get('date') || null,
+                time: form.get('time') || null,
+                category: shop_category[0].name_en || null,
+            }
+
+            let product = new CartItem(item)
+
+            let cart = CartSerializer(getCartLocal());
+
+            if (cart.cart_items.length > 0) {
+                if (product.category == "Fine Dining") {
+                    let flag = false;
+                    for (i = 0; i < cart.cart_items.length; i++) {
+                        if (cart.cart_items[i].id == product.id && product.size_id == cart.cart_items[i].size_id) {
+                            cart.cart_items[i].quantity = parseInt(cart.cart_items[i].quantity) + parseInt(product.quantity);
+                            flag = true;
+                        }
+                    }
+                    if (flag) {
+                        storeCartLocal(JsonCartSerializer(cart));
+                        return;
+
+                    } else {
+                        cart.addItem(product);
+                    }
+
+                }
+            } else {
+                cart.addItem(product);
+            }
+
+            storeCartLocal(JsonCartSerializer(cart));
+
+        }
+
+
+
+        function changePriceOnSize(sizes) {
+            const size = document.getElementById("sizes").value
+            const form = new FormData(document.getElementById("product-form"))
+            var currentSize = sizes.filter(function(sz) {
+                return sz.id == size;
+            });
+            if (currentSize[0]) {
+                updateInputField('price', currentSize[0].price)
+                updateInputField('size', currentSize[0].value)
+                updateInputField('size_id', currentSize[0].id)
+                document.getElementById("pro-price").innerHTML = 'AED ' +
+                    currentSize[0].price;
+
+            }
+        }
     </script>
     <script src="js/prodjs.js"></script>
     <div>
         @include('footer')
     </div>
     @endsection
-

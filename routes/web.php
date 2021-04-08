@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
-   
+
 
 use App\Http\Controllers\CookieController;
 use App\Http\Middleware\AuthTest;
-  
+
 use App\Http\Controllers\WebsiteHomeController;
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +84,7 @@ Route::get('/cookie/set', [CookieController::class, 'setCookie']);
 Route::get('/cookie/get', [CookieController::class, 'getCookie']);
 Route::get('/cookie/remove', [CookieController::class, 'removeCookie']);
 Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
+Route::get('/shop-category',  [WebsiteHomeController::class, 'shopCategory']);
 Route::get('/cart', function () {
     return view('/cart');
 });

@@ -72,9 +72,25 @@ class WebsiteHomeController extends Controller
                 products.price as price,
                 products.desc_en as desc_en,
                 products.desc_ar as desc_ar,
-                images.url as image'))
+                images.url as image,
+                shop_id as shop_id'))
             ->leftjoin('images', 'images.product_id', '=', 'products.id')
             ->where('products.id', '=', $id)
+            ->get();
+    }
+
+
+    private function getProductSize($id)
+    {
+        return  DB::table('sizes')
+            ->where('product_id', '=', $id)
+            ->get();
+    }
+
+    private function getShopCategory()
+    {
+        return  DB::table('cats')
+            ->select('id', 'name_en')
             ->get();
     }
 
@@ -171,22 +187,25 @@ class WebsiteHomeController extends Controller
         $products = $popular_products->concat($topsale_products);
         return $products;
     }
-    private function getshopname($id)
+    private function getShop($id)
     {
-        return  DB::table('products')
-            ->select(DB::raw('shops.name_en as shopsname'))
-            ->leftjoin('shops', 'shops.id', '=', 'products.id')
-            ->where('products.id', '=', $id)
-            ->get();
+        return  DB::table('shops')
+            ->where('id', '=', $id)
+            ->get()->first();
     }
 
     public function product(Request $request, $id)
     {
-        $data['shopname'] = $this->getshopname($id);
-        $data['product'] = $this->getProduct($id);
+        $data['product'] = $this->getProduct($id)->first();
+        $data['shop'] = $this->getShop($data['product']->shop_id);
+        $data['sizes'] = $this->getProductSize($id);
         $data['addons'] = $this->getAddons($id);
         $data['trywith'] = $this->gettry($id);
-
         return view('/product')->with($data);
+    }
+
+    public function shopCategory(Request $request)
+    {
+        return response()->json(['shop_category' => $this->getShopCategory()]);
     }
 }

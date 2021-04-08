@@ -94,7 +94,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -126,145 +125,168 @@
                                     <th class="product-subtotal" colspan="2">Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="cart_item">
-                                    <td class="product-thumbnail">
-                                        <a href="#">
-                                            <img src="img/shop/shop_item_3.jpg" alt="">
-                                        </a>
-                                    </td>
-                                    <td class="product-name">
-                                        <a href="#" class="itemtitle">Gray Jacket</a>
-                                        <ul>
-                                            <li class="colorgrey">Size: M</li>
-                                            <li class="colorgrey">Color: White</li>
-                                        </ul>
-                                    </td>
-                                    <td class="product-price">
-                                        <span class="amount">SAR 1250.00</span>
-                                    </td>
-                                    <td class="product-quantity">
-                                        <div class="quantity buttons_added">
-                                            <input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
-                                            <div class="quantity-adjust">
-                                                <a href="#" class="plus">
-                                                    <i class="fa fa-angle-up"></i>
-                                                </a>
-                                                <a href="#" class="minus">
-                                                    <i class="fa fa-angle-down"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">
-                                        <span class="amount">SAR 1250.00</span>
-                                    </td>
-                                    <td class="product-remove">
-                                        <a href="#" class="remove" title="Remove this item">
-                                            <i class="ui-close"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tbody id="cart-item-view">
 
-                                <tr class="cart_item">
-                                    <td class="product-thumbnail">
-                                        <a href="#">
-                                            <img src="img/shop/shop_item_7.jpg" alt="">
-                                        </a>
-                                    </td>
-                                    <td class="product-name">
-                                        <a href="#" class="itemtitle">Hair Style</a>
-                                        <ul>
-                                            <li class="colorgrey">Booking: 4:30, THU</li>
-                                            <li class="colorgrey">25 March 2021</li>
-                                        </ul>
-                                    </td>
-                                    <td class="product-price">
-                                        <span class="amount">SAR 240.00</span>
-                                    </td>
-                                    <td class="product-quantity">
-                                        <div class="quantity buttons_added">
-                                            <span class="colorgrey" style="font-size:24px;">__ __</span>
-                                        </div>
-                    </div>
-                    </td>
-                    <td class="product-subtotal">
-                        <span class="amount">SAR 240.00</span>
-                    </td>
-                    <td class="product-remove">
-                        <a href="#" class="remove" title="Remove this item">
-                            <i class="ui-close"></i>
-                        </a>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
-                </div>
-
-                <div class="row mb-50">
-                    <div class="col-md-5 col-sm-12">
-
+                            </tbody>
+                        </table>
                     </div>
 
-                    <div class="col-md-7 col-sm-12">
-                        <div class="actions">
+                    <div class="row mb-50">
+                        <div class="col-md-5 col-sm-12">
 
-                            <input type="submit" name="update_cart" value="ADD ITEM" class="btn btn-lg btn-stroke additembtn">
+                        </div>
 
-                            <div class="wc-proceed-to-checkout checkoutbtn">
-                                <a href="checkout.html" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
+                        <div class="col-md-7 col-sm-12">
+                            <div class="actions">
+
+                                <input type="submit" name="update_cart" value="ADD ITEM" class="btn btn-lg btn-stroke additembtn">
+
+                                <div class="wc-proceed-to-checkout checkoutbtn">
+                                    <a href="checkout.html" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div> <!-- end col -->
-        </div> <!-- end row -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
 
-        <div class="row">
-            <div class="col-md-6 shipping-calculator-form">
+            <div class="row">
+                <div class="col-md-6 shipping-calculator-form">
 
-            </div> <!-- end col shipping calculator -->
+                </div> <!-- end col shipping calculator -->
 
-            <div class="col-md-6">
-                <div class="cart_totals">
-                    <h2 class="heading relative bottom-line full-grey uppercase mb-30">BAG TOTAL</h2>
+                <div class="col-md-6">
+                    <div class="cart_totals">
+                        <h2 class="heading relative bottom-line full-grey uppercase mb-30">BAG TOTAL</h2>
 
-                    <table class="table shop_table">
-                        <tbody>
-                            <tr class="cart-subtotal">
-                                <th class="totalcolorblue"> Subtotal</th>
-                                <td>
-                                    <span class="amount">SAR 1490.00</span>
-                                </td>
-                            </tr>
-                            <tr class="shipping">
-                                <th class="totalcolorblue">Shipping</th>
-                                <td>
-                                    <span class="amount">Free Shipping</span>
-                                </td>
-                            </tr>
-                            <tr class="order-total">
-                                <th class="totalcolorblue">Order Total</th>
-                                <td>
-                                    <strong><span class="amount totalamount">SAR 1490.00</span></strong>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table shop_table">
+                            <tbody>
+                                <tr class="cart-subtotal">
+                                    <th class="totalcolorblue"> Subtotal</th>
+                                    <td>
+                                        <span class="amount" id="sub_total"></span>
+                                    </td>
+                                </tr>
+                                <tr class="shipping">
+                                    <th class="totalcolorblue">Shipping</th>
+                                    <td>
+                                        <span class="amount">Free Shipping</span>
+                                    </td>
+                                </tr>
+                                <tr class="order-total">
+                                    <th class="totalcolorblue">Order Total</th>
+                                    <td>
+                                        <strong><span class="amount totalamount" id="order_total"></span></strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                </div>
-            </div> <!-- end col cart totals -->
+                    </div>
+                </div> <!-- end col cart totals -->
 
-        </div> <!-- end row -->
-
-
-</div> <!-- end container -->
-</section> <!-- end cart -->
+            </div> <!-- end row -->
 
 
-<div style="border: 2px solid #b2bad4">
-    @include('footer')
-</div>
-@endsection
+        </div> <!-- end container -->
+    </section> <!-- end cart -->
 
+    <script>
+        function renderCartList(cart) {
+            var template = '';
+            base_url = window.location.origin
+            if (cart.cart_items.length > 0) {
+                cart.cart_items.forEach(item => {
+                    template = template +
+                        "<tr class='cart_item' >" +
+                        "<td class='product-thumbnail'>" +
+                        "<a href='#'>" +
+                        "<img src= '" + base_url + "/storage/products/" + item.image_url + "' alt=''>" +
+                        "</a>" +
+                        "</td>" +
+                        "<td class='product-name'>" +
+                        "<a href='#' class='itemtitle'>" + item.name + "</a>" +
+                        "<ul>" +
+                        renderSubCategory(item) +
+                        "</ul>" +
+                        "</td>" +
+                        "<td class='product-price'>" +
+                        "<span class='amount'>SAR " + item.price + "</span>" +
+                        "</td>" +
+                        "<td class='product-quantity'>" +
+                        "<div class='quantity buttons_added'>" +
+                        "<input type='number' step='1' min='0' value=" + item.quantity + " title='Qty' class='input-text qty text'>" +
+                        "<div class='quantity-adjust'>" +
+                        "<a id='plus" + item.id + "' class='plus cart-plus-button'>" +
+                        "<i class='fa fa-angle-up'></i>" +
+                        "</a>" +
+                        "<a id='minus" + item.id + "' class='minus cart-minus-button'>" +
+                        "<i class='fa fa-angle-down'></i>" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td class='product-subtotal'>" +
+                        "<span class='amount' id= 'cart-item-price" + item.id + "'>SAR " + item.total_price() + "</span>" +
+                        "</td>" +
+                        "<td class='product-remove'>" +
+                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + ":" + item.size_id + "'>" +
+                        "<i class='ui-close'></i>" +
+                        "</a>" +
+                        "</td>" +
+                        "</tr>"
+                });
+            }
+            return template
+        }
+        $(document).ready(function() {
+            var cart = CartSerializer(getCartLocal())
+            document.getElementById('cart-item-view').innerHTML = renderCartList(cart)
+            document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+            document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
+            $(".cart-plus-button").on('click', function(event) {
+                let id = $(this).attr("id").slice(4);
+                cart.cart_items.find(item => item.id === id).addQuantity();
+                console.log(cart)
+                document.getElementById('cart-item-price' + id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === id).total_price();
+                document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+                document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
+            });
+            $(".cart-minus-button").on('click', function(event) {
+                let id = $(this).attr("id").slice(5);
+                cart.cart_items.find(item => item.id === id).substractQuantity();
+                document.getElementById('cart-item-price' + id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === id).total_price();
+                document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+                document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
+            });
+
+            $(".product-remove-button").on('click', function(event) {
+                let id = $(this).attr("id").slice(16);
+                cart.removeItem(id);
+                document.getElementById('cart-item-view').innerHTML = renderCartList(cart)
+                document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal();
+                document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal();
+            });
+
+        });
+
+
+
+        function renderSubCategory(item) {
+            let template = ''
+            if ((item.category === 'Fine Dining') && (item.is_product_variant === 'true')) {
+                template = "<li class='colorgrey'>" + item.size + "</li>"
+
+            } else {
+
+            }
+
+            return template;
+        }
+    </script>
+
+    <div style="border: 2px solid #b2bad4">
+        @include('footer')
+    </div>
+    @endsection

@@ -102,9 +102,11 @@
         .slick-track {
             margin: 20px 0;
         }
-        .menufont{
-            font-weight:100;
+
+        .menufont {
+            font-weight: 100;
         }
+
         .bottomtitleheader {
             text-transform: uppercase !important;
             font-size: 12px !important;
@@ -133,9 +135,11 @@
             color: #001b71 !important;
             font-size: 12px !important;
         }
-        .nav-right li { 
-            padding-right: 5px; 
+
+        .nav-right li {
+            padding-right: 5px;
         }
+
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -276,65 +280,81 @@
                                             </div>
                                         </div>
                                         <div class="nav-cart-container">
-                                             <div class="nav-cart-container">
+                                            <<<<<<< Updated upstream <div class="nav-cart-container">
+                                                =======
+                                                <div class="nav-cart-container">
+                                                    >>>>>>> Stashed changes
 
-                                                <div class="nav-cart-items">
+                                                    <div class="nav-cart-items">
 
-                                                    <div class="nav-cart-item clearfix">
-                                                        <div class="nav-cart-img">
-                                                            <a href="#">
-                                                                <img src="img/shop/shop_item_1.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="nav-cart-title">
-                                                            <a href="#">
-                                                                Ladies Bag
-                                                            </a>
-                                                            <div class="nav-cart-price">
-                                                                <span>1 x</span>
-                                                                <span>1250.00</span>
+                                                        <div class="nav-cart-item clearfix">
+                                                            <div class="nav-cart-img">
+                                                                <a href="#">
+                                                                    <img src="img/shop/shop_item_1.jpg" alt="">
+                                                                </a>
                                                             </div>
-                                                        </div>
-                                                        <div class="nav-cart-remove">
-                                                            <a href="#" class="remove"><i class="ui-close"></i></a>
-                                                             
-                                                            <div class="nav-cart-items">
+                                                            <div class="nav-cart-title">
+                                                                <a href="#">
+                                                                    Ladies Bag
+                                                                </a>
+                                                                <div class="nav-cart-price">
+                                                                    <span>1 x</span>
+                                                                    <span>1250.00</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="nav-cart-remove">
+                                                                <a href="#" class="remove"><i class="ui-close"></i></a>
 
-                                                                <div class="nav-cart-item clearfix">
-                                                                    <div class="nav-cart-img">
-                                                                        <a href="#">
-                                                                            <img src="img/shop/shop_item_1.jpg" alt="">
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="nav-cart-title">
-                                                                        <a href="#">
-                                                                            Ladies Bag
-                                                                        </a>
-                                                                        <div class="nav-cart-price">
-                                                                            <span>1 x</span>
-                                                                            <span>1250.00</span>
-                                                                          
-                                                                        </div>
-                                                                    </div>
+                                                                <div class="nav-cart-items">
 
                                                                     <div class="nav-cart-item clearfix">
                                                                         <div class="nav-cart-img">
                                                                             <a href="#">
-                                                                                <img src="img/shop/shop_item_2.jpg" alt="">
+                                                                                <img src="img/shop/shop_item_1.jpg" alt="">
                                                                             </a>
                                                                         </div>
                                                                         <div class="nav-cart-title">
                                                                             <a href="#">
-                                                                                Sequin Suit longer title
+                                                                                Ladies Bag
                                                                             </a>
                                                                             <div class="nav-cart-price">
                                                                                 <span>1 x</span>
                                                                                 <span>1250.00</span>
+
                                                                             </div>
                                                                         </div>
-                                                                        <div class="nav-cart-remove">
-                                                                            <a href="#" class="remove"><i class="ui-close"></i></a>
+
+                                                                        <div class="nav-cart-item clearfix">
+                                                                            <div class="nav-cart-img">
+                                                                                <a href="#">
+                                                                                    <img src="img/shop/shop_item_2.jpg" alt="">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="nav-cart-title">
+                                                                                <a href="#">
+                                                                                    Sequin Suit longer title
+                                                                                </a>
+                                                                                <div class="nav-cart-price">
+                                                                                    <span>1 x</span>
+                                                                                    <span>1250.00</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="nav-cart-remove">
+                                                                                <a href="#" class="remove"><i class="ui-close"></i></a>
+                                                                            </div>
                                                                         </div>
+
+                                                                    </div>
+                                                                    <div class="nav-cart-summary">
+                                                                        <span>Cart Subtotal</span>
+                                                                        <span class="total-price">$1799.00</span>
+                                                                    </div>
+
+                                                                    <div class="nav-cart-actions mt-20">
+                                                                        <a href="{{url('/cart')}}" class="btn btn-md btn-dark"><span>View
+                                                                                Cart</span></a>
+                                                                        <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
+                                                                                Checkout</span></a>
                                                                     </div>
 
                                                                 </div>
@@ -343,28 +363,21 @@
                                                                     <span class="total-price">$1799.00</span>
                                                                 </div>
 
-                                                                <div class="nav-cart-actions mt-20">
-                                                                    <a href="{{url('/cart')}}" class="btn btn-md btn-dark"><span>View
-                                                                            Cart</span></a>
-                                                                    <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
-                                                                            Checkout</span></a>
+
+                                                            </div>
+                                                            <div class="nav-cart-summary">
+                                                                <span>Cart Subtotal</span>
+                                                                <span class="total-price">$1799.00</span>
                                                             </div>
 
-                                                           
-                                                        </div>
-                                                        <div class="nav-cart-summary">
-                                                            <span>Cart Subtotal</span>
-                                                            <span class="total-price">$1799.00</span>
+                                                            <div class="nav-cart-actions mt-20">
+                                                                <a href="/cart" class="btn btn-md btn-dark"><span>View
+                                                                        Cart</span></a>
+                                                                <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
+                                                                        Checkout</span></a>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="nav-cart-actions mt-20">
-                                                            <a href="/cart" class="btn btn-md btn-dark"><span>View
-                                                                    Cart</span></a>
-                                                            <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
-                                                                    Checkout</span></a>
-                                                        </div>
-                                                    </div>
-                                                     
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
@@ -379,7 +392,7 @@
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
                                             <img class="imgicon" src="img/nav/lang.png">
-                                                
+
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
@@ -567,85 +580,232 @@
         }
 
 
-        // // cart manager
 
+
+        /**
+         * Cart Manager start for local storage
+         */
+
+        //cart
         function Cart() {
-            this.cart_subtotal = 0;
-            this.order_total = 0;
             this.cart_items = [];
+
+        }
+        Cart.prototype.subTotal = function() {
+            if (this.cart_items.length > 0) {
+                let total = 0;
+                this.cart_items.forEach(item => {
+                    total = total + (item.price * item.quantity)
+                });
+                return total;
+
+            } else {
+                return 0;
+            }
+
+        }
+        Cart.prototype.orderTotal = function() {
+            if (this.cart_items.length > 0) {
+                let total = 0;
+                this.cart_items.forEach(item => {
+                    total = total + (item.price * item.quantity)
+                });
+                return total;
+            } else {
+                return 0;
+            }
 
         }
 
         Cart.prototype.addItem = function(cartItem) {
+
             this.cart_items.push(cartItem)
         }
-        Cart.prototype.removeItem = function(cartItem) {
-            this.cart_items.filter(item => item.id != cartItem.id);
+
+        // For removing cart item
+        Cart.prototype.removeItem = function(id) {
+            pro_id = parseInt(id.split(":")[0])
+            size_id = parseInt(id.split(":")[1])
+            let i = this.cart_items.length;
+            console.log(pro_id)
+            while (i--) {
+                if (this.cart_items[i] && (pro_id > 0 && this.cart_items[i]['id'] === pro_id)) {
+                    if (this.cart_items[i].is_product_variant === "true") {
+
+
+                    } else {
+                        this.cart_items.splice(i, 1);
+                    }
+                    console.log('hi')
+
+                }
+            }
+            return this.cart_items;
         }
 
-        Cart.prototype.viewCartItems = function() {
-            console.log(this.cart_items)
+        Cart.prototype.getCartItems = function() {
             return this.cart_items
         }
 
-        // Cart item start here
-        function CartItem(id, price, quantity, name = null, size = null, color = null) {
-            this.id = id;
-            this.price = price;
-            this.name = name;
-            this.size = size;
-            this.color = color;
-            this.quantity = quantity;
+        // Cart item 
+        // in case of delicay size referring to product variant
+        // in case of fashion it make sense
+        // In product variant case the price will be variant price
+        // category -> delicacy, beauty, fashion
+        // date and time for only booking
+        function CartItem(item) {
+            this.id = item.id;
+            this.price = item.price
+            this.name = item.name;
+            this.is_product_variant = item.is_product_variant || false;
+            this.size = item.size || null;
+            this.size_id = item.size_id || null;
+            this.color = item.color || null;
+            this.color_id = item.color_id || null;
+            this.quantity = item.quantity || null;
+            this.date = item.date || null;
+            this.time = item.time || null;
+            this.category = item.category || null;
+            this.image_url = item.image_url;
             this.total_price = function() {
                 return this.quantity * this.price;
             }
         }
 
         CartItem.prototype.addQuantity = function() {
-            this.quantity = this.quantity + 1
-            console.log(this.quantity)
+            this.quantity = parseInt(this.quantity) + 1
         }
         CartItem.prototype.substractQuantity = function() {
-            this.quantity = this.quantity - 1
-            console.log(this.quantity)
+            this.quantity = parseInt(this.quantity) - 1
         }
-        // cart item end here
+        /**
+         * Cart manager end here
+         */
 
+        function JsonCartSerializer(cart) {
+            let cart_items = []
+            cart.cart_items.forEach(element => {
+                let item = {}
+                item['id'] = element.id
+                item['price'] = element.price
+                item['name'] = element.name
+                item['size'] = element.size
+                item['size_id'] = element.size_id
+                item['is_product_variant'] = element.is_product_variant
+                item['color'] = element.color
+                item['quantity'] = element.quantity
+                item['category'] = element.category
+                item['image_url'] = element.image_url
+                cart_items.push(item)
+            });
+            return {
+                "cart_subtotal": cart.cart_subtotal,
+                "order_total": cart.order_total,
+                "cart_items": cart_items
+            }
+
+        }
+
+        function CartSerializer(data) {
+            let cart = new Cart()
+            cart.cart_subtotal = data.cart_subtotal;
+            cart.order_total = data.order_total;
+            if (data.cart_items.length > 0) {
+                data.cart_items.forEach(element => {
+                    let item = {
+                        id: element.id,
+                        price: element.price,
+                        name: element.name,
+                        is_product_variant: element.is_product_variant,
+                        size: element.size || null,
+                        size_id: element.size_id || null,
+                        color: element.color || null,
+                        color_id: element.color_id || null,
+                        quantity: element.quantity || null,
+                        date: element.date || null,
+                        time: element.time || null,
+                        image_url: element.image_url || null,
+                        category: element.category || null,
+                    }
+
+                    cart.addItem(new CartItem(item))
+                });
+            }
+
+            return cart;
+        }
+
+        <<
+        << << < Updated upstream
         // cart manager end here
-          $(".trackorderslider").slick({
-        dots: false
-        , infinite: true
-        , slidesToShow: 8
-        , slidesToScroll: 1
-        , autoplay: false
-        , arrows: true
-        , autoplaySpeed: 10000
-        , responsive: [{
-                breakpoint: 1024
-                , settings: {
-                    slidesToShow: 3
-                    , slidesToScroll: 3
-                    , infinite: true
-                    , dots: true
+        $(".trackorderslider").slick({
+            dots: false,
+            infinite: true,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }
+
+            ]
+        }); ===
+        === =
+        //storing data
+        function storeCartLocal(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart))
+        }
+        // getting data
+        function getCartLocal() {
+            if (JSON.parse(localStorage.getItem('cart'))) {
+                return JSON.parse(localStorage.getItem('cart'))
+            } else {
+                return {
+                    cart_subtotal: 0,
+                    order_total: 0,
+                    cart_items: []
                 }
             }
-            , {
-                breakpoint: 600
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+
+        }
+
+        $(document).ready(function() {
+            let cart = new Cart()
+            $.ajax({
+                type: 'GET',
+                url: 'http://127.0.0.1:8000/shop-category',
+                dataType: 'JSON',
+                success: function(data) {
+                    localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
-            }
-            , {
-                breakpoint: 480
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
-                }
-            }
-  
-        ]
-    });
+            });
+        });
+
+        // for updating input fields by id
+        function updateInputField(id, value) {
+            document.getElementById(id).value = value;
+        } >>>
+        >>> > Stashed changes
     </script>
 </body>
 
