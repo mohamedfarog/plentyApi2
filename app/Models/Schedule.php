@@ -19,7 +19,7 @@ class Schedule extends Model
         $date = Carbon::today()->format('Y-m-d');
         $sched = Schedule::where('day', $day)->first();
         if ($sched) {
-            return $sched;
+
             if($sched->opening != null && $sched->closing != null){
                 $from = explode(":", $sched->opening);
                 $to = explode(":", $sched->closing);
