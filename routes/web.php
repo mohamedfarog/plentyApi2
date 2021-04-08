@@ -90,3 +90,7 @@ Route::get('/cart', function () {
 Route::get('/trackorder', function () {
     return view('/trackorder');
 });
+
+Route::get('/checkout', function () {
+    return view('/checkout');
+});

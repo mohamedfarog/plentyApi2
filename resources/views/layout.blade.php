@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="css/material-design-iconic-font.css" defer>
     <!-- All common css of theme -->
     <link rel="stylesheet" href="css/default.css" defer>
-
+    <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <!-- shortcode css -->
     <link rel="stylesheet" href="css/shortcode.css" defer>
     <link rel="stylesheet" href="css/shortcode.css" defer>
@@ -70,6 +70,7 @@
     <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <style type="text/css">
         .slick-slide {
             margin: 0px 20px;
@@ -101,7 +102,9 @@
         .slick-track {
             margin: 20px 0;
         }
-
+        .menufont{
+            font-weight:100;
+        }
         .bottomtitleheader {
             text-transform: uppercase !important;
             font-size: 12px !important;
@@ -130,7 +133,9 @@
             color: #001b71 !important;
             font-size: 12px !important;
         }
-
+        .nav-right li { 
+            padding-right: 5px; 
+        }
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -271,7 +276,7 @@
                                             </div>
                                         </div>
                                         <div class="nav-cart-container">
-                                            <<<<<<< HEAD <div class="nav-cart-container">
+                                             <div class="nav-cart-container">
 
                                                 <div class="nav-cart-items">
 
@@ -292,7 +297,7 @@
                                                         </div>
                                                         <div class="nav-cart-remove">
                                                             <a href="#" class="remove"><i class="ui-close"></i></a>
-                                                            =======
+                                                             
                                                             <div class="nav-cart-items">
 
                                                                 <div class="nav-cart-item clearfix">
@@ -308,7 +313,7 @@
                                                                         <div class="nav-cart-price">
                                                                             <span>1 x</span>
                                                                             <span>1250.00</span>
-                                                                            >>>>>>> ea0fa3c9486b6c32e7ccee521d3cb2065856b7f6
+                                                                          
                                                                         </div>
                                                                     </div>
 
@@ -338,14 +343,14 @@
                                                                     <span class="total-price">$1799.00</span>
                                                                 </div>
 
-                                                                <<<<<<< HEAD <div class="nav-cart-actions mt-20">
+                                                                <div class="nav-cart-actions mt-20">
                                                                     <a href="{{url('/cart')}}" class="btn btn-md btn-dark"><span>View
                                                                             Cart</span></a>
                                                                     <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to
                                                                             Checkout</span></a>
                                                             </div>
 
-                                                            =======
+                                                           
                                                         </div>
                                                         <div class="nav-cart-summary">
                                                             <span>Cart Subtotal</span>
@@ -359,7 +364,7 @@
                                                                     Checkout</span></a>
                                                         </div>
                                                     </div>
-                                                    >>>>>>> ea0fa3c9486b6c32e7ccee521d3cb2065856b7f6
+                                                     
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
@@ -374,11 +379,11 @@
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
                                             <img class="imgicon" src="img/nav/lang.png">
-
+                                                
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="menufont">{{ __('website.currentlanguage') }}</a>
+                                        <a href="#" class="menufont">: {{ __('website.currentlanguage') }}</a>
 
                                         <ul class="dropdown-menu">
 
