@@ -9,6 +9,6 @@ class Eventcat extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'event_id', 'image',
+        'name_en', 'name_ar', 'image', 'event_id',
     ];
 }

@@ -47,14 +47,17 @@ class EventcatController extends Controller
                     return response()->json(['success' => !!$eventcat, 'message' => $msg]);
                     break;
                 case 'update':
-                    if (isset($request->name)) {
-                        $eventcat->name = $request->name;
+                    if (isset($request->name_en)) {
+                        $eventcat->name_en = $request->name_en;
                     }
-                    if (isset($request->event_id)) {
-                        $eventcat->event_id = $request->event_id;
+                    if (isset($request->name_ar)) {
+                        $eventcat->name_ar = $request->name_ar;
                     }
                     if (isset($request->image)) {
                         $eventcat->image = $request->image;
+                    }
+                    if (isset($request->event_id)) {
+                        $eventcat->event_id = $request->event_id;
                     }
                     $msg = 'Eventcat has been updated';
 
@@ -64,14 +67,17 @@ class EventcatController extends Controller
             }
         } else {
             $data = array();
-            if (isset($request->name)) {
-                $data['name'] = $request->name;
+            if (isset($request->name_en)) {
+                $data['name_en'] = $request->name_en;
             }
-            if (isset($request->event_id)) {
-                $data['event_id'] = $request->event_id;
+            if (isset($request->name_ar)) {
+                $data['name_ar'] = $request->name_ar;
             }
             if (isset($request->image)) {
                 $data['image'] = $request->image;
+            }
+            if (isset($request->event_id)) {
+                $data['event_id'] = $request->event_id;
             }
             $eventcat = Eventcat::create($data);
             $msg = 'Eventcat has been added';
