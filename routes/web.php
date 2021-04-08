@@ -87,3 +87,6 @@ Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
 Route::get('/cart', function () {
     return view('/cart');
 });
+Route::get('/trackorder', function () {
+    return view('/trackorder');
+});
