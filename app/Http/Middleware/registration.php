@@ -38,7 +38,16 @@ class registration
                 }
             }
         } else {
-            return response()->json(['error' => 'Unauthorized client!'], 401);
+            if ($request->header('DashRegister') != null) {
+                if (in_array($request->header('DashRegister'), ['NgBeW4dQFsiGiTiDUOlcam6H', 'JEvmfd9hfiURvdqXMYE39r4E', 'eT7JV88G9El3888Eu6gnoGFB'])) {
+                    return $next($request);
+                } else {
+                    return response()->json(['error' => 'Unauthorized client!'], 401);
+                }
+            } else {
+
+                return response()->json(['error' => 'Unauthorized client!'], 401);
+            }
         }
     }
 }
