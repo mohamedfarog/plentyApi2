@@ -34,16 +34,6 @@ class Schedule extends Model
     
                         // $p = ($fromhour < 10 && $fromhour > 0 ? "0" . $fromhour : $fromhour) . ':' . $fromminute;
                         $p =  $fromhour . ':' . $fromminute;
-
-                        $fromminute += $duration;
-                        while ($fromminute >= 60) {
-                            $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
-                            $fromhour++;
-                        }
-                        if ($fromhour >= 24) {
-                            $fromhour = "00";
-                        }
-
                         if($fromhour<12){
                             $sched= 'M';
                          }
@@ -54,6 +44,16 @@ class Schedule extends Model
                              $sched='E';
                          }
 
+                        $fromminute += $duration;
+                        while ($fromminute >= 60) {
+                            $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
+                            $fromhour++;
+                        }
+                        if ($fromhour >= 24) {
+                            $fromhour = "00";
+                        }
+
+                     
 
                         $newarr = array();
                         $newarr['timeslot'] = $p;
@@ -65,15 +65,6 @@ class Schedule extends Model
                     while ($fromhour < $tohour || ($fromhour == $tohour && $fromminute <= $tominute)) {
                         // $p = ($fromhour < 10 && $fromhour > 0 ? "0" . $fromhour : $fromhour) . ':' . $fromminute;
                         $p =  $fromhour . ':' . $fromminute;
-
-                        $fromminute += $duration;
-                        if ($fromminute >= 60) {
-                            $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
-                            $fromhour++;
-                        }
-                        if ($fromhour >= 24) {
-                            $fromhour = "00";
-                        }
                         if($fromhour<12){
                             $sched= 'M';
                          }
@@ -83,6 +74,15 @@ class Schedule extends Model
                          else{
                              $sched='E';
                          }
+                        $fromminute += $duration;
+                        if ($fromminute >= 60) {
+                            $fromminute = ($fromminute - 60) == 0 ? '00' : ($fromminute - 60 < 10 ? "0" . ($fromminute - 60) : $fromminute - 60);
+                            $fromhour++;
+                        }
+                        if ($fromhour >= 24) {
+                            $fromhour = "00";
+                        }
+                       
 
                         $newarr = array();
                         $newarr['timeslot'] = $p;
