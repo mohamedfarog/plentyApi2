@@ -37,7 +37,7 @@ class Schedule extends Model
                         if($fromhour<12){
                             $sched= 'M';
                          }
-                         else if($fromhour<=17 && $fromhour>12){
+                         else if($fromhour<=17 && $fromhour>=12){
                             $sched= 'A';
                          }
                          else{
@@ -68,7 +68,7 @@ class Schedule extends Model
                         if($fromhour<12){
                             $sched= 'M';
                          }
-                         else if($fromhour<=17 && $fromhour>12){
+                         else if($fromhour<=17 && $fromhour>=12){
                             $sched= 'A';
                          }
                          else{
