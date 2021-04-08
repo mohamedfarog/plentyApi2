@@ -280,10 +280,10 @@
                                             </div>
                                         </div>
                                         <div class="nav-cart-container">
-                                            <<<<<<< Updated upstream <div class="nav-cart-container">
-                                                =======
+                                            <div class="nav-cart-container">
+                        
                                                 <div class="nav-cart-container">
-                                                    >>>>>>> Stashed changes
+                                                 
 
                                                     <div class="nav-cart-items">
 
@@ -734,9 +734,7 @@
 
             return cart;
         }
-
-        <<
-        << << < Updated upstream
+ 
         // cart manager end here
         $(".trackorderslider").slick({
             dots: false,
@@ -769,8 +767,7 @@
                 }
 
             ]
-        }); ===
-        === =
+        }); 
         //storing data
         function storeCartLocal(cart) {
             localStorage.setItem('cart', JSON.stringify(cart))
@@ -804,8 +801,7 @@
         // for updating input fields by id
         function updateInputField(id, value) {
             document.getElementById(id).value = value;
-        } >>>
-        >>> > Stashed changes
+        }  
     </script>
 </body>
 
