@@ -124,7 +124,7 @@ class OrderController extends Controller
                 //TODO POINT DEDUCTION (CHECK AGAIN)
                 $user->points= $user->points-$request->points;
             }
-            if (isset($request->points)) {
+            if (isset($request->wallet)) {
                 //TODO WALLET DEDUCTION (CHECK AGAIN)
                 $user->wallet= $user->wallet  -$request->wallet;
             }
