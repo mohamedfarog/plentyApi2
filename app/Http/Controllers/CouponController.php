@@ -14,8 +14,14 @@ class CouponController extends Controller
     public function index(Request $request)
     {
         $today = Carbon::now();
+        if(isset($request->code)){
+            $couponexist= Coupon::where('code',strtoupper($request->code))->first();
 
-        $couponexist= Coupon::where('code',strtoupper($request->code))->first();
+        }
+        else{
+            return response()->json(['Response'=>false,   'Coupon'=>'Coupon Code is required']);
+
+        }
         if(!$couponexist){
             return response()->json(['Response'=>false,   'Coupon'=>'Coupon Code does not exist']);
 
@@ -51,17 +57,14 @@ class CouponController extends Controller
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'create':
-                    $request->validate([
-                        "value" => "required",
-                        "code" => ["required", Rule::unique('coupons')]
-                    ]);
+               
                     $coupon = new Coupon();
                     
 
 
                     if (Coupon::where('code', '=', strtoupper($request->code))->first()) {
 
-                        return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+                        return response()->json(["error" => 'The coupon already exists',  "status_code" => 0]);
                     } else {
                         $coupon->code = strtoupper($request->code);
                         $coupon->value = $request->value;
@@ -87,7 +90,7 @@ class CouponController extends Controller
 
                     $coupon->save();
 
-                    return response()->json(['error' => "Coupons added"]);
+                    return response()->json(['success' => "Coupons added"]);
                     break;
 
                 case "activate":

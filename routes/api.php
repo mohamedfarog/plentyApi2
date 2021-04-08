@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('products', ProductController::class);
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
+    Route::post('wallet/topup',[UserController::class,'topUpWallet']);
 }); 
 
 Route::get('generate', function (Request $request) {

@@ -71,6 +71,10 @@ class OrderController extends Controller
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
                     }
+                    if (isset($request->coupon_value)) {
+                        $order->coupon_value = $request->coupon_value;
+                    }
+        
                     if (isset($request->payment_method)) {
                         $order->payment_method = $request->payment_method;
                     }
@@ -86,6 +90,7 @@ class OrderController extends Controller
                     if (isset($request->user_id)) {
                         $order->user_id = $request->user_id;
                     }
+                    
                     $msg = 'Order has been updated';
 
                     $order->save();
@@ -115,11 +120,22 @@ class OrderController extends Controller
             if (isset($request->payment_method)) {
                 $data['payment_method'] = $request->payment_method;
             }
+            if (isset($request->points)) {
+                //TODO POINT DEDUCTION (CHECK AGAIN)
+                $user->points= $user->points-$request->points;
+            }
+            if (isset($request->wallet)) {
+                //TODO WALLET DEDUCTION (CHECK AGAIN)
+                $user->wallet= $user->wallet  -$request->wallet;
+            }
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
             }
             if (isset($request->delivery_charge)) {
                 $data['delivery_charge'] = $request->delivery_charge;
+            }
+            if (isset($request->coupon_value)) {
+                $data['coupon_value'] = $request->coupon_value;
             }
 
 

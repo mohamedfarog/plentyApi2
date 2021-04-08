@@ -9,7 +9,7 @@ class Coupon extends Model
 {   
     public function shop()
     {
-        return $this->hasOne(Shop::class);
+        return $this->hasOne(Shop::class,'id','shop_id');
     }
 
 
