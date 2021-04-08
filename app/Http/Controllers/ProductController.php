@@ -26,10 +26,10 @@ class ProductController extends Controller
         switch ($user->typeofuser) {
             case 'S':
                 $perpage = 15;
-                if(isset($request->perpage)){
+                if (isset($request->perpage)) {
                     $perpage = $request->perpage;
                 }
-                if(isset($request->all)){
+                if (isset($request->all)) {
                     return Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->all();
                 }
                 return Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
@@ -170,7 +170,9 @@ class ProductController extends Controller
                             $arr['others'] = $size['others'];
                             $arr['price'] = $size['price'];
                             $arr['stocks'] = $size['stocks'];
-                            $arr['image'] = $helper->store($request->image);
+                            if ($size['image'] != null) {
+                                $arr['image'] = $helper->store($size['image']);
+                            }
 
                             $sizes = Size::create($arr);
                         }
@@ -212,17 +214,17 @@ class ProductController extends Controller
                             $arr['product_id'] = $product->id;
                             $arr['url'] = $helper->store($image['img']);
 
-                        
+
                             $sizes = Image::create($arr);
-                    // return response()->json(['Sizes' => !!$sizes , 'message' => $msg, 'Size'=>$sizes]);
+                            // return response()->json(['Sizes' => !!$sizes , 'message' => $msg, 'Size'=>$sizes]);
 
                         }
                     }
-                    
-                    $product = Product::with(['addons', 'sizes','colors','designer','images'])->find($product->id);
+
+                    $product = Product::with(['addons', 'sizes', 'colors', 'designer', 'images'])->find($product->id);
 
                     $msg = 'Product has been added';
-                    return response()->json(['success' => !!$product, 'message' => $msg, 'product'=>$product]);
+                    return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
                 }
                 break;
 
