@@ -210,7 +210,9 @@ Route::get('test', function (Request $request) {
 
      
     }
-
+    if(isset($request->generattime)){
+        return (new Schedule())->generateTimes();
+    }
 
     return  $user =User::with(['tier'])->where('id', $request->userid)->first();
     
