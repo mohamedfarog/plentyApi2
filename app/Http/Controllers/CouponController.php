@@ -80,7 +80,7 @@ class CouponController extends Controller
                     if (isset($request->expiry)) {
                         $coupon->expiry = $request->expiry;
                     }
-                    if (isset($request->percentage)) {
+                    if (isset($request->ispercentage)) {
                         $coupon->ispercentage = $request->ispercentage;
 
                     }
