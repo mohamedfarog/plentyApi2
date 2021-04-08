@@ -51,10 +51,7 @@ class CouponController extends Controller
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'create':
-                    $request->validate([
-                        "value" => "required",
-                        "code" => ["required", Rule::unique('coupons')]
-                    ]);
+               
                     $coupon = new Coupon();
                     
 
