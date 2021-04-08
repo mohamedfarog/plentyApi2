@@ -120,6 +120,10 @@ class OrderController extends Controller
             if (isset($request->payment_method)) {
                 $data['payment_method'] = $request->payment_method;
             }
+            if (isset($request->points)) {
+                //TODO POINT DEDUCTION (CHECK AGAIN)
+                $user->points= $user->points-$request->points;
+            }
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
             }
