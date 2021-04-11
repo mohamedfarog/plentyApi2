@@ -185,7 +185,7 @@ class UserController extends Controller
 
     public function myProfile(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'get':
@@ -203,6 +203,9 @@ class UserController extends Controller
                     }
                     if (isset($request->bday)) {
                         $user->bday = $request->bday;
+                    }
+                    if (isset($request->points)) {
+                        $user->points = $request->points;
                     }
                     // if(isset($request->contact)){
                     //     $user->contact = $request->contact;
