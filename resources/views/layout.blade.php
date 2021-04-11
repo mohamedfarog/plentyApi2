@@ -736,29 +736,18 @@
             }
 
             return cart;
-        } <<
-        <<
-        <<
-        < Updated upstream
+        }
 
-            ===
-            ===
-            =
-
-            >>>
-            >>>
-            >
-            Stashed changes
         // cart manager end here
         $(".trackorderslider").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 8,
-        slidesToScroll: 1,
-        autoplay: false,
-        arrows: true,
-        autoplaySpeed: 10000,
-        responsive: [{
+            dots: false,
+            infinite: true,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
                     breakpoint: 1024,
                     settings: {
                         slidesToShow: 3,
@@ -780,19 +769,9 @@
                     }
                 }
 
-            ] <<
-            <<
-            <<
-            < Updated upstream
-        }); ===
-        ===
-        =
+            ]
         });
 
-        >>>
-        >>>
-        >
-        Stashed changes
         //storing data
         function storeCartLocal(cart) {
             localStorage.setItem('cart', JSON.stringify(cart))
@@ -825,17 +804,8 @@
 
         // for updating input fields by id
         function updateInputField(id, value) {
-            document.getElementById(id).value = value; <<
-            <<
-            <<
-            < Updated upstream
-        } ===
-        ===
-        =
-        } >>>
-        >>>
-        >
-        Stashed changes
+            document.getElementById(id).value = value;
+        }
     </script>
 </body>
 
