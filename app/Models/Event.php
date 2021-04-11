@@ -27,15 +27,15 @@ class Event extends Model
 
     public function getImgurlAttribute()
     {
-        if ($this->img != null) {
-            return env('CATURL') . $this->img;
+        if ($this->image != null) {
+            return env('CATURL') . $this->image;
         }
     }
 
     public function getBgurlAttribute()
     {
-        if($this->backgroundvid != null){
-            return env('CATURL').$this->backgroundvid;
+        if($this->video != null){
+            return env('CATURL').$this->video;
         }
     }
 }
