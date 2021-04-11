@@ -15,8 +15,8 @@ class EventcatController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $shops = Shop::whereNotNull('eventcat_id', null)->get();
+  
+        $shops = Shop::with(['shop','style','designers'])->whereNotNull('eventcat_id', null)->get();
         if (isset($request->cat_id)) {
             $shops = Shop::where('eventcat_id', $request->cat_id)->get();
         }
