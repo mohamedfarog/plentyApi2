@@ -9,12 +9,13 @@ class Loyalty extends Model
 {
     use HasFactory;
 
-    public static function addPoints($user,$amount_due)
+    public static function addPoints($user,$amount_due,$wallet)
     {
         //Check the user's tier list and calculate points accordingly
         $tier= Tier::find($user->tier_id);
         $acquisition= $tier-> acquisition;
-        $pointsearned= $acquisition* $amount_due;
+        $amount= $amount_due+ $wallet;          //Including wallet amount for points calculation
+        $pointsearned= $acquisition* $amount;
         return $pointsearned;
 
 
