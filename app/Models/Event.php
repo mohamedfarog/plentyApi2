@@ -12,8 +12,30 @@ class Event extends Model
         'name_en', 'name_ar', 'desc_en', 'desc_ar', 'image', 'video', 'start', 'end',
     ];
 
+
+    protected $appends = [
+        'imgurl',
+        'bgurl'
+    ];
+
+    protected $hidden = ['created_at', 'updated_at', 'image', 'video'];
+
     public function categories()
     {
         return $this->hasMany(Eventcat::class);
+    }
+
+    public function getImgurlAttribute()
+    {
+        if ($this->img != null) {
+            return env('CATURL') . $this->img;
+        }
+    }
+
+    public function getBgurlAttribute()
+    {
+        if($this->backgroundvid != null){
+            return env('CATURL').$this->backgroundvid;
+        }
     }
 }
