@@ -18,7 +18,7 @@ class EventcatController extends Controller
   
         $shops = Shop::with(['style','designers'])->whereNotNull('eventcat_id', null)->get();
         if (isset($request->cat_id)) {
-            $shops = Shop::where('eventcat_id', $request->cat_id)->get();
+            $shops = Shop::with(['style','designers'])->where('eventcat_id', $request->cat_id)->get();
         }
         return $shops;
     }
