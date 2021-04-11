@@ -61,6 +61,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
 
+
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);
 Route::post('register', [UserController::class, 'register'])->middleware('registration');;
@@ -77,6 +78,10 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
+    Route::post('addpoints',function () {
+        //TODO
+        return response()->json(['Success'=>  true ]);
+    });
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
