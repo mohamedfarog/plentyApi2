@@ -352,6 +352,9 @@ class UserController extends Controller
                             if (isset($request->password)) {
                                 $user->password = bcrypt($request->password);
                             }
+                            if (isset($request->bday)) {
+                                $user->bday = $request->bday;
+                            }
                             if (isset($request->contact)) {
                                 $user->contact = $request->contact;
                             }
@@ -421,6 +424,9 @@ class UserController extends Controller
                     }
                     if (isset($request->others)) {
                         $data['others'] = $request->others;
+                    }
+                    if (isset($request->bday)) {
+                        $data['bday'] = $request->bday;
                     }
                     if (isset($request->apple_id)) {
                         $data['apple_id'] = $request->apple_id;

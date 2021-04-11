@@ -35,7 +35,8 @@ class User extends Authenticatable
         'invites',
         'points',
         'totalpurchases',
-        'tier_id'
+        'tier_id',
+        'bday'
     ];
 
     protected $appends = [
