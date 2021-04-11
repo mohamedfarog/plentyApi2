@@ -139,7 +139,7 @@ class OrderController extends Controller
             $loyalty= new Loyalty();
             $pointsearned= $loyalty->addPoints($customer,$request->amount_due);  
             $customer->points+=$pointsearned;
-            return $pointsearned;
+            
             $customer->save();
 
             if (isset($request->tax)) {
