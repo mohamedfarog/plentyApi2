@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detail;
+use App\Models\Loyalty;
 use App\Models\Order;
+use App\Models\Tier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -114,6 +116,8 @@ class OrderController extends Controller
             $data['total_amount'] = $request->total_amount;
             $data['amount_due'] = $request->amount_due;
             $data['delivery_location'] = $request->delivery_location;
+
+            //  addPoints
             if (isset($request->order_status)) {
                 $data['order_status'] = $request->order_status;
             }
@@ -128,6 +132,11 @@ class OrderController extends Controller
                 //TODO WALLET DEDUCTION (CHECK AGAIN)
                 $user->wallet= $user->wallet  -$request->wallet;
             }
+
+            $loyalty= new Loyalty();
+            $pointsearned= $loyalty->addPoints($user,$request->amount_due);  
+            $user->points+=$pointsearned;
+
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
             }

@@ -9,15 +9,27 @@ class Loyalty extends Model
 {
     use HasFactory;
 
-    public static function addPoints($data)
+    public static function addPoints($user,$amount_due)
     {
+        //Check the user's tier list and calculate points accordingly
+        $tier= Tier::find($user->tier_id);
+        $acquisition= $tier-> acquisition;
+        $pointsearned= $acquisition* $amount_due;
+        return $pointsearned;
+
+
+        
+        
+        
+
+
         //update user points
-        $user = User::with(['tier'])->where('id', $data['user_id'])->first();
+        // $user = User::with(['tier'])->where('id', $data['user_id'])->first();
 
         
         //add translog
 
-        Translog::create($data);
+        // Translog::create($data);
 
         //add user_points
 
