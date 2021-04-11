@@ -95,3 +95,7 @@ Route::get('/trackorder', function () {
 Route::get('/checkout', function () {
     return view('/checkout');
 });
+
+Route::get('/userlevel', function () {
+    return view('/userlevel');
+});

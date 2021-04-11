@@ -175,69 +175,23 @@
         color: #ffa400;
         margin-top: -1px;
     }
-.containerz {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
-/* Hide the browser's default radio button */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
+    .carddets {
+        background: white;
+        padding: 10px;
+        padding-left: 30px;
+    }
 
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: 50%;
-}
+    .carddets:nth-child(odd) {
+        background: #f2f3f8;
+    }
 
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
+    @media only screen and (max-width: 600px) {
+        .contmobile {
+            width: 90%;
+        }
+    }
 
-/* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
-}
- 
 </style>
 
 
@@ -253,7 +207,7 @@
 </section>
 
 <div class="shopping-cart-area  ">
-    <div class="container">
+    <div class="container contmobile">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="shopping-cart">
@@ -550,7 +504,7 @@
                                                     </div>
                                                     <div class="col-md-12 col-xs-12">
                                                         <div class="row" style="width:80%;text-align:center;margin:auto;padding:20px 0;">
-                                                            <div class="col-md-4 col-xs-12">
+                                                            <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
                                                                         <input type="radio" name="optradio" checked>
@@ -560,7 +514,7 @@
 
                                                                 </label>
                                                             </div>
-                                                            <div class="col-md-4 col-xs-12">
+                                                            <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
                                                                         <input type="radio" name="optradio" checked>
@@ -570,7 +524,7 @@
 
                                                                 </label>
                                                             </div>
-                                                            <div class="col-md-4 col-xs-12">
+                                                            <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
                                                                         <input type="radio" name="optradio" checked>
@@ -660,7 +614,6 @@
                                                 <h4 class="title-1 title-border mb-20 mt-20 selpaymet" style="font-weight:100">Select payment method</h4>
                                                 <div class="payment-accordion">
                                                     <!-- Accordion start  -->
-
                                                     <h3 class="payment-accordion-toggle active" style="background:#ffa400;color:white;">Use your Loyalty Points <span class="text-right spanh3" style="color:white;float:right;margin-right:30px;">375 PTS</span> </h3>
 
 
@@ -700,42 +653,42 @@
                                                     </div>
                                                     <!-- Accordion end -->
                                                     <!-- Accordion start -->
-                                                    <h3 class="payment-accordion" style="background:white"><label class="containerz">One
-                                                        <input type="radio" checked="checked" name="radio">
-                                                        <span class="checkmark"></span>Cheque Payment
+                                                    <h3 class="payment-accordion" style="background:white">
+                                                        <input type="radio" id="male" name="gender" value="male"><label style="width:100%;" for="male">Cash on Delivery
+                                                            <span style='float:right;line-height:1;padding-top: 5px;'><img src="img/checkout/cash.png" style="height:25px;"></span></label>
+
                                                     </h3>
-                                                    <div >
-                                                        <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                                    </div>
+
                                                     <!-- Accordion end -->
                                                     <!-- Accordion start -->
-                                                    <h3 class="payment-accordion">PayPal</h3>
-                                                    <div class="payment-content">
-                                                        <p>Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
-                                                        <a href="#"><img src="img/payment/1.png" alt="" /></a>
-                                                        <a href="#"><img src="img/payment/2.png" alt="" /></a>
-                                                        <a href="#"><img src="img/payment/3.png" alt="" /></a>
-                                                        <a href="#"><img src="img/payment/4.png" alt="" /></a>
+                                                    <div style="border: 2px solid #1d2767;margin-bottom:20px;">
+                                                        <h3 class="payment-accordion" style="background:white;margin-bottom:0px;">
+                                                            <input type="radio" id="male" name="gender" value="male"><label for="male">Pay with Card</label>
+                                                            <span style='float:right;line-height:1;padding-top: 5px;'><img src="img/checkout/card.png" style="height:25px;"></span></label>
+                                                        </h3>
+                                                        <div class="carddets">
+                                                            <img src="img/checkout/master card logo.png">
+                                                            <span style="font-size:16px;">Card ending with 1234</span>
+                                                        </div>
+                                                        <div class="carddets">
+                                                            <img src="img/checkout/visa.png">
+                                                            <span style="font-size:16px;">Card ending with 4025</span>
+                                                        </div>
+                                                        <div class="carddets">
+
+                                                        </div>
+                                                        <button style="width:100%; background: #1d2767;color:white;font-size:16px;padding:5px">
+                                                            Add new card +
+                                                        </button>
                                                     </div>
-                                                    <!-- Accordion end --> 
-                                                    <div>
-                                                        
-                                                        </label>
-                                                        <label class="containerz">Two
-                                                        <input type="radio" name="radio">
-                                                        <span class="checkmark"></span>
-                                                        </label>
-                                                        <label class="containerz">Three
-                                                        <input type="radio" name="radio">
-                                                        <span class="checkmark"></span>
-                                                        </label>
-                                                        <label class="containerz">Four
-                                                        <input type="radio" name="radio">
-                                                        <span class="checkmark"></span>
-                                                        </label>
-                                                    </div>
-                                                    
-                                                    <button class="button-one submit-button mt-15" data-text="place order" type="submit">place order</button>
+
+
+                                                    <!-- Accordion end -->
+
+                                                    <h3 class="payment-accordion" style="background:white">
+                                                        <input type="radio" id="male" name="gender" value="male"><label for="male">Pay with Plenty Pay</label>
+                                                    </h3>
+                                                    <button class="button-one submit-button mt-15" data-text="place order" type="submit" style="width:100%;font-size:16px;height: 50px;background: #1d2767">place order</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -890,7 +843,7 @@
             'color': 'white'
         });
         event.preventDefault();
-    }); 
+    });
     $(document).ready(function() {
         console.log("ready!");
     });
