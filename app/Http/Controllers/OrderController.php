@@ -6,6 +6,7 @@ use App\Models\Detail;
 use App\Models\Loyalty;
 use App\Models\Order;
 use App\Models\Tier;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -126,16 +127,19 @@ class OrderController extends Controller
             }
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
-                $user->points= $user->points-$request->points;
+
+                $customer= User::find($user->id);
+                $customer->points= $user->points-$request->points;
             }
             if (isset($request->wallet)) {
                 //TODO WALLET DEDUCTION (CHECK AGAIN)
-                $user->wallet= $user->wallet  -$request->wallet;
+                $customer->wallet= $user->wallet  -$request->wallet;
             }
 
             $loyalty= new Loyalty();
-            $pointsearned= $loyalty->addPoints($user,$request->amount_due);  
-            $user->points+=$pointsearned;
+            $pointsearned= $loyalty->addPoints($customer,$request->amount_due);  
+            $customer->points+=$pointsearned;
+            $customer->save();
 
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
