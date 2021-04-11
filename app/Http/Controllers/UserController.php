@@ -498,7 +498,7 @@ class UserController extends Controller
           $authuser= Auth::user();
         if($authuser){
             if(isset($request->amount)){
-                $user= User::find($authuser->id);
+                $user= User::with(['tier'])->find($authuser->id);
                 $user->wallet+= $request->amount;
                 $user->save();
                 return response()->json(['success' => !!$user ,'user' => $user]);
