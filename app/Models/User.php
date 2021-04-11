@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function tier()
     {
-        return $this->belongsTo(Tier::class,'id','user_id');
+        return $this->belongsTo(Tier::class);
     }
 
 
