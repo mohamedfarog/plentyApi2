@@ -271,21 +271,21 @@
                                         </a>
                                     </li>
                                     <li class="nav-cart">
-                                            <div class="nav-cart ">
-                                                <div class="nav-cart-outer">
-                                                    <div class="nav-cart-inner">
-                                                        <a href="#" class="nav-cart-icon">
-                                                            <span class="nav-cart-badge">2</span>
-                                                        </a>
-                                                    </div>
+                                        <div class="nav-cart ">
+                                            <div class="nav-cart-outer">
+                                                <div class="nav-cart-inner">
+                                                    <a href="#" class="nav-cart-icon">
+                                                        <span class="nav-cart-badge">2</span>
+                                                    </a>
                                                 </div>
                                             </div>
-                                         
+                                        </div>
+
                                         <div class="nav-cart-container">
                                             <div class="nav-cart-container">
-                        
+
                                                 <div class="nav-cart-container">
-                                                 
+
 
                                                     <div class="nav-cart-items">
 
@@ -380,8 +380,8 @@
                                                             </div>
                                                         </div>
 
-                                    
-                                   
+
+
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="/cart" class="nav-search  imgicon">
@@ -628,19 +628,18 @@
 
         // For removing cart item
         Cart.prototype.removeItem = function(id) {
-            pro_id = parseInt(id.split(":")[0])
-            size_id = parseInt(id.split(":")[1])
+            pro_id = id.split("-")[0]
+            size_id = id.split("-")[1]
             let i = this.cart_items.length;
-            console.log(pro_id)
             while (i--) {
-                if (this.cart_items[i] && (pro_id > 0 && this.cart_items[i]['id'] === pro_id)) {
-                    if (this.cart_items[i].is_product_variant === "true") {
-
-
+                if (this.cart_items[i] && this.cart_items[i]['id'] === pro_id) {
+                    if (size_id > 0) {
+                        if (this.cart_items[i]['size_id'] === size_id) {
+                            this.cart_items.splice(i, 1);
+                        }
                     } else {
                         this.cart_items.splice(i, 1);
                     }
-                    console.log('hi')
 
                 }
             }
@@ -737,18 +736,29 @@
             }
 
             return cart;
-        }
- 
+        } <<
+        <<
+        <<
+        < Updated upstream
+
+            ===
+            ===
+            =
+
+            >>>
+            >>>
+            >
+            Stashed changes
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false,
-            infinite: true,
-            slidesToShow: 8,
-            slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            autoplaySpeed: 10000,
-            responsive: [{
+        dots: false,
+        infinite: true,
+        slidesToShow: 8,
+        slidesToScroll: 1,
+        autoplay: false,
+        arrows: true,
+        autoplaySpeed: 10000,
+        responsive: [{
                     breakpoint: 1024,
                     settings: {
                         slidesToShow: 3,
@@ -770,8 +780,19 @@
                     }
                 }
 
-            ]
-        }); 
+            ] <<
+            <<
+            <<
+            < Updated upstream
+        }); ===
+        ===
+        =
+        });
+
+        >>>
+        >>>
+        >
+        Stashed changes
         //storing data
         function storeCartLocal(cart) {
             localStorage.setItem('cart', JSON.stringify(cart))
@@ -804,8 +825,17 @@
 
         // for updating input fields by id
         function updateInputField(id, value) {
-            document.getElementById(id).value = value;
-        }  
+            document.getElementById(id).value = value; <<
+            <<
+            <<
+            < Updated upstream
+        } ===
+        ===
+        =
+        } >>>
+        >>>
+        >
+        Stashed changes
     </script>
 </body>
 

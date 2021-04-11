@@ -125,7 +125,7 @@
                                     <th class="product-subtotal" colspan="2">Total</th>
                                 </tr>
                             </thead>
-                            <tbody id="cart-item-view">
+                            <tbody id="cart_item_view">
 
                             </tbody>
                         </table>
@@ -193,8 +193,10 @@
     </section> <!-- end cart -->
 
     <script>
-        function renderCartList(cart) {
-            var template = '';
+        function renderCartList() {
+            let cart = CartSerializer(getCartLocal())
+            let template = '';
+
             base_url = window.location.origin
             if (cart.cart_items.length > 0) {
                 cart.cart_items.forEach(item => {
@@ -218,53 +220,81 @@
                         "<div class='quantity buttons_added'>" +
                         "<input type='number' step='1' min='0' value=" + item.quantity + " title='Qty' class='input-text qty text'>" +
                         "<div class='quantity-adjust'>" +
-                        "<a id='plus" + item.id + "' class='plus cart-plus-button'>" +
+                        "<a id='plus" + item.id + "-" + item.size_id + "' class='plus cart-plus-button'>" +
                         "<i class='fa fa-angle-up'></i>" +
                         "</a>" +
-                        "<a id='minus" + item.id + "' class='minus cart-minus-button'>" +
+                        "<a id='minus" + item.id + "-" + item.size_id + "' class='minus cart-minus-button'>" +
                         "<i class='fa fa-angle-down'></i>" +
                         "</a>" +
                         "</div>" +
                         "</div>" +
                         "</td>" +
                         "<td class='product-subtotal'>" +
-                        "<span class='amount' id= 'cart-item-price" + item.id + "'>SAR " + item.total_price() + "</span>" +
+                        "<span class='amount' id= 'cart-item-price" + item.id + "-" + item.size_id + "'>SAR " + item.total_price() + "</span>" +
                         "</td>" +
                         "<td class='product-remove'>" +
-                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + ":" + item.size_id + "'>" +
+                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + "-" + item.size_id + "'>" +
                         "<i class='ui-close'></i>" +
                         "</a>" +
                         "</td>" +
                         "</tr>"
                 });
             }
-            return template
+            $('#cart_item_view').html(template);
         }
         $(document).ready(function() {
             var cart = CartSerializer(getCartLocal())
-            document.getElementById('cart-item-view').innerHTML = renderCartList(cart)
+            renderCartList()
             document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
             document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
             $(".cart-plus-button").on('click', function(event) {
                 let id = $(this).attr("id").slice(4);
-                cart.cart_items.find(item => item.id === id).addQuantity();
-                console.log(cart)
-                document.getElementById('cart-item-price' + id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === id).total_price();
+                pro_id = id.split("-")[0]
+                size_id = id.split("-")[1]
+                if (parseInt(size_id)) {
+                    cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
+                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
+                } else {
+                    cart.cart_items.find(item => item.id === pro_id).addQuantity();
+                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                }
+
+                storeCartLocal(JsonCartSerializer(cart));
+
+
                 document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
                 document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
             });
             $(".cart-minus-button").on('click', function(event) {
                 let id = $(this).attr("id").slice(5);
-                cart.cart_items.find(item => item.id === id).substractQuantity();
-                document.getElementById('cart-item-price' + id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === id).total_price();
+                pro_id = id.split("-")[0]
+                size_id = id.split("-")[1]
+                pro_id = id.split("-")[0]
+                size_id = id.split("-")[1]
+                if (parseInt(size_id)) {
+                    cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
+                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
+                } else {
+                    cart.cart_items.find(item => item.id === pro_id).substractQuantity();
+                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                }
+
+                storeCartLocal(JsonCartSerializer(cart));
+
                 document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
                 document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
             });
 
             $(".product-remove-button").on('click', function(event) {
+
                 let id = $(this).attr("id").slice(16);
                 cart.removeItem(id);
-                document.getElementById('cart-item-view').innerHTML = renderCartList(cart)
+
+                storeCartLocal(JsonCartSerializer(cart));
+
+                // problem with innerHTML so reloading
+                location.reload();
+
                 document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal();
                 document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal();
             });

@@ -266,7 +266,11 @@
                     'border': '2px solid transparent'
                 });
             });
+
+
+
         });
+
 
         function substractQuantity() {
             const current = parseInt(document.getElementById("quantity").value)
@@ -321,9 +325,11 @@
                 if (product.category == "Fine Dining") {
                     let flag = false;
                     for (i = 0; i < cart.cart_items.length; i++) {
-                        if (cart.cart_items[i].id == product.id && product.size_id == cart.cart_items[i].size_id) {
+                        if (cart.cart_items[i].id === product.id && product.size_id === cart.cart_items[i].size_id) {
+                            console.log(cart.cart_items[i].id, cart.cart_items[i].size_id)
                             cart.cart_items[i].quantity = parseInt(cart.cart_items[i].quantity) + parseInt(product.quantity);
                             flag = true;
+                            break
                         }
                     }
                     if (flag) {
