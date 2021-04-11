@@ -189,7 +189,7 @@ class OrderController extends Controller
             }
 
             $msg = 'Order has been added';
-            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $customer]);
+            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $customer->with('tier')]);
         }
     }
 
