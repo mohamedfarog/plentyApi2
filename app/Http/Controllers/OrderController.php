@@ -128,7 +128,7 @@ class OrderController extends Controller
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
-                $customer= User::find($user->id);
+                $customer= User::find($user->id);           //for updating the user model
                 $customer->points= $user->points-$request->points;
             }
             if (isset($request->wallet)) {
@@ -189,7 +189,7 @@ class OrderController extends Controller
             }
 
             $msg = 'Order has been added';
-            return response()->json(['success' => !!$order, 'message' => $msg]);
+            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $customer]);
         }
     }
 
