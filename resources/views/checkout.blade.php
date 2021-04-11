@@ -67,7 +67,10 @@
         font-weight: 100 !important;
 
         text-transform: unset !important;
-        font-size: 14px !important;
+        font-size: 16px !important;
+        padding: 7px 20px !important;
+        height: 50px !important;
+
     }
 
     .selpaymet::before {
@@ -78,16 +81,163 @@
 
     .payment-accordion-toggle.active::before {
         content: "\f077";
-    } 
-    .payment-accordion-toggle::before {
+    }
 
+    .payment-accordion-toggle::before {
+        color: white;
         font-family: FontAwesome;
         content: "\f078";
         font-size: 16px;
         position: absolute;
-        right: 30px;
         text-align: center;
+        right: 15px;
     }
+
+    .payment-content {
+        padding: 0;
+    }
+
+    .boldfont {
+        font-family: 'Avenir';
+        font-weight: 600 !important;
+        font-size: 16px !important;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        border-radius: 15px;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+        height: 10px;
+        -webkit-appearance: none;
+        color: #13bba4;
+        margin-top: -1px;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+
+        background: url('img/checkout/sliderthumb.png') #ffa400;
+        color: #43e5f7;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: url('img/checkout/sliderthumb.png') #ffa400;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: url('img/checkout/sliderthumb.png') #ffa400;
+        cursor: pointer;
+
+    }
+
+    /** FF*/
+    input[type="range"]::-moz-range-progress {
+        background-color: #ffa400;
+    }
+
+    input[type="range"]::-moz-range-track {
+        background-color: white;
+    }
+
+    /* IE*/
+    input[type="range"]::-ms-fill-lower {
+        background-color: #ffa400;
+    }
+
+    input[type="range"]::-ms-fill-upper {
+        background-color: #ffa400;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+        height: 15px;
+        -webkit-appearance: none;
+        color: #ffa400;
+        margin-top: -1px;
+    }
+.containerz {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+ 
 </style>
 
 
@@ -489,10 +639,10 @@
                                         </div>
                                         <!-- payment-method -->
                                         <div class="col-md-6 col-sm-6 col-xs-12" style="background:#f2f3f8">
-                                            <div class="payment-method mt-20 mb-20 pl-20">
+                                            <div class="payment-method mt-20 mb-20 pl-20 pr-20">
                                                 <div class="row">
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" type="text" placeholder="" style="border: 2px solid #001b71;margin-bottom: 5px;" value="MVP10">
+                                                        <input class="inputdeladd" type="text" placeholder="" style="border: 2px solid #001b71;margin-bottom: 5px;padding: 10px;" value="MVP10">
                                                         <br>
 
                                                     </div>
@@ -511,29 +661,80 @@
                                                 <div class="payment-accordion">
                                                     <!-- Accordion start  -->
 
-                                                    <h3 class="payment-accordion-toggle active" style="background:#ffa400;color:white;">Use your Loyalty Points <span class="text-right spanh3" style="color:white;float:right;margin-right:30px;">195 SAR</span> </h3>
+                                                    <h3 class="payment-accordion-toggle active" style="background:#ffa400;color:white;">Use your Loyalty Points <span class="text-right spanh3" style="color:white;float:right;margin-right:30px;">375 PTS</span> </h3>
 
- 
+
                                                     <div class="payment-content default">
-                                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won't be shipped until the funds have cleared in our account.</p>
+                                                        <div class="row" style="border-bottom:1px solid grey;margin-left:5px;margin-right:5px;">
+                                                            <span class="boldfont">Available Loyalty Points</span>
+                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold'">375 <span style="font-family:'Avenir';font-weight:100">PTS</span></span>
+                                                        </div>
+                                                        <div style="margin-left:5px;margin-right:5px;margin-top:5px;">
+                                                            <span class="boldfont">Use your Loyalty Points</span><br>
+                                                            <span style="font-size:16px;">Select the amount to pay with your Loyalty Points!</span>
+                                                        </div>
+                                                        <div style="margin-left:5px;margin-right:5px;margin-top5:px;">
+                                                            <input type="range" name="ageInputName" id="ageInputId" class="slider" value="56" min="1" max="100" oninput="ageOutputId.value = ageInputId.value" style="background:#ffa400">
+                                                            <output name="ageOutputName" id="ageOutputId">56</output>
+                                                        </div>
+                                                        <div class="mt-30 row" style="width:50%;text-align:center;margin:auto">
+                                                            <div style="background:white;padding: 10px 0" class="col-md-5 col-xs-12">
+                                                                <span class="boldfont">56.25</span><br>
+                                                                <span>Points Used</span>
+                                                            </div>
+                                                            <div class="col-md-2 col-xs-12">
+                                                                <br><span> =
+                                                                </span>
+                                                            </div>
+
+                                                            <div style="background:white;padding: 10px 0 " class="col-md-5 col-xs-12">
+                                                                <span class="boldfont">20</span><br>
+                                                                <span>SAR</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-30 mb-30" style="margin-left:5px;margin-right:5px;">
+                                                            <span style="font-size:16px;">Available Loyalty Points</span>
+                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold';font-size:16px;">375 <span style="font-family:'Avenir';font-weight:100">SAR</span></span>
+                                                        </div>
                                                     </div>
                                                     <!-- Accordion end -->
                                                     <!-- Accordion start -->
-                                                    <h3 class="payment-accordion-toggle">Cheque Payment</h3>
-                                                    <div class="payment-content">
+                                                    <h3 class="payment-accordion" style="background:white"><label class="containerz">One
+                                                        <input type="radio" checked="checked" name="radio">
+                                                        <span class="checkmark"></span>Cheque Payment
+                                                    </h3>
+                                                    <div >
                                                         <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
                                                     </div>
                                                     <!-- Accordion end -->
                                                     <!-- Accordion start -->
-                                                    <h3 class="payment-accordion-toggle">PayPal</h3>
+                                                    <h3 class="payment-accordion">PayPal</h3>
                                                     <div class="payment-content">
-                                                        <p>Pay via PayPal; you can pay with your credit card if you don�t have a PayPal account.</p>
+                                                        <p>Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
                                                         <a href="#"><img src="img/payment/1.png" alt="" /></a>
                                                         <a href="#"><img src="img/payment/2.png" alt="" /></a>
                                                         <a href="#"><img src="img/payment/3.png" alt="" /></a>
                                                         <a href="#"><img src="img/payment/4.png" alt="" /></a>
                                                     </div>
-                                                    <!-- Accordion end -->
+                                                    <!-- Accordion end --> 
+                                                    <div>
+                                                        
+                                                        </label>
+                                                        <label class="containerz">Two
+                                                        <input type="radio" name="radio">
+                                                        <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="containerz">Three
+                                                        <input type="radio" name="radio">
+                                                        <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="containerz">Four
+                                                        <input type="radio" name="radio">
+                                                        <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    
                                                     <button class="button-one submit-button mt-15" data-text="place order" type="submit">place order</button>
                                                 </div>
                                             </div>
@@ -628,7 +829,7 @@
                                                     <!-- Accordion start -->
                                                     <h3 class="payment-accordion-toggle">PayPal</h3>
                                                     <div class="payment-content">
-                                                        <p>Pay via PayPal; you can pay with your credit card if you don�t have a PayPal account.</p>
+                                                        <p>Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
                                                         <a href="#"><img src="img/payment/1.png" alt="" /></a>
                                                         <a href="#"><img src="img/payment/2.png" alt="" /></a>
                                                         <a href="#"><img src="img/payment/3.png" alt="" /></a>
@@ -689,8 +890,7 @@
             'color': 'white'
         });
         event.preventDefault();
-    });
-
+    }); 
     $(document).ready(function() {
         console.log("ready!");
     });

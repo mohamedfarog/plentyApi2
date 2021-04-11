@@ -232,19 +232,19 @@
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="#">Beauty</a>
+                                            <a href="/delicacy">Beauty</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="#">Fashion</a>
+                                            <a href="/delicacy">Fashion</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="#">Featured</a>
+                                            <a href="/delicacy">Featured</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="#">Brands</a>
+                                            <a href="/delicacy">Brands</a>
 
                                         </li> <!-- end elements -->
 
@@ -266,19 +266,21 @@
                                 <ul>
 
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger imgicon">
+                                        <a href="/delicacy" class="nav-search search-trigger imgicon">
                                             <img class="imgicon" src="img/nav/search.png">
                                         </a>
                                     </li>
                                     <li class="nav-cart">
-                                        <div class="nav-cart-outer">
-                                            <div class="nav-cart-inner">
-                                                <a href="/cart" class="nav-search imgicon">
-                                                    <img class="imgicon" src="img/nav/bag.png">
-
-                                                </a>
+                                            <div class="nav-cart ">
+                                                <div class="nav-cart-outer">
+                                                    <div class="nav-cart-inner">
+                                                        <a href="#" class="nav-cart-icon">
+                                                            <span class="nav-cart-badge">2</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                         
                                         <div class="nav-cart-container">
                                             <div class="nav-cart-container">
                         
@@ -378,9 +380,11 @@
                                                             </div>
                                                         </div>
 
+                                    
+                                   
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger imgicon">
+                                        <a href="/cart" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/fav.png">
                                         </a>
                                     </li>
