@@ -205,7 +205,7 @@ class UserController extends Controller
                         $user->bday = $request->bday;
                     }
                     if (isset($request->points)) {
-                        $user->points = $user->points+$request->points;
+                        $user->points = $request->points;
                     }
                     // if(isset($request->contact)){
                     //     $user->contact = $request->contact;
