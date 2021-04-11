@@ -72,6 +72,7 @@ class WebsiteHomeController extends Controller
                 products.price as price,
                 products.desc_en as desc_en,
                 products.desc_ar as desc_ar,
+                products.stocks as stock,
                 images.url as image,
                 shop_id as shop_id'))
             ->leftjoin('images', 'images.product_id', '=', 'products.id')

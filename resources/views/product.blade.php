@@ -64,7 +64,11 @@
         cursor: pointer;
     }
 
-
+    .stock-error {
+        color: red;
+        margin-left: 100px;
+        display: none;
+    }
 
     @media only screen and (max-width: 600px) {
         .contmobile {
@@ -169,6 +173,7 @@
                                 <input type="hidden" id="size_id" name="size_id" value="{{$sizes->first()->id}}">
                                 <input type="hidden" id="size" name="size" value="{{$sizes->first()->value}}">
                                 <input type="hidden" id="price" name="price" value="{{$sizes->first()->price}}">
+                                <input type="hidden" id="stock" name="stock" value="{{$sizes->first()->stocks}}">
                                 <input type="hidden" id="is_product_variant" name="is_product_variant" value=true>
                                 <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
                                     <ul>
@@ -186,7 +191,7 @@
                                 @else
 
                                 <input type="hidden" id="price" name="price" value="{{$product->price}}">
-
+                                <input type="hidden" id="stock" name="stock" value="{{$product->stock}}">
                                 @endif
                                 <div class="clearfix">
                                     <div class="cart-plus-minus" style="width:50%;background:#e1e0e5;">
@@ -194,6 +199,11 @@
                                         <input type="text" id="quantity" value="1" name="quantity" class="cart-plus-minus-box" style="background: #e1e0e5 none repeat scroll 0 0;">
                                         <div class="inc qtybutton" onclick="addQuantity()">+</div>
                                     </div>
+                                </div>
+                                <div class="stock-error" id="stock-error">
+
+                                    Out of stock
+
                                 </div>
                                 <!-- Size end -->
                                 <div style="height:30px;">
@@ -267,23 +277,70 @@
                 });
             });
 
+            // for force reloading for resetting form
+            var perfEntries = performance.getEntriesByType("navigation");
+
+            if (perfEntries[0].type === "back_forward") {
+                location.reload(true);
+            }
 
 
         });
 
 
         function substractQuantity() {
+            var cart = CartSerializer(getCartLocal())
             const current = parseInt(document.getElementById("quantity").value)
+            document.getElementById("stock-error").style.display = "none";
             if (current > 1) {
                 document.getElementById("quantity").value = current - 1
+            } else {
+                document.getElementById("stock-error").innerHTML = "Required minimum quntity 1";
+                document.getElementById("stock-error").style.display = "block";
             }
-
+            if (availableStock() < 0) {
+                document.getElementById("stock-error").innerHTML = "Out of stock";
+                document.getElementById("stock-error").style.display = "block";
+            }
 
         }
 
         function addQuantity() {
             const current = parseInt(document.getElementById("quantity").value)
+            document.getElementById("stock-error").style.display = "none";
+            console.log(availableStock())
+            if (availableStock() < 1) {
+                document.getElementById("stock-error").innerHTML = "Out of stock";
+                document.getElementById("stock-error").style.display = "block";
+            }
             document.getElementById("quantity").value = current + 1
+
+        }
+
+        function availableStock() {
+            let size_id = document.getElementById("size_id").value || null;
+            let product_id = document.getElementById("product_id").value || null;
+            let purchased = checkCurrentItemNumber(product_id, size_id);
+            let current = parseInt(document.getElementById("quantity").value)
+            let total_quantity = purchased + current;
+            let stock = parseInt(document.getElementById("stock").value)
+            if (stock - total_quantity < 0) {
+                return -1;
+            } else {
+                return stock - total_quantity;
+            }
+            return
+        }
+
+        function checkCurrentItemNumber(id = null, size_id = null) {
+            let cart = CartSerializer(getCartLocal())
+            let purchased = 0
+            if (size_id) {
+                purchased = cart.cart_items.find(item => (item.id === id) && (item.size_id === size_id)).quantity
+            } else {
+                purchased = cart.cart_items.find(item => (item.id === id)).quantity
+            }
+            return purchased;
         }
 
         function addProductBag() {
@@ -314,6 +371,7 @@
                 quantity: form.get('quantity') || null,
                 date: form.get('date') || null,
                 time: form.get('time') || null,
+                stock: form.get('stock') || null,
                 category: shop_category[0].name_en || null,
             }
 
@@ -326,8 +384,14 @@
                     let flag = false;
                     for (i = 0; i < cart.cart_items.length; i++) {
                         if (cart.cart_items[i].id === product.id && product.size_id === cart.cart_items[i].size_id) {
-                            console.log(cart.cart_items[i].id, cart.cart_items[i].size_id)
-                            cart.cart_items[i].quantity = parseInt(cart.cart_items[i].quantity) + parseInt(product.quantity);
+                            let quantity = parseInt(cart.cart_items[i].quantity) + parseInt(product.quantity);
+                            if (quantity <= cart.cart_items[i].stock) {
+                                cart.cart_items[i].quantity = quantity;
+                            } else {
+                                document.getElementById("stock-error").innerHTML = "Out of stock";
+                                document.getElementById("stock-error").style.display = "block";
+                            }
+
                             flag = true;
                             break
                         }
@@ -357,10 +421,16 @@
             var currentSize = sizes.filter(function(sz) {
                 return sz.id == size;
             });
+
             if (currentSize[0]) {
+                document.getElementById("stock-error").style.display = "none";
                 updateInputField('price', currentSize[0].price)
+                updateInputField('stock', currentSize[0].stocks)
                 updateInputField('size', currentSize[0].value)
                 updateInputField('size_id', currentSize[0].id)
+                if (form.get('stock') > currentSize[0].stocks) {
+                    document.getElementById("quantity").value = 1;
+                }
                 document.getElementById("pro-price").innerHTML = 'AED ' +
                     currentSize[0].price;
 

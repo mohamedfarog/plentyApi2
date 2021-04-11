@@ -670,6 +670,7 @@
             this.time = item.time || null;
             this.category = item.category || null;
             this.image_url = item.image_url;
+            this.stock = item.stock;
             this.total_price = function() {
                 return this.quantity * this.price;
             }
@@ -699,6 +700,7 @@
                 item['quantity'] = element.quantity
                 item['category'] = element.category
                 item['image_url'] = element.image_url
+                item['stock'] = element.stock
                 cart_items.push(item)
             });
             return {
@@ -728,6 +730,7 @@
                         date: element.date || null,
                         time: element.time || null,
                         image_url: element.image_url || null,
+                        stock: element.stock || null,
                         category: element.category || null,
                     }
 

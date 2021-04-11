@@ -218,7 +218,8 @@
                         "</td>" +
                         "<td class='product-quantity'>" +
                         "<div class='quantity buttons_added'>" +
-                        "<input type='number' step='1' min='0' value=" + item.quantity + " title='Qty' class='input-text qty text'>" +
+                        "<input type='number' step='1' min='0' max='" + item.stock + "' id ='quantity" + item.id + "-" + item.size_id + "'value=" + item.quantity + " title='Qty' class='input-text qty text'>" +
+                        "<input type='hidden' id ='stock" + item.id + "-" + item.size_id + "' value=" + item.stock + ">" +
                         "<div class='quantity-adjust'>" +
                         "<a id='plus" + item.id + "-" + item.size_id + "' class='plus cart-plus-button'>" +
                         "<i class='fa fa-angle-up'></i>" +
@@ -251,38 +252,50 @@
                 let id = $(this).attr("id").slice(4);
                 pro_id = id.split("-")[0]
                 size_id = id.split("-")[1]
-                if (parseInt(size_id)) {
-                    cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
-                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
-                } else {
-                    cart.cart_items.find(item => item.id === pro_id).addQuantity();
-                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                let stock = parseInt(document.getElementById('stock' + pro_id + "-" + size_id).value);
+                let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
+                console.log(quantity, stock)
+                if (stock > quantity) {
+                    if (parseInt(size_id)) {
+                        cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
+                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
+                    } else {
+                        cart.cart_items.find(item => item.id === pro_id).addQuantity();
+                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                    }
+
+                    storeCartLocal(JsonCartSerializer(cart));
+
+
+                    document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+                    document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                 }
 
-                storeCartLocal(JsonCartSerializer(cart));
-
-
-                document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
-                document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
             });
             $(".cart-minus-button").on('click', function(event) {
+
                 let id = $(this).attr("id").slice(5);
                 pro_id = id.split("-")[0]
                 size_id = id.split("-")[1]
                 pro_id = id.split("-")[0]
                 size_id = id.split("-")[1]
-                if (parseInt(size_id)) {
-                    cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
-                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
-                } else {
-                    cart.cart_items.find(item => item.id === pro_id).substractQuantity();
-                    document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
+
+                if (quantity > 1) {
+                    if (parseInt(size_id)) {
+                        cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
+                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
+                    } else {
+                        cart.cart_items.find(item => item.id === pro_id).substractQuantity();
+                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                    }
+
+                    storeCartLocal(JsonCartSerializer(cart));
+
+                    document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+                    document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                 }
 
-                storeCartLocal(JsonCartSerializer(cart));
-
-                document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
-                document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
             });
 
             $(".product-remove-button").on('click', function(event) {
