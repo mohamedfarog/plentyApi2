@@ -128,7 +128,7 @@ class OrderController extends Controller
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
-                $customer= User::find($user->id);           //for updating the user model
+                $customer= User::with(['tier'])->find($user->id);           //for updating the user model
                 $customer->points= $user->points-$request->points;
             }
             if (isset($request->wallet)) {
@@ -189,9 +189,9 @@ class OrderController extends Controller
             }
 
             $msg = 'Order has been added';
-            $userwithtier= $customer->with(['tier']);
+   
             
-            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $userwithtier]);
+            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $customer]);
         }
     }
 
