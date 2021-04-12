@@ -93,6 +93,24 @@ class OrderController extends Controller
                     if (isset($request->user_id)) {
                         $order->user_id = $request->user_id;
                     }
+                    if(isset($request->lat)){
+                        $order->lat = $request->lat;
+                    }
+                    if(isset($request->lng)){
+                        $order->lng = $request->lng;
+                    }
+                    if(isset($request->delivery_note)){
+                        $order->delivery_note = $request->delivery_note;
+                    }
+                    if(isset($request->contact_number)){
+                        $order->contact_number = $request->contact_number;
+                    }
+                    if(isset($request->city)){
+                        $order->city = $request->city;
+                    }
+                    if(isset($request->label)){
+                        $order->label = $request->label;
+                    }
                     
                     $msg = 'Order has been updated';
 
@@ -125,6 +143,27 @@ class OrderController extends Controller
             if (isset($request->payment_method)) {
                 $data['payment_method'] = $request->payment_method;
             }
+
+            if(isset($request->lat)){
+                $data['lat'] = $request->lat;
+            }
+            if(isset($request->lng)){
+                $data['lng'] = $request->lng;
+
+            }
+            if(isset($request->delivery_note)){
+                $data['delivery_note'] = $request->delivery_note;
+            }
+            if(isset($request->contact_number)){
+                $data['contact_number'] = $request->contact_number;
+            }
+            if(isset($request->city)){
+                $data['city'] = $request->city;
+            }
+            if(isset($request->label)){
+                $data['label'] = $request->label;
+            }
+
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
