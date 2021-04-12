@@ -37,7 +37,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="/" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/fashion" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/beauty" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
         <div class="row">
 
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="#">
+                <a href="/delicacy">
                     <div style="">
                     </div>
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
@@ -134,7 +134,7 @@
 
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
 
-                <a href="#">
+                <a href="/beauty">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/beauty.mp4" type="video/mp4">
                         Your browser does not support the video tag.
@@ -147,7 +147,7 @@
             </div>
 
             <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="#">
+                <a href="/fashion">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">
                         Your browser does not support the video tag.
