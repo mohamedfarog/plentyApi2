@@ -519,8 +519,8 @@ class UserController extends Controller
     {   
         
         $user= Auth::user();
-        return $user;
-        if($user->type=='S'){
+      
+        if($user->typeofuser=='S'){
      
             $newuser= new User();
             if(isset($request->name)){
