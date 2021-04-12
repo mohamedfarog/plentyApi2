@@ -220,7 +220,7 @@ class OrderController extends Controller
                     $arr['timeslot_id'] = $orderdetails['timeslot_id'];
                 }
                 if (isset($orderdetails['addons'])) {
-                    
+
                     $arr['addons'] = implode(',', $orderdetails['addons']);
                 }
                 $arr['order_id'] =  $order->id;

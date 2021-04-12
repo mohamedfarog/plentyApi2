@@ -192,7 +192,6 @@
             width: 90%;
         }
     }
-
 </style>
 
 
@@ -474,19 +473,16 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="billing-details pr-20">
                                                 <h4 class="title-1 title-border text-uppercase mb-30 ordsumtitle">Delivery Address</h4>
-                                                 <div class="form-group">
+                                                <div class="form-group">
                                                     <label id="saloon_map">Salon Location</label>
                                                     <div id="map" class="form-control" style="height:400px;"></div>
                                                     <br>
                                                     <div class="row" style="margin:auto;">
-                                                        <a onclick="getLocation()" class="btn btn-outline-primary"
-                                                            style="width:30%;color:black;">Current Location</a>
+                                                        <a onclick="getLocation()" class="btn btn-outline-primary" style="width:30%;color:black;">Current Location</a>
                                                         <div style="width:5%;"></div>
-                                                        <input type="text" id="lat" name="lat" readonly="yes" class="form-control"
-                                                            style="width:30%;" placeholder="latitude">
+                                                        <input type="text" id="lat" name="lat" readonly="yes" class="form-control" style="width:30%;" placeholder="latitude">
                                                         <div style="width:5%;"></div>
-                                                        <input type="text" id="lng" name="lng" readonly="yes" class="form-control"
-                                                            style="width:30%;" placeholder="longitude">
+                                                        <input type="text" id="lng" name="lng" readonly="yes" class="form-control" style="width:30%;" placeholder="longitude">
 
 
                                                     </div>
@@ -846,8 +842,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -855,8 +851,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -866,10 +862,8 @@
     $(document).ready(function() {
         console.log("ready!");
     });
-
 </script>
 <script src="js/map.js" defer></script>
 <script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyDQxeWFV5QiIZIPw5iRD5H1d5LxycBkou8&sensor=false&libraries=places' defer async>
-</script>    
+</script>
 @endsection
-

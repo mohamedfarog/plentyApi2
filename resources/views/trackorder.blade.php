@@ -34,24 +34,26 @@
     .modal-header {
         border-bottom: 0;
         padding: 15px 15px;
-    } 
+    }
 
     .modal-footer {
         border-top: 0;
     }
-    .totext{
+
+    .totext {
         color: #001b71 !important;
     }
+
     @media only screen and (max-width: 600px) {
-        .tablemobile{
-            width:95%;
+        .tablemobile {
+            width: 95%;
         }
+
         .modal-dialog {
             width: 100%;
-            padding:20px;
+            padding: 20px;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -432,8 +434,8 @@
                 </div>
             </div> <!-- end col -->
             <!-- end order -->
-            
-             <!-- order -->
+
+            <!-- order -->
             <div class="row trackorderdiv">
                 <div class="col-md-12 col-sm-12" style="border-left: 2px solid yellow">
                     <div class="row">
@@ -451,7 +453,7 @@
                                 <img src="img/nav/delivery.png" style="padding-right:20px;">
                             </div>
                             <div class="row  " style="text-align: right;margin-top:10px;        ">
-                                 <a class="totext" data-toggle="modal" data-target="#exampleModal">Track Order ></a>
+                                <a class="totext" data-toggle="modal" data-target="#exampleModal">Track Order ></a>
                             </div>
                         </div>
 
@@ -795,7 +797,7 @@
             </div> <!-- end col -->
             <!-- end order -->
 
-             <!-- order -->
+            <!-- order -->
             <div class="row trackorderdiv">
                 <div class="col-md-12 col-sm-12" style="border-left: 2px solid yellow">
                     <div class="row">
@@ -813,7 +815,7 @@
                                 <img src="img/nav/delivery.png" style="padding-right:20px;">
                             </div>
                             <div class="row  " style="text-align: right;margin-top:10px;">
-                                 <a class="totext" data-toggle="modal" data-target="#exampleModal">Track Order ></a>
+                                <a class="totext" data-toggle="modal" data-target="#exampleModal">Track Order ></a>
                             </div>
                         </div>
 
@@ -1163,7 +1165,7 @@
 
     </section> <!-- end cart -->
     <!-- Button trigger modal -->
-  
+
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1233,7 +1235,7 @@
                                     <li class="colorgrey">Size: M</li>
                                     <li class="colorgrey">Qty: 2</li>
                                 </ul>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -1252,13 +1254,13 @@
                                     <li class="colorgrey">Size: M</li>
                                     <li class="colorgrey">Qty: 2</li>
                                 </ul>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                   
+
                 </div>
             </div>
         </div>
@@ -1273,4 +1275,3 @@
 
 </script>
 @endsection
-
