@@ -185,7 +185,7 @@ class UserController extends Controller
 
     public function myProfile(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'get':
@@ -203,6 +203,9 @@ class UserController extends Controller
                     }
                     if (isset($request->bday)) {
                         $user->bday = $request->bday;
+                    }
+                    if (isset($request->points)) {
+                        $user->points = $request->points;
                     }
                     // if(isset($request->contact)){
                     //     $user->contact = $request->contact;
@@ -352,6 +355,9 @@ class UserController extends Controller
                             if (isset($request->password)) {
                                 $user->password = bcrypt($request->password);
                             }
+                            if (isset($request->bday)) {
+                                $user->bday = $request->bday;
+                            }
                             if (isset($request->contact)) {
                                 $user->contact = $request->contact;
                             }
@@ -422,6 +428,9 @@ class UserController extends Controller
                     if (isset($request->others)) {
                         $data['others'] = $request->others;
                     }
+                    if (isset($request->bday)) {
+                        $data['bday'] = $request->bday;
+                    }
                     if (isset($request->apple_id)) {
                         $data['apple_id'] = $request->apple_id;
                     }
@@ -485,6 +494,23 @@ class UserController extends Controller
                 # code...
                 break;
         }
+    }
+
+    public function topUpWallet(Request $request)
+    { 
+          $authuser= Auth::user();
+        if($authuser){
+            if(isset($request->amount)){
+                $user= User::with(['tier'])->find($authuser->id);
+                $user->wallet+= $request->amount;
+                $user->save();
+                return response()->json(['success' => !!$user ,'user' => $user]);
+            }
+        }
+        else{
+            return response()->json(["error" =>'Unauthorized User']);
+        }
+        
     }
 
     /**

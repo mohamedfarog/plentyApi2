@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Otp extends Model
+class Timeslot extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'contact', 'otp', 'verified','code'
+        'timeslot', 'sched', 'product_id'
     ];
 }

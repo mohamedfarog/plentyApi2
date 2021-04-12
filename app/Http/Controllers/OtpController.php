@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Otp;
 use App\Models\Project;
 use App\Models\SMS;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class OtpController extends Controller
 {
@@ -17,7 +20,6 @@ class OtpController extends Controller
      */
     public function index(Request $request)
     {
-        
     }
 
     /**
@@ -41,33 +43,41 @@ class OtpController extends Controller
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
         }
-        $otp = Otp::where('contact',$request->contact)->where('verified',0)->first();
+        $otp = Otp::where('contact', $request->contact)->where('verified', 0)->first();
         $verified = false;
         $msg = '';
 
-        if($otp != null){
-            if(isset($request->otp)){
-                if($otp->otp == $request->otp){
+        if ($otp != null) {
+            if (isset($request->otp)) {
+                if ($otp->otp == $request->otp) {
                     $verified  = true;
                     $otp->verified = true;
                     $msg = 'OTP has been verified.';
                     $otp->save();
-                }else{
+
+                    $user = User::where('contact', $request->contact)->first();
+
+                    if ($user) {
+                        Auth::login($user);
+                        $dbuser = Auth::user();
+                        $token = $dbuser->createToken('MyApp')->accessToken;
+                        return response()->json(['success' => $verified, 'message' => $msg, 'user' => $user, 'token' => $token]);
+                    }
+                    return response()->json(['success' => $verified, 'message' => $msg, 'authtoken' => $otp->code]);
+                } else {
                     $verified = false;
                     $msg = 'OTP entered is incorrect.';
                 }
-              
             }
         }
-
-        return response()->json(['success' => $verified, 'message'=>$msg]);
+        return response()->json(['success' => $verified, 'message' => $msg]);
     }
 
     public function otpNumber(Request $request)
     {
         $project = Project::first();
 
-        return response()->json(['otplength'=>$project->otp]);
+        return response()->json(['otplength' => $project->otp]);
     }
 
     /**
@@ -119,26 +129,27 @@ class OtpController extends Controller
             }
             $data['verified'] = false;
             $start = '1';
-            $end = '';  
+            $end = '';
 
-            for ($i = 0; $i < $settings->otp -1; $i++) {
-                
+            for ($i = 0; $i < $settings->otp - 1; $i++) {
+
                 $start .= '0';
             }
             for ($i = 0; $i < $settings->otp; $i++) {
-                
+
                 $end .= '9';
             }
             $data['otp'] = rand(intval($start), intval($end));
+            $data['code'] = Str::random(30);
             // return $start . ' ----- '. $end . ' ----- '.  $data['otp'];
-            
+
             $otp = Otp::updateOrCreate(['contact' => $request->contact], $data);;
 
             //send code -- waiting for client's SMS gateway.
 
-            $msg = (new SMS())->sendSms(substr($otp->contact, 1), 'Hello, thank you for using Plenty of Things, use this OTP '.$otp->otp.' This OTP is valid for 30 minutes.');
+            $msg = (new SMS())->sendSms(substr($otp->contact, 1), 'Hello, thank you for using Plenty of Things, use this OTP ' . $otp->otp . ' This OTP is valid for 30 minutes.');
             // $msg = 'Otp has been added';
-            return response()->json(['success' => !!$otp, 'message' => $msg, 'otp'=>$otp->otp]);
+            return response()->json(['success' => !!$otp, 'message' => $msg,  'otp' => $otp->otp]);
         }
     }
 

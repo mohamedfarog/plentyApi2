@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTranslogsTable extends Migration
+class CreateEventcatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateTranslogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('translogs', function (Blueprint $table) {
+        Schema::create('eventcats', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('events');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateTranslogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('translogs');
+        Schema::dropIfExists('eventcats');
     }
 }

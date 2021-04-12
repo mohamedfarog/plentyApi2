@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\EventcatController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
@@ -11,20 +14,24 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TierController;
+use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\UserController;
 use App\Models\Addon;
 use App\Models\Cat;
 use App\Models\Color;
 use App\Models\Designer;
+use App\Models\Detail;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\Pass;
 use App\Models\Prodcat;
 use App\Models\Product;
+use App\Models\Schedule;
 use App\Models\Shop;
 use App\Models\Size;
 use App\Models\Style;
 use App\Models\Support;
+use App\Models\Timeslot;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,6 +39,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Thenextweb\Definitions\StoreCard;
 use Thenextweb\PassGenerator;
@@ -50,10 +58,13 @@ use Thenextweb\PassGenerator;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('events',[EventController::class, 'index']);
+Route::get('eventshops',[EventcatController::class, 'index']);
+
 
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);
-Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register'])->middleware('registration');;
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
@@ -62,10 +73,15 @@ Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
 Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
+Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
+    Route::post('addpoints',function () {
+        //TODO
+        return response()->json(['Success'=>  true ]);
+    });
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
@@ -74,6 +90,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('orders', OrderController::class);
     Route::resource('products', ProductController::class);
     Route::post('tier', [TierController::class, 'store']);
+    Route::resource('coupons', CouponController::class);
+    Route::post('wallet/topup',[UserController::class,'topUpWallet']);
 }); 
 
 Route::get('generate', function (Request $request) {
@@ -178,6 +196,35 @@ Route::get('test', function (Request $request) {
         }, 'user'])->where('id', $request->id)->first();
         return view('bill', ["data" => $order]);
     }
+    if(isset($request->timeslot)){
+
+        $timeslots= Timeslot::where('product_id', $request->product_id)->get();
+        $slotsarray= array();
+        foreach($timeslots as $timeslot){
+            $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->count();
+            $timeslot->setAttribute('bookingcount',$bookingcount);
+            array_push($slotsarray, $timeslot);
+        
+        }
+        return $slotsarray;
+
+
+        //timeslot_id
+        // Date, PRODUCT ID
+        // Get the day and find the count of booking for each timeslot
+        //bookignd_date, booking_time, booking_
+        //timeslot_id
+        //
+        // if(iss)
+
+
+
+     
+    }
+    if(isset($request->generattime)){
+        return (new Schedule())->generateTimes();
+    }
+
     return  $user =User::with(['tier'])->where('id', $request->userid)->first();
     
 });
@@ -186,3 +233,10 @@ Route::get('models', function (Request $request){
    return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(), 'user'=>User::first()]) ;
     
 });
+
+Route::get('/updates', function () {
+    $output = shell_exec('cd ../ && git pull && php artisan migrate');
+    echo "<pre>$output</pre>";;
+});
+
+

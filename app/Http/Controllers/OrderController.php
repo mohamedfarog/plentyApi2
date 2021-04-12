@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detail;
+use App\Models\Loyalty;
 use App\Models\Order;
+use App\Models\Tier;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +22,13 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
+        $orders = Order::with(['details' => function($details){
+            return $details->with(['product'=>function($product){
+                return $product->with(['images']);
+            },'size', 'color']);
+        },'user'])->where('user_id', $user->id)->paginate();
+        return $orders;
     }
 
     /**
@@ -64,6 +74,10 @@ class OrderController extends Controller
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
                     }
+                    if (isset($request->coupon_value)) {
+                        $order->coupon_value = $request->coupon_value;
+                    }
+        
                     if (isset($request->payment_method)) {
                         $order->payment_method = $request->payment_method;
                     }
@@ -79,6 +93,25 @@ class OrderController extends Controller
                     if (isset($request->user_id)) {
                         $order->user_id = $request->user_id;
                     }
+                    if(isset($request->lat)){
+                        $order->lat = $request->lat;
+                    }
+                    if(isset($request->lng)){
+                        $order->lng = $request->lng;
+                    }
+                    if(isset($request->delivery_note)){
+                        $order->delivery_note = $request->delivery_note;
+                    }
+                    if(isset($request->contact_number)){
+                        $order->contact_number = $request->contact_number;
+                    }
+                    if(isset($request->city)){
+                        $order->city = $request->city;
+                    }
+                    if(isset($request->label)){
+                        $order->label = $request->label;
+                    }
+                    
                     $msg = 'Order has been updated';
 
                     $order->save();
@@ -102,17 +135,60 @@ class OrderController extends Controller
             $data['total_amount'] = $request->total_amount;
             $data['amount_due'] = $request->amount_due;
             $data['delivery_location'] = $request->delivery_location;
+
+            //  addPoints
             if (isset($request->order_status)) {
                 $data['order_status'] = $request->order_status;
             }
             if (isset($request->payment_method)) {
                 $data['payment_method'] = $request->payment_method;
             }
+
+            if(isset($request->lat)){
+                $data['lat'] = $request->lat;
+            }
+            if(isset($request->lng)){
+                $data['lng'] = $request->lng;
+
+            }
+            if(isset($request->delivery_note)){
+                $data['delivery_note'] = $request->delivery_note;
+            }
+            if(isset($request->contact_number)){
+                $data['contact_number'] = $request->contact_number;
+            }
+            if(isset($request->city)){
+                $data['city'] = $request->city;
+            }
+            if(isset($request->label)){
+                $data['label'] = $request->label;
+            }
+
+            if (isset($request->points)) {
+                //TODO POINT DEDUCTION (CHECK AGAIN)
+
+                $customer= User::with(['tier'])->find($user->id);           //for updating the user model
+                $customer->points= $user->points-$request->points;
+            }
+            if (isset($request->wallet)) {
+                //TODO WALLET DEDUCTION (CHECK AGAIN)
+                $customer->wallet= $user->wallet  -$request->wallet;
+            }
+
+            $loyalty= new Loyalty();
+            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet);  
+            $customer->points+=$pointsearned;
+            
+            $customer->save();
+
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
             }
             if (isset($request->delivery_charge)) {
                 $data['delivery_charge'] = $request->delivery_charge;
+            }
+            if (isset($request->coupon_value)) {
+                $data['coupon_value'] = $request->coupon_value;
             }
 
 
@@ -140,8 +216,8 @@ class OrderController extends Controller
                 if (isset($orderdetails['booking_date'])) {
                     $arr['booking_date'] = $orderdetails['booking_date'];
                 }
-                if (isset($orderdetails['booking_time'])) {
-                    $arr['booking_time'] = $orderdetails['booking_time'];
+                if (isset($orderdetails['timeslot_id'])) {
+                    $arr['timeslot_id'] = $orderdetails['timeslot_id'];
                 }
                 if (isset($orderdetails['addons'])) {
                     
@@ -152,7 +228,9 @@ class OrderController extends Controller
             }
 
             $msg = 'Order has been added';
-            return response()->json(['success' => !!$order, 'message' => $msg]);
+   
+            
+            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $customer]);
         }
     }
 
