@@ -6,10 +6,12 @@ use App\Models\Access;
 use App\Models\ApplePass;
 use App\Models\Otp;
 use App\Models\Project;
+use App\Models\Shop;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Thenextweb\Definitions\StoreCard;
@@ -512,50 +514,56 @@ class UserController extends Controller
         }
         
     }
+    // Vendors sign up for the Bazar
+    public function vendorsRegister(Request $request)
+    {   
+        $user= Auth::user();
+        if($user->type=='S'){
+            $newuser= new User();
+            if(isset($request->name)){
+                $newuser->name = $request->name;
+            }
+            if(isset($request->email)){
+                $newuser->email = $request->email;
+            }
+            if(isset($request->password)){
+                $newuser->password =  Hash::make($request->password);
+            }
+            if(isset($request->contact)){
+                $newuser->contact = $request->contact;
+            }
+            if(isset($request->name)){
+                $newuser->name = $request->name;
+            }
+            $newuser->typeofuser= 'V';
+            $newuser->save();
+            $shop = new Shop();
+            if(isset($request->name_en)){
+                $shop->name_en  = $request->name_en;
+            }
+            if(isset($request->name_ar)){
+                $shop->name_ar  = $request->name_ar;
+            }
+            if(isset($request->desc_en)){
+                $shop->desc_en  = $request->desc_en;
+            }
+            if(isset($request->desc_ar)){
+                $shop->desc_ar  = $request->desc_ar;
+            }
+            if(isset($request->eventcat_id)){
+                $shop->eventcat_id  = $request->eventcat_id;
+            }
+            if(isset($request->active)){
+                $shop->active  = $request->active;
+            }
+            $shop->save();
+      
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
+
+        }
     }
 }
