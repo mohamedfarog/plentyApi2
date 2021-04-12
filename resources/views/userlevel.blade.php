@@ -185,7 +185,106 @@
     .carddets:nth-child(odd) {
         background: #f2f3f8;
     }
-
+    .howtext{
+        font-size:20px;
+    }
+    .userlvlrowuser{
+        width:50%;
+        margin:auto
+    }
+    .userlevelimg{
+        border: 1px solid #001b71;
+        width:120px;
+        float:left;
+    }
+    .userleveltxt{
+        margin-left:5px;
+        border: 1px solid #001b71;
+        width:75%;
+        float:left;
+        padding:0 5px;
+        height:120px;
+        vertical-align:middle;
+        line-height:120px;
+        border-right:20px solid blue;
+    }
+    .containerpoints{
+        width:60%;
+        margin:auto
+    }
+    .containerbar{
+        width:60%;
+        margin:auto;
+        margin-bottom:50px;
+    }
+    .howworkssec{
+        width:70%;
+        margin:auto;
+        margin-top:100px;
+    }
+    .howworkstxt{
+        font-weight:600;
+        color:black;
+        margin-left:10%;
+    }
+    .howworkssecdesc{
+        width:70%;
+        margin:auto;
+    }
+    .title-text{
+        margin-left:10%;
+    }
+    
+     @media only screen and (max-width: 1000px) {
+        .userlvlrowuser{
+            width:95%;
+            margin:auto
+        }
+        .userlevelimg{
+            border: 1px solid #001b71;
+            width:30%;
+            float:left;
+        }
+        .userleveltxt{
+            width:65%;
+        }
+        .containerbar{
+            width:90%;
+            margin:auto;
+            margin-bottom:50px;
+        }
+        .howworkssec{
+            width:100%;
+            margin:auto; 
+            margin-top:100px;
+        }
+        .howworkstxt{
+            font-weight:600;
+            color:black;
+            text-align:center;
+            margin:auto;
+            padding:10px 0;
+        }
+       .howworkssecdesc{
+            width:90%;
+            margin:auto;
+        }
+        .title-text{
+            margin-left:0;
+            text-align:center
+        }
+        .howsworksdivsecdesc{
+            width:100%;
+        }
+        .howtext{
+            width: 100%;
+            display: block;
+            text-align:center;
+        }
+        .imgworksdesc{
+            margin:auto;
+        }
+     }
 </style>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -201,12 +300,12 @@
 </section>
 
 <section class="mt-30 mb-30">
-    <div class="row" style="width:50%;margin:auto">
-        <div class="" style="border: 1px solid #001b71;width:120px;float:left;">
+    <div class="row userlvlrowuser" style="">
+        <div class="userlevelimg" style="">
             <img src="img/userlevel/sapphire.png">
         </div>
 
-        <div class="align-middle" style="margin-left:5px;border: 1px solid #001b71;width:75%;float:left;padding:0 5px;height:120px;vertical-align:middle;line-height:120px;border-right:20px solid blue">
+        <div class="align-middle userleveltxt" style="">
             <span style="font-size:18px;width:100%;">You are a
                 <span style="font-size:18px;font-family:'Avenir Bold'">Sapphire</span>
                 <span style="font-size:18px;">user</span>
@@ -216,28 +315,28 @@
 </section>
 
 <section class="mt-30 mb-30">
-    <div class="container" style="width:60%;margin:auto">
-        <div class="col-md-4 col-sm-12 col-xs-12" style="text-align:center">
+    <div class="container userlvlrowuser containerpoints" style="">
+        <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div>
-                <img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                <a  data-toggle="modal" data-target=".bd-example-modal-sm"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;"></a>
                 <img src="img/userlevel/sapphire.png">
             </div>
             <br>
             <h4 class="boldfont" style="color:#2257f4;font-family'Avenir Bold';font-family:18px;">Sapphire</h4>
             <span>1 SAR</span>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12" style="text-align:center">
+        <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div style="width:100%;">
-                <img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                <a data-toggle="modal" data-target=".bd-example-modal-sm"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;"></a>
                 <img src="img/userlevel/emerald.png">
             </div>
             <br>
             <h4 class="boldfont" style="color:#0c9d18;">Emerald</h4>
             <span>19,999 SAR</span>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12" style="text-align:center">
+        <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div style="width:100%;">
-                <img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                <a data-toggle="modal" data-target=".bd-example-modal-sm"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;"></a>
                 <img src="img/userlevel/topaz.png">
             </div>
             <br>
@@ -246,12 +345,82 @@
         </div>
     </div>
 </section>
-<section style="width:60%;margin:auto;margin-bottom:50px;">
-    <div class="w3-border" style="border-radius:50px;background-color: #e2e2e2;">
+<section class="containerbar" style="">
+    <div class="w3-border" style="border-radius:50px;background-color: #e2e2e2;margin-top:30px;position:relative;display:block;" >
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;top: -35px;left:1%">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;top: -35px;left:35%;">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;top: -35px;left:65%" >
+        <img src="img/userlevel/triangle.png" style="position:absolute;top: 30px;left:18%" >
+        <span style="position:absolute;top: 50px;left:14%" >15,450 SAR</span>
         <div class="w3-grey" style="height:20px;width:20%;border-radius:50px;background-color:#ffa400 !important;"></div>
-    </div>
+    </div> 
 </section>
 
+<section class="bg-light howworkssec" style="margin-bottom:30px;">
+    <div class="container relative clearfix">
+        <div class="title-holder">
+            <div class="title-text">
+                <h4 class="howworkstxt" style="">How it works?</h4>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="howworkssecdesc" style="">
+    <div class="container relative clearfix howsworksdivsecdesc">
+        <div class="title-holder">
+            <div class="title-text" style="">
+                <div class="row">
+                    <img src="img/userlevel/star.png" class="imgworksdesc">
+                    <span class="howtext">You earn points everytime you spend at Plenty <span>
+                </div>
+                <div class="row">
+                    <img src="img/userlevel/gift-box.png" class="imgworksdesc">
+                    <span class="howtext">Use your points to redeem exciting deals & <span>
+                </div>
+                <div class="row">
+                    <img src="img/userlevel/crown.png" class="imgworksdesc">
+                    <span class="howtext">Promotions<span>
+                </div> 
+
+
+            </div>
+        </div>
+    </div> 
+</section>
+
+<section style="margin-top:50px;margin-bottom:50px;">
+
+</section>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px;">
+            <div class="modal-content">
+                <div style="text-align:center;margin-top:10px">
+                    <img src="img/userlevel/emerald.png">
+                </div>
+                <div style="text-align:center;background:#11ad1a;padding:10px 0;"> 
+                    <span style="font-family:'Avenir Bold';color:white;font-size:24px;">Emerald</span>
+                </div>
+                <div style="text-align:center;margin-top:50px">
+                    <h4 style="color:black;font-weight:600;margin:0"> Get x2 Loyalty Points for every Riyal spent</h4>
+                    <span style="color:#c8c8c8">(eg. 1000 SAR = 2000 Points)</span>
+                </div>
+                <div style="text-align:center;margin-top:30px">
+                    <h4 style="color:black;font-weight:600;margin:0">Get a discount of 2% for Loyalty Point Redeemed</h4>
+                    <span style="color:#c8c8c8">(eg. 1000 Points = 20 SAR Discount)</span>
+                </div>
+                <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
+                    <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px"  data-dismiss="modal"> OKAY </button>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+
+
+ 
 <div style="border: 2px solid #b2bad4">
     @include('footer')
 </div>
