@@ -21,8 +21,6 @@ class AddToIsvendor extends Migration
             $table->point('latlng')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->double('lat')->nullable();
-            $table->double('lng')->nullable();
             $table->tinyInteger('isvendor')->default(0);
         });
     }
