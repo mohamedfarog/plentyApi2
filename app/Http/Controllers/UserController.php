@@ -556,6 +556,7 @@ class UserController extends Controller
             if(isset($request->active)){
                 $shop->active  = $request->active;
             }
+            $shop->isvendor=1;
             $shop->save();
       
 

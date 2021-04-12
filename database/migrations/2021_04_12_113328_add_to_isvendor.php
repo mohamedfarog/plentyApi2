@@ -34,6 +34,13 @@ class AddToIsvendor extends Migration
     {
         Schema::table('shops', function (Blueprint $table) {
             $table->dropColumn('isvendor');
+            $table->dropColumn('lat');
+            $table->dropColumn('lng');
+            $table->dropColumn('contact');
+            $table->dropColumn('placename');
+            $table->dropColumn('latlng');
+            $table->dropForeign('user_id');
+            $table->dropColumn('user_id');
         });
     }
 }
