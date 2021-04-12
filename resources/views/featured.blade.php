@@ -28,16 +28,16 @@
 
 <!-- Hero Slider -->
 <section class="hero-wrap text-center relative">
-    <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated">
+    <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated" style="height: 400px;">
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/1.jpg)">
             <div class="container">
-                <div class="hero-holder">
+                <div class="hero-holder" style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="/" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/2.jpg)">
             <div class="container">
-                <div class="hero-holder">
+                <div class="hero-holder" style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
@@ -60,7 +60,7 @@
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/3.jpg)">
             <div class="container">
-                <div class="hero-holder">
+                <div class="hero-holder" style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
@@ -74,7 +74,7 @@
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/4.jpg)">
             <div class="container">
-                <div class="hero-holder">
+                <div class="hero-holder"  style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
@@ -88,7 +88,7 @@
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/5.jpg)">
             <div class="container">
-                <div class="hero-holder">
+                <div class="hero-holder"  style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
@@ -101,67 +101,9 @@
         </div>
     </div>
 </section> <!-- end hero slider -->
-
-<!-- Promo Banners -->
-<section class="section-wrap promo-banners pb-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2 class="title-border">{{ __('website.welcome') }}</h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="#">
-                    <div style="">
-                    </div>
-                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
-                        <source src="img/category/dine.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-
-                    <div class="overlay categoverlay"></div>
-                    <div class="promo-inner valign">
-                        <h2>DELICACY</h2>
-
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-
-                <a href="#">
-                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
-                        <source src="img/category/beauty.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="overlay categoverlay"></div>
-                    <div class="promo-inner valign">
-                        <h2>BEAUTY</h2>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="#">
-                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
-                        <source src="img/category/fashion.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="overlay categoverlay"></div>
-                    <div class="promo-inner valign">
-                        <h2>FASHION</h2>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section> <!-- end promo banners -->
-
+ 
+<section style="margin-top:50px;">
+</section>
 
 <!-- Trendy Products -->
 <section class="section-wrap-sm new-arrivals ">
@@ -196,7 +138,7 @@
         </div>
     </div>
 </section> <!-- end trendy products -->
-<section class="regular slider" style="width:90%;text-align:center;margin:auto">
+<section style="width:90%;text-align:center;margin:auto">
     @if(isset($featured_products))
     @foreach($featured_products as $product)
 
@@ -229,60 +171,8 @@
     @endforeach
     @endif
 </section>
-
-<div class="purchase-online-area ">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2 class="title-border">Brands</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <!-- Nav tabs -->
-
-            </div>
-            <div class="col-lg-12">
-                <!-- Tab panes -->
-                <div class="-">
-                    <div class="tab-pane active" id="new-arrivals">
-                        <div class="row">
-
-
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<section class="brandsslider slider" style="width:90%;text-align:center;margin:auto">
-    @if(isset($homebrands))
-    @foreach($homebrands as $hb)
-    <?php
-    $primary = $hb->primary;
-    $primarycolor = substr($primary, -6);
-    ?>
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
-        <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
-            <a href="/product">
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-            </a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-    </div>
-
-    @endforeach
-    @endif
-
-</section>
+ 
+ 
 
 <section style="height:50px;">
 </section>
