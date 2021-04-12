@@ -519,7 +519,9 @@ class UserController extends Controller
     {   
         
         $user= Auth::user();
+        return $user;
         if($user->type=='S'){
+     
             $newuser= new User();
             if(isset($request->name)){
                 $newuser->name = $request->name;
@@ -538,7 +540,6 @@ class UserController extends Controller
             }
             $newuser->typeofuser= 'V';
             $newuser->save();
-            return $newuser;
             $shop = new Shop();
             if(isset($request->name_en)){
                 $shop->name_en  = $request->name_en;
