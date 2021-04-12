@@ -517,6 +517,7 @@ class UserController extends Controller
     // Vendors sign up for the Bazar
     public function vendorsRegister(Request $request)
     {   
+        return $request->all();
         $user= Auth::user();
         if($user->type=='S'){
             $newuser= new User();
