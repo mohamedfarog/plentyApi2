@@ -519,7 +519,8 @@ class UserController extends Controller
     {   
         
         $user= Auth::user();
-      
+        $settings = Project::first();
+        
         if($user->typeofuser=='S'){
      
             $newuser= new User();
@@ -539,6 +540,30 @@ class UserController extends Controller
                 $newuser->name = $request->name;
             }
             $newuser->typeofuser= 'V';
+            $start = '1';
+            $end = '';
+            for ($i = 0; $i < $settings->invcode - 1; $i++) {
+
+                $start .= '0';
+            }
+            for ($i = 0; $i < $settings->invcode; $i++) {
+
+                $end .= '9';
+            }
+            $run = true;
+            $code = 'P-' . rand(intval($start), intval($end));
+
+            while ($run) {
+
+                $user = User::where('invitation_code', $code)->first();
+                if ($user != null) {
+                    $code = 'P-' . rand(intval($start), intval($end));
+                } else {
+                    $user->invitation_code = $code;
+                    $run = false;
+                }
+            }
+            
             $newuser->save();
             $shop = new Shop();
             if(isset($request->name_en)){
@@ -561,6 +586,7 @@ class UserController extends Controller
             }
             $shop->user_id=$newuser->id;
             $shop->isvendor=1;
+       
             $shop->save();
             return response()->json(['success' => !!$user, 'Vendor' => $shop]);
 
