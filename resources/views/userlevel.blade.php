@@ -98,7 +98,7 @@
     }
 
     .boldfont {
-        font-family: 'Avenir';
+        font-family: 'Avenir Bold';
         font-weight: 600 !important;
         font-size: 16px !important;
     }
@@ -187,7 +187,7 @@
     }
 
 </style>
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <section class="page-title text-center bg-light ">
     <div class="container relative clearfix">
@@ -202,21 +202,53 @@
 
 <section class="mt-30 mb-30">
     <div class="row" style="width:50%;margin:auto">
-        <div class="col-lg-4" style="border: 1px solid blue">
+        <div class="" style="border: 1px solid #001b71;width:120px;float:left;">
             <img src="img/userlevel/sapphire.png">
         </div>
-        <div class="col-lg-8">
-            <span>You are a</span><br>
-            <span>Sapphire</span><span>user</span>
-        </div>
 
-    </div>
+        <div class="align-middle" style="margin-left:5px;border: 1px solid #001b71;width:75%;float:left;padding:0 5px;height:120px;vertical-align:middle;line-height:120px;border-right:20px solid blue">
+            <span style="font-size:18px;width:100%;">You are a
+                <span style="font-size:18px;font-family:'Avenir Bold'">Sapphire</span>
+                <span style="font-size:18px;">user</span>
+            </span><br>
+        </div>
     </div>
 </section>
 
 <section class="mt-30 mb-30">
-    <div class="row" style="width:50%;margin:auto">
-       
+    <div class="container" style="width:60%;margin:auto">
+        <div class="col-md-4 col-sm-12 col-xs-12" style="text-align:center">
+            <div>
+                <img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                <img src="img/userlevel/sapphire.png">
+            </div>
+            <br>
+            <h4 class="boldfont" style="color:#2257f4;font-family'Avenir Bold';font-family:18px;">Sapphire</h4>
+            <span>1 SAR</span>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12" style="text-align:center">
+            <div style="width:100%;">
+                <img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                <img src="img/userlevel/emerald.png">
+            </div>
+            <br>
+            <h4 class="boldfont" style="color:#0c9d18;">Emerald</h4>
+            <span>19,999 SAR</span>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12" style="text-align:center">
+            <div style="width:100%;">
+                <img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                <img src="img/userlevel/topaz.png">
+            </div>
+            <br>
+            <h4 class="boldfont" style="color:#3fdcec;">Topaz</h4>
+            <span>29,999 SAR</span>
+        </div>
+    </div>
+</section>
+<section style="width:60%;margin:auto;margin-bottom:50px;">
+    <div class="w3-border" style="border-radius:50px;background-color: #e2e2e2;">
+        <div class="w3-grey" style="height:20px;width:20%;border-radius:50px;background-color:#ffa400 !important;"></div>
     </div>
 </section>
 

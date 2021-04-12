@@ -1,6 +1,7 @@
 @extends('layout')
 @section('content')
 <link rel="stylesheet" href="css/hurst.css">
+
 <style>
     body,
     span {
@@ -473,6 +474,24 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="billing-details pr-20">
                                                 <h4 class="title-1 title-border text-uppercase mb-30 ordsumtitle">Delivery Address</h4>
+                                                 <div class="form-group">
+                                                    <label id="saloon_map">Salon Location</label>
+                                                    <div id="map" class="form-control" style="height:400px;"></div>
+                                                    <br>
+                                                    <div class="row" style="margin:auto;">
+                                                        <a onclick="getLocation()" class="btn btn-outline-primary"
+                                                            style="width:30%;color:black;">Current Location</a>
+                                                        <div style="width:5%;"></div>
+                                                        <input type="text" id="lat" name="lat" readonly="yes" class="form-control"
+                                                            style="width:30%;" placeholder="latitude">
+                                                        <div style="width:5%;"></div>
+                                                        <input type="text" id="lng" name="lng" readonly="yes" class="form-control"
+                                                            style="width:30%;" placeholder="longitude">
+
+
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-4 col-xs-12">
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">Address: </label>
@@ -849,5 +868,8 @@
     });
 
 </script>
+<script src="js/map.js" defer></script>
+<script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyDQxeWFV5QiIZIPw5iRD5H1d5LxycBkou8&sensor=false&libraries=places' defer async>
+</script>    
 @endsection
 
