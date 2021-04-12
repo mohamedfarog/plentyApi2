@@ -240,7 +240,7 @@
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/delicacy">Featured</a>
+                                            <a href="/featured">Featured</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">

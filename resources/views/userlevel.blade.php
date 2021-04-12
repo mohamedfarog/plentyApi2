@@ -394,7 +394,7 @@
 
 </section>
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm" t1abindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" style="width:400px;">
             <div class="modal-content">
                 <div style="text-align:center;margin-top:10px">
