@@ -176,10 +176,7 @@ class OrderController extends Controller
             }
 
             $loyalty= new Loyalty();
-            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet);  
-            $customer->points+=$pointsearned;
-            
-            $customer->save();
+
 
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
@@ -193,6 +190,7 @@ class OrderController extends Controller
 
 
             $order = Order::create($data);
+            $shoplist =  array();                // List of Shop Ids
             foreach ($request->orderdetails as $orderdetails) {
                 $arr = array();
                 if (isset($orderdetails['product_id'])) {
@@ -203,6 +201,13 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['shop_id'])) {
                     $arr['shop_id'] = $orderdetails['shop_id'];
+                    if(!in_array($shoplist,$orderdetails['shop_id'])){
+                        array_push($shoplist,['shop_id'=> $orderdetails['shop_id'] ,'price' => $orderdetails['price'] ]);
+                    }
+                    else{
+                        $shoplist['price']= $shoplist['price'] + $orderdetails['price'];
+                    }
+                    return $shoplist;
                 }
                 if (isset($orderdetails['price'])) {
                     $arr['price'] = $orderdetails['price'];
@@ -226,7 +231,11 @@ class OrderController extends Controller
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
             }
-
+            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
+              
+            $customer->points+=$pointsearned;
+            
+            $customer->save();
             $msg = 'Order has been added';
    
             
