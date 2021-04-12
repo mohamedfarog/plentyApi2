@@ -559,7 +559,7 @@ class UserController extends Controller
                 if ($user != null) {
                     $code = 'P-' . rand(intval($start), intval($end));
                 } else {
-                    $user->invitation_code = $code;
+                    $newuser->invitation_code = $code;
                     $run = false;
                 }
             }
