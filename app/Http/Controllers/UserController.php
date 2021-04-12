@@ -556,10 +556,10 @@ class UserController extends Controller
             if(isset($request->active)){
                 $shop->active  = $request->active;
             }
+            $shop->user_id=$newuser->id;
             $shop->isvendor=1;
             $shop->save();
-      
-
+            return response()->json(['success' => !!$user, 'Vendor' => $shop]);
 
 
 
