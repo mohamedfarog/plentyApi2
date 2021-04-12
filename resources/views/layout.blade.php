@@ -232,11 +232,11 @@
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/delicacy">Beauty</a>
+                                            <a href="/beauty">Beauty</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/delicacy">Fashion</a>
+                                            <a href="/fashion">Fashion</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
@@ -244,7 +244,7 @@
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/delicacy">Brands</a>
+                                            <a href="/brands">Brands</a>
 
                                         </li> <!-- end elements -->
 

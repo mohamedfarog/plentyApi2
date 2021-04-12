@@ -107,3 +107,6 @@ Route::get('/featured', function () {
 Route::get('/brands', function () {
     return view('/brands');
 });
+
+Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
+Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
