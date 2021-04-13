@@ -69,7 +69,10 @@
         margin-left: 100px;
         display: none;
     }
-
+    .product-img{
+        width:100%;
+        margin-bottom:0 !important;
+    }
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;
@@ -240,8 +243,8 @@
         @if(isset($trywith))
         @foreach($trywith as $tw)
 
-        <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="border:2px solid transparent;">
-            <div class="product-img">
+        <div class="brand-slide " style="border:2px solid transparent;">
+            <div class="product-img" >
                 <div class="frame">
                     @if ($tw->image)
                     <a href="{{ url('/product/' . $tw->id) }}">

@@ -10,16 +10,16 @@
 
                             <div class="footer-socials">
                                 <div class="social-icons nobase" style="padding:0 20px;">
-                                    <a href="#"><img class="socialfooter" src="img/social/whatsapp.png"></a>
-                                    <a href="#"><img class="socialfooter" src="img/social/facebook.png"></a>
-                                    <a href="#"><img class="socialfooter" src="img/social/instagram.png"></a>
-                                    <a href="#"><img class="socialfooter" src="img/social/twitter.png"></a>
+                                    <a href="tel:+966501233344"><img class="socialfooter" src="img/social/whatsapp.png"></a>
+                                    <a href="https://www.facebook.com/Plenty-of-Things-110954667698263"><img class="socialfooter" src="img/social/facebook.png"></a>
+                                    <a href="https://instagram.com/plenty_sa?igshid=1u4kjykb9losw"><img class="socialfooter" src="img/social/instagram.png"></a>
+                                    <a href="https://twitter.com/plenty_sa"><img class="socialfooter" src="img/social/twitter.png"></a>
 
                                 </div>
                             </div>
                             <p class="" style="margin-top: 10px;margin-bottom:0;line-height: 20px;">Tel: +966 50 123
                                 3344</p>
-                            <p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p>
+                            <a href="mailto:info@plentyofthings.com"><p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p></a>
                         </div>
                     </div> <!-- end about us -->
 
@@ -28,9 +28,9 @@
                             <h5 class="widget-title bottom-line left-align grey bottomtitleheader">Help & Information
                             </h5>
                             <ul class="list-no-dividers">
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Track Order</a></li>
-                                <li><a href="#">Delivery & Returns</a></li>
+                                <li><a href="/">Help</a></li>
+                                <li><a href="/trackorder">Track Order</a></li>
+                                <li><a href="/">Delivery & Returns</a></li>
                             </ul>
                         </div>
                     </div>
@@ -40,9 +40,9 @@
                             <h5 class="widget-title bottom-line left-align grey bottomtitleheader">About Plenty</h5>
                             <ul class="list-no-dividers">
                                 <li><a href="/aboutus">About us</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Corporate Responsibility</a></li>
-                                <li><a href="#">Investors Site</a></li>
+                                <li><a href="/careers">Careers</a></li>
+                                <li><a href="/">Corporate Responsibility</a></li>
+                                <li><a href="/">Investors Site</a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,10 +51,10 @@
                         <div class="widget footer-links" style="">
                             <h5 class="widget-title bottom-line left-align grey bottomtitleheader">More From Plenty</h5>
                             <ul class="list-no-dividers">
-                                <li><a href="#">Plenty Mobile App</a></li>
-                                <li><a href="#">Plenty Marketplace</a></li>
-                                <li><a href="#">Plenty Loyalty Points</a></li>
-                                <li><a href="#">Rewards</a></li>
+                                <li><a href="/">Plenty Mobile App</a></li>
+                                <li><a href="/">Plenty Marketplace</a></li>
+                                <li><a href="/userlevel">Plenty Loyalty Points</a></li>
+                                <li><a href="/userlevel">Rewards</a></li>
                             </ul>
                         </div>
                     </div>

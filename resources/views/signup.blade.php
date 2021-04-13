@@ -30,15 +30,19 @@
     .smsCode {
         width: 60px !important;
         padding: 0 !important;
+<<<<<<< Updated upstream
     }
 
     .smsCode {
         width: 40px !important;
 
+=======
+>>>>>>> Stashed changes
     }
 
     input:focus {
         background: #e3e3e3 !important;
+<<<<<<< Updated upstream
     }
 
     .otp-input {}
@@ -60,7 +64,12 @@
             content: " ";
             height: 100%;
         }
+=======
+>>>>>>> Stashed changes
     }
+
+    .otp-input {}
+
 
     .modal-dialog {
         display: inline-block;
@@ -76,19 +85,23 @@
         box-shadow: 0 0 5px #ccc inset;
         width: 100%;
         outline: none;
-
-
+        border-radius: 15px !important;
+        height: 70px !important;
+        width: 70px !important;
     }
 
     .otp input {
         background-color: #f1f1f1;
-        width: auto;
-        border-radius: 3px;
+        width: auto; 
     }
 
     .otp-field {
         display: inline;
+<<<<<<< Updated upstream
 
+=======
+        margin-left: 20px;
+>>>>>>> Stashed changes
     }
 
     #otpModal .modal-header {
@@ -133,7 +146,7 @@
 
     input[type="text"],
     input[type="password"] {
-        background: #f6f6f6 none repeat scroll 0 0;
+        background: #f2f3f8 none repeat scroll 0 0;
         border: medium none;
         box-shadow: none;
         color: #272c65;
@@ -207,8 +220,18 @@
     .sfa {
         margin-right: 5px !important;
     }
+    .modaltextp{
+        font-size:16px;
+        font-weight:100;
+    }
+    @media screen and (min-width: 768px) {
+        .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 100%;
+        }
 
-    @media only screen and (max-width: 600px) {
         .contymobile {
             width: 90%;
         }
@@ -248,15 +271,15 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-content" style="padding: 50px;">
+                <div class="modal-header" style="margin-bottom:50px;">
+                    <p class="modaltextp">Verification Account</p>
                 </div>
                 <div>
-                    <h1>Verification Account</h1>
+
                 </div>
                 <div>
-                    <p>
+                    <p class="modaltextp">
                         Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to +919239739
                     </p>
                 </div>
@@ -278,10 +301,12 @@
                     </div>
                     <div>
                         <p>
-                            Didn't recieve any code? <a href="#">Resend</a>
+                            Didn't recieve any code? <a href="#" style="text-decoration:underline;color:#001b71;">Resend</a>
                         </p>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" onclick="verifyOTP()">Submit</button>
+                    <div style="margin-top:50px;">
+                        <button type="submit" class="btn btn-primary btn-block" onclick="verifyOTP()" style="background:#001b71;font-size:15px;font-weight:100;">Verify</button>
+                    </div>
                 </div>
             </div>
 

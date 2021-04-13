@@ -31,7 +31,7 @@ class WebsiteHomeController extends Controller
     private function homebrands()
     {
         return  DB::table('shops')
-            ->select(DB::raw('styles.brandheader,styles.primary'))
+            ->select(DB::raw('styles.brandheader,styles.primary,styles.shop_id'))
             ->join('styles', 'styles.shop_id', '=', 'shops.id')
             ->get();
     }

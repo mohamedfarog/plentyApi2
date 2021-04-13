@@ -72,7 +72,7 @@
         margin: 3em auto;
         padding: 20px 50px 10px 50px;
         border: 1px solid #dcdcff;
-        border-radius: 20px;
+        border-radius: 50px;
         background: #fff;
         box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
@@ -89,9 +89,10 @@
         border-radius: 3px;
         border-collapse: collapse;
         color: #444;
-        font-size: 15px;
-        font-weight: 800;
+        font-size: 18px;
+        font-weight: 100;
         margin: auto;
+        font-family:'Avenir Bold'
 
     }
 
@@ -111,7 +112,7 @@
 
     .calendar-wrapper .today:hover,
     .calendar-wrapper .normal:hover {
-        background-color: palevioletred;
+        background-color: #edbddb;
         border-radius: 50%;
     }
 
@@ -122,13 +123,13 @@
     .calendar-wrapper td.today {
         font-weight: 700;
         color: #28283b;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
 
     .calendar-wrapper thead td {
         border: none;
         color: #c31c4a;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
 
     .calendar-wrapper #btnPrev {
@@ -197,17 +198,15 @@
 
     /* styling for calendar footer */
 
-    .time-shedule-wrapper {
-        height: 200px;
-
+    .time-shedule-wrapper { 
+        height: 300px;
         background-color: #fff;
-        border-radius: 20px;
+        border-radius: 0 0 50px 50px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         position: relative;
-        top: -60px;
-        padding: 60px 50px 150px 50px;
-
+        top: -100px;
+        padding: 100px 50px 150px 50px; 
     }
 
     .day-booked {
@@ -225,13 +224,13 @@
         text-align: center;
         text-align: center;
         text-decoration: none;
-        font-size: 16px;
+        font-size: 18px;
         cursor: pointer;
         width: 150px;
         height: 40px;
         background-color: white;
-        color: black;
-        border: 2px solid pink;
+        color: #edbddb;
+        border: 2px solid #c31c4a;
         border-radius: 30px;
         margin: 5px 5px;
 
@@ -298,6 +297,10 @@
     .calendar-btn-right {
         margin-right: 30px
     }
+    .activemonthtd{
+        font-family:'Avenir';
+        font-weight:100;
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/booking/skirts.png') no-repeat scroll center center / cover;">
@@ -325,7 +328,7 @@
             <div class="col-lg-5"></div>
             <div class="col-lg-7">
                 <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
-                    GEL NAILS <span style="color:#edbddb">SAR 50</span></h4>
+                    GEL NAILS <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR 50</span></h4>
             </div>
         </div>
     </div>
@@ -351,8 +354,8 @@
                         <button id="btnNext" type="button"></button>
                         <div id="divCal"></div>
                         <div class="day-status">
-                            <span class="booking-available">Available</span>
-                            <span class="booked">Booked</span>
+                            <span class="booking-available" style="font-weight:100;">Available</span>
+                            <span class="booked" style="font-weight:100;">Booked</span>
                         </div>
                     </div>
                     <div class="time-shedule-wrapper">
@@ -493,21 +496,18 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            ,
-            firstDayOfMonth = new Date(y, m, 1).getDay()
+            , firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            ,
-            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            ,
-            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table>';
 
         // Write selected month and year
         html += '<thead><tr>';
-        html += '<td colspan="7">' + this.Months[m] + '</td>';
+        html += '<td colspan="7" class="activemonthtd">' + this.Months[m] + '</td>';
         html += '</tr></thead>';
 
 
@@ -628,6 +628,7 @@
     function dayClicked(id) {
         console.log(id, month, year)
     }
+
 </script>
 <script src="js/prodjs.js"></script>
 @endsection
