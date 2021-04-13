@@ -39,7 +39,7 @@
                         <div class="widget footer-links">
                             <h5 class="widget-title bottom-line left-align grey bottomtitleheader">About Plenty</h5>
                             <ul class="list-no-dividers">
-                                <li><a href="#">About us</a></li>
+                                <li><a href="/aboutus">About us</a></li>
                                 <li><a href="#">Careers</a></li>
                                 <li><a href="#">Corporate Responsibility</a></li>
                                 <li><a href="#">Investors Site</a></li>

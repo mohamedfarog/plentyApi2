@@ -274,7 +274,8 @@
                                     <li class="nav-cart">
                                         <div class="nav-cart-outer">
                                             <div class="nav-cart-inner">
-                                                <a href="#" class="nav-cart-icon">
+                                                <a href="/cart" class="" style="font-size: 14px;">
+                                                    <img src="img/nav/bag.png" alt="" style="width:20px;height:20px;">
                                                     0
                                                 </a>
                                             </div>

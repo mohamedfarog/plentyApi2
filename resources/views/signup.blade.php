@@ -27,10 +27,14 @@
         text-align: center;
     }
     .smsCode{
-        width:40px !important;
+        width: 60px !important;
+        padding:0 !important;
     }
     input:focus {
-       background: grey !important;
+       background: #e3e3e3 !important;
+    }
+    .otp-input{
+       
     }
     @media screen and (min-width: 768px) {
         .modal:before {
@@ -67,6 +71,7 @@
 
     .otp-field {
         display: inline;
+       
     }
 
     #otpModal .modal-header {
