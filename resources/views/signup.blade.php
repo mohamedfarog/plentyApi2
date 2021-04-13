@@ -26,27 +26,32 @@
     .modal {
         text-align: center;
     }
-<<<<<<< Updated upstream
-    .smsCode{
+
+    .smsCode {
         width: 60px !important;
-        padding:0 !important;
-=======
+        padding: 0 !important;
+    }
 
     .smsCode {
         width: 40px !important;
->>>>>>> Stashed changes
+
     }
 
     input:focus {
-<<<<<<< Updated upstream
-       background: #e3e3e3 !important;
+        background: #e3e3e3 !important;
     }
-    .otp-input{
-       
-=======
+
+    .otp-input {}
+
+
+    .smsCode {
+        width: 40px !important;
+    }
+
+    input:focus {
         background: grey !important;
->>>>>>> Stashed changes
     }
+
 
     @media screen and (min-width: 768px) {
         .modal:before {
@@ -83,7 +88,7 @@
 
     .otp-field {
         display: inline;
-       
+
     }
 
     #otpModal .modal-header {
