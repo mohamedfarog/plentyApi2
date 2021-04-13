@@ -108,5 +108,14 @@ Route::get('/brands', function () {
     return view('/brands');
 });
 
+Route::get('/aboutus', function () {
+    return view('/aboutus');
+});
+
+Route::get('/careers', function () {
+    return view('/careers');
+});
+
+
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
