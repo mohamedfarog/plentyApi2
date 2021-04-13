@@ -49,27 +49,9 @@
         text-align: center;
     }
 
-    @media only screen and (max-width: 600px) {
-        .contmobile {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            width: 350px;
-        }
-
-        .product-info {
-            width: 100% !important;
-        }
-
-        .cart-plus-minus {
-            width: 100% !important;
-        }
-
-    }
-
-
     /*  calendar styling*/
     .calendar-wrapper {
-        margin: 3em auto;
+        margin: 2em auto;
         padding: 20px 50px 10px 50px;
         border: 1px solid #dcdcff;
         border-radius: 50px;
@@ -302,6 +284,34 @@
         font-weight: 100;
     }
 
+    .homebrandtitle {
+        width: 30%;
+        padding: 50px 0;
+        filter: brightness(0) invert(1);
+    }
+
+    @media only screen and (max-width: 600px) {
+        .contmobile {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: 350px;
+        }
+
+        .product-info {
+            width: 100% !important;
+        }
+
+        .cart-plus-minus {
+            width: 100% !important;
+        }
+
+        .homebrandtitle {
+            width: 100%;
+            padding: 50px 0;
+            filter: brightness(0) invert(1);
+        }
+    }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/booking/skirts.png') no-repeat scroll center center / cover;">
@@ -310,7 +320,7 @@
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title" style="text-align:center">
-                        <img src="img/homebrands/Skirts.png" style="width:30%;padding: 50px 0">
+                        <img src="img/homebrands/Skirts.png" style="" class="homebrandtitle">
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
@@ -327,9 +337,8 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-5"></div>
-            <div class="col-lg-7">
-                <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
-                    GEL NAILS <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR 50</span></h4>
+            <div class="col-lg-6">
+
             </div>
         </div>
     </div>
@@ -348,9 +357,10 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7" style="padding:0 15px">
-
-                    <div class="calendar-wrapper">
+                <div class="col-lg-7" style="padding:0 30px 0 0">
+                    <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
+                        GEL NAILS <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR 50</span></h4>
+                    <div class="calendar-wrapper" style="margin-top:80px;">
                         <button id="btnPrev" type="button"></button>
                         <button id="btnNext" type="button"></button>
                         <div id="divCal"></div>
@@ -390,26 +400,28 @@
     </div>
 </div>
 
-<div class="container contmobile" style="background-color:#f2f3f8;margin-top:20px">
+<div class="container contmobile" style="background-color:#f2f3f8;margin-top:40px;padding-left: 40px;">
 
     <div class="your-booking">
-        <h4 style="margin-top: 30px;color:black">Your Booking</h4>
+        <h4 style="margin-top: 30px;color:black;font-weight:500;font-size:24px;">Your Booking</h4>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="padding-left: 50px;">
+
                 <div class="booking-item">
-                    GET NAILS <span>SAR 50</span>
+                    <span style="font-size:24px;color:black;width:200px;display:block;float:left;">GET NAILS </span>
+                    <span style="font-size:24px;">SAR 50</span>
                 </div>
-                <div class="booking-item">
-                    March 14 <span>04:30 PM</span>
+                <div class="booking-item" style="font-size:24px;">
+                    <span style="font-size:24px;color:black;width:200px;display:block;float:left;">March 14 </span>
+                    <span style="font-size:24px;">04:30 PM</span>
                 </div>
             </div>
             <div class="col-lg-6">
-                <button class=" addtobagbtn floatright" style="margin-top: 40px;border-color:#c31c4a">
-                    <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a">
+                <button class=" addtobagbtn floatright" style="margin-top: 40px;border-color:#c31c4a;vertical-align:bottom">
+                    <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
                         Add to Bag
                     </span>
                     <img src="img/product/bag-red.png" style="width:30px;">
-
                 </button>
             </div>
 
@@ -423,7 +435,7 @@
 
 <script>
     $(document).ready(function() {
-        console.log("ready!");
+
         $(".active").css("background-color", "black");
     });
 
@@ -480,7 +492,8 @@
             this.currYear = this.currYear - 1;
         } else {
             this.currMonth = this.currMonth - 1;
-        }1
+        }
+        1
         this.showcurr();
     };
 
@@ -631,5 +644,9 @@
 
 </script>
 <script src="js/prodjs.js"></script>
+
+<div style="border: 2px solid #b2bad4;margin-top: 30px;">
+    @include('footer')
+</div>
 @endsection
 

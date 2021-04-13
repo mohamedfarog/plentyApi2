@@ -435,7 +435,7 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 
-    //for filtering product based on category
+    //for ing product based on category
     function getProducts(element, category = 0) {
         $.ajax({
             type: 'GET'
