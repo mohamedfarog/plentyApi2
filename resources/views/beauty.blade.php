@@ -1,7 +1,6 @@
 @extends('layout')
 @section('content')
 <style>
-
     section.wholetabs {
         width: 90%;
         margin: auto;
@@ -11,7 +10,7 @@
         border-radius: 15px !important;
         border: 2px solid white;
         text-transform: none;
-        line-height: 35px; 
+        line-height: 35px;
     }
 
     .hero-subtitle-dine {
@@ -140,40 +139,48 @@
     .mobiletabs {
         display: none;
     }
-    .divitext{
-        color:white;
-        font-size:24px;
-        font-weight:100;
+
+    .divitext {
+        color: white;
+        font-size: 24px;
+        font-weight: 100;
         font-family: 'Avenir';
     }
-    .buttonsshow{
-        background:green;
-        height:30px;
-        width:80%; 
+
+    .buttonsshow {
+        background: green;
+        height: 30px;
+        width: 80%;
         text-align: center;
-        margin:auto;
-        margin-bottom:20px;
+        margin: auto;
+        margin-bottom: 20px;
     }
- 
+
     @media only screen and (max-width: 600px) {
-        .catmobile{
-            font-size:16px;
+        .catmobile {
+            font-size: 16px;
         }
-        .tabprod{
-            display:block !important;
+
+        .tabprod {
+            display: block !important;
         }
-        .frame{
-            width:400px;
+
+        .frame {
+            width: 400px;
         }
-        .wholemobile{
-            width:100% !important;
-        }
-        .tablinkprod{
+
+        .wholemobile {
             width: 100% !important;
         }
-        .heading-banner-area{
-            margin:0 !important;
+
+        .tablinkprod {
+            width: 100% !important;
         }
+
+        .heading-banner-area {
+            margin: 0 !important;
+        }
+
         .buttonmobile {
             height: 60px;
         }
@@ -200,14 +207,15 @@
             flex: 100%;
             height: 100% !important;
         }
-        .owlmobile{
+
+        .owlmobile {
             height: 100% !important;
         }
-        .dinebtn{
+
+        .dinebtn {
             width: 100% !important;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -218,12 +226,12 @@
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title">
-                        <h2 style="font-weight:lighter;font-size:60px;padding: 100px 0 100px;">DINE</h2>
+                        <h2 style="font-weight:lighter;font-size:60px;padding: 100px 0 100px;">BEAUTY</h2>
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
                             <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
-                            <li style="font-weight:lighter;">DINE</li>
+                            <li style="font-weight:lighter;">BEAUTY</li>
                             <li style="font-weight:lighter;" id="breadcrumbshopname">Linen</li>
                         </ul>
                     </div>
@@ -288,9 +296,9 @@
 
 <section class="mobiletabs wholetabs">
     <div class="tab shoplistmobiletabs" style="">
-    <div style="width:50%;margin:auto;padding-bottom:50px;">
-        <img id="mobileheadershop" src="img/linen.png"> 
-    </div>
+        <div style="width:50%;margin:auto;padding-bottom:50px;">
+            <img id="mobileheadershop" src="img/linen.png">
+        </div>
         <select id='shopsidselect'>
             @if(isset($shops))
             @foreach($shops as $shop)
@@ -305,68 +313,68 @@
             @endif
             @endforeach
             @endif
-        </select> 
+        </select>
     </div>
 </section>
 
 <section class="wholetabs wholemobile">
     <div id="Sada">
-       
-            <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated owlmobile" style="height:380px;">
 
-                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner1.png);background-size: cover !important;background-position: unset;">
-                    <div class="container">
-                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                            <div class="hero-message" style="text-align:right;">
-                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                </h1>
-                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                <div class="buttons-holder" style="">
-                                    <a  class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                </div>
+        <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated owlmobile" style="height:380px;">
+
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner1.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
-                    <div class="container">
-                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                            <div class="hero-message" style="text-align:right;">
-                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                </h1>
-                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                <div class="buttons-holder" style="">
-                                    <a  class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
-                    <div class="container">
-                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                            <div class="hero-message" style="text-align:right;">
-                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                </h1>
-                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                <div class="buttons-holder" style="">
-                                    <a  class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        
+
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <section class="mt-30 mb-30">
             <div style="text-align:center;">
                 <h1 style="font-weight:lighter;color:#288248">
@@ -409,9 +417,8 @@
         document.getElementById("defaultOpen").click();
         $(".active").css("background-color", "black");
         const shop_id = $('#shopid').val();
-        makeShopActive(shop_id, color = "#2b854b") 
+        makeShopActive(shop_id, color = "#2b854b")
     });
-
 </script>
 
 <script>
@@ -438,10 +445,10 @@
     //for filtering product based on category
     function getProducts(element, category = 0) {
         $.ajax({
-            type: 'GET'
-            , url: 'http://127.0.0.1:8000/product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -450,96 +457,96 @@
                 } else {
                     renderNoProduct()
                     makeCategoryActive(element)
-                } 
+                }
             }
         });
-    } 
+    }
     //getProducts  //for filtering product based on category
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
         $.ajax({
-            type: 'GET'
-            , url: 'http://127.0.0.1:8000/best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
                 } else {
                     //raise error already exist
-                } 
+                }
             }
         });
     }
 
     // For rendering products in product panel
     function renderProduct(data) {
-        base_url = window.location.origin + '/storage/products/'
+        url = base_url + 'storage/products/'
         let prod_element = ''
         data.forEach(element => {
-            prod_element += 
-            "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" + 
+            prod_element +=
+                "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
-                    "<a href=''><img src='" + base_url + element.url + "' alt='' loading=lazy  class='imgz'/></a>" +
-                    "<div class='fix buttonsshow' style=''>" +
-                        "<span class='pro-price '><img class='featicons' src='img/nav/bag.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
-                        "<span class='divitext' style=''> | </span> "+
-                        "<span class='pro-rating '><img class='featicons' src='img/nav/search.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
-                    "</div>" +
-                    "<div class='product-action clearfix'></div></div>" +
-                    "<div class='product-info clearfix'>" +
-                        "<div class='fix'>" +
-                            "<h4 class='post-title floatcenter feattitle'><a href='#' style=>" + element.name_en + "</a></h4>" +
-                                "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
-                        "</div>" +
-                    "</div>" +
-             "</div>"
+                "<a href=''><img src='" + url + element.url + "' alt='' loading=lazy  class='imgz'/></a>" +
+                "<div class='fix buttonsshow' style=''>" +
+                "<span class='pro-price '><img class='featicons' src='img/nav/bag.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
+                "<span class='divitext' style=''> | </span> " +
+                "<span class='pro-rating '><img class='featicons' src='img/nav/search.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
+                "</div>" +
+                "<div class='product-action clearfix'></div></div>" +
+                "<div class='product-info clearfix'>" +
+                "<div class='fix'>" +
+                "<h4 class='post-title floatcenter feattitle'><a href='#' style=>" + element.name_en + "</a></h4>" +
+                "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
 
         });
         document.getElementById('product-panel').innerHTML = prod_element
-         $('.buttonsshow').css({
+        $('.buttonsshow').css({
             'visibility': 'visible'
         });
     }
+
     function renderNoProduct() {
 
         let prod_element = "<h1>Product is not available!</h1>"
         document.getElementById('product-panel').innerHTML = prod_element
     }
 
-    function shopname(shopid,shoppy,imgy) {
+    function shopname(shopid, shoppy, imgy) {
 
         if (typeof(Storage) !== "undefined") {
             localStorage.shopid = shopid;
             localStorage.shopname = shoppy;
-            localStorage.shopimg = '{{ url('/storage/styles/') }}' + '/' +  imgy;
-            window.location = '{{ url('/delicacy/') }}' + '/' + shopid;
+            localStorage.shopimg = '{{ url(' / storage / styles / ') }}' + '/' + imgy;
+            window.location = base_url + 'beauty' + '/' + shopid;
 
-        } else { 
-            window.location = '{{ url('/delicacy/') }}' + '/' + shopid;
+        } else {
+            window.location = base_url + 'beauty' + '/' + shopid;
         }
-        window.location = '{{ url('/delicacy/') }}' + '/' + shopid;
+
     }
-    $( document ).ready(function() {
-        console.log( "100%" ); 
+    $(document).ready(function() {
+        console.log("100%");
         document.getElementById('breadcrumbshopname').innerHTML = localStorage.shopname;
-        document.getElementById('mobileheadershop').src = localStorage.shopimg; 
-        $('.shopsidselect').find('option[value=]' + localStorage.shop).attr('selected','selected');
-       
+        document.getElementById('mobileheadershop').src = localStorage.shopimg;
+        $('.shopsidselect').find('option[value=]' + localStorage.shop).attr('selected', 'selected');
+
     });
 
-        $(".producthover").hover(function() {
-            $(this).children(".product-img").children(".buttonsshow").css({
-                'visibility': 'visible'
-            });
-            console.log('hover');
-        }, function() {
-            $(this).children(".product-img").children(".buttonsshow").css({
-                'visibility': 'hidden'
-            });
-            console.log('nohover');
+    $(".producthover").hover(function() {
+        $(this).children(".product-img").children(".buttonsshow").css({
+            'visibility': 'visible'
         });
-
+        console.log('hover');
+    }, function() {
+        $(this).children(".product-img").children(".buttonsshow").css({
+            'visibility': 'hidden'
+        });
+        console.log('nohover');
+    });
 </script>
 <script src="js/prodjs.js"></script>
 <div>

@@ -387,7 +387,7 @@
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
             type: 'POST',
-            url: 'https://plentyapp.mvp-apps.ae/api/otp',
+            url: base_url + 'api/otp',
             data: {
                 contact: form.get('contact')
             },
@@ -403,18 +403,18 @@
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
             type: 'POST',
-            url: 'https://plentyapp.mvp-apps.ae/api/verify',
+            url: base_url + 'api/verify',
             data: {
                 contact: form.get('contact'),
                 otp: parseInt(combineSMSCodes())
             },
             dataType: 'JSON',
             success: function(data) {
-                console.log(data)
                 if (data.success) {
                     if (data.user) {
-                        setCookie('bearer_token', data.token, 1)
-                        window.location.href = "http://127.0.0.1:8000/";
+                        setCookie('bearer_token', data.token, 1);
+                        login();
+                        window.location.href = base_url;
                     } else {
                         register(data)
                     }
@@ -435,16 +435,39 @@
             headers: {
                 "AuthRegister": data.authtoken
             },
-            url: 'https://plentyapp.mvp-apps.ae/api/register',
+            url: base_url + 'api/register',
             data: {
                 contact: form.get('contact'),
             },
             dataType: 'JSON',
             success: function(data) {
-                setCookie('bearer_token', data.token, 1)
-                window.location.href = "http://127.0.0.1:8000/profile-edit";
+                setCookie('bearer_token', data.token, 1);
+                login();
+                window.location.href = base_url + "profile-edit";
                 //console.log(data)
             }
+        });
+    }
+
+    function login() {
+        const bearer_token = getCookie('bearer_token');
+        url = base_url + 'login'
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            headers: {
+                "Authorization": 'Bearer ' + bearer_token
+            },
+
+            success: function(data) {
+                console.log('success')
+
+            },
+            error: function(err) {
+                console.log('Error!', err)
+            }
+
         });
     }
 </script>

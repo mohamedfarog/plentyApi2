@@ -127,7 +127,7 @@
     function updatProfile() {
         const form = new FormData(document.getElementById("profile-form"))
         const bearer_token = getCookie('bearer_token');
-        url = window.location.origin + '/api/profile'
+        url = base_url + 'api/profile'
         $.ajax({
             type: 'POST',
             url: url,
@@ -144,7 +144,7 @@
                 bday: form.get('bday')
             },
             success: function(data) {
-                window.location.replace(base_url + '/profile');
+                window.location.replace(base_url + 'profile');
 
             },
             error: function(err) {

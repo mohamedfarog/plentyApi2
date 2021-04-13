@@ -23,7 +23,6 @@
     .featicons {
         width: 25px !important;
     }
-
 </style>
 
 <!-- Hero Slider -->
@@ -74,7 +73,7 @@
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/4.jpg)">
             <div class="container">
-                <div class="hero-holder"  style="height:50%">
+                <div class="hero-holder" style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
@@ -88,7 +87,7 @@
 
         <div class="hero-slide overlay" style="background-image:url(img/hero/5.jpg)">
             <div class="container">
-                <div class="hero-holder"  style="height:50%">
+                <div class="hero-holder" style="height:50%">
                     <div class="hero-message">
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
@@ -101,11 +100,11 @@
         </div>
     </div>
 </section> <!-- end hero slider -->
- 
-<section style="margin-top:50px;">
+
+<section style="height:50px;">
 </section>
 
-<!-- Trendy Products -->
+<!-- Featured Product -->
 <section class="section-wrap-sm new-arrivals ">
     <div class="purchase-online-area ">
         <div class="container">
@@ -116,63 +115,27 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <!-- Nav tabs -->
-
-                </div>
-                <div class="col-lg-12">
-                    <!-- Tab panes -->
-                    <div class="-">
-                        <div class="tab-pane active" id="new-arrivals">
-                            <div class="row">
-
-
-                            </div>
+            <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
+                @foreach($products as $product)
+                <div class="producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm " style="margin-bottom:30px;">
+                    <div class="product-img frame"><a href=""><img src="http://127.0.0.1:8000/storage/products/jqit4OFba9ZbS8NNOVO91di1GeHhttLuDMyr5YXA.png" alt="" loading="lazy" class="imgz"></a>
+                        <div class="fix buttonsshow" style="visibility: visible;"><span class="pro-price "><img class="featicons" src="img/nav/bag.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span><span class="divitext" style=""> | </span> <span class="pro-rating "><img class="featicons" src="img/nav/search.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span></div>
+                        <div class="product-action clearfix"></div>
+                    </div>
+                    <div class="product-info clearfix">
+                        <div class="fix">
+                            <h4 class="post-title floatcenter feattitle"><a href="#" style="">{{$product->name_en}}</a></h4>
+                            <p class="floatcenter hidden-sm featsubtitle  post-title">SAR {{$product->price}}</p>
                         </div>
-
-
                     </div>
                 </div>
-            </div>
+                @endforeach
+            </section>
+
         </div>
     </div>
-</section> <!-- end trendy products -->
-<section style="width:90%;text-align:center;margin:auto">
-    @if(isset($featured_products))
-    @foreach($featured_products as $product)
+</section> <!-- end Featured Product -->
 
-    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img frame">
-
-            @if ($product->image)
-            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
-            @else
-            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
-            @endif
-
-            <div class="product-action clearfix">
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-    @endforeach
-    @endif
-</section>
- 
- 
 
 <section style="height:50px;">
 </section>
@@ -231,10 +194,8 @@
             });
         });
     });
-
 </script>
 <div>
     @include('footer')
 </div>
 @endsection
-

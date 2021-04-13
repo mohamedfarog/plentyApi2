@@ -142,7 +142,7 @@
                                 <input type="submit" name="update_cart" value="ADD ITEM" class="btn btn-lg btn-stroke additembtn">
 
                                 <div class="wc-proceed-to-checkout checkoutbtn">
-                                    <a href="checkout.html" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
+                                    <a href="/checkout" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
                                 </div>
                             </div>
                         </div>

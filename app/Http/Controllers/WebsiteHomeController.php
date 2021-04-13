@@ -12,6 +12,10 @@ use App\Models\Cat;
 use App\Models\Prodcat;
 use App\Models\Product;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\Environment\Console;
+
 class WebsiteHomeController extends Controller
 {
     //home
@@ -121,7 +125,7 @@ class WebsiteHomeController extends Controller
     }
 
     //  Delicacy 
-    public function delicacy($shop = null, $category = null, Request $request)
+    public function delicacy(Request $request, $shop = null, $category = null)
     {
         // Getting category id  
         $category_id = Cat::select('id', 'name_en')->where('name_en', 'Fine Dining')->first();
@@ -208,5 +212,70 @@ class WebsiteHomeController extends Controller
     public function shopCategory(Request $request)
     {
         return response()->json(['shop_category' => $this->getShopCategory()]);
+    }
+
+    //profile edit
+    public function profileEdit(Request $request)
+    {
+        $user = Auth::user();
+        $data['user'] = $user;
+        return view('profile_edit')->with($data);
+    }
+
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+        $data['user'] = $user;
+        return view('profile')->with($data);
+    }
+
+    //  Beauty
+    public function beauty(Request $request, $shop = null, $category = null)
+    {
+        // Getting category id  
+        $category_id = Cat::select('id', 'name_en')->where('name_en', 'Beauty')->first();
+        $data['shops'] = Shop::where('cat_id', $category_id->id)->get();
+
+        // getting shop details
+        if (isset($shop)) {
+            $data['shop'] = $data['shops']->filter(function ($value, $key) use ($shop) {
+                if ($value['id'] == $shop) {
+                    return true;
+                }
+            })->first();
+        } else {
+            $data['shop'] = $data['shops']->first();
+        }
+        $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
+
+        return view('/beauty')->with($data);
+    }
+
+    //  Beauty
+    public function fashion(Request $request, $shop = null, $category = null)
+    {
+        // Getting category id  
+        $category_id = Cat::select('id', 'name_en')->where('name_en', 'Fashion')->first();
+        $data['shops'] = Shop::where('cat_id', $category_id->id)->get();
+
+        // getting shop details
+        if (isset($shop)) {
+            $data['shop'] = $data['shops']->filter(function ($value, $key) use ($shop) {
+                if ($value['id'] == $shop) {
+                    return true;
+                }
+            })->first();
+        } else {
+            $data['shop'] = $data['shops']->first();
+        }
+        $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
+
+        return view('/fashion')->with($data);
+    }
+
+    public function featured(Request $request)
+    {
+        $data['products'] = $this->featuredItems();
+        return view('featured')->with($data);
     }
 }

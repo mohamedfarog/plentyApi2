@@ -30,13 +30,16 @@
             width: 90% !important;
         }
     }
-
 </style>
 
 <section style="text-align:center;">
     <img src="img/profile/profilepic.png" style="width:100px;margin-bottom:20px;">
 
-    <h1 style="font-weight:100">Welcome, <span style="font-weight:400;font-family:'Avenir Bold'">Jake Hazim</span></h1>
+    <h1 style="font-weight:100">Welcome,
+        @if($user->name)
+        <span style="font-weight:400;font-family:'Avenir Bold'">{{$user->name}}</span>
+        @endif
+    </h1>
 </section>
 <section>
     <!-- Mobile-menu end -->
@@ -53,7 +56,7 @@
                         <div class="panel-group" id="accordion">
                             <div class="panel" style="text-align:right">
                                 <div style="margin-bottom:20px;">
-                                    <a href="#">
+                                    <a href="/profile-edit">
                                         <h1 style=" text-decoration: underline;font-size:16px;font-weight:400;">edit
                                         </h1>
                                     </a>
@@ -80,7 +83,9 @@
                                         <h3 class="norm-text">Email:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text">jakehazim@gmail.com</h2>
+                                        @if(isset($user->email))
+                                        <h2 class="norm-text">{{$user->email}}</h2>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +95,9 @@
                                         <h3 class="norm-text">Mobile Phone:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text">+966 1234 56 789</h2>
+                                        @if(isset($user->contact))
+                                        <h2 class="norm-text">{{$user->contact}}</h2>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -232,4 +239,3 @@
     @include('footer')
 </div>
 @endsection
-

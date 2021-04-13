@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
 
-use App\Http\Controllers\CookieController;
-use App\Http\Middleware\AuthTest;
+use App\Http\Middleware\AuthWeb;
+
 
 use App\Http\Controllers\WebsiteHomeController;
 /*
@@ -34,9 +34,9 @@ Route::get('/product', function () {
     return view('/product');
 });
 
-Route::get('/profile', function () {
-    return view('/profile');
-});
+// Route::get('/profile', function () {
+//     return view('/profile');
+// });
 
 Route::get('/#', function () {
     return redirect('/');
@@ -46,9 +46,9 @@ Route::get('/signup', function () {
     return view('/signup');
 });
 
-Route::get('/login', function () {
-    return view('/login');
-});
+// Route::get('/login', function () {
+//     return view('/login');
+// });
 Route::get('/booking', function () {
     return view('/booking');
 });
@@ -73,7 +73,6 @@ Route::get('/lang', function () {
 });
 
 // Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
-Route::get('/home1',  [WebsiteHomeController::class, 'home'])->middleware(AuthTest::class);
 Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getDineProduct']);
@@ -100,9 +99,7 @@ Route::get('/userlevel', function () {
     return view('/userlevel');
 });
 
-Route::get('/featured', function () {
-    return view('/featured');
-});
+
 
 Route::get('/brands', function () {
     return view('/brands');
@@ -117,5 +114,13 @@ Route::get('/careers', function () {
 });
 
 
-Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
-Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
+//Profile edit
+Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
+    Route::get('/profile-edit', [WebsiteHomeController::class, 'profileEdit']);
+    Route::get('/profile', [WebsiteHomeController::class, 'profile']);
+});
+Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
+Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);
+Route::get('/delicay/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
+
+Route::get('/featured',  [WebsiteHomeController::class, 'featured']);
