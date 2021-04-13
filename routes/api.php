@@ -58,8 +58,8 @@ use Thenextweb\PassGenerator;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('events',[EventController::class, 'index']);
-Route::get('eventshops',[EventcatController::class, 'index']);
+Route::get('events', [EventController::class, 'index']);
+Route::get('eventshops', [EventcatController::class, 'index']);
 
 
 Route::resource('otp', OtpController::class);
@@ -78,9 +78,9 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
-    Route::post('addpoints',function () {
+    Route::post('addpoints', function () {
         //TODO
-        return response()->json(['Success'=>  true ]);
+        return response()->json(['Success' =>  true]);
     });
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
@@ -91,8 +91,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('products', ProductController::class);
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
-    Route::post('wallet/topup',[UserController::class,'topUpWallet']);
-}); 
+    Route::post('wallet/topup', [UserController::class, 'topUpWallet']);
+});
 
 Route::get('generate', function (Request $request) {
     $len = 24;
@@ -167,8 +167,8 @@ Route::post('test', function (Request $request) {
                 return response()->json(['message' => 'No passes were found.'], 400);
             }
         }
-        if(isset($request->passupdated)){
-            $passes = Pass::where('deviceLibraryIdentifier', $request->passupdated)->where('passesUpdatedSince',">=",$request->passesUpdatedSince)->get();
+        if (isset($request->passupdated)) {
+            $passes = Pass::where('deviceLibraryIdentifier', $request->passupdated)->where('passesUpdatedSince', ">=", $request->passesUpdatedSince)->get();
             return $passes;
         }
     }
@@ -196,15 +196,14 @@ Route::get('test', function (Request $request) {
         }, 'user'])->where('id', $request->id)->first();
         return view('bill', ["data" => $order]);
     }
-    if(isset($request->timeslot)){
+    if (isset($request->timeslot)) {
 
-        $timeslots= Timeslot::where('product_id', $request->product_id)->get();
-        $slotsarray= array();
-        foreach($timeslots as $timeslot){
-            $bookingcount = Detail::where('product_id',$request->product_id)->where('booking_date',$request->date)->where('timeslot_id',$timeslot->id)->count();
-            $timeslot->setAttribute('bookingcount',$bookingcount);
+        $timeslots = Timeslot::where('product_id', $request->product_id)->get();
+        $slotsarray = array();
+        foreach ($timeslots as $timeslot) {
+            $bookingcount = Detail::where('product_id', $request->product_id)->where('booking_date', $request->date)->where('timeslot_id', $timeslot->id)->count();
+            $timeslot->setAttribute('bookingcount', $bookingcount);
             array_push($slotsarray, $timeslot);
-        
         }
         return $slotsarray;
 
@@ -219,24 +218,20 @@ Route::get('test', function (Request $request) {
 
 
 
-     
+
     }
-    if(isset($request->generattime)){
+    if (isset($request->generattime)) {
         return (new Schedule())->generateTimes();
     }
 
-    return  $user =User::with(['tier'])->where('id', $request->userid)->first();
-    
+    return  $user = User::with(['tier'])->where('id', $request->userid)->first();
 });
 
-Route::get('models', function (Request $request){
-   return response()->json(['addon'=>Addon::first(),'category'=>Cat::first(),'color'=>Color::first(),'designer'=>Designer::first(),'image'=>Image::first(),'prodcat'=>Prodcat::first(),'product'=>Product::first(),'shop'=>Shop::first(),'size'=>Size::first(),'style'=>Style::first(), 'user'=>User::first()]) ;
-    
+Route::get('models', function (Request $request) {
+    return response()->json(['addon' => Addon::first(), 'category' => Cat::first(), 'color' => Color::first(), 'designer' => Designer::first(), 'image' => Image::first(), 'prodcat' => Prodcat::first(), 'product' => Product::first(), 'shop' => Shop::first(), 'size' => Size::first(), 'style' => Style::first(), 'user' => User::first()]);
 });
 
 Route::get('/updates', function () {
     $output = shell_exec('cd ../ && git pull && php artisan migrate');
     echo "<pre>$output</pre>";;
 });
-
-

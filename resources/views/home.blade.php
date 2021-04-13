@@ -23,7 +23,6 @@
     .featicons {
         width: 25px !important;
     }
-
 </style>
 
 <!-- Hero Slider -->
@@ -341,10 +340,8 @@
             });
         });
     });
-
 </script>
 <div>
     @include('footer')
 </div>
 @endsection
-

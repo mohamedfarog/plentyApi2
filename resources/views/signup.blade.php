@@ -26,16 +26,28 @@
     .modal {
         text-align: center;
     }
+<<<<<<< Updated upstream
     .smsCode{
         width: 60px !important;
         padding:0 !important;
+=======
+
+    .smsCode {
+        width: 40px !important;
+>>>>>>> Stashed changes
     }
+
     input:focus {
+<<<<<<< Updated upstream
        background: #e3e3e3 !important;
     }
     .otp-input{
        
+=======
+        background: grey !important;
+>>>>>>> Stashed changes
     }
+
     @media screen and (min-width: 768px) {
         .modal:before {
             display: inline-block;
@@ -196,7 +208,6 @@
             width: 90%;
         }
     }
-
 </style>
 <section class="signup container" style="background:transparent">
     <div class="signup-logo">
@@ -247,16 +258,16 @@
                 <div class="modal-body">
                     <div class="row otp">
                         <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
                         </div>
                         <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
                         </div>
                         <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
                         </div>
                         <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
                         </div>
 
                     </div>
@@ -287,8 +298,8 @@
         var smsCodes = $('.smsCode');
 
         function goToNextInput(e) {
-            var key = e.which
-                , t = $(e.target),
+            var key = e.which,
+                t = $(e.target),
                 // Get the next input
                 sib = t.closest('div').next().find('.smsCode');
 
@@ -344,14 +355,15 @@
     function generateOTP(e) {
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
+        console.log(form.get('contact'))
         $.ajax({
-            type: 'POST'
-            , url: 'https://plentyapp.mvp-apps.ae/api/otp'
-            , data: {
+            type: 'POST',
+            url: 'https://plentyapp.mvp-apps.ae/api/otp',
+            data: {
                 contact: form.get('contact')
-            }
-            , dataType: 'JSON'
-            , success: function(data) {
+            },
+            dataType: 'JSON',
+            success: function(data) {
                 $('#otpModal').modal('show');
                 console.log(data)
             }
@@ -360,28 +372,53 @@
 
     function verifyOTP() {
         const form = new FormData(document.getElementById("signup-form"))
+        console.log(parseInt(combineSMSCodes()))
         $.ajax({
-            type: 'POST'
-            , url: 'https://plentyapp.mvp-apps.ae/api/verify'
-            , data: {
-                contact: form.get('contact')
-                , otp: parseInt(combineSMSCodes())
-            }
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'POST',
+            url: 'https://plentyapp.mvp-apps.ae/api/verify',
+            data: {
+                contact: form.get('contact'),
+                otp: parseInt(combineSMSCodes())
+            },
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.success) {
-                    //do registration
+                    if (data.user) {
+                        console.log('user')
+                    } else {
+                        console.log('!user')
+                    }
+
+
                 } else {
-                    //raise error already exist
+                    console.log(data)
                 }
 
 
-                console.log(data)
             }
         });
     }
 
+    function register(data) {
+        const form = new FormData(document.getElementById("signup-form"))
+        //  console.log(data)
+        $.ajax({
+            type: 'POST',
+            headers: {
+                "AuthRegister": data.authtoken
+            },
+            url: 'https://plentyapp.mvp-apps.ae/api/register',
+            data: {
+                contact: form.get('contact'),
+            },
+            dataType: 'JSON',
+            success: function(data) {
+                setCookie('bearer_token', data.token, 1)
+                window.location.href = "http://127.0.0.1:8000/profile";
+                //console.log(data)
+            }
+        });
+    }
 </script>
 
 @endsection
-

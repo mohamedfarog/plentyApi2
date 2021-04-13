@@ -23,11 +23,11 @@ class OrderController extends Controller
     {
         //
         $user = Auth::user();
-        $orders = Order::with(['details' => function($details){
-            return $details->with(['product'=>function($product){
+        $orders = Order::with(['details' => function ($details) {
+            return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
-            },'size', 'color']);
-        },'user'])->where('user_id', $user->id)->paginate();
+            }, 'size', 'color']);
+        }, 'user'])->where('user_id', $user->id)->paginate();
         return $orders;
     }
 
@@ -77,7 +77,7 @@ class OrderController extends Controller
                     if (isset($request->coupon_value)) {
                         $order->coupon_value = $request->coupon_value;
                     }
-        
+
                     if (isset($request->payment_method)) {
                         $order->payment_method = $request->payment_method;
                     }
@@ -93,25 +93,25 @@ class OrderController extends Controller
                     if (isset($request->user_id)) {
                         $order->user_id = $request->user_id;
                     }
-                    if(isset($request->lat)){
+                    if (isset($request->lat)) {
                         $order->lat = $request->lat;
                     }
-                    if(isset($request->lng)){
+                    if (isset($request->lng)) {
                         $order->lng = $request->lng;
                     }
-                    if(isset($request->delivery_note)){
+                    if (isset($request->delivery_note)) {
                         $order->delivery_note = $request->delivery_note;
                     }
-                    if(isset($request->contact_number)){
+                    if (isset($request->contact_number)) {
                         $order->contact_number = $request->contact_number;
                     }
-                    if(isset($request->city)){
+                    if (isset($request->city)) {
                         $order->city = $request->city;
                     }
-                    if(isset($request->label)){
+                    if (isset($request->label)) {
                         $order->label = $request->label;
                     }
-                    
+
                     $msg = 'Order has been updated';
 
                     $order->save();
@@ -144,41 +144,40 @@ class OrderController extends Controller
                 $data['payment_method'] = $request->payment_method;
             }
 
-            if(isset($request->lat)){
+            if (isset($request->lat)) {
                 $data['lat'] = $request->lat;
             }
-            if(isset($request->lng)){
+            if (isset($request->lng)) {
                 $data['lng'] = $request->lng;
-
             }
-            if(isset($request->delivery_note)){
+            if (isset($request->delivery_note)) {
                 $data['delivery_note'] = $request->delivery_note;
             }
-            if(isset($request->contact_number)){
+            if (isset($request->contact_number)) {
                 $data['contact_number'] = $request->contact_number;
             }
-            if(isset($request->city)){
+            if (isset($request->city)) {
                 $data['city'] = $request->city;
             }
-            if(isset($request->label)){
+            if (isset($request->label)) {
                 $data['label'] = $request->label;
             }
 
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
-                $customer= User::with(['tier'])->find($user->id);           //for updating the user model
-                $customer->points= $user->points-$request->points;
+                $customer = User::with(['tier'])->find($user->id);           //for updating the user model
+                $customer->points = $user->points - $request->points;
             }
             if (isset($request->wallet)) {
                 //TODO WALLET DEDUCTION (CHECK AGAIN)
-                $customer->wallet= $user->wallet  -$request->wallet;
+                $customer->wallet = $user->wallet  - $request->wallet;
             }
 
-            $loyalty= new Loyalty();
-            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet);  
-            $customer->points+=$pointsearned;
-            
+            $loyalty = new Loyalty();
+            $pointsearned = $loyalty->addPoints($customer, $request->amount_due, $request->wallet);
+            $customer->points += $pointsearned;
+
             $customer->save();
 
             if (isset($request->tax)) {
@@ -228,9 +227,9 @@ class OrderController extends Controller
             }
 
             $msg = 'Order has been added';
-   
-            
-            return response()->json(['success' => !!$order, 'message' => $msg,'user' => $customer]);
+
+
+            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => $customer]);
         }
     }
 

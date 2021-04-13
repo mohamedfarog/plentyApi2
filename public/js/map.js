@@ -1,5 +1,7 @@
 //map.js
 
+//const { functions } = require("lodash");
+
 //Set up some of our variables.
 var map; //Will contain map object.
 var marker = false; ////Has the user plotted their location marker? 
@@ -39,7 +41,7 @@ function initMap() {
             map.setCenter(pos);
             $('#lat').val(position.coords.latitude);
             $("#lng").val(position.coords.longitude);
-
+            getAddress(position.coords.latitude, position.coords.longitude);
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -65,6 +67,7 @@ function initMap() {
         infoWindow.open(map, marker);
         $('#lat').val(e.latLng.lat());
         $("#lng").val(e.latLng.lng());
+        getAddress(e.latLng.lat(), e.latLng.lng());
     });
 
 
@@ -78,40 +81,41 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function getLocation() {
- 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
 
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                console.log(pos.lat);
-                console.log(pos.lng);
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('You are here:<br>Lat: ' + pos.lat + '<br>Long: ' + pos.lng);
-                if (marker && marker.setMap) {
-                    marker.setMap(null);
-                }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
 
-                marker = new google.maps.Marker({
-                    position: pos,
-                    map: map
-                });
-                $('#lat').val(pos.lat);
-                $("#lng").val(pos.lng);
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            console.log(pos.lat);
+            console.log(pos.lng);
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('You are here:<br>Lat: ' + pos.lat + '<br>Long: ' + pos.lng);
+            if (marker && marker.setMap) {
+                marker.setMap(null);
+            }
 
-                infoWindow.open(map, marker);
-                map.setCenter(pos);
-
-            }, function () {
-                handleLocationError(true, infoWindow, map.getCenter());
+            marker = new google.maps.Marker({
+                position: pos,
+                map: map
             });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
- 
+            $('#lat').val(pos.lat);
+            $("#lng").val(pos.lng);
+
+            infoWindow.open(map, marker);
+            map.setCenter(pos);
+
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+
 }
 
 
@@ -126,28 +130,52 @@ function markerLocation() {
     document.getElementById('lng').value = currentLocation.lng(); //longitude
 }
 
-function getsaloonloc(){
-   
-        var addeditlat = parseFloat($('#lat').val());
-        var addeditlng = parseFloat($("#lng").val());
-        var posy = {
-            lat: addeditlat,
-            lng: addeditlng
-        };
-        infoWindow.setPosition(posy);
-        infoWindow.setContent('Salon here:<br>Lat: ' + posy.lat + '<br>Long: ' + posy.lng);
-        if (marker && marker.setMap) {
-            marker.setMap(null);
-        }
-        marker = new google.maps.Marker({
-            position: posy,
-            map: map
-        });
-        infoWindow.open(map, marker);
-        map.setCenter(posy);
-    
+
+
+function getsaloonloc() {
+
+    var addeditlat = parseFloat($('#lat').val());
+    var addeditlng = parseFloat($("#lng").val());
+    var posy = {
+        lat: addeditlat,
+        lng: addeditlng
+    };
+    infoWindow.setPosition(posy);
+    infoWindow.setContent('Salon here:<br>Lat: ' + posy.lat + '<br>Long: ' + posy.lng);
+    if (marker && marker.setMap) {
+        marker.setMap(null);
+    }
+    marker = new google.maps.Marker({
+        position: posy,
+        map: map
+    });
+    infoWindow.open(map, marker);
+    map.setCenter(posy);
+
 }
 
 
-//Load the map when the page has finished loading.
+function getAddress(lat = 24.774265, lng = 46.738586) {
+    var point = {
+        lat: lat,
+        lng: lng
+    };
+
+    $.geo.reverseGeocode(point, {
+        success: function (data) {
+            setAddress(data)
+        },
+        error: function () {
+            // error callback
+        }
+    });
+}
+function setAddress(address) {
+    let addr = address[0].formatted;
+    console.log(addr)
+    $('#address').val(addr)
+}
+
 google.maps.event.addDomListener(window, 'load', initMap);
+
+//Load the map when the page has finished loading.

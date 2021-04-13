@@ -19,8 +19,7 @@ class OtpController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-    }
+    { }
 
     /**
      * Show the form for creating a new resource.

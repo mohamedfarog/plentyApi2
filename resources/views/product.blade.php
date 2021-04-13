@@ -308,7 +308,6 @@
         function addQuantity() {
             const current = parseInt(document.getElementById("quantity").value)
             document.getElementById("stock-error").style.display = "none";
-            console.log(availableStock())
             if (availableStock() < 1) {
                 document.getElementById("stock-error").innerHTML = "Out of stock";
                 document.getElementById("stock-error").style.display = "block";
@@ -318,11 +317,12 @@
         }
 
         function availableStock() {
-            let size_id = document.getElementById("size_id").value || null;
+            let size_id = (document.getElementById("size_id")) ? document.getElementById("size_id").value : null;
             let product_id = document.getElementById("product_id").value || null;
             let purchased = checkCurrentItemNumber(product_id, size_id);
             let current = parseInt(document.getElementById("quantity").value)
-            let total_quantity = purchased + current;
+            let total_quantity = parseInt(purchased) + parseInt(current);
+
             let stock = parseInt(document.getElementById("stock").value)
             if (stock - total_quantity < 0) {
                 return -1;
@@ -335,11 +335,14 @@
         function checkCurrentItemNumber(id = null, size_id = null) {
             let cart = CartSerializer(getCartLocal())
             let purchased = 0
-            if (size_id) {
-                purchased = cart.cart_items.find(item => (item.id === id) && (item.size_id === size_id)).quantity
-            } else {
-                purchased = cart.cart_items.find(item => (item.id === id)).quantity
+            if (cart.cart_items.length > 0) {
+                if (size_id) {
+                    purchased = (cart.cart_items.find(item => (item.id === id) && (item.size_id === size_id))) ? cart.cart_items.find(item => (item.id === id) && (item.size_id === size_id)).quantity : 0;
+                } else {
+                    purchased = (cart.cart_items.find(item => (item.id === id))) ? cart.cart_items.find(item => (item.id === id)).quantity : 0;
+                }
             }
+
             return purchased;
         }
 

@@ -192,6 +192,11 @@
             width: 90%;
         }
     }
+
+    #product td {
+        color: #001b71;
+        font-weight: 100;
+    }
 </style>
 
 
@@ -474,15 +479,12 @@
                                             <div class="billing-details pr-20">
                                                 <h4 class="title-1 title-border text-uppercase mb-30 ordsumtitle">Delivery Address</h4>
                                                 <div class="form-group">
-                                                    <label id="saloon_map">Salon Location</label>
                                                     <div id="map" class="form-control" style="height:400px;"></div>
                                                     <br>
                                                     <div class="row" style="margin:auto;">
-                                                        <a onclick="getLocation()" class="btn btn-outline-primary" style="width:30%;color:black;">Current Location</a>
-                                                        <div style="width:5%;"></div>
-                                                        <input type="text" id="lat" name="lat" readonly="yes" class="form-control" style="width:30%;" placeholder="latitude">
-                                                        <div style="width:5%;"></div>
-                                                        <input type="text" id="lng" name="lng" readonly="yes" class="form-control" style="width:30%;" placeholder="longitude">
+                                                        <input type="hidden" id="lat" name="lat">
+
+                                                        <input type="hidden" id="lng" name="lng">
 
 
                                                     </div>
@@ -493,7 +495,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">Address: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" type="text" placeholder="">
+                                                        <input class="inputdeladd" id="address" onchange="initAutocomplete()" type="text" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -501,7 +503,17 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">City: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" type="text" placeholder="">
+                                                        <select class="inputdeladd">
+                                                            <option value="Jiddah">Jiddah</option>
+                                                            <option value="Jīzān">Jīzān</option>
+                                                            <option value="Khamīs Mushayt">Khamīs Mushayt</option>
+                                                            <option value="King Khālid Military City">King Khālid Military City</option>
+                                                            <option value="Mecca">Mecca</option>
+                                                            <option value="Medina">Medina</option>
+                                                            <option value="Najrān">Najrān</option>
+                                                            <option value="Ras Tanura">Ras Tanura</option>
+                                                            <option value="Riyadh">Riyadh</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -571,18 +583,14 @@
                                             <div class="our-order payment-details  pr-20">
                                                 <h4 class="title-1 title-border text-uppercase ordsumtitle">Your order</h4>
                                                 <table>
+                                                    <tbody id="product">
+
+                                                    </tbody>
+
                                                     <tbody>
                                                         <tr>
-                                                            <td class="orderprodtxt" style="padding-left: 10px;">Gray Jacket x1</td>
-                                                            <td class="text-right orderprodtxt orderprodprice">75 SAR</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="orderprodtxt" style="padding-left: 10px;">Hair Style Booking</td>
-                                                            <td class="text-right orderprodtxt orderprodprice">125 SAR</td>
-                                                        </tr>
-                                                        <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Subtotal</td>
-                                                            <td class="text-right orderprodtxt orderprodprice">195 SAR</td>
+                                                            <td class="text-right orderprodtxt orderprodprice" id="sub_total">195 SAR</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Shipping</td>
@@ -598,7 +606,11 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">TOTAL</td>
-                                                            <td class="text-right orderprodtxt orderprodprice">170.00
+                                                            <td class="text-right orderprodtxt orderprodprice">
+                                                                <span id="order_total">
+                                                                    170.00
+                                                                </span>
+
                                                                 <span style="font-weight: 100;font-family:'Avenir'">SAR</span>
                                                             </td>
                                                         </tr>
@@ -860,10 +872,39 @@
         event.preventDefault();
     });
     $(document).ready(function() {
-        console.log("ready!");
+        renderOrderedProduct()
+
     });
+
+
+    function renderOrderedProduct() {
+        var cart = CartSerializer(getCartLocal())
+        let template = ''
+
+        cart.cart_items.forEach(item => {
+            let size = '';
+            if (item.size) {
+                size = " (" + item.size + ")";
+            }
+            template = template + "<tr>" +
+                "<td class='orderprodtxt' style='padding-left: 10px;'>" + item.name + size + " x" + item.quantity + "</td>" +
+                "<td class='text-right orderprodtxt orderprodprice'>" + item.price + " SAR</td>" +
+                "</tr>"
+
+        });
+        $('#product').html(template);
+        $('#sub_total').html(cart.subTotal() + " SAR");
+    }
+
+    function checkCouponValid() {
+
+    }
+</script>
+
+<script src="js/jquery.geocoder.js"></script>
+
+
+<script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyDQxeWFV5QiIZIPw5iRD5H1d5LxycBkou8&sensor=false&libraries=places'>
 </script>
 <script src="js/map.js" defer></script>
-<script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyDQxeWFV5QiIZIPw5iRD5H1d5LxycBkou8&sensor=false&libraries=places' defer async>
-</script>
-@endsection
+< @endsection
