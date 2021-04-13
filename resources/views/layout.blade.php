@@ -478,7 +478,6 @@
 
     <script>
         $(".regular").slick({
-<<<<<<< Updated upstream
             dots: true,
             infinite: true,
             slidesToShow: 4,
@@ -492,21 +491,6 @@
                         slidesToScroll: 3,
                         infinite: true,
                         dots: true
-=======
-            dots: false
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
->>>>>>> Stashed changes
                     }
                 }, {
                     breakpoint: 600,
@@ -526,7 +510,6 @@
         });
 
         $(".brandsslider").slick({
-<<<<<<< Updated upstream
             dots: true,
             infinite: true,
             slidesToShow: 4,
@@ -540,21 +523,6 @@
                         slidesToScroll: 3,
                         infinite: true,
                         dots: true
-=======
-            dots: false
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
->>>>>>> Stashed changes
                     }
                 }, {
                     breakpoint: 600,
@@ -574,7 +542,6 @@
         });
 
         $(".tryprodslider").slick({
-<<<<<<< Updated upstream
             dots: true,
             infinite: true,
             slidesToShow: 4,
@@ -589,22 +556,6 @@
                         slidesToScroll: 3,
                         infinite: true,
                         dots: true
-=======
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: false
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
->>>>>>> Stashed changes
                     }
                 }, {
                     breakpoint: 600,
@@ -868,9 +819,4 @@
     </script>
 </body>
 
-<<<<<<< Updated upstream
 </html>
-=======
-</html>
-
->>>>>>> Stashed changes

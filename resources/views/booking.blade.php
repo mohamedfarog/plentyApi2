@@ -92,7 +92,7 @@
         font-size: 18px;
         font-weight: 100;
         margin: auto;
-        font-family:'Avenir Bold'
+        font-family: 'Avenir Bold'
 
     }
 
@@ -198,7 +198,7 @@
 
     /* styling for calendar footer */
 
-    .time-shedule-wrapper { 
+    .time-shedule-wrapper {
         height: 300px;
         background-color: #fff;
         border-radius: 0 0 50px 50px;
@@ -206,7 +206,7 @@
         transition: 0.3s;
         position: relative;
         top: -100px;
-        padding: 100px 50px 150px 50px; 
+        padding: 100px 50px 100px 50px;
     }
 
     .day-booked {
@@ -215,24 +215,23 @@
 
     .time-shedule {
         padding: 10px;
-        height: 110px;
+        height: 140px;
         overflow-y: scroll;
     }
 
     .time-btn {
         position: relative;
         text-align: center;
-        text-align: center;
         text-decoration: none;
         font-size: 18px;
         cursor: pointer;
-        width: 150px;
-        height: 40px;
+        width: 135px;
+        height: 50px;
         background-color: white;
         color: #edbddb;
         border: 2px solid #c31c4a;
         border-radius: 30px;
-        margin: 5px 5px;
+        margin: 0px 5px 20px 5px;
 
     }
 
@@ -297,10 +296,12 @@
     .calendar-btn-right {
         margin-right: 30px
     }
-    .activemonthtd{
-        font-family:'Avenir';
-        font-weight:100;
+
+    .activemonthtd {
+        font-family: 'Avenir';
+        font-weight: 100;
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/booking/skirts.png') no-repeat scroll center center / cover;">
@@ -479,7 +480,7 @@
             this.currYear = this.currYear - 1;
         } else {
             this.currMonth = this.currMonth - 1;
-        }
+        }1
         this.showcurr();
     };
 
@@ -598,7 +599,6 @@
     }
 
     function getClass(name) {
-        console.log('HI')
         return document.getElementsByClassName(name)
     }
 
@@ -632,3 +632,4 @@
 </script>
 <script src="js/prodjs.js"></script>
 @endsection
+
