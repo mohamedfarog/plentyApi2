@@ -360,7 +360,6 @@
     function generateOTP(e) {
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
-        console.log(form.get('contact'))
         $.ajax({
             type: 'POST',
             url: 'https://plentyapp.mvp-apps.ae/api/otp',
@@ -377,7 +376,6 @@
 
     function verifyOTP() {
         const form = new FormData(document.getElementById("signup-form"))
-        console.log(parseInt(combineSMSCodes()))
         $.ajax({
             type: 'POST',
             url: 'https://plentyapp.mvp-apps.ae/api/verify',
@@ -387,16 +385,16 @@
             },
             dataType: 'JSON',
             success: function(data) {
+                console.log(data)
                 if (data.success) {
                     if (data.user) {
-                        console.log('user')
+                        setCookie('bearer_token', data.token, 1)
+                        window.location.href = "http://127.0.0.1:8000/";
                     } else {
-                        console.log('!user')
+                        register(data)
                     }
 
 
-                } else {
-                    console.log(data)
                 }
 
 
@@ -419,7 +417,7 @@
             dataType: 'JSON',
             success: function(data) {
                 setCookie('bearer_token', data.token, 1)
-                window.location.href = "http://127.0.0.1:8000/profile";
+                window.location.href = "http://127.0.0.1:8000/profile-edit";
                 //console.log(data)
             }
         });
