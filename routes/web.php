@@ -18,7 +18,7 @@ use App\Http\Controllers\WebsiteHomeController;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
+|z
 */
 
 Route::get('/',  [WebsiteHomeController::class, 'home']);
@@ -97,8 +97,7 @@ Route::get('/checkout', function () {
 
 Route::get('/userlevel', function () {
     return view('/userlevel');
-});
-
+}); 
 
 
 
@@ -109,8 +108,7 @@ Route::get('/aboutus', function () {
 Route::get('/careers', function () {
     return view('/careers');
 });
-
-
+ 
 //Profile edit
 Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/profile-edit', [WebsiteHomeController::class, 'profileEdit']);

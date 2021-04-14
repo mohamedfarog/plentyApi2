@@ -23,6 +23,13 @@
     .featicons {
         width: 25px !important;
     }
+
+    @media only screen and (max-width: 600px) {
+        .contm {
+            width: 100%;
+        }
+    }
+
 </style>
 
 <!-- Hero Slider -->
@@ -107,7 +114,7 @@
 <!-- Featured Product -->
 <section class="section-wrap-sm new-arrivals ">
     <div class="purchase-online-area ">
-        <div class="container">
+        <div class="container contm">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
@@ -194,6 +201,7 @@
             });
         });
     });
+
 </script>
 <div>
     @include('footer')

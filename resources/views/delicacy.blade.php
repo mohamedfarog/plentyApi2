@@ -377,8 +377,8 @@
 
         <section class="mt-30 mb-30">
             <div style="text-align:center;">
-                <h1 style="font-weight:lighter;color:#288248">
-                    Simply Put.
+                <h1 style="font-weight:lighter;color:#288248" id="breadcrumbshopname2">
+                    Linen
                 </h1>
             </div>
         </section>
@@ -520,7 +520,7 @@
         if (typeof(Storage) !== "undefined") {
             localStorage.shopid = shopid;
             localStorage.shopname = shoppy;
-            localStorage.shopimg = '{{ url(' / storage / styles / ') }}' + '/' + imgy;
+            localStorage.shopimg = '{{ url('storage/styles') }}' + '/' + imgy;
             window.location = base_url + 'delicacy/' + shopid;
 
         } else {
@@ -532,6 +532,7 @@
     $(document).ready(function() {
         console.log("100%");
         document.getElementById('breadcrumbshopname').innerHTML = localStorage.shopname;
+        document.getElementById('breadcrumbshopname2').innerHTML = localStorage.shopname;
         document.getElementById('mobileheadershop').src = localStorage.shopimg;
         $('.shopsidselect').find('option[value=]' + localStorage.shop).attr('selected', 'selected');
 

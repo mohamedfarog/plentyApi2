@@ -227,7 +227,8 @@ class WebsiteHomeController extends Controller
         $user = Auth::user();
         $data['user'] = $user;
         return view('profile')->with($data);
-    }
+    } 
+
 
     //  Beauty
     public function beauty(Request $request, $shop = null, $category = null)

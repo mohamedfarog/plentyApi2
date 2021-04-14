@@ -23,6 +23,12 @@
     .featicons {
         width: 25px !important;
     }
+    .nwtr{
+        font-family:'Avenir Bold'
+    }
+    .nwa{
+        font-weight:100;
+    }
 </style>
 
 <!-- Hero Slider -->
@@ -33,8 +39,8 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
                             <a href="/fashion" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
@@ -47,8 +53,8 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
                             <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
@@ -61,8 +67,8 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
                             <a href="/beauty" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
@@ -75,8 +81,8 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
                             <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
@@ -89,8 +95,8 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
                             <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
@@ -217,11 +223,14 @@
                 <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
             </div>
             <div class="fix featlineicons">
+                <a href="/">
                 <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
                 </span>
-                <span class="pro-rating floatright">
+                </a>
+                <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
                     <img class="featicons" src="img/nav/bag.png" loading=lazy>
                 </span>
+                </a>
             </div>
         </div>
     </div>

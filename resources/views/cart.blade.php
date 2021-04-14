@@ -61,7 +61,9 @@
         font-weight: 100 !important;
         font-size: 14px;
     }
-
+    .zzbtnproc::before{
+        background:white !important;
+    }
     @media only screen and (max-width: 600px) {
         .tablemobile {
             width: 95% !important;
@@ -139,8 +141,8 @@
                         <div class="col-md-7 col-sm-12">
                             <div class="actions">
 
-                                <input type="submit" name="update_cart" value="ADD ITEM" class="btn btn-lg btn-stroke additembtn">
-
+                                
+                                <a href="/checkout" class="btn btn-lg btn-dark chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="color:#001b71">add item</span></a>
                                 <div class="wc-proceed-to-checkout checkoutbtn">
                                     <a href="/checkout" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
                                 </div>

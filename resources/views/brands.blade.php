@@ -23,18 +23,28 @@
     .featicons {
         width: 25px !important;
     }
+    @media only screen and (max-width: 600px) {
+        .contu {
+            width: 95%;
+        }
+    }
 </style>
+<section class="page-title text-center bg-light">
+    <div class="container relative clearfix">
+        <div class="title-holder">
+            <div class="title-text">
+                <h1 class="uppercase" style="font-family:'Avenir Bold'">Brands</h1>
 
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <div class="purchase-online-area ">
-    <div class="container">
+    <div class="container contu">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2 class="title-border">Brands</h2>
-                </div>
-            </div>
+          
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -45,7 +55,7 @@
                 <!-- Tab panes -->
                 <div class="-">
                     <div class="tab-pane active" id="new-arrivals">
-                        <section style="margin: auto;width:90%;text-align:center;">
+                        <section style="margin: auto;width:100%;text-align:center;">
 
                             @if(isset($brands))
                             @foreach($brands as $hb)
@@ -54,7 +64,7 @@
                             $primarycolor = substr($primary, -6);
                             ?>
 
-                            <div class="col-lg-3 col-xs-12" style="margin:0 5px;">
+                            <div class="col-lg-3 col-xs-6 brand-slide" style="margin-top:50px;">
                                 <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
                                     <a href="/delicacy/{{$hb->shop_id}}">
                                         <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />

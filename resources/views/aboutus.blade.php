@@ -15,6 +15,7 @@
     div {
         color: white;
     }
+
 </style>
 <div style="background-color: #22264c;padding-top:10px;padding-bottom:10px;text-align: center;margin-bottom: 20px;">
     <h3 style="color:white;font-weight: 100;">About us</h3>
@@ -67,3 +68,4 @@
     @include('footer')
 </div>
 @endsection
+

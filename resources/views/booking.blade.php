@@ -290,6 +290,33 @@
         filter: brightness(0) invert(1);
     }
 
+    .coltablpadd {
+        padding: 0 30px 0 0;
+    }
+
+    .contimgu {
+        background-color: #f2f3f8;
+        padding-top: 50px;
+        margin-top: 20px
+    }
+
+    .divtitle {
+        position: relative;
+        display: block;
+        height: 20px;
+        text-align: center;
+    }
+
+    .bktitle {
+        font-size: 24px;
+        color: black !important;
+        width: 200px;
+        display: block;
+        float: left;
+    }
+
+    .bkprice {}
+
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;
@@ -309,6 +336,51 @@
             width: 100%;
             padding: 50px 0;
             filter: brightness(0) invert(1);
+        }
+
+        .coltablpadd {
+            padding: 0;
+            margin: auto;
+        }
+
+        .calendar-wrapper #btnNext {
+            position: absolute;
+            right: 0;
+        }
+
+        .calendar-wrapper #btnPrev {
+            position: absolute;
+            left: 0;
+        }
+
+        .contimgu {
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .divtitle {
+            padding-left: 20px;
+            position: relative;
+            display: block;
+            height: 20px;
+            text-align: center;
+        }
+
+        .time-shedule-wrapper {
+            padding: 100px 10px;
+        }
+
+        .bktitle {
+            width: 100%;
+        }
+
+        .bkprice {
+            width: 100%;
+        }
+        .ffaddbag{
+            width:100%;
+            float:none !important;
+            padding:10px !important;
         }
     }
 
@@ -333,7 +405,7 @@
         </div>
     </div>
 </div>
-<div class="container contmobile" style="background-color:#f2f3f8;padding-top:50px;margin-top:20px">
+<div class="container contmobile contimgu" style="">
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-5"></div>
@@ -347,7 +419,7 @@
         <div class="col-lg-12" style="padding:0;">
             <div class="clearfix" style="background-color:#f2f3f8;">
 
-                <div class="col-lg-5">
+                <div class="col-lg-5 hidden-md hidden-sm hidden-xs">
 
                     <div class="single-big-photo view-lightbox slider-for" style="width:100% !important">
                         <div>
@@ -357,12 +429,19 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7" style="padding:0 30px 0 0">
-                    <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
-                        GEL NAILS <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR 50</span></h4>
+                <div class="col-lg-7 col-sm-12 coltablpadd" style="">
+                    <div class="divtitle" style="">
+                        <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
+                            GEL NAILS
+                            <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR 50</span>
+
+                        </h4>
+                    </div>
                     <div class="calendar-wrapper" style="margin-top:80px;">
-                        <button id="btnPrev" type="button"></button>
-                        <button id="btnNext" type="button"></button>
+                        <div style="width:100%;">
+                            <button id="btnPrev" type="button"></button>
+                            <button id="btnNext" type="button"></button>
+                        </div>
                         <div id="divCal"></div>
                         <div class="day-status">
                             <span class="booking-available" style="font-weight:100;">Available</span>
@@ -405,19 +484,19 @@
     <div class="your-booking">
         <h4 style="margin-top: 30px;color:black;font-weight:500;font-size:24px;">Your Booking</h4>
         <div class="row">
-            <div class="col-lg-6" style="padding-left: 50px;">
+            <div class="col-lg-6 col-xs-12" style="padding-left: 50px;">
 
                 <div class="booking-item">
-                    <span style="font-size:24px;color:black;width:200px;display:block;float:left;">GET NAILS </span>
-                    <span style="font-size:24px;">SAR 50</span>
+                    <span class="bktitle" style="">GET NAILS </span>
+                    <span class="bkprice" style="font-size:24px;">SAR 50</span>
                 </div>
                 <div class="booking-item" style="font-size:24px;">
-                    <span style="font-size:24px;color:black;width:200px;display:block;float:left;">March 14 </span>
-                    <span style="font-size:24px;">04:30 PM</span>
+                    <span class="bktitle" style="">March 14 </span>
+                    <span class="bkprice" style="font-size:24px;">04:30 PM</span>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <button class=" addtobagbtn floatright" style="margin-top: 40px;border-color:#c31c4a;vertical-align:bottom">
+            <div class="col-lg-6 col-xs-12">
+                <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;border-color:#c31c4a;vertical-align:bottom">
                     <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
                         Add to Bag
                     </span>
@@ -517,7 +596,7 @@
             , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
-        var html = '<table>';
+        var html = '<table style="width:100% !important;">';
 
         // Write selected month and year
         html += '<thead><tr>';

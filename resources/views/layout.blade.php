@@ -46,7 +46,6 @@
     <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <!-- shortcode css -->
     <link rel="stylesheet" href="css/shortcode.css" defer>
-    <link rel="stylesheet" href="css/shortcode.css" defer>
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css" defer>
     <!-- modernizr css -->
@@ -141,6 +140,19 @@
             padding-right: 5px;
         }
 
+        .dropdownanch:hover {
+            color: black !important;
+        }
+
+        .mainanc:hover {
+            color: #001b71 !important;
+        }
+
+        .viewcartbtn {
+            background: #001b71 !important;
+            color: white !important;
+        }
+
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -154,12 +166,6 @@
 
         }
 
-        .dropdownanch:hover {
-            color: black !important;
-        }
-        .mainanc:hover{
-            color: #001b71 !important;
-        }
     </style>
 </head>
 
@@ -255,10 +261,10 @@
                                             <a class="mainanc" href="/brands">Brands</a>
 
                                         </li> <!-- end elements -->
-                                        <li class="hidden-lg hidden-md"><a href="/lang">Profile</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/lang">Track Order</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/lang">User Level</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/lang">Logout</a></li>
+                                        <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
+                                        <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
+                                        <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
+                                        <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
                                         <!-- Mobile search -->
 
                                     </ul> <!-- end menu -->
@@ -296,7 +302,7 @@
                                             </div>
 
                                             <div class="nav-cart-actions mt-20">
-                                                <a href="/cart" class="btn btn-md btn-dark"><span>View Cart</span></a>
+                                                <a href="/cart" class="btn btn-md viewcartbtn"><span style="color:white;">View Cart</span></a>
                                                 <a href="/checkout" class="btn btn-md btn-color mt-10"><span>Proceed to Checkout</span></a>
                                             </div>
                                         </div>
@@ -311,7 +317,7 @@
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
                                         <ul class="dropdown-menu" style="background:white">
-                                            <li><a class="dropdownanch" href="/lang">Profile</a></li><br>
+                                            <li><a class="dropdownanch" href="/profile">Profile</a></li><br>
                                             <li><a class="dropdownanch" href="/trackorder">Track Order</a></li><br>
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
                                             <li><a class="dropdownanch" href="/lang">Logout</a></li>
@@ -396,31 +402,31 @@
     <script>
         var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -428,31 +434,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -460,32 +466,32 @@
         });
 
         $(".tryprodslider").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            arrows: false,
-            autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , arrows: false
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -629,9 +635,9 @@
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal,
-                "order_total": cart.order_total,
-                "cart_items": cart_items
+                "cart_subtotal": cart.cart_subtotal
+                , "order_total": cart.order_total
+                , "cart_items": cart_items
             }
 
         }
@@ -643,21 +649,21 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id,
-                        price: element.price,
-                        name: element.name,
-                        is_product_variant: element.is_product_variant,
-                        size: element.size || null,
-                        size_id: element.size_id || null,
-                        color: element.color || null,
-                        color_id: element.color_id || null,
-                        quantity: element.quantity || null,
-                        date: element.date || null,
-                        time: element.time || null,
-                        image_url: element.image_url || null,
-                        stock: element.stock || null,
-                        category: element.category || null,
-                    }
+                        id: element.id
+                        , price: element.price
+                        , name: element.name
+                        , is_product_variant: element.is_product_variant
+                        , size: element.size || null
+                        , size_id: element.size_id || null
+                        , color: element.color || null
+                        , color_id: element.color_id || null
+                        , quantity: element.quantity || null
+                        , date: element.date || null
+                        , time: element.time || null
+                        , image_url: element.image_url || null
+                        , stock: element.stock || null
+                        , category: element.category || null
+                    , }
 
                     cart.addItem(new CartItem(item))
                 });
@@ -668,32 +674,32 @@
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false,
-            infinite: true,
-            slidesToShow: 8,
-            slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            autoplaySpeed: 10000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: false
+            , infinite: true
+            , slidesToShow: 8
+            , slidesToScroll: 1
+            , autoplay: false
+            , arrows: true
+            , autoplaySpeed: 10000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -710,9 +716,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0,
-                    order_total: 0,
-                    cart_items: []
+                    cart_subtotal: 0
+                    , order_total: 0
+                    , cart_items: []
                 }
             }
 
@@ -721,10 +727,10 @@
         $(document).ready(function() {
             let cart = new Cart()
             $.ajax({
-                type: 'GET',
-                url: 'http://127.0.0.1:8000/shop-category',
-                dataType: 'JSON',
-                success: function(data) {
+                type: 'GET'
+                , url: 'http://127.0.0.1:8000/shop-category'
+                , dataType: 'JSON'
+                , success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
@@ -783,6 +789,7 @@
                 location.reload();
             }
         }
+
     </script>
 </body>
 

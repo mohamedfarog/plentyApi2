@@ -112,7 +112,7 @@
             <label class="radio-inline"><input type="radio" name="gender" value="other" {{ ($user->gender) == 'other' ? 'checked' : ''}}>Other</label>
         </div>
         <div class="form-group">
-            <button∂ class="btn btn-primary" onclick="updatProfile(this)" value="Send">Update</button>
+            <button class="btn btn-primary" onclick="updatProfile(this)" value="Send">Update</button>
         </div>
 
     </form>
