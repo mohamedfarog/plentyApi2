@@ -101,9 +101,6 @@ Route::get('/userlevel', function () {
 
 
 
-Route::get('/brands', function () {
-    return view('/brands');
-});
 
 Route::get('/aboutus', function () {
     return view('/aboutus');
@@ -124,3 +121,5 @@ Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beaut
 Route::get('/delicay/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 
 Route::get('/featured',  [WebsiteHomeController::class, 'featured']);
+
+Route::get('/brands',  [WebsiteHomeController::class, 'brands']);

@@ -278,4 +278,10 @@ class WebsiteHomeController extends Controller
         $data['products'] = $this->featuredItems();
         return view('featured')->with($data);
     }
+
+    public function brands(Request $request)
+    {
+        $data['brands'] = $this->homebrands();
+        return view('brands')->with($data);
+    }
 }

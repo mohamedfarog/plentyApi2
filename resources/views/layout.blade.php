@@ -157,7 +157,6 @@
         .dropdownanch:hover {
             color: black !important;
         }
-
     </style>
 </head>
 
@@ -276,63 +275,26 @@
                                             <div class="nav-cart-inner">
                                                 <a href="/cart" class="" style="font-size: 14px;">
                                                     <img src="img/nav/bag.png" alt="" style="width:20px;height:20px;">
-                                                    0
+                                                    <span id="nav-cart-size"></span>
+
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="nav-cart-container">
-                                            <div class="nav-cart-items">
 
-                                                <div class="nav-cart-item clearfix">
-                                                    <div class="nav-cart-img">
-                                                        <a href="#">
-                                                            <img src="img/shop/shop_item_1.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="nav-cart-title">
-                                                        <a href="#">
-                                                            Ladies Bag
-                                                        </a>
-                                                        <div class="nav-cart-price">
-                                                            <span>1 x</span>
-                                                            <span>1250.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nav-cart-remove">
-                                                        <a href="#" class="remove"><i class="ui-close"></i></a>
-                                                    </div>
-                                                </div>
+                                            <div id="nav-cart-products">
 
-                                                <div class="nav-cart-item clearfix">
-                                                    <div class="nav-cart-img">
-                                                        <a href="#">
-                                                            <img src="img/shop/shop_item_2.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="nav-cart-title">
-                                                        <a href="#">
-                                                            Sequin Suit longer title
-                                                        </a>
-                                                        <div class="nav-cart-price">
-                                                            <span>1 x</span>
-                                                            <span>1250.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nav-cart-remove">
-                                                        <a href="#" class="remove"><i class="ui-close"></i></a>
-                                                    </div>
-                                                </div>
+                                            </div>
 
-                                            </div> <!-- end cart items -->
 
                                             <div class="nav-cart-summary">
                                                 <span>Cart Subtotal</span>
-                                                <span class="total-price">$1799.00</span>
+                                                <span class="total-price" id="nav-cart-total"></span>
                                             </div>
 
                                             <div class="nav-cart-actions mt-20">
-                                                <a href="shop-cart.html" class="btn btn-md btn-dark"><span>View Cart</span></a>
-                                                <a href="shop-checkout.html" class="btn btn-md btn-color mt-10"><span>Proceed to Checkout</span></a>
+                                                <a href="/cart" class="btn btn-md btn-dark"><span>View Cart</span></a>
+                                                <a href="/checkout" class="btn btn-md btn-color mt-10"><span>Proceed to Checkout</span></a>
                                             </div>
                                         </div>
                                     </li>
@@ -429,32 +391,33 @@
     <script src="js/main.js"></script>
 
     <script>
+        var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -462,31 +425,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -494,32 +457,32 @@
         });
 
         $(".tryprodslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -663,9 +626,9 @@
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal
-                , "order_total": cart.order_total
-                , "cart_items": cart_items
+                "cart_subtotal": cart.cart_subtotal,
+                "order_total": cart.order_total,
+                "cart_items": cart_items
             }
 
         }
@@ -677,21 +640,21 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , price: element.price
-                        , name: element.name
-                        , is_product_variant: element.is_product_variant
-                        , size: element.size || null
-                        , size_id: element.size_id || null
-                        , color: element.color || null
-                        , color_id: element.color_id || null
-                        , quantity: element.quantity || null
-                        , date: element.date || null
-                        , time: element.time || null
-                        , image_url: element.image_url || null
-                        , stock: element.stock || null
-                        , category: element.category || null
-                    , }
+                        id: element.id,
+                        price: element.price,
+                        name: element.name,
+                        is_product_variant: element.is_product_variant,
+                        size: element.size || null,
+                        size_id: element.size_id || null,
+                        color: element.color || null,
+                        color_id: element.color_id || null,
+                        quantity: element.quantity || null,
+                        date: element.date || null,
+                        time: element.time || null,
+                        image_url: element.image_url || null,
+                        stock: element.stock || null,
+                        category: element.category || null,
+                    }
 
                     cart.addItem(new CartItem(item))
                 });
@@ -702,32 +665,32 @@
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false
-            , infinite: true
-            , slidesToShow: 8
-            , slidesToScroll: 1
-            , autoplay: false
-            , arrows: true
-            , autoplaySpeed: 10000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: false,
+            infinite: true,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -744,9 +707,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0
-                    , order_total: 0
-                    , cart_items: []
+                    cart_subtotal: 0,
+                    order_total: 0,
+                    cart_items: []
                 }
             }
 
@@ -755,13 +718,14 @@
         $(document).ready(function() {
             let cart = new Cart()
             $.ajax({
-                type: 'GET'
-                , url: 'http://127.0.0.1:8000/shop-category'
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: 'http://127.0.0.1:8000/shop-category',
+                dataType: 'JSON',
+                success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
+            renderNavCart()
         });
 
         // for updating input fields by id
@@ -769,8 +733,54 @@
             document.getElementById(id).value = value;
         }
 
+        function renderNavCart() {
+            var cart = CartSerializer(getCartLocal())
+            console.log(cart.cart_items.length)
+            let template = ''
+            if (cart.cart_items.length > 0) {
+                cart.cart_items.forEach(item => {
+                    template = template +
+                        "<div class='nav-cart-items'>" +
+                        "<div class='nav-cart-item clearfix'>" +
+                        "<div class='nav-cart-img'>" +
+                        "<a href='#'>" +
+                        "<img src='" + base_url + "/storage/products/" + item.image_url + "' alt=''>" +
+                        "</a>" +
+                        "</div>" +
+                        "<div class='nav-cart-title'>" +
+                        "<a href='#'>" + item.name + "</a>" +
+                        "<div class='nav-cart-price'>" +
+                        "<span>" + item.quantity + " x</span>" +
+                        "<span>" + item.price + "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='nav-cart-remove'>" +
+                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + ")' class='remove'><i class='ui-close'></i></a>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>"
+
+                })
+
+
+            }
+            $('#nav-cart-size').html(cart.cart_items.length)
+            $('#nav-cart-products').html(template)
+            $('#nav-cart-total').html(cart.subTotal())
+        }
+
+        function removeNavCartItem(prd_id, size_id) {
+            var cart = CartSerializer(getCartLocal())
+            let id = prd_id + "-" + size_id
+            cart.removeItem(id)
+            storeCartLocal(JsonCartSerializer(cart));
+            renderNavCart();
+            var currentLocation = window.location.pathname;
+            if (currentLocation === '/cart') {
+                location.reload();
+            }
+        }
     </script>
 </body>
 
 </html>
-

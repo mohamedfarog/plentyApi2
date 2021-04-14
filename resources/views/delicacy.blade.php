@@ -319,6 +319,7 @@
 
 <section class="wholetabs wholemobile">
     <div id="Sada">
+
         <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated owlmobile" style="height:380px;">
 
             <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner1.png);background-size: cover !important;background-position: unset;">
@@ -333,119 +334,74 @@
                             <div class="buttons-holder" style="">
                                 <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated owlmobile" style="height:380px;">
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner1.png);background-size: cover !important;background-position: unset;">
-                                    <div class="container">
-                                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                                            <div class="hero-message" style="text-align:right;">
-                                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                                </h1>
-                                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                                <div class="buttons-holder" style="">
-                                                    <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+        </div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        <section class="mt-30 mb-30">
+            <div style="text-align:center;">
+                <h1 style="font-weight:lighter;color:#288248">
+                    Simply Put.
+                </h1>
+            </div>
+        </section>
+        <section style="width: 100%;margin: auto;margin-bottom:40px;">
+            <div class="tabprod" style="justify-content: space-evenly;width:100%;display:flex;margin-top:20px;">
 
-                                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
-                                    <div class="container">
-                                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                                            <div class="hero-message" style="text-align:right;">
-                                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                                </h1>
-                                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                                <div class="buttons-holder" style="">
-                                                    <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                                </div>
+                @foreach($product_categories as $product_category)
+                @if ($loop->first)
+                <button class="tablinkprod" onclick="getBestSeller(this)" id="defaultOpen">
+                    <h2 class="category-name category catmobile">
+                        Best Seller </h2>
+                </button>
+                @else
+                <button class="tablinkprod" onclick="getProducts(this,{{$product_category->id}})">
+                    <h2 class="category-name category catmobile"> {{$product_category->name_en}} </h2>
+                </button>
+                @endif
+                @endforeach
+            </div>
+        </section>
+        <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
 
-                                                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
-                                                    <div class="container">
-                                                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                                                            <div class="hero-message" style="text-align:right;">
-                                                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                                                </h1>
-                                                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                                                <div class="buttons-holder" style="">
-                                                                    <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
-                                                    <div class="container">
-                                                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                                                            <div class="hero-message" style="text-align:right;">
-                                                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                                                </h1>
-                                                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                                                <div class="buttons-holder" style="">
-                                                                    <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                                                </div>
-
-                                                                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
-                                                                    <div class="container">
-                                                                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                                                                            <div class="hero-message" style="text-align:right;">
-                                                                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                                                                </h1>
-                                                                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                                                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                                                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                                                                <div class="buttons-holder" style="">
-                                                                                    <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <section class="mt-30 mb-30">
-                                                                <div style="text-align:center;">
-                                                                    <h1 style="font-weight:lighter;color:#288248">
-                                                                        Simply Put.
-                                                                    </h1>
-                                                                </div>
-                                                            </section>
-                                                            <section style="width: 100%;margin: auto;margin-bottom:40px;">
-                                                                <div class="tabprod" style="justify-content: space-evenly;width:100%;display:flex;margin-top:20px;">
-
-                                                                    @foreach($product_categories as $product_category)
-                                                                    @if ($loop->first)
-                                                                    <button class="tablinkprod" onclick="getBestSeller(this)" id="defaultOpen">
-                                                                        <h2 class="category-name category catmobile">
-                                                                            Best Seller </h2>
-                                                                    </button>
-                                                                    @else
-                                                                    <button class="tablinkprod" onclick="getProducts(this,{{$product_category->id}})">
-                                                                        <h2 class="category-name category catmobile"> {{$product_category->name_en}} </h2>
-                                                                    </button>
-                                                                    @endif
-                                                                    @endforeach
-                                                                </div>
-                                                            </section>
-                                                            <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
-
-                                                            </section>
+        </section>
 </section>
 
 </div> <!-- end sada -->
@@ -490,7 +446,7 @@
     function getProducts(element, category = 0) {
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:8000/product-by-category/' + category,
+            url: base_url + 'product-by-category/' + category,
             dataType: 'JSON',
             success: function(data) {
                 if (data.length) {
@@ -510,7 +466,7 @@
         shop_id = $('#shopid').val();
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:8000/best-seller/' + shop_id,
+            url: base_url + 'best-seller/' + shop_id,
             dataType: 'JSON',
             success: function(data) {
                 if (data) {
@@ -570,6 +526,7 @@
         } else {
             window.location = base_url + 'delicacy/' + shopid;
         }
+
 
     }
     $(document).ready(function() {
