@@ -157,6 +157,9 @@
         .dropdownanch:hover {
             color: black !important;
         }
+        .mainanc:hover{
+            color: #001b71 !important;
+        }
     </style>
 </head>
 
@@ -229,27 +232,27 @@
                                     <ul class="nav navbar-nav">
 
                                         <li class="">
-                                            <a href="/">Home</a>
+                                            <a class="mainanc" href="/">Home</a>
                                         </li>
 
                                         <li class="">
-                                            <a href="/delicacy">Delicacy</a>
+                                            <a class="mainanc" href="/delicacy">Delicacy</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/beauty">Beauty</a>
+                                            <a class="mainanc" href="/beauty">Beauty</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/fashion">Fashion</a>
+                                            <a class="mainanc" href="/fashion">Fashion</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/featured">Featured</a>
+                                            <a class="mainanc" href="/featured">Featured</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
-                                            <a href="/brands">Brands</a>
+                                            <a class="mainanc" href="/brands">Brands</a>
 
                                         </li> <!-- end elements -->
                                         <li class="hidden-lg hidden-md"><a href="/lang">Profile</a></li><br>
