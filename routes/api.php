@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         //TODO
         return response()->json(['Success' =>  true]);
     });
+    Route::post('eventshopregister',[UserController::class,'vendorsRegister']);
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
