@@ -197,7 +197,6 @@
         color: #001b71;
         font-weight: 100;
     }
-
 </style>
 
 
@@ -560,7 +559,7 @@
                                                             <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
-                                                                        <a class="addresslabel"  style="padding: 7px;">
+                                                                        <a class="addresslabel" style="padding: 7px;">
                                                                             <input type="radio" name="optradio" checked>
                                                                             <span>Other </span>
                                                                             <img src="img/checkout/pin.png" style="height:20px;margin-left:10px;">
@@ -862,8 +861,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -871,8 +870,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -969,14 +968,42 @@
 
         });
     }
-    $(document).ready(function(){
-        $(".addresslabel").click(function(){
-            $( ".addresslabel" ).css( "background-color", "white" );
-            $( ".addresslabel" ).children("span").css( "color", "#001b71" );
-            $( ".addresslabel" ).children("img").css( "filter", "none" ); 
+
+    $("form").on('submit', function(e) {
+        e.preventDefault();
+        const bearer_token = getCookie('bearer_token');
+        url = base_url + 'place-order'
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "cart": getCartLocal()
+            },
+            headers: {
+                "Authorization": 'Bearer ' + bearer_token
+            },
+
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(err) {
+
+                console.log('Error!', err)
+            }
+
+        });
+    });
+
+    $(document).ready(function() {
+        $(".addresslabel").click(function() {
+            $(".addresslabel").css("background-color", "white");
+            $(".addresslabel").children("span").css("color", "#001b71");
+            $(".addresslabel").children("img").css("filter", "none");
             $(this).css("background-color", "#001b71");
             $(this).children("span").css("color", "white");
-            $(this).children("img").css( "filter", "brightness(0) invert(1)" ); 
+            $(this).children("img").css("filter", "brightness(0) invert(1)");
         });
     });
 </script>

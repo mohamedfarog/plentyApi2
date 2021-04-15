@@ -384,7 +384,7 @@
                 if (data.success) {
                     if (data.user) {
                         setCookie('bearer_token', data.token, 1);
-                        login();
+                        getUser();
                         window.location.href = base_url;
                     } else {
                         register(data)
@@ -413,32 +413,10 @@
             dataType: 'JSON',
             success: function(data) {
                 setCookie('bearer_token', data.token, 1);
-                login();
+                getUser();
                 window.location.href = base_url + "profile-edit";
                 //console.log(data)
             }
-        });
-    }
-
-    function login() {
-        const bearer_token = getCookie('bearer_token');
-        url = base_url + 'login'
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'JSON',
-            headers: {
-                "Authorization": 'Bearer ' + bearer_token
-            },
-
-            success: function(data) {
-                console.log('success')
-
-            },
-            error: function(err) {
-                console.log('Error!', err)
-            }
-
         });
     }
 </script>
