@@ -298,7 +298,7 @@
 
                                             <div class="nav-cart-summary">
                                                 <span>Cart Subtotal</span>
-                                                <span class="total-price" id="nav-cart-total"></span>
+                                                <span class="total-price" id="nav-cart-total"> </span>
                                             </div>
 
                                             <div class="nav-cart-actions mt-20">
@@ -753,7 +753,7 @@
                         "<div class='nav-cart-item clearfix'>" +
                         "<div class='nav-cart-img'>" +
                         "<a href='#'>" +
-                        "<img src='" + base_url + "/storage/products/" + item.image_url + "' alt=''>" +
+                        "<img src='" + base_url + "storage/products/" + item.image_url + "' alt='No Image' >" +
                         "</a>" +
                         "</div>" +
                         "<div class='nav-cart-title'>" +
@@ -775,7 +775,7 @@
             }
             $('#nav-cart-size').html(cart.cart_items.length)
             $('#nav-cart-products').html(template)
-            $('#nav-cart-total').html(cart.subTotal())
+            $('#nav-cart-total').html(cart.subTotal() + ' SAR')
         }
 
         function removeNavCartItem(prd_id, size_id) {
