@@ -197,6 +197,7 @@
         color: #001b71;
         font-weight: 100;
     }
+
 </style>
 
 
@@ -534,9 +535,11 @@
                                                             <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
-                                                                        <input type="radio" name="optradio" checked>
-                                                                        <span>Home </span>
-                                                                        <img src="img/checkout/home.png" style="height:20px;margin-left:10px;">
+                                                                        <a class="addresslabel" style="padding: 7px;">
+                                                                            <input type="radio" name="optradio" checked>
+                                                                            <span>Home </span>
+                                                                            <img src="img/checkout/home.png" style="height:20px;margin-left:10px;">
+                                                                        </a>
                                                                     </div>
 
                                                                 </label>
@@ -544,9 +547,11 @@
                                                             <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
-                                                                        <input type="radio" name="optradio" checked>
-                                                                        <span>Work </span>
-                                                                        <img src="img/checkout/portfolio.png" style="height:20px;margin-left:10px;">
+                                                                        <a class="addresslabel" style="padding: 7px;">
+                                                                            <input type="radio" name="optradio" checked>
+                                                                            <span>Work </span>
+                                                                            <img src="img/checkout/portfolio.png" style="height:20px;margin-left:10px;">
+                                                                        </a>
                                                                     </div>
 
                                                                 </label>
@@ -554,9 +559,11 @@
                                                             <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
-                                                                        <input type="radio" name="optradio" checked>
-                                                                        <span>Other </span>
-                                                                        <img src="img/checkout/pin.png" style="height:20px;margin-left:10px;">
+                                                                        <a class="addresslabel"  style="padding: 7px;">
+                                                                            <input type="radio" name="optradio" checked>
+                                                                            <span>Other </span>
+                                                                            <img src="img/checkout/pin.png" style="height:20px;margin-left:10px;">
+                                                                        </a>
                                                                     </div>
 
                                                                 </label>
@@ -834,7 +841,7 @@
 </div>
 
 
-<div style="border: 2px solid #b2bad4">
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
 <script>
@@ -854,8 +861,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6',
-            'color': '#1d2767'
+            'background': '#f6f6f6'
+            , 'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -863,8 +870,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400',
-            'color': 'white'
+            'background': '#ffa400'
+            , 'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -899,6 +906,16 @@
     function checkCouponValid() {
 
     }
+    $(document).ready(function(){
+        $(".addresslabel").click(function(){
+            $( ".addresslabel" ).css( "background-color", "white" );
+            $( ".addresslabel" ).children("span").css( "color", "#001b71" );
+            $( ".addresslabel" ).children("img").css( "filter", "none" ); 
+            $(this).css("background-color", "#001b71");
+            $(this).children("span").css("color", "white");
+            $(this).children("img").css( "filter", "brightness(0) invert(1)" ); 
+        });
+    });
 </script>
 
 <script src="js/jquery.geocoder.js"></script>

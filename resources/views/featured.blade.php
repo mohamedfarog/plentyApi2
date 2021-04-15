@@ -126,7 +126,8 @@
                 @foreach($products as $product)
                 <div class="producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm " style="margin-bottom:30px;">
                     <div class="product-img frame"><a href=""><img src="http://127.0.0.1:8000/storage/products/jqit4OFba9ZbS8NNOVO91di1GeHhttLuDMyr5YXA.png" alt="" loading="lazy" class="imgz"></a>
-                        <div class="fix buttonsshow" style="visibility: visible;"><span class="pro-price "><img class="featicons" src="img/nav/bag.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span><span class="divitext" style=""> | </span> <span class="pro-rating "><img class="featicons" src="img/nav/search.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span></div>
+                        <div class="fix buttonsshow" style="visibility: visible;"><span class="pro-price "><img class="featicons" src="img/nav/bag.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span>
+                        <span class="pro-rating "><img class="featicons" src="img/nav/search.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span></div>
                         <div class="product-action clearfix"></div>
                     </div>
                     <div class="product-info clearfix">
@@ -203,7 +204,7 @@
     });
 
 </script>
-<div>
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
 @endsection

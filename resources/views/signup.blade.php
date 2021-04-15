@@ -229,7 +229,7 @@
         </div>
 
         <!-- Submit button -->
-        <button onclick="generateOTP(event)" class="btn btn-primary btn-block mb-4 signupbutton">CREATE</button>
+        <button onclick="generateOTP(event)" class="btn btn-primary btn-block mb-4 signupbutton">Login</button>
 
 
     </form>

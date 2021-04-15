@@ -353,7 +353,7 @@
         });
     });
 </script>
-<div>
+<div style="">
     @include('footer')
 </div>
 @endsection

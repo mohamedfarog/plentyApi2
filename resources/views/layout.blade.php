@@ -153,6 +153,9 @@
             color: white !important;
         }
 
+        .nav-right li {
+            height: 50px;
+        }
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -316,7 +319,20 @@
                                         <a href="/login" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
-                                        <ul class="dropdown-menu" style="background:white">
+                                        <ul class="dropdown-menu dwdw" style="background:white">
+                                            <div class="row">
+
+                                            </div>
+                                            <li>
+                                                <a class="dropdownanch" href="/profile">
+                                                    <div class="row">
+                                                        
+                                                        <div class="hidden-sm hidden-xs" style="width:100%;float:left;margin:auto">
+                                                            <p>Hello,<span>Jake Tan</span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li><br>
                                             <li><a class="dropdownanch" href="/profile">Profile</a></li><br>
                                             <li><a class="dropdownanch" href="/trackorder">Track Order</a></li><br>
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
@@ -794,3 +810,4 @@
 </body>
 
 </html>
+

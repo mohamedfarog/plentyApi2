@@ -724,7 +724,7 @@
 </script>
 <script src="js/prodjs.js"></script>
 
-<div style="border: 2px solid #b2bad4;margin-top: 30px;">
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
 @endsection

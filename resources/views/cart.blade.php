@@ -142,7 +142,7 @@
                             <div class="actions">
 
                                 
-                                <a href="/checkout" class="btn btn-lg btn-dark chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="color:#001b71">add item</span></a>
+                                <a href="/brands" class="btn btn-lg btn-dark chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="color:#001b71">add item</span></a>
                                 <div class="wc-proceed-to-checkout checkoutbtn">
                                     <a href="/checkout" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
                                 </div>
@@ -331,7 +331,7 @@
         }
     </script>
 
-    <div style="border: 2px solid #b2bad4">
+    <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
         @include('footer')
     </div>
     @endsection

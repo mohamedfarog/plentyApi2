@@ -118,7 +118,7 @@
         max-height: 90%;
         display: block;
         margin: 0 auto;
-        min-width: 95% !important;
+        min-width: 80px;
     }
 
     .shoplistmobile {
@@ -549,7 +549,7 @@
     });
 </script>
 <script src="js/prodjs.js"></script>
-<div>
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
 
