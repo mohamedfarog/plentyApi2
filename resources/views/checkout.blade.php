@@ -474,6 +474,7 @@
                         <!-- check-out start -->
                         <div class="tab-pane active" id="check-out">
                             <form action="#">
+                                <input type="hidden" id="loyality-point" name="loyality-point">
                                 <div class="shop-cart-table check-out-wrap">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -605,7 +606,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Coupon Code</td>
-                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c">- 19.5 SAR (10%)</td>
+                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c" id="coupon-applied"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Plenty Balance</td>
@@ -630,31 +631,31 @@
                                             <div class="payment-method mt-20 mb-20 pl-20 pr-20">
                                                 <div class="row">
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" type="text" placeholder="" style="border: 2px solid #001b71;margin-bottom: 5px;padding: 10px;" value="MVP10">
+                                                        <input class="inputdeladd" type="text" id="coupon-code" placeholder="Coupon here!" style="border: 2px solid #001b71;margin-bottom: 5px;padding: 10px;" id=>
                                                         <br>
 
                                                     </div>
                                                     <div class="col-md-4 col-xs-12" style="padding-left: 0">
-                                                        <button class="button-one submit-button" data-text="coupon" type="submit" style="height: 100%;background:#001b71;">apply</button>
+                                                        <button class="button-one submit-button" type="button" data-text="coupon" onclick="checkCouponValid()" style="height: 100%;background:#001b71;">apply</button>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-12 col-xs-12">
-                                                        <span>10% discount from MVP Application and Game Design</span>
+                                                        <span id="coupon_error"></span>
                                                     </div>
                                                 </div>
                                                 <h4 class="title-1 title-border mb-20 mt-20 selpaymet" style="font-weight:100">Select payment method</h4>
                                                 <div class="payment-accordion">
                                                     <!-- Accordion start  -->
-                                                    <h3 class="payment-accordion-toggle active" style="background:#ffa400;color:white;">Use your Loyalty Points <span class="text-right spanh3" style="color:white;float:right;margin-right:30px;">375 PTS</span> </h3>
+                                                    <h3 class="payment-accordion-toggle active" style="background:#ffa400;color:white;">Use your Loyalty Points <span class="text-right spanh3" style="color:white;float:right;margin-right:30px;"> <span class="loyality-point"></span> PTS</span> </h3>
 
 
                                                     <div class="payment-content default">
                                                         <div class="row" style="border-bottom:1px solid grey;margin-left:5px;margin-right:5px;">
                                                             <span class="boldfont">Available Loyalty Points</span>
-                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold'">375 <span style="font-family:'Avenir';font-weight:100">PTS</span></span>
+                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold'"><span class="loyality-point"></span> <span style="font-family:'Avenir';font-weight:100"> PTS</span></span>
                                                         </div>
                                                         <div style="margin-left:5px;margin-right:5px;margin-top:5px;">
                                                             <span class="boldfont">Use your Loyalty Points</span><br>
@@ -880,6 +881,7 @@
     });
     $(document).ready(function() {
         renderOrderedProduct()
+        getLoyalityPoint()
 
     });
 
@@ -904,7 +906,68 @@
     }
 
     function checkCouponValid() {
+        $("#coupon_error").html("");
+        const bearer_token = getCookie('bearer_token');
+        let code = $('#coupon-code').val()
+        console.log(code)
+        url = base_url + 'coupon'
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "couponcode": code,
+                "cart": getCartLocal()
+            },
+            headers: {
 
+                "Authorization": 'Bearer ' + bearer_token
+            },
+
+            success: function(data) {
+                console.log(data)
+                if (data.value > 0) {
+                    $("#coupon_error").html("coupon applied " + data.value + " SAR")
+                    $("#coupon-applied").html('-' + data.value + ' SAR (10%)')
+                } else
+                    $("#coupon_error").html("This shop is not ")
+            },
+            error: function(err) {
+                let error = err.responseJSON.message;
+                $("#coupon_error").html(error)
+
+                console.log('Error!', err)
+            }
+
+        });
+    }
+
+    function getLoyalityPoint() {
+
+        const bearer_token = getCookie('bearer_token');
+        url = base_url + 'plenty-points'
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}"
+            },
+            headers: {
+                "Authorization": 'Bearer ' + bearer_token
+            },
+
+            success: function(data) {
+                console.log(data.point)
+                $(".loyality-point").html(data.point);
+                $("#loyality-point").val(data.point);
+            },
+            error: function(err) {
+                console.log('Error!', err)
+            }
+
+        });
     }
     $(document).ready(function(){
         $(".addresslabel").click(function(){

@@ -169,6 +169,7 @@
                             <span class="color-title text-capitalize mb-20" style="font-size:18px;text-transform:uppercase">size</span>
                             <form id="product-form">
                                 <input type="hidden" id="name" name="name" value="{{$product->name_en}}">
+                                <input type="hidden" id="shop_id" name="shop_id" value="{{$product->shop_id}}">
                                 <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
                                 <input type="hidden" id="image_url" name="image_url" value="{{$product->image}}">
                                 @if($shop->cat_id)
@@ -380,6 +381,7 @@
                 date: form.get('date') || null,
                 time: form.get('time') || null,
                 stock: form.get('stock') || null,
+                shop_id: form.get('shop_id') || null,
                 category: shop_category[0].name_en || null,
             }
 

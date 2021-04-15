@@ -530,7 +530,6 @@
 
     }
     $(document).ready(function() {
-        console.log("100%");
         document.getElementById('breadcrumbshopname').innerHTML = localStorage.shopname;
         document.getElementById('breadcrumbshopname2').innerHTML = localStorage.shopname;
         document.getElementById('mobileheadershop').src = localStorage.shopimg;

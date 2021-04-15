@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/font-icons.css" defer />
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
@@ -156,6 +157,7 @@
         .nav-right li {
             height: 50px;
         }
+
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -168,7 +170,6 @@
             }
 
         }
-
     </style>
 </head>
 
@@ -311,7 +312,7 @@
                                         </div>
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="/cart" class="nav-search  imgicon">
+                                        <a href="/favourites" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/fav.png">
                                         </a>
                                     </li>
@@ -326,7 +327,7 @@
                                             <li>
                                                 <a class="dropdownanch" href="/profile">
                                                     <div class="row">
-                                                        
+
                                                         <div class="hidden-sm hidden-xs" style="width:100%;float:left;margin:auto">
                                                             <p>Hello,<span>Jake Tan</span></p>
                                                         </div>
@@ -418,31 +419,31 @@
     <script>
         var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -450,31 +451,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -482,32 +483,32 @@
         });
 
         $(".tryprodslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -605,7 +606,8 @@
         // date and time for only booking
         function CartItem(item) {
             this.id = item.id;
-            this.price = item.price
+            this.price = item.price;
+            this.shop_id = item.shop_id || '';
             this.name = item.name;
             this.is_product_variant = item.is_product_variant || false;
             this.size = item.size || null;
@@ -648,12 +650,13 @@
                 item['category'] = element.category
                 item['image_url'] = element.image_url
                 item['stock'] = element.stock
+                item['shop_id'] = element.shop_id
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal
-                , "order_total": cart.order_total
-                , "cart_items": cart_items
+                "cart_subtotal": cart.cart_subtotal,
+                "order_total": cart.order_total,
+                "cart_items": cart_items
             }
 
         }
@@ -665,21 +668,22 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , price: element.price
-                        , name: element.name
-                        , is_product_variant: element.is_product_variant
-                        , size: element.size || null
-                        , size_id: element.size_id || null
-                        , color: element.color || null
-                        , color_id: element.color_id || null
-                        , quantity: element.quantity || null
-                        , date: element.date || null
-                        , time: element.time || null
-                        , image_url: element.image_url || null
-                        , stock: element.stock || null
-                        , category: element.category || null
-                    , }
+                        id: element.id,
+                        shop_id: element.shop_id,
+                        price: element.price,
+                        name: element.name,
+                        is_product_variant: element.is_product_variant,
+                        size: element.size || null,
+                        size_id: element.size_id || null,
+                        color: element.color || null,
+                        color_id: element.color_id || null,
+                        quantity: element.quantity || null,
+                        date: element.date || null,
+                        time: element.time || null,
+                        image_url: element.image_url || null,
+                        stock: element.stock || null,
+                        category: element.category || null,
+                    }
 
                     cart.addItem(new CartItem(item))
                 });
@@ -690,32 +694,32 @@
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false
-            , infinite: true
-            , slidesToShow: 8
-            , slidesToScroll: 1
-            , autoplay: false
-            , arrows: true
-            , autoplaySpeed: 10000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: false,
+            infinite: true,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -732,9 +736,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0
-                    , order_total: 0
-                    , cart_items: []
+                    cart_subtotal: 0,
+                    order_total: 0,
+                    cart_items: []
                 }
             }
 
@@ -743,10 +747,10 @@
         $(document).ready(function() {
             let cart = new Cart()
             $.ajax({
-                type: 'GET'
-                , url: 'http://127.0.0.1:8000/shop-category'
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: 'http://127.0.0.1:8000/shop-category',
+                dataType: 'JSON',
+                success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
@@ -769,7 +773,7 @@
                         "<div class='nav-cart-item clearfix'>" +
                         "<div class='nav-cart-img'>" +
                         "<a href='#'>" +
-                        "<img src='" + base_url + "storage/products/" + item.image_url + "' alt='No Image' >" +
+                        "<img src='" + base_url + "storage/products/" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</div>" +
                         "<div class='nav-cart-title'>" +
@@ -806,8 +810,117 @@
             }
         }
 
+
+
+        // favourite item start from here
+
+        function Favourite() {
+            this.favourite_items = [];
+        }
+        Favourite.prototype.addItem = function(FavouriteItem) {
+            let i = this.favourite_items.length;
+            let flag = true;
+            while (i--) {
+                if (this.favourite_items[i] && this.favourite_items[i]['id'] === FavouriteItem.id) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                this.favourite_items.push(FavouriteItem)
+            }
+
+
+        }
+
+        Favourite.prototype.removeItem = function(pro_id) {
+            let i = this.favourite_items.length;
+            while (i--) {
+                if (this.favourite_items[i] && this.favourite_items[i]['id'] === pro_id) {
+                    this.favourite_items.splice(i, 1);
+                }
+            }
+            return this.favourite_items;
+        }
+
+
+
+        function FavouriteItem(item) {
+            this.id = item.id;
+            this.price = item.price;
+            this.name = item.name_en;
+            this.image = item.image;
+
+        }
+
+        function MakeFavourite(id) {
+            let product = getFavouriteProductInfo(id);
+
+        }
+
+        function getFavouriteProductInfo(id) {
+            $.ajax({
+                type: 'GET',
+                url: base_url + 'favourite-product/' + id,
+                dataType: 'JSON',
+                success: function(data) {
+                    if (data.Response) {
+                        let favourite_item = new FavouriteItem(data.product[0])
+                        let favourites = FavouriteSerializer(getFavouritesLocal())
+                        favourites.addItem(favourite_item);
+                        storeFavouritesLocal(favourites)
+
+
+                    } else {
+                        //
+                    }
+
+                },
+                error: function(err) {
+                    console.log('Error!', err)
+                }
+
+            });
+        }
+
+        //storing data
+        function storeFavouritesLocal(favourites) {
+            localStorage.setItem('favourites', JSON.stringify(favourites))
+        }
+
+        // getting data
+        function getFavouritesLocal() {
+            if (JSON.parse(localStorage.getItem('favourites'))) {
+                return JSON.parse(localStorage.getItem('favourites'))
+            } else {
+                return {
+                    favourite_items: []
+                }
+            }
+
+        }
+
+        function FavouriteSerializer(data) {
+            let favourites = new Favourite()
+
+            if (data.favourite_items.length > 0) {
+                data.favourite_items.forEach(element => {
+                    let item = {
+                        id: element.id,
+                        price: element.price,
+                        name: element.name,
+                        image: element.image || null,
+                    }
+
+                    favourites.addItem(new FavouriteItem(item))
+                });
+            }
+            return favourites;
+        }
+
+
+        // Favourite end here
     </script>
 </body>
 
 </html>
-

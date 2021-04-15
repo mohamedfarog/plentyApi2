@@ -65,7 +65,7 @@
 
     .otp input {
         background-color: #f1f1f1;
-        width: auto; 
+        width: auto;
     }
 
     .otp-field {
@@ -189,10 +189,12 @@
     .sfa {
         margin-right: 5px !important;
     }
-    .modaltextp{
-        font-size:16px;
-        font-weight:100;
+
+    .modaltextp {
+        font-size: 16px;
+        font-weight: 100;
     }
+
     @media screen and (min-width: 768px) {
         .modal:before {
             display: inline-block;

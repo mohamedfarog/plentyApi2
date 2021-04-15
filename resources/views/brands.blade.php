@@ -66,9 +66,19 @@
 
                             <div class="col-lg-3 col-xs-6 brand-slide" style="margin-top:50px;">
                                 <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
+                                    @if($hb->cat_id == 1)
                                     <a href="/delicacy/{{$hb->shop_id}}">
                                         <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
                                     </a>
+                                    @elseif($hb->cat_id == 2)
+                                    <a href="/beauty/{{$hb->shop_id}}">
+                                        <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+                                    </a>
+                                    @else
+                                    <a href="/fashion/{{$hb->shop_id}}">
+                                        <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+                                    </a>
+                                    @endif
 
                                     <div class="product-action clearfix">
 

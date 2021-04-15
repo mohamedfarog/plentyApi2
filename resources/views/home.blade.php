@@ -23,11 +23,13 @@
     .featicons {
         width: 25px !important;
     }
-    .nwtr{
-        font-family:'Avenir Bold'
+
+    .nwtr {
+        font-family: 'Avenir Bold'
     }
-    .nwa{
-        font-weight:100;
+
+    .nwa {
+        font-weight: 100;
     }
 </style>
 
@@ -223,13 +225,12 @@
                 <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
             </div>
             <div class="fix featlineicons">
-                <a href="/">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
                 </span>
                 </a>
                 <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
+                        <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                    </span>
                 </a>
             </div>
         </div>
@@ -276,18 +277,30 @@
     $primary = $hb->primary;
     $primarycolor = substr($primary, -6);
     ?>
-    
+
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
         <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
+
+            @if($hb->cat_id == 1)
             <a href="/delicacy/{{$hb->shop_id}}">
                 <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
             </a>
+            @elseif($hb->cat_id == 2)
+            <a href="/beauty/{{$hb->shop_id}}">
+                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+            </a>
+            @else
+            <a href="/fashion/{{$hb->shop_id}}">
+                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+            </a>
+            @endif
+
 
             <div class="product-action clearfix">
 
             </div>
         </div>
-                    
+
     </div>
 
     @endforeach

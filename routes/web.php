@@ -97,7 +97,7 @@ Route::get('/checkout', function () {
 
 Route::get('/userlevel', function () {
     return view('/userlevel');
-}); 
+});
 
 
 
@@ -108,11 +108,17 @@ Route::get('/aboutus', function () {
 Route::get('/careers', function () {
     return view('/careers');
 });
- 
+
+Route::get('/favourites', function () {
+    return view('/favourite');
+});
+
 //Profile edit
 Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/profile-edit', [WebsiteHomeController::class, 'profileEdit']);
     Route::get('/profile', [WebsiteHomeController::class, 'profile']);
+    Route::get('/plenty-points',  [WebsiteHomeController::class, 'getPlentyPoints']);
+    Route::post('/coupon', [WebsiteHomeController::class, "cacluateCoupon"]);
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);
@@ -121,3 +127,5 @@ Route::get('/delicay/{shop?}/{category?}',  [WebsiteHomeController::class, 'deli
 Route::get('/featured',  [WebsiteHomeController::class, 'featured']);
 
 Route::get('/brands',  [WebsiteHomeController::class, 'brands']);
+
+Route::get('/favourite-product/{id}',  [WebsiteHomeController::class, 'getFavouiteProduct']);

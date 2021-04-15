@@ -9,6 +9,7 @@ use DB;
 
 use App\Models\Shop;
 use App\Models\Cat;
+use App\Models\Coupon;
 use App\Models\Prodcat;
 use App\Models\Product;
 
@@ -35,7 +36,7 @@ class WebsiteHomeController extends Controller
     private function homebrands()
     {
         return  DB::table('shops')
-            ->select(DB::raw('styles.brandheader,styles.primary,styles.shop_id'))
+            ->select(DB::raw('styles.brandheader,styles.primary,styles.shop_id,shops.cat_id as cat_id'))
             ->join('styles', 'styles.shop_id', '=', 'shops.id')
             ->get();
     }
@@ -269,8 +270,8 @@ class WebsiteHomeController extends Controller
         } else {
             $data['shop'] = $data['shops']->first();
         }
-        $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
 
+        $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
         return view('/fashion')->with($data);
     }
 
@@ -284,5 +285,65 @@ class WebsiteHomeController extends Controller
     {
         $data['brands'] = $this->homebrands();
         return view('brands')->with($data);
+    }
+
+    // getting plenty points
+    public function getPlentyPoints(Request $request)
+    {
+        $user = Auth::user();
+        return response()->json(['Response' => !!$user, 'point' =>  $user->points]);
+    }
+
+    // getting coupon code
+    public function cacluateCoupon(Request $request)
+    {
+        $coupon = $request->couponcode;
+        $coupon = Coupon::where("code", $coupon)->first();
+        if (!$coupon) {
+            return response()->json(["type" => "error", "message" => "coupon code not found"], 400);
+        }
+        $cart = $request->cart;
+        if (!$cart)
+            return response()->json(["type" => "error", "message" => "You cart is empty"], 400);
+
+        //checking coupon is for shop or all
+        // This is when it is for shop
+        $totalAmount = 0;
+        if ($coupon->shop_id) {
+            $totalAmount = $this->calculateTotal($cart['cart_items'], $coupon->shop_id);
+
+            // return response()->json(["type" => "success", "value" => $this->calculateTotal($cart['cart_items'], $coupon->shop_id)], 200);
+        } else {
+            $totalAmount = $this->calculateTotal($cart['cart_items'], null);
+            // return response()->json(["type" => "success", "value" => $this->calculateTotal($cart['cart_items'], null)], 200);
+        }
+        $amountApplied = 0;
+        if ($coupon->ispercentage) {
+            $amountApplied = ($totalAmount * ($coupon->value)) / 100;
+        } else {
+            if ($amountApplied >= $totalAmount)
+                $amountApplied = $totalAmount;
+        }
+        return response()->json(["type" => "success", "value" =>  $amountApplied], 200);
+    }
+    function calculateTotal($items, $shop_id = null)
+    {
+        $total = 0;
+        foreach ($items as $item) {
+            if ($shop_id) {
+                if ($item['shop_id'] && $item['shop_id'] == $shop_id)
+
+                    $total += ($item['price'] * $item['quantity']);
+            } else
+                $total += ($item['price'] * $item['quantity']);
+        }
+        return $total;
+    }
+
+    // getting plenty points
+    public function getFavouiteProduct(Request $request, $id)
+    {
+        $data['product'] =  $this->getProduct($id);
+        return response()->json(['Response' => !!count($data['product']), 'product' => $data['product']]);
     }
 }
