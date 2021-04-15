@@ -52,7 +52,7 @@
                 "<div class='product-action clearfix'></div></div>" +
                 "<div class='product-info clearfix'>" +
                 "<div class='fix'>" +
-                "<h4 class='post-title floatcenter feattitle'><a href='#' style=>" + element.name + "</a></h4>" +
+                "<h4 class='post-title floatcenter feattitle'><a href='#' style=>" + element.name_en + "</a></h4>" +
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +

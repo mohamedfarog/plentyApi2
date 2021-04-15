@@ -847,7 +847,7 @@
         function FavouriteItem(item) {
             this.id = item.id;
             this.price = item.price;
-            this.name = item.name_en;
+            this.name_en = item.name_en;
             this.image = item.image;
 
         }
@@ -907,7 +907,7 @@
                     let item = {
                         id: element.id,
                         price: element.price,
-                        name: element.name,
+                        name_en: element.name_en,
                         image: element.image || null,
                     }
 
