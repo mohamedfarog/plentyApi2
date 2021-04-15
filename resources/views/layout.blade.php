@@ -176,9 +176,8 @@
 
     <!-- Preloader -->
     <div class="loader-mask">
-        <div class="loader">
-            <div></div>
-            <div></div>
+        <div class="loader" style="height:100px;width:100px;">
+            <img class="logo-dark" src="img/logo_dark.png" alt="Plenty" style="width: 100px;height: 100px;max-height: 100px;">
         </div>
     </div>
 
