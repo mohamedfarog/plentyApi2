@@ -318,8 +318,9 @@
     <div class="container userlvlrowuser containerpoints" style="">
         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div>
-                <a  data-toggle="modal" data-target=".bd-example-modal-sm"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;"></a>
+                <a  data-toggle="modal" data-target=".sapphiremodal"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
                 <img src="img/userlevel/sapphire.png">
+                </a>
             </div>
             <br>
             <h4 class="boldfont" style="color:#2257f4;font-family'Avenir Bold';font-family:18px;">Sapphire</h4>
@@ -327,8 +328,9 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div style="width:100%;">
-                <a data-toggle="modal" data-target=".bd-example-modal-sm"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;"></a>
+                <a data-toggle="modal" data-target=".emeraldmodal"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
                 <img src="img/userlevel/emerald.png">
+                </a>
             </div>
             <br>
             <h4 class="boldfont" style="color:#0c9d18;">Emerald</h4>
@@ -336,8 +338,9 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div style="width:100%;">
-                <a data-toggle="modal" data-target=".bd-example-modal-sm"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;"></a>
-                <img src="img/userlevel/topaz.png">
+                <a data-toggle="modal" data-target=".topazmodal"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
+                    <img src="img/userlevel/topaz.png">
+                </a>
             </div>
             <br>
             <h4 class="boldfont" style="color:#3fdcec;">Topaz</h4>
@@ -394,7 +397,32 @@
 
 </section>
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-sm" t1abindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm sapphiremodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px;">
+            <div class="modal-content">
+                <div style="text-align:center;margin-top:10px">
+                    <img src="img/userlevel/sapphire.png">
+                </div>
+                <div style="text-align:center;background:#08298a;padding:10px 0;"> 
+                    <span style="font-family:'Avenir Bold';color:white;font-size:24px;">Sapphire</span>
+                </div>
+                <div style="text-align:center;margin-top:50px">
+                    <h4 style="color:black;font-weight:600;margin:0"> Get x1 Loyalty Points for every Riyal spent</h4>
+                    <span style="color:#c8c8c8">(eg. 1000 SAR = 1000 Points)</span>
+                </div>
+                <div style="text-align:center;margin-top:30px">
+                    <h4 style="color:black;font-weight:600;margin:0">Get a discount of 1% for Loyalty Point Redeemed</h4>
+                    <span style="color:#c8c8c8">(eg. 1000 Points = 10 SAR Discount)</span>
+                </div>
+                <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
+                    <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px"  data-dismiss="modal"> OKAY </button>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm emeraldmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" style="width:400px;">
             <div class="modal-content">
                 <div style="text-align:center;margin-top:10px">
@@ -410,6 +438,31 @@
                 <div style="text-align:center;margin-top:30px">
                     <h4 style="color:black;font-weight:600;margin:0">Get a discount of 2% for Loyalty Point Redeemed</h4>
                     <span style="color:#c8c8c8">(eg. 1000 Points = 20 SAR Discount)</span>
+                </div>
+                <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
+                    <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px"  data-dismiss="modal"> OKAY </button>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm topazmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px;">
+            <div class="modal-content">
+                <div style="text-align:center;margin-top:10px">
+                    <img src="img/userlevel/topaz.png">
+                </div>
+                <div style="text-align:center;background:#40daea;padding:10px 0;"> 
+                    <span style="font-family:'Avenir Bold';color:white;font-size:24px;">Topaz</span>
+                </div>
+                <div style="text-align:center;margin-top:50px">
+                    <h4 style="color:black;font-weight:600;margin:0"> Get x3 Loyalty Points for every Riyal spent</h4>
+                    <span style="color:#c8c8c8">(eg. 1000 SAR = 3000 Points)</span>
+                </div>
+                <div style="text-align:center;margin-top:30px">
+                    <h4 style="color:black;font-weight:600;margin:0">Get a discount of 3% for Loyalty Point Redeemed</h4>
+                    <span style="color:#c8c8c8">(eg. 1000 Points = 30 SAR Discount)</span>
                 </div>
                 <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
                     <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px"  data-dismiss="modal"> OKAY </button>
