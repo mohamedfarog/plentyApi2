@@ -12,7 +12,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
                         <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>

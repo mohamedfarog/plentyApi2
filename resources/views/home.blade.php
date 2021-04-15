@@ -31,6 +31,7 @@
     .nwa {
         font-weight: 100;
     }
+
 </style>
 
 <!-- Hero Slider -->
@@ -365,8 +366,10 @@
             });
         });
     });
+
 </script>
 <div style="">
     @include('footer')
 </div>
 @endsection
+

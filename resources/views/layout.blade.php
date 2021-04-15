@@ -158,6 +158,10 @@
             height: 50px;
         }
 
+        .btn.btn-color::before {
+            background-color: black;
+        }
+
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -170,6 +174,7 @@
             }
 
         }
+
     </style>
 </head>
 
@@ -299,9 +304,9 @@
                                             </div>
 
 
-                                            <div class="nav-cart-summary">
-                                                <span>Cart Subtotal</span>
-                                                <span class="total-price" id="nav-cart-total"> </span>
+                                            <div class="nav-cart-summary" style="margin-top:20px;">
+                                                <span>Bag Subtotal</span>
+                                                <span class="total-price" id="nav-cart-total" style="font-size:16px;font-family:'Avenir Bold'"> </span>
                                             </div>
 
                                             <div class="nav-cart-actions mt-20">
@@ -418,31 +423,31 @@
     <script>
         var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -450,31 +455,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -482,32 +487,32 @@
         });
 
         $(".tryprodslider").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            arrows: false,
-            autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: true
+            , infinite: true
+            , slidesToShow: 4
+            , slidesToScroll: 1
+            , autoplay: true
+            , arrows: false
+            , autoplaySpeed: 2000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -653,9 +658,9 @@
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal,
-                "order_total": cart.order_total,
-                "cart_items": cart_items
+                "cart_subtotal": cart.cart_subtotal
+                , "order_total": cart.order_total
+                , "cart_items": cart_items
             }
 
         }
@@ -667,22 +672,22 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id,
-                        shop_id: element.shop_id,
-                        price: element.price,
-                        name: element.name,
-                        is_product_variant: element.is_product_variant,
-                        size: element.size || null,
-                        size_id: element.size_id || null,
-                        color: element.color || null,
-                        color_id: element.color_id || null,
-                        quantity: element.quantity || null,
-                        date: element.date || null,
-                        time: element.time || null,
-                        image_url: element.image_url || null,
-                        stock: element.stock || null,
-                        category: element.category || null,
-                    }
+                        id: element.id
+                        , shop_id: element.shop_id
+                        , price: element.price
+                        , name: element.name
+                        , is_product_variant: element.is_product_variant
+                        , size: element.size || null
+                        , size_id: element.size_id || null
+                        , color: element.color || null
+                        , color_id: element.color_id || null
+                        , quantity: element.quantity || null
+                        , date: element.date || null
+                        , time: element.time || null
+                        , image_url: element.image_url || null
+                        , stock: element.stock || null
+                        , category: element.category || null
+                    , }
 
                     cart.addItem(new CartItem(item))
                 });
@@ -693,32 +698,32 @@
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false,
-            infinite: true,
-            slidesToShow: 8,
-            slidesToScroll: 1,
-            autoplay: false,
-            arrows: true,
-            autoplaySpeed: 10000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
+            dots: false
+            , infinite: true
+            , slidesToShow: 8
+            , slidesToScroll: 1
+            , autoplay: false
+            , arrows: true
+            , autoplaySpeed: 10000
+            , responsive: [{
+                    breakpoint: 1024
+                    , settings: {
+                        slidesToShow: 3
+                        , slidesToScroll: 3
+                        , infinite: true
+                        , dots: true
                     }
                 }, {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 600
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
+                    breakpoint: 480
+                    , settings: {
+                        slidesToShow: 2
+                        , slidesToScroll: 2
                     }
                 }
 
@@ -735,9 +740,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0,
-                    order_total: 0,
-                    cart_items: []
+                    cart_subtotal: 0
+                    , order_total: 0
+                    , cart_items: []
                 }
             }
 
@@ -746,10 +751,10 @@
         $(document).ready(function() {
             let cart = new Cart()
             $.ajax({
-                type: 'GET',
-                url: 'http://127.0.0.1:8000/shop-category',
-                dataType: 'JSON',
-                success: function(data) {
+                type: 'GET'
+                , url: 'http://127.0.0.1:8000/shop-category'
+                , dataType: 'JSON'
+                , success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
@@ -768,18 +773,18 @@
             if (cart.cart_items.length > 0) {
                 cart.cart_items.forEach(item => {
                     template = template +
-                        "<div class='nav-cart-items'>" +
+                        "<div class='nav-cart-items' style='margin-top:10px;'>" +
                         "<div class='nav-cart-item clearfix'>" +
                         "<div class='nav-cart-img'>" +
-                        "<a href='#'>" +
+                        "<a href='" + base_url + "product/" + item.id + "'>" +
                         "<img src='" + base_url + "storage/products/" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</div>" +
                         "<div class='nav-cart-title'>" +
-                        "<a href='#'>" + item.name + "</a>" +
+                        "<a href='" + base_url + "product/" + item.id + "'>" + item.name + "</a>" +
                         "<div class='nav-cart-price'>" +
-                        "<span>" + item.quantity + " x</span>" +
-                        "<span>" + item.price + "</span>" +
+                        "<span>(" + item.quantity + " x </span>" +
+                        "<span style='font-weight:900;color:black'> " + item.price + " SAR</span><span>)</span>" +
                         "</div>" +
                         "</div>" +
                         "<div class='nav-cart-remove'>" +
@@ -859,10 +864,10 @@
 
         function getFavouriteProductInfo(id) {
             $.ajax({
-                type: 'GET',
-                url: base_url + 'favourite-product/' + id,
-                dataType: 'JSON',
-                success: function(data) {
+                type: 'GET'
+                , url: base_url + 'favourite-product/' + id
+                , dataType: 'JSON'
+                , success: function(data) {
                     if (data.Response) {
                         let favourite_item = new FavouriteItem(data.product[0])
                         let favourites = FavouriteSerializer(getFavouritesLocal())
@@ -874,8 +879,8 @@
                         //
                     }
 
-                },
-                error: function(err) {
+                }
+                , error: function(err) {
                     console.log('Error!', err)
                 }
 
@@ -905,11 +910,11 @@
             if (data.favourite_items.length > 0) {
                 data.favourite_items.forEach(element => {
                     let item = {
-                        id: element.id,
-                        price: element.price,
-                        name_en: element.name_en,
-                        image: element.image || null,
-                    }
+                        id: element.id
+                        , price: element.price
+                        , name_en: element.name_en
+                        , image: element.image || null
+                    , }
 
                     favourites.addItem(new FavouriteItem(item))
                 });
@@ -919,7 +924,9 @@
 
 
         // Favourite end here
+
     </script>
 </body>
 
 </html>
+
