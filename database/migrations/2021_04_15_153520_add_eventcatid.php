@@ -14,7 +14,7 @@ class AddEventcatid extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->eventcat_id->nullable();
+            $table->unsignedBigInteger('eventcat_id')->nullable();
             $table->foreign('eventcat_id')->references('id')->on('eventcats');
         });
     }
