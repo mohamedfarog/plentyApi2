@@ -93,7 +93,7 @@ class EventcatController extends Controller
 
     public function eventcatlist(Request $request)
     {
-        $eventcats= Eventcat::get();
+        $eventcat= Eventcat::get();
         if(isset($request->event_id)){
             $eventcat= Eventcat::where('event_id',$request->event_id)->get();
         }
