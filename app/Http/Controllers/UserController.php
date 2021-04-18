@@ -390,6 +390,9 @@ class UserController extends Controller
                             if (isset($request->gender)) {
                                 $user->gender = $request->gender;
                             }
+                            if (isset($request->points)) {
+                                $user->points = $request->points;
+                            }
                             if (isset($request->invitationcode)) {
                                 $user->invitationcode = $request->invitationcode;
                             }
@@ -450,6 +453,9 @@ class UserController extends Controller
                     }
                     if (isset($request->gender)) {
                         $data['gender'] = $request->gender;
+                    }
+                    if (isset($request->points)) {
+                        $data['points'] = $request->points;
                     }
                     if (isset($request->invitationcode)) {
                         $data['invitationcode'] = $request->invitationcode;
