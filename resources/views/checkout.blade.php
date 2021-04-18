@@ -560,7 +560,7 @@
                                                             <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
-                                                                        <a class="addresslabel"  style="padding: 7px;">
+                                                                        <a class="addresslabel" style="padding: 7px;">
                                                                             <input type="radio" name="optradio" checked>
                                                                             <span>Other </span>
                                                                             <img src="img/checkout/pin.png" style="height:20px;margin-left:10px;">
@@ -912,15 +912,15 @@
         console.log(code)
         url = base_url + 'coupon'
         $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: 'JSON',
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "couponcode": code,
-                "cart": getCartLocal()
-            },
-            headers: {
+            type: 'POST'
+            , url: url
+            , dataType: 'JSON'
+            , data: {
+                "_token": "{{ csrf_token() }}"
+                , "couponcode": code
+                , "cart": getCartLocal()
+            }
+            , headers: {
 
                 "Authorization": 'Bearer ' + bearer_token
             },
@@ -932,8 +932,8 @@
                     $("#coupon-applied").html('-' + data.value + ' SAR (10%)')
                 } else
                     $("#coupon_error").html("This shop is not ")
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 let error = err.responseJSON.message;
                 $("#coupon_error").html(error)
 
@@ -948,13 +948,13 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'JSON',
-            data: {
+            type: 'GET'
+            , url: url
+            , dataType: 'JSON'
+            , data: {
                 "_token": "{{ csrf_token() }}"
-            },
-            headers: {
+            }
+            , headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
@@ -962,23 +962,24 @@
                 console.log(data.point)
                 $(".loyality-point").html(data.point);
                 $("#loyality-point").val(data.point);
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 console.log('Error!', err)
             }
 
         });
     }
-    $(document).ready(function(){
-        $(".addresslabel").click(function(){
-            $( ".addresslabel" ).css( "background-color", "white" );
-            $( ".addresslabel" ).children("span").css( "color", "#001b71" );
-            $( ".addresslabel" ).children("img").css( "filter", "none" ); 
+    $(document).ready(function() {
+        $(".addresslabel").click(function() {
+            $(".addresslabel").css("background-color", "white");
+            $(".addresslabel").children("span").css("color", "#001b71");
+            $(".addresslabel").children("img").css("filter", "none");
             $(this).css("background-color", "#001b71");
             $(this).children("span").css("color", "white");
-            $(this).children("img").css( "filter", "brightness(0) invert(1)" ); 
+            $(this).children("img").css("filter", "brightness(0) invert(1)");
         });
     });
+
 </script>
 
 <script src="js/jquery.geocoder.js"></script>
@@ -988,3 +989,4 @@
 </script>
 <script src="js/map.js" defer></script>
 < @endsection
+
