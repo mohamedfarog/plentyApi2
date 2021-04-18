@@ -216,6 +216,11 @@ class OrderController extends Controller
                     $arr['price'] = $orderdetails['price'];
                 }
                 if (isset($orderdetails['color_id'])) {
+                    if($orderdetails['color_id']==-1){
+
+
+                    }
+                    else
                     $arr['color_id'] = $orderdetails['color_id'];
                 }
                 if (isset($orderdetails['size_id'])) {
