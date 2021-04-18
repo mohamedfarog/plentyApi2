@@ -30,9 +30,9 @@ Route::get('/delicacy', function () {
 });
 */
 
-Route::get('/product', function () {
-    return view('/product');
-});
+// Route::get('/product', function () {
+//     return view('/product');
+// });
 
 // Route::get('/profile', function () {
 //     return view('/profile');
@@ -49,9 +49,9 @@ Route::get('/signup', function () {
 Route::get('/login', function () {
     return view('/login');
 });
-Route::get('/booking', function () {
-    return view('/booking');
-});
+// Route::get('/booking', function () {
+//     return view('/booking');
+// });
 
 
 Route::get('/lang', function () {
@@ -73,15 +73,10 @@ Route::get('/lang', function () {
 });
 
 // Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
-Route::get('/product1/{id}',  [WebsiteProductController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getDineProduct']);
 Route::get('/best-seller/{id}',  [WebsiteHomeController::class, 'getBestSellers']);
 
-// For cookies controller
-Route::get('/cookie/set', [CookieController::class, 'setCookie']);
-Route::get('/cookie/get', [CookieController::class, 'getCookie']);
-Route::get('/cookie/remove', [CookieController::class, 'removeCookie']);
 Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
 Route::get('/shop-category',  [WebsiteHomeController::class, 'shopCategory']);
 Route::get('/cart', function () {
@@ -128,3 +123,7 @@ Route::get('/featured',  [WebsiteHomeController::class, 'featured']);
 Route::get('/brands',  [WebsiteHomeController::class, 'brands']);
 
 Route::get('/favourite-product/{id}',  [WebsiteHomeController::class, 'getFavouiteProduct']);
+
+
+Route::get('/booking/{id}',  [WebsiteHomeController::class, 'booking']);
+Route::get('/timeslot/{id}',  [WebsiteHomeController::class, 'timeslot']);

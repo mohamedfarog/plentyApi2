@@ -581,11 +581,16 @@
         Cart.prototype.removeItem = function(id) {
             pro_id = id.split("-")[0]
             size_id = id.split("-")[1]
+            timeslot_id = id.split("-")[2]
             let i = this.cart_items.length;
             while (i--) {
                 if (this.cart_items[i] && this.cart_items[i]['id'] === pro_id) {
                     if (size_id > 0) {
                         if (this.cart_items[i]['size_id'] === size_id) {
+                            this.cart_items.splice(i, 1);
+                        }
+                    } else if (timeslot_id > 0) {
+                        if (this.cart_items[i]['timeslot_id'] === timeslot_id) {
                             this.cart_items.splice(i, 1);
                         }
                     } else {
@@ -620,6 +625,7 @@
             this.quantity = item.quantity || null;
             this.date = item.date || null;
             this.time = item.time || null;
+            this.timeslot_id = item.timeslot_id || null;
             this.category = item.category || null;
             this.image_url = item.image_url;
             this.stock = item.stock;
@@ -650,6 +656,8 @@
                 item['is_product_variant'] = element.is_product_variant
                 item['color'] = element.color
                 item['quantity'] = element.quantity
+                item['time'] = element.time
+                item['timeslot_id'] = element.timeslot_id
                 item['category'] = element.category
                 item['image_url'] = element.image_url
                 item['stock'] = element.stock
@@ -683,6 +691,7 @@
                         quantity: element.quantity || null,
                         date: element.date || null,
                         time: element.time || null,
+                        timeslot_id: element.timeslot_id || null,
                         image_url: element.image_url || null,
                         stock: element.stock || null,
                         category: element.category || null,

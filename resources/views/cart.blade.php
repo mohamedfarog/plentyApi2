@@ -98,7 +98,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -239,7 +238,7 @@
                         "<span class='amount' id= 'cart-item-price" + item.id + "-" + item.size_id + "'>SAR " + item.total_price() + "</span>" +
                         "</td>" +
                         "<td class='product-remove'>" +
-                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + "-" + item.size_id + "'>" +
+                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + "-" + item.size_id + "-" + item.timeslot_id + "'>" +
                         "<i class='ui-close'></i>" +
                         "</a>" +
                         "</td>" +
@@ -326,17 +325,17 @@
             if ((item.category === 'Fine Dining') && (item.is_product_variant === 'true')) {
                 template = "<li class='colorgrey'>" + item.size + "</li>"
 
+            } else if (item.category === 'Beauty') {
+                template = "<li class='colorgrey'>" + item.time + "</li>"
             } else {
-
+                //
             }
 
             return template;
         }
-
     </script>
 
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
         @include('footer')
     </div>
     @endsection
-

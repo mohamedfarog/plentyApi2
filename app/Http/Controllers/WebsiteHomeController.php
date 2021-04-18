@@ -415,4 +415,32 @@ class WebsiteHomeController extends Controller
         $data['typeofuser'] = $user['typeofuser'];
         return response()->json(['Response' => !!$user, 'user' => $data]);
     }
+
+    private function getStyle($id)
+    {
+        return  DB::table('styles')
+            ->where('shop_id', '=', $id)
+            ->get()->first();
+    }
+
+    public function booking(Request $request, $id)
+    {
+        $data['product'] = $this->getProduct($id)->first();
+        $data['style'] = $this->getStyle($data['product']->shop_id);
+        $data['shop'] = $this->getShop($data['product']->shop_id);
+        return view('/booking')->with($data);
+    }
+
+    private function getTimeSlot($id)
+    {
+        return  DB::table('timeslots')
+            ->where('id', '=', $id)
+            ->get()->first();
+    }
+
+    public function timeslot(Request $request, $id)
+    {
+        $data = $this->getTimeSlot($id);
+        return response()->json(['Response' => !!$data, 'timeslot' => $data]);
+    }
 }
