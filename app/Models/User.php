@@ -63,6 +63,10 @@ class User extends Authenticatable
             return env('PASSURL'). $this->accessidentifier;
         }
     }
+    public function shop()
+    {
+        return $this->belongsTo(ShopController::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
