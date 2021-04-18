@@ -623,7 +623,7 @@ class UserController extends Controller
                 }
              
             } else {
-                return response()->json(["error" => "Invalid Email/Password"], 400);
+                return response()->json(["error" => "Invalid Email/Password"]);
             }
         }
 
