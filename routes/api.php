@@ -60,7 +60,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
-
+Route::post('vendorslogin',[UserController::class,'vendorslogin']);
 
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);
@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         return response()->json(['Success'=>  true ]);
     });
     Route::post('eventshopregister',[UserController::class,'vendorsRegister']);
-    Route::post('vendorslogin',[UserController::class,'vendorslogin']);
+
 
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
