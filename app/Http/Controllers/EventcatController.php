@@ -91,6 +91,15 @@ class EventcatController extends Controller
         }
     }
 
+    public function eventcatlist(Request $request)
+    {
+        $eventcats= Eventcat::get();
+        if(isset($request->event_id)){
+            $eventcat= Eventcat::where('event_id',$request->event_id)->get();
+        }
+        return response()->json(['success'=>!!$eventcat ,'cats'=> $eventcat    ]);
+    }
+
     /**
      * Display the specified resource.
      *
