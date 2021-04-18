@@ -197,7 +197,6 @@
         color: #001b71;
         font-weight: 100;
     }
-
 </style>
 
 
@@ -862,8 +861,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -871,8 +870,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -969,6 +968,34 @@
 
         });
     }
+
+    $("form").on('submit', function(e) {
+        e.preventDefault();
+        const bearer_token = getCookie('bearer_token');
+        url = base_url + 'place-order'
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "cart": getCartLocal()
+            },
+            headers: {
+                "Authorization": 'Bearer ' + bearer_token
+            },
+
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(err) {
+
+                console.log('Error!', err)
+            }
+
+        });
+    });
+
     $(document).ready(function() {
         $(".addresslabel").click(function() {
             $(".addresslabel").css("background-color", "white");
@@ -988,5 +1015,4 @@
 <script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyDQxeWFV5QiIZIPw5iRD5H1d5LxycBkou8&sensor=false&libraries=places'>
 </script>
 <script src="js/map.js" defer></script>
-< @endsection
-
+ @endsection

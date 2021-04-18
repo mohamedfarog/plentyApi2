@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
 
 use DB;
 
@@ -294,6 +294,25 @@ class WebsiteHomeController extends Controller
         return response()->json(['Response' => !!$user, 'point' =>  $user->points]);
     }
 
+    function loyalityPointSAR($user)
+    {
+        switch (true) {
+            case $user['totalpurchases'] > 29999:
+                $sar = $user['totalpurchases'];
+                break;
+            case $user['totalpurchases'] > 19999:
+                $sar = $user['totalpurchases'];
+                break;
+            case $user['totalpurchases'] > 0:
+                $sar = $user['totalpurchases'];
+                break;
+            default:
+                $sar = $user['totalpurchases'];
+                break;
+        }
+        return 1;
+    }
+
     // getting coupon code
     public function cacluateCoupon(Request $request)
     {
@@ -345,5 +364,55 @@ class WebsiteHomeController extends Controller
     {
         $data['product'] =  $this->getProduct($id);
         return response()->json(['Response' => !!count($data['product']), 'product' => $data['product']]);
+    }
+
+    // User Level
+    public function userLevel(Request $request)
+    {
+        $user = Auth::user();
+        if (isset($user)) {
+            $data['totalpurchases'] = $user->totalpurchases;
+            $data['percentage'] =  $data['totalpurchases'] * 100 / 30000;
+            switch (true) {
+                case $data['totalpurchases'] > 29999:
+                    $data['userlevel'] = 'Topaz';
+                    break;
+                case $data['totalpurchases'] > 19999:
+                    $data['userlevel'] = 'Emerald';
+                    break;
+                case $data['totalpurchases'] > 0:
+                    $data['userlevel'] = 'Sapphire';
+                    break;
+                default:
+                    $data['userlevel'] = 'NA';
+                    break;
+            }
+            return view('userlevel')->with($data);
+        } else {
+            return Redirect::to('/signup');
+        }
+    }
+
+
+
+    /**
+     * Check out start here
+     * parm :  cart
+     * return total amount
+     */
+    function placeOreder(Request $request)
+    {
+        $cart = $request->cart;
+        return response()->json(['Response' => $cart]);
+    }
+
+
+    function userDetails(Request $request)
+    {
+        $user = Auth::user();
+        $data['id'] = $user['id'];
+        $data['name'] =  $user['name'];
+        $data['typeofuser'] = $user['typeofuser'];
+        return response()->json(['Response' => !!$user, 'user' => $data]);
     }
 }

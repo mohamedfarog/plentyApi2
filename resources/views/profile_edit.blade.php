@@ -144,6 +144,7 @@
                 bday: form.get('bday')
             },
             success: function(data) {
+                getUser();
                 window.location.replace(base_url + 'profile');
 
             },
@@ -151,7 +152,7 @@
                 console.log('Error!', err)
             }
 
-        }); 
+        });
     }
 </script>
 
