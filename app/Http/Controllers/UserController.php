@@ -520,7 +520,7 @@ class UserController extends Controller
         }
         
     }
-    // Vendors sign up for the Bazar
+    // Vendors sign up and login  for the Bazar
     public function vendorsRegister(Request $request)
     {   
         
@@ -602,4 +602,29 @@ class UserController extends Controller
 
         }
     }
+
+        public function vendorslogin(Request $request)
+        {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $user = Auth::user();
+                if($user->typeofuser == 'V'){
+                    if ($user->email_verified_at != NULL) {
+                        $success["message"] = "Login successful";
+                        $success["token"] = $user->createToken('MyApp')->accessToken;
+                        $u = User::with('shop')->find($user->id);
+        
+                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                    } else {
+                        return response()->json(["error" => "Please verify the email"]);
+                    }
+                }
+                else{
+                    return response()->json(["error" => "The user is not a vendor"]);
+                }
+             
+            } else {
+                return response()->json(["error" => "Invalid Email/Password"], 400);
+            }
+        }
+
 }
