@@ -60,6 +60,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
+Route::get('eventproducts',[ProductController::class, 'getProducts']);
+
 Route::post('vendorslogin',[UserController::class,'vendorslogin']);
 
 Route::resource('otp', OtpController::class);
