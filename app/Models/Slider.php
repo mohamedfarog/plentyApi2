@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Slider extends Model
 {
     use HasFactory;
-    protected $visible = ["url"];
+    protected $casts = [
+        'isactive' => 'boolean',
+        "shop_id"=>"integer"
+    ];
+    public function shop()
+    {
+        return $this->hasOne(ShopInfo::class,'id','shop_id');
+    }
 
 }

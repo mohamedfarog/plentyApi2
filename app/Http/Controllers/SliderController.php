@@ -13,16 +13,13 @@ class SliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $slider=Slider::where('isactive',1);
-        if(isset($request->shop_id))
-        {
-            $slider=$slider->where('shop_id',$request->shop_id);
-        }
-        elseif(isset($request->location))
-        {
-            $slider=$slider->where('location',$request->location);
+        $slider = Slider::where('isactive', 1)->with('shop');
+        if (isset($request->shop_id)) {
+            $slider = $slider->where('shop_id', $request->shop_id);
+        } elseif (isset($request->location)) {
+            $slider = $slider->where('location', $request->location);
         }
         return $slider->get();
     }
@@ -43,23 +40,32 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,UploadHelper $helper)
+    public function store(Request $request, UploadHelper $helper)
     {
         $slider = new Slider();
-        if (isset($request->id)) 
-        $slider=Slider::where('id', $request->id)->first();
-        $slider->url=$helper->store($request->file,'slider');
-        if(isset($request->shop_id))
-        {
-            $slider->shop_id=$request->shop_id;
-        }
-        if(isset($request->location)&& in_array($request->location,["home","shop"]))
-        {
-            $slider->location=$request->location;
-        }
-        $slider->save();
-        return $slider;
+        if (isset($request->id))
+            $slider = Slider::where('id', $request->id)->first();
 
+        switch ($request->action) {
+            case 'remove':
+                $slider->delete();
+                break;
+
+            default:
+                $slider->url = $helper->store($request->file, 'slider');
+                if (isset($request->shop_id)) {
+                    $slider->shop_id = $request->shop_id;
+                }
+                if (isset($request->location) && in_array($request->location, ["home", "shop"])) {
+                    $slider->location = $request->location;
+                }
+                $slider->save();
+                
+                break;
+        }
+
+
+        return $slider;
     }
 
     /**
