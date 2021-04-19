@@ -284,7 +284,7 @@ class ProductController extends Controller
     public function getProducts(Request $request)
     {
         $product=Product::where("stocks",">",0);
-        if($request->eventcat_id)
+        if(isset($request->eventcat_id))
         {
             return $product->where("eventcat_id",$request->eventcat_id);
         }
