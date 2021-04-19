@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UploadHelper;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
