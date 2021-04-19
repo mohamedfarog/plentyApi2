@@ -27,7 +27,7 @@ class Eventcat extends Model
     public function getImgurlAttribute()
     {
         if ($this->image != null) {
-            return "https://plentyapp.mvp-apps.ae/". $this->image;
+            return "https://plentyapp.mvp-apps.ae/storage/". $this->image;
         }
     }
 }
