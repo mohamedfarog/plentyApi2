@@ -63,6 +63,7 @@ class EventcatController extends Controller
              
                 
                 $eventcat->save();
+                return response()->json(['success' => !!$eventcat]);
             }
         
         else{
