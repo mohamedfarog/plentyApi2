@@ -15,6 +15,10 @@ class Eventcat extends Model
         'imgurl',
         
     ];
+    protected $hidden = [
+        'image',
+        
+    ];
 
     public function shops()
     {
@@ -23,7 +27,7 @@ class Eventcat extends Model
     public function getImgurlAttribute()
     {
         if ($this->image != null) {
-            return env('CATURL') . $this->image;
+            return "https://plentyapp.mvp-apps.ae/storage/categories/". $this->image;
         }
     }
 }
