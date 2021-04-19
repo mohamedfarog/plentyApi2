@@ -46,16 +46,29 @@ class EventcatController extends Controller
                 else{
                     $eventcat= new EventCat();
                 }
-                $eventcat->name = $request->name;
-                $eventcat->event_id= $request->event_id;
-                $eventcat->image= $request->image->store('categories', ['disk' => "public"]);
-                $eventcat->name_ar= $request->name_ar;
+                if(isset($request->name)){
+
+                    $eventcat->name = $request->name;       
+                }      
+                    if(isset($request->event_id)){
+                    $eventcat->event_id= $request->event_id;
+                    }
+                    if(isset($request->image)){
+                           $eventcat->image= $request->image->store('categories', ['disk' => "public"]);
+                    }
+                    if(isset($request->name_ar)){
+                        $eventcat->name_ar= $request->name_ar;
+                    }
+             
+             
+                
+                $eventcat->save();
             }
         
         else{
             return response()->json(['error' =>'Unauthorized client!']);
         }
-    }}
+    }
 
     /**
      * Store a newly created resource in storage.
