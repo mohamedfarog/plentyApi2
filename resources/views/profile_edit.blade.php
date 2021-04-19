@@ -94,7 +94,6 @@
             20px;
         }
     }
-
 </style>
 <section class="page-title text-center bg-light ">
     <div class="container relative clearfix">
@@ -188,32 +187,31 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'api/profile'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
-            }
-            , data: {
-                action: 'update'
-                , name: form.get('name')
-                , email: form.get('email')
-                , contact: form.get('contact')
-                , gender: form.get('gender')
-                , bday: form.get('bday')
-            }
-            , success: function(data) {
+            },
+            data: {
+                action: 'update',
+                name: form.get('name'),
+                email: form.get('email'),
+                contact: form.get('contact'),
+                gender: form.get('gender'),
+                bday: form.get('bday')
+            },
+            success: function(data) {
                 getUser();
-                window.location.replace(base_url + 'profile');
 
-            }
-            , error: function(err) {
+                window.location.replace(base_url + 'profile');
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
         });
     }
-
 </script>
 
 @endsection

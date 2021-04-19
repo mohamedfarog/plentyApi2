@@ -853,8 +853,9 @@
                     cart.addItem(product);
                     storeCartLocal(JsonCartSerializer(cart));
                     renderNavCart()
+                    showAlertSuccess(`${product.name} is booked`)
                 } else {
-                    console.log('already added')
+                    showAlertError(`${product.name} is already booked`)
                 }
             } else {
                 cart.addItem(product);
@@ -862,7 +863,7 @@
                 renderNavCart()
             }
         } else {
-            console.log('please select a slot')
+            showAlertError("Please select a slot!")
         }
     }
 </script>

@@ -187,9 +187,10 @@
     </div>
 
     <main class="main-wrapper">
-<section id="greenbar" style="height:50px;background-color:green;">
-    <h4 id="textgreenbar" style="color:white;padding-top:10px;padding-left:20px;">Successfully added Product x4 to Bag</h4>
-</section>
+        <div class="alert alert-dismissible" style="display:none;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span id="alert_message_text"></span>
+        </div>
         <header class="nav-type-1">
 
             <!-- Fullscreen search -->
@@ -271,12 +272,12 @@
 
                                         </li> <!-- end elements -->
                                         @auth
-                                            <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
-                                            <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
-                                            <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
-                                            <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
+                                        <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
+                                        <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
+                                        <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
+                                        <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
                                         @endauth
-                                        
+
                                         <!-- Mobile search -->
 
                                     </ul> <!-- end menu -->
@@ -328,8 +329,8 @@
                                         <a href="/login" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
-                                       
-                                        
+
+
                                         <ul class="dropdown-menu dwdw" style="background:white">
                                             <div class="row">
 
@@ -349,7 +350,7 @@
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
                                             <li><a class="dropdownanch" href="/lang">Logout</a></li>
                                         </ul>
-                                        
+
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
@@ -777,6 +778,7 @@
                 }
             });
             renderNavCart()
+            initiateTimeOut()
         });
 
         // for updating input fields by id
@@ -850,6 +852,9 @@
             }
             if (flag) {
                 this.favourite_items.push(FavouriteItem)
+                showAlertSuccess(`${FavouriteItem.name_en} added to favourite`)
+            } else {
+                showAlertError(`${FavouriteItem.name_en} alredy added to favourite`)
             }
 
 
@@ -955,8 +960,8 @@
 
         $(document).ready(function() {
             if (getUserDetails()) {
-                document.getElementById('nav-username').innerHTML = getUserDetails().name; 
-            } 
+                document.getElementById('nav-username').innerHTML = getUserDetails().name;
+            }
         });
 
         function getUser() {
@@ -981,6 +986,30 @@
                 }
 
             });
+        }
+
+        function showAlertSuccess(msg = 'Added') {
+            document.getElementById("alert_message_text").innerHTML = ''
+            document.getElementById("alert_message_text").innerHTML = msg;
+            $(".alert").removeClass('alert-danger')
+            $(".alert").addClass('alert-success')
+            $(".alert").show()
+            initiateTimeOut()
+        }
+
+        function showAlertError(msg = 'Added') {
+            document.getElementById("alert_message_text").innerHTML = ''
+            document.getElementById("alert_message_text").innerHTML = msg;
+            $(".alert").removeClass('alert-success')
+            $(".alert").addClass('alert-danger')
+            $(".alert").show()
+            initiateTimeOut()
+        }
+
+        function initiateTimeOut(time = 5000) {
+            setTimeout(function() {
+                $(".alert").hide();
+            }, time);
         }
     </script>
 </body>

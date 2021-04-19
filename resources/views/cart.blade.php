@@ -281,8 +281,6 @@
                 let id = $(this).attr("id").slice(5);
                 pro_id = id.split("-")[0]
                 size_id = id.split("-")[1]
-                pro_id = id.split("-")[0]
-                size_id = id.split("-")[1]
                 let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
 
                 if (quantity > 1) {

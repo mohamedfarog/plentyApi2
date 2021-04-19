@@ -236,28 +236,29 @@
         </div>
     </div>
     @endif
-
+    @if(count($addons)>0)
     <section style="width:90%;text-align:left;margin:auto; background-color:#f2f3f8">
         <h1 style="padding: 30px;margin-bottom: 0;padding-bottom:0;font-size:28px;color:black;font-weight: lighter;">
             TRY IT WITH
         </h1>
     </section>
     <section class="tryprodslider slider" style="width:90%;text-align:center;margin:auto; background-color:#f2f3f8">
-        @if(isset($trywith))
-        @foreach($trywith as $tw)
+
+        @foreach($addons as $tw)
 
         <div class="brand-slide " style="border:2px solid transparent;">
             <div class="product-img">
                 <div class="frame">
-                    @if ($tw->image)
+                    {{-- @if ($tw->image)
+                    Remove if there image for addons
                     <a href="{{ url('/product/' . $tw->id) }}">
-                        <img class="imgz" src="storage/products/{{$tw->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy />
+                    <img class="imgz" src="storage/products/{{$tw->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy />
                     </a>
-                    @else
+                    @else --}}
                     <a href="{{ url('/product/' . $tw->id) }}">
                         <img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy />
                     </a>
-                    @endif
+                    {{-- @endif --}}
                     <div class="product-action clearfix">
 
                     </div>
@@ -267,10 +268,11 @@
         </div>
 
         @endforeach
-        @endif
+
 
 
     </section>
+    @endif
     <script>
         $(document).ready(function() {
             $(".brand-slide").hover(function() {
@@ -354,7 +356,6 @@
 
         function addProductBag() {
             const form = new FormData(document.getElementById("product-form"))
-
             let shop_id = function() {
                 const cat_id = form.get('cat_id')
                 return cat_id;
@@ -367,6 +368,7 @@
             let shop_category = JSON.parse(localStorage.getItem('shop_category')).filter(function(category) {
                 return category.id == shop_id();
             });
+
             let item = {
                 id: form.get('product_id'),
                 price: form.get('price'),
@@ -384,13 +386,10 @@
                 shop_id: form.get('shop_id') || null,
                 category: shop_category[0].name_en || null,
             }
-
             let product = new CartItem(item)
-
             let cart = CartSerializer(getCartLocal());
-
             if (cart.cart_items.length > 0) {
-                if (product.category == "Fine Dining") {
+                if (product.category == "Fine Dining" || product.category == "Fashion") {
                     let flag = false;
                     for (i = 0; i < cart.cart_items.length; i++) {
                         if (cart.cart_items[i].id === product.id && product.size_id === cart.cart_items[i].size_id) {
@@ -400,6 +399,7 @@
                             } else {
                                 document.getElementById("stock-error").innerHTML = "Out of stock";
                                 document.getElementById("stock-error").style.display = "block";
+                                showAlertError(`Out of stock`)
                             }
 
                             flag = true;
@@ -409,15 +409,18 @@
                     if (flag) {
                         storeCartLocal(JsonCartSerializer(cart));
                         renderNavCart()
+                        showAlertSuccess(`${item.name} added X ${item.quantity}`)
                         return;
 
                     } else {
                         cart.addItem(product);
+                        showAlertSuccess(`${item.name} added X ${item.quantity}`)
                     }
 
                 }
             } else {
                 cart.addItem(product);
+                showAlertSuccess(`${item.name} added`)
             }
 
             storeCartLocal(JsonCartSerializer(cart));

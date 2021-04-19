@@ -74,7 +74,7 @@ Route::get('/lang', function () {
 
 // Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
-Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getDineProduct']);
+Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getProductFilter']);
 Route::get('/best-seller/{id}',  [WebsiteHomeController::class, 'getBestSellers']);
 
 Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);

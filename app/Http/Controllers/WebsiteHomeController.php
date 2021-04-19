@@ -153,7 +153,7 @@ class WebsiteHomeController extends Controller
      * @param  prodcat_id
      * @return products
      */
-    public function getDineProduct($prodcat_id)
+    public function getProductFilter($prodcat_id)
     {
         $products = DB::table('products')
             ->leftjoin('images', 'images.product_id', '=', 'products.id')
@@ -451,8 +451,8 @@ class WebsiteHomeController extends Controller
         $data['name'] =  $user['name'];
         $data['typeofuser'] = $user['typeofuser'];
         $userid = $user['id'];
-        
-        
+
+
         // $data['orders'] = Order::with('details')
         // ->where('user_id',$userid)->get(); 
         $data['orders'] = Order::with(['details' => function ($details) {
@@ -468,5 +468,4 @@ class WebsiteHomeController extends Controller
         // Booking::with('services')->get();
         return view('trackorder')->with($data);
     }
-
 }
