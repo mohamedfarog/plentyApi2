@@ -289,6 +289,6 @@ class ProductController extends Controller
         
             $product=$product->where("eventcat_id",$request->eventcat_id);
         }
-        return $product->paginate();
+        return $product->orderby("updated_at","desc")->paginate();
     }
 }
