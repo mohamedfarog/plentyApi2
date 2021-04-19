@@ -3,6 +3,37 @@
 
 <section style="height:50px;">
 </section>
+<style>
+    .frame {
+        width: 250px;
+        height: 250px;
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell;
+    }
+
+    .imgz {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .ssproduct {
+        margin: 0 5px;
+    }
+
+    .featicons {
+        width: 25px !important;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .contm {
+            width: 100%;
+        }
+    }
+
+</style>
 
 <!-- Featured Product -->
 <section class="section-wrap-sm new-arrivals ">

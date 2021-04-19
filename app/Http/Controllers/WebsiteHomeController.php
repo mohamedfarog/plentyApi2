@@ -72,6 +72,7 @@ class WebsiteHomeController extends Controller
     {
         return  DB::table('products')
             ->select(DB::raw(' products.id as id,
+                products.id as prodid,
                 products.name_ar as name_ar,
                 products.name_en as name_en,
                 products.price as price,

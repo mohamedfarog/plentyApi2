@@ -178,7 +178,12 @@
 </head>
 
 <body class="relative">
-
+    <div class="alert alert-dismissible" style="display:none;position: -webkit-sticky;  
+  position: sticky;
+  top: 0;z-index:99999">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span id="alert_message_text"></span>
+    </div>
     <!-- Preloader -->
     <div class="loader-mask">
         <div class="loader" style="height:100px;width:100px;">
@@ -187,10 +192,7 @@
     </div>
 
     <main class="main-wrapper">
-        <div class="alert alert-dismissible" style="display:none;">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <span id="alert_message_text"></span>
-        </div>
+
         <header class="nav-type-1">
 
             <!-- Fullscreen search -->
@@ -252,7 +254,7 @@
                                         </li>
 
                                         <li class="">
-                                            <a class="mainanc" href="/delicacy">Delicacy</a>
+                                            <a class="mainanc" href="/delicacy/1">Delicacy</a>
 
                                         </li> <!-- end elements -->
                                         <li class="">
@@ -353,13 +355,13 @@
 
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="nav-search search-trigger imgicon">
+                                        <a href="/lang" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/lang.png">
 
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="#" class="menufont">: {{ __('website.currentlanguage') }}</a>
+                                        <a href="/lang" class="menufont">: {{ __('website.currentlanguage') }}</a>
 
                                         <ul class="dropdown-menu" style="background:white">
 
@@ -431,6 +433,7 @@
     <script src="js/main.js"></script>
 
     <script>
+   
         var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
             dots: true,
@@ -525,7 +528,6 @@
                         slidesToScroll: 2
                     }
                 }
-
             ]
         });
 
@@ -1006,7 +1008,7 @@
             initiateTimeOut()
         }
 
-        function initiateTimeOut(time = 5000) {
+        function initiateTimeOut(time = 10000) {
             setTimeout(function() {
                 $(".alert").hide();
             }, time);
