@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Eventcat;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventcatController extends Controller
 {
@@ -32,6 +33,29 @@ class EventcatController extends Controller
     {
         //
     }
+
+    public function eventcatadd(Request $request)
+    {
+        $user= Auth::user();
+        if($user->typeofuser=='S'){
+            if(isset($request->eventcatid)){
+                $eventcat= EventCat::find($request->eventcatid);
+                
+            
+                }
+                else{
+                    $eventcat= new EventCat();
+                }
+                $eventcat->name = $request->name;
+                $eventcat->event_id= $request->event_id;
+                $eventcat->image= $request->image->store('categories', ['disk' => "public"]);
+                $eventcat->name_ar= $request->name_ar;
+            }
+        
+        else{
+            return response()->json(['error' =>'Unauthorized client!']);
+        }
+    }}
 
     /**
      * Store a newly created resource in storage.

@@ -80,6 +80,7 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
+    Route::post('eventcatadd',[EventCatController::class,'eventcatadd']);
     Route::post('autologin', [UserController::class, 'autologin']);
     Route::post('addpoints',function () {
         //TODO
