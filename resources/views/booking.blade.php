@@ -389,6 +389,16 @@
             padding: 10px !important;
         }
     }
+
+    .day-clicked {
+        font-size: larger;
+        background-color: #edbddb;
+        border-radius: 50%;
+    }
+
+    .slot-clicked {
+        background-color: #f1f1f1;
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
@@ -611,7 +621,7 @@
             lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
-        var html = '<table style="width:100% !important;">';
+        var html = '<table style="width:100% !important;" id="calendar">';
 
         // Write selected month and year
         html += '<thead><tr>';
@@ -647,16 +657,16 @@
             var chkM = chk.getMonth();
             if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
                 if (booked.includes(i)) {
-                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
+                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
-                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
+                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col">' + i + '</span></td>';
                 }
 
             } else {
                 if (booked.includes(i)) {
-                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
+                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
-                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
+                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col">' + i + '</span></td>';
                 }
             }
             // If Saturday, closes the row
@@ -732,9 +742,11 @@
             this.Months[nextMonth] + '</span>';
     }
 
-    function dayClicked(id) {
-        day = id;
-        let formated_date = `${year}-${month+1}-${id}`
+    function dayClicked(day_ele) {
+        day = day_ele.id;
+        $('#calendar').find("*").removeClass("day-clicked");
+        day_ele.classList.add("day-clicked");
+        let formated_date = `${year}-${month+1}-${day}`
         getSlots(formated_date)
     }
 
@@ -764,7 +776,7 @@
         let template = ''
         data.forEach(item => {
             if (item.available) {
-                template = template + `<button class="time-btn" onclick= "slotSelect(${item.id})">` + `${item.timeslot}</button>`
+                template = template + `<button class="time-btn" onclick= "slotSelect(${item.id},this)">` + `${item.timeslot}</button>`
             } else {
                 template = template + `<button class="time-btn time-btn-inactive">${item.timeslot}</button>`
             }
@@ -773,7 +785,9 @@
         document.getElementById('time-slots').innerHTML = template
     }
 
-    function slotSelect(id) {
+    function slotSelect(id, ele) {
+        $('#time-slots').find("*").removeClass("slot-clicked");
+        ele.classList.add("slot-clicked");
         url = base_url + 'timeslot/' + id
         $.ajax({
             type: 'GET',
