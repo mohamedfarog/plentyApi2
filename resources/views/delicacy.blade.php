@@ -384,18 +384,14 @@
         </section>
         <section style="width: 100%;margin: auto;margin-bottom:40px;">
             <div class="tabprod" style="justify-content: space-evenly;width:100%;display:flex;margin-top:20px;">
-
-                @foreach($product_categories as $product_category)
-                @if ($loop->first)
                 <button class="tablinkprod" onclick="getBestSeller(this)" id="defaultOpen">
                     <h2 class="category-name category catmobile">
                         Best Seller </h2>
                 </button>
-                @else
+                @foreach($product_categories as $product_category)
                 <button class="tablinkprod" onclick="getProducts(this,{{$product_category->id}})">
                     <h2 class="category-name category catmobile"> {{$product_category->name_en}} </h2>
                 </button>
-                @endif
                 @endforeach
             </div>
         </section>
@@ -520,7 +516,7 @@
         if (typeof(Storage) !== "undefined") {
             localStorage.shopid = shopid;
             localStorage.shopname = shoppy;
-            localStorage.shopimg = '{{ url('storage/styles') }}' + '/' + imgy;
+            localStorage.shopimg = '{{ url(' / storage / styles / ') }}' + '/' + imgy;
             window.location = base_url + 'delicacy/' + shopid;
 
         } else {

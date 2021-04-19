@@ -796,7 +796,7 @@
                         "</div>" +
                         "</div>" +
                         "<div class='nav-cart-remove'>" +
-                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + ")' class='remove'><i class='ui-close'></i></a>" +
+                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + "," + item.timeslot_id + ")' class='remove'><i class='ui-close'></i></a>" +
                         "</div>" +
                         "</div>" +
                         "</div>"
@@ -810,9 +810,9 @@
             $('#nav-cart-total').html(cart.subTotal() + ' SAR')
         }
 
-        function removeNavCartItem(prd_id, size_id) {
+        function removeNavCartItem(prd_id, size_id, timeslot_id) {
             var cart = CartSerializer(getCartLocal())
-            let id = prd_id + "-" + size_id
+            let id = prd_id + "-" + size_id + "-" + timeslot_id
             cart.removeItem(id)
             storeCartLocal(JsonCartSerializer(cart));
             renderNavCart();
