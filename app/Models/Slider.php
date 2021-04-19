@@ -12,9 +12,16 @@ class Slider extends Model
         'isactive' => 'boolean',
         "shop_id"=>"integer"
     ];
+    protected $hidden=['created_at', 'updated_at','url'];
+    protected $appends = ['imgurl'];
     public function shop()
     {
         return $this->hasOne(ShopInfo::class,'id','shop_id');
     }
-
+    public function getImgurlAttribute()
+    {
+        if ($this->image != null) {
+            return "https://plentyapp.mvp-apps.ae/storage/". $this->url;
+        }
+    }
 }
