@@ -47,7 +47,7 @@ Route::get('/signup', function () {
 });
 
 Route::get('/login', function () {
-    return view('/login');
+    return view('/signup');
 });
 // Route::get('/booking', function () {
 //     return view('/booking');
@@ -82,9 +82,7 @@ Route::get('/shop-category',  [WebsiteHomeController::class, 'shopCategory']);
 Route::get('/cart', function () {
     return view('/cart');
 });
-Route::get('/trackorder', function () {
-    return view('/trackorder');
-});
+
 
 Route::get('/checkout', function () {
     return view('/checkout');
@@ -113,6 +111,8 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::post('/coupon', [WebsiteHomeController::class, "cacluateCoupon"]);
     Route::get('/userlevel', [WebsiteHomeController::class, "userLevel"]);
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
+
+    Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);

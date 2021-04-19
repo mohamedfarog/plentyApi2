@@ -187,7 +187,9 @@
     </div>
 
     <main class="main-wrapper">
-
+<section id="greenbar" style="height:50px;background-color:green;">
+    <h4 id="textgreenbar" style="color:white;padding-top:10px;padding-left:20px;">Successfully added Product x4 to Bag</h4>
+</section>
         <header class="nav-type-1">
 
             <!-- Fullscreen search -->
@@ -268,10 +270,13 @@
                                             <a class="mainanc" href="/brands">Brands</a>
 
                                         </li> <!-- end elements -->
-                                        <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
+                                        @auth
+                                            <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
+                                            <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
+                                            <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
+                                            <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
+                                        @endauth
+                                        
                                         <!-- Mobile search -->
 
                                     </ul> <!-- end menu -->
@@ -310,7 +315,7 @@
 
                                             <div class="nav-cart-actions mt-20">
                                                 <a href="/cart" class="btn btn-md viewcartbtn"><span style="color:white;">View Cart</span></a>
-                                                <a href="/checkout" class="btn btn-md btn-color mt-10"><span>Proceed to Checkout</span></a>
+                                                <a href="/checkout" class="btn btn-md btn-color mt-10"><span style="color:white;">Proceed to Checkout</span></a>
                                             </div>
                                         </div>
                                     </li>
@@ -323,6 +328,8 @@
                                         <a href="/login" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
+                                       
+                                        
                                         <ul class="dropdown-menu dwdw" style="background:white">
                                             <div class="row">
 
@@ -332,7 +339,7 @@
                                                     <div class="row">
 
                                                         <div class="hidden-sm hidden-xs" style="width:100%;float:left;margin:auto">
-                                                            <p>Hello,<span id="nav-username">Visitor</span></p>
+                                                            <p>Hello, <span id="nav-username"></span></p>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -342,6 +349,7 @@
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
                                             <li><a class="dropdownanch" href="/lang">Logout</a></li>
                                         </ul>
+                                        
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="#" class="nav-search search-trigger imgicon">
@@ -368,7 +376,9 @@
                     </div> <!-- end container -->
                 </div> <!-- end navigation -->
             </nav> <!-- end navbar -->
+
         </header>
+
 
 
 
@@ -708,7 +718,7 @@
         $(".trackorderslider").slick({
             dots: false,
             infinite: true,
-            slidesToShow: 8,
+            slidesToShow: 6,
             slidesToScroll: 1,
             autoplay: false,
             arrows: true,
@@ -945,9 +955,8 @@
 
         $(document).ready(function() {
             if (getUserDetails()) {
-                document.getElementById('nav-username').innerHTML = getUserDetails().name;
-            }
-
+                document.getElementById('nav-username').innerHTML = getUserDetails().name; 
+            } 
         });
 
         function getUser() {

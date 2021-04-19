@@ -12,7 +12,7 @@ use App\Models\Cat;
 use App\Models\Coupon;
 use App\Models\Prodcat;
 use App\Models\Product;
-
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
@@ -443,4 +443,30 @@ class WebsiteHomeController extends Controller
         $data = $this->getTimeSlot($id);
         return response()->json(['Response' => !!$data, 'timeslot' => $data]);
     }
+    //trackorder
+    function trackorder(Request $request)
+    {
+        $user = Auth::user();
+        $data['id'] = $user['id'];
+        $data['name'] =  $user['name'];
+        $data['typeofuser'] = $user['typeofuser'];
+        $userid = $user['id'];
+        
+        
+        // $data['orders'] = Order::with('details')
+        // ->where('user_id',$userid)->get(); 
+        $data['orders'] = Order::with(['details' => function ($details) {
+            return $details->with(['product' => function ($product) {
+                return $product->with(['images']);
+            }, 'size', 'color']);
+        }, 'user'])->where('user_id', $userid)->get();
+        $data['ordermodal'] = Order::with(['details' => function ($details) {
+            return $details->with(['product' => function ($product) {
+                return $product->with(['images']);
+            }, 'size', 'color']);
+        }, 'user'])->where('user_id', $userid)->get();
+        // Booking::with('services')->get();
+        return view('trackorder')->with($data);
+    }
+
 }

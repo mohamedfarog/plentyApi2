@@ -77,6 +77,9 @@
         border-radius: 20px;
     }
 
+    .form-group {
+        margin-bottom: 20px;
+    }
 
 
 
@@ -84,35 +87,91 @@
         .contymobile {
             width: 90%;
         }
+
+        .form-group {
+            height: 80px !important;
+            margin-bottom;
+            20px;
+        }
     }
+
 </style>
+<section class="page-title text-center bg-light ">
+    <div class="container relative clearfix">
+        <div class="title-holder">
+            <div class="title-text">
+                <h1 class="uppercase" style="font-family:'Avenir Bold'">Edit Profile</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="container contymobile" style="background:transparent;min-height:600px">
 
 
-    <form class="profile-form" id="profile-form">
+    <form class="profile-form" id="profile-form" style="max-width:600px;margin-top:50px;">
         {{ csrf_field() }}
-        <div class="form-group">
-            <input type="file" class="form-control" id="avatar" placeholder="Avatart" name="avatar">
+        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+            <div class="col-lg-3">
+                <h6>Profile Picture:</h6>
+            </div>
+            <div class="col-lg-9">
+                <input type="file" class="form-control" id="avatar" placeholder="Avatart" name="avatar">
+            </div>
         </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="name" value="{{$user->name}}" placeholder="Name" name="name">
+
+        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+            <div class="col-lg-3">
+                <h6>Name:</h6>
+            </div>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="name" value="{{$user->name}}" placeholder="Name" name="name">
+            </div>
         </div>
-        <div class="form-group">
-            <input type="email" class="form-control" id="email" value="{{$user->email}}" placeholder="Email" name="email">
+
+        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+            <div class="col-lg-3">
+                <h6>Email:</h6>
+            </div>
+            <div class="col-lg-9">
+                <input type="email" class="form-control" id="email" value="{{$user->email}}" placeholder="Email" name="email">
+            </div>
         </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="contact" value="{{$user->contact}}" placeholder="Contact" name="contact">
+
+        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+            <div class="col-lg-3">
+                <h6>Contact Number:</h6>
+            </div>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="contact" value="{{$user->contact}}" placeholder="Contact" name="contact">
+            </div>
         </div>
-        <div class="form-group">
-            <input type="date" class="form-control" id="bday" value="{{$user->bday}}" placeholder="Birth Date" name="bday">
+
+        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+            <div class="col-lg-3">
+                <h6>Birthdate:</h6>
+            </div>
+            <div class="col-lg-9">
+                <input type="date" class="form-control" id="bday" value="{{$user->bday}}" placeholder="Birth Date" name="bday">
+            </div>
         </div>
-        <div class="form-group gender">
-            <label class="radio-inline"><input type="radio" name="gender" value="male" {{ ($user->gender) == 'male' ? 'checked' : ''}}>Male</label>
-            <label class="radio-inline"><input type="radio" name="gender" value="female" {{ ($user->gender) == 'female' ? 'checked' : ''}}>Female</label>
-            <label class="radio-inline"><input type="radio" name="gender" value="other" {{ ($user->gender) == 'other' ? 'checked' : ''}}>Other</label>
+        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+            <div class="col-lg-3">
+                <h6>Gender:</h6>
+            </div>
+            <div class="col-lg-9">
+                <div class="form-group gender">
+                    <label class="radio-inline"><input type="radio" name="gender" value="male" {{ ($user->gender) == 'male' ? 'checked' : ''}}>Male</label>
+                    <label class="radio-inline"><input type="radio" name="gender" value="female" {{ ($user->gender) == 'female' ? 'checked' : ''}}>Female</label>
+                    <label class="radio-inline"><input type="radio" name="gender" value="other" {{ ($user->gender) == 'other' ? 'checked' : ''}}>Other</label>
+                </div>
+            </div>
         </div>
+
+
         <div class="form-group">
-            <button class="btn btn-primary" onclick="updatProfile(this)" value="Send">Update</button>
+            <button class="btn btn-primary" onclick="updatProfile(this)" value="Send" style="width:100%;background-color:#001b71">Update</button>
         </div>
 
     </form>
@@ -129,31 +188,32 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'api/profile'
         $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: 'JSON',
-            headers: {
+            type: 'POST'
+            , url: url
+            , dataType: 'JSON'
+            , headers: {
                 "Authorization": 'Bearer ' + bearer_token
-            },
-            data: {
-                action: 'update',
-                name: form.get('name'),
-                email: form.get('email'),
-                contact: form.get('contact'),
-                gender: form.get('gender'),
-                bday: form.get('bday')
-            },
-            success: function(data) {
+            }
+            , data: {
+                action: 'update'
+                , name: form.get('name')
+                , email: form.get('email')
+                , contact: form.get('contact')
+                , gender: form.get('gender')
+                , bday: form.get('bday')
+            }
+            , success: function(data) {
                 getUser();
                 window.location.replace(base_url + 'profile');
 
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 console.log('Error!', err)
             }
 
         });
     }
+
 </script>
 
 @endsection
