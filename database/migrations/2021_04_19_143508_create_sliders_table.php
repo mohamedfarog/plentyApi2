@@ -17,7 +17,7 @@ class CreateSlidersTable extends Migration
             $table->id();
             $table->string("url");
             $table->string("location")->nullable();
-            $table->boolean('isactive')->default(false);
+            $table->boolean('isactive')->default(true);
             $table->unsignedBigInteger('shop_id')->nullable();
             $table->timestamps();
         });

@@ -14,7 +14,16 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return Slider::where();
+        $slider=Slider::where('isactive',1);
+        if(isset($request->shop_id))
+        {
+            $slider=$slider->where('shop_id',$request->shop_id);
+        }
+        elseif(isset($request->location))
+        {
+            $slider=$slider->where('location',$request->location);
+        }
+        return $slider->get();
     }
 
     /**
@@ -33,9 +42,23 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,UploadHelper $helper)
     {
-        //
+        $slider = new Slider();
+        if (isset($request->id)) 
+        $slider=Slider::where('id', $request->id)->first();
+        $slider->url=$helper->store($request->file,'slider');
+        if(isset($request->shop_id))
+        {
+            $slider->shop_id=$request->shop_id;
+        }
+        if(isset($request->location)&& in_array($request->location,["home","shop"]))
+        {
+            $slider->location=$request->location;
+        }
+        $slider->save();
+        return $slider;
+
     }
 
     /**

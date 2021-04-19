@@ -31,6 +31,8 @@ class UploadHelper
                 break;
             case 'tiers':
                 $path = $file->store('tiers', ['disk' => "public"]);
+            case 'slider':
+                $path = $file->store('slider', ['disk' => "public"]);
                 break;
             default:
                 $path = $file->store('products', ['disk' => "public"]);
@@ -78,9 +80,12 @@ class UploadHelper
                 case 'category':
                     imagejpeg($dest_image, '../storage/app/public/categories/compressed/' . $filename, 80);
                     break;
-                    case 'tiers':
+                case 'tiers':
                         imagejpeg($dest_image, '../storage/app/public/tiers/compressed/' . $filename, 80);
                         break;
+                case 'slider':
+                    imagejpeg($dest_image, '../storage/app/public/slider/compressed/' . $filename, 80);
+                break;
                 default:
                     imagejpeg($dest_image, '../storage/app/public/products/compressed/' . $filename, 80);
                     break;
