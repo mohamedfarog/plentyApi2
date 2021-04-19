@@ -21,7 +21,7 @@ class Slider extends Model
     public function getImgurlAttribute()
     {
         if ($this->url != null) {
-            return "https://plentyapp.mvp-apps.ae/storage/banner". $this->url;
+            return "https://plentyapp.mvp-apps.ae/storage/slider/". $this->url;
         }
     }
 }
