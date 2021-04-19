@@ -75,6 +75,7 @@ Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
 Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
+Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('autologin', [UserController::class, 'autologin']);
@@ -83,7 +84,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         return response()->json(['Success'=>  true ]);
     });
     Route::post('eventshopregister',[UserController::class,'vendorsRegister']);
-    Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
+   
 
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
