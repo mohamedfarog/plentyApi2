@@ -291,7 +291,7 @@ class ProductController extends Controller
         }
         if(isset($request->room))
         {
-        
+            // 13 is a category reserved for room purposes
             $product=$product->where("eventcat_id",13);
         }
         return $product->orderby("updated_at","desc")->paginate();
