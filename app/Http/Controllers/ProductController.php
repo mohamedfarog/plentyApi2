@@ -286,7 +286,7 @@ class ProductController extends Controller
         $product=Product::where("stocks",">",0);
         if(isset($request->eventcat_id))
         {
-            return $product->where("eventcat_id",$request->eventcat_id);
+            return $product=$product->where("eventcat_id",$request->eventcat_id);
         }
         return $product->paginate();
     }
