@@ -80,14 +80,14 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', [UserController::class, 'myProfile']);
-    Route::post('eventcatadd',[EventCatController::class,'eventcatadd']);
+   
     Route::post('autologin', [UserController::class, 'autologin']);
     Route::post('addpoints',function () {
         //TODO
         return response()->json(['Success'=>  true ]);
     });
     Route::post('eventshopregister',[UserController::class,'vendorsRegister']);
-   
+    Route::post('eventcatadd',[EventCatController::class,'eventcatadd']);
 
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
