@@ -14,7 +14,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
+        return Slider::where();
     }
 
     /**
