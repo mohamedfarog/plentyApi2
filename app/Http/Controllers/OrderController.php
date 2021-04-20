@@ -40,7 +40,7 @@ class OrderController extends Controller
                 $shop=171;
                 $q = Detail::join('products', "product_id", "products.id")->select('products.shop_id', 'products.price', 'details.*')->with(['order', 'product' => function ($product_info) use ($shop) {
                     return $product_info->with('images')->where('products.shop_id', '=', $shop);
-                }])->has('product.shop')->where('product.shop_id', '=', $shop);
+                }])->where('products.shop_id', '=', $shop);
                 if (isset($request->status))
                     $q->join('orders', "order_id", "orders.id")->where('status', '=', $request->status,);
                 return $q->paginate();
