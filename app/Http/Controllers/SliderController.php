@@ -44,8 +44,7 @@ class SliderController extends Controller
     public function store(Request $request, UploadHelper $helper)
     {
         $user=Auth::user();
-        return $user->typeofuser;
-        if($user->typeofuser=='S'|| $user->typeofuser=='V'||$user->typeofuser=='A')
+        if($user->typeofuser == 'S'|| $user->typeofuser=='V'||$user->typeofuser=='A')
         {
 
             $slider = new Slider();
@@ -69,10 +68,10 @@ class SliderController extends Controller
                     
                     break;
             }
+            return $slider;
         }
         return response()->json(['error' =>'You don\'t have permission to access this resource'],400);
 
-        return $slider;
     }
 
     /**
