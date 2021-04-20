@@ -307,7 +307,7 @@ class ProductController extends Controller
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
-        $product = Product::where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        $product = Product::with(['sizes', 'colors', 'addons', 'images', 'designer']);
         if (isset($request->eventcat_id)) {
 
             $product = $product->where("eventcat_id", $request->eventcat_id);
@@ -317,7 +317,7 @@ class ProductController extends Controller
             $product = $product->where("eventcat_id", 13);
         }
         if (isset($request->products)) {
-            // 13 is a category reserved for room purposes
+           // This is used for fetch products for array
             $product = $product->whereIn("id", $request->products);
         }
         return $product->orderby($sortBy, $sortOrder)->paginate();
