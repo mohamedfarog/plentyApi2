@@ -307,7 +307,7 @@ class ProductController extends Controller
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
-        $product = Product::with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        $product = Product::where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
         if (isset($request->eventcat_id)) {
 
             $product = $product->where("eventcat_id", $request->eventcat_id);
