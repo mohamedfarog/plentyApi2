@@ -42,6 +42,7 @@ class OrderController extends Controller
                 $shop=Shop::where('user_id',$user->id)->first();
                 if(!$shop)
                 return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data", ],400);
+                return $shop;
                 $orders= Order::join('details', 'details.order_id', 'orders.id')->where('shop_id', $shop->id)->select()->with(['details' => function ($details) {
                     return $details->with(['product' => function ($product) {
                         return $product->with(['images']);
