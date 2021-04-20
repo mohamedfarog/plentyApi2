@@ -120,7 +120,7 @@
                             </div>
                             <div class="row" style="margin:15px 0;direction: ltr !important;text-align: left !important;">
                                 <div class="col-lg-12" style="direction: ltr !important;">
-                                    <div id="msgsent" style="padding:10px;direction:ltr !important;font-size:1.5rem;color:green;">Thank you, your request has been received </div>
+                                    <div id="msgsent" style="padding:10px;direction:ltr !important;font-size:1.5rem;color:green;"> </div>
                                 </div>
                             </div>
                         </form>
@@ -202,7 +202,16 @@
             timeout: 600000,
             data: form,
             success: function(data) {
-
+                if (data.Response.status === true) {
+                    msg = 'Thank you, your request has been received';
+                    document.getElementById('msgsent').style.color = "green"
+                    document.getElementById('msgsent').innerText = msg
+                }
+            },
+            error: function(err) {
+                msg = 'Please, try again!';
+                document.getElementById('msgsent').style.color = "red"
+                document.getElementById('msgsent').innerText = msg
             }
         });
     }

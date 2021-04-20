@@ -500,7 +500,7 @@ class WebsiteHomeController extends Controller
     private function sendEmail($userName, $senderEmail, $senderNum, $message, $cmessage)
     {
         //Headers
-        $to = "hr@plentyofthings.com"; // Your email address goes here
+        $to = ""; // Your email address goes here
         $subject = 'Plenty Website - Careers Form';
         $headers = "From: Career Form <noreply@plentyofthings.com>";
         $headers .= "\nMIME-Version: 1.0\r\n";
