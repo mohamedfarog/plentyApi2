@@ -94,10 +94,12 @@ Route::get('/aboutus', function () {
     return view('/aboutus');
 });
 
+
+
 Route::get('/careers', function () {
     return view('/careers');
 });
-
+Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
 Route::get('/favourites', function () {
     return view('/favourite');
 });

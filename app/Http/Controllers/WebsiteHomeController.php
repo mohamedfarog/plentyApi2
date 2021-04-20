@@ -14,8 +14,10 @@ use App\Models\Prodcat;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
+use Illuminate\Support\Facades\Validator;
 
 class WebsiteHomeController extends Controller
 {
@@ -467,5 +469,92 @@ class WebsiteHomeController extends Controller
         }, 'user'])->where('user_id', $userid)->get();
         // Booking::with('services')->get();
         return view('trackorder')->with($data);
+    }
+
+
+    //career
+    private function uploadCV($file)
+    {
+        $allowedfileExtensions = array('doc', 'docx', 'pdf');
+        $fileExtension = $file->extension();
+        $fileName = md5(time() . $file->getClientOriginalName()) . '.' . $fileExtension;
+        if (in_array($fileExtension, $allowedfileExtensions)) {
+            try {
+                $file->move(public_path('cv'), $fileName);
+            } catch (\Exception $e) {
+                $err['status'] = false;
+                $err['error'] = 'There was some error moving the file to upload directory. ' . $e;
+                return $err;
+            }
+            $msg['status'] = true;
+            $msg['url'] = url('/cv') . '/' . $fileName;
+            return $msg;
+        } else {
+            $err['status'] = false;
+            $err['error'] = 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+            return $err;
+        }
+    }
+
+    private function sendEmail($userName, $senderEmail, $senderNum, $message, $cmessage)
+    {
+        //Headers
+        $to = "hr@plentyofthings.com"; // Your email address goes here
+        $subject = 'Plenty Website - Careers Form';
+        $headers = "From: Career Form <noreply@plentyofthings.com>";
+        $headers .= "\nMIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+        if (isset($userName) && isset($senderEmail) && isset($senderNum) && isset($cmessage)) {
+            //body message
+            $message = "Name: " . $userName . "<br>
+            Email: " . $senderEmail . "<br>
+            Phone Number: " . $senderNum . "<br>
+            Message: " . $message . "" . "<br><br>CV: " . $cmessage . "<br>";
+
+            //Email Send Function
+            try {
+                mail($to, $subject, $message, $headers);
+            } catch (\Exception $e) {
+                $err['status'] = false;
+                $err['error'] = 'Email is not sent !';
+                return $err;
+            }
+        }
+        $msg['status'] = true;
+        $msg['message'] = 'Email send successfully.';
+        return $msg;
+    }
+
+    public function career(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'mobile' => 'required|regex:/^\+?\d+$/',
+            'uploadedFile' => 'required|max:10000|mimes:doc,docx,pdf'
+        ]);
+
+        if ($validator->fails()) {
+            $err['status'] = false;
+            $err['error'] = $validator->errors();
+            return response()->json(['Response' => $err], 400);
+        }
+
+        $data = $request->all();
+        $file = $request->file('uploadedFile');
+        $userName = isset($data['name']) ? preg_replace("/[^\s\S\.\-\_\@a-zA-Z0-9]/", "", $data['name']) : "";
+        $senderEmail = isset($data['email']) ? preg_replace("/[^\.\-\_\@a-zA-Z0-9]/", "", $data['email']) : "";
+        $senderNum = isset($data['mobile']) ? preg_replace("/[^\.\-\_\@a-zA-Z0-9]/", "", $data['mobile']) : "";
+        $message = isset($data['message']) ? preg_replace("/(From:|To:|BCC:|CC:|Subject:|mobile-Type:)/", "", $data['message']) : "";
+        $uploadResponse = $this->uploadCV($file);
+        if ($uploadResponse['status'] == true) {
+            $emailResponse = $this->sendEmail($userName, $senderEmail, $senderNum, $message, $uploadResponse['url']);
+            if ($emailResponse['status'] == false) {
+                return response()->json(['Response' => $emailResponse], 500);
+            }
+        } else {
+            return response()->json(['Response' => $uploadResponse], 500);
+        }
+        return response()->json(['Response' => $emailResponse], 200);
     }
 }

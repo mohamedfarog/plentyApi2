@@ -40,7 +40,6 @@
     span {
         color: #001B71;
     }
-
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -69,13 +68,14 @@
                         </h6>
                     </div>
                     <div class="col-lg-7 col-xs-12">
-                        <form method="post" action="sendcareers.php" enctype="multipart/form-data">
+                        <form id="career-form" enctype="multipart/form-data" onsubmit="event.preventDefault();submitCareer(this)">
+                            {{ csrf_field() }}
                             <div class="row" style="margin:15px 0">
                                 <div class="col-lg-3">
                                     <h6>Name:</h6>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" name="username" id="name" style="background-color: #f8f8f8;border:0px solid #ccc;width:100%;padding: 5px;" placeholder="First and Last  " required>
+                                    <input type="text" name="name" id="name" style="background-color: #f8f8f8;border:0px solid #ccc;width:100%;padding: 5px;" placeholder="First and Last  " required>
                                 </div>
                                 <br>
                             </div>
@@ -155,7 +155,6 @@
         background: white;
 
     }
-
 </style>
 <script>
     $(document).ready(function() {
@@ -191,6 +190,21 @@
         localStorage.setItem("52msgsent", 1);
     });
 
+    function submitCareer(e) {
+        const form = new FormData(e)
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'career-contact',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            data: form,
+            success: function(data) {
+
+            }
+        });
+    }
 </script>
 @endsection
-
