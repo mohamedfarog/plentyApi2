@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\UploadHelper;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SliderController extends Controller
 {
