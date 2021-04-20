@@ -12,7 +12,7 @@ class Order extends Model
         'ref', 'total_amount', 'amount_due', 'order_status', 'payment_method', 'tax', 'delivery_charge', 'delivery_location', 'user_id', 'coupon_value', 'lat', 'lng', 'delivery_note', 'contact_number', 'city', 'label'
     ];
     protected $casts = [
-        'updated_at'  =>'datetime:Y-m-d H:00',
+        'updated_at'  =>'datetime',
         'created_at' => 'datetime:Y-m-d H:00',
     ];
     protected $appends = ['orderstatusvalue'];
