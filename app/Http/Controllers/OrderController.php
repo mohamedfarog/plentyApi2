@@ -37,12 +37,10 @@ class OrderController extends Controller
                 break;
             case 'V':
             case 'v':
-                $shop = 171;
-                return Detail::select('order_id')->distinct()->get();
-
-
-                return Order::whereIn('id', function ($ordersInfo) {
-                })->paginate();
+        
+                return Order::with(['details'=>function($q){
+                    $q->where('shop_id',171);
+                }])->get();
                 break;
             case 'S':
             case 's':
