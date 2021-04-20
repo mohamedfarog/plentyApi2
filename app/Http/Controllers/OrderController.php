@@ -43,7 +43,7 @@ class OrderController extends Controller
                 }])->where('products.shop_id', '=', $shop);
                 if (isset($request->status))
                     $q->join('orders', "order_id", "orders.id")->where('status', '=', $request->status,);
-                return $q->paginate();
+                return $q->unique("order_id");
                 
               
                 return Order::whereIn('id',function($ordersInfo){
