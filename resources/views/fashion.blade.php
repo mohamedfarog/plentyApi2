@@ -185,17 +185,14 @@
             height: 60px;
         }
 
-        .tabsshops {
-            display: none;
-        }
 
         .shoplistmobile>button {
-            flex: 50%;
+            flex: 25%;
             height: 100% !important;
         }
 
         .shoplistmobile {
-            height: 100%;
+             height: 100px;
         }
 
         .mobiletabs {
@@ -215,11 +212,20 @@
         .dinebtn {
             width: 100% !important;
         }
+        section.wholetabs {
+            width: 100%;
+            margin: auto;
+        }
+        .imgz{
+            min-width: 0;
+        }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
 <input type="hidden" id="shopid" value={{$shop->id}}>
+<input type="hidden" id="shopname" value={{$shop->name_en}}>
 <div class="heading-banner-area overlay-bg" style="background: url('img/store/SADA/Dine Banner.png') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
@@ -232,7 +238,7 @@
                         <ul>
                             <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;">FASHION</li>
-                            <li style="font-weight:lighter;" id="breadcrumbshopname">Linen</li>
+                            <li style="font-weight:lighter;" id="breadcrumbshopname2">Linen</li>
                         </ul>
                     </div>
                 </div>
@@ -295,26 +301,7 @@
 </section>
 
 <section class="mobiletabs wholetabs">
-    <div class="tab shoplistmobiletabs" style="">
-        <div style="width:50%;margin:auto;padding-bottom:50px;">
-            <img id="mobileheadershop" src="img/linen.png">
-        </div>
-        <select id='shopsidselect'>
-            @if(isset($shops))
-            @foreach($shops as $shop)
-            @if ($loop->first)
-            <option onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-                {{$shop->name_en}}
-            </option>
-            @else
-            <option onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-                {{$shop->name_en}}
-            </option>
-            @endif
-            @endforeach
-            @endif
-        </select>
-    </div>
+  
 </section>
 
 <section class="wholetabs wholemobile">
@@ -326,7 +313,7 @@
                 <div class="container">
                     <div class="hero-holder" style="display: grid;padding-top:50px;">
                         <div class="hero-message" style="text-align:right;">
-                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
                             </h1>
                             <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
@@ -343,7 +330,7 @@
                 <div class="container">
                     <div class="hero-holder" style="display: grid;padding-top:50px;">
                         <div class="hero-message" style="text-align:right;">
-                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
                             </h1>
                             <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
@@ -360,7 +347,7 @@
                 <div class="container">
                     <div class="hero-holder" style="display: grid;padding-top:50px;">
                         <div class="hero-message" style="text-align:right;">
-                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
                             </h1>
                             <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
@@ -377,7 +364,7 @@
 
         <section class="mt-30 mb-30">
             <div style="text-align:center;">
-                <h1 style="font-weight:lighter;color:#288248">
+                <h1 style="font-weight:lighter;color:#288248" id="breadcrumbshopname2">
                     Simply Put.
                 </h1>
             </div>
@@ -413,8 +400,12 @@
         document.getElementById("defaultOpen").click();
         $(".active").css("background-color", "black");
         const shop_id = $('#shopid').val();
-        makeShopActive(shop_id, color = "#2b854b")
+        const shop_name = $('#shopname').val();
+        makeShopActive(shop_id, color = "#2b854b");
+         document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
+
 </script>
 
 <script>
@@ -441,10 +432,10 @@
     //for filtering product based on category
     function getProducts(element, category = 0) {
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     console.log(data)
                     renderProduct(data)
@@ -462,10 +453,10 @@
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
         $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:8000/best-seller/' + shop_id,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: 'http://127.0.0.1:8000/best-seller/' + shop_id
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -544,6 +535,7 @@
         });
         console.log('nohover');
     });
+
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">

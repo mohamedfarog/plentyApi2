@@ -144,9 +144,9 @@
 /*--------------------------
 	tooltip active jquery
 ---------------------------- */
-	$('.product-action a').tooltip({
-        container: 'body'
-    });	
+	// $('.product-action a').tooltip({
+    //     container: 'body'
+    // });	
 	
 /*---------------------
 	countdown
@@ -226,12 +226,12 @@
 /*--------------------------
 	scrollUp
 ---------------------------- */	
-	$.scrollUp({
-		scrollText: '<i class="zmdi zmdi-triangle-up"></i>',
-		easingType: 'linear',
-		scrollSpeed: 900,
-		animation: 'fade'
-	}); 	   
+	// $.scrollUp({
+	// 	scrollText: '<i class="zmdi zmdi-triangle-up"></i>',
+	// 	easingType: 'linear',
+	// 	scrollSpeed: 900,
+	// 	animation: 'fade'
+	// }); 	   
 
 /*--------------------------	
 	shop page manu dropdown	

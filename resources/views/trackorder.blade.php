@@ -82,18 +82,21 @@
                 $orderstatus = $ord->order_status;
                 $color = 'red';
                 if ($orderstatus == 0){
-                    $color = 'green';
+                    $color = 'grey';
                 }
                 else if ($orderstatus == 1){
-                    $color = 'lime';
+                    $color = 'lightgreen';
                 }
                 else if ($orderstatus == 2){
-                    $color = 'yellow';
+                    $color = 'lime';
                 }
                 else if ($orderstatus == 3){
+                    $color = 'yellow';
+                }
+                else if ($orderstatus == 4){    
                     $color = 'green';
                 }
-                else if ($orderstatus == 4){
+                else if ($orderstatus == 5){
                     $color = 'red';
                 }
                 else{
@@ -290,20 +293,24 @@
         var ordcdate = $(this).data('cdate');
         var ordid = $(this).data('ordid');
         var prodordid = '.prod-' + ordid;
-        if (ordstat == '0') {
-            ordstatstr = "Confirmed";
+        if (ordstat == '1') {
+            ordstatstr = "Order Placed";
             ordpic = 'img/trackorder/1.png';
-        } else if (ordstat == '1') {
+        } else if (ordstat == '2') {
             ordstatstr = "Preparing";
             ordpic = 'img/trackorder/2.png';
-        } else if (ordstat == '2') {
+        } else if (ordstat == '3') {
             ordstatstr = "Out for Delivery";
             ordpic = 'img/trackorder/3.png';
-        } else if (ordstat == '3') {
+        } else if (ordstat == '4') {
             ordstatstr = "Delivered";
             ordpic = 'img/trackorder/4.png';
-        } else if (ordstat == '4') {
+        } else if (ordstat == '5') {
             ordstatstr = "Rejected";
+            ordpic = 'img/trackorder/0.png'
+        } 
+        else if (ordstat == '0') {
+            ordstatstr = "Pending";
             ordpic = 'img/trackorder/0.png'
         } else {
             ordstatstr = "Unknown";

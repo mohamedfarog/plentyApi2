@@ -194,7 +194,9 @@
         font-size: 16px;
         font-weight: 100;
     }
-
+    .mccontent{
+        padding:50px;
+    }
     @media screen and (min-width: 768px) {
         .modal:before {
             display: inline-block;
@@ -205,6 +207,12 @@
 
         .contymobile {
             width: 90%;
+        }
+
+    }
+    @media only screen and (max-width: 600px) {
+        .mccontent{
+            padding:0 !important;
         }
     }
 </style>
@@ -242,7 +250,7 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content" style="padding: 50px;">
+            <div class="modal-content mccontent" >
                 <div class="modal-header" style="margin-bottom:50px;">
                     <p class="modaltextp">Verification Account</p>
                 </div>

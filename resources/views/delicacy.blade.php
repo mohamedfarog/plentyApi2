@@ -185,12 +185,9 @@
             height: 60px;
         }
 
-        .tabsshops {
-            display: none;
-        }
 
         .shoplistmobile>button {
-            flex: 50%;
+            flex: 25%;
             height: 100% !important;
         }
 
@@ -215,11 +212,17 @@
         .dinebtn {
             width: 100% !important;
         }
+        section.wholetabs {
+            width: 100%;
+            margin: auto;
+        }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
 <input type="hidden" id="shopid" value={{$shop->id}}>
+<input type="hidden" id="shopname" value={{$shop->name_en}}>
 <div class="heading-banner-area overlay-bg" style="background: url('img/store/SADA/Dine Banner.png') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
@@ -281,12 +284,14 @@
         @foreach($shops as $shop)
         @if ($loop->first)
         <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
+            
             <img class="delicacy-shop-logo imgz" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
         </button>
         @else
 
         <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-            <img class="delicacy-shop-logo" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
+       
+        <img class="delicacy-shop-logo" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
         </button>
         @endif
         @endforeach
@@ -295,26 +300,7 @@
 </section>
 
 <section class="mobiletabs wholetabs">
-    <div class="tab shoplistmobiletabs" style="">
-        <div style="width:50%;margin:auto;padding-bottom:50px;">
-            <img id="mobileheadershop" src="img/linen.png">
-        </div>
-        <select id='shopsidselect'>
-            @if(isset($shops))
-            @foreach($shops as $shop)
-            @if ($loop->first)
-            <option onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-                {{$shop->name_en}}
-            </option>
-            @else
-            <option onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-                {{$shop->name_en}}
-            </option>
-            @endif
-            @endforeach
-            @endif
-        </select>
-    </div>
+
 </section>
 
 <section class="wholetabs wholemobile">
@@ -326,7 +312,7 @@
                 <div class="container">
                     <div class="hero-holder" style="display: grid;padding-top:50px;">
                         <div class="hero-message" style="text-align:right;">
-                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
                             </h1>
                             <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
@@ -343,7 +329,7 @@
                 <div class="container">
                     <div class="hero-holder" style="display: grid;padding-top:50px;">
                         <div class="hero-message" style="text-align:right;">
-                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
                             </h1>
                             <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
@@ -360,7 +346,7 @@
                 <div class="container">
                     <div class="hero-holder" style="display: grid;padding-top:50px;">
                         <div class="hero-message" style="text-align:right;">
-                            <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
                             </h1>
                             <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
@@ -413,8 +399,13 @@
         document.getElementById("defaultOpen").click();
         $(".active").css("background-color", "black");
         const shop_id = $('#shopid').val();
-        makeShopActive(shop_id, color = "#2b854b")
+        const shop_name = $('#shopname').val();
+        makeShopActive(shop_id, color = "#2b854b");
+        
+        document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
+
 </script>
 
 <script>
@@ -423,6 +414,7 @@
         const shop = 'shop' + shop_id
         document.getElementById(shop).style.boxShadow = '0 0 3px #000000';
         document.getElementById(shop).style.backgroundColor = color;
+        
     }
 
     // Making sub category link active
@@ -441,10 +433,10 @@
     //for filtering product based on category
     function getProducts(element, category = 0) {
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -461,10 +453,10 @@
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
         $.ajax({
-            type: 'GET',
-            url: base_url + 'best-seller/' + shop_id,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'best-seller/' + shop_id
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -525,14 +517,7 @@
 
 
     }
-    $(document).ready(function() {
-        document.getElementById('breadcrumbshopname').innerHTML = localStorage.shopname;
-        document.getElementById('breadcrumbshopname2').innerHTML = localStorage.shopname;
-        document.getElementById('mobileheadershop').src = localStorage.shopimg;
-        $('.shopsidselect').find('option[value=]' + localStorage.shop).attr('selected', 'selected');
-
-    });
-
+ 
     $(".producthover").hover(function() {
         $(this).children(".product-img").children(".buttonsshow").css({
             'visibility': 'visible'
@@ -544,6 +529,7 @@
         });
         console.log('nohover');
     });
+
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">

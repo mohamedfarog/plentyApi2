@@ -184,6 +184,7 @@
   top: 0;z-index:99999">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <span id="alert_message_text"></span>
+        <button class="btn" style="float: right;background:#001b71;padding:5px;margin-right:5px">Go to Bag </button>
     </div>
     <!-- Preloader -->
     <div class="loader-mask">
@@ -249,7 +250,7 @@
                                 <div class="collapse navbar-collapse text-center" id="navbar-collapse">
 
                                     <ul class="nav navbar-nav">
-
+                                        
                                         <li class="">
                                             <a class="mainanc" href="/">Home</a>
                                         </li>
@@ -274,12 +275,14 @@
                                             <a class="mainanc" href="/brands">Brands</a>
 
                                         </li> <!-- end elements -->
-                                        @auth
+                                     
                                         <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
                                         <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
                                         <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
                                         <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
-                                        @endauth
+                                      
+                                        <li class="hidden-lg hidden-md"><a href="/login">Login</a></li>
+                                      
 
                                         <!-- Mobile search -->
 
@@ -296,15 +299,17 @@
                                         </a>
                                     </li>
                                     <li class="nav-cart">
+                                    <a href="/cart" class="" style="font-size: 14px;">
                                         <div class="nav-cart-outer">
                                             <div class="nav-cart-inner">
-                                                <a href="/cart" class="" style="font-size: 14px;">
+                                                
                                                     <img src="img/nav/bag.png" alt="" style="width:20px;height:20px;">
                                                     <span id="nav-cart-size"></span>
 
-                                                </a>
+                                               
                                             </div>
                                         </div>
+                                    </a>
                                         <div class="nav-cart-container">
 
                                             <div id="nav-cart-products">
@@ -329,11 +334,12 @@
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="/login" class="nav-search  imgicon">
+                                 
+                                        <a href="/profile" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
-
-
+                                    
+                                         
                                         <ul class="dropdown-menu dwdw" style="background:white">
                                             <div class="row">
 
@@ -343,7 +349,11 @@
                                                     <div class="row">
 
                                                         <div class="hidden-sm hidden-xs" style="width:100%;float:left;margin:auto">
-                                                            <p>Hello, <span id="nav-username"></span></p>
+                                                            
+                                                      
+                                                            <p>Hello, <span id="nav-username"></span></p></p>
+                                                            
+                                                         
                                                         </div>
                                                     </div>
                                                 </a>
@@ -353,7 +363,8 @@
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
                                             <li><a class="dropdownanch" href="/lang">Logout</a></li>
                                         </ul>
-
+                                 
+                                 
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="/lang" class="nav-search  imgicon">
@@ -953,6 +964,7 @@
         // getting data
         function getUserDetails() {
             if (JSON.parse(getCookie('user'))) {
+                console.log('logged in');
                 return JSON.parse(getCookie('user'))
             } else {
                 return null;
@@ -961,8 +973,10 @@
         }
 
         $(document).ready(function() {
+            
             if (getUserDetails()) {
                 document.getElementById('nav-username').innerHTML = getUserDetails().name;
+                document.getElementById('nav-username').value = getUserDetails().name;
             }
         });
 

@@ -31,7 +31,17 @@
     .nwa {
         font-weight: 100;
     }
+    @media only screen and (max-width: 600px) {
 
+            .cccategory {
+                width:100%;
+            }
+            .pm-cat-item{
+                padding-left:0;
+                padding-right:5px;
+            }
+        }
+    
 </style>
 
 <!-- Hero Slider -->
@@ -112,7 +122,7 @@
 
 <!-- Promo Banners -->
 <section class="section-wrap promo-banners pb-30">
-    <div class="container">
+    <div class="container cccategory">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
@@ -123,7 +133,7 @@
 
         <div class="row">
 
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
                 <a href="/delicacy">
                     <div style="">
                     </div>
@@ -140,7 +150,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
 
                 <a href="/beauty">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
@@ -154,7 +164,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
                 <a href="/fashion">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">

@@ -399,6 +399,7 @@
     .slot-clicked {
         background-color: #f1f1f1;
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
@@ -611,14 +612,11 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            ,
-            firstDayOfMonth = new Date(y, m, 1).getDay()
+            , firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            ,
-            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            ,
-            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table style="width:100% !important;" id="calendar">';
@@ -754,18 +752,18 @@
         let prod_id = document.getElementById('product_id').value
         url = base_url + 'api/timeslots'
         $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'JSON',
-            data: {
-                product_id: prod_id,
-                date: date
-            },
-            success: function(data) {
+            type: 'GET'
+            , url: url
+            , dataType: 'JSON'
+            , data: {
+                product_id: prod_id
+                , date: date
+            }
+            , success: function(data) {
                 renderSlots(data)
 
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -790,10 +788,10 @@
         ele.classList.add("slot-clicked");
         url = base_url + 'timeslot/' + id
         $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: url
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.Response) {
                     document.getElementById('timeslot').value = data.timeslot.timeslot
                     document.getElementById('timeslot_id').value = data.timeslot.id
@@ -803,8 +801,8 @@
                 }
 
 
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -829,15 +827,15 @@
                 return category.id == shop_id();
             });
             let item = {
-                id: form.get('product_id'),
-                price: form.get('product_price'),
-                name: form.get('product_name'),
-                image_url: form.get('product_image') || null,
-                timeslot_id: form.get('timeslot_id') || null,
-                time: form.get('timeslot') || null,
-                date: new Date(year, month, day) || null,
-                category: shop_category[0].name_en || null,
-                quantity: 1
+                id: form.get('product_id')
+                , price: form.get('product_price')
+                , name: form.get('product_name')
+                , image_url: form.get('product_image') || null
+                , timeslot_id: form.get('timeslot_id') || null
+                , time: form.get('timeslot') || null
+                , date: new Date(year, month, day) || null
+                , category: shop_category[0].name_en || null
+                , quantity: 1
             }
             let product = new CartItem(item)
             let cart = CartSerializer(getCartLocal());
@@ -866,6 +864,7 @@
             showAlertError("Please select a slot!")
         }
     }
+
 </script>
 <script src="js/prodjs.js"></script>
 

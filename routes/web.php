@@ -123,7 +123,7 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);
-Route::get('/delicay/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
+Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 
 Route::get('/featured',  [WebsiteHomeController::class, 'featured']);
 
