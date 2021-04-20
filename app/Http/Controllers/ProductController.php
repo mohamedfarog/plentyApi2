@@ -281,4 +281,38 @@ class ProductController extends Controller
     {
         //
     }
+    public function getProducts(Request $request)
+    {
+        $sortBy="updated_at";
+        $sortOrder="desc";
+        if(isset($request->sort))
+        {
+            switch ($request->sort) {
+                case 'price':
+                    $sortBy='price';
+                    break;
+                    case 'name':
+                        $sortBy='name_en';
+                        break;
+                default:
+                    # code...
+                    break;
+            }
+        }
+        if(isset($request->order)&& $request->order=="asc"){
+            $sortOrder="asc";
+        }
+        $product=Product::where("stocks",">",0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        if(isset($request->eventcat_id))
+        {
+        
+            $product=$product->where("eventcat_id",$request->eventcat_id);
+        }
+        if(isset($request->room))
+        {
+            // 13 is a category reserved for room purposes
+            $product=$product->where("eventcat_id",13);
+        }
+        return $product->orderby($sortBy,$sortOrder)->paginate();
+    }
 }

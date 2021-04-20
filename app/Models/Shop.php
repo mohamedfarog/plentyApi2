@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
+    protected $table="shops";
     use HasFactory;
     protected $fillable = [
         'name_en', 'name_ar', 'desc_en', 'desc_ar', 'cat_id', 'active', 'status',
