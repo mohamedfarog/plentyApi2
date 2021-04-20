@@ -38,6 +38,8 @@ class OrderController extends Controller
             case 's':
                 if (isset($request->user_id))
                     $orders = $orders->where('user_id', $request->user_id);
+                if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4]))
+                    $orders = $orders->where('order_status', $request->order_status);
             default:
                 break;
         }
