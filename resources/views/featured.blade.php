@@ -137,8 +137,20 @@
                             <h4 class="post-title floatcenter feattitle"><a href="#" style="">{{$product->name_en}} </a></h4>
                             <p class="floatcenter hidden-sm featsubtitle  post-title">SAR {{$product->price}}</p>
                         </div>
+                        <div class="fix featlineicons">
+                            <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                            </span>
+                            </a>
+                            <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
+                                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                                </span>
+                            </a>
+                        </div>
+
                     </div>
+                    
                 </div>
+                
                 @endforeach
             </section>
 

@@ -433,6 +433,7 @@
     <!-- main js -->
     <script src="js/main.js"></script>
 
+
     <script>
         var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
@@ -1007,13 +1008,14 @@
             initiateTimeOut()
         }
 
-        function initiateTimeOut(time = 10000) {
+        function initiateTimeOut(time = 5000) {
             setTimeout(function() {
                 $(".alert").hide();
             }, time);
         }
 
     </script>
+
 </body>
 
 </html>
