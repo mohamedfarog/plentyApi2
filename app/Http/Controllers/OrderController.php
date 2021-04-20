@@ -28,18 +28,22 @@ class OrderController extends Controller
                 return $product->with(['images']);
             }, 'size', 'color']);
         }, 'user']);
+        if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4]))
+            $orders = $orders->where('order_status', $request->order_status);
         switch ($user->typeofuser) {
             case 'U':
             case 'u':
                 $orders = $orders->where('user_id', $user->id);
                 break;
-
+            case 'V':
+            case 'v':
+                if (isset($request->user_id))
+                    $orders = $orders->where('user_id', $request->user_id);
             case 'S':
             case 's':
                 if (isset($request->user_id))
                     $orders = $orders->where('user_id', $request->user_id);
-                if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4]))
-                    $orders = $orders->where('order_status', $request->order_status);
+                break;
             default:
                 break;
         }
@@ -212,6 +216,9 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['qty'])) {
                     $arr['qty'] = $orderdetails['qty'];
+                }
+                if (isset($orderdetails['booking_time'])) {
+                    $arr['booking_time'] = $orderdetails['booking_time'];
                 }
                 if (isset($orderdetails['shop_id'])) {
                     $arr['shop_id'] = $orderdetails['shop_id'];
