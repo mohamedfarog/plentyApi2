@@ -105,10 +105,12 @@
                             <div class="leftpane" style="background:#f2f3f8">
                                 <div class="row" style=" ">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h3 class="norm-text">Mailing Address:</h3>
+                                        <h3 class="norm-text">Birthdate:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text"> 1st Street, Saudi Arabia</h2>
+                                        @if(isset($user->bday))
+                                        <h2 class="norm-text">{{$user->bday}}</h2>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
@@ -60,7 +61,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('events', [EventController::class, 'index']);
 Route::get('eventshops', [EventcatController::class, 'index']);
+Route::get('eventproducts',[ProductController::class, 'getProducts']);
+Route::get('banners',[SliderController::class, 'index']);
 
+Route::post('vendorslogin',[UserController::class,'vendorslogin']);
 
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);
@@ -75,14 +79,19 @@ Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
 Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
+Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
+   
     Route::post('autologin', [UserController::class, 'autologin']);
     Route::post('addpoints', function () {
         //TODO
         return response()->json(['Success' =>  true]);
     });
     Route::post('eventshopregister',[UserController::class,'vendorsRegister']);
+    Route::post('eventcatadd',[EventCatController::class,'eventcatadd']);
+
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);

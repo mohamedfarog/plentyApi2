@@ -104,6 +104,11 @@ Route::get('/favourites', function () {
     return view('/favourite');
 });
 
+Route::get('/search', function () {
+    return view('/search');
+});
+
+
 //Profile edit
 Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/profile-edit', [WebsiteHomeController::class, 'profileEdit']);

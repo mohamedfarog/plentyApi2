@@ -223,6 +223,7 @@
                     <div class="col-lg-6 col-xs-12">
                         <div class="row" style="padding:20px;">
                             <img id="trackorderimg" src="img/trackorder/0.png">
+                            <h4></h4>
                         </div>
                     </div>
                 </div>

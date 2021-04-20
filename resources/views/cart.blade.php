@@ -248,10 +248,16 @@
             $('#cart_item_view').html(template);
         }
         $(document).ready(function() {
+
             var cart = CartSerializer(getCartLocal())
             renderCartList()
             document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
             document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
+
+
+
+
+
             $(".cart-plus-button").on('click', function(event) {
                 let id = $(this).attr("id").slice(4);
                 pro_id = id.split("-")[0]
@@ -276,6 +282,9 @@
                 }
 
             });
+
+
+
             $(".cart-minus-button").on('click', function(event) {
 
                 let id = $(this).attr("id").slice(5);
@@ -336,4 +345,5 @@
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
         @include('footer')
     </div>
+ 
     @endsection

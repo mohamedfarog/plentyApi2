@@ -203,18 +203,26 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['shop_id'])) {
                     $arr['shop_id'] = $orderdetails['shop_id'];
-                    if(!in_array($shoplist,$orderdetails['shop_id'])){
-                        array_push($shoplist,['shop_id'=> $orderdetails['shop_id'] ,'price' => $orderdetails['price'] ]);
-                    }
-                    else{
-                        $shoplist['price']= $shoplist['price'] + $orderdetails['price'];
-                    }
-                    return $shoplist;
                 }
+                // if (isset($orderdetails['shop_id'])) {
+                //     $arr['shop_id'] = $orderdetails['shop_id'];
+                //     if(!in_array($shoplist,$orderdetails['shop_id'])){
+                //         array_push($shoplist,['shop_id'=> $orderdetails['shop_id'] ,'price' => $orderdetails['price'] ]);
+                //     }
+                //     else{
+                //         $shoplist['price']= $shoplist['price'] + $orderdetails['price'];
+                //     }
+                //     return $shoplist;
+                // }
                 if (isset($orderdetails['price'])) {
                     $arr['price'] = $orderdetails['price'];
                 }
                 if (isset($orderdetails['color_id'])) {
+                    if($orderdetails['color_id']==-1){
+
+
+                    }
+                    else
                     $arr['color_id'] = $orderdetails['color_id'];
                 }
                 if (isset($orderdetails['size_id'])) {

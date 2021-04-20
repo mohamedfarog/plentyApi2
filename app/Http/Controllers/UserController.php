@@ -390,6 +390,9 @@ class UserController extends Controller
                             if (isset($request->gender)) {
                                 $user->gender = $request->gender;
                             }
+                            if (isset($request->points)) {
+                                $user->points = $request->points;
+                            }
                             if (isset($request->invitationcode)) {
                                 $user->invitationcode = $request->invitationcode;
                             }
@@ -449,6 +452,9 @@ class UserController extends Controller
                     }
                     if (isset($request->gender)) {
                         $data['gender'] = $request->gender;
+                    }
+                    if (isset($request->points)) {
+                        $data['points'] = $request->points;
                     }
                     if (isset($request->invitationcode)) {
                         $data['invitationcode'] = $request->invitationcode;
@@ -510,7 +516,7 @@ class UserController extends Controller
             return response()->json(["error" => 'Unauthorized User']);
         }
     }
-    // Vendors sign up for the Bazar
+    // Vendors sign up and login  for the Bazar
     public function vendorsRegister(Request $request)
     {   
         
@@ -592,4 +598,29 @@ class UserController extends Controller
 
         }
     }
+
+        public function vendorslogin(Request $request)
+        {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $user = Auth::user();
+                if($user->typeofuser == 'V'){
+                    if ($user->email_verified_at != NULL) {
+                        $success["message"] = "Login successful";
+                        $success["token"] = $user->createToken('MyApp')->accessToken;
+                        $u = User::with('shop')->where('id',$user->id)->first();
+        
+                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                    } else {
+                        return response()->json(["error" => "Please verify the email"]);
+                    }
+                }
+                else{
+                    return response()->json(["error" => "The user is not a vendor"]);
+                }
+             
+            } else {
+                return response()->json(["error" => "Invalid Email/Password"]);
+            }
+        }
+
 }
