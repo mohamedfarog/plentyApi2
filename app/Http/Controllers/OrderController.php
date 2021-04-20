@@ -40,7 +40,7 @@ class OrderController extends Controller
         
                 return Order::with(['details'=>function($q){
                     $q->where('shop_id',171);
-                }])->get();
+                }])->has('details')->get();
                 break;
             case 'S':
             case 's':
