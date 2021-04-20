@@ -6,7 +6,6 @@ use App\Models\Detail;
 use App\Models\Loyalty;
 use App\Models\Order;
 use App\Models\Shop;
-use App\Models\ShopInfo;
 use App\Models\Tier;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,7 +39,7 @@ class OrderController extends Controller
             case 'V':
             case 'v':
                 
-                $shop=ShopInfo::where('user_id',$user->id)->first();
+                $shop=Shop::where('user_id',$user->id)->first();
                 if(!$shop)
                 return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data", ],400);
                 $orders= Order::join('details', 'details.order_id', 'orders.id')->where('shop_id', $shop->id)->select()->with(['details' => function ($details) {
