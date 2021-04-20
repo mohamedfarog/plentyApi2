@@ -37,14 +37,17 @@ class OrderController extends Controller
                 break;
             case 'V':
             case 'v':
+                // $shop=171;
+                // $q = Detail::join('products', "product_id", "products.id")->select('products.shop_id', 'products.price', 'details.*')->with(['order', 'product' => function ($product_info) use ($shop) {
+                //     return $product_info->with('images')->where('products.shop_id', '=', $shop);
+                // }])->where('products.shop_id', '=', $shop);
+                // if (isset($request->status))
+                //     $q->join('orders', "order_id", "orders.id")->where('status', '=', $request->status,);
+                // return $q->paginate();
+                
                 $shop=171;
-                $q = Detail::join('products', "product_id", "products.id")->select('products.shop_id', 'products.price', 'details.*')->with(['order', 'product' => function ($product_info) use ($shop) {
-                    return $product_info->with('images')->where('products.shop_id', '=', $shop);
-                }])->where('products.shop_id', '=', $shop);
-                if (isset($request->status))
-                    $q->join('orders', "order_id", "orders.id")->where('status', '=', $request->status,);
-                return $q->paginate();
-    
+                return Order::whereIn('id',[44])->paginate();
+                break;
             case 'S':
             case 's':
                 if (isset($request->user_id))
