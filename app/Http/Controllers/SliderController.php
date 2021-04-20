@@ -44,6 +44,7 @@ class SliderController extends Controller
     public function store(Request $request, UploadHelper $helper)
     {
         $user=Auth::user();
+        return $user->typeofuser;
         if($user->typeofuser=='S'|| $user->typeofuser=='V'||$user->typeofuser=='A')
         {
 
