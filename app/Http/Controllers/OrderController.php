@@ -38,7 +38,7 @@ class OrderController extends Controller
             case 'V':
             case 'v':
                 $shop = 171;
-                return Detail::select('order_id')->select()->distinct()->get();
+                return Detail::select('order_id')->distinct()->get();
 
 
                 return Order::whereIn('id', function ($ordersInfo) {
