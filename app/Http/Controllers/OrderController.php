@@ -38,9 +38,7 @@ class OrderController extends Controller
             case 'V':
             case 'v':
         
-                return Order::with(['details'=>function($q){
-                    $q->where('shop_id',171);
-                }])->has('details')->get();
+                return Order::join('details','details.order_id','id')->where('shop_id','171')->with(['details'])->has('details')->get();
                 break;
             case 'S':
             case 's':
