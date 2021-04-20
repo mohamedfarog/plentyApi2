@@ -316,6 +316,10 @@ class ProductController extends Controller
             // 13 is a category reserved for room purposes
             $product = $product->where("eventcat_id", 13);
         }
+        if (isset($request->products)) {
+            // 13 is a category reserved for room purposes
+            $product = $product->whereIn("id", $request->products);
+        }
         return $product->orderby($sortBy, $sortOrder)->paginate();
     }
 }
