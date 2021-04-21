@@ -7,6 +7,7 @@ use App\Models\Addon;
 use App\Models\Color;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\ShopInfo;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,13 @@ class ProductController extends Controller
                 }
                 return Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
                 break;
-
+            case 'V':
+            case 'v':
+                $shop = ShopInfo::where('user_id', $user->id)->first();
+                if (!$shop)
+                    return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+                return Product::where("shop_id", $shop->id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
+                break;
             default:
                 # code...
                 break;
@@ -283,36 +290,54 @@ class ProductController extends Controller
     }
     public function getProducts(Request $request)
     {
-        $sortBy="updated_at";
-        $sortOrder="desc";
-        if(isset($request->sort))
-        {
+        $sortBy = "updated_at";
+        $sortOrder = "desc";
+        if (isset($request->sort)) {
             switch ($request->sort) {
                 case 'price':
-                    $sortBy='price';
+                    $sortBy = 'price';
                     break;
-                    case 'name':
-                        $sortBy='name_en';
-                        break;
+                case 'name':
+                    $sortBy = 'name_en';
+                    break;
+                case 'id':
+                    $sortBy = 'id';
+                    break;
+                case 'created_at':
+                    $sortBy = 'created_at';
+                    break;
                 default:
                     # code...
                     break;
             }
         }
-        if(isset($request->order)&& $request->order=="asc"){
-            $sortOrder="asc";
+        if (isset($request->order) && $request->order == "asc") {
+            $sortOrder = "asc";
         }
-        $product=Product::where("stocks",">",0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
-        if(isset($request->eventcat_id))
-        {
-        
-            $product=$product->where("eventcat_id",$request->eventcat_id);
+        $product = Product::where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        if (isset($request->eventcat_id)) {
+
+            $product = $product->where("eventcat_id", $request->eventcat_id);
         }
-        if(isset($request->room))
-        {
+        if (isset($request->room)) {
             // 13 is a category reserved for room purposes
-            $product=$product->where("eventcat_id",13);
+            $product = $product->where("eventcat_id", 13);
         }
-        return $product->orderby($sortBy,$sortOrder)->paginate();
+        if (isset($request->products)) {
+            // This is used for fetch products for array
+            $product = $product->whereIn("id", $request->products);
+        }
+        return $product->orderby($sortBy, $sortOrder)->paginate();
+    }
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $shop = ShopInfo::where('user_id', $user->id)->first();
+        if (!$shop)
+            return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+        $name = $request->name;
+        return Product::where("shop_id", $shop->id)->where(function($searching)use( $name){
+            $searching->where('name_ar', 'like', "%" . $name . "%",)->orwhere('name_en', 'like', "%" . $name . "%",);
+        })->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
     }
 }

@@ -63,7 +63,6 @@ Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
 Route::get('eventproducts',[ProductController::class, 'getProducts']);
 Route::get('banners',[SliderController::class, 'index']);
-Route::resource('sliders', SliderController::class);
 
 Route::post('vendorslogin',[UserController::class,'vendorslogin']);
 
@@ -82,6 +81,7 @@ Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
    
     Route::post('autologin', [UserController::class, 'autologin']);
@@ -99,6 +99,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('products', ProductController::class);
+    Route::post('searchProduct', [ProductController::class,"search"]);// This is currently work for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
     Route::post('wallet/topup',[UserController::class,'topUpWallet']);

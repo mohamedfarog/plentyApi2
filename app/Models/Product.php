@@ -31,8 +31,10 @@ class Product extends Model
     {
         return $this->belongsTo(Designer::class);
     }
-
-
+    public function shop()
+    {
+        return $this->hasOne(Shop::class, 'id','shop_id');
+    }
     public function images()
     {
         return $this->hasMany(Image::class);

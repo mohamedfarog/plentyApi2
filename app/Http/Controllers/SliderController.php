@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\UploadHelper;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SliderController extends Controller
 {
@@ -42,30 +43,35 @@ class SliderController extends Controller
      */
     public function store(Request $request, UploadHelper $helper)
     {
-        $slider = new Slider();
-        if (isset($request->id))
-            $slider = Slider::where('id', $request->id)->first();
+        $user=Auth::user();
+        if($user->typeofuser == 'S'|| $user->typeofuser=='V'||$user->typeofuser=='A')
+        {
 
-        switch ($request->action) {
-            case 'remove':
-                $slider->delete();
-                break;
-
-            default:
-                $slider->url = $helper->store($request->file, 'slider');
-                if (isset($request->shop_id)) {
-                    $slider->shop_id = $request->shop_id;
-                }
-                if (isset($request->location) && in_array($request->location, ["home", "shop"])) {
-                    $slider->location = $request->location;
-                }
-                $slider->save();
-                
-                break;
+            $slider = new Slider();
+            if (isset($request->id))
+                $slider = Slider::where('id', $request->id)->first();
+    
+            switch ($request->action) {
+                case 'remove':
+                    $slider->delete();
+                    break;
+    
+                default:
+                    $slider->url = $helper->store($request->file, 'slider');
+                    if (isset($request->shop_id)) {
+                        $slider->shop_id = $request->shop_id;
+                    }
+                    if (isset($request->location) && in_array($request->location, ["home", "shop"])) {
+                        $slider->location = $request->location;
+                    }
+                    $slider->save();
+                    
+                    break;
+            }
+            return $slider;
         }
+        return response()->json(['error' =>'You don\'t have permission to access this resource'],400);
 
-
-        return $slider;
     }
 
     /**
