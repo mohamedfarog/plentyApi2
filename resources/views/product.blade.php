@@ -147,7 +147,7 @@
                                     @endif
                                 </div> 
                     <div class="fix featlineicons">
-                        <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                        <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
                         </span>
                     </div>
                             </div> 
