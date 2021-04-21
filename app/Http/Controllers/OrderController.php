@@ -47,6 +47,7 @@ class OrderController extends Controller
                         return $product->with(['images']);
                     }, 'size', 'color']);
                 },]);
+                
                 break;
             case 'S':
             case 's':

@@ -329,4 +329,12 @@ class ProductController extends Controller
         }
         return $product->orderby($sortBy, $sortOrder)->paginate();
     }
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $shop = ShopInfo::where('user_id', $user->id)->first();
+        if (!$shop)
+            return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+        return Product::where("shop_id", $shop->id)->where('name_ar', 'like', "%" . $request->name . "%",)->where('name_en', 'like', "%" . $request->name . "%", "or")->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
+    }
 }
