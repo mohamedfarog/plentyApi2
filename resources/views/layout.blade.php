@@ -971,110 +971,103 @@
 
         // getting data
         function getUserDetails() {
-            <<
-            << << < Updated upstream
-            if (JSON.parse(getCookie('user'))) {
-                console.log('logged in'); ===
-                === =
 
-                if (getCookie('user')) {
-                    >>>
-                    >>> > Stashed changes
-                    return JSON.parse(getCookie('user'))
-                } else {
-                    return null;
-                }
-
+            if (getCookie('user')) {
+                return JSON.parse(getCookie('user'))
+            } else {
+                return null;
             }
 
-            $(document).ready(function() {
+        }
 
-                if (getUserDetails()) {
-                    userIsAuthenticated();
-                } else {
-                    userIsNotAuthenticated();
-                }
-            });
+        $(document).ready(function() {
 
-
-            function userIsAuthenticated() {
-                document.getElementById('user-menu-nav').style = " visibility: visible;";
-                document.getElementById('nav-username').innerHTML = getUserDetails().name;
-
+            if (getUserDetails()) {
+                userIsAuthenticated();
+            } else {
+                userIsNotAuthenticated();
             }
+        });
 
-            function userIsNotAuthenticated() {
-                document.getElementById('user-menu-nav').style = " visibility: hidden;";
-            }
 
-            function getUser() {
-                const bearer_token = getCookie('bearer_token');
-                if (bearer_token) {
-                    url = base_url + 'user'
-                    $.ajax({
-                        type: 'GET',
-                        url: url,
-                        dataType: 'JSON',
-                        headers: {
-                            "Authorization": 'Bearer ' + bearer_token
-                        },
+        function userIsAuthenticated() {
+            document.getElementById('user-menu-nav').style = " visibility: visible;";
+            document.getElementById('nav-username').innerHTML = getUserDetails().name;
 
-                        success: function(data) {
-                            if (data.Response) {
-                                setCookie('user', JSON.stringify(data.user), 1);
-                            }
+        }
 
-                        },
-                        error: function(err) {
-                            console.log('Error!', err)
+        function userIsNotAuthenticated() {
+            document.getElementById('user-menu-nav').style = " visibility: hidden;";
+        }
+
+        function getUser() {
+            const bearer_token = getCookie('bearer_token');
+            if (bearer_token) {
+                url = base_url + 'user'
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'JSON',
+                    headers: {
+                        "Authorization": 'Bearer ' + bearer_token
+                    },
+
+                    success: function(data) {
+                        if (data.Response) {
+                            setCookie('user', JSON.stringify(data.user), 1);
                         }
 
-                    });
-                } else {
-                    return null;
-                }
+                    },
+                    error: function(err) {
+                        console.log('Error!', err)
+                    }
 
+                });
+            } else {
+                return null;
             }
 
-            function showAlertSuccess(msg = 'Added') {
-                document.getElementById("alert_message_text").innerHTML = ''
-                document.getElementById("alert_message_text").innerHTML = msg;
-                $(".alert").removeClass('alert-danger')
-                $(".alert").addClass('alert-success')
-                $(".alert").show()
-                initiateTimeOut()
-            }
+        }
 
-            function showAlertError(msg = 'Added') {
-                document.getElementById("alert_message_text").innerHTML = ''
-                document.getElementById("alert_message_text").innerHTML = msg;
-                $(".alert").removeClass('alert-success')
-                $(".alert").addClass('alert-danger')
-                $(".alert").show()
-                initiateTimeOut()
-            }
+        function showAlertSuccess(msg = 'Added') {
+            document.getElementById("alert_message_text").innerHTML = ''
+            document.getElementById("alert_message_text").innerHTML = msg;
+            $(".alert").removeClass('alert-danger')
+            $(".alert").addClass('alert-success')
+            $(".alert").show()
+            initiateTimeOut()
+        }
 
-            function initiateTimeOut(time = 5000) {
-                setTimeout(function() {
-                    $(".alert").hide();
-                }, time);
-            }
+        function showAlertError(msg = 'Added') {
+            document.getElementById("alert_message_text").innerHTML = ''
+            document.getElementById("alert_message_text").innerHTML = msg;
+            $(".alert").removeClass('alert-success')
+            $(".alert").addClass('alert-danger')
+            $(".alert").show()
+            initiateTimeOut()
+        }
 
-            function search(e) {
-                e.preventDefault();
-                const form = new FormData(document.getElementById('search-form-nav'))
-                window.location.replace(base_url + 'search/' + form.get('search-item'));
-            }
+        function initiateTimeOut(time = 5000) {
+            setTimeout(function() {
+                $(".alert").hide();
+            }, time);
+        }
 
-            function logoutUser() {
-                eraseCookie('bearer_token');
-                eraseCookie('user');
-                window.location.replace(base_url + 'login');
-            }
+        function search(e) {
+            e.preventDefault();
+            const form = new FormData(document.getElementById('search-form-nav'))
+            window.location.replace(base_url + 'search/' + form.get('search-item'));
+        }
 
-            function eraseCookie(name) {
-                document.cookie = name + '=; Max-Age=-99999999;';
-            }
+        function logoutUser() {
+            eraseCookie('bearer_token');
+            eraseCookie('user');
+            window.location.replace(base_url + 'login');
+        }
+
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
     </script>
 
 </body>
