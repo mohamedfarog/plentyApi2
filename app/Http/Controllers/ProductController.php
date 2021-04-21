@@ -7,6 +7,7 @@ use App\Models\Addon;
 use App\Models\Color;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\ShopInfo;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,13 @@ class ProductController extends Controller
                 }
                 return Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
                 break;
-
+            case 'V':
+            case 'v':
+                $shop = ShopInfo::where('user_id', $user->id)->first();
+                if (!$shop)
+                    return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+                return Product::where("shop_id", $shop->id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
+                break;
             default:
                 # code...
                 break;
@@ -317,7 +324,7 @@ class ProductController extends Controller
             $product = $product->where("eventcat_id", 13);
         }
         if (isset($request->products)) {
-           // This is used for fetch products for array
+            // This is used for fetch products for array
             $product = $product->whereIn("id", $request->products);
         }
         return $product->orderby($sortBy, $sortOrder)->paginate();
