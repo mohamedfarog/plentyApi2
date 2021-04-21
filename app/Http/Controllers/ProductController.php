@@ -336,7 +336,7 @@ class ProductController extends Controller
         if (!$shop)
             return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
         $name = $request->name;
-        return Product::where(function($searching)use( $name){
+        return Product::where("shop_id", $shop->id)->where(function($searching)use( $name){
             $searching->where('name_ar', 'like', "%" . $name . "%",)->orwhere('name_en', 'like', "%" . $name . "%",);
         })->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
     }
