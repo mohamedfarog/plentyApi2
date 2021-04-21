@@ -170,7 +170,7 @@
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group" style="margin-top:50px;">
             <button class="btn btn-primary" onclick="updatProfile(this)" value="Send" style="width:100%;background-color:#001b71">Update</button>
         </div>
 
@@ -205,7 +205,7 @@
             , success: function(data) {
                 getUser();
 
-                window.location.replace(base_url + 'profile');
+                window.location.replace(base_url + 'profile'); 
             }
             , error: function(err) {
                 console.log('Error!', err)

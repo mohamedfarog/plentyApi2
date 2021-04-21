@@ -161,7 +161,10 @@
         .btn.btn-color::before {
             background-color: black;
         }
-
+        button.btn:hover {
+            background-color: #001b71;
+            color: #fff;
+        }
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {

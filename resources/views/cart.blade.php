@@ -213,7 +213,7 @@
                         "</a>" +
                         "</td>" +
                         "<td class='product-name'>" +
-                        "<a href='/product/" + item.id + "'>" + item.name + "</a>" +
+                        "<a href='/product/" + item.id + "' style='font-size:16px;color: #001b71;font-weight:900;'>" + item.name + "</a>" +
                         "<ul>" +
                         renderSubCategory(item) +
                         "</ul>" +
@@ -271,18 +271,16 @@
                     if (parseInt(size_id)) {
 
                         cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
-                        var qqcart = cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).quantity;
 
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
-                        document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
-                        console.log(qqcart);
+
                     } else {
 
                         cart.cart_items.find(item => item.id === pro_id).addQuantity();
-                        var qqcart = cart.cart_items.find(item => item.id === pro_id).quantity;
+
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
-                        document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
-                        console.log(qqcart);
+
+
 
 
                     }
@@ -307,15 +305,15 @@
                     if (parseInt(size_id)) {
 
                         cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
-                        var qqcart = cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).quantity;
+
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
-                        document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
+
 
                     } else {
                         cart.cart_items.find(item => item.id === pro_id).substractQuantity();
-                        var qqcart = cart.cart_items.find(item => item.id === pro_id).quantity;
+
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
-                        document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
+
                     }
                     storeCartLocal(JsonCartSerializer(cart));
 
@@ -364,3 +362,4 @@
     </div>
 
     @endsection
+
