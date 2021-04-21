@@ -335,9 +335,7 @@ class ProductController extends Controller
         $shop = ShopInfo::where('user_id', $user->id)->first();
         if (!$shop)
             return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-            $name=$request->name;
-        return Product::where("shop_id", $shop->id)->where('name_ar', 'like', "%" . $name . "%",)->orWhere(function($q)use($name) {
-            $q->where('name_ar', 'like', "%" . $name . "%",)->orwhere('name_en', 'like', "%" . $name . "%", );
-        })->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
+        $name = $request->name;
+        return Product::where("shop_id", $shop->id)->where('name_ar', 'like', "%" . $name . "%",)->where('name_en', 'like', "%" . $name . "%",)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
     }
 }
