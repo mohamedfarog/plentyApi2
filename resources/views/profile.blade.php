@@ -83,6 +83,7 @@
         background-color: #f2f3f8;
         box-shadow: inset 0px 0px 0px 8px white;
     }
+
 </style>
 
 <section style="text-align:center;">
@@ -304,13 +305,13 @@
 
         // Days of week, starting on Sunday
         this.DaysOfWeek = [
-            'Sun',
-            'Mon',
-            'Tue',
-            'Wed',
-            'Thu',
-            'Fri',
-            'Sat'
+            'Sun'
+            , 'Mon'
+            , 'Tue'
+            , 'Wed'
+            , 'Thu'
+            , 'Fri'
+            , 'Sat'
         ];
 
         // Months, stating on January
@@ -338,14 +339,11 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            ,
-            firstDayOfMonth = new Date(y, m, 1).getDay()
+            , firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            ,
-            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            ,
-            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table>';
@@ -443,6 +441,7 @@
     function getId(id) {
         return document.getElementById(id);
     }
+
 </script>
 
 @endsection

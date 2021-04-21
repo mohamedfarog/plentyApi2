@@ -67,7 +67,7 @@
         </div>
     </div>
 </section>
- 
+
 <div class="content-wrapper oh">
 
     <!-- Cart -->
@@ -82,19 +82,19 @@
                 $orderstatus = $ord->order_status;
                 $color = 'red';
                 if ($orderstatus == 0){
-                    $color = 'grey';
+                    $color = 'green';
                 }
                 else if ($orderstatus == 1){
                     $color = 'lightgreen';
                 }
                 else if ($orderstatus == 2){
-                    $color = 'lime';
-                }
-                else if ($orderstatus == 3){
                     $color = 'yellow';
                 }
-                else if ($orderstatus == 4){    
+                else if ($orderstatus == 3){
                     $color = 'green';
+                }
+                else if ($orderstatus == 4){    
+                    $color = 'red';
                 }
                 else if ($orderstatus == 5){
                     $color = 'red';
@@ -109,7 +109,7 @@
                             <div class="row" style="text-align: left;">
                                 <p style="font-family:'Avenir Bold';font-size:16px;">Order #<span>{{$ord->id}} </span></p>
                             </div>
-                           
+
                             <div class="row" style="text-align: left;">
                                 <p style="font-weight:100;font-size:16px;">{{$ord->created_at}}</p>
                             </div>
@@ -219,7 +219,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                     </div>
@@ -231,47 +231,47 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                @if(isset($ordermodal))
+                    @if(isset($ordermodal))
                     @foreach($ordermodal as $ord)
-                   @if(isset($ord->details ))
-                        @foreach($ord->details as $orddets)
-            
-                            <div class="prodsingle prod-{{$orddets->order_id}}">
-                                <div class="row" style="width:100%;border-bottom:2px solid grey;padding:20px 0;">
-                                    <div class="col-lg-2 col-xs-6">
-                                          <a href="/product/{{$orddets->product->id}}">
-                                          @if(isset($orddets->product->images))
-                                          @foreach($orddets->product->images as $prodimg)
-                                            <img src="storage/products/{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="width:100%;">
-                                          @endforeach
-                                          @else
-                                            <img src="img/product/plentylogo.png" alt="" loading=lazy style="width:100%;">
-                                          @endif
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-6 col-xs-6">
-                                        <a href="/product/{{$orddets->product->id}}" class="itemtitle">{{$orddets->product->name_en}}<br></a>
-                                        <span class="amount" style="font-family:'Avenir Bold'">SAR {{$orddets->product->price}}</span>
-                                        <ul>
-                                        
-                                            <li class="colorgrey">Color: {{$orddets->product->color}}</li>
-                                            @if(isset($orddets->size))
-                                                <li class="colorgrey">Size:  {{$orddets->size->value}}</li>
-                                             @endif
-                                            <li class="colorgrey">Qty: {{$orddets->qty}}</li>
-                                          
-                                            
-                                            
-                                        </ul>
+                    @if(isset($ord->details ))
+                    @foreach($ord->details as $orddets)
 
-                                    </div>
-                                </div>
+                    <div class="prodsingle prod-{{$orddets->order_id}}">
+                        <div class="row" style="width:100%;border-bottom:2px solid grey;padding:20px 0;">
+                            <div class="col-lg-2 col-xs-6">
+                                <a href="/product/{{$orddets->product->id}}">
+                                    @if(isset($orddets->product->images))
+                                    @foreach($orddets->product->images as $prodimg)
+                                    <img src="storage/products/{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="width:100%;">
+                                    @endforeach
+                                    @else
+                                    <img src="img/product/plentylogo.png" alt="" loading=lazy style="width:100%;">
+                                    @endif
+                                </a>
                             </div>
-                        @endforeach
-                        @endif
-                        
+                            <div class="col-lg-6 col-xs-6">
+                                <a href="/product/{{$orddets->product->id}}" class="itemtitle">{{$orddets->product->name_en}}<br></a>
+                                <span class="amount" style="font-family:'Avenir Bold'">SAR {{$orddets->product->price}}</span>
+                                <ul>
+
+                                    <li class="colorgrey">Color: {{$orddets->product->color}}</li>
+                                    @if(isset($orddets->size))
+                                    <li class="colorgrey">Size: {{$orddets->size->value}}</li>
+                                    @endif
+                                    <li class="colorgrey">Qty: {{$orddets->qty}}</li>
+
+
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
-                @endif
+                    @endif
+
+                    @endforeach
+                    @endif
                 </div>
                 <div class="modal-footer">
 
@@ -283,7 +283,7 @@
 
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
-</div> 
+</div>
 <script>
     $(document).on("click", ".open-trackordermodal", function() {
         var trackorderref = $(this).data('ref');
@@ -293,37 +293,33 @@
         var ordcdate = $(this).data('cdate');
         var ordid = $(this).data('ordid');
         var prodordid = '.prod-' + ordid;
-        if (ordstat == '1') {
+        if (ordstat == '0') {
             ordstatstr = "Order Placed";
             ordpic = 'img/trackorder/1.png';
-        } else if (ordstat == '2') {
+        } else if (ordstat == '1') {
             ordstatstr = "Preparing";
             ordpic = 'img/trackorder/2.png';
-        } else if (ordstat == '3') {
+        } else if (ordstat == '2') {
             ordstatstr = "Out for Delivery";
             ordpic = 'img/trackorder/3.png';
-        } else if (ordstat == '4') {
+        } else if (ordstat == '3') {
             ordstatstr = "Delivered";
             ordpic = 'img/trackorder/4.png';
-        } else if (ordstat == '5') {
+        } else if (ordstat == '4') {
             ordstatstr = "Rejected";
-            ordpic = 'img/trackorder/0.png'
-        } 
-        else if (ordstat == '0') {
-            ordstatstr = "Pending";
             ordpic = 'img/trackorder/0.png'
         } else {
             ordstatstr = "Unknown";
             ordpic = 'img/trackorder/0.png'
         }
-        $("#refmodal").text(ordid + ' (' + trackorderref +') ');
+        $("#refmodal").text(ordid + ' (' + trackorderref + ') ');
         $("#ordstatusmodal").text(ordstatstr);
         $("#trackorderimg").attr("src", ordpic);
         $("#cdatemodal").text(ordcdate);
- 
-        $('.prodsingle').hide();  
-        $(prodordid).show();  
-        
+
+        $('.prodsingle').hide();
+        $(prodordid).show();
+
     });
 
 </script>

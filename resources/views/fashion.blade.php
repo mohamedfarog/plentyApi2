@@ -192,7 +192,7 @@
         }
 
         .shoplistmobile {
-             height: 100px;
+            height: 100px;
         }
 
         .mobiletabs {
@@ -212,11 +212,13 @@
         .dinebtn {
             width: 100% !important;
         }
+
         section.wholetabs {
             width: 100%;
             margin: auto;
         }
-        .imgz{
+
+        .imgz {
             min-width: 0;
         }
     }
@@ -301,7 +303,7 @@
 </section>
 
 <section class="mobiletabs wholetabs">
-  
+
 </section>
 
 <section class="wholetabs wholemobile">
@@ -402,7 +404,7 @@
         const shop_id = $('#shopid').val();
         const shop_name = $('#shopname').val();
         makeShopActive(shop_id, color = "#2b854b");
-         document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
 
@@ -543,3 +545,4 @@
 </div>
 
 @endsection
+

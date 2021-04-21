@@ -212,6 +212,7 @@
         .dinebtn {
             width: 100% !important;
         }
+
         section.wholetabs {
             width: 100%;
             margin: auto;
@@ -284,14 +285,14 @@
         @foreach($shops as $shop)
         @if ($loop->first)
         <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-            
+
             <img class="delicacy-shop-logo imgz" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
         </button>
         @else
 
         <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-       
-        <img class="delicacy-shop-logo" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
+
+            <img class="delicacy-shop-logo" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
         </button>
         @endif
         @endforeach
@@ -401,7 +402,7 @@
         const shop_id = $('#shopid').val();
         const shop_name = $('#shopname').val();
         makeShopActive(shop_id, color = "#2b854b");
-        
+
         document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
@@ -414,7 +415,7 @@
         const shop = 'shop' + shop_id
         document.getElementById(shop).style.boxShadow = '0 0 3px #000000';
         document.getElementById(shop).style.backgroundColor = color;
-        
+
     }
 
     // Making sub category link active
@@ -517,7 +518,7 @@
 
 
     }
- 
+
     $(".producthover").hover(function() {
         $(this).children(".product-img").children(".buttonsshow").css({
             'visibility': 'visible'
@@ -537,3 +538,4 @@
 </div>
 
 @endsection
+

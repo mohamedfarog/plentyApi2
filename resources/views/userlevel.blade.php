@@ -304,10 +304,12 @@
         .imgworksdesc {
             margin: auto;
         }
+
         .userleveltxt {
             line-height: 30px;
         }
     }
+
 </style>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -525,8 +527,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6',
-            'color': '#1d2767'
+            'background': '#f6f6f6'
+            , 'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -534,8 +536,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400',
-            'color': 'white'
+            'background': '#ffa400'
+            , 'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -545,5 +547,6 @@
     $(document).ready(function() {
         console.log("ready!");
     });
+
 </script>
 @endsection

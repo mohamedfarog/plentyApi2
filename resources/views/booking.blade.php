@@ -321,17 +321,19 @@
     }
 
     .bkprice {}
-    .day-clicked > span {
-        color:black;
+
+    .day-clicked>span {
+        color: black;
     }
-    .calendar-col{
-        
+
+    .calendar-col {}
+
+    td.normal {
+        text-align: center;
+        height: 50px;
+        width: 50px;
     }
-    td.normal{
-        text-align:center;
-        height:50px;
-        width:50px;
-    }
+
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;

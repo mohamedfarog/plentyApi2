@@ -342,7 +342,7 @@
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
 
-                                        <a href="/profile" class="nav-search  imgicon">
+                                        <a href="/login" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
 

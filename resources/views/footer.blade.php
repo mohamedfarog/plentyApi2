@@ -6,8 +6,9 @@
 
                     <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="widget footer-about-us" style="text-align:center;">
-                            <img src="img/logo_dark.png" alt="" class="logo" style="height:150px;max-height:100%;">
-
+                            <a href="/">
+                                <img src="img/logo_dark.png" alt="" class="logo" style="height:150px;max-height:100%;">
+                            </a>
                             <div class="footer-socials">
                                 <div class="social-icons nobase" style="padding:0 20px;">
                                     <a href="tel:+966501233344"><img class="socialfooter" src="img/social/whatsapp.png"></a>
@@ -19,7 +20,9 @@
                             </div>
                             <p class="" style="margin-top: 10px;margin-bottom:0;line-height: 20px;">Tel: +966 50 123
                                 3344</p>
-                            <a href="mailto:info@plentyofthings.com"><p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p></a>
+                            <a href="mailto:info@plentyofthings.com">
+                                <p class="mb-30" style="margin-top: 0;line-height: 20px;">Email: info@plentyofthings.com</p>
+                            </a>
                         </div>
                     </div> <!-- end about us -->
 

@@ -32,6 +32,7 @@
             width: 100%;
         }
     }
+
 </style>
 
 <!-- Featured Product -->
@@ -96,5 +97,6 @@
         });
 
     }
+
 </script>
 @endsection

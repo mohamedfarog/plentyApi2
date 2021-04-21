@@ -66,7 +66,7 @@
 
     .stock-error {
         color: red;
-        
+
         display: none;
     }
 
@@ -74,13 +74,16 @@
         width: 100%;
         margin-bottom: 0 !important;
     }
-    #quantity{
-        color:green;
-        font-size:18px;
+
+    #quantity {
+        color: green;
+        font-size: 18px;
     }
-    .qtybutton{
-        color:black;
+
+    .qtybutton {
+        color: black;
     }
+
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;
@@ -138,19 +141,19 @@
                     <!-- Single-pro-slider Big-photo start -->
                     <div class="col-lg-4">
                         <div class="single-pro-slider single-big-photo view-lightbox slider-for frame" style="width:100% !important">
-                            <div> 
+                            <div>
                                 <div class="frame">
                                     @if ($product->image)
                                     <img class="imgz" src="storage/products/{{$product->image}}" alt="" loading=lazy />
                                     @else
                                     <img class="imgz" src="img/product/Main.png" alt="" loading=lazy />
                                     @endif
-                                </div> 
-                    <div class="fix featlineicons">
-                        <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
-                        </span>
-                    </div>
-                            </div> 
+                                </div>
+                                <div class="fix featlineicons">
+                                    <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -227,7 +230,7 @@
                             <div class="centermobile" style="margin-top:30px;">
                                 <a class=" addtobagbtn" onclick="addProductBag()">
                                     <span class="addtobagheader" style="padding-top:10px !important;">
-                                        Add to Bag   
+                                        Add to Bag
                                     </span>
                                     <img src="img/product/bag.png" style="width:30px;margin-left:10px;">
 
@@ -468,3 +471,4 @@
     @include('footer')
 </div>
 @endsection
+

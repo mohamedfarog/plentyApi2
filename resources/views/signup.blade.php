@@ -194,9 +194,11 @@
         font-size: 16px;
         font-weight: 100;
     }
-    .mccontent{
-        padding:50px;
+
+    .mccontent {
+        padding: 50px;
     }
+
     @media screen and (min-width: 768px) {
         .modal:before {
             display: inline-block;
@@ -210,11 +212,13 @@
         }
 
     }
+
     @media only screen and (max-width: 600px) {
-        .mccontent{
-            padding:0 !important;
+        .mccontent {
+            padding: 0 !important;
         }
     }
+
 </style>
 <section class="signup container" style="background:transparent">
     <div class="signup-logo">
@@ -250,7 +254,7 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content mccontent" >
+            <div class="modal-content mccontent">
                 <div class="modal-header" style="margin-bottom:50px;">
                     <p class="modaltextp">Verification Account</p>
                 </div>
@@ -307,8 +311,8 @@
         var smsCodes = $('.smsCode');
 
         function goToNextInput(e) {
-            var key = e.which,
-                t = $(e.target),
+            var key = e.which
+                , t = $(e.target),
                 // Get the next input
                 sib = t.closest('div').next().find('.smsCode');
 
@@ -365,13 +369,13 @@
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
-            type: 'POST',
-            url: base_url + 'api/otp',
-            data: {
+            type: 'POST'
+            , url: base_url + 'api/otp'
+            , data: {
                 contact: form.get('contact')
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 $('#otpModal').modal('show');
                 console.log(data)
             }
@@ -381,14 +385,14 @@
     function verifyOTP() {
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
-            type: 'POST',
-            url: base_url + 'api/verify',
-            data: {
-                contact: form.get('contact'),
-                otp: parseInt(combineSMSCodes())
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'POST'
+            , url: base_url + 'api/verify'
+            , data: {
+                contact: form.get('contact')
+                , otp: parseInt(combineSMSCodes())
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.success) {
                     if (data.user) {
                         setCookie('bearer_token', data.token, 1);
@@ -410,16 +414,16 @@
         const form = new FormData(document.getElementById("signup-form"))
         //  console.log(data)
         $.ajax({
-            type: 'POST',
-            headers: {
+            type: 'POST'
+            , headers: {
                 "AuthRegister": data.authtoken
-            },
-            url: base_url + 'api/register',
-            data: {
-                contact: form.get('contact'),
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            }
+            , url: base_url + 'api/register'
+            , data: {
+                contact: form.get('contact')
+            , }
+            , dataType: 'JSON'
+            , success: function(data) {
                 setCookie('bearer_token', data.token, 1);
                 getUser();
                 window.location.href = base_url + "profile-edit";
@@ -427,6 +431,7 @@
             }
         });
     }
+
 </script>
 
 @endsection
