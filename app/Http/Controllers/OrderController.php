@@ -270,7 +270,7 @@ class OrderController extends Controller
                 $detail = Detail::create($arr);
             }
             $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
-                return [ 'pointsbefore'=>$customer->points,         'pointsearned'=>$pointsearned];
+               
             $customer->points+=$pointsearned;
             
             $customer->save();
