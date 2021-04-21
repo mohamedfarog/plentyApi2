@@ -209,7 +209,7 @@
                                 <input type="search" id="search-item" name="search-item" class="form-control main-search-input" placeholder="Search for">
                                 <i class="ui-close search-close" id="search-close"></i>
                                 <div style="padding:20px;">
-                                    <input type="submit" class="btn btn-lg btn-dark" value="Go" style="font-weight:500;font-size:14px;display: block;margin : 0 auto;">
+                                    <input type="submit" class="btn btn-lg btn-dark" value="Go" style="font-weight:500;font-size:14px;display: block;margin : 0 auto;padding:0 100px;">
                                 </div>
 
                             </div>

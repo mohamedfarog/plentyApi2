@@ -119,16 +119,16 @@
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4 loginbtn">LOGIN</button>
 
-        <p class="centertxt">Forget your password? <a href="#" class="clickunderline">Click here</a></p>
+        <p class="centertxt">Forget your password? <a href="/" class="clickunderline">Click here</a></p>
 
         <!-- Register buttons -->
         <div class="text-center mb-40">
             <p>or login using</p>
             <div class="footer-socials">
                 <div class="social-icons nobase" style="padding:0 20px;">
-                    <a href="#" class="sfa"><img class="socialfooter" src="img/social/signupgoogle.png"></a>
-                    <a href="#" class="sfa"><img class="socialfooter" src="img/social/signupfb.png"></a>
-                    <a href="#" class="sfa"><img class="socialfooter" src="img/social/signupapple.png"></a>
+                    <a href="/" class="sfa"><img class="socialfooter" src="img/social/signupgoogle.png"></a>
+                    <a href="/" class="sfa"><img class="socialfooter" src="img/social/signupfb.png"></a>
+                    <a href="/" class="sfa"><img class="socialfooter" src="img/social/signupapple.png"></a>
 
                 </div>
             </div>

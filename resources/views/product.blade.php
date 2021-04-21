@@ -66,7 +66,7 @@
 
     .stock-error {
         color: red;
-        margin-left: 100px;
+        
         display: none;
     }
 
@@ -313,7 +313,7 @@
         if (current > 1) {
             document.getElementById("quantity").value = current - 1
         } else {
-            document.getElementById("stock-error").innerHTML = "Required minimum quntity 1";
+            document.getElementById("stock-error").innerHTML = "Required minimum quantity: 1";
             document.getElementById("stock-error").style.display = "block";
         }
         if (availableStock() < 0) {

@@ -243,7 +243,7 @@
                                                                 <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
                                                             </div>
                                                             <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
+                                                                <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
                                                                 <p class="mb-0">Color : Black</p>
                                                                 <p class="mb-0">Size : SL</p>
                                                             </div>
@@ -269,7 +269,7 @@
                                                                 <a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
                                                             </div>
                                                             <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
+                                                                <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
                                                                 <p class="mb-0">Color : Black</p>
                                                                 <p class="mb-0">Size : SL</p>
                                                             </div>
@@ -295,7 +295,7 @@
                                                                 <a href="single-product.html"><img src="img/product/6.jpg" alt="" /></a>
                                                             </div>
                                                             <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
+                                                                <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
                                                                 <p class="mb-0">Color : Black</p>
                                                                 <p class="mb-0">Size : SL</p>
                                                             </div>

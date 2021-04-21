@@ -34,7 +34,7 @@
     <div class="container relative clearfix">
         <div class="title-holder">
             <div class="title-text">
-                <h1 style="text-transform: uppercase;font-family:'Avenir Bold'">Search results for {{$item}}</h1>
+                <h1 style="text-transform: uppercase;font-family:'Avenir Bold'">Search results for "{{$item}}"</h1>
 
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="col-sm-12 text-center">
                 <h4 style="text-transform: uppercase;font-family:'Avenir Bold'">Search for</h4>
                 <form class="relative newsletter-form" onsubmit="searchItem(event)" id="search-form">
-                    <input type="text" class="newsletter-input" name="search-item" id="search-item" placeholder="" style="border: 2px solid #001b71;font-size:14px;">
+                    <input type="text" class="newsletter-input" name="search-item" id="search-item" value="{{$item}}" style="border: 2px solid #001b71;font-size:14px;">
                     <input type="submit" class="btn btn-lg btn-dark newsletter-submit" value="Search" style="font-weight:500;font-size:14px">
                 </form>
             </div>

@@ -319,7 +319,7 @@
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
                             <div class="buttons-holder" style="">
-                                <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
                             <div class="buttons-holder" style="">
-                                <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>
@@ -353,7 +353,7 @@
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
                             <div class="buttons-holder" style="">
-                                <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>

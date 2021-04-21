@@ -232,7 +232,7 @@
                 <!-- Checkbox -->
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked />
-                    <label class="form-check-label" for="form2Example3">I've read and accept the <a href="#" class="clickunderline">Terms and Condition</a></label>
+                    <label class="form-check-label" for="form2Example3">I've read and accept the <a href="/" class="clickunderline">Terms and Condition</a></label>
                 </div>
             </div>
 
@@ -280,7 +280,7 @@
                     </div>
                     <div>
                         <p>
-                            Didn't recieve any code? <a href="#" style="text-decoration:underline;color:#001b71;">Resend</a>
+                            Didn't recieve any code? <a href="/" style="text-decoration:underline;color:#001b71;">Resend</a>
                         </p>
                     </div>
                     <div style="margin-top:50px;">

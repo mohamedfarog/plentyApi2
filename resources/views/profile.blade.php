@@ -192,7 +192,7 @@
                         <div class="panel-group" id="accordion">
                             <div class="panel" style="text-align:right">
                                 <div style="margin-bottom:20px;">
-                                    <a href="#">
+                                    <a href="/">
                                         <h1 style=" text-decoration: underline;font-size:16px;font-weight:400;color:white">.
                                         </h1>
                                     </a>
@@ -262,7 +262,7 @@
                                             <h3 class="norm-text">3:30 p.m.</h3>
                                         </div>
                                         <div style="width:60%;float:left;text-align:right">
-                                            <a href="#">
+                                            <a href="/">
                                                 <h2 class="norm-text" style="text-decoration: underline;">edit</h2>
                                             </a>
                                         </div>
@@ -272,7 +272,7 @@
 
                             </div>
                             <div class="" style="background:#f2f3f8;text-align:center;padding-bottom:20px;">
-                                <a href="#">
+                                <a href="/">
                                     <h2 class="norm-text" style="text-decoration: underline;">view all</h2>
                                 </a>
                             </div>
