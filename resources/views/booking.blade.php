@@ -512,13 +512,13 @@
                 </div>
             </div>
             <form onsubmit="event.preventDefault(); addToCart()" id="booking-form">
-                <input type="hidden" name="cat_id" id="cat_id" value="{{$shop->cat_id}}">
-                <input type="hidden" name="product_id" id="product_id" value="{{$product->id}}">
-                <input type="hidden" name="product_name" id="product_name" value="{{$product->name_en}}">
-                <input type="hidden" name="product_price" id="product_price" value="{{$product->price}}">
-                <input type="hidden" name="product_image" id="product_image" value="{{$product->image}}">
-                <input type="hidden" name="timeslot" id="timeslot">
-                <input type="hidden" name="timeslot_id" id="timeslot_id">
+                <input type="hidden" name="cat_id" id="cat_id" value="{{$shop->cat_id}}" autocomplete="off">
+                <input type="hidden" name="product_id" id="product_id" value="{{$product->id}}" autocomplete="off">
+                <input type="hidden" name="product_name" id="product_name" value="{{$product->name_en}}" autocomplete="off">
+                <input type="hidden" name="product_price" id="product_price" value="{{$product->price}}" autocomplete="off">
+                <input type="hidden" name="product_image" id="product_image" value="{{$product->image}}" autocomplete="off">
+                <input type="hidden" name="timeslot" id="timeslot" autocomplete="off">
+                <input type="hidden" name="timeslot_id" id="timeslot_id" autocomplete="off">
                 <div class="col-lg-6 col-xs-12">
                     <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;margin-right:40px;border-color:#c31c4a;vertical-align:bottom">
                         <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
@@ -546,6 +546,7 @@
         let today = new Date();
         let formated_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
         getSlots(formated_date)
+        booking - form
 
     });
 

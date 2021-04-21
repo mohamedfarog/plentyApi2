@@ -365,8 +365,8 @@ class WebsiteHomeController extends Controller
     // getting plenty points
     public function getFavouiteProduct(Request $request, $id)
     {
-        $data['product'] =  $this->getProduct($id);
-        return response()->json(['Response' => !!count($data['product']), 'product' => $data['product']]);
+        $data['product'] =  $this->getProduct($id)->first();
+        return response()->json(['Response' => !!$data['product'], 'product' => $data['product']]);
     }
 
     // User Level
@@ -557,5 +557,54 @@ class WebsiteHomeController extends Controller
             return response()->json(['Response' => $uploadResponse], 500);
         }
         return response()->json(['Response' => $emailResponse], 200);
+    }
+
+    //Searching
+    public function search(Request $request, $item)
+    {
+        switch (strtolower($item)) {
+            case 'delicacy':
+                return redirect('delicacy');
+                break;
+            case 'beauty':
+                return redirect('beauty');
+                break;
+            case 'fashion':
+                return redirect('fashion');
+                break;
+            default:
+                break;
+        }
+        //Cheking brand
+        $brand = DB::table('shops')
+            ->where(DB::raw('lower(name_en)'), 'like',  strtolower($item))
+            ->get()->first();
+        if (isset($brand)) {
+            switch ($brand->cat_id) {
+                case '1':
+                    return redirect('delicacy/' . $brand->id);
+                    break;
+                case '2':
+                    return redirect('beauty/' . $brand->id);
+                    break;
+                case '3':
+                    return redirect('fashion/' . $brand->id);
+                    break;
+                default:
+                    break;
+            }
+        }
+        $data['item'] = $item;
+        $data['products'] = $this->searchProduct($item);
+        return view('/search')->with($data);
+    }
+
+    private function searchProduct($item)
+    {
+        return DB::table('products')
+            ->where(DB::raw('lower(name_en)'), 'like', '%' . strtolower($item) . '%')
+            ->leftjoin('images', 'images.product_id', '=', 'products.id')
+            ->get()
+            ->take(20);
     }
 }

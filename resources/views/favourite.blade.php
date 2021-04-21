@@ -32,7 +32,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <!-- Featured Product -->
@@ -71,10 +70,11 @@
         url = base_url + 'storage/products/'
         let prod_element = ''
         favourites.forEach(element => {
+
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
-                "<a href=''><img src='" + url + element.image + "' alt='' loading=lazy  class='imgz'/></a>" +
+                `<a href='/product/${element.id}'><img src='` + url + element.image + "' alt='' loading=lazy  class='imgz'/></a>" +
                 "<div class='fix buttonsshow' style=''>" +
                 "<span class='pro-price '><img class='featicons' src='img/nav/bag.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
                 "<span class='divitext' style=''>  </span> " +
@@ -83,7 +83,7 @@
                 "<div class='product-action clearfix'></div></div>" +
                 "<div class='product-info clearfix'>" +
                 "<div class='fix'>" +
-                "<h4 class='post-title floatcenter feattitle'><a href='#' style=>" + element.name_en + "</a></h4>" +
+                `<h4 class='post-title floatcenter feattitle'><a href='product/${element.id}'>` + element.name_en + "</a></h4>" +
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +

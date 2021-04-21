@@ -104,9 +104,10 @@ Route::get('/favourites', function () {
     return view('/favourite');
 });
 
-Route::get('/search', function () {
-    return view('/search');
-});
+// Route::get('/search', function () {
+//     return view('/search');
+// });
+Route::get('/search/{item?}', [WebsiteHomeController::class, "search"]);
 
 
 //Profile edit

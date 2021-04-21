@@ -197,7 +197,6 @@
         color: #001b71;
         font-weight: 100;
     }
-
 </style>
 
 
@@ -862,8 +861,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -871,8 +870,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -909,18 +908,17 @@
         $("#coupon_error").html("");
         const bearer_token = getCookie('bearer_token');
         let code = $('#coupon-code').val()
-        console.log(code)
         url = base_url + 'coupon'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                "_token": "{{ csrf_token() }}"
-                , "couponcode": code
-                , "cart": getCartLocal()
-            }
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "couponcode": code,
+                "cart": getCartLocal()
+            },
+            headers: {
 
                 "Authorization": 'Bearer ' + bearer_token
             },
@@ -932,8 +930,8 @@
                     $("#coupon-applied").html('-' + data.value + ' SAR (10%)')
                 } else
                     $("#coupon_error").html("This shop is not ")
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 let error = err.responseJSON.message;
                 $("#coupon_error").html(error)
 
@@ -948,13 +946,13 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
                 "_token": "{{ csrf_token() }}"
-            }
-            , headers: {
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
@@ -962,8 +960,8 @@
                 console.log(data.point)
                 $(".loyality-point").html(data.point);
                 $("#loyality-point").val(data.point);
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -975,21 +973,21 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'place-order'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                "_token": "{{ csrf_token() }}"
-                , "cart": getCartLocal()
-            }
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "cart": getCartLocal()
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
             success: function(data) {
                 console.log(data)
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
 
                 console.log('Error!', err)
             }
@@ -1007,7 +1005,6 @@
             $(this).children("img").css("filter", "brightness(0) invert(1)");
         });
     });
-
 </script>
 
 <script src="js/jquery.geocoder.js"></script>
@@ -1017,4 +1014,3 @@
 </script>
 <script src="js/map.js" defer></script>
 @endsection
-

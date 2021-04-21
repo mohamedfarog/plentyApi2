@@ -184,7 +184,7 @@
         .buttonmobile {
             height: 60px;
         }
- 
+
 
         .shoplistmobile>button {
             flex: 20%;
@@ -212,12 +212,12 @@
         .dinebtn {
             width: 100% !important;
         }
-         section.wholetabs {
+
+        section.wholetabs {
             width: 100%;
             margin: auto;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -298,7 +298,7 @@
 </section>
 
 <section class="mobiletabs wholetabs">
-  
+
 </section>
 
 <section class="wholetabs wholemobile">
@@ -402,7 +402,6 @@
         document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
@@ -429,10 +428,10 @@
     //for ing product based on category
     function getProducts(element, category = 0) {
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -449,10 +448,10 @@
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -471,12 +470,16 @@
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
-                "<a href='booking/" + element.id + "'><img src='" + url + element.url + "' alt='' loading=lazy  class='imgz'/></a>" +
-                 
+                "<a href='booking/" + element.product_id + "'><img src='" + url + element.url + "' alt='' loading=lazy  class='imgz'/></a>" +
+                "<div class='fix buttonsshow' style=''>" +
+                "<span class='pro-price '><img class='featicons' src='img/nav/bag.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
+                "<span class='divitext' style=''> | </span> " +
+                "<span class='pro-rating '><img class='featicons' src='img/nav/search.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
+                "</div>" +
                 "<div class='product-action clearfix'></div></div>" +
                 "<div class='product-info clearfix'>" +
                 "<div class='fix'>" +
-                "<h4 class='post-title floatcenter feattitle'><a href='booking/" + element.id + "' style=>" + element.name_en + "</a></h4>" +
+                "<h4 class='post-title floatcenter feattitle'><a href='booking/" + element.product_id + "' style=>" + element.name_en + "</a></h4>" +
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
@@ -508,7 +511,7 @@
         }
 
     }
-     
+
     $(".producthover").hover(function() {
         $(this).children(".product-img").children(".buttonsshow").css({
             'visibility': 'visible'
@@ -520,7 +523,6 @@
         });
         console.log('nohover');
     });
-
 </script>
 <script src="js/prodjs.js"></script>
 

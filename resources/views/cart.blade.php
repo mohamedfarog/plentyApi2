@@ -98,7 +98,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -208,12 +207,12 @@
                     template = template +
                         "<tr class='cart_item' >" +
                         "<td class='product-thumbnail'>" +
-                        "<a href='#'>" +
+                        "<a href='/product/" + item.id + "'>" +
                         "<img src= '" + base_url + "/storage/products/" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</td>" +
                         "<td class='product-name'>" +
-                        "<a href='#' class='itemtitle'>" + item.name + "</a>" +
+                        "<a href='/product/" + item.id + "'>" + item.name + "</a>" +
                         "<ul>" +
                         renderSubCategory(item) +
                         "</ul>" +
@@ -263,31 +262,31 @@
                 let id = $(this).attr("id").slice(4);
                 pro_id = id.split("-")[0]
                 size_id = id.split("-")[1]
-                
+
                 let stock = parseInt(document.getElementById('stock' + pro_id + "-" + size_id).value);
                 let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
                 console.log(quantity, stock)
                 if (stock > quantity) {
                     if (parseInt(size_id)) {
-                        
+
                         cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
                         var qqcart = cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).quantity;
-                        
+
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
                         document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
                         console.log(qqcart);
                     } else {
-                       
+
                         cart.cart_items.find(item => item.id === pro_id).addQuantity();
                         var qqcart = cart.cart_items.find(item => item.id === pro_id).quantity;
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
                         document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
                         console.log(qqcart);
 
-  
+
                     }
 
-                    storeCartLocal(JsonCartSerializer(cart)); 
+                    storeCartLocal(JsonCartSerializer(cart));
                     document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
                     document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                 }
@@ -305,18 +304,18 @@
 
                 if (quantity > 1) {
                     if (parseInt(size_id)) {
-                        
+
                         cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
                         var qqcart = cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).quantity;
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
                         document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
-   
+
                     } else {
                         cart.cart_items.find(item => item.id === pro_id).substractQuantity();
                         var qqcart = cart.cart_items.find(item => item.id === pro_id).quantity;
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
                         document.getElementById('quantity' + pro_id + "-" + size_id).value = qqcart;
-                    } 
+                    }
                     storeCartLocal(JsonCartSerializer(cart));
 
                     document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
@@ -356,7 +355,6 @@
 
             return template;
         }
-
     </script>
 
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">

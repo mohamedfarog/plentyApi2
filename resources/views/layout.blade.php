@@ -175,6 +175,9 @@
 
         }
 
+        #user-menu-nav {
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -201,10 +204,14 @@
             <div class="search-wrap">
                 <div class="search-inner">
                     <div class="search-cell">
-                        <form method="get">
+                        <form onsubmit="search(event)" id="search-form-nav">
                             <div class="search-field-holder">
-                                <input type="search" class="form-control main-search-input" placeholder="Search for">
+                                <input type="search" id="search-item" name="search-item" class="form-control main-search-input" placeholder="Search for">
                                 <i class="ui-close search-close" id="search-close"></i>
+                                <div style="padding:20px;">
+                                    <input type="submit" class="btn btn-lg btn-dark" value="Go" style="font-weight:500;font-size:14px;display: block;margin : 0 auto;">
+                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -250,7 +257,7 @@
                                 <div class="collapse navbar-collapse text-center" id="navbar-collapse">
 
                                     <ul class="nav navbar-nav">
-                                        
+
                                         <li class="">
                                             <a class="mainanc" href="/">Home</a>
                                         </li>
@@ -275,14 +282,14 @@
                                             <a class="mainanc" href="/brands">Brands</a>
 
                                         </li> <!-- end elements -->
-                                     
+
                                         <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
                                         <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
                                         <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
                                         <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
-                                      
+
                                         <li class="hidden-lg hidden-md"><a href="/login">Login</a></li>
-                                      
+
 
                                         <!-- Mobile search -->
 
@@ -299,17 +306,17 @@
                                         </a>
                                     </li>
                                     <li class="nav-cart">
-                                    <a href="/cart" class="" style="font-size: 14px;">
-                                        <div class="nav-cart-outer">
-                                            <div class="nav-cart-inner">
-                                                
+                                        <a href="/cart" class="" style="font-size: 14px;">
+                                            <div class="nav-cart-outer">
+                                                <div class="nav-cart-inner">
+
                                                     <img src="img/nav/bag.png" alt="" style="width:20px;height:20px;">
                                                     <span id="nav-cart-size"></span>
 
-                                               
+
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
                                         <div class="nav-cart-container">
 
                                             <div id="nav-cart-products">
@@ -334,13 +341,12 @@
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                 
+
                                         <a href="/profile" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
-                                    
-                                         
-                                        <ul class="dropdown-menu dwdw" style="background:white">
+
+                                        <ul class="dropdown-menu dwdw" id="user-menu-nav" style="background:white">
                                             <div class="row">
 
                                             </div>
@@ -349,11 +355,12 @@
                                                     <div class="row">
 
                                                         <div class="hidden-sm hidden-xs" style="width:100%;float:left;margin:auto">
-                                                            
-                                                      
-                                                            <p>Hello, <span id="nav-username"></span></p></p>
-                                                            
-                                                         
+
+
+                                                            <p>Hello, <span id="nav-username"></span></p>
+                                                            </p>
+
+
                                                         </div>
                                                     </div>
                                                 </a>
@@ -361,10 +368,10 @@
                                             <li><a class="dropdownanch" href="/profile">Profile</a></li><br>
                                             <li><a class="dropdownanch" href="/trackorder">Track Order</a></li><br>
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
-                                            <li><a class="dropdownanch" href="/lang">Logout</a></li>
+                                            <li><a class="dropdownanch" onclick="logoutUser()">Logout</a></li>
                                         </ul>
-                                 
-                                 
+
+
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
                                         <a href="/lang" class="nav-search  imgicon">
@@ -448,31 +455,31 @@
     <script>
         var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -480,31 +487,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -512,32 +519,32 @@
         });
 
         $(".tryprodslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                breakpoint: 1024
-                , settings: {
-                    slidesToShow: 3
-                    , slidesToScroll: 3
-                    , infinite: true
-                    , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
                 }
             }, {
-                breakpoint: 600
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }, {
-                breakpoint: 480
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }]
         });
@@ -689,9 +696,9 @@
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal
-                , "order_total": cart.order_total
-                , "cart_items": cart_items
+                "cart_subtotal": cart.cart_subtotal,
+                "order_total": cart.order_total,
+                "cart_items": cart_items
             }
 
         }
@@ -703,23 +710,23 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , shop_id: element.shop_id
-                        , price: element.price
-                        , name: element.name
-                        , is_product_variant: element.is_product_variant
-                        , size: element.size || null
-                        , size_id: element.size_id || null
-                        , color: element.color || null
-                        , color_id: element.color_id || null
-                        , quantity: element.quantity || null
-                        , date: element.date || null
-                        , time: element.time || null
-                        , timeslot_id: element.timeslot_id || null
-                        , image_url: element.image_url || null
-                        , stock: element.stock || null
-                        , category: element.category || null
-                    , }
+                        id: element.id,
+                        shop_id: element.shop_id,
+                        price: element.price,
+                        name: element.name,
+                        is_product_variant: element.is_product_variant,
+                        size: element.size || null,
+                        size_id: element.size_id || null,
+                        color: element.color || null,
+                        color_id: element.color_id || null,
+                        quantity: element.quantity || null,
+                        date: element.date || null,
+                        time: element.time || null,
+                        timeslot_id: element.timeslot_id || null,
+                        image_url: element.image_url || null,
+                        stock: element.stock || null,
+                        category: element.category || null,
+                    }
 
                     cart.addItem(new CartItem(item))
                 });
@@ -730,32 +737,32 @@
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false
-            , infinite: true
-            , slidesToShow: 6
-            , slidesToScroll: 1
-            , autoplay: false
-            , arrows: true
-            , autoplaySpeed: 10000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: false,
+            infinite: true,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -772,9 +779,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0
-                    , order_total: 0
-                    , cart_items: []
+                    cart_subtotal: 0,
+                    order_total: 0,
+                    cart_items: []
                 }
             }
 
@@ -783,10 +790,10 @@
         $(document).ready(function() {
             let cart = new Cart()
             $.ajax({
-                type: 'GET'
-                , url: 'http://127.0.0.1:8000/shop-category'
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: 'http://127.0.0.1:8000/shop-category',
+                dataType: 'JSON',
+                success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
@@ -890,6 +897,7 @@
             this.price = item.price;
             this.name_en = item.name_en;
             this.image = item.image;
+            this.shop_id = item.shop_id;
 
         }
 
@@ -900,12 +908,12 @@
 
         function getFavouriteProductInfo(id) {
             $.ajax({
-                type: 'GET'
-                , url: base_url + 'favourite-product/' + id
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: base_url + 'favourite-product/' + id,
+                dataType: 'JSON',
+                success: function(data) {
                     if (data.Response) {
-                        let favourite_item = new FavouriteItem(data.product[0])
+                        let favourite_item = new FavouriteItem(data.product)
                         let favourites = FavouriteSerializer(getFavouritesLocal())
                         favourites.addItem(favourite_item);
                         storeFavouritesLocal(favourites)
@@ -915,8 +923,8 @@
                         //
                     }
 
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     console.log('Error!', err)
                 }
 
@@ -946,11 +954,11 @@
             if (data.favourite_items.length > 0) {
                 data.favourite_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , price: element.price
-                        , name_en: element.name_en
-                        , image: element.image || null
-                    , }
+                        id: element.id,
+                        price: element.price,
+                        name_en: element.name_en,
+                        image: element.image || null,
+                    }
 
                     favourites.addItem(new FavouriteItem(item))
                 });
@@ -963,71 +971,110 @@
 
         // getting data
         function getUserDetails() {
+            <<
+            << << < Updated upstream
             if (JSON.parse(getCookie('user'))) {
-                console.log('logged in');
-                return JSON.parse(getCookie('user'))
-            } else {
-                return null;
-            }
+                console.log('logged in'); ===
+                === =
 
-        }
-
-        $(document).ready(function() {
-            
-            if (getUserDetails()) {
-                document.getElementById('nav-username').innerHTML = getUserDetails().name;
-                document.getElementById('nav-username').value = getUserDetails().name;
-            }
-        });
-
-        function getUser() {
-            const bearer_token = getCookie('bearer_token');
-            url = base_url + 'user'
-            $.ajax({
-                type: 'GET'
-                , url: url
-                , dataType: 'JSON'
-                , headers: {
-                    "Authorization": 'Bearer ' + bearer_token
-                },
-
-                success: function(data) {
-                    if (data.Response) {
-                        setCookie('user', JSON.stringify(data.user), 1);
-                    }
-
-                }
-                , error: function(err) {
-                    console.log('Error!', err)
+                if (getCookie('user')) {
+                    >>>
+                    >>> > Stashed changes
+                    return JSON.parse(getCookie('user'))
+                } else {
+                    return null;
                 }
 
+            }
+
+            $(document).ready(function() {
+
+                if (getUserDetails()) {
+                    userIsAuthenticated();
+                } else {
+                    userIsNotAuthenticated();
+                }
             });
-        }
 
-        function showAlertSuccess(msg = 'Added') {
-            document.getElementById("alert_message_text").innerHTML = ''
-            document.getElementById("alert_message_text").innerHTML = msg;
-            $(".alert").removeClass('alert-danger')
-            $(".alert").addClass('alert-success')
-            $(".alert").show()
-            initiateTimeOut()
-        }
 
-        function showAlertError(msg = 'Added') {
-            document.getElementById("alert_message_text").innerHTML = ''
-            document.getElementById("alert_message_text").innerHTML = msg;
-            $(".alert").removeClass('alert-success')
-            $(".alert").addClass('alert-danger')
-            $(".alert").show()
-            initiateTimeOut()
-        }
+            function userIsAuthenticated() {
+                document.getElementById('user-menu-nav').style = " visibility: visible;";
+                document.getElementById('nav-username').innerHTML = getUserDetails().name;
 
-        function initiateTimeOut(time = 5000) {
-            setTimeout(function() {
-                $(".alert").hide();
-            }, time);
-        }
+            }
 
+            function userIsNotAuthenticated() {
+                document.getElementById('user-menu-nav').style = " visibility: hidden;";
+            }
+
+            function getUser() {
+                const bearer_token = getCookie('bearer_token');
+                if (bearer_token) {
+                    url = base_url + 'user'
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        dataType: 'JSON',
+                        headers: {
+                            "Authorization": 'Bearer ' + bearer_token
+                        },
+
+                        success: function(data) {
+                            if (data.Response) {
+                                setCookie('user', JSON.stringify(data.user), 1);
+                            }
+
+                        },
+                        error: function(err) {
+                            console.log('Error!', err)
+                        }
+
+                    });
+                } else {
+                    return null;
+                }
+
+            }
+
+            function showAlertSuccess(msg = 'Added') {
+                document.getElementById("alert_message_text").innerHTML = ''
+                document.getElementById("alert_message_text").innerHTML = msg;
+                $(".alert").removeClass('alert-danger')
+                $(".alert").addClass('alert-success')
+                $(".alert").show()
+                initiateTimeOut()
+            }
+
+            function showAlertError(msg = 'Added') {
+                document.getElementById("alert_message_text").innerHTML = ''
+                document.getElementById("alert_message_text").innerHTML = msg;
+                $(".alert").removeClass('alert-success')
+                $(".alert").addClass('alert-danger')
+                $(".alert").show()
+                initiateTimeOut()
+            }
+
+            function initiateTimeOut(time = 5000) {
+                setTimeout(function() {
+                    $(".alert").hide();
+                }, time);
+            }
+
+            function search(e) {
+                e.preventDefault();
+                const form = new FormData(document.getElementById('search-form-nav'))
+                window.location.replace(base_url + 'search/' + form.get('search-item'));
+            }
+
+            function logoutUser() {
+                eraseCookie('bearer_token');
+                eraseCookie('user');
+                window.location.replace(base_url + 'login');
+            }
+
+            function eraseCookie(name) {
+                document.cookie = name + '=; Max-Age=-99999999;';
+            }
     </script>
 
 </body>
