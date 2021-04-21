@@ -19,7 +19,7 @@ return [
     'track order'  
     'user level'  
     'logout'  
-
+    'go to bag'
     'has been added to favorites'
     'has been added to bag'
     'has been removed from favorites'
@@ -152,6 +152,6 @@ return [
     'get x3 loyalty points for every riyal spent'
     'get a discount of 3% per loyalty point redeemed'
     'okay'
-    
+
 ];
 

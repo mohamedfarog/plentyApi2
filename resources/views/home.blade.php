@@ -31,17 +31,19 @@
     .nwa {
         font-weight: 100;
     }
+
     @media only screen and (max-width: 600px) {
 
-            .cccategory {
-                width:100%;
-            }
-            .pm-cat-item{
-                padding-left:0;
-                padding-right:5px;
-            }
+        .cccategory {
+            width: 100%;
         }
-    
+
+        .pm-cat-item {
+            padding-left: 0;
+            padding-right: 5px;
+        }
+    }
+
 </style>
 
 <!-- Hero Slider -->

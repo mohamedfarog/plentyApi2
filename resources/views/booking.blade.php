@@ -95,7 +95,7 @@
     .calendar-wrapper .today:hover,
     .calendar-wrapper .normal:hover {
         background-color: #edbddb;
-        border-radius: 50%;
+        border-radius: 100%;
     }
 
     .calendar-wrapper td.not-current {
@@ -262,7 +262,7 @@
 
     .day-status span {
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 5px 30px;
         font-size: 15px;
     }
 
@@ -321,7 +321,17 @@
     }
 
     .bkprice {}
-
+    .day-clicked > span {
+        color:black;
+    }
+    .calendar-col{
+        
+    }
+    td.normal{
+        text-align:center;
+        height:50px;
+        width:50px;
+    }
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;
@@ -397,7 +407,9 @@
     }
 
     .slot-clicked {
-        background-color: #f1f1f1;
+        background-color: #edbddb;
+        color: black;
+        border: 2px solid #edbddb;
     }
 
 </style>
@@ -447,7 +459,7 @@
 
                 <div class="col-lg-7 col-sm-12 coltablpadd" style="">
                     <div class="divtitle" style="">
-                        <h4 class="floatleft" style="font-size:30px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
+                        <h4 class="floatleft" style="font-size:30px;font-weight:100;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
                             {{$product->name_en}}
                             <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR {{$product->price}}</span>
 
@@ -460,7 +472,7 @@
                         </div>
                         <div id="divCal"></div>
                         <div class="day-status">
-                            <span class="booking-available" style="font-weight:100;">Available</span>
+                            <span class="booking-available" style="font-weight:100;margin-right:10px;">Available</span>
                             <span class="booked" style="font-weight:100;">Booked</span>
                         </div>
                     </div>
@@ -483,7 +495,7 @@
     </div>
 </div>
 
-<div class="container contmobile" style="background-color:#f2f3f8;margin-top:40px;padding-left: 40px;">
+<div class="container contmobile" style="background-color:#f2f3f8;margin-top:40px;padding-left: 40px;padding-bottom:40px;">
 
     <div class="your-booking">
         <h4 style="margin-top: 30px;color:black;font-weight:500;font-size:24px;">Your Booking</h4>
@@ -508,7 +520,7 @@
                 <input type="hidden" name="timeslot" id="timeslot">
                 <input type="hidden" name="timeslot_id" id="timeslot_id">
                 <div class="col-lg-6 col-xs-12">
-                    <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;border-color:#c31c4a;vertical-align:bottom">
+                    <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;margin-right:40px;border-color:#c31c4a;vertical-align:bottom">
                         <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
                             Add to Bag
                         </span>
@@ -872,3 +884,4 @@
     @include('footer')
 </div>
 @endsection
+

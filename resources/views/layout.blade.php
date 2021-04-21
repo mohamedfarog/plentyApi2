@@ -184,7 +184,7 @@
   top: 0;z-index:99999">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <span id="alert_message_text"></span>
-        <button class="btn" style="float: right;background:#001b71;padding:5px;margin-right:5px">Go to Bag </button>
+        <a href="/cart" class="btn" style="float: right;background:#001b71;padding:5px;margin-right:5px">Go to Bag </a>
     </div>
     <!-- Preloader -->
     <div class="loader-mask">
