@@ -27,8 +27,37 @@ class OrderController extends Controller
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
-        }, 'user'])->where('user_id', $user->id)->paginate();
-        return $orders;
+        }, 'user']);
+
+        switch ($user->typeofuser) {
+            case 'U':
+            case 'u':
+                $orders = $orders->where('user_id', $user->id);
+                break;
+            case 'V':
+            case 'v':
+
+                $shop = ShopInfo::where('user_id', $user->id)->first();
+                if (!$shop)
+                    return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
+                    return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
+                        return $product->with(['images']);
+                    }, 'size', 'color']);
+                },]);
+                
+                break;
+            case 'S':
+            case 's':
+                if (isset($request->user_id))
+                    $orders = $orders->where('user_id', $request->user_id);
+                break;
+            default:
+                break;
+        }
+        if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4]))
+            $orders = $orders->where('order_status', $request->order_status);
+        return $orders->orderBy('orders.id', 'desc')->paginate();
     }
 
     /**
