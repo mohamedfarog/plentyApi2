@@ -283,36 +283,43 @@ class ProductController extends Controller
     }
     public function getProducts(Request $request)
     {
-        $sortBy="updated_at";
-        $sortOrder="desc";
-        if(isset($request->sort))
-        {
+        $sortBy = "updated_at";
+        $sortOrder = "desc";
+        if (isset($request->sort)) {
             switch ($request->sort) {
                 case 'price':
-                    $sortBy='price';
+                    $sortBy = 'price';
                     break;
-                    case 'name':
-                        $sortBy='name_en';
-                        break;
+                case 'name':
+                    $sortBy = 'name_en';
+                    break;
+                case 'id':
+                    $sortBy = 'id';
+                    break;
+                case 'created_at':
+                    $sortBy = 'created_at';
+                    break;
                 default:
                     # code...
                     break;
             }
         }
-        if(isset($request->order)&& $request->order=="asc"){
-            $sortOrder="asc";
+        if (isset($request->order) && $request->order == "asc") {
+            $sortOrder = "asc";
         }
-        $product=Product::where("stocks",">",0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
-        if(isset($request->eventcat_id))
-        {
-        
-            $product=$product->where("eventcat_id",$request->eventcat_id);
+        $product = Product::where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        if (isset($request->eventcat_id)) {
+
+            $product = $product->where("eventcat_id", $request->eventcat_id);
         }
-        if(isset($request->room))
-        {
+        if (isset($request->room)) {
             // 13 is a category reserved for room purposes
-            $product=$product->where("eventcat_id",13);
+            $product = $product->where("eventcat_id", 13);
         }
-        return $product->orderby($sortBy,$sortOrder)->paginate();
+        if (isset($request->products)) {
+           // This is used for fetch products for array
+            $product = $product->whereIn("id", $request->products);
+        }
+        return $product->orderby($sortBy, $sortOrder)->paginate();
     }
 }
