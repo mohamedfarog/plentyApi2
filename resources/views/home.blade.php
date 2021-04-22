@@ -31,19 +31,17 @@
     .nwa {
         font-weight: 100;
     }
-
     @media only screen and (max-width: 600px) {
 
-        .cccategory {
-            width: 100%;
+            .cccategory {
+                width:100%;
+            }
+            .pm-cat-item{
+                padding-left:0;
+                padding-right:5px;
+            }
         }
-
-        .pm-cat-item {
-            padding-left: 0;
-            padding-right: 5px;
-        }
-    }
-
+    
 </style>
 
 <!-- Hero Slider -->
@@ -292,26 +290,21 @@
     ?>
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
+        <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
 
             @if($hb->cat_id == 1)
             <a href="/delicacy/{{$hb->shop_id}}">
+                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+            </a>
             @elseif($hb->cat_id == 2)
             <a href="/beauty/{{$hb->shop_id}}">
-            @elseif($hb->cat_id == 3)
-            <a href="/fashion/{{$hb->shop_id}}">
+                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+            </a>
             @else
-            <a href="/">
+            <a href="/fashion/{{$hb->shop_id}}">
+                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+            </a>
             @endif
-        <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
-
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-         
-           
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-         
-           
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-
 
 
             <div class="product-action clearfix">

@@ -377,13 +377,13 @@
 
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="/" class="nav-search  imgicon">
+                                    <a href="/" class="nav-search  imgicon"> 
                                             <img class="imgicon" src="img/nav/lang.png">
 
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                        <a href="/" class="menufont">: {{ __('website.currentlanguage') }}</a>
+                                                                             <a href="/" class="menufont">: {{ __('website.currentlanguage') }}</a>
 
                                         <ul class="dropdown-menu" style="background:white">
 
@@ -556,20 +556,15 @@
 
 
         function getCookie(name) {
-            const value = '; ${document.cookie}';
-            const parts = value.split('; ${name}=');
-            if (parts.length === 2) {
-                return parts.pop().split(';').shift();
-            }
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
 
         function setCookie(cname, cvalue, exdays) {
             var d = new Date();
-            d.setTime(d.getTime() + (exdays*24*60*60*1000));
-            var expires = "expires="+ d.toUTCString();
-            console.log(cname);
-            console.log(cvalue);
-            console.log(exdays);
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
@@ -807,13 +802,6 @@
             });
             renderNavCart()
             initiateTimeOut()
-            if (getUserDetails()) {
-                userIsAuthenticated();
-            } else {
-                userIsNotAuthenticated();
-            }
-            
-            
         });
 
         // for updating input fields by id
@@ -887,9 +875,9 @@
             }
             if (flag) {
                 this.favourite_items.push(FavouriteItem)
-                showAlertSuccess('${FavouriteItem.name_en} added to favorites')
+                showAlertSuccess(`${FavouriteItem.name_en} added to favorites`)
             } else {
-                showAlertError('${FavouriteItem.name_en} already added to favorites')
+                showAlertError(`${FavouriteItem.name_en} already added to favorites`)
             }
 
 
@@ -986,7 +974,7 @@
 
         // getting data
         function getUserDetails() {
- 
+
             if (getCookie('user')) {
                 return JSON.parse(getCookie('user'))
             } else {
@@ -994,12 +982,21 @@
             }
 
         }
- 
+
+        $(document).ready(function() {
+
+            if (getUserDetails()) {
+                userIsAuthenticated();
+            } else {
+                userIsNotAuthenticated();
+            }
+        });
+
 
         function userIsAuthenticated() {
             document.getElementById('user-menu-nav').style = " visibility: visible;";
             document.getElementById('nav-username').innerHTML = getUserDetails().name;
-           
+
         }
 
         function userIsNotAuthenticated() {
@@ -1068,7 +1065,7 @@
         function logoutUser() {
             eraseCookie('bearer_token');
             eraseCookie('user');
-            window.location.replace(base_url + 'login'); 
+            window.location.replace(base_url + 'login');
         }
 
         function eraseCookie(name) {

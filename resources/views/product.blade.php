@@ -412,7 +412,8 @@
                         } else {
                             document.getElementById("stock-error").innerHTML = "Out of stock";
                             document.getElementById("stock-error").style.display = "block";
-                            showAlertError('Out of stock')
+                            showAlertError(`Out of stock`)
+
                         }
 
                         flag = true;
@@ -422,18 +423,21 @@
                 if (flag) {
                     storeCartLocal(JsonCartSerializer(cart));
                     renderNavCart()
-                    showAlertSuccess('${item.name} added X ${item.quantity}')
+                    showAlertSuccess(`${item.name} added X ${item.quantity}`)
+
                     return;
 
                 } else {
                     cart.addItem(product);
-                    showAlertSuccess('${item.name} added X ${item.quantity}')
+                    showAlertSuccess(`${item.name} added X ${item.quantity}`)
+
                 }
 
             }
         } else {
             cart.addItem(product);
-            showAlertSuccess('${item.name} added')
+            showAlertSuccess(`${item.name} added`)
+
         }
 
         storeCartLocal(JsonCartSerializer(cart));

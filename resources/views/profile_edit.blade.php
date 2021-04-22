@@ -20,8 +20,11 @@
     }
 
     .form-group input[type="text"],
-    .form-group input[type="password"] {
-        background: #f6f6f6 none repeat scroll 0 0;
+    .form-group input[type="password"],
+    .form-group input[type="email"],
+    .form-group input[type="date"],
+    .form-group input[type="file"], {
+        background: white;
         border: 1px solid #dedede;
         color: #999;
         height: 50px;
@@ -144,7 +147,7 @@
                 <h6>Contact Number:</h6>
             </div>
             <div class="col-lg-9">
-                <input type="text" class="form-control" id="contact" value="{{$user->contact}}" placeholder="Contact" name="contact">
+                <input type="text" class="form-control" id="contact" value="{{$user->contact}}" placeholder="Contact" name="contact" disabled>
             </div>
         </div>
 
@@ -171,7 +174,7 @@
 
 
         <div class="form-group" style="margin-top:50px;">
-            <button class="btn btn-primary" onclick="updatProfile(this)" value="Send" style="width:100%;background-color:#001b71">Update</button>
+            <button class="btn btn-primary" onclick="updateProfile(this)" value="Send" style="width:100%;background-color:#001b71">Update</button>
         </div>
 
     </form>
@@ -183,7 +186,7 @@
 </div>
 
 <script>
-    function updatProfile() {
+    function updateProfile() {
         const form = new FormData(document.getElementById("profile-form"))
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'api/profile'
