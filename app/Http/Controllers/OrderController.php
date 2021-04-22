@@ -273,8 +273,11 @@ class OrderController extends Controller
                
             $customer->points+=$pointsearned;
             
+            
             $customer->save();
             $msg = 'Order has been added';
+
+            
 
 
             return response()->json(['success' => !!$order, 'message' => $msg, 'user' => $customer]);
