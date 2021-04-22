@@ -280,7 +280,7 @@ class OrderController extends Controller
             $customer->points+=$pointsearned;
             
             $customer->save();
-            $loyalty->calculateTier($customer);
+            $loyalty->calculateTier($customer,$request->amount_due,$request->wallet);
             $msg = 'Order has been added';
 
             

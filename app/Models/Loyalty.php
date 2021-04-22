@@ -40,7 +40,7 @@ class Loyalty extends Model
     }
 
     //Function  to update the user's tier based on the points
-    public  static function calculateTier ($user)
+    public  static function calculateTier ($user,$amount_due,$wallet)
     {   $points = $user->points;
         $tierid = $user->tier_id;
         $tiers= Tier::get();
@@ -49,7 +49,8 @@ class Loyalty extends Model
                 $tierid= $tier->id;
             }
         }
-        User::find($user->id)->update(['tier_id'=>$tierid]);
+        $purchases= $user->totalpurchases + $amount_due+ $wallet ; 
+        User::find($user->id)->update(['tier_id'=>$tierid,'totalpurchases'=>$purchases  ]);
         
     }
 
