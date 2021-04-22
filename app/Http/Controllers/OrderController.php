@@ -217,10 +217,16 @@ class OrderController extends Controller
             if (isset($request->coupon_value)) {
                 $data['coupon_value'] = $request->coupon_value;
             }
-
+            $shoplist =  array();                // List of Shop Ids
+            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
+            if($pointsearned){
+                $data['points_earned'] = $pointsearned;
+            }
 
             $order = Order::create($data);
-            $shoplist =  array();                // List of Shop Ids
+
+
+           
             foreach ($request->orderdetails as $orderdetails) {
                 $arr = array();
                 if (isset($orderdetails['product_id'])) {
@@ -269,12 +275,15 @@ class OrderController extends Controller
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
             }
-            $pointsearned = $loyalty->addPoints($customer, $request->amount_due, $request->wallet ?? 0, $shoplist);
-
-            $customer->points += $pointsearned;
-
+            
+               
+            $customer->points+=$pointsearned;
+            
             $customer->save();
+            $loyalty->calculateTier($customer,$request->amount_due,$request->wallet);
             $msg = 'Order has been added';
+
+            
 
 
             return response()->json(['success' => !!$order, 'message' => $msg, 'user' => $customer]);
