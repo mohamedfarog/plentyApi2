@@ -57,7 +57,7 @@ class FoodicsController extends Controller
         Log::info([
             "name"=> $user->name,
             "dial_code"=> 966,
-            "phone"=> last(explode("+966",$user->phone)),
+            "phone"=> last(explode("+966",$user->contact)),
             "email"=> $user->email,
             "gender"=> $user->gender=="Male"? 1:0,
             "birth_date"=> $user->bday,
@@ -71,7 +71,7 @@ class FoodicsController extends Controller
         Http::withToken($this->token)->post($this->baseUrl . "customers",  [
             "name"=> $user->name,
             "dial_code"=> 966,
-            "phone"=> last(explode("+966",$user->phone)),
+            "phone"=> last(explode("+966",$user->contact)),
             "email"=> $user->email,
             "gender"=> $user->gender=="Male"? 1:0,
             "birth_date"=> $user->bday,
