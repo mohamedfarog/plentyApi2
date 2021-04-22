@@ -48,7 +48,7 @@ class FoodicsController extends Controller
                 $userinfo->save();
             }
         }
-        return response()->json($response->json());
+        return ($response->json());
     }
     public function getUserInfoByFoodicID($foodics_unique_id)
     {
@@ -88,8 +88,9 @@ class FoodicsController extends Controller
     {
         Log::info($request->all());
     }
-    public function loyality(Request $request)
+    public function loyalityRewards(Request $request)
     {
+        $this->access($request);
         $res = [];
         if ($request->customer_mobile_number) {
             $contact = "" . $request->mobile_country_code . $request->customer_mobile_number;
@@ -112,6 +113,7 @@ class FoodicsController extends Controller
                     ]);
                 }
             }
+            $this->getAllCustomers(null, $request->customer_mobile_number);
         }
         $res = [
             "type" => 1,
@@ -125,8 +127,27 @@ class FoodicsController extends Controller
             "discount_includes_modifiers" => false,
             "allowed_products" => null,
             "is_discount_taxable" => false
-
         ];
         return response()->json($res);
+    }
+    public function loyalityRedeem(Request $request)
+    {
+        $this->access($request);
+        if (isset($request->user_id)) {
+            $userinfo = User::where("foodics_unique_id", $request->user_id)->first();
+            if ($userinfo) {
+                $points = Loyalty::convertToPoints($userinfo->tier_id, $request->discount_amount);
+                Loyalty::redeemPoints($userinfo, $points);
+            }
+        }
+    }
+    public function access(Request $request)
+    {
+        $authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGU1NjczOGU1YTEzNGE2ZDY3N2Y1YWY4OTJiMWEyM2NkOTVmN2FmODg3Y2Q1MGMyZWEzMDVhOWU5YTNmYzUxYzUwZGIxOTE0YzEzNDhhYWMiLCJpYXQiOiIxNjE4OTgzOTY4LjgwNTc5OCIsIm5iZiI6IjE2MTg5ODM5NjguODA1ODAyIiwiZXhwIjoiMTY1MDUxOTk2OC43OTY2MTAiLCJzdWIiOiIxNzEiLCJzY29wZXMiOltdfQ.g1yuIuzGXBBzoT-slu0dIAF0IATy4iJImoEcPPGdWuMpmsT6y0QIyqpYqMc1fNg-IbmmgbLhmoG29kaoqukWCTd1p-r0gORVtuCmsMju89IKIZHCj_RYmFJ7vsbV_5cALGdZ9FlHxU67jFr_p5RPqKnD70R5G7HIcyuiR8I6kVvuy9cLKPTD4-zaD6RPON4PNkU2Iyv0qHxnEkRHD_pSMgxJYqsiXPfMgosbpEecoRRg_h-hfTu3HQhxkg0jv6ianRhqJEftMi340xfQIc1IvDRLuEqBtNzrlrmfNbTzLsO0G3QTG4_XjHmX9IOtjjtADv0sdmb-436VhU45l7O-pdNX7DIVyLyio8oFZw6MmGVMl2R33kkJRUmi5p1sB6lpGYTvLXvzyAQrmyGCDON-pY5TZutOoIARQNG8xeIy1QtHFVl-zOI4o3x3dLGqPGa769_ZVqZVkPjGyH3WlN6k2h5uq7R9JLHrVxBYPShJIC2duBrhpMFAIuSVzeCUzH85KsJlaW0_gyhtJZvSFg_Hvtn-2a3JuLWuC7DldTkEVH735CVCPpTOCttkT7cKA9d6100pCtzP89KQZrzMUUWR64u8JImVxAOf5RWqMFOSLrndqkem6DBWNZtUUXXWzSlalhSpigEtGBUA8wIkFolZ-OWDp49cqv8U291nsCfs1MQ";
+        if ($request->header('Authorization') != null && $request->header("Authorization") == $authToken) {
+        } else {
+            return response()->json('unauthorized', 403);
+            die();
+        }
     }
 }

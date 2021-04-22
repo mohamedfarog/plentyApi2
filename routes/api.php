@@ -59,8 +59,8 @@ use Thenextweb\PassGenerator;
 //Foodics routes
 Route::get('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
 Route::post('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
-Route::get('loyality',[FoodicsController::class, 'loyality']);
-
+Route::post('loyality/rewards',[FoodicsController::class, 'loyalityRewards']);
+Route::post('loyality/redeem',[FoodicsController::class, 'loyalityRedeem']);
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
