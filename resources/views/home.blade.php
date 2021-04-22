@@ -219,17 +219,20 @@
     @foreach($featured_products as $product)
 
     <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img frame">
+        
+        <a href="{{ url('/product/' . $product->id) }}">
+            <div class="product-img frame">
 
-            @if ($product->image)
-            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
-            @else
-            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
-            @endif
+                @if ($product->image)
+                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+                @else
+                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
+                @endif
 
-            <div class="product-action clearfix">
+                <div class="product-action clearfix">
+                </div>
             </div>
-        </div>
+        </a>
         <div class="product-info clearfix">
             <div class="fix">
                 <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
@@ -290,27 +293,26 @@
     ?>
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
-        <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
-
             @if($hb->cat_id == 1)
-            <a href="/delicacy/{{$hb->shop_id}}">
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-            </a>
+                <a href="/delicacy/{{$hb->shop_id}}">
             @elseif($hb->cat_id == 2)
-            <a href="/beauty/{{$hb->shop_id}}">
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-            </a>
+                <a href="/beauty/{{$hb->shop_id}}">
+            @elseif($hb->cat_id == 3)
+                <a href="/fashion/{{$hb->shop_id}}">
             @else
-            <a href="/fashion/{{$hb->shop_id}}">
-                <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-            </a>
+                <a href="/">
             @endif
+            <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
 
 
-            <div class="product-action clearfix">
+                    <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+                
+                <div class="product-action clearfix">
 
+                </div>
             </div>
-        </div>
+        </a> 
+
 
     </div>
 
