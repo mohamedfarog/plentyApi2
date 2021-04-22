@@ -286,7 +286,7 @@ class OrderController extends Controller
             
 
 
-            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => $customer]);
+            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => User::find($customer->id)]);
         }
     }
 
