@@ -57,15 +57,15 @@ use Thenextweb\PassGenerator;
 |
 */
 //Foodics routes
-Route::get('webhooks',[FoodicsController::class, 'webhooks']);
-Route::post('webhooks',[FoodicsController::class, 'webhooks']);
+Route::get('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
+Route::post('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
+Route::get('testfoodics',[FoodicsController::class, 'getAllCustomers']);
 
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('testfoodics',[FoodicsController::class, 'getAllCustomers']);
 Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
 Route::get('eventproducts',[ProductController::class, 'getProducts']);

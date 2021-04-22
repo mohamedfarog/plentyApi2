@@ -177,7 +177,7 @@ class UserController extends Controller
             //Update foodics database
             $dbUser = Auth::login($user);
             $user = User::with(['tier'])->find($user->id);
-
+            (new FoodicsController())->createUser($user);
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User has been added';
