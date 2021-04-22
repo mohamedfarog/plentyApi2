@@ -177,7 +177,6 @@ class UserController extends Controller
             //Update foodics database
             $dbUser = Auth::login($user);
             $user = User::with(['tier'])->find($user->id);
-            (new FoodicsController())->createUser($user);
             $dbUser = Auth::user();
             $token = $dbUser->createToken('MyApp')->accessToken;
             $msg = 'User has been added';
@@ -227,7 +226,8 @@ class UserController extends Controller
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
                     }
-
+                    (new FoodicsController())->createUser($user);
+                    
                     $msg = 'Account details updated successfully.';
                     return response()->json(['success' => !!$user, 'message' => $msg, 'user' => $user]);
                     break;
