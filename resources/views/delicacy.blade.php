@@ -489,7 +489,7 @@
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
-                "</div>"
+                "</div>" 
 
         });
         document.getElementById('product-panel').innerHTML = prod_element

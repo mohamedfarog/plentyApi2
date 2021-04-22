@@ -272,12 +272,8 @@
                 <div class="-">
                     <div class="tab-pane active" id="new-arrivals">
                         <div class="row">
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

@@ -383,11 +383,11 @@
 </section>
 <section class="containerbar" style="">
     <div class="w3-border" style="border-radius:50px;background-color: #e2e2e2;margin-top:30px;position:relative;display:block;">
-        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;top: -35px;left:1%">
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;top: -35px;left:0%">
         <img src="img/userlevel/greyprogcircle.png" style="position:absolute;top: -35px;left:35%;">
         <img src="img/userlevel/greyprogcircle.png" style="position:absolute;top: -35px;left:65%">
         <img src="img/userlevel/triangle.png" style="position:absolute;top: 30px;left:{{$percentage-2}}%">
-        <span style="position:absolute;top: 50px;left:{{$percentage-6}}%">15,450 SAR</span>
+        <span style="position:absolute;top: 50px;left:{{$percentage-6}}%">{{$totalpurchases}} SAR</span>
         <div class="w3-grey" style="height:20px;width:{{$percentage}}%;border-radius:50px;background-color:#ffa400 !important;"></div>
     </div>
 </section>
@@ -550,3 +550,4 @@
 
 </script>
 @endsection
+
