@@ -161,10 +161,12 @@
         .btn.btn-color::before {
             background-color: black;
         }
+
         button.btn:hover {
             background-color: #001b71;
             color: #fff;
         }
+
         @media only screen and (max-width: 600px) {
 
             .footer-widgets {
@@ -345,7 +347,7 @@
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
 
-                                        <a href="/login" class="nav-search  imgicon">
+                                        <a href="/profile" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/user.png">
                                         </a>
 
@@ -377,13 +379,13 @@
 
                                     </li>
                                     <li class="nav-search-wrap style-2 hidden-sm hidden-xs">
-                                    <a href="/" class="nav-search  imgicon"> 
+                                        <a href="/" class="nav-search  imgicon">
                                             <img class="imgicon" src="img/nav/lang.png">
 
                                         </a>
                                     </li>
                                     <li class="dropdown nav-search-wrap style-2 hidden-sm hidden-xs">
-                                                                             <a href="/" class="menufont">: {{ __('website.currentlanguage') }}</a>
+                                        <a href="/" class="menufont">: {{ __('website.currentlanguage') }}</a>
 
                                         <ul class="dropdown-menu" style="background:white">
 
@@ -565,7 +567,7 @@
             var d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
             var expires = "expires=" + d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Lax";
         }
 
 
@@ -808,6 +810,7 @@
         }
 
         $(document).ready(function() {
+
             let cart = new Cart()
             $.ajax({
                 type: 'GET',
@@ -1001,7 +1004,6 @@
         }
 
         $(document).ready(function() {
-
             if (getUserDetails()) {
                 userIsAuthenticated();
             } else {
@@ -1034,7 +1036,7 @@
 
                     success: function(data) {
                         if (data.Response) {
-                            setCookie('user', JSON.stringify(data.user), 1);
+
                         }
 
                     },

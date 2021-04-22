@@ -23,7 +23,8 @@
     .form-group input[type="password"],
     .form-group input[type="email"],
     .form-group input[type="date"],
-    .form-group input[type="file"], {
+    .form-group input[type="file"],
+        {
         background: white;
         border: 1px solid #dedede;
         color: #999;
@@ -97,7 +98,6 @@
             20px;
         }
     }
-
 </style>
 <section class="page-title text-center bg-light ">
     <div class="container relative clearfix">
@@ -113,7 +113,7 @@
 <section class="container contymobile" style="background:transparent;min-height:600px">
 
 
-    <form class="profile-form" id="profile-form" style="max-width:600px;margin-top:50px;">
+    <form class="profile-form" id="profile-form" style="max-width:600px;margin-top:50px;" onsubmit="event.preventDefault()">
         {{ csrf_field() }}
         <div class="form-group" style="margin-bottom;50px;height: 50px;">
             <div class="col-lg-3">
@@ -191,32 +191,35 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'api/profile'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
-            }
-            , data: {
-                action: 'update'
-                , name: form.get('name')
-                , email: form.get('email')
-                , contact: form.get('contact')
-                , gender: form.get('gender')
-                , bday: form.get('bday')
-            }
-            , success: function(data) {
-                getUser();
-
-                window.location.replace(base_url + 'profile'); 
-            }
-            , error: function(err) {
+            },
+            data: {
+                action: 'update',
+                name: form.get('name'),
+                email: form.get('email'),
+                contact: form.get('contact'),
+                gender: form.get('gender'),
+                bday: form.get('bday')
+            },
+            success: function(data) {
+                const user = {
+                    "id": data.user.id,
+                    "name": data.user.name,
+                    "typeofuser": data.user.typeofuser
+                }
+                setCookie('user', JSON.stringify(user), 1);
+                window.location.replace(base_url + 'profile');
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
         });
     }
-
 </script>
 
 @endsection
