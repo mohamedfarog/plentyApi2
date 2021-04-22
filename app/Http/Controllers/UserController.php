@@ -174,6 +174,7 @@ class UserController extends Controller
             $data['points'] = $settings->registerpts;
 
             $user = User::create($data);
+            //Update foodics database
             $dbUser = Auth::login($user);
             $user = User::with(['tier'])->find($user->id);
 
