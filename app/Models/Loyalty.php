@@ -39,6 +39,20 @@ class Loyalty extends Model
         //update loyalty card
     }
 
+    //Function  to update the user's tier based on the points
+    public  static function calculateTier ($user)
+    {   $points = $user->points;
+        $tierid = $user->tier_id;
+        $tiers= Tier::get();
+        foreach($tiers as $tier){
+            if($points>= $tier->requirement){
+                $tierid= $tier->id;
+            }
+        }
+        User::find($user->id)->update(['tier_id'=>$tierid]);
+        
+    }
+
     public static function redeemPoints($id, $points)
     {
     }
