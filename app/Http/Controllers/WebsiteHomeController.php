@@ -383,7 +383,7 @@ class WebsiteHomeController extends Controller
     {
         $user = Auth::user();
         if (isset($user)) {
-            $data['totalpurchases'] = $user->points;
+            $data['totalpurchases'] = $user->totalpurchases;
             
             $data['percentage'] =  $data['totalpurchases'] * 100 /40000;
             switch (true) {
