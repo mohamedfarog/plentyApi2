@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loyalty;
+use App\Models\Tier;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -45,10 +47,16 @@ class FoodicsController extends Controller
                 $userinfo->foodics_unique_id = $foodics_unique_id;
                 $userinfo->save();
             }
-
-            Log::info($customer['id']);
         }
         return response()->json($response->json());
+    }
+    public function getUserInfoByFoodicID($foodics_unique_id)
+    {
+        $response = Http::withToken($this->token)->get($this->baseUrl . "customers/" . $foodics_unique_id,);
+        if ($response->ok()) {
+            return $response->json();
+        } else
+            throw ("there is some errors while getUserInfoByFoodicID" . $foodics_unique_id);
     }
     public function createUser(User $user)
     {
@@ -70,20 +78,10 @@ class FoodicsController extends Controller
             $user->foodics_unique_id = $response->json()['id'];
             $user->save();
         } else {
-            Log::error("there is some errors");
-            Log::info([
-                "name" => $user->name,
-                "dial_code" => 966,
-                "phone" => last(explode("+966", $user->contact)),
-                "email" => $user->email,
-                "gender" => $user->gender == "Male" ? 1 : 0,
-                "birth_date" => $user->bday,
-                "house_account_limit" => 0,
-                "house_account_balance" => 0,
-                "is_loyalty_enabled" => false,
-                "is_blacklisted" => false,
-                "is_house_account_enabled" => true
-            ]);
+            Log::error(
+                "there is some errors while CreateUser" .
+                    "name" . $user->name
+            );
         }
     }
     public function webhooks(Request $request)
@@ -92,6 +90,43 @@ class FoodicsController extends Controller
     }
     public function loyality(Request $request)
     {
-        Log::info($request->all());
+        $res = [];
+        if ($request->customer_mobile_number) {
+            $contact = "" . $request->mobile_country_code . $request->customer_mobile_number;
+            $userinfo = User::where("contact", "like", "%" . $contact)->first();
+            if ($userinfo) {
+                if (!isset($userinfo->tier_id)) {
+                    $amount = Loyalty::convertToCurrency($userinfo->tier_id, $userinfo->points);
+                    return response()->json([
+                        "type" => 1,
+                        "discount_amount" => $amount,
+                        "is_percent" => true,
+                        "customer_mobile_number" => $request->customer_mobile_number,
+                        "mobile_country_code" => "SA",
+                        "reward_code" => $request->reward_code,
+                        "business_reference" => "255214",
+                        "max_discount_amount" => $amount,
+                        "discount_includes_modifiers" => false,
+                        "allowed_products" => null,
+                        "is_discount_taxable" => false
+                    ]);
+                }
+            }
+        }
+        $res = [
+            "type" => 1,
+            "discount_amount" => 0,
+            "is_percent" => true,
+            "customer_mobile_number" => $request->customer_mobile_number,
+            "mobile_country_code" => "SA",
+            "reward_code" => $request->reward_code,
+            "business_reference" => "255214",
+            "max_discount_amount" => 0,
+            "discount_includes_modifiers" => false,
+            "allowed_products" => null,
+            "is_discount_taxable" => false
+
+        ];
+        return response()->json($res);
     }
 }

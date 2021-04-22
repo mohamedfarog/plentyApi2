@@ -64,5 +64,13 @@ class Loyalty extends Model
 
     public static function convertToCurrency($tier, $points)
     {
+        $tierData= Tier::find($tier);
+        if($tierData)
+        {
+
+            $tierValueInPerc= ($tier->value)/100;
+            return $points*$tierValueInPerc;    
+        }
+        return 0.0;
     }
 }
