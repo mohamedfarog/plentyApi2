@@ -193,11 +193,29 @@
         }
     }
 
-    #product td {
-        color: #001b71;
-        font-weight: 100;
+    .chip {
+        display: inline-block;
+        padding: 0 25px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 50px;
+        border-radius: 25px;
+        background-color: #f1f1f1;
     }
 
+
+    .chip .closebtn {
+        padding-left: 10px;
+        color: #888;
+        font-weight: bold;
+        float: right;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .chip .closebtn:hover {
+        color: #000;
+    }
 </style>
 
 
@@ -581,9 +599,6 @@
                                                         <textarea class="custom-textarea" row="6" placeholder="" style=" background: white;border: 2px solid #7f8db8;"></textarea>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
                                         </div>
 
@@ -598,7 +613,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Subtotal</td>
-                                                            <td class="text-right orderprodtxt orderprodprice" id="sub_total">195 SAR</td>
+                                                            <td class="text-right orderprodtxt orderprodprice" id="sub_total"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Shipping</td>
@@ -606,17 +621,20 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Coupon Code</td>
-                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c" id="coupon-applied"></td>
+                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c" id="coupon-applied">-</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">Plenty Balance</td>
-                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c">- 20 SAR</td>
+                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c" id="plenty-balance-show">-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="orderprodtxt" style="padding-left: 10px;">Plenty Point</td>
+                                                            <td class="text-right orderprodtxt orderprodprice" style="color:#ff000c" id="plenty-point-show">-</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="orderprodtxt" style="padding-left: 10px;">TOTAL</td>
                                                             <td class="text-right orderprodtxt orderprodprice">
                                                                 <span id="order_total">
-                                                                    170.00
                                                                 </span>
 
                                                                 <span style="font-weight: 100;font-family:'Avenir'">SAR</span>
@@ -624,6 +642,8 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                <input type="hidden" id="ordertotal" name="ordertotal">
+                                                <input type="hidden" id="balance" name="balance">
                                             </div>
                                         </div>
                                         <!-- payment-method -->
@@ -640,10 +660,17 @@
                                                     </div>
 
                                                 </div>
-
                                                 <div class="row">
                                                     <div class="col-md-12 col-xs-12">
                                                         <span id="coupon_error"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-xs-12">
+                                                        <div class="chip" style="visibility:hidden" id="coupon-wrapper">
+                                                            <span id="coupon"></span>
+                                                            <span class="closebtn" onclick="removeCoupon()">&times;</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <h4 class="title-1 title-border mb-20 mt-20 selpaymet" style="font-weight:100">Select payment method</h4>
@@ -662,12 +689,12 @@
                                                             <span style="font-size:16px;">Select the amount to pay with your Loyalty Points!</span>
                                                         </div>
                                                         <div style="margin-left:5px;margin-right:5px;margin-top5:px;">
-                                                            <input type="range" name="ageInputName" id="ageInputId" class="slider" value="56" min="1" max="100" oninput="ageOutputId.value = ageInputId.value" style="background:#ffa400">
-                                                            <output name="ageOutputName" id="ageOutputId">56</output>
+                                                            <input type="range" name="pointInputName" id="pointInputId" onchange="calculateLoyalityPoint(this)" class="slider" value="56" min="1" max="100" oninput="pointOutputId.value = pointInputId.value" style="background:#ffa400">
+                                                            <output name="pointOutputName" id="pointOutputId">50</output>
                                                         </div>
                                                         <div class="mt-30 row" style="width:50%;text-align:center;margin:auto">
                                                             <div style="background:white;padding: 10px 0" class="col-md-5 col-xs-12">
-                                                                <span class="boldfont">56.25</span><br>
+                                                                <span class="boldfont" id="point-used">00.00</span><br>
                                                                 <span>Points Used</span>
                                                             </div>
                                                             <div class="col-md-2 col-xs-12">
@@ -676,14 +703,14 @@
                                                             </div>
 
                                                             <div style="background:white;padding: 10px 0 " class="col-md-5 col-xs-12">
-                                                                <span class="boldfont">20</span><br>
+                                                                <span class="boldfont" id="sar-used">0</span><br>
                                                                 <span>SAR</span>
                                                             </div>
                                                         </div>
 
                                                         <div class="row mt-30 mb-30" style="margin-left:5px;margin-right:5px;">
                                                             <span style="font-size:16px;">Available Loyalty Points</span>
-                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold';font-size:16px;">375 <span style="font-family:'Avenir';font-weight:100">SAR</span></span>
+                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold';font-size:16px;" id="point-sar-balance">375 <span style="font-family:'Avenir';font-weight:100">SAR</span></span>
                                                         </div>
                                                     </div>
                                                     <!-- Accordion end -->
@@ -721,7 +748,9 @@
                                                     <!-- Accordion end -->
 
                                                     <h3 class="payment-accordion" style="background:white">
-                                                        <input type="radio" id="male" name="gender" value="male"><label for="male">Pay with Plenty Pay</label>
+                                                        <input type="checkbox" id="plentypay" name="plentypay" value="1" onchange="plentyPaySelect(this)"><label for="plentypay">Pay with Plenty Pay</label>
+                                                        <input type="hidden" id="plenty-balance" name="plenty-balance">
+                                                        <input type="hidden" id="plenty-payed" name="plentypay">
                                                     </h3>
                                                     <button class="button-one submit-button mt-15" data-text="place order" type="submit" style="width:100%;font-size:16px;height: 50px;background: #1d2767">place order</button>
                                                 </div>
@@ -862,8 +891,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -871,8 +900,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -880,9 +909,10 @@
         event.preventDefault();
     });
     $(document).ready(function() {
-        renderOrderedProduct()
-        getLoyalityPoint()
-
+        renderOrderedProduct();
+        getLoyalityPoint();
+        removeCoupon();
+        getPlentyBalance();
     });
 
 
@@ -896,50 +926,69 @@
                 size = " (" + item.size + ")";
             }
             template = template + "<tr>" +
-                "<td class='orderprodtxt' style='padding-left: 10px;'>" + item.name + size + " x" + item.quantity + "</td>" +
+                "<td class='orderprodtxt' style='padding-left: 10px; font-weight:100'>" + item.name + size + " x" + item.quantity + "</td>" +
                 "<td class='text-right orderprodtxt orderprodprice'>" + item.price + " SAR</td>" +
                 "</tr>"
 
         });
         $('#product').html(template);
+        $('#order_total').html(cart.subTotal() + " SAR");
+        $('#ordertotal').val(cart.subTotal());
+        $('#balance').val(cart.subTotal());
         $('#sub_total').html(cart.subTotal() + " SAR");
     }
 
     function checkCouponValid() {
         $("#coupon_error").html("");
-        const bearer_token = getCookie('bearer_token');
-        let code = $('#coupon-code').val()
-        url = base_url + 'coupon'
-        $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                "_token": "{{ csrf_token() }}"
-                , "couponcode": code
-                , "cart": getCartLocal()
-            }
-            , headers: {
+        var cart = CartSerializer(getCartLocal())
+        if (cart.coupon_value > 0) {
+            $("#coupon_error").html("You applied coupon already!");
+        } else if ($('#balance').val() == 0) {
+            $("#coupon_error").html("You don't need to apply coupon!");
+        } else {
+            const bearer_token = getCookie('bearer_token');
+            let code = $('#coupon-code').val()
+            url = base_url + 'coupon'
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "couponcode": code,
+                    "cart": getCartLocal()
+                },
+                headers: {
 
-                "Authorization": 'Bearer ' + bearer_token
-            },
+                    "Authorization": 'Bearer ' + bearer_token
+                },
 
-            success: function(data) {
-                console.log(data)
-                if (data.value > 0) {
-                    $("#coupon_error").html("coupon applied " + data.value + " SAR")
-                    $("#coupon-applied").html('-' + data.value + ' SAR (10%)')
-                } else
-                    $("#coupon_error").html("This shop is not ")
-            }
-            , error: function(err) {
-                let error = err.responseJSON.message;
-                $("#coupon_error").html(error)
+                success: function(data) {
+                    console.log(data)
+                    if (data.value > 0) {
+                        $("#coupon_error").html("coupon applied " + data.value + " SAR")
+                        $("#coupon-applied").html('-' + data.value + ' SAR (10%)')
+                        cart.coupon_value = data.value;
+                        cart.coupon = code;
+                        $("#coupon-wrapper").css("visibility", "visible");
+                        $("#coupon").html(code)
+                        document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) - parseFloat(cart.coupon_value);
+                        document.getElementById("order_total").innerText = document.getElementById("balance").value
+                        storeCartLocal(JsonCartSerializer(cart));
+                    } else {
+                        $("#coupon_error").html("This coupon is not applicable ! ")
+                    }
+                },
+                error: function(err) {
+                    let error = err.responseJSON.message;
+                    $("#coupon_error").html(error)
 
-                console.log('Error!', err)
-            }
+                    console.log('Error!', err)
+                }
 
-        });
+            });
+        }
+
     }
 
     function getLoyalityPoint() {
@@ -947,22 +996,25 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
                 "_token": "{{ csrf_token() }}"
-            }
-            , headers: {
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
             success: function(data) {
                 console.log(data.point)
                 $(".loyality-point").html(data.point);
+                $("#pointInputId").attr({
+                    max: data.point
+                })
                 $("#loyality-point").val(data.point);
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -974,21 +1026,21 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'place-order'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                "_token": "{{ csrf_token() }}"
-                , "cart": getCartLocal()
-            }
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "cart": getCartLocal()
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
             success: function(data) {
                 console.log(data)
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
 
                 console.log('Error!', err)
             }
@@ -1005,8 +1057,135 @@
             $(this).children("span").css("color", "white");
             $(this).children("img").css("filter", "brightness(0) invert(1)");
         });
+
     });
 
+    function calculateLoyalityPoint(ele) {
+        if (parseFloat(document.getElementById("balance").value) > 0) {
+            let sar = calculateLoyalityPointSAR(parseFloat(ele.value), parseFloat(ele.max));
+            if (sar >= parseFloat(document.getElementById("balance").value)) {
+                let sar_availble = calculateLoyalityPointSAR(parseInt(ele.max));
+                document.getElementById("point-used").innerHTML = ele.value;
+                document.getElementById("sar-used").innerHTML = sar;
+                document.getElementById("point-sar-balance").innerHTML = (sar_availble - sar).toFixed(2) + ' SAR';
+                document.getElementById("plenty-point-show").innerHTML = sar + ' SAR';
+                document.getElementById("balance").value = 0;;
+                document.getElementById("order_total").innerText = 0
+            } else {
+                let sar_availble = calculateLoyalityPointSAR(parseFloat(ele.max), );
+                document.getElementById("point-used").innerHTML = ele.value;
+                document.getElementById("sar-used").innerHTML = sar;
+                document.getElementById("point-sar-balance").innerHTML = (sar_availble - sar).toFixed(2) + ' SAR';
+                document.getElementById("plenty-point-show").innerHTML = sar + ' SAR';
+                document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) - parseFloat(sar);
+                document.getElementById("order_total").innerText = document.getElementById("balance").value
+            }
+
+        }
+
+    }
+
+    function calculateLoyalityPointSAR(point, total_point) {
+        console.log(point, total_point)
+        if (total_point > 29999) {
+            return point * 3 / 100;
+        } else if (total_point > 19999) {
+            return point * 2 / 100;
+        } else if (total_point > 0) {
+            return point * 1 / 100;
+        } else {
+            return 0;
+        }
+    }
+
+
+
+    function getPlentyBalance() {
+        const bearer_token = getCookie('bearer_token');
+        if (bearer_token) {
+            url = base_url + 'plenty-balance'
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'JSON',
+                headers: {
+
+                    "Authorization": 'Bearer ' + bearer_token
+                },
+
+                success: function(data) {
+                    console.log(data)
+                    if (data.Response) {
+                        document.getElementById('plenty-balance').value = data.wallet;
+                    } else {
+                        document.getElementById('plenty-balance').value = 0;
+                    }
+
+                },
+                error: function(err) {
+                    console.log('Error!', err)
+                }
+
+            });
+        } else {
+            return 0;
+        }
+
+    }
+
+    function plentyPaySelect(ele) {
+        if (ele.checked) {
+            if (parseFloat(document.getElementById("balance").value) > 0) {
+                const balance = parseFloat(document.getElementById("balance").value);
+                const wallet = parseFloat(document.getElementById('plenty-balance').value);
+                if (balance > wallet) {
+                    document.getElementById("plenty-balance-show").innerText = (wallet - balance) + " SAR"
+                    document.getElementById("plentypay").value = wallet - balance;
+                    document.getElementById("balance").value = balance - (wallet - balance);
+                } else {
+                    document.getElementById("plenty-balance-show").innerText = balance + " SAR"
+                    document.getElementById("plentypay").value = balance;
+                    document.getElementById("balance").value = 0;
+                }
+            }
+
+        } else {
+            const plentypayed = document.getElementById("plentypay").value
+            if (plentypayed > 0) {
+                document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(document.getElementById("plentypay").value);
+            }
+            document.getElementById("plenty-balance-show").innerText = "-"
+        }
+
+        changeTotalPrice()
+
+    }
+
+    function calculateOrderTotal() {
+        document.getElementById("order_total").innerText = 100.00;
+    }
+
+    function showPlentyBalance(sar = 100) {
+
+        document.getElementById("plenty-balance-show").innerText = sar + " SAR";
+    }
+
+    function changeTotalPrice() {
+        const balance = document.getElementById("balance").value
+        document.getElementById("order_total").innerText = balance
+    }
+
+    function removeCoupon() {
+        var ele = document.getElementById("coupon-wrapper");
+        ele.style.visibility = 'hidden'
+        var cart = CartSerializer(getCartLocal())
+        document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(cart.coupon_value);
+        document.getElementById("order_total").innerText = document.getElementById("balance").value
+        cart.coupon = '';
+        cart.coupon_value = 0;
+        storeCartLocal(JsonCartSerializer(cart));
+        $("#coupon_error").html("");
+    }
 </script>
 
 <script src="js/jquery.geocoder.js"></script>

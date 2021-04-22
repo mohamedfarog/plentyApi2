@@ -18,6 +18,7 @@ use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 
 class WebsiteHomeController extends Controller
 {
@@ -321,43 +322,51 @@ class WebsiteHomeController extends Controller
     {
         $coupon = $request->couponcode;
         $coupon = Coupon::where("code", $coupon)->first();
-        if (!$coupon) {
-            return response()->json(["type" => "error", "message" => "coupon code not found"], 400);
-        }
-        $cart = $request->cart;
-        if (!$cart)
-            return response()->json(["type" => "error", "message" => "You cart is empty"], 400);
+        $date = Carbon::now();
+        if ($coupon->expiry >= $date) {
+            if (!$coupon) {
+                return response()->json(["type" => "error", "message" => "coupon code not found"], 400);
+            }
+            $cart = $request->cart;
+            if (!$cart)
+                return response()->json(["type" => "error", "message" => "You cart is empty"], 400);
 
-        //checking coupon is for shop or all
-        // This is when it is for shop
-        $totalAmount = 0;
-        if ($coupon->shop_id) {
-            $totalAmount = $this->calculateTotal($cart['cart_items'], $coupon->shop_id);
+            //checking coupon is for shop or all
+            // This is when it is for shop
+            $totalAmount = 0;
+            if ($coupon->shop_id) {
+                $totalAmount = $this->calculateTotal($cart['cart_items'], $coupon->shop_id);
 
-            // return response()->json(["type" => "success", "value" => $this->calculateTotal($cart['cart_items'], $coupon->shop_id)], 200);
-        } else {
-            $totalAmount = $this->calculateTotal($cart['cart_items'], null);
-            // return response()->json(["type" => "success", "value" => $this->calculateTotal($cart['cart_items'], null)], 200);
-        }
-        $amountApplied = 0;
-        if ($coupon->ispercentage) {
-            $amountApplied = ($totalAmount * ($coupon->value)) / 100;
-        } else {
-            if ($amountApplied >= $totalAmount)
+                // return response()->json(["type" => "success", "value" => $this->calculateTotal($cart['cart_items'], $coupon->shop_id)], 200);
+            } else {
+                $totalAmount = $this->calculateTotal($cart['cart_items'], null);
+                // return response()->json(["type" => "success", "value" => $this->calculateTotal($cart['cart_items'], null)], 200);
+            }
+            $amountApplied = 0;
+            if ($coupon->ispercentage) {
+                $amountApplied = ($totalAmount * ($coupon->value)) / 100;
+            } else {
+                $amountApplied = $coupon->value;
+            }
+            if ($amountApplied >= $totalAmount) {
                 $amountApplied = $totalAmount;
+            }
+            return response()->json(["type" => "success", "value" =>  $amountApplied], 200);
+        } else {
+            return response()->json(["type" => "error", "message" => "coupon expired!"], 400);
         }
-        return response()->json(["type" => "success", "value" =>  $amountApplied], 200);
     }
     function calculateTotal($items, $shop_id = null)
     {
         $total = 0;
         foreach ($items as $item) {
             if ($shop_id) {
-                if ($item['shop_id'] && $item['shop_id'] == $shop_id)
-
+                if ($item['shop_id'] && $item['shop_id'] == $shop_id) {
                     $total += ($item['price'] * $item['quantity']);
-            } else
+                }
+            } else {
                 $total += ($item['price'] * $item['quantity']);
+            }
         }
         return $total;
     }
@@ -606,5 +615,12 @@ class WebsiteHomeController extends Controller
             ->leftjoin('images', 'images.product_id', '=', 'products.id')
             ->get()
             ->take(20);
+    }
+
+    function getPlentyBalance(Request $request)
+    {
+        $user = Auth::user();
+        $data['wallet'] = $user['wallet'];
+        return response()->json(['Response' => !!$user, 'wallet' =>  $data['wallet']]);
     }
 }

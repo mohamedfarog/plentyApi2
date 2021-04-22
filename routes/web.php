@@ -116,10 +116,10 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/user', [WebsiteHomeController::class, "userDetails"]);
     Route::get('/profile', [WebsiteHomeController::class, 'profile']);
     Route::get('/plenty-points',  [WebsiteHomeController::class, 'getPlentyPoints']);
+    Route::get('/plenty-balance',  [WebsiteHomeController::class, 'getPlentyBalance']);
     Route::post('/coupon', [WebsiteHomeController::class, "cacluateCoupon"]);
     Route::get('/userlevel', [WebsiteHomeController::class, "userLevel"]);
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
-
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);

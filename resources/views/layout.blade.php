@@ -578,6 +578,12 @@
         //cart
         function Cart() {
             this.cart_items = [];
+            this.coupon = '';
+            this.coupon_value = 0;
+            this.loyality_point = 0;
+            this.order_total = 0;
+            this.plenty_pay = 0;
+            this.is_cash_on_delivery = true;
 
         }
         Cart.prototype.subTotal = function() {
@@ -701,7 +707,12 @@
             return {
                 "cart_subtotal": cart.cart_subtotal,
                 "order_total": cart.order_total,
-                "cart_items": cart_items
+                "cart_items": cart_items,
+                "coupon": cart.coupon,
+                "coupon_value": cart.coupon_value,
+                "loyality_point": cart.loyality_point,
+                "plenty_pay": cart.plenty_pay,
+                "is_cash_on_delivery": cart.is_cash_on_delivery
             }
 
         }
@@ -710,6 +721,12 @@
             let cart = new Cart()
             cart.cart_subtotal = data.cart_subtotal;
             cart.order_total = data.order_total;
+            cart.coupon = data.coupon;
+            cart.coupon_value = data.coupon_value;
+            cart.loyality_point = data.loyality_point;
+            cart.order_total = data.order_total;
+            cart.plenty_pay = data.plenty_pay;
+            cart.is_cash_on_delivery = data.is_cash_on_delivery;
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
