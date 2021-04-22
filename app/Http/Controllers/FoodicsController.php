@@ -53,6 +53,20 @@ class FoodicsController extends Controller
     }
     public function createUser(User $user)
     {
+        Log::info("This is started loading");
+        Log::info([
+            "name"=> $user->name,
+            "dial_code"=> 966,
+            "phone"=> last(explode("+966",$user->phone)),
+            "email"=> $user->email,
+            "gender"=> $user->gender=="Male"? 1:0,
+            "birth_date"=> $user->bday,
+            "house_account_limit"=> 0,
+            "house_account_balance"=> 0,
+            "is_loyalty_enabled"=> false,
+            "is_blacklisted"=> false,
+            "is_house_account_enabled"=> true
+        ]);
         //When New user created in plenty database sending informaions to foodics
         Http::withToken($this->token)->post($this->baseUrl . "customers",  [
             "name"=> $user->name,
