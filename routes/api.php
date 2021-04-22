@@ -5,6 +5,7 @@ use App\Http\Controllers\CatController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FoodicsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
@@ -55,10 +56,16 @@ use Thenextweb\PassGenerator;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//Foodics routes
+Route::get('webhooks',[FoodicsController::class, 'webhooks']);
+Route::post('webhooks',[FoodicsController::class, 'webhooks']);
+
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('testfoodics',[FoodicsController::class, 'getAllCustomers']);
 Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
 Route::get('eventproducts',[ProductController::class, 'getProducts']);
