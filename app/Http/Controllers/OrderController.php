@@ -195,7 +195,8 @@ class OrderController extends Controller
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
-                $customer = User::with(['tier'])->find($user->id);           //for updating the user model
+                $customer = User::with(['tier'])->find($user->id);           
+                //for updating the user model
                 $customer->points = $user->points - $request->points;
             }
             if (isset($request->wallet)) {

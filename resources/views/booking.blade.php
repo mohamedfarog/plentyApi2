@@ -546,7 +546,7 @@
 
         $(".active").css("background-color", "black");
         let today = new Date();
-        let formated_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+        let formated_date = '${today.getFullYear()}-${today.getMonth()}-${today.getDate()}'
         getSlots(formated_date)
         booking - form
 
@@ -759,7 +759,7 @@
         day = day_ele.id;
         $('#calendar').find("*").removeClass("day-clicked");
         day_ele.classList.add("day-clicked");
-        let formated_date = `${year}-${month+1}-${day}`
+        let formated_date = '${year}-${month+1}-${day}'
         getSlots(formated_date)
     }
 
@@ -789,9 +789,9 @@
         let template = ''
         data.forEach(item => {
             if (item.available) {
-                template = template + `<button class="time-btn" onclick= "slotSelect(${item.id},this)">` + `${item.timeslot}</button>`
+                template = template + '<button class="time-btn" onclick= "slotSelect(${item.id},this)">' + '${item.timeslot}</button>'
             } else {
-                template = template + `<button class="time-btn time-btn-inactive">${item.timeslot}</button>`
+                template = template + '<button class="time-btn time-btn-inactive">${item.timeslot}</button>'
             }
 
         });
@@ -866,9 +866,9 @@
                     cart.addItem(product);
                     storeCartLocal(JsonCartSerializer(cart));
                     renderNavCart()
-                    showAlertSuccess(`${product.name} is booked`)
+                    showAlertSuccess('${product.name} is booked')
                 } else {
-                    showAlertError(`${product.name} is already booked`)
+                    showAlertError('${product.name} is already booked')
                 }
             } else {
                 cart.addItem(product);

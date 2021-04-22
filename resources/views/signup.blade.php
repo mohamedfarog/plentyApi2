@@ -228,7 +228,7 @@
     <form class="signup-form" id="signup-form">
 
 
-        <input type="text" name="contact" placeholder="MOBILE NO." />
+        <input id="contactnumbersignin" type="text" name="contact" placeholder="MOBILE NO." />
 
         <!-- 2 column grid layout for inline styling -->
         <div>
@@ -263,7 +263,7 @@
                 </div>
                 <div>
                     <p class="modaltextp">
-                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to +919239739
+                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to <span id="modalinputnumber">+915 00 000 0000</span>
                     </p>
                 </div>
                 <div class="modal-body">
@@ -366,6 +366,8 @@
     }
 
     function generateOTP(e) {
+        var cc =  $('#contactnumbersignin').val();
+        document.getElementById('modalinputnumber').innerHTML = cc; 
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
@@ -431,6 +433,11 @@
             }
         });
     }
+    $(document).ready(function() {
+        eraseCookie('bearer_token');
+        eraseCookie('user');     
+        console.log('logged out');
+    });
 
 </script>
 
