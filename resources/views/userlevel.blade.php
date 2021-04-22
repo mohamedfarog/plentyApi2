@@ -210,7 +210,7 @@
         height: 120px;
         vertical-align: middle;
         line-height: 120px;
-        border-right: 20px solid blue;
+        
     }
 
     .containerpoints {
@@ -327,10 +327,26 @@
 <section class="mt-30 mb-30">
     <div class="row userlvlrowuser" style="">
         <div class="userlevelimg" style="">
-            <img src="img/userlevel/sapphire.png">
-        </div>
-
-        <div class="align-middle userleveltxt" style="">
+            @if(isset($userlevel)) 
+                        @if($userlevel == 'NA')
+                            <img src="img/userlevel/sapphire.png">
+                            </div> 
+                            <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
+                        @elseif($userlevel == 'Sapphire')
+                            <img src="img/userlevel/sapphire.png">
+                            </div> 
+                            <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
+                        @elseif($userlevel == 'Emerald')
+                            <img src="img/userlevel/emerald.png">
+                            </div> 
+                            <div class="align-middle userleveltxt" style="border-right: 20px solid green;">
+                        @elseif($userlevel == 'Topaz')
+                            <img src="img/userlevel/topaz.png">
+                            </div> 
+                            <div class="align-middle userleveltxt" style="border-right: 20px solid #2fc1d1;">
+                @endif
+            @endif
+       
             <span style="font-size:18px;width:100%;">
                 @if(isset($userlevel))
 
@@ -352,7 +368,7 @@
         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div>
                 <a data-toggle="modal" data-target=".sapphiremodal"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
-                    <img src="img/userlevel/sapphire.png">
+                     <img src="img/userlevel/sapphire.png">
                 </a>
             </div>
             <br>
@@ -383,11 +399,31 @@
 </section>
 <section class="containerbar" style="">
     <div class="w3-border" style="border-radius:50px;background-color: #e2e2e2;margin-top:30px;position:relative;display:block;">
-        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;top: -35px;left:0%">
-        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;top: -35px;left:35%;">
-        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;top: -35px;left:65%">
-        <img src="img/userlevel/triangle.png" style="position:absolute;top: 30px;left:{{$percentage-2}}%">
-        <span style="position:absolute;top: 50px;left:{{$percentage-6}}%">{{$totalpurchases}} SAR</span>
+        @if(isset($totalpurchases))
+            @if($totalpurchases > 29999)
+                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
+                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%">
+                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+            @elseif($totalpurchases > 19999)
+                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
+                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%">
+                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+            @elseif($totalpurchases > 1)
+                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
+                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;"> 
+                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+            @else
+                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%;"> 
+                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;"> 
+                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+            @endif 
+        @else
+            <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%;">
+            <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;">
+            <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%"> 
+        @endif
+        <img src="img/userlevel/triangle.png" style="position:absolute;top: 40px;left:{{$percentage-2}}%">
+        <span style="position:absolute;top: 60px;left:{{$percentage-6}}%">{{$totalpurchases}} SAR</span>
         <div class="w3-grey" style="height:20px;width:{{$percentage}}%;border-radius:50px;background-color:#ffa400 !important;"></div>
     </div>
 </section>
@@ -473,7 +509,7 @@
                 <span style="color:#c8c8c8">(eg. 1000 Points = 20 SAR Discount)</span>
             </div>
             <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
-                <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px" data-dismiss="modal"> OKAY </button>
+                <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px;background:green;" data-dismiss="modal"> OKAY </button>
             </div>
 
         </div>
@@ -498,7 +534,7 @@
                 <span style="color:#c8c8c8">(eg. 1000 Points = 30 SAR Discount)</span>
             </div>
             <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
-                <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px" data-dismiss="modal"> OKAY </button>
+                <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px;background:#2fc1d1;" data-dismiss="modal"> OKAY </button>
             </div>
 
         </div>

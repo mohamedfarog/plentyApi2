@@ -385,7 +385,7 @@ class WebsiteHomeController extends Controller
         if (isset($user)) {
             $data['totalpurchases'] = $user->points;
             
-            $data['percentage'] =  $data['totalpurchases'] * 100 / 30000;
+            $data['percentage'] =  $data['totalpurchases'] * 100 /40000;
             switch (true) {
                 case $data['totalpurchases'] > 29999:
                     $data['userlevel'] = 'Topaz';
