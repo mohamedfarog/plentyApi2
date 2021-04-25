@@ -96,7 +96,7 @@ class FoodicsController extends Controller
             "is_house_account_enabled" => true
         ]);
         if ($response->ok()) {
-            $user->foodics_unique_id = $response->json()['id'];
+            // $user->foodics_unique_id = $response->json()['id'];
             $user->save();
         } else {
             Log::error(
