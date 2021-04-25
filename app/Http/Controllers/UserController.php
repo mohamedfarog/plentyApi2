@@ -226,7 +226,7 @@ class UserController extends Controller
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
                     }
-                    (new FoodicsController())->createUser($user);
+                    // (new FoodicsController())->createUser($user);
                     
                     $msg = 'Account details updated successfully.';
                     return response()->json(['success' => !!$user, 'message' => $msg, 'user' => $user]);
