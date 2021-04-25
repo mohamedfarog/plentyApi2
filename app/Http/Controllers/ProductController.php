@@ -291,7 +291,10 @@ class ProductController extends Controller
                     if(isset($request->productid)){
                         $product = Product::find($request->productid)->update($data);
                     }
-                    $product = Product::create($data);
+                    else{
+                       $product = Product::create($data); 
+                    }
+                    
 
                     if (isset($request->sizes)) {
                         foreach ($request->sizes as $size) {
@@ -339,6 +342,7 @@ class ProductController extends Controller
                             $sizes = Color::create($arr);
                         }
                     }
+                 
                     if (isset($request->images)) {
                         foreach ($request->images as $image) {
                             $arr = array();
