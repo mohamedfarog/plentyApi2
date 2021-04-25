@@ -20,7 +20,7 @@ class TableschedSeeder extends Seeder
         $shops = Shop::where('cat_id', 1)->get();
         foreach ($shops as $shop) {
             foreach ($days as $day) {
-                Tablesched::create(['day' => $day, 'seating_time' => 30, 'shop_id' => $shop->id, 'opening' => "10:00 AM", 'closing' => '10:00 PM']);
+                Tablesched::create(['day' => $day, 'seating_time' => 30, 'shop_id' => $shop->id, 'opening' => "10:00:00 AM", 'closing' => '10:00:00 PM']);
             }
         }
     }
