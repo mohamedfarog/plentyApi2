@@ -67,7 +67,7 @@ class ProductController extends Controller
     public function store(Request $request, UploadHelper $helper)
     {
         //
-       
+
 
         $user = Auth::user();
 
@@ -245,6 +245,23 @@ class ProductController extends Controller
         }
     }
 
+    public function toggleFeatured(Request $request)
+    {
+        $user = Auth::user();
+        $prod = false;
+        $msg = "You are currently logged out, please login to update.";
+        $status = 400;
+        if ($user) {
+            if (isset($request->id)) {
+                $prod =  Product::find($request->id)->update(["featured" => $request->featured]);
+                $msg = "Product has been updated.";
+                $status = 200;
+            }
+        }
+
+        return response()->json(['success' => !!$prod, 'msg' => $msg], $status);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -337,7 +354,7 @@ class ProductController extends Controller
         if (!$shop)
             return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
         $name = $request->name;
-        return Product::where("shop_id", $shop->id)->where(function($searching)use( $name){
+        return Product::where("shop_id", $shop->id)->where(function ($searching) use ($name) {
             $searching->where('name_ar', 'like', "%" . $name . "%",)->orwhere('name_en', 'like', "%" . $name . "%",);
         })->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
     }
