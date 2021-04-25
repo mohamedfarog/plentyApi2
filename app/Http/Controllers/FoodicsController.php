@@ -136,7 +136,7 @@ class FoodicsController extends Controller
         $res = [];
         if ($request->customer_mobile_number) {
             
-            $contact = "" . $request->mobile_country_code . $request->customer_mobile_number;
+            $contact = "" . $request->customer_mobile_number;
             $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
                 if (!isset($userinfo->tier_id)) {
@@ -144,7 +144,7 @@ class FoodicsController extends Controller
                     return response()->json([
                         "type" => 1,
                         "discount_amount" => $amount,
-                        "is_percent" => true,
+                        "is_percent" => false,
                         "customer_mobile_number" => $request->customer_mobile_number,
                         "mobile_country_code" => "SA",
                         "reward_code" => $request->reward_code,
@@ -161,7 +161,7 @@ class FoodicsController extends Controller
         $res = [
             "type" => 1,
             "discount_amount" => 0,
-            "is_percent" => true,
+            "is_percent" => false,
             "customer_mobile_number" => $request->customer_mobile_number,
             "mobile_country_code" => "SA",
             "reward_code" => $request->reward_code,
