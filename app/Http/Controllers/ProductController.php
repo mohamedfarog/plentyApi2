@@ -67,6 +67,7 @@ class ProductController extends Controller
     public function store(Request $request, UploadHelper $helper)
     {
         //
+        return $request->all();
 
         $user = Auth::user();
 
