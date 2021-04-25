@@ -73,6 +73,16 @@ class Loyalty extends Model
         }
         return 0.0;
     }
+    public static function convertPurchaseAmountToPoints($tier=1, $amount)
+    {
+        //Converting amount to points
+        $tierData= Tier::find($tier);
+        if($tierData)
+        {
+            return$amount*($tierData->value);
+        }
+        return $amount;
+    }
 
     public static function convertToCurrency($tier=1, $points)
     {
