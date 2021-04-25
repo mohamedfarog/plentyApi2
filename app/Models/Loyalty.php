@@ -59,7 +59,7 @@ class Loyalty extends Model
         // $user - User
         // $points
         // redeem Login
-        $user->points=$points;
+        $user->points-=$points;
         $user->save();
     }
 

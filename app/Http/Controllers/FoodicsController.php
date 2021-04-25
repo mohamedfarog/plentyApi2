@@ -135,30 +135,28 @@ class FoodicsController extends Controller
         $this->access($request);
         $res = [];
         if ($request->customer_mobile_number) {
-            
-            $contact = "" . $request->customer_mobile_number;
+
+            $contact = "" . $this->findCountryISOBYCODE($request->mobile_country_code) . $request->customer_mobile_number;
             $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
-                if (!($userinfo->tier_id)) 
-                {
-                    $userinfo->tier_id=1;
+                if (!($userinfo->tier_id)) {
+                    $userinfo->tier_id = 1;
                     $userinfo->save();
                 }
-                    $amount = Loyalty::convertToCurrency($userinfo->tier_id, $userinfo->points);
-                    return response()->json([
-                        "type" => 1,
-                        "discount_amount" => $amount,
-                        "is_percent" => false,
-                        "customer_mobile_number" => $request->customer_mobile_number,
-                        "mobile_country_code" => $request->mobile_country_code,
-                        "reward_code" => $request->reward_code,
-                        "business_reference" => $request->business_reference,
-                        "max_discount_amount" => $amount,
-                        "discount_includes_modifiers" => false,
-                        "allowed_products" => null,
-                        "is_discount_taxable" => false
-                    ]);
-                
+                $amount = Loyalty::convertToCurrency($userinfo->tier_id, $userinfo->points);
+                return response()->json([
+                    "type" => 1,
+                    "discount_amount" => $amount,
+                    "is_percent" => false,
+                    "customer_mobile_number" => $request->customer_mobile_number,
+                    "mobile_country_code" => $request->mobile_country_code,
+                    "reward_code" => $request->reward_code,
+                    "business_reference" => $request->business_reference,
+                    "max_discount_amount" => $amount,
+                    "discount_includes_modifiers" => false,
+                    "allowed_products" => null,
+                    "is_discount_taxable" => false
+                ]);
             }
             $this->getAllCustomers(null, $request->customer_mobile_number);
         }
@@ -177,12 +175,27 @@ class FoodicsController extends Controller
         ];
         return response()->json($res);
     }
+    public function findCountryISOBYCODE($code)
+    {
+        switch ($code) {
+            case 'AE':
+                return "971";
+                break;
+            case 'SA':
+                return "966";
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
     public function loyalityRedeem(Request $request)
     {
         Log::info($request->all());
         $this->access($request);
-        if (isset($request->user_id)) {
-            $userinfo = User::where("foodics_unique_id", $request->user_id)->first();
+        if ($request->customer_mobile_number) {
+            $contact = "" . $this->findCountryISOBYCODE($request->mobile_country_code) . $request->customer_mobile_number;
+            $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
                 $points = Loyalty::convertToPoints($userinfo->tier_id, $request->discount_amount);
                 Loyalty::redeemPoints($userinfo, $points);
