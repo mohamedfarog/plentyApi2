@@ -59,14 +59,14 @@ class FoodicsController extends Controller
         if ($response->ok()) {
             $customer = $response->json()['data'];
 
-            $userinfo = User::where("contact", "like", "%" . $customer['phone'])->first();
+            $userinfo = User::where("contact", "like", "%" .$customer['dial_code'] . $customer['phone'])->first();
             if ($userinfo) {
                 $userinfo->foodics_unique_id = $foodics_unique_id;
                 $userinfo->save();
                 return $userinfo;
             }
             $userinfo = new User();
-
+            $userinfo->tier_id=1;
             $userinfo->name = $customer['name'];
             $userinfo->email = $customer['email'];
             $userinfo->bday = $customer['birth_date'];
