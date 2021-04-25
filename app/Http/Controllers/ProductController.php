@@ -122,7 +122,6 @@ class ProductController extends Controller
                             break;
                     }
                 } else {
-                    return response()->json(['success' =>'test']);
                     $validator = Validator::make($request->all(), [
                         "name_en" => "required",
                         "price" => "required",
@@ -239,7 +238,122 @@ class ProductController extends Controller
                     return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
                 }
                 break;
+                case 'V':
+                    $validator = Validator::make($request->all(), [
+                        "name_en" => "required",
+                        "price" => "required",
+                        "desc_en" => "required",
+                        
+                    ]);
 
+                    if ($validator->fails()) {
+                        return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+                    }
+                     
+                  
+                    $data = array();
+                    if (isset($request->name_en)) {
+                        $data['name_en'] = $request->name_en;
+                    }
+                    if (isset($request->name_ar)) {
+                        $data['name_ar'] = $request->name_ar;
+                    }
+                    if (isset($request->desc_en)) {
+                        $data['desc_en'] = $request->desc_en;
+                    }
+                    if (isset($request->desc_ar)) {
+                        $data['desc_ar'] = $request->desc_ar;
+                    }
+                    if (isset($request->price)) {
+                        $data['price'] = $request->price;
+                    }
+                    if (isset($request->offerprice)) {
+                        $data['offerprice'] = $request->offerprice;
+                    }
+                    if (isset($request->isoffer)) {
+                        $data['isoffer'] = $request->isoffer;
+                    }
+                    if (isset($request->stocks)) {
+                        $data['stocks'] = $request->stocks;
+                    }
+                    if (isset($request->prodcat_id)) {
+                        $data['prodcat_id'] = $request->prodcat_id;
+                    }
+                    if (isset($request->shop_id)) {
+                        $data['shop_id'] = $request->shop_id;
+                    }
+                    if (isset($request->shop_id)) {
+                        $data['shop_id'] = $request->shop_id;
+                    }
+                    if (isset($request->eventcat_id)) {
+                        $data['eventcat_id'] = $request->eventcat_id;
+                    }
+                    $product = Product::create($data);
+
+                    if (isset($request->sizes)) {
+                        foreach ($request->sizes as $size) {
+                            $arr = array();
+                            $arr['product_id'] = $product->id;
+                            $arr['value'] = $size['value'];
+                            $arr['others'] = $size['others'];
+                            $arr['price'] = $size['price'];
+                            $arr['stocks'] = $size['stocks'];
+                            if (isset($size['image']) && $size['image'] != null) {
+                                $arr['image'] = $helper->store($size['image']);
+                            }
+
+                            $sizes = Size::create($arr);
+                        }
+                    }
+                    if (isset($request->addons)) {
+                        foreach ($request->addons as $addon) {
+                            $arr = array();
+                            $arr['product_id'] = $product->id;
+                            $arr['name_en'] = $addon['name_en'];
+                            if (isset($addon['name_ar'])) {
+
+                                $arr['name_ar'] = $addon['name_ar'];
+                            }
+
+                            $arr['desc_en'] = $addon['desc_en'];
+                            if (isset($addon['desc_ar'])) {
+
+                                $arr['desc_ar'] = $addon['desc_ar'];
+                            }
+                            $arr['others'] = $addon['others'];
+                            $arr['price'] = $addon['price'];
+                            $sizes = Addon::create($arr);
+                        }
+                    }
+                    if (isset($request->colors)) {
+                        foreach ($request->colors as $color) {
+                            $arr = array();
+                            $arr['product_id'] = $product->id;
+                            $arr['value'] = $color['value'];
+                            $arr['others'] = $color['others'];
+
+
+                            $sizes = Color::create($arr);
+                        }
+                    }
+                    if (isset($request->images)) {
+                        foreach ($request->images as $image) {
+                            $arr = array();
+                            $arr['product_id'] = $product->id;
+                            $arr['url'] = $helper->store($image['img']);
+
+
+                            $sizes = Image::create($arr);
+                            // return response()->json(['Sizes' => !!$sizes , 'message' => $msg, 'Size'=>$sizes]);
+
+                        }
+                    }
+
+                    $product = Product::with(['addons', 'sizes', 'colors', 'designer', 'images'])->find($product->id);
+
+                    $msg = 'Product has been added';
+                    return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
+                    break;
             default:
                 # code...
                 break;
