@@ -728,7 +728,7 @@
             cart.loyality_point = data.loyality_point;
             cart.order_total = data.order_total;
             cart.plenty_pay = data.plenty_pay;
-            cart.is_cash_on_delivery = data.is_cash_on_delivery;
+            cart.is_cash_on_delivery = data.is_cash_on_delivery || true;
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {

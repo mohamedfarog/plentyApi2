@@ -240,158 +240,157 @@
                     <div class="tab-content" style="border:0;padding:0">
                         <!-- shopping-cart start -->
                         <div class="tab-pane" id="shopping-cart">
-                            <form action="#">
-                                <div class="shop-cart-table">
-                                    <div class="table-content table-responsive">
+                            <div class="shop-cart-table">
+                                <div class="table-content table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="product-thumbnail">Product</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product-quantity">Quantity</th>
+                                                <th class="product-subtotal">Total</th>
+                                                <th class="product-remove">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="product-thumbnail  text-left">
+                                                    <!-- Single-product start -->
+                                                    <div class="single-product">
+                                                        <div class="product-img">
+                                                            <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
+                                                        </div>
+                                                        <div class="product-info">
+                                                            <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
+                                                            <p class="mb-0">Color : Black</p>
+                                                            <p class="mb-0">Size : SL</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Single-product end -->
+                                                </td>
+                                                <td class="product-price">$56.00</td>
+                                                <td class="product-quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">$112.00</td>
+                                                <td class="product-remove">
+                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-thumbnail  text-left">
+                                                    <!-- Single-product start -->
+                                                    <div class="single-product">
+                                                        <div class="product-img">
+                                                            <a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
+                                                        </div>
+                                                        <div class="product-info">
+                                                            <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
+                                                            <p class="mb-0">Color : Black</p>
+                                                            <p class="mb-0">Size : SL</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Single-product end -->
+                                                </td>
+                                                <td class="product-price">$56.00</td>
+                                                <td class="product-quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">$112.00</td>
+                                                <td class="product-remove">
+                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-thumbnail  text-left">
+                                                    <!-- Single-product start -->
+                                                    <div class="single-product">
+                                                        <div class="product-img">
+                                                            <a href="single-product.html"><img src="img/product/6.jpg" alt="" /></a>
+                                                        </div>
+                                                        <div class="product-info">
+                                                            <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
+                                                            <p class="mb-0">Color : Black</p>
+                                                            <p class="mb-0">Size : SL</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Single-product end -->
+                                                </td>
+                                                <td class="product-price">$56.00</td>
+                                                <td class="product-quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">$112.00</td>
+                                                <td class="product-remove">
+                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="customer-login mt-30">
+                                        <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
+                                        <p class="text-gray">Enter your coupon code if you have one!</p>
+                                        <input type="text" placeholder="Enter your code here.">
+                                        <button type="submit" data-text="apply coupon" class="button-one submit-button mt-15">apply coupon</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="customer-login payment-details mt-30">
+                                        <h4 class="title-1 title-border text-uppercase">payment details</h4>
                                         <table>
-                                            <thead>
-                                                <tr>
-                                                    <th class="product-thumbnail">Product</th>
-                                                    <th class="product-price">Price</th>
-                                                    <th class="product-quantity">Quantity</th>
-                                                    <th class="product-subtotal">Total</th>
-                                                    <th class="product-remove">Remove</th>
-                                                </tr>
-                                            </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
-                                                                <p class="mb-0">Color : Black</p>
-                                                                <p class="mb-0">Size : SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-quantity">
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </td>
-                                                    <td class="product-subtotal">$112.00</td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
+                                                    <td class="text-left">Cart Subtotal</td>
+                                                    <td class="text-right">$155.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
-                                                                <p class="mb-0">Color : Black</p>
-                                                                <p class="mb-0">Size : SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-quantity">
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </td>
-                                                    <td class="product-subtotal">$112.00</td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
+                                                    <td class="text-left">Cart Subtotal</td>
+                                                    <td class="text-right">$15.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/6.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
-                                                                <p class="mb-0">Color : Black</p>
-                                                                <p class="mb-0">Size : SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-quantity">
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </td>
-                                                    <td class="product-subtotal">$112.00</td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
+                                                    <td class="text-left">Vat</td>
+                                                    <td class="text-right">$00.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Order Total</td>
+                                                    <td class="text-right">$170.00</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="customer-login mt-30">
-                                            <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
-                                            <p class="text-gray">Enter your coupon code if you have one!</p>
-                                            <input type="text" placeholder="Enter your code here.">
-                                            <button type="submit" data-text="apply coupon" class="button-one submit-button mt-15">apply coupon</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="customer-login payment-details mt-30">
-                                            <h4 class="title-1 title-border text-uppercase">payment details</h4>
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-left">Cart Subtotal</td>
-                                                        <td class="text-right">$155.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left">Cart Subtotal</td>
-                                                        <td class="text-right">$15.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left">Vat</td>
-                                                        <td class="text-right">$00.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left">Order Total</td>
-                                                        <td class="text-right">$170.00</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="customer-login mt-30">
-                                            <h4 class="title-1 title-border text-uppercase">culculate shipping</h4>
-                                            <p class="text-gray">Enter your coupon code if you have one!</p>
-                                            <div class="row">
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <input type="text" placeholder="Country">
-                                                </div>
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <input type="text" placeholder="Region / State">
-                                                </div>
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <input type="text" placeholder="Post code">
-                                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="customer-login mt-30">
+                                        <h4 class="title-1 title-border text-uppercase">culculate shipping</h4>
+                                        <p class="text-gray">Enter your coupon code if you have one!</p>
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <input type="text" placeholder="Country">
                                             </div>
-                                            <button type="submit" data-text="get a quote" class="button-one submit-button mt-15">get a quote</button>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <input type="text" placeholder="Region / State">
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <input type="text" placeholder="Post code">
+                                            </div>
                                         </div>
+                                        <button type="submit" data-text="get a quote" class="button-one submit-button mt-15">get a quote</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+
                         </div>
                         <!-- shopping-cart end -->
                         <!-- wishlist start -->
@@ -491,7 +490,7 @@
                         <!-- wishlist end -->
                         <!-- check-out start -->
                         <div class="tab-pane active" id="check-out">
-                            <form action="#">
+                            <form id="cart-form">
                                 <input type="hidden" id="loyality-point" name="loyality-point">
                                 <div class="shop-cart-table check-out-wrap">
                                     <div class="row">
@@ -515,7 +514,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">Address: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" id="address" onchange="initAutocomplete()" type="text" placeholder="">
+                                                        <input class="inputdeladd" name="address" id="address" onchange="initAutocomplete()" type="text" placeholder="" required>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -523,7 +522,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">City: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <select class="inputdeladd">
+                                                        <select id="city" name="city" required>
                                                             <option value="Jiddah">Jiddah</option>
                                                             <option value="Jīzān">Jīzān</option>
                                                             <option value="Khamīs Mushayt">Khamīs Mushayt</option>
@@ -541,7 +540,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">Contact Number: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" type="text" placeholder="">
+                                                        <input class="inputdeladd" id="contact" name="contact" type="text" placeholder="" required>
                                                     </div>
                                                 </div>
                                                 <div class="mt-20"></div>
@@ -554,10 +553,10 @@
                                                             <div class="col-md-4 col-xs-4">
                                                                 <label class="radio-inline">
                                                                     <div class="row">
-                                                                        <a class="addresslabel" style="padding: 7px;">
-                                                                            <input type="radio" name="optradio" checked>
-                                                                            <span>Home </span>
-                                                                            <img src="img/checkout/home.png" style="height:20px;margin-left:10px;">
+                                                                        <a class="addresslabel" style="padding: 7px; background-color: rgb(0, 27, 113);">
+                                                                            <input type="radio" name="adresslabel" value="0" checked>
+                                                                            <span style="color:white">Home </span>
+                                                                            <img src="img/checkout/home.png" style="height:20px;margin-left:10px;color:white;filter: brightness(0) invert(1);">
                                                                         </a>
                                                                     </div>
 
@@ -567,7 +566,7 @@
                                                                 <label class="radio-inline">
                                                                     <div class="row">
                                                                         <a class="addresslabel" style="padding: 7px;">
-                                                                            <input type="radio" name="optradio" checked>
+                                                                            <input type="radio" name="adresslabel" value="1">
                                                                             <span>Work </span>
                                                                             <img src="img/checkout/portfolio.png" style="height:20px;margin-left:10px;">
                                                                         </a>
@@ -579,7 +578,7 @@
                                                                 <label class="radio-inline">
                                                                     <div class="row">
                                                                         <a class="addresslabel" style="padding: 7px;">
-                                                                            <input type="radio" name="optradio" checked>
+                                                                            <input type="radio" name="adresslabel" value="2">
                                                                             <span>Other </span>
                                                                             <img src="img/checkout/pin.png" style="height:20px;margin-left:10px;">
                                                                         </a>
@@ -596,7 +595,7 @@
                                                         <label class="labelbilldet">Other Notes: </label>
                                                     </div>
                                                     <div class="col-md-12 col-xs-12">
-                                                        <textarea class="custom-textarea" row="6" placeholder="" style=" background: white;border: 2px solid #7f8db8;"></textarea>
+                                                        <textarea class="custom-textarea" name="othernotes" id="othernotes" row="6" placeholder="" style=" background: white;border: 2px solid #7f8db8;"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -689,8 +688,8 @@
                                                             <span style="font-size:16px;">Select the amount to pay with your Loyalty Points!</span>
                                                         </div>
                                                         <div style="margin-left:5px;margin-right:5px;margin-top5:px;">
-                                                            <input type="range" name="pointInputName" id="pointInputId" onchange="calculateLoyalityPoint(this)" class="slider" value="56" min="1" max="100" oninput="pointOutputId.value = pointInputId.value" style="background:#ffa400">
-                                                            <output name="pointOutputName" id="pointOutputId">50</output>
+                                                            <input type="range" name="pointInputName" id="pointInputId" onchange="calculateLoyalityPoint(this)" class="slider" value="0" min="0" max="100" oninput="pointOutputId.value = pointInputId.value" style="background:#ffa400">
+                                                            <output name="pointOutputName" id="pointOutputId">0</output>
                                                         </div>
                                                         <div class="mt-30 row" style="width:50%;text-align:center;margin:auto">
                                                             <div style="background:white;padding: 10px 0" class="col-md-5 col-xs-12">
@@ -710,13 +709,13 @@
 
                                                         <div class="row mt-30 mb-30" style="margin-left:5px;margin-right:5px;">
                                                             <span style="font-size:16px;">Available Loyalty Points</span>
-                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold';font-size:16px;" id="point-sar-balance">375 <span style="font-family:'Avenir';font-weight:100">SAR</span></span>
+                                                            <span class="boldfont" style="text-align:right;float:right;margin-right:15px;font-family:'Avenir Bold';font-size:16px;" id="point-sar-balance">0 <span style="font-family:'Avenir';font-weight:100">SAR</span></span>
                                                         </div>
                                                     </div>
                                                     <!-- Accordion end -->
                                                     <!-- Accordion start -->
                                                     <h3 class="payment-accordion" style="background:white">
-                                                        <input type="radio" id="male" name="gender" value="male"><label style="width:100%;" for="male">Cash on Delivery
+                                                        <input type="radio" id="paymode0" name="paymode" value="0" checked><label style="width:100%;" for="paymode0">Cash on Delivery
                                                             <span style='float:right;line-height:1;padding-top: 5px;'><img src="img/checkout/cash.png" style="height:25px;"></span></label>
 
                                                     </h3>
@@ -725,7 +724,7 @@
                                                     <!-- Accordion start -->
                                                     <div style="border: 2px solid #1d2767;margin-bottom:20px;">
                                                         <h3 class="payment-accordion" style="background:white;margin-bottom:0px;">
-                                                            <input type="radio" id="male" name="gender" value="male"><label for="male">Pay with Card</label>
+                                                            <input type="radio" id="paymode1" name="paymode" value="1"><label for="paymode1">Pay with Card</label>
                                                             <span style='float:right;line-height:1;padding-top: 5px;'><img src="img/checkout/card.png" style="height:25px;"></span></label>
                                                         </h3>
                                                         <div class="carddets">
@@ -909,6 +908,17 @@
         event.preventDefault();
     });
     $(document).ready(function() {
+        $('#paymode0').change(function() {
+            var cart = CartSerializer(getCartLocal())
+            cart.is_cash_on_delivery = true
+            storeCartLocal(JsonCartSerializer(cart));
+
+        });
+        $('#paymode1').change(function() {
+            var cart = CartSerializer(getCartLocal())
+            cart.is_cash_on_delivery = false;
+            storeCartLocal(JsonCartSerializer(cart));
+        });
         renderOrderedProduct();
         getLoyalityPoint();
         removeCoupon();
@@ -918,6 +928,10 @@
 
     function renderOrderedProduct() {
         var cart = CartSerializer(getCartLocal())
+        cart.loyality_point = 0;
+        cart.coupon = '';
+        cart.coupon_value = 0;
+        storeCartLocal(JsonCartSerializer(cart));
         let template = ''
 
         cart.cart_items.forEach(item => {
@@ -932,7 +946,7 @@
 
         });
         $('#product').html(template);
-        $('#order_total').html(cart.subTotal() + " SAR");
+        $('#order_total').html(cart.subTotal().toFixed(2) + " SAR");
         $('#ordertotal').val(cart.subTotal());
         $('#balance').val(cart.subTotal());
         $('#sub_total').html(cart.subTotal() + " SAR");
@@ -964,17 +978,20 @@
                 },
 
                 success: function(data) {
-                    console.log(data)
                     if (data.value > 0) {
                         $("#coupon_error").html("coupon applied " + data.value + " SAR")
-                        $("#coupon-applied").html('-' + data.value + ' SAR (10%)')
+                        $("#coupon-applied").html(data.value + ' SAR (10%)')
                         cart.coupon_value = data.value;
                         cart.coupon = code;
+                        document.getElementById("balance").value = cart.orderTotal();
                         $("#coupon-wrapper").css("visibility", "visible");
                         $("#coupon").html(code)
+                        cart.loyality_point = 0;
+                        cart.plenty_pay = 0;
                         document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) - parseFloat(cart.coupon_value);
-                        document.getElementById("order_total").innerText = document.getElementById("balance").value
+                        document.getElementById("order_total").innerText = parseFloat(document.getElementById("balance").value).toFixed(2);
                         storeCartLocal(JsonCartSerializer(cart));
+                        resetPlentyPointAndPay();
                     } else {
                         $("#coupon_error").html("This coupon is not applicable ! ")
                     }
@@ -990,6 +1007,22 @@
         }
 
     }
+
+    function resetPlentyPointAndPay() {
+        document.getElementById("point-used").innerHTML = 0;
+        document.getElementById("sar-used").innerHTML = 0;
+        var ele = document.getElementById("pointInputId");;
+        document.getElementById("point-sar-balance").innerHTML = (
+            calculateLoyalityPointSAR(parseFloat(ele.max),
+                parseFloat(ele.max))).toFixed(2) + ' SAR';
+        document.getElementById("plenty-point-show").innerHTML = (0).toFixed(2) + ' SAR';
+        ele.value = 0;
+        document.getElementById("pointOutputId").value = 0;
+        document.getElementById("plenty-balance-show").innerHTML = 0;
+        ele = document.getElementById("plentypay")
+        ele.checked = false;
+    }
+
 
     function getLoyalityPoint() {
 
@@ -1023,6 +1056,7 @@
 
     $("form").on('submit', function(e) {
         e.preventDefault();
+        const form = new FormData(document.getElementById("cart-form"))
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'place-order'
         $.ajax({
@@ -1031,7 +1065,14 @@
             dataType: 'JSON',
             data: {
                 "_token": "{{ csrf_token() }}",
-                "cart": getCartLocal()
+                "cart": getCartLocal(),
+                "address": form.get("address") || null,
+                "city": form.get("city") || null,
+                "contact": form.get("contact") || null,
+                "addresslabel": form.get("adresslabel") || null,
+                "othernotes": form.get("othernotes") || null,
+                "lang": form.get("lng") || null,
+                "lat": form.get("lat") || null
             },
             headers: {
                 "Authorization": 'Bearer ' + bearer_token
@@ -1061,38 +1102,65 @@
     });
 
     function calculateLoyalityPoint(ele) {
-        if (parseFloat(document.getElementById("balance").value) > 0) {
-            let sar = calculateLoyalityPointSAR(parseFloat(ele.value), parseFloat(ele.max));
-            if (sar >= parseFloat(document.getElementById("balance").value)) {
-                let sar_availble = calculateLoyalityPointSAR(parseInt(ele.max));
-                document.getElementById("point-used").innerHTML = ele.value;
-                document.getElementById("sar-used").innerHTML = sar;
-                document.getElementById("point-sar-balance").innerHTML = (sar_availble - sar).toFixed(2) + ' SAR';
-                document.getElementById("plenty-point-show").innerHTML = sar + ' SAR';
-                document.getElementById("balance").value = 0;;
-                document.getElementById("order_total").innerText = 0
-            } else {
-                let sar_availble = calculateLoyalityPointSAR(parseFloat(ele.max), );
-                document.getElementById("point-used").innerHTML = ele.value;
-                document.getElementById("sar-used").innerHTML = sar;
-                document.getElementById("point-sar-balance").innerHTML = (sar_availble - sar).toFixed(2) + ' SAR';
-                document.getElementById("plenty-point-show").innerHTML = sar + ' SAR';
-                document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) - parseFloat(sar);
-                document.getElementById("order_total").innerText = document.getElementById("balance").value
-            }
-
+        var cart = CartSerializer(getCartLocal())
+        let applied_sar = calculateLoyalityPointSAR(parseFloat(cart.loyality_point), parseFloat(ele.max))
+        let balance;
+        if (applied_sar > 0) {
+            balance = parseFloat(document.getElementById("balance").value) + applied_sar;
+        } else {
+            balance = parseFloat(document.getElementById("balance").value)
         }
-
+        let sar = calculateLoyalityPointSAR(parseFloat(ele.value), parseFloat(ele.max));
+        let sar_available = calculateLoyalityPointSAR(parseFloat(ele.max), parseFloat(ele.max)) - sar;
+        if (sar < balance) {
+            console.log('do not!')
+            document.getElementById("point-used").innerHTML = ele.value;
+            document.getElementById("sar-used").innerHTML = sar;
+            document.getElementById("point-sar-balance").innerHTML = (sar_available).toFixed(2) + ' SAR';
+            document.getElementById("plenty-point-show").innerHTML = sar.toFixed(2) + ' SAR';
+            document.getElementById("balance").value = balance - parseFloat(sar);
+            document.getElementById("order_total").innerText = parseFloat(document.getElementById("balance").value).toFixed(2);
+        } else {
+            let max_point
+            if (balance > 0) {
+                max_point = calculateLoyalitySARPoint(balance, parseFloat(ele.max))
+            } else {
+                max_point = cart.loyality_point;
+            }
+            sar_available = calculateLoyalityPointSAR(parseFloat(ele.max) - max_point, parseFloat(ele.max));
+            document.getElementById("pointOutputId").innerHTML = max_point;
+            document.getElementById("point-used").innerHTML = max_point;
+            document.getElementById("sar-used").innerHTML = balance;
+            document.getElementById("point-sar-balance").innerHTML = (sar_available).toFixed(2) + ' SAR';
+            document.getElementById("balance").value = 0;
+            document.getElementById("order_total").innerText = 0;
+            ele.value = max_point;
+            sar = calculateLoyalityPointSAR(parseFloat(ele.value), parseFloat(ele.max));
+            document.getElementById("plenty-point-show").innerHTML = sar.toFixed(2) + ' SAR';
+        }
+        cart.loyality_point = ele.value;
+        storeCartLocal(JsonCartSerializer(cart));
     }
 
     function calculateLoyalityPointSAR(point, total_point) {
-        console.log(point, total_point)
         if (total_point > 29999) {
             return point * 3 / 100;
         } else if (total_point > 19999) {
             return point * 2 / 100;
         } else if (total_point > 0) {
             return point * 1 / 100;
+        } else {
+            return 0;
+        }
+    }
+
+    function calculateLoyalitySARPoint(sar, total_point) {
+        if (total_point > 29999) {
+            return sar * 100 / 3;
+        } else if (total_point > 19999) {
+            return sar * 100 / 2;
+        } else if (total_point > 0) {
+            return sar * 100;
         } else {
             return 0;
         }
@@ -1139,11 +1207,11 @@
                 const balance = parseFloat(document.getElementById("balance").value);
                 const wallet = parseFloat(document.getElementById('plenty-balance').value);
                 if (balance > wallet) {
-                    document.getElementById("plenty-balance-show").innerText = (wallet - balance) + " SAR"
+                    document.getElementById("plenty-balance-show").innerText = (wallet - balance).toFixed(2) + " SAR"
                     document.getElementById("plentypay").value = wallet - balance;
                     document.getElementById("balance").value = balance - (wallet - balance);
                 } else {
-                    document.getElementById("plenty-balance-show").innerText = balance + " SAR"
+                    document.getElementById("plenty-balance-show").innerText = balance.toFixed(2) + " SAR"
                     document.getElementById("plentypay").value = balance;
                     document.getElementById("balance").value = 0;
                 }
@@ -1161,9 +1229,7 @@
 
     }
 
-    function calculateOrderTotal() {
-        document.getElementById("order_total").innerText = 100.00;
-    }
+
 
     function showPlentyBalance(sar = 100) {
 
@@ -1172,7 +1238,7 @@
 
     function changeTotalPrice() {
         const balance = document.getElementById("balance").value
-        document.getElementById("order_total").innerText = balance
+        document.getElementById("order_total").innerText = balance.toFixed(2)
     }
 
     function removeCoupon() {
@@ -1180,7 +1246,7 @@
         ele.style.visibility = 'hidden'
         var cart = CartSerializer(getCartLocal())
         document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(cart.coupon_value);
-        document.getElementById("order_total").innerText = document.getElementById("balance").value
+        document.getElementById("order_total").innerText = parseFloat(document.getElementById("balance").value).toFixed(2)
         cart.coupon = '';
         cart.coupon_value = 0;
         storeCartLocal(JsonCartSerializer(cart));
