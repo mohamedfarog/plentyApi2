@@ -52,9 +52,30 @@ class FoodicsController extends Controller
     }
     public function getUserInfoByFoodicID($foodics_unique_id)
     {
+        $userinfo = User::where("foodics_unique_id", $foodics_unique_id)->first();
+        if ($userinfo)
+            return $userinfo;
         $response = Http::withToken($this->token)->get($this->baseUrl . "customers/" . $foodics_unique_id,);
         if ($response->ok()) {
-            return $response->json();
+            $customer = $response->json()['data'];
+
+            $userinfo = User::where("contact", "like", "%" . $customer['phone'])->first();
+            if ($userinfo) {
+                $userinfo->foodics_unique_id = $foodics_unique_id;
+                $userinfo->save();
+                return $userinfo;
+            }
+            $userinfo = new User();
+
+            $userinfo->name = $customer['name'];
+            $userinfo->email = $customer['email'];
+            $userinfo->bday = $customer['birth_date'];
+            $userinfo->gender = $customer['gender'];
+            $userinfo->contact = "+" . $customer['dial_code'] . $customer['phone'];
+            $userinfo->invitation_code = 'P-' . time();
+            $userinfo->foodics_unique_id = $foodics_unique_id;
+            $userinfo->save();
+            return $userinfo;
         } else
             throw ("there is some errors while getUserInfoByFoodicID" . $foodics_unique_id);
     }
@@ -86,7 +107,21 @@ class FoodicsController extends Controller
     }
     public function webhooks(Request $request)
     {
-        Log::info($request->all());
+
+        switch ($request->event) {
+            case 'customer.order.created':
+                $foodics_unique_id = $request->customer['id'];
+                $amount = $request->customer['total_price'];
+                $userinfo = $this->getUserInfoByFoodicID($foodics_unique_id);
+                $userinfo->points+=Loyalty::convertToPoints($userinfo->tier_id,$amount);
+                $userinfo->totalpurchases+=$amount;
+                break;
+
+            default:
+                Log::info($request->all());
+                break;
+        } {
+        }
     }
     public function loyalityRewards(Request $request)
     {
