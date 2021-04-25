@@ -89,8 +89,7 @@
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
-                "</div>"
-
+                "</div>"  
         });
         $("#fav-product-panel").html(prod_element)
         $('.buttonsshow').css({

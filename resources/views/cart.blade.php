@@ -65,7 +65,33 @@
     .zzbtnproc::before {
         background: white !important;
     }
+    .zzbtnproc:hover {
+        background-color: #001b71 !important;
+        background: #001b71 !important;
+        color:white !important;
+    }
+    .btn.zzbtnproc:after {
+    background-color: #001b71;
+    color:white !important;
+    }
+    button.btn.btn-dark:hover {
+        background-color: #001b71;
+        color:white !important;
+    }
+    .proceedbtn{
+        color:#001b71
+    }
+    .product-remove-button:hover{
+         background-color: #001b71;
+    }
 
+    .btn.btn-dark::after {
+        background-color: white;
+        color: #001b71 !important;
+    }
+    .procchks:hover{
+        color: #001b71;
+    }
     @media only screen and (max-width: 600px) {
         .tablemobile {
             width: 95% !important;
@@ -145,9 +171,9 @@
                             <div class="actions">
 
 
-                                <a href="/brands" class="btn btn-lg btn-dark chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="color:#001b71">add item</span></a>
+                                <a href="/brands" class="btn btn-lg  chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="">add item</span></a>
                                 <div class="wc-proceed-to-checkout checkoutbtn">
-                                    <a href="/checkout" class="btn btn-lg btn-dark chkbtn"><span class="proceedbtn">proceed to checkout</span></a>
+                                    <a href="/checkout" class="btn btn-lg btn-dark chkbtn procchks"><span class="proceedbtnz">proceed to checkout</span></a>
                                 </div>
                             </div>
                         </div>

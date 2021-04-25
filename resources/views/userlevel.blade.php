@@ -351,9 +351,9 @@
                 @if(isset($userlevel))
 
                 @if($userlevel == 'NA')
-                <span style="font-size:18px;">User level is not applicable for you!</span>
+                <span style="font-size:18px;">The more you spend, the better the rewards!</span>
                 @else
-                You are a<span style="font-size:18px;font-family:'Avenir Bold'"> {{$userlevel}}</span>
+                You are a<span style="font-size:18px;font-family:'Avenir Bold';"> {{$userlevel}}</span>
                 <span style="font-size:18px;">user</span>
                 @endif
                 @endif
