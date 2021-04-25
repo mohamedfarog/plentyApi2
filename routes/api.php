@@ -258,4 +258,3 @@ Route::get('/updates', function () {
     $output = shell_exec('cd ../ && git pull && php artisan migrate');
     echo "<pre>$output</pre>";;
 });
-Route::any("*",[FoodicsController::class,"test"]);
