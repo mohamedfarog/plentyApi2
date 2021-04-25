@@ -121,7 +121,7 @@ class FoodicsController extends Controller
                 $userinfo->save();
                 break;
             case "customer.created":
-                $foodics_unique_id = $request->order['customer']['id'];
+                $foodics_unique_id = $request->customer['id'];
                 $this->getUserInfoByFoodicID($foodics_unique_id);
                 break;
             default:
