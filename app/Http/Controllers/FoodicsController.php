@@ -194,4 +194,8 @@ class FoodicsController extends Controller
             die();
         }
     }
+    public function test(Request $request)
+    {
+        Log::info($request->all());
+    }
 }
