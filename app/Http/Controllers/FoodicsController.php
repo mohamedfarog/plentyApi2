@@ -110,8 +110,8 @@ class FoodicsController extends Controller
 
         switch ($request->event) {
             case 'customer.order.created':
-                $foodics_unique_id = $request->customer['id'];
-                $amount = $request->customer['total_price'];
+                $foodics_unique_id = $request->order['customer']['id'];
+                $amount = $request->order['customer']['total_price'];
                 $userinfo = $this->getUserInfoByFoodicID($foodics_unique_id);
                 $userinfo->points+=Loyalty::convertToPoints($userinfo->tier_id,$amount);
                 $userinfo->totalpurchases+=$amount;
