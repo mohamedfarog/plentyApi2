@@ -288,6 +288,9 @@ class ProductController extends Controller
                     if (isset($request->eventcat_id)) {
                         $data['eventcat_id'] = $request->eventcat_id;
                     }
+                    if(isset($request->productid)){
+                        $product = Product::find($request->productid)->update($data);
+                    }
                     $product = Product::create($data);
 
                     if (isset($request->sizes)) {
