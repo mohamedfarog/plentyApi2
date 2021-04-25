@@ -249,18 +249,23 @@ class ProductController extends Controller
     public function toggleFeatured(Request $request)
     {
         $user = Auth::user();
-        $prod = false;
+        $prodsave = false;
         $msg = "You are currently logged out, please login to update.";
         $status = 400;
         if ($user) {
             if (isset($request->id)) {
-                $prod =  Product::find($request->id)->update(["featured" => $request->featured]);
+
+                $prod =  Product::find($request->id);
+                if($prod){
+                    $prod->featured = $request->featured;
+                    $prodsave = $prod->save();
+                }
                 $msg = "Product has been updated.";
                 $status = 200;
             }
         }
 
-        return response()->json(['success' => !!$prod, 'msg' => $msg], $status);
+        return response()->json(['success' => !!$prodsave, 'msg' => $msg], $status);
     }
 
     /**
