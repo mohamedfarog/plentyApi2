@@ -139,7 +139,11 @@ class FoodicsController extends Controller
             $contact = "" . $request->customer_mobile_number;
             $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
-                if (!isset($userinfo->tier_id)) {
+                if (!($userinfo->tier_id)) 
+                {
+                    $userinfo->tier_id=1;
+                    $userinfo->save();
+                }
                     $amount = Loyalty::convertToCurrency($userinfo->tier_id, $userinfo->points);
                     return response()->json([
                         "type" => 1,
@@ -154,7 +158,7 @@ class FoodicsController extends Controller
                         "allowed_products" => null,
                         "is_discount_taxable" => false
                     ]);
-                }
+                
             }
             $this->getAllCustomers(null, $request->customer_mobile_number);
         }
