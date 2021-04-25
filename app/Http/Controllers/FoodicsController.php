@@ -134,6 +134,7 @@ class FoodicsController extends Controller
         $this->access($request);
         $res = [];
         if ($request->customer_mobile_number) {
+            Log::info($request->all());
             $contact = "" . $request->mobile_country_code . $request->customer_mobile_number;
             $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
