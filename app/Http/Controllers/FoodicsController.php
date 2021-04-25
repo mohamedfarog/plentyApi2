@@ -131,9 +131,11 @@ class FoodicsController extends Controller
     }
     public function loyalityRewards(Request $request)
     {
+        Log::info($request->all());
         $this->access($request);
         $res = [];
         if ($request->customer_mobile_number) {
+            
             $contact = "" . $request->mobile_country_code . $request->customer_mobile_number;
             $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
@@ -173,6 +175,7 @@ class FoodicsController extends Controller
     }
     public function loyalityRedeem(Request $request)
     {
+        Log::info($request->all());
         $this->access($request);
         if (isset($request->user_id)) {
             $userinfo = User::where("foodics_unique_id", $request->user_id)->first();
