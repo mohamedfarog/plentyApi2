@@ -243,7 +243,7 @@ class ProductController extends Controller
                         "name_en" => "required",
                         "price" => "required",
                         "desc_en" => "required",
-                        "prodcat_id" => "required"
+                        
                     ]);
 
                     if ($validator->fails()) {

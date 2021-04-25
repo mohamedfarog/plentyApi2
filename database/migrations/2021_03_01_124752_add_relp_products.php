@@ -16,7 +16,7 @@ class AddRelpProducts extends Migration
         Schema::table('products', function (Blueprint $table) {
             //
             $table->unsignedBigInteger('prodcat_id');
-            $table->foreign('prodcat_id')->references('id')->on('prodcats');
+            $table->foreign('prodcat_id')->references('id')->on('prodcats')->nullable();
         });
     }
 
