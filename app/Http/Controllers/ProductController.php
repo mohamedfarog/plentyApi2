@@ -122,7 +122,7 @@ class ProductController extends Controller
                             break;
                     }
                 } else {
-
+                    return response()->json(['success' =>'test']);
                     $validator = Validator::make($request->all(), [
                         "name_en" => "required",
                         "price" => "required",
@@ -133,8 +133,8 @@ class ProductController extends Controller
                     if ($validator->fails()) {
                         return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
                     }
-                   
-                    return response()->json(['success' =>'RESPONSE IS']);
+                     
+                  
                     $data = array();
                     if (isset($request->name_en)) {
                         $data['name_en'] = $request->name_en;
