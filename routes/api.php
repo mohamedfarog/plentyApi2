@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\EjackController;
 use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FoodicsController;
@@ -57,15 +58,16 @@ use Thenextweb\PassGenerator;
 |
 */
 //Foodics routes
-Route::get('webhooks',[FoodicsController::class, 'webhooks']);
-Route::post('webhooks',[FoodicsController::class, 'webhooks']);
-
+Route::get('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
+Route::post('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
+Route::post('loyality/rewards',[FoodicsController::class, 'loyalityRewards']);
+Route::post('loyality/redeem',[FoodicsController::class, 'loyalityRedeem']);
+Route::get('testtran',[EjackController::class, 'create']);
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('testfoodics',[FoodicsController::class, 'getAllCustomers']);
 Route::get('events',[EventController::class, 'index']);
 Route::get('eventshops',[EventcatController::class, 'index']);
 Route::get('eventproducts',[ProductController::class, 'getProducts']);
