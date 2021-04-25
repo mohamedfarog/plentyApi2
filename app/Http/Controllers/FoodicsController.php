@@ -120,13 +120,13 @@ class FoodicsController extends Controller
                 $userinfo->points+=Loyalty::convertToPoints($userinfo->tier_id,$amount);
                 $userinfo->totalpurchases+=$amount;
                 $userinfo->save();
+                Log::info("purchases".$amount );
                 break;
 
             default:
                 Log::info($request->all());
                 break;
-        } {
-        }
+        } 
     }
     public function loyalityRewards(Request $request)
     {
