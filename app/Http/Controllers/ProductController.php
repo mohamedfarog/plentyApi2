@@ -254,6 +254,7 @@ class ProductController extends Controller
         $status = 400;
         if ($user) {
             if (isset($request->id)) {
+                return Product::find($request->id);
                 $prod =  Product::find($request->id)->update(["featured" => $request->featured]);
                 $msg = "Product has been updated.";
                 $status = 200;
