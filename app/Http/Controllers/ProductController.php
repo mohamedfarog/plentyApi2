@@ -254,7 +254,7 @@ class ProductController extends Controller
         $status = 400;
         if ($user) {
             if (isset($request->id)) {
-                return Product::find($request->id);
+
                 $prod =  Product::find($request->id);
                 if($prod){
                     $prod->featured = $request->featured;
