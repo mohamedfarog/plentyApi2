@@ -238,7 +238,7 @@ class UserController extends Controller
     public function autologin(Request $request)
     {
         $user = Auth::user();
-        $user = User::with(['tier'])->find($user->id);
+        $user = User::with(['tier','shop'])->find($user->id);
         return response()->json(['user' => $user]);
     }
 
