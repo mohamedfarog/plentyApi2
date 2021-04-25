@@ -113,6 +113,10 @@ class FoodicsController extends Controller
                 $foodics_unique_id = $request->order['customer']['id'];
                 $amount = $request->total_price;
                 $userinfo = $this->getUserInfoByFoodicID($foodics_unique_id);
+                if(!$userinfo->tier_id)
+                {
+                    $userinfo->tier_id=1;
+                }
                 $userinfo->points+=Loyalty::convertToPoints($userinfo->tier_id,$amount);
                 $userinfo->totalpurchases+=$amount;
                 break;
