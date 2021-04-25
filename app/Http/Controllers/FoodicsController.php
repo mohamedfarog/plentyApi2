@@ -117,7 +117,7 @@ class FoodicsController extends Controller
                 {
                     $userinfo->tier_id=1;
                 }
-                $userinfo->points+=Loyalty::convertToPoints($userinfo->tier_id,$amount);
+                $userinfo->points+=Loyalty::convertPurchaseAmountToPoints($userinfo->tier_id,$amount);
                 $userinfo->totalpurchases+=$amount;
                 $userinfo->save();
                 Log::info("purchases".$amount );
