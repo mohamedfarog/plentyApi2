@@ -125,9 +125,9 @@ class FoodicsController extends Controller
                 $this->getUserInfoByFoodicID($foodics_unique_id);
                 break;
             default:
-               
+                Log::info($request->all());
                 break;
-        } Log::info($request->all());
+        }
     }
     public function loyalityRewards(Request $request)
     {
