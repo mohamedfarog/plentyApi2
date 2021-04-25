@@ -15,6 +15,7 @@ class UserObserver
      */
     public function created(User $user)
     {
+        if(!$user->foodics_unique_id)
         (new FoodicsController())->createUser($user);
     }
 
