@@ -264,7 +264,6 @@ class ProductController extends Controller
                      
                   
                     $data = array();
-                    return $request->all();
                     if (isset($request->name_en)) {
                         $data['name_en'] = $request->name_en;
                     }
