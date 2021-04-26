@@ -13,6 +13,6 @@ class TableBooking extends Model
     ];
     public function details()
     {
-        return $this->hasMany(TableBookingDetail::class);
+        return $this->hasMany(TableBookingDetail::class,"tablebookingid");
     }
 }
