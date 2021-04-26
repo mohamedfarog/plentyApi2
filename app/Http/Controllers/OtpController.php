@@ -55,7 +55,7 @@ class OtpController extends Controller
                     $msg = 'OTP has been verified.';
                     $otp->save();
 
-                    $user = User::where('contact', $request->contact)->first();
+                    $user = User::with(['tier'])->where('contact', $request->contact)->first();
 
                     if ($user) {
                         Auth::login($user);
