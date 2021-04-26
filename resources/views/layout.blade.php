@@ -458,7 +458,7 @@
 
 
     <script>
-        var base_url = "http://127.0.0.1:8000/"
+        var base_url = "http://plentyapp.mvp-apps.ae/"
         $(".regular").slick({
             dots: true,
             infinite: true,
@@ -816,7 +816,7 @@
             let cart = new Cart()
             $.ajax({
                 type: 'GET',
-                url: 'http://127.0.0.1:8000/shop-category',
+                url: base_url + 'shop-category',
                 dataType: 'JSON',
                 success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));

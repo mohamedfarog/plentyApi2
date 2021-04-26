@@ -210,7 +210,7 @@
         height: 120px;
         vertical-align: middle;
         line-height: 120px;
-        
+
     }
 
     .containerpoints {
@@ -309,7 +309,6 @@
             line-height: 30px;
         }
     }
-
 </style>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -327,26 +326,26 @@
 <section class="mt-30 mb-30">
     <div class="row userlvlrowuser" style="">
         <div class="userlevelimg" style="">
-            @if(isset($userlevel)) 
-                        @if($userlevel == 'NA')
-                            <img src="img/userlevel/sapphire.png">
-                            </div> 
-                            <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
-                        @elseif($userlevel == 'Sapphire')
-                            <img src="img/userlevel/sapphire.png">
-                            </div> 
-                            <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
-                        @elseif($userlevel == 'Emerald')
-                            <img src="img/userlevel/emerald.png">
-                            </div> 
-                            <div class="align-middle userleveltxt" style="border-right: 20px solid green;">
-                        @elseif($userlevel == 'Topaz')
-                            <img src="img/userlevel/topaz.png">
-                            </div> 
-                            <div class="align-middle userleveltxt" style="border-right: 20px solid #2fc1d1;">
-                @endif
+            @if(isset($userlevel))
+            @if($userlevel == 'NA')
+            <img src="img/userlevel/sapphire.png">
+        </div>
+        <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
+            @elseif($userlevel == 'Sapphire')
+            <img src="img/userlevel/sapphire.png">
+        </div>
+        <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
+            @elseif($userlevel == 'Emerald')
+            <img src="img/userlevel/emerald.png">
+        </div>
+        <div class="align-middle userleveltxt" style="border-right: 20px solid green;">
+            @elseif($userlevel == 'Topaz')
+            <img src="img/userlevel/topaz.png">
+        </div>
+        <div class="align-middle userleveltxt" style="border-right: 20px solid #2fc1d1;">
             @endif
-       
+            @endif
+
             <span style="font-size:18px;width:100%;">
                 @if(isset($userlevel))
 
@@ -368,7 +367,7 @@
         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">
             <div>
                 <a data-toggle="modal" data-target=".sapphiremodal"><img src="img/userlevel/info.png" style="vertical-align: top;padding-top:15px;">
-                     <img src="img/userlevel/sapphire.png">
+                    <img src="img/userlevel/sapphire.png">
                 </a>
             </div>
             <br>
@@ -400,27 +399,27 @@
 <section class="containerbar" style="">
     <div class="w3-border" style="border-radius:50px;background-color: #e2e2e2;margin-top:30px;position:relative;display:block;">
         @if(isset($totalpurchases))
-            @if($totalpurchases > 29999)
-                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
-                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%">
-                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
-            @elseif($totalpurchases > 19999)
-                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
-                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%">
-                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
-            @elseif($totalpurchases > 1)
-                    <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
-                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;"> 
-                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
-            @else
-                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%;"> 
-                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;"> 
-                    <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
-            @endif 
+        @if($totalpurchases > 29999)
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%">
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+        @elseif($totalpurchases > 19999)
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+        @elseif($totalpurchases > 1)
+        <img src="img/userlevel/checkprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
         @else
-            <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%;">
-            <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;">
-            <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%"> 
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%;">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
+        @endif
+        @else
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:0%;">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:46%;">
+        <img src="img/userlevel/greyprogcircle.png" style="position:absolute;z-index: 999;top: -35px;left:71%">
         @endif
         <img src="img/userlevel/triangle.png" style="position:absolute;top: 40px;left:{{$percentage-2}}%">
         <span style="position:absolute;top: 60px;left:{{$percentage-6}}%">{{$totalpurchases}} SAR</span>
@@ -563,8 +562,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -572,8 +571,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -583,7 +582,5 @@
     $(document).ready(function() {
         console.log("ready!");
     });
-
 </script>
 @endsection
-

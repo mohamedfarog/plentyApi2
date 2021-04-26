@@ -306,104 +306,10 @@
 </section>
 <!-- end plenty bazaar -->
 
-<!-- Trendy Products -->
-<section class="section-wrap-sm new-arrivals ">
-    <div class="purchase-online-area ">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <h2 class="title-border">Featured Products</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <!-- Nav tabs -->
-
-                </div>
-                <div class="col-lg-12">
-                    <!-- Tab panes -->
-                    <div class="-">
-                        <div class="tab-pane active" id="new-arrivals">
-                            <div class="row">
 
 
-                            </div>
-                        </div>
 
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> <!-- end trendy products -->
-<section class="regular slider" style="width:90%;text-align:center;margin:auto">
-    @if(isset($featured_products))
-    @foreach($featured_products as $product)
-
-    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
-
-        <a href="{{ url('/product/' . $product->id) }}">
-            <div class="product-img frame">
-
-                @if ($product->image)
-                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
-                @else
-                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
-                @endif
-
-                <div class="product-action clearfix">
-                </div>
-            </div>
-        </a>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                </a>
-                <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
-                        <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-    @endforeach
-    @endif
-</section>
-
-<div class="purchase-online-area ">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title text-center">
-                    <h2 class="title-border">Brands</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <!-- Nav tabs -->
-
-            </div>
-            <div class="col-lg-12">
-                <!-- Tab panes -->
-                <div class="-">
-                    <div class="tab-pane active" id="new-arrivals">
-                        <div class="row">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <section class="brandsslider slider" style="width:90%;text-align:center;margin:auto">
     @if(isset($homebrands))

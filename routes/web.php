@@ -94,7 +94,9 @@ Route::get('/aboutus', function () {
     return view('/aboutus');
 });
 
-
+Route::get('/clothings', function () {
+    return view('/clothing');
+});
 
 Route::get('/careers', function () {
     return view('/careers');
