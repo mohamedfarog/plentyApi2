@@ -65,33 +65,40 @@
     .zzbtnproc::before {
         background: white !important;
     }
+
     .zzbtnproc:hover {
         background-color: #001b71 !important;
         background: #001b71 !important;
-        color:white !important;
+        color: white !important;
     }
+
     .btn.zzbtnproc:after {
-    background-color: #001b71;
-    color:white !important;
+        background-color: #001b71;
+        color: white !important;
     }
+
     button.btn.btn-dark:hover {
         background-color: #001b71;
-        color:white !important;
+        color: white !important;
     }
-    .proceedbtn{
-        color:#001b71
+
+    .proceedbtn {
+        color: #001b71
     }
-    .product-remove-button:hover{
-         background-color: #001b71;
+
+    .product-remove-button:hover {
+        background-color: #001b71;
     }
 
     .btn.btn-dark::after {
         background-color: white;
         color: #001b71 !important;
     }
-    .procchks:hover{
+
+    .procchks:hover {
         color: #001b71;
     }
+
     @media only screen and (max-width: 600px) {
         .tablemobile {
             width: 95% !important;
@@ -124,7 +131,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -173,7 +179,7 @@
 
                                 <a href="/brands" class="btn btn-lg  chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="">add item</span></a>
                                 <div class="wc-proceed-to-checkout checkoutbtn">
-                                    <a href="/checkout" class="btn btn-lg btn-dark chkbtn procchks"><span class="proceedbtnz">proceed to checkout</span></a>
+                                    <a onclick="proceedCheckout()" class="btn btn-lg btn-dark chkbtn procchks"><span class="proceedbtnz">proceed to checkout</span></a>
                                 </div>
                             </div>
                         </div>
@@ -380,7 +386,6 @@
 
             return template;
         }
-
     </script>
 
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
@@ -388,4 +393,3 @@
     </div>
 
     @endsection
-

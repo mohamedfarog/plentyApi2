@@ -20,6 +20,7 @@ use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use App\Models\Project;
+use App\Http\Controllers\OrderController;
 
 class WebsiteHomeController extends Controller
 {
@@ -643,18 +644,63 @@ class WebsiteHomeController extends Controller
     function placeOreder(Request $request)
     {
         $cart = $request->cart;
-        $products_filter = $this->filterProducts($cart);
-        $a = $this->validateShedule($products_filter);
-        $b = $this->validateProduct($products_filter);
-        $c = $this->validateSize($products_filter);
+        //  $products_filter = $this->filterProducts($cart);
+        // $a = $this->validateShedule($products_filter);
+        //$b = $this->validateProduct($products_filter);
+        //$c = $this->validateSize($products_filter);
+
+        $items = array();
+        foreach ($cart["cart_items"] as $item) {
+            array_push($items, array(
+                'product_id' => $item['id'],
+                'shop_id' => $item['shop_id'],
+                'price' => $item['price'],
+                'color_id' => $item['color'],
+                'size_id' => $item['size_id'],
+                'booking_date' => $item['date'],
+                'timeslot_id' => $item['timeslot_id'],
+                'qty' => $item['quantity'],
+            ));
+        }
+
+        $pay_mode = 'cash';
+        if (!$cart["is_cash_on_delivery"]) {
+            $pay_mode = 'card';
+        }
 
 
-        $request = new Request([
-            'name'   => 'unit test',
-            'number' => 123,
+        $m_request = new Request([
+
+            'delivery_location' => $request->address,
+            'city' => $request->city,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+            'label' => $request->addresslabel,
+            'delivery_note' => $request->othernotes,
+            'contact_number' => $request->contact,
+
+            'total_amount'   => 100,
+            'amount_due' => 0,
+
+            'payment_method' =>  $pay_mode,
+            'points' => $cart["loyality_point"],
+            'wallet' => $cart["plenty_pay"],
+            'coupon_value' => $cart["coupon_value"],
+
+            'orderdetails' => $items,
+
         ]);
-        return response()->json(['Response' => $a]);
+        $order = new OrderController();
+        try {
+            $order->store($m_request);
+        } catch (Exception $e) {
+            return response()->json(['Response' => $e]);
+        }
+
+        return response()->json(['Response' => $m_request]);
     }
+
+
 
     // Checkout proceed
     function checkoutProceed()

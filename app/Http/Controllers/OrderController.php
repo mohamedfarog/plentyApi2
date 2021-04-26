@@ -45,7 +45,7 @@ class OrderController extends Controller
                         return $product->with(['images']);
                     }, 'size', 'color']);
                 },]);
-                
+
                 break;
             case 'S':
             case 's':
@@ -195,7 +195,7 @@ class OrderController extends Controller
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
-                $customer = User::with(['tier'])->find($user->id);           
+                $customer = User::with(['tier'])->find($user->id);
                 //for updating the user model
                 $customer->points = $user->points - $request->points;
             }
@@ -220,15 +220,15 @@ class OrderController extends Controller
                 $data['coupon_value'] = $request->coupon_value;
             }
             $shoplist =  array();                // List of Shop Ids
-            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
-            if($pointsearned){
+            $pointsearned = $loyalty->addPoints($customer, $request->amount_due, $request->wallet ?? 0, $shoplist);
+            if ($pointsearned) {
                 $data['points_earned'] = $pointsearned;
             }
 
             $order = Order::create($data);
 
 
-           
+
             foreach ($request->orderdetails as $orderdetails) {
                 $arr = array();
                 if (isset($orderdetails['product_id'])) {
@@ -254,12 +254,8 @@ class OrderController extends Controller
                     $arr['price'] = $orderdetails['price'];
                 }
                 if (isset($orderdetails['color_id'])) {
-                    if($orderdetails['color_id']==-1){
-
-
-                    }
-                    else
-                    $arr['color_id'] = $orderdetails['color_id'];
+                    if ($orderdetails['color_id'] == -1) { } else
+                        $arr['color_id'] = $orderdetails['color_id'];
                 }
                 if (isset($orderdetails['size_id'])) {
                     $arr['size_id'] = $orderdetails['size_id'];
@@ -277,15 +273,15 @@ class OrderController extends Controller
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
             }
-            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
-              
-            $customer->points+=$pointsearned;
-            
+            $pointsearned = $loyalty->addPoints($customer, $request->amount_due, $request->wallet ?? 0, $shoplist);
+
+            $customer->points += $pointsearned;
+
             $customer->save();
-            $loyalty->calculateTier($customer,$request->amount_due,$request->wallet);
+            $loyalty->calculateTier($customer, $request->amount_due, $request->wallet);
             $msg = 'Order has been added';
 
-            
+
 
 
             return response()->json(['success' => !!$order, 'message' => $msg, 'user' => User::find($customer->id)]);

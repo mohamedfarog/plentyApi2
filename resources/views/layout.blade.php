@@ -336,7 +336,7 @@
 
                                             <div class="nav-cart-actions mt-20">
                                                 <a href="/cart" class="btn btn-md viewcartbtn"><span style="color:white;">View Cart</span></a>
-                                                <a href="/checkout" class="btn btn-md btn-color mt-10"><span style="color:white;">Proceed to Checkout</span></a>
+                                                <a onclick="proceedCheckout()" class="btn btn-md btn-color mt-10"><span style="color:white;">Proceed to Checkout</span></a>
                                             </div>
                                         </div>
                                     </li>
@@ -458,7 +458,7 @@
 
 
     <script>
-        var base_url = "https://plentyapp.mvp-apps.ae/"
+        var base_url = "http://127.0.0.1:8000/"
         $(".regular").slick({
             dots: true,
             infinite: true,
@@ -816,7 +816,7 @@
             let cart = new Cart()
             $.ajax({
                 type: 'GET',
-                url: base_url + 'shop-category',
+                url: 'http://127.0.0.1:8000/shop-category',
                 dataType: 'JSON',
                 success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
@@ -1091,6 +1091,16 @@
 
         function eraseCookie(name) {
             document.cookie = name + '=; Max-Age=-99999999;';
+        }
+
+        function proceedCheckout() {
+            var cart = CartSerializer(getCartLocal())
+            if (cart.cart_items.length > 0) {
+                window.location.href = "/checkout";
+            } else {
+                showAlertError(`Cart is empty!`);
+            }
+
         }
     </script>
 
