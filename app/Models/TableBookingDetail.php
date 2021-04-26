@@ -11,4 +11,8 @@ class TableBookingDetail extends Model
     protected $fillable = [
         'addons', 'tablebookingid', 'addonid', 'size_id', 'qty', 'shop_id','price'
     ];
+    public function product()
+    {
+        return $this->hasone(Product::class);
+    }
 }
