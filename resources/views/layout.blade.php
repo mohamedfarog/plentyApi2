@@ -458,7 +458,7 @@
 
 
     <script>
-        var base_url = "http://127.0.0.1:8000/"
+        var base_url = "https://plentyapp.mvp-apps.ae/"
         $(".regular").slick({
             dots: true,
             infinite: true,
