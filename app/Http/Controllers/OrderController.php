@@ -218,14 +218,15 @@ class OrderController extends Controller
                 $data['coupon_value'] = $request->coupon_value;
             }
             $shoplist =  array();                // List of Shop Ids
-            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
-            if($pointsearned){
-                $data['points_earned'] = $pointsearned;
-            }
+     
 
             $order = Order::create($data);
 
-
+            //TODO
+    //    $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
+    //         if($pointsearned){
+    //             $data['points_earned'] = $pointsearned;
+    //         }
            
             foreach ($request->orderdetails as $orderdetails) {
                 $arr = array();
@@ -277,7 +278,7 @@ class OrderController extends Controller
             }
             
                
-            $customer->points+=$pointsearned;
+            // $customer->points+=$pointsearned;
             
             $customer->save();
             $loyalty->calculateTier($customer,$request->amount_due,$request->wallet);
