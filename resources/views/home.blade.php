@@ -31,17 +31,33 @@
     .nwa {
         font-weight: 100;
     }
+
     @media only screen and (max-width: 600px) {
 
-            .cccategory {
-                width:100%;
-            }
-            .pm-cat-item{
-                padding-left:0;
-                padding-right:5px;
-            }
+        .cccategory {
+            width: 100%;
         }
-    
+
+        .pm-cat-item {
+            padding-left: 0;
+            padding-right: 5px;
+        }
+    }
+
+    .panel-body {
+        padding: 0px;
+    }
+
+    .panel:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 5px 3px #d3d3d3;
+    }
+
+    .panel-default {
+        border-color: #f1f1f1;
+        color: #001b71;
+        font-size: 20px;
+    }
 </style>
 
 <!-- Hero Slider -->
@@ -117,8 +133,22 @@
                 </div>
             </div>
         </div>
+        <div class="hero-slide overlay" style="background-image:url(img/hero/6.jpg)">
+            <div class="container">
+                <div class="hero-holder">
+                    <div class="hero-message">
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">Plenty</h1>
+                        <h2 class="hero-subtitle lines nwa">Ramadan Bazaar</h2>
+                        <div class="buttons-holder">
+                            <a href="/beauty" class="btn btn-lg btn-transparent carouselbtn"><span>Discover More</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section> <!-- end hero slider -->
+
 
 <!-- Promo Banners -->
 <section class="section-wrap promo-banners pb-30">
@@ -180,6 +210,101 @@
     </div>
 </section> <!-- end promo banners -->
 
+<!-- Plenty bazaar -->
+<section class="section-wrap-sm new-arrivals">
+    <div class="purchase-online-area ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h2 class="title-border">Plenty Bazaar</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img src="img/bazaar/clothing.jpg" alt=""></div>
+                        <div class="panel-footer">Clothings<i class="fas fa-arrow-right pull-right"></i></div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/accessories.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Accessories
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/home_accessories.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Home Accessories
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/jewllery.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Jewllery
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/perfumes.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Perfumes
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/art.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Art
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/food.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Food
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end plenty bazaar -->
 
 <!-- Trendy Products -->
 <section class="section-wrap-sm new-arrivals ">
@@ -219,7 +344,7 @@
     @foreach($featured_products as $product)
 
     <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        
+
         <a href="{{ url('/product/' . $product->id) }}">
             <div class="product-img frame">
 
@@ -289,25 +414,25 @@
     ?>
 
     <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
-            @if($hb->cat_id == 1)
-                <a href="/delicacy/{{$hb->shop_id}}">
+        @if($hb->cat_id == 1)
+        <a href="/delicacy/{{$hb->shop_id}}">
             @elseif($hb->cat_id == 2)
-                <a href="/beauty/{{$hb->shop_id}}">
-            @elseif($hb->cat_id == 3)
+            <a href="/beauty/{{$hb->shop_id}}">
+                @elseif($hb->cat_id == 3)
                 <a href="/fashion/{{$hb->shop_id}}">
-            @else
-                <a href="/">
-            @endif
-            <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
+                    @else
+                    <a href="/">
+                        @endif
+                        <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
 
 
-                    <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-                
-                <div class="product-action clearfix">
+                            <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
 
-                </div>
-            </div>
-        </a> 
+                            <div class="product-action clearfix">
+
+                            </div>
+                        </div>
+                    </a>
 
 
     </div>
@@ -374,10 +499,8 @@
             });
         });
     });
-
 </script>
 <div style="">
     @include('footer')
 </div>
 @endsection
-

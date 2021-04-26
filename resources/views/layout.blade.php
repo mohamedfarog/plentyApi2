@@ -668,6 +668,7 @@
             this.date = item.date || null;
             this.time = item.time || null;
             this.timeslot_id = item.timeslot_id || null;
+            this.date = item.date || null;
             this.category = item.category || null;
             this.image_url = item.image_url;
             this.stock = item.stock;
@@ -699,6 +700,7 @@
                 item['color'] = element.color
                 item['quantity'] = element.quantity
                 item['time'] = element.time
+                item['date'] = element.date
                 item['timeslot_id'] = element.timeslot_id
                 item['category'] = element.category
                 item['image_url'] = element.image_url
@@ -1013,13 +1015,13 @@
 
 
         function userIsAuthenticated() {
-            document.getElementById('user-menu-nav').style = " visibility: visible;";
+            document.getElementById('user-menu-nav').style = " display: block;";
             document.getElementById('nav-username').innerHTML = getUserDetails().name;
 
         }
 
         function userIsNotAuthenticated() {
-            document.getElementById('user-menu-nav').style = " visibility: hidden;";
+            document.getElementById('user-menu-nav').style = " display: none;";
         }
 
         function getUser() {

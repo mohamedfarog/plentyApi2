@@ -218,12 +218,11 @@
             margin: auto;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
 <input type="hidden" id="shopid" value={{$shop->id}}>
-<input type="hidden" id="shopname" value={{$shop->name_en}}>
+<input type="hidden" id="shopname" value="{{$shop->name_en}}">
 <div class="heading-banner-area overlay-bg" style="background: url('img/store/SADA/Dine Banner.png') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
@@ -406,7 +405,6 @@
         document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
@@ -434,10 +432,10 @@
     //for filtering product based on category
     function getProducts(element, category = 0) {
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -454,10 +452,10 @@
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -489,7 +487,7 @@
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
-                "</div>" 
+                "</div>"
 
         });
         document.getElementById('product-panel').innerHTML = prod_element
@@ -530,7 +528,6 @@
         });
         console.log('nohover');
     });
-
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
@@ -538,4 +535,3 @@
 </div>
 
 @endsection
-

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
+use App\Models\Project;
 
 class WebsiteHomeController extends Controller
 {
@@ -384,8 +385,8 @@ class WebsiteHomeController extends Controller
         $user = Auth::user();
         if (isset($user)) {
             $data['totalpurchases'] = $user->totalpurchases;
-            
-            $data['percentage'] =  $data['totalpurchases'] * 100 /40000;
+
+            $data['percentage'] =  $data['totalpurchases'] * 100 / 40000;
             switch (true) {
                 case $data['totalpurchases'] > 29999:
                     $data['userlevel'] = 'Topaz';
@@ -408,16 +409,7 @@ class WebsiteHomeController extends Controller
 
 
 
-    /**
-     * Check out start here
-     * parm :  cart
-     * return total amount
-     */
-    function placeOreder(Request $request)
-    {
-        $cart = $request->cart;
-        return response()->json(['Response' => $cart]);
-    }
+
 
 
     function userDetails(Request $request)
@@ -623,5 +615,105 @@ class WebsiteHomeController extends Controller
         $user = Auth::user();
         $data['wallet'] = $user['wallet'];
         return response()->json(['Response' => !!$user, 'wallet' =>  $data['wallet']]);
+    }
+
+    /**
+     * Check out start here
+     * parm :  cart
+     * return total amount
+     */
+    function filterProducts($cart)
+    {
+        $ids['slots'] = array();
+        $ids['sizes'] = array();
+        $ids['products'] = array();
+        foreach ($cart["cart_items"] as $prd) {
+            if ($prd["category"] == 'Beauty') {
+                array_push($ids['slots'], $prd);
+            } else {
+                if ($prd["size_id"]) {
+                    array_push($ids['sizes'], $prd);
+                } else {
+                    array_push($ids['products'], $prd);
+                }
+            }
+        }
+        return $ids;
+    }
+    function placeOreder(Request $request)
+    {
+        $cart = $request->cart;
+        $products_filter = $this->filterProducts($cart);
+        $a = $this->validateShedule($products_filter);
+        $b = $this->validateProduct($products_filter);
+        $c = $this->validateSize($products_filter);
+
+
+        $request = new Request([
+            'name'   => 'unit test',
+            'number' => 123,
+        ]);
+        return response()->json(['Response' => $a]);
+    }
+
+    // Checkout proceed
+    function checkoutProceed()
+    {
+        return;
+    }
+
+
+    function validateShedule($products_filter)
+    {
+        $settings = Project::first();
+        $booking_date = array_column($products_filter["slots"], 'date');
+        $product_id = array_column($products_filter["slots"], 'id');
+        $timeslot_id = array_column($products_filter["slots"], 'timeslot_id');
+        $slots = DB::table('details')
+            ->select("product_id,booking_date,timeslot_id")
+            ->whereIn('booking_date', $booking_date, 'and')
+            ->whereIn('product_id',  $product_id, 'and')
+            ->whereIn('timeslot_id',  $timeslot_id)
+            ->get();
+
+        $booked = array();
+        if (count($slots) > 0) {
+            foreach ($slots as $slt) {
+
+                array_push($booked, "$slt->product_id-null-$slt->timeslot_id");
+            }
+            return  $booked;
+        }
+        //$timeslot = ($bookingcount < $settings->reserve);
+
+        // $booked_slots =
+        //     $slot_ids = array_column($products_filter["slots"], 'timeslot_id');
+        // $timeslots =  DB::table('details')
+        //     ->whereIn('id', $slot_ids)
+        //     ->get();
+
+        // foreach ($products_filter as $prd) {
+        //     //$prd["qi"]
+        // }
+
+        return $slots;
+    }
+    function validateProduct($products_filter)
+    {
+        $product_ids = array_column($products_filter["products"], 'id');
+        $products =  DB::table('products')
+            ->whereIn('id', $product_ids)
+            ->get();
+        foreach ($products_filter as $prd) { }
+        return $products;
+    }
+    function validateSize($products_filter)
+    {
+        $size_ids = array_column($products_filter["sizes"], 'size_id');
+        $sizes =  DB::table('sizes')
+            ->whereIn('id', $size_ids)
+            ->get();
+        foreach ($products_filter as $prd) { }
+        return $sizes;
     }
 }

@@ -940,8 +940,10 @@
                 size = " (" + item.size + ")";
             }
             template = template + "<tr>" +
-                "<td class='orderprodtxt' style='padding-left: 10px; font-weight:100'>" + item.name + size + " x" + item.quantity + "</td>" +
+                "<td class='orderprodtxt' style='padding-left: 10px; font-weight:100'>" + item.name + size + " x" + item.quantity + "<br/><span style='color:red' id='" + item.id + "-" + item.size_id + "-" + item.timeslot_id + "'> <span></td>" +
                 "<td class='text-right orderprodtxt orderprodprice'>" + item.price + " SAR</td>" +
+                "</tr>" +
+                "<tr>" +
                 "</tr>"
 
         });
@@ -1025,7 +1027,6 @@
 
 
     function getLoyalityPoint() {
-
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({

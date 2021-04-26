@@ -413,7 +413,6 @@
         color: black;
         border: 2px solid #edbddb;
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
@@ -515,12 +514,14 @@
             </div>
             <form onsubmit="event.preventDefault(); addToCart()" id="booking-form">
                 <input type="hidden" name="cat_id" id="cat_id" value="{{$shop->cat_id}}" autocomplete="off">
+                <input type="hidden" id="shop_id" name="shop_id" value="{{$product->shop_id}}" autocomplete="off">
                 <input type="hidden" name="product_id" id="product_id" value="{{$product->id}}" autocomplete="off">
                 <input type="hidden" name="product_name" id="product_name" value="{{$product->name_en}}" autocomplete="off">
                 <input type="hidden" name="product_price" id="product_price" value="{{$product->price}}" autocomplete="off">
                 <input type="hidden" name="product_image" id="product_image" value="{{$product->image}}" autocomplete="off">
                 <input type="hidden" name="timeslot" id="timeslot" autocomplete="off">
                 <input type="hidden" name="timeslot_id" id="timeslot_id" autocomplete="off">
+                <input type="hidden" name="day" id="day" autocomplete="off">
                 <div class="col-lg-6 col-xs-12">
                     <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;margin-right:40px;border-color:#c31c4a;vertical-align:bottom">
                         <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
@@ -548,8 +549,6 @@
         let today = new Date();
         let formated_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
         getSlots(formated_date)
-        booking - form
-
     });
 
 
@@ -627,11 +626,14 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            , firstDayOfMonth = new Date(y, m, 1).getDay()
+            ,
+            firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            ,
+            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            ,
+            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table style="width:100% !important;" id="calendar">';
@@ -761,24 +763,25 @@
         day_ele.classList.add("day-clicked");
         let formated_date = `${year}-${month+1}-${day}`
         getSlots(formated_date)
+        document.getElementById("day").value = formated_date
     }
 
     function getSlots(date) {
         let prod_id = document.getElementById('product_id').value
         url = base_url + 'api/timeslots'
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                product_id: prod_id
-                , date: date
-            }
-            , success: function(data) {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                product_id: prod_id,
+                date: date
+            },
+            success: function(data) {
                 renderSlots(data)
 
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -805,10 +808,10 @@
         ele.classList.add("slot-clicked");
         url = base_url + 'timeslot/' + id
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.Response) {
                     document.getElementById('timeslot').value = data.timeslot.timeslot
                     document.getElementById('timeslot_id').value = data.timeslot.id
@@ -818,8 +821,8 @@
                 }
 
 
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -844,15 +847,16 @@
                 return category.id == shop_id();
             });
             let item = {
-                id: form.get('product_id')
-                , price: form.get('product_price')
-                , name: form.get('product_name')
-                , image_url: form.get('product_image') || null
-                , timeslot_id: form.get('timeslot_id') || null
-                , time: form.get('timeslot') || null
-                , date: new Date(year, month, day) || null
-                , category: shop_category[0].name_en || null
-                , quantity: 1
+                id: form.get('product_id'),
+                price: form.get('product_price'),
+                name: form.get('product_name'),
+                shop_id: form.get('shop_id'),
+                image_url: form.get('product_image') || null,
+                timeslot_id: form.get('timeslot_id') || null,
+                time: form.get('timeslot') || null,
+                date: form.get('day') || null,
+                category: shop_category[0].name_en || null,
+                quantity: 1
             }
             let product = new CartItem(item)
             let cart = CartSerializer(getCartLocal());
@@ -875,15 +879,14 @@
                 }
             } else {
                 cart.addItem(product);
-                showAlertError(`${product.name} is already booked`)
-
+                showAlertSuccess(`${product.name} is booked`)
+                storeCartLocal(JsonCartSerializer(cart));
                 renderNavCart()
             }
         } else {
             showAlertError("Please select a slot!")
         }
     }
-
 </script>
 <script src="js/prodjs.js"></script>
 
@@ -891,4 +894,3 @@
     @include('footer')
 </div>
 @endsection
-
