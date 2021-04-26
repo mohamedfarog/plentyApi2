@@ -17,7 +17,7 @@ class CreateTableBookingDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tablebookingid');
             $table->foreign('tablebookingid')->references('id')->on('table_bookings');
-            $table->unsignedBigInteger('addon_id')->nullable();
+            $table->unsignedBigInteger('addonid')->nullable();
             $table->foreign('addonid')->references('id')->on('addons');
             $table->unsignedBigInteger('size_id')->nullable();
             $table->foreign('size_id')->references('id')->on('sizes');
