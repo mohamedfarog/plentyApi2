@@ -18,7 +18,9 @@ class TableBookingController extends Controller
      */
     public function index()
     {
-        //
+       $user_id=Auth::id();
+       $data=TableBooking::paginate();
+       return $data;
     }
 
 
