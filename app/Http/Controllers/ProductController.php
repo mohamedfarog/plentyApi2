@@ -31,16 +31,16 @@ class ProductController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                    return Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->all();
+                    return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->all();
                 }
-                return Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
+                return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
                 break;
             case 'V':
             case 'v':
                 $shop = ShopInfo::where('user_id', $user->id)->first();
                 if (!$shop)
                     return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-                return Product::where("shop_id", $shop->id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
+                return Product::where('deleted_at',null)->where("shop_id", $shop->id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
                 break;
             default:
                 # code...
@@ -296,7 +296,7 @@ class ProductController extends Controller
                     else{
                        $product = Product::create($data); 
                     }
-                    
+
                     
                     if(isset($request->productid)){
                     Size::where('product_id',$request->productid)->delete();
@@ -466,7 +466,7 @@ class ProductController extends Controller
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
-        $product = Product::where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
         if (isset($request->eventcat_id)) {
 
             $product = $product->where("eventcat_id", $request->eventcat_id);
@@ -488,7 +488,7 @@ class ProductController extends Controller
         if (!$shop)
             return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
         $name = $request->name;
-        return Product::where("shop_id", $shop->id)->where(function ($searching) use ($name) {
+        return Product::where('deleted_at',null)->where("shop_id", $shop->id)->where(function ($searching) use ($name) {
             $searching->where('name_ar', 'like', "%" . $name . "%",)->orwhere('name_en', 'like', "%" . $name . "%",);
         })->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
     }
