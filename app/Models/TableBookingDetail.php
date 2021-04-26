@@ -13,6 +13,6 @@ class TableBookingDetail extends Model
     ];
     public function product()
     {
-        return $this->hasone(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
