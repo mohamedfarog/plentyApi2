@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Detail;
 use App\Models\Loyalty;
 use App\Models\Order;
+use App\Models\Shop;
+use App\Models\ShopInfo;
 use App\Models\Tier;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $user = Auth::user();
@@ -195,8 +197,7 @@ class OrderController extends Controller
             if (isset($request->points)) {
                 //TODO POINT DEDUCTION (CHECK AGAIN)
 
-                $customer = User::with(['tier'])->find($user->id);
-                //for updating the user model
+                $customer = User::with(['tier'])->find($user->id);           //for updating the user model
                 $customer->points = $user->points - $request->points;
             }
             if (isset($request->wallet)) {
@@ -205,10 +206,7 @@ class OrderController extends Controller
             }
 
             $loyalty = new Loyalty();
-            $pointsearned = $loyalty->addPoints($customer, $request->amount_due, $request->wallet);
-            $customer->points += $pointsearned;
 
-            $customer->save();
 
             if (isset($request->tax)) {
                 $data['tax'] = $request->tax;
@@ -236,6 +234,9 @@ class OrderController extends Controller
                 }
                 if (isset($orderdetails['qty'])) {
                     $arr['qty'] = $orderdetails['qty'];
+                }
+                if (isset($orderdetails['booking_time'])) {
+                    $arr['booking_time'] = $orderdetails['booking_time'];
                 }
                 if (isset($orderdetails['shop_id'])) {
                     $arr['shop_id'] = $orderdetails['shop_id'];
@@ -273,7 +274,7 @@ class OrderController extends Controller
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
             }
-            $pointsearned = $loyalty->addPoints($customer, $request->amount_due, $request->wallet ?? 0, $shoplist);
+
 
             $customer->points += $pointsearned;
 

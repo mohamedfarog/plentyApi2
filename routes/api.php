@@ -8,6 +8,7 @@ use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FoodicsController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TableBookingController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\ProdcatController;
@@ -91,6 +92,8 @@ Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
+Route::resource('tablebooking', TableBookingController::class);
+
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
 
