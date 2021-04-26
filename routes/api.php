@@ -83,7 +83,6 @@ Route::post('register', [UserController::class, 'register'])->middleware('regist
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
-Route::resource('tablebooking', TableBookingController::class);
 Route::get('tiers', [TierController::class, 'index']);
 Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);
@@ -93,6 +92,8 @@ Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
+Route::resource('tablebooking', TableBookingController::class);
+
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
 

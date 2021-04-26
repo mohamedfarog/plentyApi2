@@ -18,8 +18,7 @@ class CreateTableBookingsTable extends Migration
             $table->string('ref');
             $table->date('date')->nullable();
             $table->time('preftime')->nullable();
-            $table->unsignedBigInteger('table_id');
-            $table->foreign('table_id')->references('id')->on('shoptables');
+            $table->unsignedBigInteger('table_id')->nullable();
             $table->string('status')->nullable();
             $table->double('total_amount')->nullable();
             $table->double('amount_due')->nullable();
