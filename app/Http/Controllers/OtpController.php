@@ -19,8 +19,7 @@ class OtpController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-    }
+    { }
 
     /**
      * Show the form for creating a new resource.
@@ -55,7 +54,7 @@ class OtpController extends Controller
                     $msg = 'OTP has been verified.';
                     $otp->save();
 
-                    $user = User::where('contact', $request->contact)->first();
+                    $user = User::with(['tier'])->where('contact', $request->contact)->first();
 
                     if ($user) {
                         Auth::login($user);
@@ -147,7 +146,7 @@ class OtpController extends Controller
 
             //send code -- waiting for client's SMS gateway.
 
-            $msg = (new SMS())->sendSms(substr($otp->contact, 1), 'Hello, thank you for using Plenty of Things, use this OTP ' . $otp->otp . ' This OTP is valid for 30 minutes.');
+            // $msg = (new SMS())->sendSms(substr($otp->contact, 1), 'Hello, thank you for using Plenty of Things, use this OTP ' . $otp->otp . ' This OTP is valid for 30 minutes.');
             // $msg = 'Otp has been added';
             return response()->json(['success' => !!$otp, 'message' => $msg,  'otp' => $otp->otp]);
         }

@@ -1,5 +1,64 @@
-@extends('../layout')
+@extends('layout')
 @section('content')
+<style>
+    .frame {
+        width: 250px;
+        height: 250px;
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell;
+    }
+
+    .imgz {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .ssproduct {
+        margin: 0 5px;
+    }
+
+    .featicons {
+        width: 25px !important;
+    }
+
+    .nwtr {
+        font-family: 'Avenir Bold'
+    }
+
+    .nwa {
+        font-weight: 100;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .cccategory {
+            width: 100%;
+        }
+
+        .pm-cat-item {
+            padding-left: 0;
+            padding-right: 5px;
+        }
+    }
+
+    .panel-body {
+        padding: 0px;
+    }
+
+    .panel:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 5px 3px #d3d3d3;
+    }
+
+    .panel-default {
+        border-color: #f1f1f1;
+        color: #001b71;
+        font-size: 20px;
+    }
+</style>
 
 <!-- Hero Slider -->
 <section class="hero-wrap text-center relative">
@@ -9,10 +68,10 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/fashion" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -23,10 +82,10 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -37,10 +96,10 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/beauty" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -51,10 +110,10 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -65,10 +124,23 @@
             <div class="container">
                 <div class="hero-holder">
                     <div class="hero-message">
-                        <h1 class="hero-title nocaps" style="font-style: italic;">New Trend in 2021</h1>
-                        <h2 class="hero-subtitle lines">New Arrivals Collection</h2>
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">New Trend in 2021</h1>
+                        <h2 class="hero-subtitle lines nwa">New Arrivals Collection</h2>
                         <div class="buttons-holder">
-                            <a href="#" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                            <a href="/delicacy" class="btn btn-lg btn-transparent carouselbtn"><span>Shop Now</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide overlay" style="background-image:url(img/hero/6.jpg)">
+            <div class="container">
+                <div class="hero-holder">
+                    <div class="hero-message">
+                        <h1 class="hero-title nocaps nwtr" style="font-style: italic;">Plenty</h1>
+                        <h2 class="hero-subtitle lines nwa">Ramadan Bazaar</h2>
+                        <div class="buttons-holder">
+                            <a href="/beauty" class="btn btn-lg btn-transparent carouselbtn"><span>Discover More</span></a>
                         </div>
                     </div>
                 </div>
@@ -77,9 +149,10 @@
     </div>
 </section> <!-- end hero slider -->
 
+
 <!-- Promo Banners -->
 <section class="section-wrap promo-banners pb-30">
-    <div class="container">
+    <div class="container cccategory">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
@@ -90,8 +163,8 @@
 
         <div class="row">
 
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="#">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
+                <a href="/delicacy">
                     <div style="">
                     </div>
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
@@ -107,9 +180,9 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
 
-                <a href="#">
+                <a href="/beauty">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/beauty.mp4" type="video/mp4">
                         Your browser does not support the video tag.
@@ -121,8 +194,8 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-12 mb-30 promo-banner">
-                <a href="#">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
+                <a href="/fashion">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">
                         Your browser does not support the video tag.
@@ -130,15 +203,108 @@
                     <div class="overlay categoverlay"></div>
                     <div class="promo-inner valign">
                         <h2>FASHION</h2>
-
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
 </section> <!-- end promo banners -->
 
+<!-- Plenty bazaar -->
+<section class="section-wrap-sm new-arrivals" style="margin-top:50px;">
+    <div class="purchase-online-area ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h2 class="title-border">Plenty Bazaar</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img src="img/bazaar/clothing.jpg" alt=""></div>
+                        <div class="panel-footer">Clothings<i class="fas fa-arrow-right pull-right"></i></div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/accessories.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Accessories
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/home_accessories.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Home Accessories
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/jewllery.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Jewllery
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/perfumes.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Perfumes
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/art.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Art
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="img/bazaar/food.jpg" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            Food
+                            <i class="fas fa-arrow-right pull-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end plenty bazaar -->
 
 <!-- Trendy Products -->
 <section class="section-wrap-sm new-arrivals ">
@@ -173,118 +339,43 @@
         </div>
     </div>
 </section> <!-- end trendy products -->
-
 <section class="regular slider" style="width:90%;text-align:center;margin:auto">
-    <div class="single-product  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
+    @if(isset($featured_products))
+    @foreach($featured_products as $product)
 
+    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
+
+        <a href="{{ url('/product/' . $product->id) }}">
+            <div class="product-img frame">
+
+                @if ($product->image)
+                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+                @else
+                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
+                @endif
+
+                <div class="product-action clearfix">
+                </div>
             </div>
-        </div>
+        </a>
         <div class="product-info clearfix">
             <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
+                <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
+                <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
             </div>
             <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
                 </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
+                </a>
+                <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
+                        <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                    </span>
+                </a>
             </div>
         </div>
     </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png">
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="single-product col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-        <div class="product-info clearfix">
-            <div class="fix">
-                <h4 class="post-title floatcenter feattitle"><a href="#">Event Hairstyle Package</a></h4>
-                <p class="floatcenter hidden-sm featsubtitle">SAR 60.00</p>
-            </div>
-            <div class="fix featlineicons">
-                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                </span>
-                <span class="pro-rating floatright">
-                    <img class="featicons" src="img/nav/bag.png">
-                </span>
-            </div>
-        </div>
-    </div>
-
+    @endforeach
+    @endif
 </section>
 
 <div class="purchase-online-area ">
@@ -306,12 +397,8 @@
                 <div class="-">
                     <div class="tab-pane active" id="new-arrivals">
                         <div class="row">
-
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -319,52 +406,39 @@
 </div>
 
 <section class="brandsslider slider" style="width:90%;text-align:center;margin:auto">
+    @if(isset($homebrands))
+    @foreach($homebrands as $hb)
+    <?php
+    $primary = $hb->primary;
+    $primarycolor = substr($primary, -6);
+    ?>
 
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
+    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
+        @if($hb->cat_id == 1)
+        <a href="/delicacy/{{$hb->shop_id}}">
+            @elseif($hb->cat_id == 2)
+            <a href="/beauty/{{$hb->shop_id}}">
+                @elseif($hb->cat_id == 3)
+                <a href="/fashion/{{$hb->shop_id}}">
+                    @else
+                    <a href="/">
+                        @endif
+                        <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
 
-            </div>
-        </div>
+
+                            <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
+
+                            <div class="product-action clearfix">
+
+                            </div>
+                        </div>
+                    </a>
+
+
     </div>
 
-    <div class="brand-slide    col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="brand-slide   col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product">
-                <img src="img/product/8.jpg" alt="" /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm">
-        <div class="product-img">
-            <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-            <div class="product-action clearfix">
-
-            </div>
-        </div>
-    </div>
+    @endforeach
+    @endif
 
 </section>
 
@@ -425,10 +499,8 @@
             });
         });
     });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 </script>
-
+<div style="">
+    @include('footer')
+</div>
 @endsection

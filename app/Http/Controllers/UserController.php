@@ -64,7 +64,7 @@ class UserController extends Controller
             if ($user->email_verified_at != NULL) {
                 $success["message"] = "Login successful";
                 $success["token"] = $user->createToken('MyApp')->accessToken;
-                $u = User::with('shop')->find($user->id);
+                $u = User::with(['tier','shop'])->find($user->id);
 
                 return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
             } else {
@@ -221,7 +221,7 @@ class UserController extends Controller
                     }
 
                     $user->save();
-                    
+
                     (new ApplePass())->createLoyaltyPass($user);
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
@@ -402,11 +402,10 @@ class UserController extends Controller
                             }
                             $msg = 'User has been updated';
                             $user->save();
-                            $newuser = User::where('id',$user->id)->first();
-                            if(!is_null($newuser->name) && !is_null($newuser->contact) && !is_null($newuser->email)){
-                                
-                                (new ApplePass())->createLoyaltyPass($newuser);
+                            $newuser = User::where('id', $user->id)->first();
+                            if (!is_null($newuser->name) && !is_null($newuser->contact) && !is_null($newuser->email)) {
 
+                                (new ApplePass())->createLoyaltyPass($newuser);
                             }
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
@@ -490,10 +489,9 @@ class UserController extends Controller
                     $data['points'] = $settings->registerpts;
                     $user = User::create($data);
                     $msg = 'User has been added';
-                    if(!is_null($user->name) && !is_null($user->contact) && !is_null($user->email)){
-                                
-                        (new ApplePass())->createLoyaltyPass($user);
+                    if (!is_null($user->name) && !is_null($user->contact) && !is_null($user->email)) {
 
+                        (new ApplePass())->createLoyaltyPass($user);
                     }
                     return response()->json(['success' => !!$user, 'message' => $msg]);
                 }
@@ -506,20 +504,18 @@ class UserController extends Controller
     }
 
     public function topUpWallet(Request $request)
-    { 
-          $authuser= Auth::user();
-        if($authuser){
-            if(isset($request->amount)){
-                $user= User::with(['tier'])->find($authuser->id);
-                $user->wallet+= $request->amount;
+    {
+        $authuser = Auth::user();
+        if ($authuser) {
+            if (isset($request->amount)) {
+                $user = User::with(['tier'])->find($authuser->id);
+                $user->wallet += $request->amount;
                 $user->save();
-                return response()->json(['success' => !!$user ,'user' => $user]);
+                return response()->json(['success' => !!$user, 'user' => $user]);
             }
+        } else {
+            return response()->json(["error" => 'Unauthorized User']);
         }
-        else{
-            return response()->json(["error" =>'Unauthorized User']);
-        }
-        
     }
     // Vendors sign up and login  for the Bazar
     public function vendorsRegister(Request $request)

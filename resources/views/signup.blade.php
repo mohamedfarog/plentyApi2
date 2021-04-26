@@ -1,86 +1,5 @@
-@extends('../layout2')
+@extends('../layout')
 @section('content')
-
-<section class="signup container">
-    <div class="signup-logo">
-        <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
-    </div>
-
-    <form class="signup-form" id="signup-form">
-
-
-        <input type="text" name="contact" placeholder="MOBILE NO." />
-
-        <!-- 2 column grid layout for inline styling -->
-        <div>
-            <div class="justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked />
-                    <label class="form-check-label" for="form2Example3">I've read and accept the <a href="#">Terms and Condition</a></label>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Submit button -->
-        <button onclick="generateOTP(event)" class="btn btn-primary btn-block mb-4">CREATE</button>
-
-
-    </form>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="otpModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div>
-                    <h1>Verification Account</h1>
-                </div>
-                <div>
-                    <p>
-                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to +919239739
-                    </p>
-                </div>
-                <div class="modal-body">
-                    <div class="row otp">
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-                        <div class="otp-field">
-                            <input type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
-                        </div>
-
-                    </div>
-                    <div>
-                        <p>
-                            Didn't recieve any code? <a href="#">Resend</a>
-                        </p>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block" onclick="verifyOTP()">Submit</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-
-</section>
-
-
 <style>
     .signup {
         background-color: #f1f1f1;
@@ -108,14 +27,22 @@
         text-align: center;
     }
 
-    @media screen and (min-width: 768px) {
-        .modal:before {
-            display: inline-block;
-            vertical-align: middle;
-            content: " ";
-            height: 100%;
-        }
+    .smsCode {
+        width: 60px !important;
+        padding: 0 !important;
     }
+
+    .smsCode {
+        width: 40px !important;
+
+    }
+
+    input:focus {
+        background: #e3e3e3 !important;
+    }
+
+    .otp-input {}
+
 
     .modal-dialog {
         display: inline-block;
@@ -131,18 +58,19 @@
         box-shadow: 0 0 5px #ccc inset;
         width: 100%;
         outline: none;
-
-
+        border-radius: 15px !important;
+        height: 70px !important;
+        width: 70px !important;
     }
 
     .otp input {
         background-color: #f1f1f1;
         width: auto;
-        border-radius: 3px;
     }
 
     .otp-field {
         display: inline;
+        margin-left: 20px;
     }
 
     #otpModal .modal-header {
@@ -166,6 +94,215 @@
     .modal-body button {
         border-radius: 30px;
     }
+
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #272c65 !important;
+        opacity: 1;
+        /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #272c65 !important;
+    }
+
+    ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #272c65 !important;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        background: #f2f3f8 none repeat scroll 0 0;
+        border: medium none;
+        box-shadow: none;
+        color: #272c65;
+        height: 50px;
+        margin-bottom: 30px;
+        padding: 0 30px;
+        transition: all 0.5s ease 0s;
+        width: 100%;
+        outline: none;
+    }
+
+    .loginlogo {
+        max-height: 70%;
+        margin-bottom: 50px;
+    }
+
+    body {
+        font-family: 'Avenir', sans-serif;
+
+    }
+
+    .signupbutton {
+        background: #272c65 !important;
+        font-family: 'Avenir', sans-serif;
+        font-weight: 100;
+        font-size: 14px !important;
+        margin-bottom: 30px;
+    }
+
+    .centertxt {
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: 'Avenir', sans-serif;
+        font-weight: 100;
+        font-size: 14px !important;
+    }
+
+    .forgotpass {}
+
+    .clickunderline {
+        text-decoration: underline;
+        color: #272c65 !important;
+    }
+
+    .login {
+        background-color: #f1f1f1;
+    }
+
+    .signup-form {
+        color: red;
+        margin: auto;
+        max-width: 400px;
+    }
+
+    .login-logo {
+        text-align: center;
+    }
+
+    .login-form input {
+        border-radius: 20px;
+    }
+
+    .login-form button {
+        border-radius: 20px;
+    }
+
+    .socialfooter {
+        width: 40px;
+    }
+
+    .sfa {
+        margin-right: 5px !important;
+    }
+
+    .modaltextp {
+        font-size: 16px;
+        font-weight: 100;
+    }
+
+    .mccontent {
+        padding: 50px;
+    }
+
+    @media screen and (min-width: 768px) {
+        .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 100%;
+        }
+
+        .contymobile {
+            width: 90%;
+        }
+
+    }
+
+    @media only screen and (max-width: 600px) {
+        .mccontent {
+            padding: 0 !important;
+        }
+    }
+</style>
+<section class="signup container" style="background:transparent">
+    <div class="signup-logo">
+        <img class="logo-dark loginlogo" src="img/logo_dark.png" alt="logo">
+    </div>
+
+    <form class="signup-form" id="signup-form">
+
+
+        <input id="contactnumbersignin" type="text" name="contact" placeholder="MOBILE NO." />
+
+        <!-- 2 column grid layout for inline styling -->
+        <div>
+            <div class="justify-content-center mb-40" style="text-align:center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked />
+                    <label class="form-check-label" for="form2Example3">I've read and accept the <a href="/" class="clickunderline">Terms and Condition</a></label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submit button -->
+        <button onclick="generateOTP(event)" class="btn btn-primary btn-block mb-4 signupbutton">Login</button>
+
+
+    </form>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="otpModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content mccontent">
+                <div class="modal-header" style="margin-bottom:50px;">
+                    <p class="modaltextp">Verification Account</p>
+                </div>
+                <div>
+
+                </div>
+                <div>
+                    <p class="modaltextp">
+                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to <span id="modalinputnumber">+915 00 000 0000</span>
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <div class="row otp">
+                        <div class="otp-field">
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+                        <div class="otp-field">
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+                        <div class="otp-field">
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+                        <div class="otp-field">
+                            <input style="color:black" type="text" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" class="smsCode text-center rounded-lg" />
+                        </div>
+
+                    </div>
+                    <div>
+                        <p>
+                            Didn't recieve any code? <a href="/" style="text-decoration:underline;color:#001b71;">Resend</a>
+                        </p>
+                    </div>
+                    <div style="margin-top:50px;">
+                        <button type="submit" class="btn btn-primary btn-block" onclick="verifyOTP()" style="background:#001b71;font-size:15px;font-weight:100;">Verify</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</section>
+
+
+<style>
+
 </style>
 
 <script>
@@ -228,11 +365,13 @@
     }
 
     function generateOTP(e) {
+        var cc = $('#contactnumbersignin').val();
+        document.getElementById('modalinputnumber').innerHTML = cc;
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
             type: 'POST',
-            url: 'https://plentyapp.mvp-apps.ae/api/otp',
+            url: base_url + 'api/otp',
             data: {
                 contact: form.get('contact')
             },
@@ -248,7 +387,7 @@
         const form = new FormData(document.getElementById("signup-form"))
         $.ajax({
             type: 'POST',
-            url: 'https://plentyapp.mvp-apps.ae/api/verify',
+            url: base_url + 'api/verify',
             data: {
                 contact: form.get('contact'),
                 otp: parseInt(combineSMSCodes())
@@ -256,16 +395,58 @@
             dataType: 'JSON',
             success: function(data) {
                 if (data.success) {
-                    //do registration
-                } else {
-                    //raise error already exist
+                    if (data.user) {
+                        setCookie('bearer_token', data.token, 1);
+                        const user = {
+                            "id": data.user.id,
+                            "name": data.user.name,
+                            "typeofuser": data.user.typeofuser
+                        }
+                        setCookie('user', JSON.stringify(user), 1);
+                        window.location.href = base_url;
+                    } else {
+                        register(data)
+                    }
+
+
                 }
 
 
-                console.log(data)
             }
         });
     }
+
+    function register(data) {
+        const form = new FormData(document.getElementById("signup-form"))
+        //  console.log(data)
+        $.ajax({
+            type: 'POST',
+            headers: {
+                "AuthRegister": data.authtoken
+            },
+            url: base_url + 'api/register',
+            data: {
+                contact: form.get('contact'),
+            },
+            dataType: 'JSON',
+            success: function(data) {
+                console.log(data)
+                setCookie('bearer_token', data.token, 1);
+                const user = {
+                    "id": data.user.id,
+                    "name": data.user.name,
+                    "typeofuser": data.user.typeofuser
+                }
+                setCookie('user', JSON.stringify(user), 1);
+                window.location.href = base_url + "profile-edit";
+            }
+        });
+    }
+    $(document).ready(function() {
+        eraseCookie('bearer_token');
+        eraseCookie('user');
+        console.log('logged out');
+    });
 </script>
 
 @endsection

@@ -144,9 +144,9 @@
 /*--------------------------
 	tooltip active jquery
 ---------------------------- */
-	$('.product-action a').tooltip({
-        container: 'body'
-    });	
+	// $('.product-action a').tooltip({
+    //     container: 'body'
+    // });	
 	
 /*---------------------
 	countdown
@@ -186,25 +186,25 @@
 /*----------------------------
 	Cart Plus Minus Button
 ------------------------------ */
-	$(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
-	$(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
-	$(".qtybutton").on("click", function() {
-		var $button = $(this);
-		var oldValue = $button.parent().find("input").val();
-		if ($button.text() == "+") {
-			var newVal = parseFloat(oldValue) + 1;
-		} 
-		else {
-			// Don't allow decrementing below zero
-			if (oldValue > 0) {
-				var newVal = parseFloat(oldValue) - 1;
-			} 
-			else {
-				newVal = 0;
-			}
-		}
-		$button.parent().find("input").val(newVal);
-	});
+	// $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
+	// $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
+	// $(".qtybutton").on("click", function() {
+	// 	var $button = $(this);
+	// 	var oldValue = $button.parent().find("input").val();
+	// 	if ($button.text() == "+") {
+	// 		var newVal = parseFloat(oldValue) + 1;
+	// 	} 
+	// 	else {
+	// 		// Don't allow decrementing below zero
+	// 		if (oldValue > 0) {
+	// 			var newVal = parseFloat(oldValue) - 1;
+	// 		} 
+	// 		else {
+	// 			newVal = 0;
+	// 		}
+	// 	}
+	// 	$button.parent().find("input").val(newVal);
+	// });
 
 /*-------------------------
 	accordion toggle function
@@ -226,12 +226,12 @@
 /*--------------------------
 	scrollUp
 ---------------------------- */	
-	$.scrollUp({
-		scrollText: '<i class="zmdi zmdi-triangle-up"></i>',
-		easingType: 'linear',
-		scrollSpeed: 900,
-		animation: 'fade'
-	}); 	   
+	// $.scrollUp({
+	// 	scrollText: '<i class="zmdi zmdi-triangle-up"></i>',
+	// 	easingType: 'linear',
+	// 	scrollSpeed: 900,
+	// 	animation: 'fade'
+	// }); 	   
 
 /*--------------------------	
 	shop page manu dropdown	

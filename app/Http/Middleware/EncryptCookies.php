@@ -13,5 +13,7 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         //
+        'bearer_token',
+        'user_id'
     ];
 }

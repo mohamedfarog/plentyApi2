@@ -49,54 +49,42 @@
         text-align: center;
     }
 
-    @media only screen and (max-width: 600px) {
-        .contmobile {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            width: 350px;
-        }
-
-        .product-info {
-            width: 100% !important;
-        }
-
-        .cart-plus-minus {
-            width: 100% !important;
-        }
-
-    }
-
-
     /*  calendar styling*/
     .calendar-wrapper {
-        margin: 3em auto;
-        padding: 50px;
+        margin: 2em auto;
+        padding: 20px 50px 10px 50px;
         border: 1px solid #dcdcff;
-        border-radius: 20px;
+        border-radius: 50px;
         background: #fff;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         z-index: 100;
         position: relative;
+
+
     }
 
     .calendar-wrapper table {
-        width: 100%;
+        width: 400px;
+        height: 300px;
         padding: 50px;
         border-radius: 3px;
         border-collapse: collapse;
         color: #444;
-        font-size: 15px;
-        font-weight: 800;
+        font-size: 18px;
+        font-weight: 100;
+        margin: auto;
+        font-family: 'Avenir Bold'
 
     }
 
     .calendar-wrapper td {
-        height: 48px;
+        height: 30px;
         text-align: center;
         vertical-align: middle;
         width: 14.285714285714%;
         color: #c31c4a;
+        padding: 25px;
     }
 
     .calendar-wrapper td:hover {
@@ -104,13 +92,11 @@
     }
 
 
-    .calendar-col:hover {
-        background-color: palevioletred;
-        border-radius: 50%;
-        padding: 20px;
-        width: 100px;
-        height: 100px;
 
+    .calendar-wrapper .today:hover,
+    .calendar-wrapper .normal:hover {
+        background-color: #edbddb;
+        border-radius: 100%;
     }
 
     .calendar-wrapper td.not-current {
@@ -120,14 +106,13 @@
     .calendar-wrapper td.today {
         font-weight: 700;
         color: #28283b;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
 
     .calendar-wrapper thead td {
         border: none;
         color: #c31c4a;
-        text-transform: uppercase;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
 
     .calendar-wrapper #btnPrev {
@@ -137,7 +122,7 @@
 
     .calendar-wrapper #btnPrev:before {
         content: '';
-        background-image: url('img/Lightbox/prev.png');
+        background-image: url('img/Lightbox/prev-gray.png');
         font-family: FontAwesome;
         padding-right: 4px;
         background-size: 100% 100%;
@@ -155,7 +140,7 @@
 
     .calendar-wrapper #btnNext:after {
         content: '';
-        background-image: url('img/Lightbox/next.png');
+        background-image: url('img/Lightbox/next-gray.png');
         padding-left: 4px;
         width: 100px;
         background-size: 100% 100%;
@@ -171,22 +156,21 @@
         background: transparent;
         border: none;
         outline: none;
-        font-size: 1em;
+        font-size: 15px;
         color: #c0c0c0;
         cursor: pointer;
-        font-family: "Roboto Condensed", sans-serif;
-        text-transform: uppercase;
         transition: all 0.3s ease;
-
+        =
     }
 
     .calendar-wrapper #btnPrev {
         position: absolute;
+        left: 100px;
     }
 
     .calendar-wrapper #btnNext {
         position: absolute;
-        right: 60px;
+        right: 100px;
     }
 
     .calendar-wrapper #btnPrev:hover,
@@ -198,16 +182,14 @@
     /* styling for calendar footer */
 
     .time-shedule-wrapper {
-        height: 200px;
-
+        height: 300px;
         background-color: #fff;
-        border-radius: 20px;
+        border-radius: 0 0 50px 50px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         position: relative;
-        top: -70px;
-        padding: 80px 50px 50px 50px;
-
+        top: -100px;
+        padding: 100px 50px 100px 50px;
     }
 
     .day-booked {
@@ -216,23 +198,29 @@
 
     .time-shedule {
         padding: 10px;
-        height: 100px;
+        height: 140px;
         overflow-y: scroll;
     }
 
     .time-btn {
         position: relative;
-        padding: 15px 32px;
         text-align: center;
         text-decoration: none;
-        font-size: 16px;
+        font-size: 18px;
         cursor: pointer;
+        width: 135px;
+        height: 50px;
         background-color: white;
-        color: black;
-        border: 2px solid pink;
+        color: #edbddb;
+        border: 2px solid #c31c4a;
         border-radius: 30px;
-        margin: 5px 10px;
+        margin: 0px 5px 20px 5px;
 
+    }
+
+    .time-btn-inactive {
+        color: red;
+        background-color: #009eb3;
     }
 
 
@@ -265,7 +253,7 @@
 
     .booking-item span {
         font-size: 20px;
-        color: pink;
+        color: #edbddb;
     }
 
     .day-status {
@@ -275,7 +263,7 @@
 
     .day-status span {
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 5px 30px;
         font-size: 15px;
     }
 
@@ -288,20 +276,158 @@
         background-color: #c31c4a;
         color: white
     }
+
+    .calendar-btn-left {
+        margin-left: 30px
+    }
+
+    .calendar-btn-right {
+        margin-right: 30px
+    }
+
+    .activemonthtd {
+        font-family: 'Avenir';
+        font-weight: 100;
+    }
+
+    .homebrandtitle {
+        width: 30%;
+        padding: 50px 0;
+        filter: brightness(0) invert(1);
+    }
+
+    .coltablpadd {
+        padding: 0 30px 0 0;
+    }
+
+    .contimgu {
+        background-color: #f2f3f8;
+        padding-top: 50px;
+        margin-top: 20px
+    }
+
+    .divtitle {
+        position: relative;
+        display: block;
+        height: 20px;
+        text-align: center;
+    }
+
+    .bktitle {
+        font-size: 24px;
+        color: black !important;
+        width: 200px;
+        display: block;
+        float: left;
+    }
+
+    .bkprice {}
+
+    .day-clicked>span {
+        color: black;
+    }
+
+    .calendar-col {}
+
+    td.normal {
+        text-align: center;
+        height: 50px;
+        width: 50px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .contmobile {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: 350px;
+        }
+
+        .product-info {
+            width: 100% !important;
+        }
+
+        .cart-plus-minus {
+            width: 100% !important;
+        }
+
+        .homebrandtitle {
+            width: 100%;
+            padding: 50px 0;
+            filter: brightness(0) invert(1);
+        }
+
+        .coltablpadd {
+            padding: 0;
+            margin: auto;
+        }
+
+        .calendar-wrapper #btnNext {
+            position: absolute;
+            right: 0;
+        }
+
+        .calendar-wrapper #btnPrev {
+            position: absolute;
+            left: 0;
+        }
+
+        .contimgu {
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .divtitle {
+            padding-left: 20px;
+            position: relative;
+            display: block;
+            height: 20px;
+            text-align: center;
+        }
+
+        .time-shedule-wrapper {
+            padding: 100px 10px;
+        }
+
+        .bktitle {
+            width: 100%;
+        }
+
+        .bkprice {
+            width: 100%;
+        }
+
+        .ffaddbag {
+            width: 100%;
+            float: none !important;
+            padding: 10px !important;
+        }
+    }
+
+    .day-clicked {
+        font-size: larger;
+        background-color: #edbddb;
+        border-radius: 50%;
+    }
+
+    .slot-clicked {
+        background-color: #edbddb;
+        color: black;
+        border: 2px solid #edbddb;
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
-<div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/booking/skirts.png') no-repeat scroll center center / cover;">
+<div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title" style="text-align:center">
-                        <img src="img/homebrands/Skirts.png" style="width:30%;padding: 50px 0">
+                        <img src="storage/styles/{{$style->brandheader}}" class="homebrandtitle">
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
                             <li><a href="index.html">BEAUTY</a></li>
-                            <li>SKIRT</li>
+                            <li>{{$shop->name_en}}</li>
                         </ul>
                     </div>
                 </div>
@@ -309,48 +435,53 @@
         </div>
     </div>
 </div>
-<div class="container contmobile" style="background-color:#f2f3f8">
+<div class="container contmobile contimgu" style="">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+    </div>
     <div class="row no-sidebar">
         <!-- Booking section start here -->
         <div class="col-lg-12" style="padding:0;">
-            <div class="clearfix" style="background-color:#f2f3f8;padding: 10px;">
+            <div class="clearfix" style="background-color:#f2f3f8;">
 
-                <div class="col-lg-5">
+                <div class="col-lg-5 hidden-md hidden-sm hidden-xs">
 
                     <div class="single-big-photo view-lightbox slider-for" style="width:100% !important">
                         <div>
-                            <img src="img/booking/Main.png" alt="" />
+                            <img src="storage/styles/{{$style->posterimg}}" alt="" />
                         </div>
 
                     </div>
                 </div>
 
-                <div class="col-lg-7" style="padding:0 15px">
-                    <h4 class="floatleft" style="font-size:24px;font-weight:bolder;line-height:200%;font-family:'Avenir bold';color:black;">
-                        GEL NAILS <span>SAR 50</span></h4>
-                    <div class="calendar-wrapper">
-                        <button id="btnPrev" type="button"></button>
-                        <button id="btnNext" type="button"></button>
+                <div class="col-lg-7 col-sm-12 coltablpadd" style="">
+                    <div class="divtitle" style="">
+                        <h4 class="floatleft" style="font-size:30px;font-weight:100;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
+                            {{$product->name_en}}
+                            <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR {{$product->price}}</span>
+
+                        </h4>
+                    </div>
+                    <div class="calendar-wrapper" style="margin-top:80px;">
+                        <div style="width:100%;">
+                            <button id="btnPrev" type="button"></button>
+                            <button id="btnNext" type="button"></button>
+                        </div>
                         <div id="divCal"></div>
                         <div class="day-status">
-                            <span class="booking-available">Available</span>
-                            <span class="booked">Booked</span>
+                            <span class="booking-available" style="font-weight:100;margin-right:10px;">Available</span>
+                            <span class="booked" style="font-weight:100;">Booked</span>
                         </div>
                     </div>
                     <div class="time-shedule-wrapper">
-                        <div class="time-shedule">
-                            <button class="time-btn">9:30 AM</button>
-                            <button class="time-btn">10:30 AM</button>
-                            <button class="time-btn">11: 00 AM</button>
-                            <button class="time-btn ">10: 00 AM </button>
-                            <button class="time-btn">9:30 AM</button>
-                            <button class="time-btn">10:30 AM</button>
-                            <button class="time-btn">11: 00 AM</button>
-                            <button class="time-btn">10: 00 AM </button>
-                            <button class="time-btn">9:30 AM</button>
-                            <button class="time-btn">10:30 AM</button>
-                            <button class="time-btn">11: 00 AM</button>
-                            <button class="time-btn">10: 00 AM </button>
+                        <div class="time-shedule" id="time-slots">
+
+
                         </div>
 
                     </div>
@@ -366,28 +497,43 @@
     </div>
 </div>
 
-<div class="container contmobile" style="background-color:#f2f3f8;margin-top:20px">
+<div class="container contmobile" style="background-color:#f2f3f8;margin-top:40px;padding-left: 40px;padding-bottom:40px;">
 
     <div class="your-booking">
-        <h4 style="margin-top: 30px;color:black">Your Booking</h4>
+        <h4 style="margin-top: 30px;color:black;font-weight:500;font-size:24px;">Your Booking</h4>
         <div class="row">
-            <div class="col-lg-6">
-                <div class="booking-item">
-                    GET NAILS <span>SAR 50</span>
-                </div>
-                <div class="booking-item">
-                    March 14 <span>04:30 PM</span>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <button class=" addtobagbtn floatright" style="margin-top: 40px;border-color:red">
-                    <span class="addtobagheader" style="padding-top:10px !important; color:red">
-                        Add to Bag
-                    </span>
-                    <img src="img/product/bag.png" style="width:30px;">
+            <div class="col-lg-6 col-xs-12" style="padding-left: 50px;">
 
-                </button>
+                <div class="booking-item">
+                    <span class="bktitle" style="">{{$product->name_en}} </span>
+                    <span class="bkprice" style="font-size:24px;">SAR {{$product->price}}</span>
+                </div>
+                <div class="booking-item" style="font-size:24px;">
+                    <span class="bktitle" id="date-selected" style=""> </span>
+                    <span class="bkprice" id="slot-selected" style="font-size:24px;"></span>
+                </div>
             </div>
+            <form onsubmit="event.preventDefault(); addToCart()" id="booking-form">
+                <input type="hidden" name="cat_id" id="cat_id" value="{{$shop->cat_id}}" autocomplete="off">
+                <input type="hidden" id="shop_id" name="shop_id" value="{{$product->shop_id}}" autocomplete="off">
+                <input type="hidden" name="product_id" id="product_id" value="{{$product->id}}" autocomplete="off">
+                <input type="hidden" name="product_name" id="product_name" value="{{$product->name_en}}" autocomplete="off">
+                <input type="hidden" name="product_price" id="product_price" value="{{$product->price}}" autocomplete="off">
+                <input type="hidden" name="product_image" id="product_image" value="{{$product->image}}" autocomplete="off">
+                <input type="hidden" name="timeslot" id="timeslot" autocomplete="off">
+                <input type="hidden" name="timeslot_id" id="timeslot_id" autocomplete="off">
+                <input type="hidden" name="day" id="day" autocomplete="off">
+                <div class="col-lg-6 col-xs-12">
+                    <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;margin-right:40px;border-color:#c31c4a;vertical-align:bottom">
+                        <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
+                            Add to Bag
+                        </span>
+                        <img src="img/product/bag-red.png" style="width:30px;">
+                    </button>
+                </div>
+
+            </form>
+
 
         </div>
     </div>
@@ -399,14 +545,19 @@
 
 <script>
     $(document).ready(function() {
-        console.log("ready!");
+
         $(".active").css("background-color", "black");
+        let today = new Date();
+        let formated_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+        getSlots(formated_date)
     });
 
 
     var month;
     var year;
-    var booked = [1, 2, 3, 4]
+    var day;
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var booked = [1, 16, 21]
 
     var Cal = function(divId) {
 
@@ -415,17 +566,11 @@
 
         // Days of week, starting on Sunday
         this.DaysOfWeek = [
-            'Sun',
-            'Mon',
-            'Tue',
-            'Wed',
-            'Thu',
-            'Fri',
-            'Sat'
+            'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
         ];
 
         // Months, stating on January
-        this.Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        this.Months = months;
 
         // Set the current month, year
         var d = new Date();
@@ -435,6 +580,7 @@
         this.currDay = d.getDate();
         month = this.currMonth
         year = this.currYear
+
 
     };
 
@@ -463,6 +609,7 @@
         } else {
             this.currMonth = this.currMonth - 1;
         }
+        1
         this.showcurr();
     };
 
@@ -472,6 +619,7 @@
         this.updateAdjacentMonth(this.currMonth);
         month = this.currMonth
         year = this.currYear
+        day = this.currDay
     };
 
     // Show month (year, month)
@@ -489,11 +637,11 @@
             lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
-        var html = '<table>';
+        var html = '<table style="width:100% !important;" id="calendar">';
 
         // Write selected month and year
         html += '<thead><tr>';
-        html += '<td colspan="7">' + this.Months[m] + '</td>';
+        html += '<td colspan="7" class="activemonthtd">' + this.Months[m] + '</td>';
         html += '</tr></thead>';
 
 
@@ -523,19 +671,18 @@
             var chk = new Date();
             var chkY = chk.getFullYear();
             var chkM = chk.getMonth();
-            console.log(parseInt(i))
             if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
-                if (parseInt(i) in booked) {
-                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
+                if (booked.includes(i)) {
+                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
-                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
+                    html += '<td class="today day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col">' + i + '</span></td>';
                 }
 
             } else {
-                if (parseInt(i) in booked) {
-                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col day-booked">' + i + '</span></td>';
+                if (booked.includes(i)) {
+                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col day-booked">' + i + '</span></td>';
                 } else {
-                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this.id)"><span class="calendar-col">' + i + '</span></td>';
+                    html += '<td class="normal day" id = ' + i + ' onclick ="dayClicked(this)"><span class="calendar-col">' + i + '</span></td>';
                 }
             }
             // If Saturday, closes the row
@@ -585,7 +732,6 @@
     }
 
     function getClass(name) {
-        console.log('HI')
         return document.getElementsByClassName(name)
     }
 
@@ -607,13 +753,145 @@
 
         }
 
-        document.getElementById('btnPrev').innerHTML = this.Months[previousMonth];
-        document.getElementById('btnNext').innerHTML = this.Months[nextMonth];
+        document.getElementById('btnPrev').innerHTML = '<span class="calendar-btn-left"> ' + this.Months[previousMonth] + '</span>';
+        document.getElementById('btnNext').innerHTML = '<span class="calendar-btn-right">' +
+            this.Months[nextMonth] + '</span>';
     }
 
-    function dayClicked(id) {
-        console.log(id, month, year)
+    function dayClicked(day_ele) {
+        day = day_ele.id;
+        $('#calendar').find("*").removeClass("day-clicked");
+        day_ele.classList.add("day-clicked");
+        let formated_date = `${year}-${month+1}-${day}`
+        getSlots(formated_date)
+        document.getElementById("day").value = formated_date
+    }
+
+    function getSlots(date) {
+        let prod_id = document.getElementById('product_id').value
+        url = base_url + 'api/timeslots'
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                product_id: prod_id,
+                date: date
+            },
+            success: function(data) {
+                renderSlots(data)
+
+            },
+            error: function(err) {
+                console.log('Error!', err)
+            }
+
+        });
+    }
+
+    function renderSlots(data) {
+        let template = ''
+        data.forEach(item => {
+            if (item.available) {
+                template = template + `<button class="time-btn" onclick= "slotSelect(${item.id},this)">` + `${item.timeslot}</button>`
+
+            } else {
+                template = template + `<button class="time-btn time-btn-inactive">${item.timeslot}</button>`
+
+            }
+
+        });
+        document.getElementById('time-slots').innerHTML = template
+    }
+
+    function slotSelect(id, ele) {
+        $('#time-slots').find("*").removeClass("slot-clicked");
+        ele.classList.add("slot-clicked");
+        url = base_url + 'timeslot/' + id
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            success: function(data) {
+                if (data.Response) {
+                    document.getElementById('timeslot').value = data.timeslot.timeslot
+                    document.getElementById('timeslot_id').value = data.timeslot.id
+                    renderBooking(data.timeslot)
+                } else {
+                    console.log('Not Found')
+                }
+
+
+            },
+            error: function(err) {
+                console.log('Error!', err)
+            }
+
+        });
+    }
+
+    function renderBooking(data) {
+        let date = months[month] + ' ' + day
+        document.getElementById('date-selected').innerHTML = date
+        document.getElementById('slot-selected').innerHTML = data.timeslot
+    }
+
+    function addToCart() {
+        const form = new FormData(document.getElementById("booking-form"))
+        if (form.get('timeslot_id')) {
+
+            let shop_id = function() {
+                const cat_id = form.get('cat_id')
+                return cat_id;
+            }
+            let shop_category = JSON.parse(localStorage.getItem('shop_category')).filter(function(category) {
+                return category.id == shop_id();
+            });
+            let item = {
+                id: form.get('product_id'),
+                price: form.get('product_price'),
+                name: form.get('product_name'),
+                shop_id: form.get('shop_id'),
+                image_url: form.get('product_image') || null,
+                timeslot_id: form.get('timeslot_id') || null,
+                time: form.get('timeslot') || null,
+                date: form.get('day') || null,
+                category: shop_category[0].name_en || null,
+                quantity: 1
+            }
+            let product = new CartItem(item)
+            let cart = CartSerializer(getCartLocal());
+            if (cart.cart_items.length > 0) {
+                let flag = true;
+                for (i = 0; i < cart.cart_items.length; i++) {
+                    if (cart.cart_items[i].id === item.id && cart.cart_items[i].timeslot_id === item.timeslot_id) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    cart.addItem(product);
+                    storeCartLocal(JsonCartSerializer(cart));
+                    renderNavCart()
+                    showAlertSuccess(`${product.name} is booked`)
+
+                } else {
+                    showAlertError(`${product.name} is already booked`)
+                }
+            } else {
+                cart.addItem(product);
+                showAlertSuccess(`${product.name} is booked`)
+                storeCartLocal(JsonCartSerializer(cart));
+                renderNavCart()
+            }
+        } else {
+            showAlertError("Please select a slot!")
+        }
     }
 </script>
 <script src="js/prodjs.js"></script>
+
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
+    @include('footer')
+</div>
 @endsection

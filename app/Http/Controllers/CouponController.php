@@ -10,21 +10,17 @@ use Illuminate\Validation\Rule;
 
 class CouponController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $today = Carbon::now();
-        if(isset($request->code)){
-            $couponexist= Coupon::where('code',strtoupper($request->code))->first();
-
+        if (isset($request->code)) {
+            $couponexist = Coupon::where('code', strtoupper($request->code))->first();
+        } else {
+            return response()->json(['Response' => false,   'Coupon' => 'Coupon Code is required']);
         }
-        else{
-            return response()->json(['Response'=>false,   'Coupon'=>'Coupon Code is required']);
-
-        }
-        if(!$couponexist){
-            return response()->json(['Response'=>false,   'Coupon'=>'Coupon Code does not exist']);
-
+        if (!$couponexist) {
+            return response()->json(['Response' => false,   'Coupon' => 'Coupon Code does not exist']);
         }
 
         $q = Coupon::with('shop');
@@ -35,31 +31,30 @@ class CouponController extends Controller
         if (isset($request->code) && $request->code != '') {
             $q = $q->where('code', 'like', "%" . $request->code . "%",);
         }
-  
-        if( $today->gt($q->first()->expiry)){
-            return response()->json(['Response'=>false,   'Coupon'=>'Coupon is expired']);
 
+        if ($today->gt($q->first()->expiry)) {
+            return response()->json(['Response' => false,   'Coupon' => 'Coupon is expired']);
         }
-        return response()->json(['Response'=>!!$q, 'Coupon'=>$q->first()]);
+        return response()->json(['Response' => !!$q, 'Coupon' => $q->first()]);
     }
 
-  
+
     public function store(Request $request)
     {
-    
+
         $validator = Validator::make($request->all(), [
             "action" => "required|string"
         ]);
         if ($validator->fails()) {
             return response()->json(["error" => $validator->errors()]);
         }
-        
+
         if (isset($request->action)) {
             switch ($request->action) {
                 case 'create':
-               
+
                     $coupon = new Coupon();
-                    
+
 
 
                     if (Coupon::where('code', '=', strtoupper($request->code))->first()) {
@@ -70,22 +65,15 @@ class CouponController extends Controller
                         $coupon->value = $request->value;
                     }
                     if (isset($request->shop_id)) {
-                        if($request->shop_id == '0'){
-                        }
-                        else{
+                        if ($request->shop_id == '0') { } else {
                             $coupon->shop_id = $request->shop_id;
-
                         }
-                    }
-                    else{
-
-                    }
+                    } else { }
                     if (isset($request->expiry)) {
                         $coupon->expiry = $request->expiry;
                     }
                     if (isset($request->ispercentage)) {
                         $coupon->ispercentage = $request->ispercentage;
-
                     }
 
                     $coupon->save();
@@ -97,7 +85,7 @@ class CouponController extends Controller
 
                     if (isset($request->id)) {
                         $coupon = Coupon::where('id', $request->id)->first();
-                        $coupon->update(['expiry' =>  $coupon->expiry->addDays(7) ]);
+                        $coupon->update(['expiry' =>  $coupon->expiry->addDays(7)]);
                         return redirect('/coupons');
 
                         // return response()->json(['status' => !!$coupon, 'data' => $coupon]);
@@ -107,7 +95,7 @@ class CouponController extends Controller
 
                 case "update":
                     if (isset($request->update_id)) {
-                    
+
                         $coupon =  Coupon::findorfail($request->update_id);
                         $coupon->value = $request->value;
                         if (isset($request->shop_id)) {
@@ -117,7 +105,7 @@ class CouponController extends Controller
                             $coupon->expiry = $request->expiry;
                         }
                         $coupon->ispercentage = $request->ispercentage;
-    
+
                         $coupon->save();
                         return back();
                     }
@@ -141,6 +129,4 @@ class CouponController extends Controller
             }
         }
     }
-
-   
 }

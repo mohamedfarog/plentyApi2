@@ -11,7 +11,6 @@
         border: 2px solid white;
         text-transform: none;
         line-height: 35px;
-
     }
 
     .hero-subtitle-dine {
@@ -91,10 +90,139 @@
         color: green;
     }
 
+    .delicacy-shop-logo {
+        filter: brightness(0) invert(1);
+    }
+
+    .category {
+        font-weight: lighter;
+        color: black
+    }
+
+    .category-active {
+        color: #288248;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+    }
+
+    .frame {
+        width: 250px;
+        height: 250px;
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell;
+    }
+
+    .imgz {
+        max-width: 95%;
+        max-height: 90%;
+        display: block;
+        margin: 0 auto;
+        min-width: 95% !important;
+    }
+
+    .shoplistmobile {
+        justify-content: space-evenly;
+        width: 100%;
+        display: flex;
+        background: #b9b9b9;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        height: 60px;
+    }
+
+    .shoplistmobile>button {
+        flex: 10%;
+        height: 100% !important;
+    }
+
+    .mobiletabs {
+        display: none;
+    }
+
+    .divitext {
+        color: white;
+        font-size: 24px;
+        font-weight: 100;
+        font-family: 'Avenir';
+    }
+
+    .buttonsshow {
+        background: green;
+        height: 30px;
+        width: 80%;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .catmobile {
+            font-size: 16px;
+        }
+
+        .tabprod {
+            display: block !important;
+        }
+
+        .frame {
+            width: 400px;
+        }
+
+        .wholemobile {
+            width: 100% !important;
+        }
+
+        .tablinkprod {
+            width: 100% !important;
+        }
+
+        .heading-banner-area {
+            margin: 0 !important;
+        }
+
+        .buttonmobile {
+            height: 60px;
+        }
+
+
+        .shoplistmobile>button {
+            flex: 25%;
+            height: 100% !important;
+        }
+
+        .shoplistmobile {
+            height: 100%;
+        }
+
+        .mobiletabs {
+            display: block;
+
+        }
+
+        .shoplistmobiletabs>button {
+            flex: 100%;
+            height: 100% !important;
+        }
+
+        .owlmobile {
+            height: 100% !important;
+        }
+
+        .dinebtn {
+            width: 100% !important;
+        }
+
+        section.wholetabs {
+            width: 100%;
+            margin: auto;
+        }
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
-
+<input type="hidden" id="shopid" value={{$shop->id}}>
+<input type="hidden" id="shopname" value="{{$shop->name_en}}">
 <div class="heading-banner-area overlay-bg" style="background: url('img/store/SADA/Dine Banner.png') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
@@ -107,6 +235,7 @@
                         <ul>
                             <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;">DINE</li>
+                            <li style="font-weight:lighter;" id="breadcrumbshopname">Linen</li>
                         </ul>
                     </div>
                 </div>
@@ -115,288 +244,150 @@
     </div>
 </div>
 <!-- Tab links -->
-<section class="wholetabs">
-    <div class="tab" style="justify-content: space-evenly;width:100%;display:flex;background:#b9b9b9;margin-top:20px;">
-        <button class="tablink" onclick="openPage('Linen', this, '#2b854b')">
-            <img src="img/dine/linen.png" style="height:30px;">
-        </button>
+<section class="regular slider wholetabs">
+    @if(isset($featured_products))
+    @foreach($featured_products as $product)
 
-        <button class="tablink activetab" onclick="openPage('Sada', this, '#2b854b')" id="defaultOpen">
-            <img src="img/dine/sada.png" style="height:30px;">
-        </button>
-        <button class="tablink" onclick="openPage('Solid', this, '#2b854b')">
-            <img src="img/dine/solid.png" style="height:30px;">
-        </button>
-        <button class="tablink" onclick="openPage('Mikroulii', this, '#2b854b')">
-            <img src="img/dine/mikroulii.png" style="height:30px;">
-        </button>
-        <button class="tablink" onclick="openPage('Gokasakana', this, '#2b854b')">
-            <img src="img/dine/gokasakana.png" style="height:30px;">
-        </button>
-        <button class="tablink" onclick="openPage('Perimeter', this, '#2b854b')">
-            <img src="img/dine/perimeter.png" style="height:30px;">
-        </button>
-        <button class="tablink" onclick="openPage('Hyphen', this, '#2b854b')">
-            <img src="img/dine/hyphen.png" style="height:30px;">
-        </button>
+    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
+        <div class="product-img frame">
 
-        <button class="tablink" onclick="openPage('Portion', this, '#2b854b')">
-            <img src="img/dine/portion.png" style="height:30px;">
-        </button>
-    </div>
+            @if ($product->image)
+            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+            @else
+            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
+            @endif
 
-    <div id="Linen" class="tabcontent">
-        <h3>Linen</h3>
-
-    </div> <!-- end linen -->
-
-    <div id="Sada" class="tabcontent">
-        <section>
-            <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated" style="height:380px;">
-
-                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner1.png);background-size: cover !important;background-position: unset;">
-                    <div class="container">
-                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                            <div class="hero-message" style="text-align:right;">
-                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                </h1>
-                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                <div class="buttons-holder" style="">
-                                    <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
-                    <div class="container">
-                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                            <div class="hero-message" style="text-align:right;">
-                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                </h1>
-                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                <div class="buttons-holder" style="">
-                                    <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
-                    <div class="container">
-                        <div class="hero-holder" style="display: grid;padding-top:50px;">
-                            <div class="hero-message" style="text-align:right;">
-                                <h1 class="hero-title nocaps" style="font-size:50px;font-weight:100;text-transform:uppercase">Early Bird Discount
-                                </h1>
-                                <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
-                                <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
-                                <div class="buttons-holder" style="">
-                                    <a href="#" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="product-action clearfix">
             </div>
-        </section> <!-- end hero slider -->
+        </div>
+        <div class="product-info clearfix">
+            <div class="fix">
+                <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
+                <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
+            </div>
+            <div class="fix featlineicons">
+                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                </span>
+                <span class="pro-rating floatright">
+                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                </span>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    @endif
+</section>
+
+<section class="wholetabs tabsshops">
+    <div class="tab shoplistmobile" style="">
+        @if(isset($shops))
+        @foreach($shops as $shop)
+        @if ($loop->first)
+        <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
+
+            <img class="delicacy-shop-logo imgz" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
+        </button>
+        @else
+
+        <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
+
+            <img class="delicacy-shop-logo" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
+        </button>
+        @endif
+        @endforeach
+        @endif
+    </div>
+</section>
+
+<section class="mobiletabs wholetabs">
+
+</section>
+
+<section class="wholetabs wholemobile">
+    <div id="Sada">
+
+        <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated owlmobile" style="height:380px;">
+
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner1.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner2.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide overlay" style="background-image:url(img/store/SADA/sadabanner3.png);background-size: cover !important;background-position: unset;">
+                <div class="container">
+                    <div class="hero-holder" style="display: grid;padding-top:50px;">
+                        <div class="hero-message" style="text-align:right;">
+                            <h1 class="hero-title nocaps" style="font-size:40px;font-weight:100;text-transform:uppercase">Early Bird Discount
+                            </h1>
+                            <h2 class="hero-subtitle-dine lines" style="">Order before 7 am and </h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
+                            <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
+                            <div class="buttons-holder" style="">
+                                <a class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <section class="mt-30 mb-30">
             <div style="text-align:center;">
-                <h1 style="font-weight:lighter;color:#288248">
-                    Simply Put.
+                <h1 style="font-weight:lighter;color:#288248" id="breadcrumbshopname2">
+                    Linen
                 </h1>
             </div>
         </section>
-        <section style="width: 50%;margin: auto;">
+        <section style="width: 100%;margin: auto;margin-bottom:40px;">
             <div class="tabprod" style="justify-content: space-evenly;width:100%;display:flex;margin-top:20px;">
-                <button class="tablinkprod" onclick="">
-                    <h2 style="font-weight:lighter;color:#288248;text-decoration: underline;text-decoration-thickness: 2px;">
+                <button class="tablinkprod" onclick="getBestSeller(this)" id="defaultOpen">
+                    <h2 class="category-name category catmobile">
                         Best Seller </h2>
                 </button>
-
-                <button class="tablinkprod activetab" onclick="">
-                    <h2 style="font-weight:lighter;color:black">Hot </h2>
+                @foreach($product_categories as $product_category)
+                <button class="tablinkprod" onclick="getProducts(this,{{$product_category->id}})">
+                    <h2 class="category-name category catmobile"> {{$product_category->name_en}} </h2>
                 </button>
-                <button class="tablinkprod" onclick="">
-                    <h2 style="font-weight:lighter;color:black">Cold </h2>
-                </button>
-                <button class="tablinkprod" onclick="">
-                    <h2 style="font-weight:lighter;color:black">Sweets </h2>
-                </button>
-
+                @endforeach
             </div>
-
         </section>
-        <section style="margin: auto;width:90%;text-align:center;">
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle  post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="single-product col-lg-3 col-xs-12 hidden-md hidden-sm" style="margin-bottom:30px;">
-                <div class="product-img">
-                    <a href="/product"><img src="img/product/8.jpg" alt="" loading=lazy /></a>
-                    <div class="product-action clearfix">
-
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="#">Hot Choco</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle post-title">SAR 60</p>
-                    </div>
-
-                </div>
-            </div>
+        <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
 
         </section>
 </section>
 
 </div> <!-- end sada -->
 
-<div id="Solid" class="tabcontent">
-    <h3>Solid</h3>
-</div> <!-- end solid -->
-
-<div id="Mikroulii" class="tabcontent">
-    <h3>Mikroulii</h3>
-
-</div> <!-- end mikroulii -->
-
-<div id="Gokasakana" class="tabcontent">
-    <h3>Gokasakana</h3>
-
-</div> <!-- end gokasakana -->
-
-<div id="Perimeter" class="tabcontent">
-    <h3>Perimeter</h3>
-
-</div> <!-- end perimeter -->
-
-<div id="Hyphen" class="tabcontent">
-    <h3>Hyphen</h3>
-
-</div> <!-- end hyphen -->
-
-<div id="Portion" class="tabcontent">
-    <h3>Portion</h3>
-
-</div> <!-- end portion -->
 
 
 
@@ -407,38 +398,140 @@
     $(document).ready(function() {
         document.getElementById("defaultOpen").click();
         $(".active").css("background-color", "black");
+        const shop_id = $('#shopid').val();
+        const shop_name = $('#shopname').val();
+        makeShopActive(shop_id, color = "#2b854b");
 
+        document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
-    function openPage(pageName, elmnt, color) {
-        // Hide all elements with class="tabcontent" by default */
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+    // Making current link activate
+    function makeShopActive(shop_id, color) {
+        const shop = 'shop' + shop_id
+        document.getElementById(shop).style.boxShadow = '0 0 3px #000000';
+        document.getElementById(shop).style.backgroundColor = color;
+
+    }
+
+    // Making sub category link active
+    function makeCategoryActive(element) {
+        var title = document.getElementsByClassName('category-name');
+        for (var i = 0; i < title.length; i++) {
+            title[i].classList.remove('category-active');
         }
+        element.querySelector('h2').classList.add('category-active');
 
-        // Remove the background color of all tablinks/buttons
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-            tablinks[i].style.boxShadow = "";
-        }
-
-        // Show the specific tab content
-        document.getElementById(pageName).style.display = "block";
-
-        // Add the specific color to the button used to open the tab content
-        elmnt.style.backgroundColor = color;
-        elmnt.style.boxShadow = '0 0 3px #000000';
     }
 
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 
+    //for filtering product based on category
+    function getProducts(element, category = 0) {
+        $.ajax({
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
+                if (data.length) {
+                    renderProduct(data)
+                    makeCategoryActive(element)
+
+
+                } else {
+                    renderNoProduct()
+                    makeCategoryActive(element)
+                }
+            }
+        });
+    }
+    //getProducts  //for filtering product based on category
+    function getBestSeller(element) {
+        shop_id = $('#shopid').val();
+        $.ajax({
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
+                if (data) {
+                    renderProduct(data)
+                    makeCategoryActive(element)
+                } else {
+                    //raise error already exist
+                }
+            }
+        });
+    }
+
+    // For rendering products in product panel
+    function renderProduct(data) {
+        url = base_url + 'storage/products/'
+        let prod_element = ''
+        data.forEach(element => {
+            prod_element +=
+                "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
+                "<div class='product-img frame'>" +
+                "<a href='/product/" + element.product_id + "'><img src='" + url + element.url + "' alt='' loading=lazy  class='imgz'/></a>" +
+                "<div class='fix buttonsshow' style=''>" +
+                "<span class='pro-price '><img class='featicons' src='img/nav/bag.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
+                "<span class='divitext' style=''> | </span> " +
+                "<span class='pro-rating '><img class='featicons' src='img/nav/search.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
+                "</div>" +
+                "<div class='product-action clearfix'></div></div>" +
+                "<div class='product-info clearfix'>" +
+                "<div class='fix'>" +
+                "<h4 class='post-title floatcenter feattitle'><a href='/product/" + element.product_id + "'>" + element.name_en + "</a></h4>" +
+                "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
+
+        });
+        document.getElementById('product-panel').innerHTML = prod_element
+        $('.buttonsshow').css({
+            'visibility': 'hidden'
+        });
+    }
+
+    function renderNoProduct() {
+
+        let prod_element = "<h1>Product is not available!</h1>"
+        document.getElementById('product-panel').innerHTML = prod_element
+    }
+
+    function shopname(shopid, shoppy, imgy) {
+
+        if (typeof(Storage) !== "undefined") {
+            localStorage.shopid = shopid;
+            localStorage.shopname = shoppy;
+            localStorage.shopimg = '{{ url(' / storage / styles / ') }}' + '/' + imgy;
+            window.location = base_url + 'delicacy/' + shopid;
+
+        } else {
+            window.location = base_url + 'delicacy/' + shopid;
+        }
+
+
+    }
+
+    $(".producthover").hover(function() {
+        $(this).children(".product-img").children(".buttonsshow").css({
+            'visibility': 'visible'
+        });
+        console.log('hover');
+    }, function() {
+        $(this).children(".product-img").children(".buttonsshow").css({
+            'visibility': 'hidden'
+        });
+        console.log('nohover');
+    });
 </script>
 <script src="js/prodjs.js"></script>
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
+    @include('footer')
+</div>
+
 @endsection

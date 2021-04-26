@@ -3829,7 +3829,7 @@ address {
   height: 0;
   top: 0;
   left: 0;
-  background: #171717;
+  /* background: #171717; */
   content: '';
   position: absolute;
   -webkit-transition: all 0.3s ease-in-out;
@@ -3846,6 +3846,7 @@ address {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   color: #fff;
+  background-color: black; /* Green */
 }
 
 .btn:hover:after {
@@ -4241,7 +4242,7 @@ button.btn.btn-md {
 
 input.btn:hover,
 button.btn:hover {
-  background-color: #aa8b6b;
+  background-color: #001b71;
   color: #fff;
 }
 
@@ -4294,7 +4295,7 @@ table th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  border-top: 1px solid #ebebeb;
+  border-top: 2px solid #b2bad4;
   padding: 10px;
 }
 
@@ -4313,7 +4314,7 @@ table th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #ebebeb;
+  border: 2px solid #b2bad4;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
@@ -5477,7 +5478,7 @@ input[type=number] {
 }
 
 .shop_table.cart tr:last-child {
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 2px solid #b2bad4;
 }
 
 .shop_table .product-thumbnail {
