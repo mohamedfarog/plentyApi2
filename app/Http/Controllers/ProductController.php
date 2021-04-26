@@ -289,7 +289,8 @@ class ProductController extends Controller
                         $data['eventcat_id'] = $request->eventcat_id;
                     }
                     if(isset($request->productid)){
-                        $product = Product::find($request->productid)->update($data);
+                        $product = Product::find($request->productid);
+                        $product->update($data);
                     }
                     else{
                        $product = Product::create($data); 
