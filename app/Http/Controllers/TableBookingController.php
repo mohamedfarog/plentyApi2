@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\TableBooking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class TableBookingController extends Controller
 {
@@ -36,7 +39,7 @@ class TableBookingController extends Controller
         $order = '';
         $msg = '';
         if (isset($request->id)) {
-            $order = Order::where('id', $request->id)->first();
+            $order = TableBooking::where('id', $request->id)->first();
             switch ($request->action) {
                 case 'delete':
                     $order->delete();
@@ -104,8 +107,8 @@ class TableBookingController extends Controller
             $validator = Validator::make($request->all(), [
                 "total_amount" => "required",
                 "amount_due" => "required",
-                "delivery_location" => "required",
-                "orderdetails" => "required"
+               
+                "bookingdetails" => "required"
             ]);
 
             if ($validator->fails()) {
