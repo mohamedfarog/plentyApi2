@@ -115,7 +115,7 @@ class TableBookingController extends Controller
                 return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
             }
             $data = array();
-            $data['user_id'] = $user->id;
+            $data['user_id'] = Auth::id();
             $data['ref'] = Str::uuid();
             $data['total_amount'] = $request->total_amount;
             $data['amount_due'] = $request->amount_due;
