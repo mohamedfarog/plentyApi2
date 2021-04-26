@@ -64,7 +64,6 @@ Route::get('webhooks', [FoodicsController::class, 'webhooks']); // this url is u
 Route::post('webhooks', [FoodicsController::class, 'webhooks']); // this url is used under foodics webserver
 Route::post('loyality/reward', [FoodicsController::class, 'loyalityRewards']);
 Route::post('loyality/redeem', [FoodicsController::class, 'loyalityRedeem']);
-Route::get('testtran', [EjackController::class, 'create']);
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
