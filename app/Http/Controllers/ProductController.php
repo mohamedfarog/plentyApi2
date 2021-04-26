@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Product;
 use App\Models\ShopInfo;
 use App\Models\Size;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -64,6 +65,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     public function deleteproduct(Request $request)
+     {
+         if(isset($request->pid)){
+             $product= Product::find($request->pid);
+             $product->deleted_at= Carbon::now();
+             $product->save();
+             return response()->json(['success' => !!$product]);
+         }
+     }
     public function store(Request $request, UploadHelper $helper)
     {
         //
