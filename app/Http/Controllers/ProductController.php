@@ -297,7 +297,10 @@ class ProductController extends Controller
                        $product = Product::create($data); 
                     }
                     
-
+                    if(isset($request->productid)){
+                    $addedsizes= Sizes::where('product_id',$request->productid)->get();
+                    
+                    }
                     if (isset($request->sizes)) {
                         foreach ($request->sizes as $size) {
                             $arr = array();
