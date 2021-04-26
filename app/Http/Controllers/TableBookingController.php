@@ -109,7 +109,6 @@ class TableBookingController extends Controller
                 "total_amount" => "required",
                 "amount_due" => "required",
                
-                "bookingdetails" => "required"
             ]);
 
             if ($validator->fails()) {
