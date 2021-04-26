@@ -21,7 +21,7 @@ class TableBookingController extends Controller
        $user_id=Auth::id();
        
        $data=TableBooking::where('user_id',$user_id)->with(['products']);
-       return $data::paginate();
+       return $data->paginate();
     }
 
 
