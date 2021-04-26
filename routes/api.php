@@ -8,6 +8,7 @@ use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FoodicsController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TableBookingController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\ProdcatController;
