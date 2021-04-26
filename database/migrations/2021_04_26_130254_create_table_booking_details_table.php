@@ -25,7 +25,6 @@ class CreateTableBookingDetailsTable extends Migration
             $table->unsignedBigInteger('shop_id')->nullable();
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->double('price')->nullable();
-            $table->id();
             $table->timestamps();
         });
     }
@@ -40,3 +39,5 @@ class CreateTableBookingDetailsTable extends Migration
         Schema::dropIfExists('table_booking_details');
     }
 }
+
+
