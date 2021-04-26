@@ -82,6 +82,7 @@ Route::post('register', [UserController::class, 'register'])->middleware('regist
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
 Route::resource('categories', CatController::class);
 Route::resource('prodcat', ProdcatController::class);
+Route::resource('tablebooking', TableBookingController::class);
 Route::get('tiers', [TierController::class, 'index']);
 Route::post('checkstock', [SizeController::class, 'checkStock']);
 Route::get('otpnum', [OtpController::class, 'otpNumber']);

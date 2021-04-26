@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TableBooking;
+use App\Models\TableBookingDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -121,126 +122,57 @@ class TableBookingController extends Controller
             $data['amount_due'] = $request->amount_due;
             $data['delivery_location'] = $request->delivery_location;
 
-            //  addPoints
-            if (isset($request->order_status)) {
-                $data['order_status'] = $request->order_status;
-            }
-            if (isset($request->payment_method)) {
-                $data['payment_method'] = $request->payment_method;
-            }
-
-            if (isset($request->lat)) {
-                $data['lat'] = $request->lat;
-            }
-            if (isset($request->lng)) {
-                $data['lng'] = $request->lng;
-            }
-            if (isset($request->delivery_note)) {
-                $data['delivery_note'] = $request->delivery_note;
-            }
-            if (isset($request->contact_number)) {
-                $data['contact_number'] = $request->contact_number;
-            }
-            if (isset($request->city)) {
-                $data['city'] = $request->city;
-            }
-            if (isset($request->label)) {
-                $data['label'] = $request->label;
-            }
-
-            if (isset($request->points)) {
-                //TODO POINT DEDUCTION (CHECK AGAIN)
-
-                $customer = User::with(['tier'])->find($user->id);           //for updating the user model
-                $customer->points = $user->points - $request->points;
-            }
-            if (isset($request->wallet)) {
-                //TODO WALLET DEDUCTION (CHECK AGAIN)
-                $customer->wallet = $user->wallet  - $request->wallet;
-            }
-
-            $loyalty = new Loyalty();
-
-
-            if (isset($request->tax)) {
-                $data['tax'] = $request->tax;
-            }
-            if (isset($request->delivery_charge)) {
-                $data['delivery_charge'] = $request->delivery_charge;
+            
+            if (isset($request->status)) {
+                $data['status'] = $request->status;
             }
             if (isset($request->coupon_value)) {
                 $data['coupon_value'] = $request->coupon_value;
             }
-            $shoplist =  array();                // List of Shop Ids
-            $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
-            if($pointsearned){
-                $data['points_earned'] = $pointsearned;
+            if (isset($request->points)) {
+                $data['points'] = $request->points;
+            }
+            if (isset($request->user_id)) {
+                $data['user_id'] = $request->user_id;
             }
 
-            $order = Order::create($data);
+            $order = TableBooking::create($data);
 
-
-           
             foreach ($request->orderdetails as $orderdetails) {
                 $arr = array();
-                if (isset($orderdetails['product_id'])) {
-                    $arr['product_id'] = $orderdetails['product_id'];
+                if (isset($orderdetails['tablebookingid'])) {
+                    $arr['tablebookingid'] = $order->id;
                 }
                 if (isset($orderdetails['qty'])) {
                     $arr['qty'] = $orderdetails['qty'];
                 }
-                if (isset($orderdetails['booking_time'])) {
-                    $arr['booking_time'] = $orderdetails['booking_time'];
-                }
+              
                 if (isset($orderdetails['shop_id'])) {
                     $arr['shop_id'] = $orderdetails['shop_id'];
                 }
-                // if (isset($orderdetails['shop_id'])) {
-                //     $arr['shop_id'] = $orderdetails['shop_id'];
-                //     if(!in_array($shoplist,$orderdetails['shop_id'])){
-                //         array_push($shoplist,['shop_id'=> $orderdetails['shop_id'] ,'price' => $orderdetails['price'] ]);
-                //     }
-                //     else{
-                //         $shoplist['price']= $shoplist['price'] + $orderdetails['price'];
-                //     }
-                //     return $shoplist;
-                // }
+       
                 if (isset($orderdetails['price'])) {
                     $arr['price'] = $orderdetails['price'];
-                }
-                if (isset($orderdetails['color_id'])) {
-                    if ($orderdetails['color_id'] == -1) {
-                    } else
-                        $arr['color_id'] = $orderdetails['color_id'];
-                }
-                if (isset($orderdetails['size_id'])) {
-                    $arr['size_id'] = $orderdetails['size_id'];
-                }
-                if (isset($orderdetails['booking_date'])) {
-                    $arr['booking_date'] = $orderdetails['booking_date'];
-                }
-                if (isset($orderdetails['timeslot_id'])) {
-                    $arr['timeslot_id'] = $orderdetails['timeslot_id'];
                 }
                 if (isset($orderdetails['addons'])) {
 
                     $arr['addons'] = implode(',', $orderdetails['addons']);
                 }
-                $arr['order_id'] =  $order->id;
-                $detail = Detail::create($arr);
+
+                
+                $detail = TableBookingDetail::create($arr);
             }
             
                
-            $customer->points+=$pointsearned;
             
-            $customer->save();
-            $loyalty->calculateTier($customer,$request->amount_due,$request->wallet);
+            
+            
             $msg = 'Order has been added';
 
             
 
 
-            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => User::find($customer->id)]);
+            return response()->json(['success' => !!$order, 'message' => $msg]);
         }
     }
 }
