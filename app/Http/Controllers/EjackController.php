@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class EjackController extends Controller
 {
-    protected $baseUrl = "https://ejack.fastcoo-solutions.com/lm/";
+    protected $baseUrl = "https://api.fastcoo-tech.com/API/";
     protected $username = 'ejack@plentyofthing.com';
     protected $password = "Ejack@123123";
 
@@ -15,7 +15,45 @@ class EjackController extends Controller
 
     public function create(Request $request)
     {
-        $res = Http::get($this->baseUrl . "shipmentBookingApi_lm.php?sender_name=test&sender_city=Riyadh&sender_mobile=966540502164&sender_address=Alsulay,Istanbulst.,Almashael,warehouseno&productType=KVAIMI&service=4&password=$this->password&sender_email=$this->username&Receiver_name=test&Receiver_email=ravi@gmail.com&Receiver_address=test&Receiver_phone=96645678945&Reciever_city=Riyadh&Weight=5&Description=test&NumberOfParcel=1&BookingMode=COD&codValue=200&refrence_id=21124&product_price=100");
+        $secret="b30935-ed3572-8a183b-7df33c-0c1dd0";
+        $customerId="161913268122";
+        $parms = [
+            "sender_name" => "fastcoo",
+            "sender_email" => "test@email.com",
+            "origin" => "Riyadh",
+            "sender_phone" => "9876543210",
+            "sender_address" => "riyadh",
+            "receiver_name" => "test",
+            "receiver_phone" => "0500000000",
+            "destination" => "Riyadh",
+            "BookingMode" => "COD",
+            "receiver_address" => "Near Tower",
+            "reference_id" => "TRL6578175952",
+            "codValue" => "150.00",
+            "productType" => "parcel",
+            "service" => "3",
+            "skudetails" => [
+                [
+                    "sku" => "band1",
+                    "description" => "TEST DESCRIPTION",
+                    "cod" => 299.00,
+                    "piece" => 1,
+                    "wieght" => 12,
+                ]
+            ]
+        ];
+
+        $data = [
+            "customerId" => $customerId,
+            "method" => " createOrder",
+            "format" => "json",
+            "secret_key"=>$secret,
+            "signMethod" => "md5",
+        ];
+        $data['sign'] = strtoupper(md5($secret."customerId161913268122formatjsonmethodcreateOrdersignMethodmd5" . json_encode($parms) .$secret));
+
+        $data["param"] = json_encode($parms);
+        $res = Http::post($this->baseUrl . "createOrder", $data);
         return $res;
     }
     public function cancel($aws_no = null)
