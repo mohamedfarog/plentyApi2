@@ -138,9 +138,9 @@ class TableBookingController extends Controller
             $order = $data->save();
 
             foreach ($request->orderdetails as $orderdetails) {
-                $details=new TableBookingDetail();
-                $details->tablebookingid=$data->id;
-              
+                $details = new TableBookingDetail();
+                $details->tablebookingid = $data->id;
+
                 if (isset($orderdetails['qty'])) {
                     $details->qty = $orderdetails['qty'];
                 }
@@ -161,8 +161,8 @@ class TableBookingController extends Controller
                 if (isset($orderdetails['price'])) {
                     $details->price = $orderdetails['price'];
                 }
-              
-$details->save();
+
+                $details->save();
             }
 
 
@@ -174,7 +174,7 @@ $details->save();
 
 
 
-            return response()->json(['success' => !!$order, 'message' => $msg]);
+            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => Auth::user()]);
         }
     }
 }
