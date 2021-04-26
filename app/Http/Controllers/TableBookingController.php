@@ -174,7 +174,7 @@ class TableBookingController extends Controller
 
 
 
-            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => Auth::user(),"order" => $data]);
+            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => Auth::user(), "order" => $data]);
         }
     }
 }
