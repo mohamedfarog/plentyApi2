@@ -21,7 +21,7 @@ class TableBookingController extends Controller
         //
     }
 
-  
+
     /**
      * Display the specified resource.
      *
@@ -108,67 +108,70 @@ class TableBookingController extends Controller
             $validator = Validator::make($request->all(), [
                 "total_amount" => "required",
                 "amount_due" => "required",
-               
+
             ]);
 
             if ($validator->fails()) {
                 return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
             }
-            $data = array();
-            $data['user_id'] = Auth::id();
-            $data['ref'] = Str::uuid();
-            $data['total_amount'] = $request->total_amount;
-            $data['amount_due'] = $request->amount_due;
-            $data['delivery_location'] = $request->delivery_location;
+            $data = new TableBooking();
 
-            
+            $data->user_id = Auth::id();
+            $data->ref = Str::uuid();
+            $data->total_amount = $request->total_amount;
+            $data->amount_due = $request->amount_due;
+
+
             if (isset($request->status)) {
-                $data['status'] = $request->status;
+                $data->status = $request->status;
             }
             if (isset($request->coupon_value)) {
-                $data['coupon_value'] = $request->coupon_value;
+                $data->coupon_value = $request->coupon_value;
+            }
+            if (isset($request->coupon_code)) {
+                $data->coupon_code = $request->coupon_code;
             }
             if (isset($request->points)) {
-                $data['points'] = $request->points;
-            }
-            if (isset($request->user_id)) {
-                $data['user_id'] = $request->user_id;
+                $data->points = $request->points;
             }
 
-            $order = TableBooking::create($data);
+            $order = $data->save();
 
             foreach ($request->orderdetails as $orderdetails) {
-                $arr = array();
-                if (isset($orderdetails['tablebookingid'])) {
-                    $arr['tablebookingid'] = $order->id;
-                }
+                $details=new TableBookingDetail();
+                $details->tablebookingid=$data->id;
+              
                 if (isset($orderdetails['qty'])) {
-                    $arr['qty'] = $orderdetails['qty'];
+                    $details->qty = $orderdetails['qty'];
+                }
+
+                if (isset($orderdetails['product_id'])) {
+                    $details->product_id = $orderdetails['product_id'];
+                }
+                if (isset($orderdetails['shop_id'])) {
+                    $details->shop_id = $orderdetails['shop_id'];
+                }
+                if (isset($orderdetails['size_id'])) {
+                    $details->size_id = $orderdetails['size_id'];
+                }
+
+                if (isset($orderdetails['addons'])) {
+                    $details->addons = implode(',', $orderdetails['addons']);
+                }
+                if (isset($orderdetails['price'])) {
+                    $details->price = $orderdetails['price'];
                 }
               
-                if (isset($orderdetails['shop_id'])) {
-                    $arr['shop_id'] = $orderdetails['shop_id'];
-                }
-       
-                if (isset($orderdetails['price'])) {
-                    $arr['price'] = $orderdetails['price'];
-                }
-                if (isset($orderdetails['addons'])) {
-
-                    $arr['addons'] = implode(',', $orderdetails['addons']);
-                }
-
-                
-                $detail = TableBookingDetail::create($arr);
+$details->save();
             }
-            
-               
-            
-            
-            
+
+
+
+
+
             $msg = 'Order has been added';
 
-            
+
 
 
             return response()->json(['success' => !!$order, 'message' => $msg]);
