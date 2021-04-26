@@ -47,6 +47,8 @@ use Illuminate\Support\Str;
 use Thenextweb\Definitions\StoreCard;
 use Thenextweb\PassGenerator;
 
+use function Clue\StreamFilter\fun;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -58,22 +60,21 @@ use Thenextweb\PassGenerator;
 |
 */
 //Foodics routes
-Route::get('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
-Route::post('webhooks',[FoodicsController::class, 'webhooks']);// this url is used under foodics webserver
-Route::post('loyality/rewards',[FoodicsController::class, 'loyalityRewards']);
-Route::post('loyality/redeem',[FoodicsController::class, 'loyalityRedeem']);
-Route::get('testtran',[EjackController::class, 'create']);
+Route::get('webhooks', [FoodicsController::class, 'webhooks']); // this url is used under foodics webserver
+Route::post('webhooks', [FoodicsController::class, 'webhooks']); // this url is used under foodics webserver
+Route::post('loyality/reward', [FoodicsController::class, 'loyalityRewards']);
+Route::post('loyality/redeem', [FoodicsController::class, 'loyalityRedeem']);
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('events',[EventController::class, 'index']);
-Route::get('eventshops',[EventcatController::class, 'index']);
-Route::get('eventproducts',[ProductController::class, 'getProducts']);
-Route::get('banners',[SliderController::class, 'index']);
+Route::get('events', [EventController::class, 'index']);
+Route::get('eventshops', [EventcatController::class, 'index']);
+Route::get('eventproducts', [ProductController::class, 'getProducts']);
+Route::get('banners', [SliderController::class, 'index']);
 
-Route::post('vendorslogin',[UserController::class,'vendorslogin']);
+Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
 Route::resource('otp', OtpController::class);
 Route::post('verify', [OtpController::class, 'verify']);
@@ -88,27 +89,29 @@ Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
 Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
-Route::get('eventcatlist',[EventcatController::class,'eventcatlist']);
+Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
-   
+
     Route::post('autologin', [UserController::class, 'autologin']);
     Route::post('addpoints', function () {
         //TODO
         return response()->json(['Success' =>  true]);
     });
-    Route::post('eventshopregister',[UserController::class,'vendorsRegister']);
-    Route::post('eventcatadd',[EventCatController::class,'eventcatadd']);
-
+    Route::post('eventshopregister', [UserController::class, 'vendorsRegister']);
+    Route::post('eventcatadd', [EventCatController::class, 'eventcatadd']);
+    Route::post('toggleFeatured', [ProductController::class, 'toggleFeatured']);
+    
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
+    Route::post('deleteproduct',[ProductController::class,'deleteproduct']);
     Route::resource('products', ProductController::class);
-    Route::post('searchProduct', [ProductController::class,"search"]);// This is currently work for vendors in mobile app
+    Route::post('searchProduct', [ProductController::class, "search"]); // This is currently work for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
     Route::post('wallet/topup', [UserController::class, 'topUpWallet']);

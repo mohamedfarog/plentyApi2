@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRelpProducts extends Migration
+class MakeProductIdNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddRelpProducts extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('prodcat_id')->nullable();
-            $table->foreign('prodcat_id')->references('id')->on('prodcats');
+        Schema::table('sizes', function (Blueprint $table) {
+            $table->unsignedBigInteger('product_id')->nullable()->change();
         });
     }
 
@@ -27,7 +25,7 @@ class AddRelpProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('sizes', function (Blueprint $table) {
             //
         });
     }

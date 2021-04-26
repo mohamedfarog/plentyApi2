@@ -59,28 +59,38 @@ class Loyalty extends Model
         // $user - User
         // $points
         // redeem Login
-        $user->points=$points;
+        $user->points-=$points;
         $user->save();
     }
 
-    public static function convertToPoints($tier, $amount)
+    public static function convertToPoints($tier=1, $amount)
     {
         //Converting amount to points
         $tierData= Tier::find($tier);
         if($tierData)
         {
-            return$amount*100/ ($tier->value);
+            return$amount*100/ ($tierData->value);
         }
         return 0.0;
     }
+    public static function convertPurchaseAmountToPoints($tier=1, $amount)
+    {
+        //Converting amount to points
+        $tierData= Tier::find($tier);
+        if($tierData)
+        {
+            return$amount*($tierData->value);
+        }
+        return $amount;
+    }
 
-    public static function convertToCurrency($tier, $points)
+    public static function convertToCurrency($tier=1, $points)
     {
          //Converting points to amount
         $tierData= Tier::find($tier);
         if($tierData)
         {
-            $tierValueInPerc= ($tier->value)/100;
+            $tierValueInPerc= ($tierData->value)/100;
             return $points*$tierValueInPerc;    
         }
         return 0.0;

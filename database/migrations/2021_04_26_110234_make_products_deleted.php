@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRelpProducts extends Migration
+class MakeProductsDeleted extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class AddRelpProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('prodcat_id')->nullable();
-            $table->foreign('prodcat_id')->references('id')->on('prodcats');
+            $table->softDeletes();
         });
     }
 
@@ -28,7 +26,7 @@ class AddRelpProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            //
+            $table->dropColumn('deleted_at');
         });
     }
 }

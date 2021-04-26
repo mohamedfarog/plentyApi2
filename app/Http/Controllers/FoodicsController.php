@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplePass;
 use App\Models\Loyalty;
 use App\Models\Tier;
 use App\Models\User;
@@ -29,32 +30,40 @@ class FoodicsController extends Controller
         $data = $response->json()['data'];
         foreach ($data as $customer) {
             $foodics_unique_id = $customer['id'];
-            // checking with foodics unique id user is exists in plentyapp database
-            $userinfo = User::where("foodics_unique_id", $foodics_unique_id)->first();
-            // If exists skip
-            if (!$userinfo) {
-                $userinfo = User::where("contact", "like", "%" . $customer['phone'])->first();
-                if (!$userinfo) {
-                    $userinfo = new User();
-                    $userinfo->name = $customer['name'];
-                    $userinfo->email = $customer['email'];
-                    $userinfo->bday = $customer['birth_date'];
-                    $userinfo->gender = $customer['gender'];
-                    $userinfo->contact = "+" . $customer['dial_code'] . $customer['phone'];
-                    $userinfo->invitation_code = 'P-' . time();
-                }
-
-                $userinfo->foodics_unique_id = $foodics_unique_id;
-                $userinfo->save();
-            }
+            $this->getUserInfoByFoodicID($foodics_unique_id);
         }
         return ($response->json());
     }
     public function getUserInfoByFoodicID($foodics_unique_id)
     {
+        $userinfo = User::where("foodics_unique_id", $foodics_unique_id)->first();
+        if ($userinfo)
+            return $userinfo;
         $response = Http::withToken($this->token)->get($this->baseUrl . "customers/" . $foodics_unique_id,);
         if ($response->ok()) {
-            return $response->json();
+            $customer = $response->json()['data'];
+
+            $userinfo = User::where("contact", "like", "%" . $customer['dial_code'] . $customer['phone'])->first();
+            if ($userinfo) {
+                $userinfo->foodics_unique_id = $foodics_unique_id;
+                $userinfo->save();
+                return $userinfo;
+            }
+            $userinfo = new User();
+            $userinfo->tier_id = 1;
+            $userinfo->name = $customer['name'];
+            $userinfo->email = $customer['email'];
+            $userinfo->bday = $customer['birth_date'];
+            $userinfo->gender = $customer['gender'];
+            $userinfo->contact = "+" . $customer['dial_code'] . $customer['phone'];
+            $userinfo->invitation_code = 'P-' . time();
+            $userinfo->foodics_unique_id = $foodics_unique_id;
+            $userinfo->save();
+            (new ApplePass())->createLoyaltyPass($userinfo);
+            if ($userinfo->accessidentifier != null) {
+                (new ApplePass())->createAccessPass($userinfo->id, null);
+            }
+            return $userinfo;
         } else
             throw ("there is some errors while getUserInfoByFoodicID" . $foodics_unique_id);
     }
@@ -75,7 +84,7 @@ class FoodicsController extends Controller
             "is_house_account_enabled" => true
         ]);
         if ($response->ok()) {
-            $user->foodics_unique_id = $response->json()['id'];
+            // $user->foodics_unique_id = $response->json()['id'];
             $user->save();
         } else {
             Log::error(
@@ -86,43 +95,67 @@ class FoodicsController extends Controller
     }
     public function webhooks(Request $request)
     {
-        Log::info($request->all());
+
+        switch ($request->event) {
+            case 'customer.order.created':
+                $foodics_unique_id = $request->order['customer']['id'];
+                $amount = $request->order['total_price'];
+                $userinfo = $this->getUserInfoByFoodicID($foodics_unique_id);
+                if (!$userinfo->tier_id) {
+                    $userinfo->tier_id = 1;
+                }
+                $userinfo->points += Loyalty::convertPurchaseAmountToPoints($userinfo->tier_id, $amount);
+                $userinfo->totalpurchases += $amount;
+                $userinfo->save();
+                break;
+            case "customer.created":
+                $foodics_unique_id = $request->customer['id'];
+                $this->getUserInfoByFoodicID($foodics_unique_id);
+                break;
+            default:
+                Log::info($request->all());
+                break;
+        }
     }
     public function loyalityRewards(Request $request)
     {
+        Log::info($request->all());
         $this->access($request);
         $res = [];
         if ($request->customer_mobile_number) {
-            $contact = "" . $request->mobile_country_code . $request->customer_mobile_number;
+
+            $contact = "" . $this->findCountryISOBYCODE($request->mobile_country_code) . $request->customer_mobile_number;
             $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
-                if (!isset($userinfo->tier_id)) {
-                    $amount = Loyalty::convertToCurrency($userinfo->tier_id, $userinfo->points);
-                    return response()->json([
-                        "type" => 1,
-                        "discount_amount" => $amount,
-                        "is_percent" => true,
-                        "customer_mobile_number" => $request->customer_mobile_number,
-                        "mobile_country_code" => "SA",
-                        "reward_code" => $request->reward_code,
-                        "business_reference" => "255214",
-                        "max_discount_amount" => $amount,
-                        "discount_includes_modifiers" => false,
-                        "allowed_products" => null,
-                        "is_discount_taxable" => false
-                    ]);
+                if (!($userinfo->tier_id)) {
+                    $userinfo->tier_id = 1;
+                    $userinfo->save();
                 }
+                $amount = Loyalty::convertToCurrency($userinfo->tier_id, $userinfo->points);
+                return response()->json([
+                    "type" => 1,
+                    "discount_amount" => $amount,
+                    "is_percent" => false,
+                    "customer_mobile_number" => $request->customer_mobile_number,
+                    "mobile_country_code" => $request->mobile_country_code,
+                    "reward_code" => $request->reward_code,
+                    "business_reference" => $request->business_reference,
+                    "max_discount_amount" => $amount,
+                    "discount_includes_modifiers" => false,
+                    "allowed_products" => null,
+                    "is_discount_taxable" => false
+                ]);
             }
             $this->getAllCustomers(null, $request->customer_mobile_number);
         }
         $res = [
             "type" => 1,
             "discount_amount" => 0,
-            "is_percent" => true,
+            "is_percent" => false,
             "customer_mobile_number" => $request->customer_mobile_number,
-            "mobile_country_code" => "SA",
+            "mobile_country_code" =>  $request->mobile_country_code,
             "reward_code" => $request->reward_code,
-            "business_reference" => "255214",
+            "business_reference" => $request->business_reference,
             "max_discount_amount" => 0,
             "discount_includes_modifiers" => false,
             "allowed_products" => null,
@@ -130,11 +163,27 @@ class FoodicsController extends Controller
         ];
         return response()->json($res);
     }
+    public function findCountryISOBYCODE($code)
+    {
+        switch ($code) {
+            case 'AE':
+                return "971";
+                break;
+            case 'SA':
+                return "966";
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
     public function loyalityRedeem(Request $request)
     {
+        Log::info($request->all());
         $this->access($request);
-        if (isset($request->user_id)) {
-            $userinfo = User::where("foodics_unique_id", $request->user_id)->first();
+        if ($request->customer_mobile_number) {
+            $contact = "" . $this->findCountryISOBYCODE($request->mobile_country_code) . $request->customer_mobile_number;
+            $userinfo = User::where("contact", "like", "%" . $contact)->first();
             if ($userinfo) {
                 $points = Loyalty::convertToPoints($userinfo->tier_id, $request->discount_amount);
                 Loyalty::redeemPoints($userinfo, $points);
