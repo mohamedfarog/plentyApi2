@@ -311,7 +311,7 @@ class ProductController extends Controller
                     
                     if(isset($request->productid)){
                     Size::where('product_id',$request->productid)->delete();
-                    
+                    Color::where('product_id',$request->productid)->delete();
                     
                     }
                     if (isset($request->sizes)) {
