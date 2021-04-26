@@ -11,8 +11,8 @@ class TableBooking extends Model
     protected $fillable = [
         'ref', 'date', 'preftime', 'table_id', 'status', 'amount_due','total_amount','coupon_value','points'
     ];
-    public function products()
+    public function details()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(TableBookingDetail::class);
     }
 }
