@@ -249,6 +249,7 @@ class ProductController extends Controller
                     if ($validator->fails()) {
                         return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
                     }
+                    return $request->all();
                      
                   
                     $data = array();
