@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchedTime;
+use App\Models\Shoptable;
 use App\Models\Tablesched;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SchedTimeController extends Controller
@@ -62,50 +64,24 @@ class SchedTimeController extends Controller
 
 
 
+    //API to delete the old time slots and generate a new one(along with assigning the users with a new time slot)
+    public function autogenerateslots()
+    {
+         SchedTime::truncate();
+         $schedtime = new SchedTime();
+         $day = date('l',Carbon::now()->toDateString());
+         $tablescheds= TableSched::where('day',$day)->get();
+         $arr= array();
+         foreach($tablescheds as $tablesched){
+             $tables=Shoptable::get($tablesched->shop_id);
+             foreach($tables as $table){
+                $tablearr= $schedtime->generateTimeSlots ($tablesched->opening,$tablesched->closing,$tablesched->seating_time,$table->id);
+                array_push($arr, $tablearr);
+             }
     
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SchedTime  $schedTime
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SchedTime $schedTime)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SchedTime  $schedTime
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SchedTime $schedTime)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SchedTime  $schedTime
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, SchedTime $schedTime)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SchedTime  $schedTime
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SchedTime $schedTime)
-    {
-        //
+         }
+        return $arr;
+       
     }
 }
