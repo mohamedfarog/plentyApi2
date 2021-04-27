@@ -57,6 +57,7 @@ class SliderController extends Controller
                     break;
     
                 default:
+              
                     $slider->url = $helper->store($request->file, 'slider');
                     if (isset($request->shop_id)) {
                         $slider->shop_id = $request->shop_id;

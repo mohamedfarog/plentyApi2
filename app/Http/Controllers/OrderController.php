@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detail;
+use App\Models\Logistics;
 use App\Models\Loyalty;
 use App\Models\Order;
 use App\Models\Shop;
@@ -104,6 +105,9 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
+                        if($request->order_status ==2){
+                            $logistics=( new Logistics())->create($request->id);
+                        }
                         if($request->order_status ==3){
                              //TODO
                              //Increment user s total purchases
