@@ -58,7 +58,8 @@ class SchedTime extends Model
                         $newarr['from'] = $p;
                         $newarr['to'] =$fromhour . ':' . $fromminute;
                         // $newarr['sched'] = $sched;
-                        $newarr['table_id']= $tableid;
+                        if($tableid!=0)
+                            $newarr['table_id']= $tableid;
 
                         array_push($arr, $newarr);
                     }
@@ -94,7 +95,8 @@ class SchedTime extends Model
                         $newarr['from'] = $p;
                         $newarr['to'] = $fromhour . ':' . $fromminute;
                         // $newarr['sched'] = $sched;
-                        $newarr['table_id']= $tableid;
+                        if($tableid!=0)
+                            $newarr['table_id']= $tableid;
                         array_push($arr, $newarr);
                     }
                 }
