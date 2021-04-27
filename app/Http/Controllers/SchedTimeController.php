@@ -59,7 +59,7 @@ class SchedTimeController extends Controller
 
         }
         //Fetch tables
-        $tables= Shoptable::where('capacity',$request->capacity)->orwhere('capacity',($request->capacity+1))->first();
+        $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
 
         if($tables){
                    //Generate Time Slots for that ID
