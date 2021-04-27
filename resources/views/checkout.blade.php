@@ -1174,8 +1174,9 @@
 
     function getPlentyBalance() {
         const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=base_url]').attr('content');
         if (bearer_token) {
-            url = "{{ base_url }}" + 'plenty-balance'
+            url = base_url + 'plenty-balance'
             $.ajax({
                 type: 'GET',
                 url: url,
