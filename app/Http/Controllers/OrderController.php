@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detail;
+use App\Models\Logistics;
 use App\Models\Loyalty;
 use App\Models\Order;
 use App\Models\Shop;
@@ -104,22 +105,22 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
-                        if($request->order_status ==3){
-                             //TODO
-                             //Increment user s total purchases
-                             // Tier List Obsever to check the user's tier and update accordingly
+                        if ($request->order_status == 3) {
+                            //TODO
+                            //Increment user s total purchases
+                            // Tier List Obsever to check the user's tier and update accordingly
                             //Add Points to the User
                             //Total Purchases
-                            $user=User::find($order->user_id);
+                            $user = User::find($order->user_id);
                             // $user->totalpurchases += $order->amount_due;
                             $user->save();
-                            $loyalty= new Loyalty();
-                          
+                            $loyalty = new Loyalty();
 
-                             
-                   $loyalty->calculateTier($user,$request->amount_due,$request->wallet??0 );
-                      $pointsearned= $loyalty->addPoints(User::find($user->id),0,$request->amount_due);
-                        $order->points_earned= $pointsearned;
+
+
+                            $loyalty->calculateTier($user, $request->amount_due, $request->wallet ?? 0);
+                            $pointsearned = $loyalty->addPoints(User::find($user->id), 0, $request->amount_due);
+                            $order->points_earned = $pointsearned;
                         }
                     }
                     if (isset($request->coupon_value)) {
@@ -159,7 +160,7 @@ class OrderController extends Controller
                     if (isset($request->label)) {
                         $order->label = $request->label;
                     }
-                    
+
 
                     $msg = 'Order has been updated';
 
@@ -187,7 +188,7 @@ class OrderController extends Controller
 
             //  addPoints
             if (isset($request->order_status)) {
-               
+
                 $data['order_status'] = $request->order_status;
             }
             if (isset($request->payment_method)) {
@@ -275,7 +276,8 @@ class OrderController extends Controller
                     $arr['price'] = $orderdetails['price'];
                 }
                 if (isset($orderdetails['color_id'])) {
-                    if ($orderdetails['color_id'] == -1) { } else
+                    if ($orderdetails['color_id'] == -1) {
+                    } else
                         $arr['color_id'] = $orderdetails['color_id'];
                 }
                 if (isset($orderdetails['size_id'])) {
@@ -317,11 +319,16 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return Order::with(['details' => function ($details) {
+        $order = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
         }, 'user'])->find($order->id);
+        if ($order->aws_no && $order->order_status==2) {
+            $order->order_status = (new Logistics())->getStatusCode($order->aws_no);
+            $order->save();
+        }
+        return $order;
     }
 
     /**

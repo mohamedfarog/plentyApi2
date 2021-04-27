@@ -26,7 +26,7 @@ class Logistics extends Model
         foreach ($orderInfo['details'] as $details) {
             $des = '';
             if ($details['size']) {
-                $des .= 'size:' . $details['size']['value']."-";
+                $des .= 'size:' . $details['size']['value'] . "-";
             }
             if ($details['color']) {
                 $des .= 'color:' . $details['color']['value'];
@@ -102,8 +102,22 @@ class Logistics extends Model
         $sign = strtoupper(md5($all_var_concatinated));
         return $sign;
     }
-    function find($awsNo){
-       $response= Http::asForm()->post($this->baseUrl."trackShipmentFm",["awb"=>$awsNo]);
-       return json_decode($response); 
+    function find($awsNo)
+    {
+        $response = Http::asForm()->post($this->baseUrl . "trackShipmentFm", ["awb" => $awsNo]);
+        return json_decode($response);
+    }
+    function getStatusCode($awsNo)
+    {
+        $shipInfo = $this->find($awsNo);
+        $lastStatus = last($shipInfo['travel_history']);
+        switch ($lastStatus['code']) {
+            case 'POD':
+                return 3;
+                break;
+            default:
+                return 2;
+                break;
+        }
     }
 }
