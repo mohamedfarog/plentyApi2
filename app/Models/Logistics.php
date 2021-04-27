@@ -16,6 +16,8 @@ class Logistics extends Model
     use HasFactory;
     public function create($id)
     {
+        // "cod" => (int)$details['qty'] * (float)$details['price'],
+        
         $skudetails = array();
         $orderInfo = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
@@ -33,8 +35,8 @@ class Logistics extends Model
             }
             $data = array(
                 "sku" => $details['product']["name_en"] . "/" . $details['product']["name_ar"],
-                "description" => $des,
-                "cod" => (int)$details['qty'] * (float)$details['price'],
+                "description" => "Abc",
+                "cod" => 10,
                 "piece" => $details['qty'],
                 "weight" => "0.0",
             );
