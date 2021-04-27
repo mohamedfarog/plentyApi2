@@ -16,6 +16,7 @@ class Logistics extends Model
     use HasFactory;
     public function create($id)
     {
+        $skudetails = array();
         $orderInfo = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
@@ -23,17 +24,16 @@ class Logistics extends Model
         }, 'user'])->find($id);
         foreach ($orderInfo['details'] as $details) {
             print_r($details);
+           $data= array(
+                "sku" =>$details['product']["name_en"],
+                "description" =>'Qty:'.$details['qty'] ,
+                "cod" => $details['qty']*$details['price'],
+                "piece" => $details['qty'],
+                "weight" => "0.0",
+           );
+            array_push($skudetails,$data);
         }
-        return;
-        $skudetails = array(
-            array(
-                "sku" => "TEST-000288",
-                "description" => "TEST",
-                "cod" => "48.00",
-                "piece" => "0",
-                "weight" => "0.454",
-            )
-        );
+       
         $param = array(
             'sender_name' => 'plentyofthing',
             'sender_email' => $this->username,
