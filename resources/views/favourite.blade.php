@@ -32,7 +32,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <!-- Featured Product -->
@@ -67,7 +66,7 @@
     function renderFavourites() {
 
         let favourites = getFavouritesLocal().favourite_items
-
+        var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'storage/products/'
         let prod_element = ''
         favourites.forEach(element => {
@@ -89,7 +88,7 @@
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
-                "</div>"  
+                "</div>"
         });
         $("#fav-product-panel").html(prod_element)
         $('.buttonsshow').css({
@@ -97,7 +96,5 @@
         });
 
     }
-
 </script>
 @endsection
-

@@ -369,6 +369,7 @@
         document.getElementById('modalinputnumber').innerHTML = cc;
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
+        var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
             type: 'POST',
             url: base_url + 'api/otp',
@@ -385,6 +386,7 @@
 
     function verifyOTP() {
         const form = new FormData(document.getElementById("signup-form"))
+        var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
             type: 'POST',
             url: base_url + 'api/verify',
@@ -419,6 +421,7 @@
     function register(data) {
         const form = new FormData(document.getElementById("signup-form"))
         //  console.log(data)
+        var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
             type: 'POST',
             headers: {

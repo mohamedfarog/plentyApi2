@@ -769,6 +769,7 @@
 
     function getSlots(date) {
         let prod_id = document.getElementById('product_id').value
+        var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'api/timeslots'
         $.ajax({
             type: 'GET',
@@ -807,6 +808,7 @@
     function slotSelect(id, ele) {
         $('#time-slots').find("*").removeClass("slot-clicked");
         ele.classList.add("slot-clicked");
+        var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'timeslot/' + id
         $.ajax({
             type: 'GET',

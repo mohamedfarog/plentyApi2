@@ -285,13 +285,13 @@
         @if ($loop->first)
         <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
 
-            <img class="delicacy-shop-logo imgz" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
+            <img class="delicacy-shop-logo imgz" src="{{$shop->style->header}}" style="max-height: 100%;">
         </button>
         @else
 
         <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
 
-            <img class="delicacy-shop-logo" src="{{ url('storage/styles/' . $shop->style->header) }}" style="max-height: 100%;">
+            <img class="delicacy-shop-logo" src="{{$shop->style->header}}" style="max-height: 100%;">
         </button>
         @endif
         @endforeach
@@ -431,6 +431,7 @@
 
     //for filtering product based on category
     function getProducts(element, category = 0) {
+        var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
             type: 'GET',
             url: base_url + 'product-by-category/' + category,
@@ -451,6 +452,7 @@
     //getProducts  //for filtering product based on category
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
+        var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
             type: 'GET',
             url: base_url + 'best-seller/' + shop_id,
@@ -468,6 +470,7 @@
 
     // For rendering products in product panel
     function renderProduct(data) {
+        var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'storage/products/'
         let prod_element = ''
         data.forEach(element => {
@@ -503,7 +506,7 @@
     }
 
     function shopname(shopid, shoppy, imgy) {
-
+        var base_url = $('meta[name=base_url]').attr('content');
         if (typeof(Storage) !== "undefined") {
             localStorage.shopid = shopid;
             localStorage.shopname = shoppy;

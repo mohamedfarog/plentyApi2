@@ -29,7 +29,6 @@
             width: 95%;
         }
     }
-
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -163,9 +162,9 @@
     function searchItem(e) {
         e.preventDefault();
         const form = new FormData(document.getElementById('search-form'))
+        var base_url = $('meta[name=base_url]').attr('content');
         window.location.replace(base_url + 'search/' + form.get('search-item'));
     }
-
 </script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')

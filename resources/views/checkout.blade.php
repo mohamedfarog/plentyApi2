@@ -956,6 +956,7 @@
 
     function checkCouponValid() {
         $("#coupon_error").html("");
+        var base_url = $('meta[name=base_url]').attr('content');
         var cart = CartSerializer(getCartLocal())
         if (cart.coupon_value > 0) {
             $("#coupon_error").html("You applied coupon already!");
@@ -1027,6 +1028,7 @@
 
 
     function getLoyalityPoint() {
+        var base_url = $('meta[name=base_url]').attr('content');
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
@@ -1059,6 +1061,7 @@
         e.preventDefault();
         const form = new FormData(document.getElementById("cart-form"))
         const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'place-order'
         $.ajax({
             type: 'POST',
@@ -1172,7 +1175,7 @@
     function getPlentyBalance() {
         const bearer_token = getCookie('bearer_token');
         if (bearer_token) {
-            url = base_url + 'plenty-balance'
+            url = "{{ base_url }}" + 'plenty-balance'
             $.ajax({
                 type: 'GET',
                 url: url,

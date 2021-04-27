@@ -234,7 +234,7 @@
             let cart = CartSerializer(getCartLocal())
             let template = '';
 
-            base_url = window.location.origin
+            var base_url = $('meta[name=base_url]').attr('content');
             if (cart.cart_items.length > 0) {
                 cart.cart_items.forEach(item => {
                     template = template +
