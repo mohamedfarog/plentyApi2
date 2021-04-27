@@ -55,7 +55,7 @@ class SchedTimeController extends Controller
         }
         else{
             $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
-            return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,0);
+            return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
 
         }
         //Generate Time Slots for that ID
