@@ -67,7 +67,7 @@ class SchedTimeController extends Controller
     //API to delete the old time slots and generate a new one(along with assigning the users with a new time slot)
     public function autogenerateslots()
     {
-         SchedTime::delete();
+         SchedTime::truncate();
          $schedtime = new SchedTime();
          $day = date('l',Carbon::now());
          $tablescheds= TableSched::where('day',$day)->get();
