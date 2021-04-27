@@ -86,9 +86,12 @@ class Logistics extends Model
         $response = curl_exec($ch);
         $response = json_decode($response);
         return $param;
-        // if ($response->status == 200)
-        //     return ($response->aws_no);
-        // return null;
+        if ($response->status == 200) {
+            $orderInfo->aws_no = $response->aws_no;
+            $orderInfo->save();
+            return ($response->aws_no);
+        }
+        return null;
     }
     function create_sign($param, $secKey, $customerId, $formate, $method, $signMethod)
     {
