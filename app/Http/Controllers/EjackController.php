@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logistics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -13,48 +14,20 @@ class EjackController extends Controller
 
 
 
-    public function create(Request $request)
+    public function create(Request $request, $orderId)
     {
-        $secret="b30935-ed3572-8a183b-7df33c-0c1dd0";
-        $customerId="161913268122";
-        $parms = [
-            "sender_name" => "fastcoo",
-            "sender_email" => "test@email.com",
-            "origin" => "Riyadh",
-            "sender_phone" => "9876543210",
-            "sender_address" => "riyadh",
-            "receiver_name" => "test",
-            "receiver_phone" => "0500000000",
-            "destination" => "Riyadh",
-            "BookingMode" => "COD",
-            "receiver_address" => "Near Tower",
-            "reference_id" => "TRL6578175952",
-            "codValue" => "150.00",
-            "productType" => "parcel",
-            "service" => "3",
-            "skudetails" => [
-                [
-                    "sku" => "band1",
-                    "description" => "TEST DESCRIPTION",
-                    "cod" => 299.00,
-                    "piece" => 1,
-                    "wieght" => 12,
-                ]
-            ]
-        ];
+        return 
+        (new Logistics())->create($orderId);
+    }
+    function create_sign($param, $secKey, $customerId, $formate, $method, $signMethod)
+    {
 
-        $data = [
-            "customerId" => $customerId,
-            "method" => " createOrder",
-            "format" => "json",
-            "secret_key"=>$secret,
-            "signMethod" => "md5",
-        ];
-        $data['sign'] = strtoupper(md5($secret."customerId161913268122formatjsonmethodcreateOrdersignMethodmd5" . json_encode($parms) .$secret));
+        $jsonDataArray = json_encode($param);
 
-        $data["param"] = json_encode($parms);
-        $res = Http::post($this->baseUrl . "createOrder", $data);
-        return $res;
+        $var = "customerId" . $customerId . "format" . $formate . "method" . $method . "signMethod" . $signMethod . "";
+        $all_var_concatinated = $secKey . $var . $jsonDataArray . $secKey;
+        $sign = strtoupper(md5($all_var_concatinated));
+        return $sign;
     }
     public function cancel($aws_no = null)
     {
