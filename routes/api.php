@@ -111,7 +111,7 @@ Route::resource('tablebooking', TableBookingController::class);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
-    Route::resource('testslots', SchedTimeController::class);
+    Route::resource('tabletimeslots', SchedTimeController::class);
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
     Route::post('deleteproduct',[ProductController::class,'deleteproduct']);

@@ -46,6 +46,10 @@ class SchedTimeController extends Controller
 
         if($istoday==true){
 
+
+
+            //Return timeslots from the DB with the given slot
+
         }
         else{
             $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
@@ -55,6 +59,10 @@ class SchedTimeController extends Controller
         //Generate Time Slots for that ID
         return $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,1);
     }
+
+
+
+    
 
     /**
      * Display the specified resource.
