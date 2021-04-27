@@ -74,8 +74,9 @@ class SchedTimeController extends Controller
          $tablescheds= TableSched::where('day',$day)->get();
          $arr= array();
          foreach($tablescheds as $tablesched){
-             $tables=Shoptable::get('shop_id',$tablesched->shop_id);
+             $tables=Shoptable::where('shop_id',$tablesched->shop_id)->get();
              foreach($tables as $table){
+
                 $tablearr= $schedtime->generateTimeSlots ($tablesched->opening,$tablesched->closing,$tablesched->seating_time,$table->id);
                 array_push($arr, $tablearr);
              }
