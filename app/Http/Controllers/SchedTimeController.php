@@ -69,7 +69,7 @@ class SchedTimeController extends Controller
     {
          SchedTime::truncate();
          $schedtime = new SchedTime();
-         $day = date('l',Carbon::now()->toDateString());
+         $day = Carbon::now()->format('l');
          $tablescheds= TableSched::where('day',$day)->get();
          $arr= array();
          foreach($tablescheds as $tablesched){
