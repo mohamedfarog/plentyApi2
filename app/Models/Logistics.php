@@ -103,7 +103,7 @@ class Logistics extends Model
         return $sign;
     }
     function find($awsNo){
-       return Http::asForm()->post($this->baseUrl."trackShipmentFm",["aws"=>$awsNo]);
+       return Http::asForm()->post($this->baseUrl."trackShipmentFm",["awb"=>$awsNo]);
         
     }
 }
