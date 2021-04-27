@@ -35,7 +35,8 @@ class SchedTimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $schedtime= new SchedTime();
+        return $schedtime->generateTimeSlots ('10:00:00','12:00:00',15);
     }
 
     /**
