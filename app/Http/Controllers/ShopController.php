@@ -15,10 +15,12 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-
+        if(isset($request->shop_id)){
+            return Shop::with(['style','designers'])->find($request->shop_id);
+        }
+        
         
     }
 

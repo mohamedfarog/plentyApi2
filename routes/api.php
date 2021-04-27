@@ -107,7 +107,7 @@ Route::resource('tablebooking', TableBookingController::class);
     Route::post('toggleFeatured', [ProductController::class, 'toggleFeatured']);
     
     Route::post('invitation', [AccessController::class, 'invite']);
-    Route::post('shops', [ShopController::class, 'store']);
+    Route::resource('shops',ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
     Route::resource('tabletimeslots', SchedTimeController::class);

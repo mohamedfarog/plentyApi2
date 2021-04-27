@@ -105,10 +105,13 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
-                        if ($request->order_status == 3) {
-                            //TODO
-                            //Increment user s total purchases
-                            // Tier List Obsever to check the user's tier and update accordingly
+                        if($request->order_status ==2){
+                            $logistics=( new Logistics())->create($request->id);
+                        }
+                        if($request->order_status ==3){
+                             //TODO
+                             //Increment user s total purchases
+                             // Tier List Obsever to check the user's tier and update accordingly
                             //Add Points to the User
                             //Total Purchases
                             $user = User::find($order->user_id);
