@@ -18,7 +18,7 @@ class CatController extends Controller
      */
     public function index()
     {
-        //
+        
         $cats = Cat::with(['shops' => function ($shop) {
             return $shop->with(['style','designers']);
         }])->get();
