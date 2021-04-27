@@ -63,7 +63,10 @@ class SchedTimeController extends Controller
 
         if($tables){
                    //Generate Time Slots for that ID
-              return $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id);
+              foreach( $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id) as $timeslot){
+
+
+              }
         }
         else{
             return response()->json(['Error'=>'No tables available']);
@@ -96,7 +99,7 @@ class SchedTimeController extends Controller
     
 
          }
-        return $arr;
+        return $arr[0];
        
     }
 }
