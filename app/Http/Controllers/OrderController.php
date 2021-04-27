@@ -104,6 +104,23 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
+                        if($request->order_status ==3){
+                             //TODO
+                             //Increment user s total purchases
+                             // Tier List Obsever to check the user's tier and update accordingly
+                            //Add Points to the User
+                            //Total Purchases
+                            $user=User::find($order->user_id);
+                            // $user->totalpurchases += $order->amount_due;
+                            $user->save();
+                            $loyalty= new Loyalty();
+                          
+
+                             
+                   $loyalty->calculateTier($user,$request->amount_due,$request->wallet??0 );
+                      $pointsearned= $loyalty->addPoints(User::find($user->id),0,$request->amount_due);
+                        $order->points_earned= $pointsearned;
+                        }
                     }
                     if (isset($request->coupon_value)) {
                         $order->coupon_value = $request->coupon_value;
@@ -142,6 +159,7 @@ class OrderController extends Controller
                     if (isset($request->label)) {
                         $order->label = $request->label;
                     }
+                    
 
                     $msg = 'Order has been updated';
 
@@ -169,6 +187,7 @@ class OrderController extends Controller
 
             //  addPoints
             if (isset($request->order_status)) {
+               
                 $data['order_status'] = $request->order_status;
             }
             if (isset($request->payment_method)) {
@@ -298,7 +317,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return Order::with(['details' => function ($details) {
+            return $details->with(['product' => function ($product) {
+                return $product->with(['images']);
+            }, 'size', 'color']);
+        }, 'user'])->find($order->id);
     }
 
     /**

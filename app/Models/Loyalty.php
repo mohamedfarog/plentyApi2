@@ -9,7 +9,7 @@ class Loyalty extends Model
 {
     use HasFactory;
 
-    public static function addPoints($user, $amount_due, $wallet, $shoplist)
+    public static function addPoints($user,$amount_due,$wallet,$shoplist=null)
     {
         //Check the user's tier list and calculate points accordingly
 
@@ -40,9 +40,9 @@ class Loyalty extends Model
     }
 
     //Function  to update the user's tier based on the points
-    public  static function calculateTier($user, $amount_due, $wallet)
-    {
-        $purchases = $user->totalpurchases;
+    public  static function calculateTier ($user,$amount_due,$wallet)
+    {   $purchases = $user->totalpurchases;
+        $purchases= $user->totalpurchases + $amount_due ; 
         $tierid = $user->tier_id;
         $tiers = Tier::get();
         foreach ($tiers as $tier) {
@@ -50,8 +50,9 @@ class Loyalty extends Model
                 $tierid = $tier->id;
             }
         }
-        $purchases = $user->totalpurchases + $amount_due + $wallet;
-        User::find($user->id)->update(['tier_id' => $tierid, 'totalpurchases' => $purchases]);
+      
+        User::find($user->id)->update(['tier_id'=>$tierid,'totalpurchases'=>$purchases  ]);
+        
     }
 
     public static function redeemPoints($user, $points)
