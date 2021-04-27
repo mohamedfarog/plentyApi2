@@ -86,9 +86,9 @@ class Logistics extends Model
         $response = curl_exec($ch);
         $response = json_decode($response);
         if ($response->status == 200) {
-            $orderInfo->aws_no = $response->aws_no;
+            $orderInfo->aws_no = $response->awb_no;
             $orderInfo->save();
-            return ($response->aws_no);
+            return ($response->awb_no);
         }
         return null;
     }
