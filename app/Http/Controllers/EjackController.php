@@ -16,7 +16,8 @@ class EjackController extends Controller
 
     public function create(Request $request, $orderId)
     {
-        return (new Logistics())->find("J3591311805");
+        $data= (new Logistics())->find("J3591311805");
+        return response()->json($data);
     }
     function create_sign($param, $secKey, $customerId, $formate, $method, $signMethod)
     {
