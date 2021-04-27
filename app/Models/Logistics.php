@@ -78,9 +78,10 @@ class Logistics extends Model
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJson);
         $response = curl_exec($ch);
         $response = json_decode($response);
-        if ($response->status == 200)
-            return ($response->aws_no);
-        return null;
+        return $orderInfo;
+        // if ($response->status == 200)
+        //     return ($response->aws_no);
+        // return null;
     }
     function create_sign($param, $secKey, $customerId, $formate, $method, $signMethod)
     {
