@@ -58,8 +58,19 @@ class SchedTimeController extends Controller
             return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
 
         }
-        //Generate Time Slots for that ID
-        return $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,1);
+        //Fetch tables
+        $tables= Shoptable::where('capacity',$request->capacity)->orwhere('capacity',($request->capacity+1))->first();
+
+        if($tables){
+                   //Generate Time Slots for that ID
+              return $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,1);
+        }
+        else{
+            return response()->json(['Error'=>'No tables available']);
+        }
+
+
+ 
     }
 
 
