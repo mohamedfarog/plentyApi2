@@ -110,10 +110,13 @@ class Logistics extends Model
     function getStatusCode($awsNo)
     {
         $shipInfo = $this->find($awsNo);
-        $lastStatus = last($shipInfo['travel_history']);
-        switch ($lastStatus['code']) {
+        $lastStatus = last($shipInfo->travel_history);
+        switch ($lastStatus->code) {
             case 'POD':
                 return 3;
+                break;
+            case 'C':
+                return 4;
                 break;
             default:
                 return 2;
