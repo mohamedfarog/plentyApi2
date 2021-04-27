@@ -211,7 +211,7 @@
 </section> <!-- end promo banners -->
 
 <!-- Plenty bazaar -->
-<section class="section-wrap-sm new-arrivals">
+<section class="section-wrap-sm new-arrivals" style="margin-top:50px;">
     <div class="purchase-online-area ">
         <div class="container">
             <div class="row">

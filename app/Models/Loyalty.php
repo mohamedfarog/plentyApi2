@@ -14,22 +14,22 @@ class Loyalty extends Model
         //Check the user's tier list and calculate points accordingly
 
         // ShopList- List of Shop Ids to keep a log
-        $tier= Tier::find($user->tier_id);
-        $acquisition= $tier-> acquisition;
-        $amount= $amount_due+ $wallet;          //Including wallet amount for points calculation
-        $pointsearned= $acquisition* $amount;
+        $tier = Tier::find($user->tier_id);
+        $acquisition = $tier->acquisition;
+        $amount = $amount_due + $wallet;          //Including wallet amount for points calculation
+        $pointsearned = $acquisition * $amount;
         return $pointsearned;
 
 
-        
-        
-        
+
+
+
 
 
         //update user points
         // $user = User::with(['tier'])->where('id', $data['user_id'])->first();
 
-        
+
         //add translog
 
         // Translog::create($data);
@@ -44,10 +44,10 @@ class Loyalty extends Model
     {   $purchases = $user->totalpurchases;
         $purchases= $user->totalpurchases + $amount_due ; 
         $tierid = $user->tier_id;
-        $tiers= Tier::get();
-        foreach($tiers as $tier){
-            if($purchases>= $tier->requirement){
-                $tierid= $tier->id;
+        $tiers = Tier::get();
+        foreach ($tiers as $tier) {
+            if ($purchases >= $tier->requirement) {
+                $tierid = $tier->id;
             }
         }
       
@@ -60,39 +60,36 @@ class Loyalty extends Model
         // $user - User
         // $points
         // redeem Login
-        $user->points-=$points;
+        $user->points -= $points;
         $user->save();
     }
 
-    public static function convertToPoints($tier=1, $amount)
+    public static function convertToPoints($tier = 1, $amount)
     {
         //Converting amount to points
-        $tierData= Tier::find($tier);
-        if($tierData)
-        {
-            return$amount*100/ ($tierData->value);
+        $tierData = Tier::find($tier);
+        if ($tierData) {
+            return $amount * 100 / ($tierData->value);
         }
         return 0.0;
     }
-    public static function convertPurchaseAmountToPoints($tier=1, $amount)
+    public static function convertPurchaseAmountToPoints($tier = 1, $amount)
     {
         //Converting amount to points
-        $tierData= Tier::find($tier);
-        if($tierData)
-        {
-            return$amount*($tierData->value);
+        $tierData = Tier::find($tier);
+        if ($tierData) {
+            return $amount * ($tierData->value);
         }
         return $amount;
     }
 
-    public static function convertToCurrency($tier=1, $points)
+    public static function convertToCurrency($tier = 1, $points)
     {
-         //Converting points to amount
-        $tierData= Tier::find($tier);
-        if($tierData)
-        {
-            $tierValueInPerc= ($tierData->value)/100;
-            return $points*$tierValueInPerc;    
+        //Converting points to amount
+        $tierData = Tier::find($tier);
+        if ($tierData) {
+            $tierValueInPerc = ($tierData->value) / 100;
+            return $points * $tierValueInPerc;
         }
         return 0.0;
     }

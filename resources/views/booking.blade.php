@@ -84,6 +84,7 @@
         vertical-align: middle;
         width: 14.285714285714%;
         color: #c31c4a;
+        padding: 25px;
     }
 
     .calendar-wrapper td:hover {

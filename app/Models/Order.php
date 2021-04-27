@@ -24,7 +24,7 @@ class Order extends Model
     {
         switch ($this->order_status) {
             case '0':
-                return "Confirmed";
+                return "Pending";
                 break;
             case '1':
                 return "Preparing";
@@ -40,7 +40,7 @@ class Order extends Model
                 break;
 
             default:
-                return "Unkown";
+                return "Unknown";
                 break;
         }
     }
