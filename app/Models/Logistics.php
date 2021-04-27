@@ -16,8 +16,6 @@ class Logistics extends Model
     use HasFactory;
     public function create($id)
     {
-        // "cod" => (int)$details['qty'] * (float)$details['price'],
-        
         $skudetails = array();
         $orderInfo = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
@@ -35,8 +33,8 @@ class Logistics extends Model
             }
             $data = array(
                 "sku" => $details['product']["name_en"] . "/" . $details['product']["name_ar"],
-                "description" => "Abc",
-                "cod" => 10,
+                "description" => $des,
+                "cod" => (int)$details['qty'] * (float)$details['price'],
                 "piece" => $details['qty'],
                 "weight" => "0.0",
             );
@@ -87,7 +85,7 @@ class Logistics extends Model
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJson);
         $response = curl_exec($ch);
         $response = json_decode($response);
-        return $orderInfo;
+        return $param ;
         // if ($response->status == 200)
         //     return ($response->aws_no);
         // return null;
