@@ -10,7 +10,7 @@ class SchedTime extends Model
 {
     use HasFactory;
 
-    public  static function generateTimeSlots ($opening,$closing,$interval)
+    public  static function generateTimeSlots ($opening,$closing,$interval,$tableid)
         {
         $day = Carbon::now()->format('l');
         $date = Carbon::today()->format('Y-m-d');
@@ -33,15 +33,15 @@ class SchedTime extends Model
     
                         // $p = ($fromhour < 10 && $fromhour > 0 ? "0" . $fromhour : $fromhour) . ':' . $fromminute;
                         $p =  $fromhour . ':' . $fromminute;
-                        if($fromhour<12){
-                            $sched= 'M';
-                         }
-                         else if($fromhour<=17 && $fromhour>=12){
-                            $sched= 'A';
-                         }
-                         else{
-                             $sched='E';
-                         }
+                        // if($fromhour<12){
+                        //     $sched= 'M';
+                        //  }
+                        //  else if($fromhour<=17 && $fromhour>=12){
+                        //     $sched= 'A';
+                        //  }
+                        //  else{
+                        //      $sched='E';
+                        //  }
 
                         $fromminute += $duration;
                         while ($fromminute >= 60) {
@@ -57,7 +57,8 @@ class SchedTime extends Model
                         $newarr = array();
                         $newarr['from'] = $p;
                         $newarr['to'] =$fromhour . ':' . $fromminute;
-                        $newarr['sched'] = $sched;
+                        // $newarr['sched'] = $sched;
+                        $newarr['table_id']= $tableid;
 
                         array_push($arr, $newarr);
                     }
@@ -92,7 +93,8 @@ class SchedTime extends Model
                         $newarr = array();
                         $newarr['from'] = $p;
                         $newarr['to'] = $fromhour . ':' . $fromminute;
-                        $newarr['sched'] = $sched;
+                        // $newarr['sched'] = $sched;
+                        $newarr['table_id']= $tableid;
                         array_push($arr, $newarr);
                     }
                 }
