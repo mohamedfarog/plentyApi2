@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class Logistics extends Model
 {
@@ -84,7 +85,6 @@ class Logistics extends Model
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJson);
         $response = curl_exec($ch);
         $response = json_decode($response);
-        return $param;
         if ($response->status == 200) {
             $orderInfo->aws_no = $response->aws_no;
             $orderInfo->save();
@@ -101,5 +101,9 @@ class Logistics extends Model
         $all_var_concatinated = $secKey . $var . $jsonDataArray . $secKey;
         $sign = strtoupper(md5($all_var_concatinated));
         return $sign;
+    }
+    function find($awsNo){
+       return Http::post($this->baseUrl."trackShipmentFm",["aws"=>$awsNo]);
+        
     }
 }
