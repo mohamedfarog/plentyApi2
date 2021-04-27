@@ -298,7 +298,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return Order::with(['details' => function ($details) {
+            return $details->with(['product' => function ($product) {
+                return $product->with(['images']);
+            }, 'size', 'color']);
+        }, 'user'])->find($order->id);
     }
 
     /**
