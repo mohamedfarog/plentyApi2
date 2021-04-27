@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsArabic extends Migration
+class AddArabicImg extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddIsArabic extends Migration
     public function up()
     {
         Schema::table('sliders', function (Blueprint $table) {
-            $table->boolean('isarabic')->default(false);
+       
+            $table->string('arabicurl')->nullable();
+            
         });
     }
 
@@ -26,7 +28,7 @@ class AddIsArabic extends Migration
     public function down()
     {
         Schema::table('sliders', function (Blueprint $table) {
-            $table->dropColumn('isarabic');
+            $table->dropColumn('arabicurl');
         });
     }
 }
