@@ -70,6 +70,7 @@ class SchedTimeController extends Controller
          SchedTime::truncate();
          $schedtime = new SchedTime();
          $day = Carbon::now()->format('l');
+         return $day;
          $tablescheds= TableSched::where('day',$day)->get();
          $arr= array();
          foreach($tablescheds as $tablesched){
