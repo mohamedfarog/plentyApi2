@@ -23,34 +23,33 @@ class Logistics extends Model
             }, 'size', 'color']);
         }, 'user'])->find($id);
         foreach ($orderInfo['details'] as $details) {
-            print_r($details);
-           $data= array(
-                "sku" =>$details['product']["name_en"],
-                "description" =>'Qty:'.$details['qty'] ,
-                "cod" => $details['qty']*$details['price'],
+            $data = array(
+                "sku" => $details['product']["name_en"] . "/" . $details['product']["name_ar"],
+                "description" => 'Qty:' . $details['qty'],
+                "cod" => $details['qty'] * $details['price'],
                 "piece" => $details['qty'],
                 "weight" => "0.0",
-           );
-            array_push($skudetails,$data);
+            );
+            array_push($skudetails, $data);
         }
-       
+
         $param = array(
             'sender_name' => 'plentyofthing',
             'sender_email' => $this->username,
             'origin' => 'Jeddah',
             'sender_phone' => '',
             'sender_address' => 'Jeddah',
-            'receiver_name' => 'test',
-            'receiver_phone' => '0544689429',
-            'destination' => 'Jeddah',
+            'receiver_name' => $orderInfo['user']['name'],
+            'receiver_phone' => $orderInfo['contact_number'],
+            'destination' => $orderInfo['city'],
             'BookingMode' => 'CC',
-            'codValue' => 0,
-            'receiver_address' => 'test',
-            'latitude' => '24.76790599433131',
-            'longitude' => '46.69361869182311',
-            'reference_id' => 'tesd3dts5-1000112',
+            'codValue' => $orderInfo['amount_due'],
+            'receiver_address' =>$orderInfo['label']. $orderInfo['delivery_location'],
+            'latitude' => $orderInfo['lat'],
+            'longitude' => $orderInfo['lng'],
+            'reference_id' => $orderInfo['ref'],
             'productType' => 'parcel',
-            'description' => 'test desc',
+            'description' => $orderInfo['delivery_note'],
             'service' => 3,
             'skudetails' =>
             $skudetails
