@@ -74,8 +74,8 @@ class SchedTimeController extends Controller
          $tablescheds= TableSched::where('day',$day)->get();
          $arr= array();
          foreach($tablescheds as $tablesched){
-            return $tablesched->shop_id;
-             $tables=   Shoptable::where('shop_id',$tablesched->shop_id)->get();
+           
+             return Shoptable::where('shop_id',$tablesched->shop_id)->get();
              
              foreach($tables as $table){
 
