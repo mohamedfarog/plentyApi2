@@ -16,8 +16,7 @@ class EjackController extends Controller
 
     public function create(Request $request, $orderId)
     {
-        return 
-        (new Logistics())->create($orderId);
+        return (new Logistics())->create($orderId);
     }
     function create_sign($param, $secKey, $customerId, $formate, $method, $signMethod)
     {

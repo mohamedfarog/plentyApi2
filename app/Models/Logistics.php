@@ -24,12 +24,11 @@ class Logistics extends Model
         }, 'user'])->find($id);
         foreach ($orderInfo['details'] as $details) {
             $des = '';
-            $des .= 'Qty:' . $details['qty'];
             if ($details['size']) {
-                $des .= ', Size:' . $details['size']['value'];
+                $des .= 'size:' . $details['size']['value']."-";
             }
             if ($details['color']) {
-                $des .= ', Color:' . $details['color']['value'];
+                $des .= 'color:' . $details['color']['value'];
             }
             $data = array(
                 "sku" => $details['product']["name_en"] . "/" . $details['product']["name_ar"],
