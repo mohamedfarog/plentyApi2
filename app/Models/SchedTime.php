@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class SchedTime extends Model
 {
     use HasFactory;
+    protected $fillable=['from','to','table_id'];
 
     public  static function generateTimeSlots ($opening,$closing,$interval,$tableid)
         {
