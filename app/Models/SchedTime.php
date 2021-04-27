@@ -55,7 +55,8 @@ class SchedTime extends Model
                      
 
                         $newarr = array();
-                        $newarr['timeslot'] = $p;
+                        $newarr['from'] = $p;
+                        $newarr['to'] =$fromhour . ':' . $fromminute;
                         $newarr['sched'] = $sched;
 
                         array_push($arr, $newarr);
@@ -81,10 +82,16 @@ class SchedTime extends Model
                         if ($fromhour >= 24) {
                             $fromhour = "00";
                         }
+
+                        
+                    
+
+                        
                        
 
                         $newarr = array();
-                        $newarr['timeslot'] = $p;
+                        $newarr['from'] = $p;
+                        $newarr['to'] = $fromhour . ':' . $fromminute;
                         $newarr['sched'] = $sched;
                         array_push($arr, $newarr);
                     }
