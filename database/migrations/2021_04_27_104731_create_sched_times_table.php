@@ -19,7 +19,7 @@ class CreateSchedTimesTable extends Migration
             $table->time('to')->nullable();
             $table->unsignedBigInteger('table_id')->nullable();
             $table->foreign('table_id')->references('id')->on('shoptables');
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->boolean('booked')->default(0);
             $table->timestamps();
         });

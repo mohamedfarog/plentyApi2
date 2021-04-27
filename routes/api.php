@@ -13,6 +13,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SchedTimeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SliderController;
@@ -65,7 +66,7 @@ Route::get('webhooks', [FoodicsController::class, 'webhooks']); // this url is u
 Route::post('webhooks', [FoodicsController::class, 'webhooks']); // this url is used under foodics webserver
 Route::post('loyality/reward', [FoodicsController::class, 'loyalityRewards']);
 Route::post('loyality/redeem', [FoodicsController::class, 'loyalityRedeem']);
-Route::get("testing",[EjackController::class,'create']);
+Route::get("testing/{id}",[EjackController::class,'create']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -110,11 +111,13 @@ Route::resource('tablebooking', TableBookingController::class);
     Route::post('shops', [ShopController::class, 'store']);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
+    Route::resource('tabletimeslots', SchedTimeController::class);
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
     Route::post('deleteproduct',[ProductController::class,'deleteproduct']);
     Route::resource('products', ProductController::class);
-    Route::post('searchProduct', [ProductController::class, "search"]); // This is currently work for vendors in mobile app
+    Route::post('autogenerateslots',[SchedTimeController::class,'autogenerateslots']);
+    Route::post('searchProduct', [ProductController::class, "search"]); // This is currently working for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
     Route::post('wallet/topup', [UserController::class, 'topUpWallet']);
