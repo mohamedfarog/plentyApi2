@@ -12,8 +12,8 @@ class Slider extends Model
         'isactive' => 'boolean',
         "shop_id"=>"integer"
     ];
-    protected $hidden=['created_at', 'updated_at','url'];
-    protected $appends = ['imgurl'];
+    protected $hidden=['created_at', 'updated_at','url','arabicurl'];
+    protected $appends = ['imgurl','arabicimgurl'];
     public function shop()
     {
         return $this->hasOne(ShopInfo::class,'id','shop_id');
@@ -22,6 +22,12 @@ class Slider extends Model
     {
         if ($this->url != null) {
             return "https://plentyapp.mvp-apps.ae/storage/slider/". $this->url;
+        }
+    }
+    public function getArabicimgurlAttribute()
+    {
+        if ($this->arabicurl != null) {
+            return "https://plentyapp.mvp-apps.ae/storage/slider/". $this->arabicurl;
         }
     }
 }

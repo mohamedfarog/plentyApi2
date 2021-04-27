@@ -189,6 +189,7 @@
     function updateProfile() {
         const form = new FormData(document.getElementById("profile-form"))
         const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'api/profile'
         $.ajax({
             type: 'POST',
@@ -216,7 +217,7 @@
             },
             error: function(err) {
                 console.log('Error!', err)
-                
+
             }
 
         });

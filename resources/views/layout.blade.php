@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
+    <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -458,7 +458,6 @@
 
 
     <script>
-        var base_url = "https://plentyapp.mvp-apps.ae/"
         $(".regular").slick({
             dots: true,
             infinite: true,
@@ -812,7 +811,7 @@
         }
 
         $(document).ready(function() {
-
+            var base_url = $('meta[name=base_url]').attr('content');
             let cart = new Cart()
             $.ajax({
                 type: 'GET',
@@ -833,7 +832,7 @@
 
         function renderNavCart() {
             var cart = CartSerializer(getCartLocal())
-            console.log(cart.cart_items.length)
+            var base_url = $('meta[name=base_url]').attr('content');
             let template = ''
             if (cart.cart_items.length > 0) {
                 cart.cart_items.forEach(item => {
@@ -932,6 +931,7 @@
         }
 
         function getFavouriteProductInfo(id) {
+            var base_url = $('meta[name=base_url]').attr('content');
             $.ajax({
                 type: 'GET',
                 url: base_url + 'favourite-product/' + id,
@@ -1026,6 +1026,7 @@
 
         function getUser() {
             const bearer_token = getCookie('bearer_token');
+            var base_url = $('meta[name=base_url]').attr('content');
             if (bearer_token) {
                 url = base_url + 'user'
                 $.ajax({
@@ -1079,6 +1080,7 @@
 
         function search(e) {
             e.preventDefault();
+            var base_url = $('meta[name=base_url]').attr('content');
             const form = new FormData(document.getElementById('search-form-nav'))
             window.location.replace(base_url + 'search/' + form.get('search-item'));
         }
@@ -1086,6 +1088,7 @@
         function logoutUser() {
             eraseCookie('bearer_token');
             eraseCookie('user');
+            var base_url = $('meta[name=base_url]').attr('content');
             window.location.replace(base_url + 'login');
         }
 
