@@ -69,12 +69,16 @@ class SchedTimeController extends Controller
     {
          SchedTime::truncate();
          $schedtime = new SchedTime();
-         $day = date('l',Carbon::now()->toDateString());
+         $day = Carbon::now()->format('l');
+         
          $tablescheds= TableSched::where('day',$day)->get();
          $arr= array();
          foreach($tablescheds as $tablesched){
-             $tables=Shoptable::get($tablesched->shop_id);
+            
+             $tables=   Shoptable::where('shop_id',$tablesched->shop_id)->get();
+           
              foreach($tables as $table){
+
                 $tablearr= $schedtime->generateTimeSlots ($tablesched->opening,$tablesched->closing,$tablesched->seating_time,$table->id);
                 array_push($arr, $tablearr);
              }
