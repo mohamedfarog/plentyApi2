@@ -23,10 +23,18 @@ class Logistics extends Model
             }, 'size', 'color']);
         }, 'user'])->find($id);
         foreach ($orderInfo['details'] as $details) {
+            $des = '';
+            $des .= 'Qty:' . $details['qty'];
+            if ($details['size']) {
+                $des .= ', Size:' . $details['size']['value'];
+            }
+            if ($details['color']) {
+                $des .= ', Color:' . $details['color']['value'];
+            }
             $data = array(
                 "sku" => $details['product']["name_en"] . "/" . $details['product']["name_ar"],
-                "description" => 'Qty:' . $details['qty'],
-                "cod" => $details['qty'] * $details['price'],
+                "description" => $des,
+                "cod" => (int)$details['qty'] * (float)$details['price'],
                 "piece" => $details['qty'],
                 "weight" => "0.0",
             );
@@ -44,7 +52,7 @@ class Logistics extends Model
             'destination' => $orderInfo['city'],
             'BookingMode' => 'CC',
             'codValue' => $orderInfo['amount_due'],
-            'receiver_address' =>$orderInfo['label']. $orderInfo['delivery_location'],
+            'receiver_address' => $orderInfo['label'] . $orderInfo['delivery_location'],
             'latitude' => $orderInfo['lat'],
             'longitude' => $orderInfo['lng'],
             'reference_id' => $orderInfo['ref'],
