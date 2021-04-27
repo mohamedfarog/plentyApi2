@@ -48,6 +48,15 @@ class SchedTimeController extends Controller
 
         if($istoday==true){
 
+            $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
+            if($tables){
+                    $schedtimes= SchedTime::where('booked',0)->where('table_id',$tables->id)->get();
+                    return $schedtimes;
+            }
+            else{
+
+            }
+
 
 
             //Return timeslots from the DB with the given slot
