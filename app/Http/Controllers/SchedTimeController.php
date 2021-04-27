@@ -99,7 +99,7 @@ class SchedTimeController extends Controller
     
 
          }
-        SchedTime::create($arr[0]);
+        SchedTime::insert($arr[0]);
        
     }
 }
