@@ -43,16 +43,16 @@ class Logistics extends Model
 
         $param = array(
             'sender_name' => 'plentyofthing',
-            'sender_email' => $this->username,
+            'sender_email' => "info@plenty.com",
             'origin' => 'Jeddah',
             'sender_phone' => '',
             'sender_address' => 'Jeddah',
             'receiver_name' => $orderInfo['user']['name'],
             'receiver_phone' => $orderInfo['contact_number'],
             'destination' => $orderInfo['city'],
-            'BookingMode' => 'CC',
+            'BookingMode' => $orderInfo['payment_method'] == "cash" ? 'COD' : "CC",
             'codValue' => $orderInfo['amount_due'],
-            'receiver_address' => $orderInfo['label'] . $orderInfo['delivery_location'],
+            'receiver_address' => $orderInfo['label'] . ':' . $orderInfo['delivery_location'],
             'latitude' => $orderInfo['lat'],
             'longitude' => $orderInfo['lng'],
             'reference_id' => $orderInfo['ref'],
@@ -85,7 +85,7 @@ class Logistics extends Model
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJson);
         $response = curl_exec($ch);
         $response = json_decode($response);
-        return $param ;
+        return $param;
         // if ($response->status == 200)
         //     return ($response->aws_no);
         // return null;
