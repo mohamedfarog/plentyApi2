@@ -79,12 +79,13 @@ class SchedTimeController extends Controller
         $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
     $ts=  $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id);
     $testarray= array();
+    return $request->date;
         if($tables){
                    //Generate Time Slots for that ID
               foreach( $ts as $timeslot){
                 //   return $timeslot;
                     //Find if any prev bookings have been made
-                    $booking= TableBooking::where('date',date_format($request->date,'Y-m-d'))->where('table_id',$timeslot['table_id'])->where('preftime',$timeslot['from'])->count();
+                    $booking= TableBooking::where('date',$request->date)->where('table_id',$timeslot['table_id'])->where('preftime',$timeslot['from'])->count();
                     if($booking>0){
                        
                         $timeslot['booked']="1";
