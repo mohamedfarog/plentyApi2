@@ -493,7 +493,7 @@ class ProductController extends Controller
             foreach($request->products as $requestproduct){
                 $p= $product->where("id", $requestproduct)->first();
                 if($p){
-                    array_push($arr,$p);
+                    array_push($arr,$p->id);
                 }
                     
             }
