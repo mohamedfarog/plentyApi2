@@ -17,6 +17,9 @@ class ProdcatController extends Controller
     {
         $eventcatid= $request->eventcat_id;
         $cats = Prodcat::with(['products'=>function($prod)  use($eventcatid){
+            if($eventcatid){
+                return $prod->where('eventcat_id',$eventcatid)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+            }
             return $prod->with(['sizes', 'colors', 'addons', 'images', 'designer']);
         }])->where('shop_id', $request->shop_id)->get();
         return $cats;
