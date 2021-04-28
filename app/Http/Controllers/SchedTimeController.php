@@ -78,7 +78,7 @@ class SchedTimeController extends Controller
         
         //Fetch tables
         $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
-
+            return 'TESTING';
         if($tables){
                    //Generate Time Slots for that ID
               foreach( $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id) as $timeslot){
