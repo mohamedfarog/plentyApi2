@@ -39,6 +39,7 @@ class SchedTimeController extends Controller
      */
     public function store(Request $request)
     {
+        return date('YYYY-MM-DD', strtotime($request->date));
 
         $schedtime= new SchedTime();
         $day= $request->day;
