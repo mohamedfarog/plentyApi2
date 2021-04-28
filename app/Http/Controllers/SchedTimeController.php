@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SchedTime;
 use App\Models\Shoptable;
+use App\Models\TableBooking;
 use App\Models\Tablesched;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -48,12 +49,20 @@ class SchedTimeController extends Controller
 
         if($istoday==true){
 
-            $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
+            $tables= Shoptable::where('capacity',$request->capacity)
+            // ->orWhere('capacity',($request->capacity+1))
+            ->first();
             if($tables){
+                    $tablebookings= TableBooking::where('date',$request->date)->get();
                     $schedtimes= SchedTime::where('booked',0)->where('table_id',$tables->id)->get();
+                    foreach($schedtimes as $schedtime){
+                        // $schedtime->whereNotIn('from',$);
+                    }
                     return $schedtimes;
             }
             else{
+
+
 
             }
 
@@ -73,7 +82,15 @@ class SchedTimeController extends Controller
         if($tables){
                    //Generate Time Slots for that ID
               foreach( $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id) as $timeslot){
+                    //Find if any prev bookings have been made
+                    $booking= TableBooking::where('date',$request->date)->where('table_id',$timeslot->id)->where('preftime',$timeslot->from)->count();
+                    if($booking>0){
+                        $timeslot['booked']=1;
 
+                    }
+                    else{
+                        $timeslot['booked']=0;
+                    }
 
               }
         }
