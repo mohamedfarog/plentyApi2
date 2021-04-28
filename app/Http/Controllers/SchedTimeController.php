@@ -96,7 +96,8 @@ class SchedTimeController extends Controller
 
                     }
                     else{
-                        $testarray= array_push($testarray,$timeslot);
+                        $timeslot['booked']=0;
+                        array_push($timeslot,$timeslot);
                         return $timeslot;
                     }
 
