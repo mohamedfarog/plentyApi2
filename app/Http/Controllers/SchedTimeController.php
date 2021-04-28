@@ -90,14 +90,14 @@ class SchedTimeController extends Controller
                     if($booking>0){
                        
                         $timeslot['booked']=1;
-                       array_push($timeslot,$timeslot);
+                       
                         
                         return $timeslot;
 
                     }
                     else{
                         $timeslot['booked']=0;
-                        array_push($timeslot,$timeslot);
+                      
                         return $timeslot;
                     }
 
