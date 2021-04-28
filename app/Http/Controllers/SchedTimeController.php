@@ -79,7 +79,7 @@ class SchedTimeController extends Controller
         //Fetch tables
         $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
     $ts=  $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id);
-    $testarray= array();
+    $timeslotarray= array();
   
         if($tables){
                    //Generate Time Slots for that ID
@@ -92,20 +92,20 @@ class SchedTimeController extends Controller
                         $timeslot['booked']="1";
                        
                         
-                        array_push($testarray,$timeslot);
+                        array_push($timeslotarray,$timeslot);
 
                     }
                     else{
                         $timeslot['booked']="0";
                       
-                        array_push($testarray,$timeslot);
+                        array_push($timeslotarray,$timeslot);
                     }
 
               }
-              return $testarray;
+              return $timeslotarray;
         }
         else{
-            return response()->json(['Error'=>'No tables available']);
+            return response()->json(['Error'=>'No tables available'],400);
         }
     }
 
