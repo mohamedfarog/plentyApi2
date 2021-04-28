@@ -90,6 +90,8 @@ class SchedTimeController extends Controller
                     if($booking>0){
                        
                         $timeslot['booked']=1;
+                       array_push($timeslot,$timeslot);
+                        
                         return $timeslot;
 
                     }
@@ -99,7 +101,7 @@ class SchedTimeController extends Controller
                     }
 
               }
-              return $testarray;
+              return $ts;
         }
         else{
             return response()->json(['Error'=>'No tables available']);
