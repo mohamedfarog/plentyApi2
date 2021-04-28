@@ -83,8 +83,9 @@ class SchedTimeController extends Controller
         if($tables){
                    //Generate Time Slots for that ID
               foreach( $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id) as $timeslot){
+                  return $timeslot;
                     //Find if any prev bookings have been made
-                    $booking= TableBooking::where('date',$request->date)->where('table_id',$timeslot['id'])->where('preftime',$timeslot->from)->count();
+                    $booking= TableBooking::where('date',$request->date)->where('table_id',$timeslot->id)->where('preftime',$timeslot->from)->count();
                     if($booking>0){
                         $timeslot['booked']=0;
 
