@@ -102,7 +102,7 @@ class SchedTimeController extends Controller
                     }
 
               }
-              return $ts;
+              return $testarray;
         }
         else{
             return response()->json(['Error'=>'No tables available']);
