@@ -48,6 +48,7 @@ class SchedTimeController extends Controller
         
 
         if($istoday==true){
+            return 'asdasd';
 
             $tables= Shoptable::where('capacity',$request->capacity)
             // ->orWhere('capacity',($request->capacity+1))
@@ -75,7 +76,7 @@ class SchedTimeController extends Controller
             // $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
             // return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
 
-        return 'asdasd';
+   
         //Fetch tables
         $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
     
