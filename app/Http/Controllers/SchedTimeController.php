@@ -85,11 +85,11 @@ class SchedTimeController extends Controller
                     //Find if any prev bookings have been made
                     $booking= TableBooking::where('date',$request->date)->where('table_id',$timeslot->id)->where('preftime',$timeslot->from)->count();
                     if($booking>0){
-                        $timeslot['booked']=1;
+                        $timeslot['booked']=0;
 
                     }
                     else{
-                        $timeslot['booked']=0;
+                        $timeslot['booked']=1;
                     }
 
               }
