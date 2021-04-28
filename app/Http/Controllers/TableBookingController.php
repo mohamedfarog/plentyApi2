@@ -131,6 +131,15 @@ class TableBookingController extends Controller
             if (isset($request->points)) {
                 $data->points = $request->points;
             }
+            if (isset($request->date)) {
+                $data->date = $request->date;
+            }
+            if (isset($request->preftime)) {
+                $data->preftime = $request->preftime;
+            }
+            if (isset($request->table_id)) {
+                $data->table_id = $request->table_id;
+            }
 
             $order = $data->save();
             if(isset($request->orderdetails)){
@@ -158,6 +167,7 @@ class TableBookingController extends Controller
                     if (isset($orderdetails['price'])) {
                         $details->price = $orderdetails['price'];
                     }
+                    
     
                     $details->save();
                 }
