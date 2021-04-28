@@ -39,7 +39,7 @@ class SchedTimeController extends Controller
      */
     public function store(Request $request)
     {
-        return date('Y-m-d', strtotime($request->date));
+        
 
         $schedtime= new SchedTime();
         $day= $request->day;
@@ -86,7 +86,7 @@ class SchedTimeController extends Controller
               foreach( $ts as $timeslot){
                 //   return $timeslot;
                     //Find if any prev bookings have been made
-                    $booking= TableBooking::where('date',date('YYYY-MM-DD', strtotime($request->date)))->where('table_id',$timeslot['table_id'])->where('preftime',$timeslot['from'])->count();
+                    $booking= TableBooking::where('date',date('Y-m-d', strtotime($request->date)))->where('table_id',$timeslot['table_id'])->where('preftime',$timeslot['from'])->count();
                     if($booking>0){
                        
                         $timeslot['booked']="1";
