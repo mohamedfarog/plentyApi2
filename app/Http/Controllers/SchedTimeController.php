@@ -51,18 +51,15 @@ class SchedTimeController extends Controller
           
 
             $tables= Shoptable::where('capacity',$request->capacity)
-            // ->orWhere('capacity',($request->capacity+1))
+            ->orWhere('capacity',($request->capacity+1))
             ->first();
             if($tables){
                     $tablebookings= TableBooking::where('date',$request->date)->get();
                     $schedtimes= SchedTime::where('booked',0)->where('table_id',$tables->id)->get();
-                    foreach($schedtimes as $schedtime){
-                        // $schedtime->whereNotIn('from',$);
-                    }
-            
+                   
             }
             else{
-
+                return response()->json(['Error'=>'No tables available']);
 
 
             }
@@ -101,7 +98,7 @@ class SchedTimeController extends Controller
                         array_push($testarray,$timeslot);
                     }
 
-              }@
+              }
               return $testarray;
         }
         else{
