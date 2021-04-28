@@ -488,7 +488,12 @@ class ProductController extends Controller
             $product = $product->where("eventcat_id", 13);
         }
         if (isset($request->products)) {
+            $arr= array();
             // This is used for fetch products for array
+            foreach($request->products as $requestproduct){
+                    array_push($arr,$product->where("id", $requestproduct));
+            }
+            return $arr;
             $product = $product->whereIn("id", $request->products);
         }
         return $product->orderby($sortBy, $sortOrder)->paginate();
