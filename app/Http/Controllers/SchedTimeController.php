@@ -61,7 +61,7 @@ class SchedTimeController extends Controller
                    return $schedtimes;
             }
             else{
-                return response()->json(['Error'=>'No tables available']);
+                return response()->json(['Error'=>'No tables available'],400);
 
 
             }
