@@ -84,7 +84,7 @@ class SchedTimeController extends Controller
               foreach( $ts as $timeslot){
                 //   return $timeslot;
                     //Find if any prev bookings have been made
-                    $booking= TableBooking::where('date',date('Y-m-d',$request->date))->where('table_id',$timeslot['table_id'])->where('preftime',$timeslot['from'])->count();
+                    $booking= TableBooking::where('date',date_format($request->date,'Y-m-d'))->where('table_id',$timeslot['table_id'])->where('preftime',$timeslot['from'])->count();
                     if($booking>0){
                        
                         $timeslot['booked']="1";
