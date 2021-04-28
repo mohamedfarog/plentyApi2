@@ -58,7 +58,7 @@ class SchedTimeController extends Controller
                     foreach($schedtimes as $schedtime){
                         // $schedtime->whereNotIn('from',$);
                     }
-                    return $schedtimes;
+            
             }
             else{
 
@@ -75,10 +75,10 @@ class SchedTimeController extends Controller
             // $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
             // return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
 
-        
+        return 'asdasd';
         //Fetch tables
         $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
-            return 'TESTING';
+    
         if($tables){
                    //Generate Time Slots for that ID
               foreach( $schedtime->generateTimeSlots ('10:00:00','12:00:00',15,$tables->id) as $timeslot){
