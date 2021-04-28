@@ -133,35 +133,37 @@ class TableBookingController extends Controller
             }
 
             $order = $data->save();
-
-            foreach ($request->orderdetails as $orderdetails) {
-                $details = new TableBookingDetail();
-                $details->tablebookingid = $data->id;
-
-                if (isset($orderdetails['qty'])) {
-                    $details->qty = $orderdetails['qty'];
+            if(isset($request->orderdetails)){
+                foreach ($request->orderdetails as $orderdetails) {
+                    $details = new TableBookingDetail();
+                    $details->tablebookingid = $data->id;
+    
+                    if (isset($orderdetails['qty'])) {
+                        $details->qty = $orderdetails['qty'];
+                    }
+    
+                    if (isset($orderdetails['product_id'])) {
+                        $details->product_id = $orderdetails['product_id'];
+                    }
+                    if (isset($orderdetails['shop_id'])) {
+                        $details->shop_id = $orderdetails['shop_id'];
+                    }
+                    if (isset($orderdetails['size_id'])) {
+                        $details->size_id = $orderdetails['size_id'];
+                    }
+    
+                    if (isset($orderdetails['addons'])) {
+                        $details->addons = implode(',', $orderdetails['addons']);
+                    }
+                    if (isset($orderdetails['price'])) {
+                        $details->price = $orderdetails['price'];
+                    }
+    
+                    $details->save();
                 }
-
-                if (isset($orderdetails['product_id'])) {
-                    $details->product_id = $orderdetails['product_id'];
-                }
-                if (isset($orderdetails['shop_id'])) {
-                    $details->shop_id = $orderdetails['shop_id'];
-                }
-                if (isset($orderdetails['size_id'])) {
-                    $details->size_id = $orderdetails['size_id'];
-                }
-
-                if (isset($orderdetails['addons'])) {
-                    $details->addons = implode(',', $orderdetails['addons']);
-                }
-                if (isset($orderdetails['price'])) {
-                    $details->price = $orderdetails['price'];
-                }
-
-                $details->save();
+    
             }
-
+     
 
 
 
