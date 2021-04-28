@@ -238,255 +238,7 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content" style="border:0;padding:0">
-                        <!-- shopping-cart start -->
-                        <div class="tab-pane" id="shopping-cart">
-                            <div class="shop-cart-table">
-                                <div class="table-content table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th class="product-thumbnail">Product</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product-quantity">Quantity</th>
-                                                <th class="product-subtotal">Total</th>
-                                                <th class="product-remove">Remove</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="product-thumbnail  text-left">
-                                                    <!-- Single-product start -->
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
-                                                            <p class="mb-0">Color : Black</p>
-                                                            <p class="mb-0">Size : SL</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Single-product end -->
-                                                </td>
-                                                <td class="product-price">$56.00</td>
-                                                <td class="product-quantity">
-                                                    <div class="cart-plus-minus">
-                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal">$112.00</td>
-                                                <td class="product-remove">
-                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-thumbnail  text-left">
-                                                    <!-- Single-product start -->
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
-                                                            <p class="mb-0">Color : Black</p>
-                                                            <p class="mb-0">Size : SL</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Single-product end -->
-                                                </td>
-                                                <td class="product-price">$56.00</td>
-                                                <td class="product-quantity">
-                                                    <div class="cart-plus-minus">
-                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal">$112.00</td>
-                                                <td class="product-remove">
-                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-thumbnail  text-left">
-                                                    <!-- Single-product start -->
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="single-product.html"><img src="img/product/6.jpg" alt="" /></a>
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <h4 class="post-title"><a class="text-light-black" href="/">dummy product name</a></h4>
-                                                            <p class="mb-0">Color : Black</p>
-                                                            <p class="mb-0">Size : SL</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Single-product end -->
-                                                </td>
-                                                <td class="product-price">$56.00</td>
-                                                <td class="product-quantity">
-                                                    <div class="cart-plus-minus">
-                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal">$112.00</td>
-                                                <td class="product-remove">
-                                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="customer-login mt-30">
-                                        <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
-                                        <p class="text-gray">Enter your coupon code if you have one!</p>
-                                        <input type="text" placeholder="Enter your code here.">
-                                        <button type="submit" data-text="apply coupon" class="button-one submit-button mt-15">apply coupon</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="customer-login payment-details mt-30">
-                                        <h4 class="title-1 title-border text-uppercase">payment details</h4>
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-left">Cart Subtotal</td>
-                                                    <td class="text-right">$155.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left">Cart Subtotal</td>
-                                                    <td class="text-right">$15.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left">Vat</td>
-                                                    <td class="text-right">$00.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-left">Order Total</td>
-                                                    <td class="text-right">$170.00</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="customer-login mt-30">
-                                        <h4 class="title-1 title-border text-uppercase">culculate shipping</h4>
-                                        <p class="text-gray">Enter your coupon code if you have one!</p>
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                                <input type="text" placeholder="Country">
-                                            </div>
-                                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                                <input type="text" placeholder="Region / State">
-                                            </div>
-                                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                                <input type="text" placeholder="Post code">
-                                            </div>
-                                        </div>
-                                        <button type="submit" data-text="get a quote" class="button-one submit-button mt-15">get a quote</button>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <!-- shopping-cart end -->
-                        <!-- wishlist start -->
-                        <div class="tab-pane" id="wishlist">
-                            <form action="#">
-                                <div class="shop-cart-table">
-                                    <div class="table-content table-responsive">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th class="product-thumbnail">Product</th>
-                                                    <th class="product-price">Price</th>
-                                                    <th class="product-stock">stock status</th>
-                                                    <th class="product-add-cart">Add to cart</th>
-                                                    <th class="product-remove">Remove</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                <p class="mb-0">Color : Black</p>
-                                                                <p class="mb-0">Size : SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-stock">in stock</td>
-                                                    <td class="product-add-cart">
-                                                        <a class="text-light-black" href="#"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                    </td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/12.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                <p class="mb-0">Color : Black</p>
-                                                                <p class="mb-0">Size : SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-stock">in stock</td>
-                                                    <td class="product-add-cart">
-                                                        <a class="text-light-black" href="#"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                    </td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="product-thumbnail  text-left">
-                                                        <!-- Single-product start -->
-                                                        <div class="single-product">
-                                                            <div class="product-img">
-                                                                <a href="single-product.html"><img src="img/product/6.jpg" alt="" /></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <h4 class="post-title"><a class="text-light-black" href="#">dummy product name</a></h4>
-                                                                <p class="mb-0">Color : Black</p>
-                                                                <p class="mb-0">Size : SL</p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Single-product end -->
-                                                    </td>
-                                                    <td class="product-price">$56.00</td>
-                                                    <td class="product-stock">in stock</td>
-                                                    <td class="product-add-cart">
-                                                        <a class="text-light-black" href="#"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                    </td>
-                                                    <td class="product-remove">
-                                                        <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                         <!-- wishlist end -->
                         <!-- check-out start -->
                         <div class="tab-pane active" id="check-out">
@@ -495,7 +247,7 @@
                                 <div class="shop-cart-table check-out-wrap">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <div class="billing-details pr-20">
+                                            <div class="billing-details pr-20" id="address-show" style="visibility:hidden;">
                                                 <h4 class="title-1 title-border text-uppercase mb-30 ordsumtitle">Delivery Address</h4>
                                                 <div class="form-group">
                                                     <div id="map" class="form-control" style="height:400px;"></div>
@@ -514,7 +266,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">Address: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" name="address" id="address" onchange="initAutocomplete()" type="text" placeholder="" required>
+                                                        <input class="inputdeladd" name="address" id="address" onchange="initAutocomplete()" type="text" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -522,7 +274,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">City: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <select id="city" name="city" required>
+                                                        <select id="city" name="city">
                                                             <option value="Jiddah">Jiddah</option>
                                                             <option value="Jīzān">Jīzān</option>
                                                             <option value="Khamīs Mushayt">Khamīs Mushayt</option>
@@ -540,7 +292,7 @@
                                                         <label class="labelbilldet" style="margin-top: 10px;margin-bottom:0">Contact Number: </label>
                                                     </div>
                                                     <div class="col-md-8 col-xs-12">
-                                                        <input class="inputdeladd" id="contact" name="contact" type="text" placeholder="" required>
+                                                        <input class="inputdeladd" id="contact" name="contact" type="text" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="mt-20"></div>
@@ -919,6 +671,19 @@
             cart.is_cash_on_delivery = false;
             storeCartLocal(JsonCartSerializer(cart));
         });
+        var cart = CartSerializer(getCartLocal());
+
+        for (var i = 0; i < cart.cart_items.length; i++) {
+            if (cart.cart_items[i].category === 'Fashion') {
+                document.getElementById("address-show").style.visibility = "visible";
+                document.getElementById("address").setAttribute("required", true);
+                document.getElementById("city").setAttribute("required", true);
+                document.getElementById("contact").setAttribute("required", true);
+                break;
+            }
+        }
+
+
         renderOrderedProduct();
         getLoyalityPoint();
         removeCoupon();
@@ -1207,30 +972,35 @@
     }
 
     function plentyPaySelect(ele) {
-        if (ele.checked) {
-            if (parseFloat(document.getElementById("balance").value) > 0) {
-                const balance = parseFloat(document.getElementById("balance").value);
-                const wallet = parseFloat(document.getElementById('plenty-balance').value);
-                if (balance > wallet) {
-                    document.getElementById("plenty-balance-show").innerText = (wallet - balance).toFixed(2) + " SAR"
-                    document.getElementById("plentypay").value = wallet - balance;
-                    document.getElementById("balance").value = balance - (wallet - balance);
-                } else {
-                    document.getElementById("plenty-balance-show").innerText = balance.toFixed(2) + " SAR"
-                    document.getElementById("plentypay").value = balance;
-                    document.getElementById("balance").value = 0;
+        if (parseFloat(document.getElementById('plenty-balance').value) > 0) {
+
+            if (ele.checked) {
+                if (parseFloat(document.getElementById("balance").value) > 0) {
+                    const balance = parseFloat(document.getElementById("balance").value);
+                    const wallet = parseFloat(document.getElementById('plenty-balance').value);
+                    if (balance > wallet) {
+                        document.getElementById("plenty-balance-show").innerText = (wallet - balance).toFixed(2) + " SAR"
+                        document.getElementById("plentypay").value = wallet - balance;
+                        document.getElementById("balance").value = balance - (wallet - balance);
+                    } else {
+                        document.getElementById("plenty-balance-show").innerText = balance.toFixed(2) + " SAR"
+                        document.getElementById("plentypay").value = balance;
+                        document.getElementById("balance").value = 0;
+                    }
                 }
+
+            } else {
+                const plentypayed = document.getElementById("plentypay").value
+                if (plentypayed > 0) {
+                    document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(document.getElementById("plentypay").value);
+                }
+                document.getElementById("plenty-balance-show").innerText = "-"
             }
 
+            changeTotalPrice()
         } else {
-            const plentypayed = document.getElementById("plentypay").value
-            if (plentypayed > 0) {
-                document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(document.getElementById("plentypay").value);
-            }
-            document.getElementById("plenty-balance-show").innerText = "-"
+            showAlertError(`Your plenty wallet is empty!`);
         }
-
-        changeTotalPrice()
 
     }
 

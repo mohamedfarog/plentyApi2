@@ -876,7 +876,7 @@
             storeCartLocal(JsonCartSerializer(cart));
             renderNavCart();
             var currentLocation = window.location.pathname;
-            if (currentLocation === '/cart') {
+            if (currentLocation === '/cart' || currentLocation === '/checkout') {
                 location.reload();
             }
         }

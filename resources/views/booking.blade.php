@@ -83,8 +83,7 @@
         text-align: center;
         vertical-align: middle;
         width: 14.285714285714%;
-        color: #c31c4a;
-        padding: 25px;
+        color: $primarycolor padding: 25px;
     }
 
     .calendar-wrapper td:hover {
@@ -435,6 +434,7 @@
         </div>
     </div>
 </div>
+
 <div class="container contmobile contimgu" style="">
     <div class="row">
         <div class="col-lg-12">
