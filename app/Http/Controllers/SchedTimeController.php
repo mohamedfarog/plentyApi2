@@ -92,13 +92,13 @@ class SchedTimeController extends Controller
                         $timeslot['booked']=1;
                        
                         
-                        return $timeslot;
+                
 
                     }
                     else{
                         $timeslot['booked']=0;
                       
-                        return $timeslot;
+                  
                     }
 
               }
