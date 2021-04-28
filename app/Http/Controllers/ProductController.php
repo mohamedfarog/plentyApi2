@@ -491,7 +491,11 @@ class ProductController extends Controller
             $arr= array();
             // This is used for fetch products for array
             foreach($request->products as $requestproduct){
-                    array_push($arr,$product->where("id", $requestproduct)->first()->id);
+                $p= $product->where("id", $requestproduct)->first()->id;
+                if($p){
+                    array_push($arr,$p);
+                }
+                    
             }
             return $arr;
             $product = $product->whereIn("id", $request->products);
