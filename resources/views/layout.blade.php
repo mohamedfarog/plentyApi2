@@ -271,6 +271,8 @@
                                             <a class="mainanc" href="/delicacy/1">Delicacy</a>
 
                                         </li> <!-- end elements -->
+
+
                                         <li class="">
                                             <a class="mainanc" href="/beauty">Beauty</a>
 
@@ -521,6 +523,7 @@
 
             ]
         });
+
 
         $(".tryprodslider").slick({
             dots: true,

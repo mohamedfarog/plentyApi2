@@ -218,6 +218,120 @@
             margin: auto;
         }
     }
+
+
+    .delecacy-opt-text {
+        border: none;
+        color: #b9aeae;
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .panel-body {
+        border: 2px solid white;
+        border-radius: 30px;
+        margin: 30px 30px 10px 30px;
+        height: 300px;
+        width: 300px;
+        background-size: cover;
+        margin: auto;
+    }
+
+    .panel-body:hover {
+        border: 2px solid rgb(43, 133, 75);
+        cursor: pointer;
+    }
+
+    #delicacy-opt2 {
+        background-image: url('img/booking/pick-up.png');
+    }
+
+    #delicacy-opt1 {
+        background-image: url('img/booking/table.png');
+    }
+
+
+    #delicacy-opt1:hover {
+        background-image: url('img/booking/table-selected.png');
+    }
+
+    #delicacy-opt2:hover {
+        background-image: url('img/booking/pick-up-selected.png');
+    }
+
+    #delicacy-opt1:hover+div {
+        color: rgb(43, 133, 75);
+    }
+
+    #delicacy-opt2:hover+div {
+        color: rgb(43, 133, 75);
+    }
+
+    .day-booking {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        height: 80px;
+        width: 80px;
+        padding: 5px;
+        margin-right: 0px;
+        font-size: large;
+        font-weight: 900;
+    }
+
+    .day-booking:hover {
+        box-shadow: 0px 0px 5px 3px #d3d3d3;
+    }
+
+    #time-slot {
+        display: inline-block;
+
+    }
+
+    .time-slot-card {
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        background-color: #288248;
+        color: white;
+        margin: 10px;
+        border-radius: 30px;
+        padding: 20px;
+        font-size: large;
+    }
+
+    .time-slot-card:hover {
+        cursor: pointer;
+    }
+
+
+
+    .nuser-table {
+        padding: 50px;
+
+    }
+
+    .nuser-table:hover {
+        filter: opacity(0.5) drop-shadow(0 0 0 green);
+        border-radius: 30px;
+        border: 2px solid #288248;
+    }
+
+    .user-select {
+        filter: opacity(0.5) drop-shadow(0 0 0 green);
+        border-radius: 30px;
+        border: 2px solid #288248;
+    }
+
+    .day-select {
+        box-shadow: 0px 0px 5px 3px #d3d3d3;
+    }
+
+    .slot-select {
+        box-shadow: 0px 0px 5px 3px #d3d3d3;
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -299,12 +413,10 @@
     </div>
 </section>
 
-<section class="mobiletabs wholetabs">
 
-</section>
 
 <section class="wholetabs wholemobile">
-    <div id="Sada">
+    <div id="Sada" style="display:none">
 
         <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated owlmobile" style="height:380px;">
 
@@ -364,11 +476,11 @@
         <section class="mt-30 mb-30">
             <div style="text-align:center;">
                 <h1 style="font-weight:lighter;color:#288248" id="breadcrumbshopname2">
-                    Linen
+
                 </h1>
             </div>
         </section>
-        <section style="width: 100%;margin: auto;margin-bottom:40px;">
+        <section style="width: 100%;margin: auto;">
             <div class="tabprod" style="justify-content: space-evenly;width:100%;display:flex;margin-top:20px;">
                 <button class="tablinkprod" onclick="getBestSeller(this)" id="defaultOpen">
                     <h2 class="category-name category catmobile">
@@ -380,20 +492,70 @@
                 </button>
                 @endforeach
             </div>
+            <div style="margin: auto;width:90%;text-align:center;" id="product-panel">
         </section>
-        <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
+    </div>
 
-        </section>
+    </div> <!-- end sada -->
+
+    <section id="book-table" style="margin: auto;width:90%;text-align:center;margin-top:100px;margin-bottom:100px;display:none">
+        <div class="row" id="booking-st1">
+            <h4 style="margin-bottom:50px;">Please select the number of people </h4>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
+        </div>
+
+        <div class="row" style="margin-top:100px;visibility: hidden;" id="booking-st2">
+            <h4 style="margin-bottom:20px;">Select the Date</h4>
+            <div id="day-for-table">
+
+                <div id="date"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:100px;visibility:hidden;" id="booking-st3">
+            <h4 style="margin-bottom:20px;">Select the Time</h4>
+            <div id="day-for-table">
+                <div id="time-slot" class="slider"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="switch-delecacy" style="margin: auto;width:90%;text-align:center;margin-top:100px;margin-bottom:100px">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="panel panel-default" style="border: none;">
+                    <div class="panel-body" id="delicacy-opt1" onclick="renderBookTable()">
+
+                    </div>
+                    <div class="panel-footer delecacy-opt-text">
+                        Book Table</div>
+                </div>
+            </div>
+            <div class=" col-lg-6 col-md-6 col-sm-12">
+                <div class="panel panel-default" style="border: none;">
+                    <div class="panel-body" id="delicacy-opt2" onclick="loadProducts()">
+
+                    </div>
+                    <div class="panel-footer delecacy-opt-text">
+                        Pick Up
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
+
 </section>
 
-</div> <!-- end sada -->
 
-
-
-
-</section>
-
-
+<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
+    @include('footer')
+</div>
 <script>
     $(document).ready(function() {
         document.getElementById("defaultOpen").click();
@@ -531,10 +693,84 @@
         });
         console.log('nohover');
     });
+
+    function loadProducts() {
+        document.getElementById("Sada").style.display = "block";
+        document.getElementById("switch-delecacy").style.display = "none";
+
+    }
+
+    function renderBookTable() {
+        document.getElementById("book-table").style.display = "block";
+        document.getElementById("switch-delecacy").style.display = "none";
+        renderDates();
+    }
+
+    function renderDates() {
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var template = ""
+        var day = new Date();
+        template = template + "<div style='display:inline-block' onclick='onDayClick(this," + day.getDate() + "," + day.getMonth() + "," + day.getFullYear() + ")'><div class='day-booking'>Today" +
+            "</div>" +
+            "<div>" +
+            DaysOfWeek[day.getDay()] +
+            "</div>" +
+            "</div>"
+        var tomorrow = new Date();
+
+        for (var i = 1; i < 10; i++) {
+            tomorrow.setDate(tomorrow.getDate() + 1)
+            template = template + "<div style='display:inline-block' onclick='onDayClick(this," + tomorrow.getDate() + "," + tomorrow.getMonth() + "," + tomorrow.getFullYear() + ")'><div class='day-booking'>" + tomorrow.getDate() + "<br/>" +
+                months[tomorrow.getMonth()] + "</div>" +
+                "<div>" +
+                DaysOfWeek[tomorrow.getDay()] +
+                "</div></div>"
+        }
+
+        document.getElementById("date").innerHTML = template;
+    }
+
+    function onDayClick(ele, day, month, year) {
+        console.log(ele);
+        $(".day-booking").removeClass("day-select");
+
+        ele.childNodes[0].classList.add("day-select");
+        console.log(day, month + 1, year);
+        $("#booking-st3").css("visibility", "visible");
+        renderTimeSlot();
+    }
+
+    function renderTimeSlot() {
+        var template = ""
+
+        for (var i = 0; i < 10; i++) {
+            template = template + "<div  class='time-slot-card' onclick='slotSelected(this," + 1 + ")'><div>" +
+                "10:20" +
+                "</div><div>" +
+                "10:40" +
+                "</div></div>"
+        }
+        document.getElementById("time-slot").innerHTML = template;
+
+    }
+
+    function slotSelected(ele, n) {
+        console.log(ele)
+        $(".time-slot-card").removeClass("slot-select");
+        ele.classList.add("slot-select");
+
+    }
+
+    function userNumber(ele, n) {
+        $(".nuser-table").removeClass("user-select");
+        $("#booking-st2").css("visibility", "hidden");
+        $("#booking-st3").css("visibility", "hidden");
+        ele.classList.add("user-select");
+        $("#booking-st2").css("visibility", "visible");
+    }
 </script>
 <script src="js/prodjs.js"></script>
-<div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
-    @include('footer')
-</div>
+
 
 @endsection

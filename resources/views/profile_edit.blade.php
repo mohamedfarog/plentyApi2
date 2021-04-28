@@ -115,14 +115,14 @@
 
     <form class="profile-form" id="profile-form" style="max-width:600px;margin-top:50px;" onsubmit="event.preventDefault()">
         {{ csrf_field() }}
-        <div class="form-group" style="margin-bottom;50px;height: 50px;">
+        <!-- <div class="form-group" style="margin-bottom;50px;height: 50px;">
             <div class="col-lg-3">
                 <h6>Profile Picture:</h6>
             </div>
             <div class="col-lg-9">
                 <input type="file" class="form-control" id="avatar" placeholder="Avatart" name="avatar">
             </div>
-        </div>
+        </div> -->
 
         <div class="form-group" style="margin-bottom;50px;height: 50px;">
             <div class="col-lg-3">
