@@ -209,7 +209,6 @@
         </div>
     </div>
 </section> <!-- end promo banners -->
-
 <!-- Plenty bazaar -->
 <section class="section-wrap-sm new-arrivals" style="margin-top:50px;">
     <div class="purchase-online-area ">
@@ -222,84 +221,20 @@
                 </div>
             </div>
             <div class="row">
+                @if(isset($plenty_category))
+                @foreach($plenty_category as $cat)
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="panel panel-default">
-                        <div class="panel-body"><img src="img/bazaar/clothing.jpg" alt=""></div>
-                        <div class="panel-footer">Clothings<i class="fas fa-arrow-right pull-right"></i></div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="img/bazaar/accessories.jpg" alt="">
-                        </div>
-                        <div class="panel-footer">
-                            Accessories
-                            <i class="fas fa-arrow-right pull-right"></i>
-                        </div>
-                    </div>
+                        <a href="/bazaar/{{$cat->id}}">
+                            <div class="panel-body"><img src="/storage/{{$cat->image}}" alt=""></div>
+                            <div class="panel-footer">{{$cat->name}}<i class="fas fa-arrow-right pull-right"></i></div>
+                        </a>
 
-
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="img/bazaar/home_accessories.jpg" alt="">
-                        </div>
-                        <div class="panel-footer">
-                            Home Accessories
-                            <i class="fas fa-arrow-right pull-right"></i>
-                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="img/bazaar/jewllery.jpg" alt="">
-                        </div>
-                        <div class="panel-footer">
-                            Jewllery
-                            <i class="fas fa-arrow-right pull-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                @endforeach
+                @endif
 
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="img/bazaar/perfumes.jpg" alt="">
-                        </div>
-                        <div class="panel-footer">
-                            Perfumes
-                            <i class="fas fa-arrow-right pull-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="img/bazaar/art.jpg" alt="">
-                        </div>
-                        <div class="panel-footer">
-                            Art
-                            <i class="fas fa-arrow-right pull-right"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img src="img/bazaar/food.jpg" alt="">
-                        </div>
-                        <div class="panel-footer">
-                            Food
-                            <i class="fas fa-arrow-right pull-right"></i>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

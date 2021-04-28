@@ -769,6 +769,10 @@
         ele.classList.add("user-select");
         $("#booking-st2").css("visibility", "visible");
     }
+
+    function getTableTimeSlot() {
+
+    }
 </script>
 <script src="js/prodjs.js"></script>
 

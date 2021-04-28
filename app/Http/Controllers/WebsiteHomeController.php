@@ -46,12 +46,19 @@ class WebsiteHomeController extends Controller
             ->get();
     }
 
+    private function plentyBazaarCategory()
+    {
+        return  DB::table('eventcats')
+            ->get();
+    }
+
 
     public function home(Request $request)
     {
 
         $data['featured_products'] = $this->featuredItems();
         $data['homebrands'] = $this->homebrands();
+        $data['plenty_category']  = $this->plentyBazaarCategory();
         return view('home')->with($data);
     }
 
@@ -761,5 +768,37 @@ class WebsiteHomeController extends Controller
             ->get();
         foreach ($products_filter as $prd) { }
         return $sizes;
+    }
+
+
+
+    private function getBazaarItems($id)
+    {
+        return  DB::table('products')
+            ->select(DB::raw(' products.id as id,
+            products.id as prodid,
+            products.name_ar as name_ar,
+            products.name_en as name_en,
+            products.price as price,
+            products.desc_en as desc_en,
+            products.desc_ar as desc_ar,
+            products.stocks as stock,
+            images.url as image,
+            shop_id as shop_id'))
+            ->leftjoin('images', 'images.product_id', '=', 'products.id')
+            ->where('eventcat_id', $id)
+            ->get();
+    }
+
+    public function plentybazaar(Request $request, $id)
+    {
+
+        $data['products'] = $this->getBazaarItems($id);
+        $data['cat'] = DB::table('eventcats')
+            ->where('id', $id)
+            ->get()
+            ->first();
+
+        return view('bazaar')->with($data);
     }
 }

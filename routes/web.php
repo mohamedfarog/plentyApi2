@@ -101,6 +101,7 @@ Route::get('/clothings', function () {
 Route::get('/careers', function () {
     return view('/careers');
 });
+
 Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
 Route::get('/favourites', function () {
     return view('/favourite');
@@ -137,3 +138,5 @@ Route::get('/favourite-product/{id}',  [WebsiteHomeController::class, 'getFavoui
 
 Route::get('/booking/{id}',  [WebsiteHomeController::class, 'booking']);
 Route::get('/timeslot/{id}',  [WebsiteHomeController::class, 'timeslot']);
+
+Route::get('/bazaar/{id}',  [WebsiteHomeController::class, 'plentybazaar']);

@@ -220,19 +220,19 @@
     }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
-<div class="heading-banner-area overlay-bg" style="background: url('img/bazaar/clothing.jpg') no-repeat scroll center center / cover;margin: 0 5%;">
+
+<div class="heading-banner-area overlay-bg" style="background: url('storage/{{$cat->image}}') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title">
-                        <h2 style="font-weight:lighter;font-size:60px;padding: 100px 0 100px;">Clothings</h2>
+                        <h2 style="font-weight:lighter;font-size:60px;padding: 100px 0 100px;">{{$cat->name}}</h2>
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
                             <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
-                            <li style="font-weight:lighter;">Plenty bazaar</li>
-                            <li style="font-weight:lighter;" id="breadcrumbshopname">Clothings</li>
+                            <li style="font-weight:lighter;" id="breadcrumbshopname">{{$cat->name}}</li>
                         </ul>
                     </div>
                 </div>
@@ -241,7 +241,47 @@
     </div>
 </div>
 
+<!-- Featured Product -->
+<section class="section-wrap-sm new-arrivals ">
+    <div class="purchase-online-area ">
+        <div class="container contm">
 
+            <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
+                @if(isset($products))
+                @foreach($products as $product)
+
+                <div class="producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm " style="margin-bottom:30px;">
+                    <div class="product-img frame"><a href="product/{{$product->id}}"><img src="storage/products/{{$product->image}}" alt="" loading="lazy" class="imgz"></a>
+                        <div class="fix buttonsshow" style="visibility: visible;"><span class="pro-price "><img class="featicons" src="img/nav/bag.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span>
+                            <span class="pro-rating "><img class="featicons" src="img/nav/search.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span></div>
+                        <div class="product-action clearfix"></div>
+                    </div>
+                    <div class="product-info clearfix">
+                        <div class="fix">
+                            <h4 class="post-title floatcenter feattitle"><a href="product/{{$product->id}}" style="">{{$product->name_en}} </a></h4>
+                            <p class="floatcenter hidden-sm featsubtitle  post-title">SAR {{$product->price}}</p>
+                        </div>
+                        <div class="fix featlineicons">
+                            <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                            </span>
+                            </a>
+                            <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
+                                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @endforeach
+                @endif
+            </section>
+
+        </div>
+    </div>
+</section> <!-- end Featured Product -->
 
 
 
