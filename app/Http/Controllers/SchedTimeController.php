@@ -72,10 +72,10 @@ class SchedTimeController extends Controller
 
         }
         else{
-            $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
-            return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
+            // $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
+            // return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
 
-        }
+        
         //Fetch tables
         $tables= Shoptable::where('capacity',$request->capacity)->orWhere('capacity',($request->capacity+1))->first();
 
@@ -97,7 +97,7 @@ class SchedTimeController extends Controller
         else{
             return response()->json(['Error'=>'No tables available']);
         }
-
+    }
 
  
     }
