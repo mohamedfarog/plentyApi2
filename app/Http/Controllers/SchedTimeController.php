@@ -47,8 +47,8 @@ class SchedTimeController extends Controller
         //If it is today, then we return the timeslots existing in the database
         
 
-        if($istoday=="true"){
-            return 'asdasd';
+        if($istoday==true){
+          
 
             $tables= Shoptable::where('capacity',$request->capacity)
             // ->orWhere('capacity',($request->capacity+1))
@@ -101,7 +101,7 @@ class SchedTimeController extends Controller
                         array_push($testarray,$timeslot);
                     }
 
-              }
+              }@
               return $testarray;
         }
         else{
