@@ -55,8 +55,8 @@ class SchedTimeController extends Controller
             ->first();
             if($tables){
                     $tablebookings= TableBooking::where('date',$request->date)->get();
-                    $schedtimes= SchedTime::where('booked',0)->where('table_id',$tables->id)->get();
-                   return $tablebookings;
+                    $schedtimes= SchedTime::where('booked',0)->get();
+                   return $schedtimes;
             }
             else{
                 return response()->json(['Error'=>'No tables available']);
