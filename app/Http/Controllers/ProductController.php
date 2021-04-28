@@ -491,8 +491,8 @@ class ProductController extends Controller
             $arr= array();
             // This is used for fetch products for array
             foreach($request->products as $requestproduct){
-               $rprod= Product::find($requestproduct);
-               array_push($arr,$rprod);
+               
+               array_push($arr,Product::find($requestproduct));
 
                     
             }
