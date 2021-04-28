@@ -56,6 +56,7 @@ class SchedTimeController extends Controller
             if($tables){
                     $tablebookings= TableBooking::where('date',$request->date)->get();
                     $schedtimes= SchedTime::where('booked',0)->get();
+                    
                    return $schedtimes;
             }
             else{

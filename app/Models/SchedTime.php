@@ -10,6 +10,37 @@ class SchedTime extends Model
 {
     use HasFactory;
     protected $fillable=['from','to','table_id'];
+    protected $hidden=['from','to'];
+    protected $appends = [
+        'fromtime',
+        'totime'
+    ];
+    
+
+
+    public function getFromtimeAttribute()
+    {
+        if($this->from){
+            $myArray = explode(':',$this->from);
+            if(strlen($this->from)>5){
+                return $myArray[0].':'.$myArray[1];
+            }
+                
+
+        }
+    }
+
+    public function getTotimeAttribute()
+    {
+        if($this->to){
+            $myArray = explode(':',$this->to);
+            if(strlen($this->to)>5){
+                return $myArray[0].':'.$myArray[1];
+            }
+                
+
+        }
+    }
 
     public  static function generateTimeSlots ($opening,$closing,$interval,$tableid)
         {
@@ -56,8 +87,8 @@ class SchedTime extends Model
                      
 
                         $newarr = array();
-                        $newarr['from'] = $p;
-                        $newarr['to'] =$fromhour . ':' . $fromminute;
+                        $newarr['fromtime'] = $p;
+                        $newarr['totime'] =$fromhour . ':' . $fromminute;
                         // $newarr['sched'] = $sched;
                         if($tableid!=0)
                             $newarr['table_id']= $tableid;
@@ -93,8 +124,8 @@ class SchedTime extends Model
                        
 
                         $newarr = array();
-                        $newarr['from'] = $p;
-                        $newarr['to'] = $fromhour . ':' . $fromminute;
+                        $newarr['fromtime'] = $p;
+                        $newarr['totime'] = $fromhour . ':' . $fromminute;
                         // $newarr['sched'] = $sched;
                         if($tableid!=0)
                             $newarr['table_id']= $tableid;
