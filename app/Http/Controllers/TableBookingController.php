@@ -110,15 +110,7 @@ class TableBookingController extends Controller
                     break;
             }
         } else {
-            $validator = Validator::make($request->all(), [
-                "total_amount" => "required",
-                "amount_due" => "required",
-
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
-            }
+        
             $data = new TableBooking();
 
             $data->user_id = Auth::id();
