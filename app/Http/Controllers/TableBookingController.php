@@ -84,14 +84,14 @@ class TableBookingController extends Controller
                     if (isset($request->user_id)) {
                         $order->user_id = $request->user_id;
                     }
-                    if (isset($request->lat)) {
-                        $order->lat = $request->lat;
+                    if (isset($request->date)) {
+                        $order->date = $request->date;
                     }
-                    if (isset($request->lng)) {
-                        $order->lng = $request->lng;
+                    if (isset($request->preftime)) {
+                        $order->preftime = $request->preftime;
                     }
-                    if (isset($request->delivery_note)) {
-                        $order->delivery_note = $request->delivery_note;
+                    if (isset($request->table_id)) {
+                        $order->table_id = $request->table_id;
                     }
                     if (isset($request->contact_number)) {
                         $order->contact_number = $request->contact_number;
