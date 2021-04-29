@@ -32,7 +32,7 @@ class ProductController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                    return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->all();
+                    return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->get();
                 }
                 if(isset($request->eventcat_id))
                 return Product::where('deleted_at',null)->where('eventcat_id',$request->eventcat_id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
