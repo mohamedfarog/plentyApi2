@@ -142,7 +142,7 @@ class WebsiteHomeController extends Controller
     public function delicacy(Request $request, $shop = null, $category = null)
     {
         // Getting category id  
-        $category_id = Cat::select('id', 'name_en')->where('name_en', 'Fine Dining')->first();
+        $category_id = Cat::select('id', 'name_en')->where('id', 1)->first();
         $data['shops'] = Shop::where('cat_id', $category_id->id)->get();
 
         // getting shop details
@@ -249,7 +249,7 @@ class WebsiteHomeController extends Controller
     public function beauty(Request $request, $shop = null, $category = null)
     {
         // Getting category id  
-        $category_id = Cat::select('id', 'name_en')->where('name_en', 'Beauty')->first();
+        $category_id = Cat::select('id', 'name_en')->where('id', 2)->first();
         $data['shops'] = Shop::where('cat_id', $category_id->id)->get();
 
         // getting shop details
@@ -271,7 +271,7 @@ class WebsiteHomeController extends Controller
     public function fashion(Request $request, $shop = null, $category = null)
     {
         // Getting category id  
-        $category_id = Cat::select('id', 'name_en')->where('name_en', 'Fashion')->first();
+        $category_id = Cat::select('id', 'name_en')->where('id', 3)->first();
         $data['shops'] = Shop::where('cat_id', $category_id->id)->get();
 
         // getting shop details
