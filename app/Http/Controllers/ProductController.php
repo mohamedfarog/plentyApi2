@@ -500,6 +500,14 @@ class ProductController extends Controller
             // 13 is a category reserved for room purposes
             $product = $product->where("eventcat_id", 13);
         }
+      
+        return $product->orderby($sortBy, $sortOrder)->paginate();
+    }
+
+    public function stockcheck(Request $request)
+    {
+        $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+
         if (isset($request->products)) {
             $arr= array();
             // This is used for fetch products for array
@@ -519,9 +527,11 @@ class ProductController extends Controller
             }
             return $arr;
             $product = $product->whereIn("id", $request->products);
+      
         }
-        return $product->orderby($sortBy, $sortOrder)->paginate();
     }
+
+
     public function search(Request $request)
     {
         $user = Auth::user();
