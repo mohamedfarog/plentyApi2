@@ -17,7 +17,7 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('pid');
             $table->foreign('pid')->references('id')->on('products');
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->string('image')->nullable();
             $table->string('category')->nullable();
             $table->string('name');
