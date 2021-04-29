@@ -488,6 +488,9 @@ class ProductController extends Controller
                     break;
             }
         }
+        if(isset($request->delete)){
+            Product::find($request->id)->deleted_at= Carbon::now();
+        }
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
@@ -515,7 +518,7 @@ class ProductController extends Controller
                 if(isset($requestproduct['color'])){
                     
                     $color= Color::find($requestproduct['color']);
-                    if($color->stock > $requestproduct['qty']){
+                    if($color->stock >= $requestproduct['qty']){
                         array_push($arr,["id"=> $requestproduct['id'], "stock"=> $color->stock 
                         
                         ]);
@@ -524,7 +527,7 @@ class ProductController extends Controller
                 else{
                     if( !isset($requestproduct['color']) && isset($requestproduct['size'])){
                         $size= Size::find($requestproduct['stocks']);
-                    if($size->stocks > $requestproduct['qty']){
+                    if($size->stocks >= $requestproduct['qty']){
                         array_push($arr,["id"=>$requestproduct['id'], "stock"=> $size->stocks]);
                     }
 
@@ -532,7 +535,7 @@ class ProductController extends Controller
 
                     if( !isset($requestproduct['color']) && !isset($requestproduct['size'])){
                         $product= Product::find($requestproduct['id']);
-                    if($product->stocks > $requestproduct['qty']){
+                    if($product->stocks >= $requestproduct['qty']){
                         array_push($arr,["id"=>$requestproduct['id'] , "stock" => $product->stocks ]);
                     }
 
