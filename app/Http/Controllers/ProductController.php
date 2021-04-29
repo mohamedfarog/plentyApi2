@@ -496,7 +496,9 @@ class ProductController extends Controller
         
         if(isset($request->delete)){
             Product::find($request->id)->deleted_at= Carbon::now()->save();
-            return $product->orderby($sortBy, $sortOrder)->paginate();
+            // return $product->orderby($sortBy, $sortOrder)->paginate();
+            $msg = 'Product has been deleted';
+            return response()->json(['success' => true, 'message' => $msg]);
         }
         if (isset($request->eventcat_id)) {
 
