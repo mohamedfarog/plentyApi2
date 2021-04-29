@@ -34,6 +34,12 @@ class ProductController extends Controller
                 if (isset($request->all)) {
                     return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->get();
                 }
+                if(isset($request->id)){
+                    return Product::find($request->id)->with(['sizes'=>function(){
+                        return $this->with(['color']);
+                    }, 'addons', 'images', 'designer']);
+
+                }
                 if(isset($request->eventcat_id))
                 return Product::where('deleted_at',null)->where('eventcat_id',$request->eventcat_id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
                 break;

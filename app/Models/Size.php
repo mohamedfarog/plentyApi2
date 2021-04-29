@@ -21,4 +21,9 @@ class Size extends Model
             return env('SIZEURL') . $this->image;
        }
    }
+   public function color()
+   {
+       
+    return $this->hasMany(Color::class);
+   }
 }
