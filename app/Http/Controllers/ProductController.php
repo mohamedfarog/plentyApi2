@@ -32,7 +32,9 @@ class ProductController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                    return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->get();
+                    return Product::where('deleted_at',null)->with(['sizes'=>function($sizes){
+                        return $sizes->with(['color']);
+                    }, 'colors', 'addons', 'images', 'designer'])->get();
                 }
                 if(isset($request->id)){
                     return Product::where('id',$request->id)->with(['sizes'=>function($sizes){
@@ -41,7 +43,9 @@ class ProductController extends Controller
 
                 }
                 if(isset($request->eventcat_id))
-                return Product::where('deleted_at',null)->where('eventcat_id',$request->eventcat_id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
+                return Product::where('deleted_at',null)->where('eventcat_id',$request->eventcat_id)->with(['sizes'=>function($sizes){
+                    return $sizes->with(['color']);
+                }, 'colors', 'addons', 'images', 'designer'])->paginate($perpage);
                 break;
             case 'V':
             case 'v':
