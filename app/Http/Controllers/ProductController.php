@@ -197,7 +197,20 @@ class ProductController extends Controller
                                 $arr['image'] = $helper->store($size['image']);
                             }
 
-                            $sizes = Size::create($arr);
+                            $sizequery = Size::create($arr);
+                        }
+                    }
+                    if (isset($request->colors)) {
+                        foreach ($request->colors as $color) {
+                            $arr = array();
+                            $arr['product_id'] = $product->id;
+                            $arr['value'] = $color['value'];
+                            $arr['others'] = $color['others'];
+                            $arr['stock']= $color['stock'];
+                            $arr['size_id']= $sizequery->id;
+
+
+                            $sizes = Color::create($arr);
                         }
                     }
                     if (isset($request->addons)) {
@@ -220,17 +233,7 @@ class ProductController extends Controller
                             $sizes = Addon::create($arr);
                         }
                     }
-                    if (isset($request->colors)) {
-                        foreach ($request->colors as $color) {
-                            $arr = array();
-                            $arr['product_id'] = $product->id;
-                            $arr['value'] = $color['value'];
-                            $arr['others'] = $color['others'];
-
-
-                            $sizes = Color::create($arr);
-                        }
-                    }
+                
                     if (isset($request->images)) {
                         foreach ($request->images as $image) {
                             $arr = array();
