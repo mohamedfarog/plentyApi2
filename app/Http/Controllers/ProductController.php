@@ -488,13 +488,15 @@ class ProductController extends Controller
                     break;
             }
         }
-        if(isset($request->delete)){
-            Product::find($request->id)->deleted_at= Carbon::now();
-        }
+       
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
         $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        if(isset($request->delete)){
+            Product::find($request->id)->deleted_at= Carbon::now();
+            return $product->orderby($sortBy, $sortOrder)->paginate();
+        }
         if (isset($request->eventcat_id)) {
 
             $product = $product->where("eventcat_id", $request->eventcat_id);
