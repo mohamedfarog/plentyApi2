@@ -15,6 +15,8 @@ class AddColorQtyS extends Migration
     {
         Schema::table('carts', function (Blueprint $table) {
            $table->integer('colorqty')->nullable();
+           $table->unsignedBigInteger('user_id')->nullable();
+           $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -27,6 +29,8 @@ class AddColorQtyS extends Migration
     {
         Schema::table('carts', function (Blueprint $table) {
             $table->dropColumn('colorqty');
+            $table->dropForeign('user_id');
+            $table->dropColumn('user_id');
         });
     }
 }
