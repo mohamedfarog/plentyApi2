@@ -493,8 +493,9 @@ class ProductController extends Controller
             $sortOrder = "asc";
         }
         $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        
         if(isset($request->delete)){
-            Product::find($request->id)->deleted_at= Carbon::now();
+            Product::find($request->id)->deleted_at= Carbon::now()->save();
             return $product->orderby($sortBy, $sortOrder)->paginate();
         }
         if (isset($request->eventcat_id)) {
