@@ -493,9 +493,9 @@ class ProductController extends Controller
             $sortOrder = "asc";
         }
         $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
-        
+        return $request->all();
         if(isset($request->delete)){
-            return 'THIS API IS BEING CALLED ';
+           
            $product=  Product::find($request->id);
            $product->deleted_at= Carbon::now();
            $product->save();
