@@ -78,4 +78,4 @@ else
 	echo '<div class="failed">Error: Faild to send. Please try again later.</div>';
 	header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
-?>   
+?>

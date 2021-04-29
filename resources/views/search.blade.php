@@ -29,6 +29,7 @@
             width: 95%;
         }
     }
+
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -127,6 +128,7 @@
             $(this).siblings(".categoverlay").css("opacity", "0.2");
         }, function() {
             $(this).siblings(".categoverlay").css("opacity", "0.6");
+            ph
         });
         $(".categoverlay").hover(function() {
             $(this).css("opacity", "0.2");
@@ -165,6 +167,7 @@
         var base_url = $('meta[name=base_url]').attr('content');
         window.location.replace(base_url + 'search/' + form.get('search-item'));
     }
+
 </script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
