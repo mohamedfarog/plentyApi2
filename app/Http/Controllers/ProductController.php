@@ -37,7 +37,7 @@ class ProductController extends Controller
                 if(isset($request->id)){
                     return Product::where('id',$request->id)->with(['sizes'=>function(){
                         return $this->with(['color']);
-                    }, 'addons', 'images', 'designer']);
+                    }, 'addons', 'images', 'designer'])->first();
 
                 }
                 if(isset($request->eventcat_id))
