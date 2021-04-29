@@ -516,14 +516,16 @@ class ProductController extends Controller
                     
                     $color= Color::find($requestproduct['color']);
                     if($color->stock > $requestproduct['qty']){
-                        array_push($arr,$requestproduct['id']);
+                        array_push($arr,["id"=> $requestproduct['id'], "stock"=> $color->stock 
+                        
+                        ]);
                     }
                 }
                 else{
                     if( !isset($requestproduct['color']) && isset($requestproduct['size'])){
                         $size= Size::find($requestproduct['stocks']);
                     if($size->stocks > $requestproduct['qty']){
-                        array_push($arr,$requestproduct['id']);
+                        array_push($arr,["id"=>$requestproduct['id'], "stock"=> $size->stocks]);
                     }
 
                     }
@@ -531,7 +533,7 @@ class ProductController extends Controller
                     if( !isset($requestproduct['color']) && !isset($requestproduct['size'])){
                         $product= Product::find($requestproduct['id']);
                     if($product->stocks > $requestproduct['qty']){
-                        array_push($arr,$requestproduct['id']);
+                        array_push($arr,["id"=>$requestproduct['id'] , "stock" => $product->stocks ]);
                     }
 
                     }
