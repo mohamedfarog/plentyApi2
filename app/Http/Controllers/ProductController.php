@@ -514,14 +514,14 @@ class ProductController extends Controller
             foreach($request->product as $requestproduct){
                 if(isset($requestproduct['color'])){
                     $color= Color::find($requestproduct['color']);
-                    if($color->stock > 0){
+                    if($color->stock > $requestproduct['qty']){
                         array_push($arr,$requestproduct['id']);
                     }
                 }
                 else{
                     if( !isset($requestproduct['color']) && isset($requestproduct['size'])){
                         $size= Size::find($requestproduct['stocks']);
-                    if($size->stocks > 0){
+                    if($size->stocks > $requestproduct['qty']){
                         array_push($arr,$requestproduct['id']);
                     }
 
@@ -529,7 +529,7 @@ class ProductController extends Controller
 
                     if( !isset($requestproduct['color']) && !isset($requestproduct['size'])){
                         $product= Product::find($requestproduct['id']);
-                    if($product->stocks > 0){
+                    if($product->stocks > $requestproduct['qty']){
                         array_push($arr,$requestproduct['id']);
                     }
 
