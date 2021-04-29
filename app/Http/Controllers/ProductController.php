@@ -508,7 +508,7 @@ class ProductController extends Controller
     {
         $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
         
-        if (isset($request->products)) {
+        if (isset($request->product)) {
             $arr= array();
             // This is used for fetch products for array
             foreach($request->product as $requestproduct){
