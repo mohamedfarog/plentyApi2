@@ -507,7 +507,7 @@ class ProductController extends Controller
     public function stockcheck(Request $request)
     {
         $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
-        return $request->all();
+        
         if (isset($request->products)) {
             $arr= array();
             // This is used for fetch products for array
