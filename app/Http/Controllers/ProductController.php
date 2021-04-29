@@ -537,7 +537,7 @@ class ProductController extends Controller
                 }
                 else{
                     if( ($requestproduct['color']==-1)  && ($requestproduct['size']!= -1)    ){
-                        $size= Size::find($requestproduct['stocks']);
+                        $size= Size::find($requestproduct['size']);
                     if($size->stocks >= $requestproduct['qty']){
                         array_push($arr,["id"=>$requestproduct['id'], "stock"=> $size->stocks]);
                     }
