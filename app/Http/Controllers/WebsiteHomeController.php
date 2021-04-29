@@ -155,6 +155,7 @@ class WebsiteHomeController extends Controller
         } else {
             $data['shop'] = $data['shops']->first();
         }
+        $data['style'] = $this->getStyle($data['shop']->id);
         $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
 
         return view('/delicacy')->with($data);
@@ -262,7 +263,7 @@ class WebsiteHomeController extends Controller
             $data['shop'] = $data['shops']->first();
         }
         $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
-
+        $data['style'] = $this->getStyle($data['shop']->id);
         return view('/beauty')->with($data);
     }
 
@@ -283,7 +284,7 @@ class WebsiteHomeController extends Controller
         } else {
             $data['shop'] = $data['shops']->first();
         }
-
+        $data['style'] = $this->getStyle($data['shop']->id);
         $data['product_categories'] = Prodcat::where('shop_id', $data['shop']->id)->get();
         return view('/fashion')->with($data);
     }

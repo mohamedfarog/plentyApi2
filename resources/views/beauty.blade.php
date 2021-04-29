@@ -100,7 +100,6 @@
     }
 
     .category-active {
-        color: #288248;
         text-decoration: underline;
         text-decoration-thickness: 2px;
     }
@@ -224,7 +223,9 @@
 
 <input type="hidden" id="shopid" value={{$shop->id}}>
 <input type="hidden" id="shopname" value={{$shop->name_en}}>
-<div class="heading-banner-area overlay-bg" style="background: url('img/store/SADA/Dine Banner.png') no-repeat scroll center center / cover;margin: 0 5%;">
+<input type="hidden" id="secondary" value={{$style->secondary}}>
+<input type="hidden" id="primary" value={{$style->primary}}>
+<div class="heading-banner-area overlay-bg" style="background: url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -317,7 +318,7 @@
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
                             <div class="buttons-holder" style="">
-                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>
@@ -334,7 +335,7 @@
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
                             <div class="buttons-holder" style="">
-                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>
@@ -351,7 +352,7 @@
                             <h2 class="hero-subtitle-dine lines" style="">get 20% discount on</h2><br>
                             <h2 class="hero-subtitle-dine lines" style="">your coffee </h2><br>
                             <div class="buttons-holder" style="">
-                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;color:green;font-weight:lighter">Order Now</span></a>
+                                <a href="/" class="btn btn-lg btn-transparent dinebtn" style="width:35%;"><span style="font-size:24px;font-weight:lighter">Order Now</span></a>
                             </div>
                         </div>
                     </div>
@@ -399,8 +400,11 @@
         $(".active").css("background-color", "black");
         const shop_id = $('#shopid').val();
         const shop_name = $('#shopname').val();
-        makeShopActive(shop_id, color = "#2b854b");
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        makeShopActive(shop_id, secondary_color);
         document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
 
@@ -419,9 +423,11 @@
         var title = document.getElementsByClassName('category-name');
         for (var i = 0; i < title.length; i++) {
             title[i].classList.remove('category-active');
+            title[i].style.color = "black"
         }
         element.querySelector('h2').classList.add('category-active');
-
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        element.querySelector('h2').style.color = primary_color;
     }
 
     // Get the element with id="defaultOpen" and click on it
@@ -471,6 +477,7 @@
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'storage/products/'
         let prod_element = ''
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
         data.forEach(element => {
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
@@ -481,7 +488,7 @@
                 "<div class='product-info clearfix'>" +
                 "<div class='fix'>" +
                 "<h4 class='post-title floatcenter feattitle'><a href='booking/" + element.product_id + "' style=>" + element.name_en + "</a></h4>" +
-                "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
+                "<p style='color:" + primary_color + "' class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
                 "</div>"
