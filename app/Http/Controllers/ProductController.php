@@ -504,14 +504,18 @@ class ProductController extends Controller
             $arr= array();
             // This is used for fetch products for array
             foreach($request->products as $requestproduct){
+                if(isset($requestproduct->size) && $requestproduct->size!=null){
+
+                        return $requestproduct->size;
+                  
+                    
+
+                 
+                }
                $p= Product::find($requestproduct);
                if($p->stocks > 0){
                 array_push($arr,$p->id);
-               }
-               
-            
-
-                    
+               }     
             }
             return $arr;
             $product = $product->whereIn("id", $request->products);
