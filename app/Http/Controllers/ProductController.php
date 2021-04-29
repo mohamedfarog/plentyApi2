@@ -517,7 +517,7 @@ class ProductController extends Controller
             $arr= array();
             // This is used for fetch products for array
             foreach($request->product as $requestproduct){
-                if(isset($requestproduct['color'])){
+                if($requestproduct['color']!= -1 ){
                     
                     $color= Color::find($requestproduct['color']);
                     if($color->stock >= $requestproduct['qty']){
@@ -527,7 +527,7 @@ class ProductController extends Controller
                     }
                 }
                 else{
-                    if( !isset($requestproduct['color']) && isset($requestproduct['size'])){
+                    if( ($requestproduct['color']==-1)  && ($requestproduct['size']!= -1)    ){
                         $size= Size::find($requestproduct['stocks']);
                     if($size->stocks >= $requestproduct['qty']){
                         array_push($arr,["id"=>$requestproduct['id'], "stock"=> $size->stocks]);
@@ -535,7 +535,7 @@ class ProductController extends Controller
 
                     }
 
-                    if( !isset($requestproduct['color']) && !isset($requestproduct['size'])){
+                    if( ($requestproduct['color']  ==-1) && ($requestproduct['size']==-1 ) ){
                         $product= Product::find($requestproduct['id']);
                     if($product->stocks >= $requestproduct['qty']){
                         array_push($arr,["id"=>$requestproduct['id'] , "stock" => $product->stocks ]);
