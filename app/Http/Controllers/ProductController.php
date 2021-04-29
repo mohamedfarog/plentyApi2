@@ -513,7 +513,7 @@ class ProductController extends Controller
             // This is used for fetch products for array
             foreach($request->product as $requestproduct){
                 if(isset($requestproduct['color'])){
-                    return 'HEY ABU';
+                    
                     $color= Color::find($requestproduct['color']);
                     if($color->stock > $requestproduct['qty']){
                         array_push($arr,$requestproduct['id']);
