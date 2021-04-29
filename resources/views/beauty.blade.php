@@ -217,6 +217,7 @@
             margin: auto;
         }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -406,6 +407,7 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
+
 </script>
 
 <script>
@@ -435,10 +437,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -456,10 +458,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'best-seller/' + shop_id,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'best-seller/' + shop_id
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -529,6 +531,7 @@
         });
         console.log('nohover');
     });
+
 </script>
 <script src="js/prodjs.js"></script>
 

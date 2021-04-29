@@ -58,6 +58,7 @@
         color: #001b71;
         font-size: 20px;
     }
+
 </style>
 
 <!-- Hero Slider -->
@@ -434,6 +435,7 @@
             });
         });
     });
+
 </script>
 <div style="">
     @include('footer')

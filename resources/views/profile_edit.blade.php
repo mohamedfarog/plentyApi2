@@ -98,6 +98,7 @@
             20px;
         }
     }
+
 </style>
 <section class="page-title text-center bg-light ">
     <div class="container relative clearfix">
@@ -192,36 +193,37 @@
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'api/profile'
         $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: 'JSON',
-            headers: {
+            type: 'POST'
+            , url: url
+            , dataType: 'JSON'
+            , headers: {
                 "Authorization": 'Bearer ' + bearer_token
-            },
-            data: {
-                action: 'update',
-                name: form.get('name'),
-                email: form.get('email'),
-                contact: form.get('contact'),
-                gender: form.get('gender'),
-                bday: form.get('bday')
-            },
-            success: function(data) {
+            }
+            , data: {
+                action: 'update'
+                , name: form.get('name')
+                , email: form.get('email')
+                , contact: form.get('contact')
+                , gender: form.get('gender')
+                , bday: form.get('bday')
+            }
+            , success: function(data) {
                 const user = {
-                    "id": data.user.id,
-                    "name": data.user.name,
-                    "typeofuser": data.user.typeofuser
+                    "id": data.user.id
+                    , "name": data.user.name
+                    , "typeofuser": data.user.typeofuser
                 }
                 setCookie('user', JSON.stringify(user), 1);
                 window.location.replace(base_url + 'profile');
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 console.log('Error!', err)
 
             }
 
         });
     }
+
 </script>
 
 @endsection

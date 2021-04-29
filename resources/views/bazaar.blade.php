@@ -218,6 +218,7 @@
             margin: auto;
         }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 

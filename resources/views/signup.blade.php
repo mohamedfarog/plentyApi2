@@ -218,6 +218,7 @@
             padding: 0 !important;
         }
     }
+
 </style>
 <section class="signup container" style="background:transparent">
     <div class="signup-logo">
@@ -310,8 +311,8 @@
         var smsCodes = $('.smsCode');
 
         function goToNextInput(e) {
-            var key = e.which,
-                t = $(e.target),
+            var key = e.which
+                , t = $(e.target),
                 // Get the next input
                 sib = t.closest('div').next().find('.smsCode');
 
@@ -371,13 +372,13 @@
         const form = new FormData(document.getElementById("signup-form"))
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'POST',
-            url: base_url + 'api/otp',
-            data: {
+            type: 'POST'
+            , url: base_url + 'api/otp'
+            , data: {
                 contact: form.get('contact')
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 $('#otpModal').modal('show');
                 console.log(data)
             }
@@ -388,21 +389,21 @@
         const form = new FormData(document.getElementById("signup-form"))
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'POST',
-            url: base_url + 'api/verify',
-            data: {
-                contact: form.get('contact'),
-                otp: parseInt(combineSMSCodes())
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'POST'
+            , url: base_url + 'api/verify'
+            , data: {
+                contact: form.get('contact')
+                , otp: parseInt(combineSMSCodes())
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.success) {
                     if (data.user) {
                         setCookie('bearer_token', data.token, 1);
                         const user = {
-                            "id": data.user.id,
-                            "name": data.user.name,
-                            "typeofuser": data.user.typeofuser
+                            "id": data.user.id
+                            , "name": data.user.name
+                            , "typeofuser": data.user.typeofuser
                         }
                         setCookie('user', JSON.stringify(user), 1);
                         window.location.href = base_url;
@@ -423,22 +424,22 @@
         //  console.log(data)
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'POST',
-            headers: {
+            type: 'POST'
+            , headers: {
                 "AuthRegister": data.authtoken
-            },
-            url: base_url + 'api/register',
-            data: {
-                contact: form.get('contact'),
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            }
+            , url: base_url + 'api/register'
+            , data: {
+                contact: form.get('contact')
+            , }
+            , dataType: 'JSON'
+            , success: function(data) {
                 console.log(data)
                 setCookie('bearer_token', data.token, 1);
                 const user = {
-                    "id": data.user.id,
-                    "name": data.user.name,
-                    "typeofuser": data.user.typeofuser
+                    "id": data.user.id
+                    , "name": data.user.name
+                    , "typeofuser": data.user.typeofuser
                 }
                 setCookie('user', JSON.stringify(user), 1);
                 window.location.href = base_url + "profile-edit";
@@ -450,6 +451,7 @@
         eraseCookie('user');
         console.log('logged out');
     });
+
 </script>
 
 @endsection
