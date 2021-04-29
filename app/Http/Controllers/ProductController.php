@@ -493,7 +493,7 @@ class ProductController extends Controller
             $sortOrder = "asc";
         }
         $product = Product::where('deleted_at',null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
-        return $request->all();
+        
         if(isset($request->delete)){
            
            $product=  Product::find($request->id);
