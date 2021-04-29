@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\EjackController;
@@ -112,6 +113,7 @@ Route::resource('tablebooking', TableBookingController::class);
     Route::resource('support', SupportController::class);
     Route::resource('tabletimeslots', SchedTimeController::class);
     Route::resource('users', UserController::class);
+    Route::resource('cart', CartController::class);
     Route::resource('orders', OrderController::class);
     Route::post('deleteproduct',[ProductController::class,'deleteproduct']);
     Route::resource('products', ProductController::class);
