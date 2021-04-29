@@ -35,8 +35,8 @@ class ProductController extends Controller
                     return Product::where('deleted_at',null)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->get();
                 }
                 if(isset($request->id)){
-                    return Product::where('id',$request->id)->with(['sizes'=>function(){
-                        return $this->with(['color']);
+                    return Product::where('id',$request->id)->with(['sizes'=>function($sizes){
+                        return $sizes->with(['color']);
                     }, 'addons', 'images', 'designer'])->first();
 
                 }
