@@ -511,19 +511,33 @@ class ProductController extends Controller
         if (isset($request->products)) {
             $arr= array();
             // This is used for fetch products for array
-            foreach($request->products as $requestproduct){
-                if(isset($requestproduct->size) && $requestproduct->size!=null){
-
-                    
-                  
-                    
-
-                 
+            foreach($request->product as $requestproduct){
+                if(isset($requestproduct['color'])){
+                    $color= Color::find($requestproduct['color']);
+                    if($color->stock > 0){
+                        array_push($arr,$requestproduct['id']);
+                    }
                 }
-               $p= Product::find($requestproduct);
-               if($p->stocks > 0){
-                array_push($arr,$p->id);
-               }     
+                else{
+                    if( !isset($requestproduct['color']) && isset($requestproduct['size'])){
+                        $size= Size::find($requestproduct['stocks']);
+                    if($size->stocks > 0){
+                        array_push($arr,$requestproduct['id']);
+                    }
+
+                    }
+
+                    if( !isset($requestproduct['color']) && !isset($requestproduct['size'])){
+                        $product= Product::find($requestproduct['id']);
+                    if($product->stocks > 0){
+                        array_push($arr,$requestproduct['id']);
+                    }
+
+                    }
+
+                }
+               
+              
             }
             return $arr;
             $product = $product->whereIn("id", $request->products);
