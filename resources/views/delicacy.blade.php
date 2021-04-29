@@ -238,7 +238,7 @@
     }
 
     .panel-body:hover {
-        border: 2px solid rgb(43, 133, 75);
+
         cursor: pointer;
     }
 
@@ -320,9 +320,8 @@
     }
 
     .user-select {
-        filter: opacity(0.5) drop-shadow(0 0 0 green);
+
         border-radius: 30px;
-        border: 2px solid #288248;
     }
 
     .day-select {
@@ -337,7 +336,9 @@
 
 <input type="hidden" id="shopid" value={{$shop->id}}>
 <input type="hidden" id="shopname" value="{{$shop->name_en}}">
-<div class="heading-banner-area overlay-bg" style="background: url('img/store/SADA/Dine Banner.png') no-repeat scroll center center / cover;margin: 0 5%;">
+<input type="hidden" id="secondary" value={{$style->secondary}}>
+<input type="hidden" id="primary" value={{$style->primary}}>
+<div class="heading-banner-area overlay-bg" style="background: url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -527,7 +528,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="panel panel-default" style="border: none;">
-                    <div class="panel-body" id="delicacy-opt1" onclick="renderBookTable()">
+                    <div class="panel-body" id="delicacy-opt1" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="renderBookTable()">
 
                     </div>
                     <div class="panel-footer delecacy-opt-text">
@@ -536,7 +537,7 @@
             </div>
             <div class=" col-lg-6 col-md-6 col-sm-12">
                 <div class="panel panel-default" style="border: none;">
-                    <div class="panel-body" id="delicacy-opt2" onclick="loadProducts()">
+                    <div class="panel-body" id="delicacy-opt2" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="loadProducts()">
 
                     </div>
                     <div class="panel-footer delecacy-opt-text">
@@ -562,10 +563,13 @@
         $(".active").css("background-color", "black");
         const shop_id = $('#shopid').val();
         const shop_name = $('#shopname').val();
-        makeShopActive(shop_id, color = "#2b854b");
-
-        document.getElementById('breadcrumbshopname2').innerHTML = shop_name;
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        makeShopActive(shop_id, secondary_color);
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname2').style.color = secondary_color;
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
+
     });
 </script>
 
@@ -583,8 +587,11 @@
         var title = document.getElementsByClassName('category-name');
         for (var i = 0; i < title.length; i++) {
             title[i].classList.remove('category-active');
+            title[i].style.color = "black"
         }
         element.querySelector('h2').classList.add('category-active');
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        element.querySelector('h2').style.color = primary_color;
 
     }
 
@@ -630,11 +637,24 @@
         });
     }
 
+    function mouseHover(ele) {
+        // $('.panel-body:hover').css('border', '2px solid rgb(43, 133, 75)')
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        ele.style.border = '2px solid ' + secondary_color;
+        ele.nextSibling.nextSibling.style.color = secondary_color;
+    }
+
+    function mouseOut(ele) {
+        ele.style.border = 'none'
+        ele.nextSibling.nextSibling.style.color = '#b9aeae';
+    }
+
     // For rendering products in product panel
     function renderProduct(data) {
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'storage/products/'
         let prod_element = ''
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
         data.forEach(element => {
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
@@ -649,7 +669,7 @@
                 "<div class='product-info clearfix'>" +
                 "<div class='fix'>" +
                 "<h4 class='post-title floatcenter feattitle'><a href='/product/" + element.product_id + "'>" + element.name_en + "</a></h4>" +
-                "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
+                "<p style='color:" + primary_color + "'class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
                 "</div>"
@@ -763,9 +783,15 @@
     }
 
     function userNumber(ele, n) {
+
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+
+        $('.user-select').css("filter", "opacity(0.5) drop-shadow(0 0 0 " + secondary_color + ")");
         $(".nuser-table").removeClass("user-select");
         $("#booking-st2").css("visibility", "hidden");
         $("#booking-st3").css("visibility", "hidden");
+
+
         ele.classList.add("user-select");
         $("#booking-st2").css("visibility", "visible");
     }
