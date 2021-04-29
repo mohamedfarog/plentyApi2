@@ -294,8 +294,7 @@
         display: inline-block;
         justify-content: center;
         align-items: center;
-        background-color: #288248;
-        color: white;
+        color: black;
         margin: 10px;
         border-radius: 30px;
         padding: 20px;
@@ -303,6 +302,7 @@
     }
 
     .time-slot-card:hover {
+        box-shadow: 0px 0px 5px 3px #d3d3d3;
         cursor: pointer;
     }
 
@@ -314,9 +314,9 @@
     }
 
     .nuser-table:hover {
-        filter: opacity(0.5) drop-shadow(0 0 0 green);
+
         border-radius: 30px;
-        border: 2px solid #288248;
+
     }
 
     .user-select {
@@ -330,6 +330,7 @@
 
     .slot-select {
         box-shadow: 0px 0px 5px 3px #d3d3d3;
+        color: white;
     }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
@@ -502,10 +503,10 @@
     <section id="book-table" style="margin: auto;width:90%;text-align:center;margin-top:100px;margin-bottom:100px;display:none">
         <div class="row" id="booking-st1">
             <h4 style="margin-bottom:50px;">Please select the number of people </h4>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
         </div>
 
         <div class="row" style="margin-top:100px;visibility: hidden;" id="booking-st2">
@@ -649,6 +650,16 @@
         ele.nextSibling.nextSibling.style.color = '#b9aeae';
     }
 
+    function mouseOutUser(ele) {
+        ele.style.border = "none";
+    }
+
+    function mouseHoverUser(ele) {
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        ele.style.border = "2px solid " + secondary_color;
+
+    }
+
     // For rendering products in product panel
     function renderProduct(data) {
         var base_url = $('meta[name=base_url]').attr('content');
@@ -767,7 +778,9 @@
         for (var i = 0; i < 10; i++) {
             template = template + "<div  class='time-slot-card' onclick='slotSelected(this," + 1 + ")'><div>" +
                 "10:20" +
-                "</div><div>" +
+                "</div>" +
+                "<div> to </div>" +
+                "<div>" +
                 "10:40" +
                 "</div></div>"
         }
@@ -776,17 +789,25 @@
     }
 
     function slotSelected(ele, n) {
-        console.log(ele)
+
         $(".time-slot-card").removeClass("slot-select");
+        var eles = document.getElementsByClassName("time-slot-card")
+        for (var i = 0; i < eles.length; i++) {
+            eles[i].style.backgroundColor = "white";
+        }
         ele.classList.add("slot-select");
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        ele.style.backgroundColor = secondary_color;
 
     }
 
     function userNumber(ele, n) {
-
+        var eles = document.getElementsByClassName("nuser-table")
+        for (var i = 0; i < eles.length; i++) {
+            eles[i].style.filter = "none";
+        }
         var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
-
-        $('.user-select').css("filter", "opacity(0.5) drop-shadow(0 0 0 " + secondary_color + ")");
+        ele.style.filter = "opacity(0.5) drop-shadow(0 0 0 " + secondary_color + ")";
         $(".nuser-table").removeClass("user-select");
         $("#booking-st2").css("visibility", "hidden");
         $("#booking-st3").css("visibility", "hidden");
@@ -794,6 +815,7 @@
 
         ele.classList.add("user-select");
         $("#booking-st2").css("visibility", "visible");
+
     }
 
     function getTableTimeSlot() {
