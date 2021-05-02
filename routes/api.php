@@ -84,15 +84,15 @@ Route::get('analytics', function (Request $request) {
 
     $period = now()->subMonths($earningmonths)->monthsUntil(now());
 
-    $data = [];
+    $earningdata = [];
     foreach ($period as $date) {
         $earning =  Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
-        $data[$date->shortMonthName] =
+        $earningdata[$date->shortMonthName] =
             $earning;
     }
-    return $data;
 
-    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands]);
+
+    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands,'earninggraph'=>$earningdata]);
 });
 Route::get('events', [EventController::class, 'index']);
 Route::get('eventshops', [EventcatController::class, 'index']);
