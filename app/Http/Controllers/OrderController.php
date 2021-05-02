@@ -12,7 +12,10 @@ use App\Models\Tier;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -24,6 +27,17 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+
+    {
+
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+
+    }
     public function index(Request $request)
     {
         $dt = Carbon::now();
