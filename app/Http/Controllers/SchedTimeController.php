@@ -60,7 +60,7 @@ class SchedTimeController extends Controller
             $arr= array();
           
             foreach($tables as $table){
-                if($table->timeslots!=null){
+                if(count($table->timeslots)>0){
                     $table['bookingcount']= count($table->timeslots);
                     array_push($arr,$table);
                 }
