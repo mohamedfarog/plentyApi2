@@ -71,6 +71,13 @@ Route::post('loyality/redeem', [FoodicsController::class, 'loyalityRedeem']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('analytics',function (Request $request){
+    $users = User::where('typeofuser',"U")->get()->count();
+    $earnings = Order::sum('total_amount')->where('order_status', 3);
+
+    return response()->json(['users'=>$users,'earnings'=>$earnings]);
+});
 Route::get('events', [EventController::class, 'index']);
 Route::get('eventshops', [EventcatController::class, 'index']);
 Route::get('eventproducts', [ProductController::class, 'getProducts']);
