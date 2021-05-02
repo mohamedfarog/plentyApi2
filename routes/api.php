@@ -93,6 +93,7 @@ Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
 Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
+Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
 Route::resource('tablebooking', TableBookingController::class);
 
@@ -112,7 +113,7 @@ Route::resource('tablebooking', TableBookingController::class);
     Route::resource('shops',ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
-    Route::resource('tabletimeslots', SchedTimeController::class);
+    
     Route::resource('users', UserController::class);
     Route::resource('cart', CartController::class);
     Route::resource('orders', OrderController::class);

@@ -45,6 +45,7 @@ class TableBookingController extends Controller
         $order = '';
         $msg = '';
         if (isset($request->id)) {
+            //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
             $order = TableBooking::where('id', $request->id)->first();
             switch ($request->action) {
                 case 'delete':
