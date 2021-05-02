@@ -48,7 +48,7 @@ class SchedTimeController extends Controller
         //If it is today, then we return the timeslots existing in the database
         
 
-        if($istoday==true){
+        if($istoday==true || $istoday=='true'){
       //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
 
 
