@@ -66,10 +66,11 @@
 
     function renderFavourites() {
 
-        let favourites = getFavouritesLocal().favourite_items
+        let favourites = getFavouritesLocal().favourite_items;
         var base_url = $('meta[name=base_url]').attr('content');
-        url = base_url + 'storage/products/'
-        let prod_element = ''
+        url = base_url + 'storage/products/';
+        let prod_element = '';
+
         favourites.forEach(element => {
 
             prod_element +=
@@ -89,10 +90,10 @@
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 '<div class="fix featlineicons">' +
-                '<span class="pro-price floatleft" onclick="MakeFavourite(' + element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
+                `<span class="pro-price floatleft" onclick="MakeFavourite(this,${element.id})"><img class="featicons" src="img/nav/fav2.png" loading=lazy>` +
                 '</span>' +
                 '</a>' +
-                '<a href="/product/' + element.product_id + '"><span class="pro-rating floatright">' +
+                `<a href='/product/${element.id}'><span class="pro-rating floatright">` +
                 '<img class="featicons" src="img/nav/bag.png" loading=lazy>' +
                 '</span>' +
                 '</a>' +

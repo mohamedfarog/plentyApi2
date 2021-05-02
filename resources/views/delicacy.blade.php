@@ -661,7 +661,6 @@
         ele.style.border = "2px solid " + secondary_color;
 
     }
-
     // For rendering products in product panel
     function renderProduct(data) {
         var base_url = $('meta[name=base_url]').attr('content');
