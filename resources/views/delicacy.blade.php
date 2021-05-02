@@ -770,6 +770,7 @@
         console.log(day, month + 1, year);
         $("#booking-st3").css("visibility", "visible");
         renderTimeSlot();
+        getTableTimeSlot();
     }
 
     function renderTimeSlot() {
@@ -819,7 +820,19 @@
     }
 
     function getTableTimeSlot() {
+        var base_url = $('meta[name=base_url]').attr('content');
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'api/tabletimeslots' + category,
+            dataType: 'JSON',
+            success: function(data) {
+                console.log(data);
 
+            },
+            error: function(err) {
+                console.log('Error!', err)
+            },
+        });
     }
 </script>
 <script src="js/prodjs.js"></script>
