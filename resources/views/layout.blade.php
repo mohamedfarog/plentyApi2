@@ -168,6 +168,9 @@
         }
 
         @media only screen and (max-width: 600px) {
+            .loader {
+                left: 45%;
+            }
 
             .footer-widgets {
                 padding: 0;
@@ -237,7 +240,7 @@
                                 <div class="logo-container">
                                     <div class="logo-wrap">
                                         <a href="/">
-                                            <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
+                                            <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:100%;">
                                         </a>
                                     </div>
                                 </div>
