@@ -26,11 +26,11 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $dt = new DateTime();
+        $dt = Carbon::now();
          $user = Auth::user();
         if(isset($request->shop_id)){
             
-        return Order::whereDate('created_at',date(Carbon::now()))->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
+        return Order::whereDate('created_at',$dt->toDateString())->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
