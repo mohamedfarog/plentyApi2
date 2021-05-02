@@ -100,6 +100,10 @@
     }
 
     @media only screen and (max-width: 600px) {
+        .checkoutbtn {
+            margin-top: 20px;
+        }
+
         .tablemobile {
             width: 95% !important;
         }
@@ -179,7 +183,7 @@
 
 
                                 <a href="/brands" class="btn btn-lg  chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="">add item</span></a>
-                                <div class="wc-proceed-to-checkout checkoutbtn">
+                                <div class="wc-proceed-to-checkout checkoutbtn" style="margin-left:0;">
                                     <a onclick="proceedCheckout()" class="btn btn-lg btn-dark chkbtn procchks"><span class="proceedbtnz">proceed to checkout</span></a>
                                 </div>
                             </div>

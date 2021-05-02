@@ -12,7 +12,10 @@ use App\Models\Tier;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -24,18 +27,48 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+
+    {
+
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+
+    }
+
+
     public function index(Request $request)
     {
         $dt = Carbon::now();
         
          $user = Auth::user();
+         $shopid=$request->shop_id;
         if(isset($request->shop_id)){
+            $orders= Order::with(['details' => function ($details) use($shopid) {
+                return $details->where('shop_id',$shopid)->with(['product' => function ($product) {
+                    return $product->with(['images']);
+                }, 'size', 'color']);
+            }, 'user','details'=>function($details) use($dt){
+                  return $details->whereDate('created_at', '=',$dt->toDateString());
+            }])->get();
+            $arr= array();
+            foreach($orders as $order){
+              
+                if(count($order->details)>0){
+                        
+                         array_push($arr,$order->details);
+                    
+                   
+                    
+                }
+            }
+            $data = $this->paginate($arr);
             
-        return Order::whereDate('created_at', '=',$dt->toDateString())->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
-            return $details->with(['product' => function ($product) {
-                return $product->with(['images']);
-            }, 'size', 'color']);
-        }, 'user']);
+            
+
         }
  
         $orders = Order::with(['details' => function ($details) {
