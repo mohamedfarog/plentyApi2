@@ -78,6 +78,8 @@ Route::get('analytics',function (Request $request){
     $sales = Order::where('order_status', 3)->get()->count();
     $brands = Shop::whereNotNull('cat_id')->where('active',1)->get()->count();
 
+    #
+
     return response()->json(['users'=>$users,'earnings'=>$earnings, 'sales'=>$sales, 'brands'=>$brands]);
 });
 Route::get('events', [EventController::class, 'index']);

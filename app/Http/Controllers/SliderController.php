@@ -48,6 +48,7 @@ class SliderController extends Controller
         {
 
             $slider = new Slider();
+            $newslider= Slider::where('id', $request->id)->first();
             if (isset($request->id))
                 $slider = Slider::where('id', $request->id)->first();
     
@@ -66,10 +67,11 @@ class SliderController extends Controller
                         $slider->location = $request->location;
                     }
                     $slider->save();
-                    
+                    $newslider = Slider::with('shop')->where('id',$slider->id)->first();
                     break;
             }
-            return $slider;
+            
+            return $newslider;
         }
         return response()->json(['error' =>'You don\'t have permission to access this resource'],400);
 
