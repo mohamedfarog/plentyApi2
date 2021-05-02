@@ -72,15 +72,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('analytics',function (Request $request){
-    $users = User::where('typeofuser',"U")->get()->count();
+Route::get('analytics', function (Request $request) {
+    $users = User::where('typeofuser', "U")->get()->count();
     $earnings = Order::where('order_status', 3)->sum('total_amount');
     $sales = Order::where('order_status', 3)->get()->count();
-    $brands = Shop::whereNotNull('cat_id')->where('active',1)->get()->count();
+    $brands = Shop::whereNotNull('cat_id')->where('active', 1)->get()->count();
+    $earningmonths = 1;
+    if(isset($request->earning_months)){
+        $earningmonths = $request->earning_months;
+    }
 
-    #
+    $period = now()->subMonths($earningmonths)->monthsUntil(now());
 
-    return response()->json(['users'=>$users,'earnings'=>$earnings, 'sales'=>$sales, 'brands'=>$brands]);
+    $data = [];
+    foreach ($period as $date) {
+        $data[] = [
+            'month' => $date->shortMonthName,
+            'year' => $date->year,
+        ];
+    }
+    return $data;
+
+    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands]);
 });
 Route::get('events', [EventController::class, 'index']);
 Route::get('eventshops', [EventcatController::class, 'index']);
@@ -106,7 +119,7 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
-Route::resource('tablebooking', TableBookingController::class);
+    Route::resource('tablebooking', TableBookingController::class);
 
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
@@ -119,18 +132,18 @@ Route::resource('tablebooking', TableBookingController::class);
     Route::post('eventshopregister', [UserController::class, 'vendorsRegister']);
     Route::post('eventcatadd', [EventCatController::class, 'eventcatadd']);
     Route::post('toggleFeatured', [ProductController::class, 'toggleFeatured']);
-    
+
     Route::post('invitation', [AccessController::class, 'invite']);
-    Route::resource('shops',ShopController::class);
+    Route::resource('shops', ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
-    
+
     Route::resource('users', UserController::class);
     Route::resource('cart', CartController::class);
     Route::resource('orders', OrderController::class);
-    Route::post('deleteproduct',[ProductController::class,'deleteproduct']);
+    Route::post('deleteproduct', [ProductController::class, 'deleteproduct']);
     Route::resource('products', ProductController::class);
-    Route::post('autogenerateslots',[SchedTimeController::class,'autogenerateslots']);
+    Route::post('autogenerateslots', [SchedTimeController::class, 'autogenerateslots']);
     Route::post('searchProduct', [ProductController::class, "search"]); // This is currently working for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
