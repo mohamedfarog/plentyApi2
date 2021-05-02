@@ -35,7 +35,7 @@ class OrderController extends Controller
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
-        }, 'user']);
+        }, 'user'])->get();
         }
  
         $orders = Order::with(['details' => function ($details) {
