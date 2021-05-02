@@ -22,4 +22,9 @@ class Shoptable extends Model
     {
         return $this->belongsTo(Zone::class);
     }
+
+    public function timeslots()
+    {
+        return $this->hasMany(SchedTime::class,'table_id','id');
+    }
 }

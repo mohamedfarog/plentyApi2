@@ -49,11 +49,29 @@ class SchedTimeController extends Controller
         
 
         if($istoday==true){
-          
+      //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
 
-            $tables= Shoptable::where('capacity',$request->capacity)
+
+            $tables= Shoptable::with(['timeslots'=>function($timeslots){
+                return $timeslots->where('booked',0);
+            }])->where('capacity',$request->capacity)
             ->orWhere('capacity',($request->capacity+1))
-            ->first();
+            ->get();
+            $arr= array();
+          
+            foreach($tables as $table){
+                if($table->timeslots!=null){
+                    $table['bookingcount']= count($table->timeslots);
+                    array_push($arr,$table);
+                }
+            }
+            $newarr= array_column($arr, 'bookingcount');
+
+            array_multisort($newarr, SORT_DESC, $arr);
+            return $arr;
+
+            
+
             if($tables){
                     $tablebookings= TableBooking::where('date',$request->date)->get();
                     $schedtimes= SchedTime::where('booked',0)->get();
