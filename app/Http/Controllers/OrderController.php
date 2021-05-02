@@ -30,7 +30,7 @@ class OrderController extends Controller
          $user = Auth::user();
         if(isset($request->shop_id)){
             
-        return Order::whereDate('created_at',Carbon::now()->format('Y-m-d'))->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
+        return Order::whereDate('created_at',date(Carbon::now()))->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
