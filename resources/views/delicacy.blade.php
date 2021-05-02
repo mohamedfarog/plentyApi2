@@ -156,69 +156,6 @@
         margin-bottom: 20px;
     }
 
-    @media only screen and (max-width: 600px) {
-        .catmobile {
-            font-size: 16px;
-        }
-
-        .tabprod {
-            display: block !important;
-        }
-
-        .frame {
-            width: 400px;
-        }
-
-        .wholemobile {
-            width: 100% !important;
-        }
-
-        .tablinkprod {
-            width: 100% !important;
-        }
-
-        .heading-banner-area {
-            margin: 0 !important;
-        }
-
-        .buttonmobile {
-            height: 60px;
-        }
-
-
-        .shoplistmobile>button {
-            flex: 25%;
-            height: 100% !important;
-        }
-
-        .shoplistmobile {
-            height: 100%;
-        }
-
-        .mobiletabs {
-            display: block;
-
-        }
-
-        .shoplistmobiletabs>button {
-            flex: 100%;
-            height: 100% !important;
-        }
-
-        .owlmobile {
-            height: 100% !important;
-        }
-
-        .dinebtn {
-            width: 100% !important;
-        }
-
-        section.wholetabs {
-            width: 100%;
-            margin: auto;
-        }
-    }
-
 
     .delecacy-opt-text {
         border: none;
@@ -244,10 +181,12 @@
 
     #delicacy-opt2 {
         background-image: url('img/booking/pick-up.png');
+        margin-bottom:50px;
     }
 
     #delicacy-opt1 {
         background-image: url('img/booking/table.png');
+        margin-bottom:50px;
     }
 
 
@@ -332,6 +271,95 @@
         box-shadow: 0px 0px 5px 3px #d3d3d3;
         color: white;
     }
+    .bookpickup{
+        width:50%;
+    }
+    @media only screen and (max-width: 600px) {
+        .bookpickup{
+            width:50%;
+            float:left;
+        }
+        .panel-body { 
+            height: 200px;
+        }
+        .catmobile {
+            font-size: 16px;
+        }
+         #delicacy-opt2 {
+            background-image: url('img/booking/pick-up.png');
+            margin-bottom:50px;
+            width:100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        #delicacy-opt1 {
+            background-image: url('img/booking/table.png');
+            margin-bottom:50px;
+            width:100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .tabprod {
+            display: block !important;
+        }
+
+        .frame {
+            width: 400px;
+        }
+
+        .wholemobile {
+            width: 100% !important;
+        }
+
+        .tablinkprod {
+            width: 100% !important;
+        }
+
+        .heading-banner-area {
+            margin: 0 !important;
+        }
+
+        .buttonmobile {
+            height: 60px;
+        }
+
+
+        .shoplistmobile>button {
+            flex: 25%;
+            height: 100% !important;
+        }
+
+        .shoplistmobile {
+            height: 100%;
+        }
+
+        .mobiletabs {
+            display: block;
+
+        }
+
+        .shoplistmobiletabs>button {
+            flex: 100%;
+            height: 100% !important;
+        }
+
+        .owlmobile {
+            height: 100% !important;
+        }
+
+        .dinebtn {
+            width: 100% !important;
+        }
+
+        section.wholetabs {
+            width: 100%;
+            margin: auto;
+        }
+    }
+
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -552,7 +580,7 @@
 
     <section id="switch-delecacy" style="margin: auto;width:90%;text-align:center;margin-top:100px;margin-bottom:100px">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 bookpickup">
                 <div class="panel panel-default" style="border: none;">
                     <div class="panel-body" id="delicacy-opt1" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="renderBookTable()">
 
@@ -561,7 +589,7 @@
                         Book Table</div>
                 </div>
             </div>
-            <div class=" col-lg-6 col-md-6 col-sm-12">
+            <div class=" col-lg-6 col-md-6 col-sm-6 bookpickup">
                 <div class="panel panel-default" style="border: none;">
                     <div class="panel-body" id="delicacy-opt2" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="loadProducts()">
 
