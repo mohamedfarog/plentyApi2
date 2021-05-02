@@ -32,7 +32,18 @@
         font-weight: 100;
     }
 
+    .contm {
+        width: 1000px;
+        text-align: center;
+        margin: auto;
+    }
+
     @media only screen and (max-width: 600px) {
+        .contm {
+            width: 90%;
+            text-align: center;
+            margin: auto;
+        }
 
         .cccategory {
             width: 100%;
@@ -58,6 +69,7 @@
         color: #001b71;
         font-size: 20px;
     }
+
 </style>
 
 <!-- Hero Slider -->
@@ -274,7 +286,7 @@
         </div>
     </div>
 </section> <!-- end trendy products -->
-<section class="regular slider" style="width:90%;text-align:center;margin:auto">
+<section class="regular slider contm" style="">
     @if(isset($featured_products))
     @foreach($featured_products as $product)
 
@@ -340,7 +352,7 @@
     </div>
 </div>
 
-<section class="brandsslider slider" style="width:90%;text-align:center;margin:auto">
+<section class="brandsslider slider contm">
     @if(isset($homebrands))
     @foreach($homebrands as $hb)
     <?php
@@ -446,8 +458,10 @@
 
 
     });
+
 </script>
 <div style="">
     @include('footer')
 </div>
 @endsection
+
