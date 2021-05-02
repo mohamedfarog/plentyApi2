@@ -332,6 +332,7 @@
         box-shadow: 0px 0px 5px 3px #d3d3d3;
         color: white;
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -572,6 +573,7 @@
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
 
     });
+
 </script>
 
 <script>
@@ -603,10 +605,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -624,10 +626,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'best-seller/' + shop_id,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'best-seller/' + shop_id
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -659,7 +661,6 @@
         ele.style.border = "2px solid " + secondary_color;
 
     }
-
     // For rendering products in product panel
     function renderProduct(data) {
         var base_url = $('meta[name=base_url]').attr('content');
@@ -682,10 +683,24 @@
                 "<h4 class='post-title floatcenter feattitle'><a href='/product/" + element.product_id + "'>" + element.name_en + "</a></h4>" +
                 "<p style='color:" + primary_color + "'class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
+                
+                '<div class="fix featlineicons">' +
+                '<span class="pro-price floatleft" onclick="MakeFavourite('+ element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
+                '</span>' +
+                '</a>' +
+                '<a href="/product/' + element.product_id + '"><span class="pro-rating floatright">' +
+                '<img class="featicons" src="img/nav/bag.png" loading=lazy>' +
+                '</span>' +
+                '</a>' +
+                '</div>' +
                 "</div>" +
                 "</div>"
 
         });
+
+
+
+
         document.getElementById('product-panel').innerHTML = prod_element
         $('.buttonsshow').css({
             'visibility': 'hidden'
@@ -770,6 +785,7 @@
         console.log(day, month + 1, year);
         $("#booking-st3").css("visibility", "visible");
         renderTimeSlot();
+        getTableTimeSlot();
     }
 
     function renderTimeSlot() {
@@ -785,7 +801,6 @@
                 "</div></div>"
         }
         document.getElementById("time-slot").innerHTML = template;
-
     }
 
     function slotSelected(ele, n) {
@@ -819,10 +834,24 @@
     }
 
     function getTableTimeSlot() {
+        var base_url = $('meta[name=base_url]').attr('content');
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'api/tabletimeslots' + category,
+            dataType: 'JSON',
+            success: function(data) {
+                console.log(data);
 
+            },
+            error: function(err) {
+                console.log('Error!', err)
+            },
+        });
     }
+
 </script>
 <script src="js/prodjs.js"></script>
 
 
 @endsection
+

@@ -32,6 +32,7 @@
             width: 100%;
         }
     }
+
 </style>
 
 <!-- Featured Product -->
@@ -64,11 +65,12 @@
     });
 
     function renderFavourites() {
-         
-        let favourites = getFavouritesLocal().favourite_items
+
+        let favourites = getFavouritesLocal().favourite_items;
         var base_url = $('meta[name=base_url]').attr('content');
-        url = base_url + 'storage/products/'
-        let prod_element = ''
+        url = base_url + 'storage/products/';
+        let prod_element = '';
+
         favourites.forEach(element => {
 
             prod_element +=
@@ -87,6 +89,15 @@
                 `<h4 class='post-title floatcenter feattitle'><a href='product/${element.id}'>` + element.name_en + "</a></h4>" +
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
+                '<div class="fix featlineicons">' +
+                `<span class="pro-price floatleft" onclick="MakeFavourite(this,${element.id})"><img class="featicons" src="img/nav/fav2.png" loading=lazy>` +
+                '</span>' +
+                '</a>' +
+                `<a href='/product/${element.id}'><span class="pro-rating floatright">` +
+                '<img class="featicons" src="img/nav/bag.png" loading=lazy>' +
+                '</span>' +
+                '</a>' +
+                '</div>' +
                 "</div>" +
                 "</div>"
         });
@@ -96,5 +107,7 @@
         });
 
     }
+
 </script>
 @endsection
+

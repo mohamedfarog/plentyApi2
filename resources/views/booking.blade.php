@@ -896,3 +896,4 @@
     @include('footer')
 </div>
 @endsection
+

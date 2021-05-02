@@ -29,6 +29,7 @@
             width: 95%;
         }
     }
+
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -161,6 +162,7 @@
             });
         });
     });
+
 </script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
