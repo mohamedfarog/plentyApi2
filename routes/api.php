@@ -86,9 +86,9 @@ Route::get('analytics', function (Request $request) {
 
     $data = [];
     foreach ($period as $date) {
+       $earning=  Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
         $data[] = [
-            'month' => $date->shortMonthName,
-            'year' => $date->year,
+            $date->shortMonthName => $earning,
         ];
     }
     return $data;
