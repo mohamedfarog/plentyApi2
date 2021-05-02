@@ -181,12 +181,12 @@
 
     #delicacy-opt2 {
         background-image: url('img/booking/pick-up.png');
-        margin-bottom:50px;
+        margin-bottom: 50px;
     }
 
     #delicacy-opt1 {
         background-image: url('img/booking/table.png');
-        margin-bottom:50px;
+        margin-bottom: 50px;
     }
 
 
@@ -271,32 +271,48 @@
         box-shadow: 0px 0px 5px 3px #d3d3d3;
         color: white;
     }
-    .bookpickup{
-        width:50%;
+
+    .bookpickup {
+        width: 50%;
     }
+
     @media only screen and (max-width: 600px) {
-        .bookpickup{
-            width:50%;
-            float:left;
+        .coluser {
+            width: 100px;
+            height: 100px;
+            float: left;
+            padding: 0;
         }
-        .panel-body { 
+
+        .nuser-table {
+            padding: 0;
+        }
+
+        .bookpickup {
+            width: 50%;
+            float: left;
+        }
+
+        .panel-body {
             height: 200px;
         }
+
         .catmobile {
             font-size: 16px;
         }
-         #delicacy-opt2 {
+
+        #delicacy-opt2 {
             background-image: url('img/booking/pick-up.png');
-            margin-bottom:50px;
-            width:100%;
+            margin-bottom: 50px;
+            width: 100%;
             background-size: contain;
             background-repeat: no-repeat;
         }
 
         #delicacy-opt1 {
             background-image: url('img/booking/table.png');
-            margin-bottom:50px;
-            width:100%;
+            margin-bottom: 50px;
+            width: 100%;
             background-size: contain;
             background-repeat: no-repeat;
         }
@@ -358,7 +374,6 @@
             margin: auto;
         }
     }
-
 
 </style>
 <link rel="stylesheet" href="css/hurst.css">
@@ -554,11 +569,13 @@
         <input type="hidden" id="pref-time" value="">
         <div class="row" id="booking-st1">
             <h4 style="margin-bottom:50px;">Please select the number of people </h4>
-            <input type="hidden" id="usercount" value="1">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
+            <div class="row" style="text-align: center;margin-left: auto;margin-right: auto;">
+                <input type="hidden" id="usercount" value="1">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
+            </div>
         </div>
 
         <div class="row" style="margin-top:100px;visibility: hidden;" id="booking-st2">
@@ -625,6 +642,7 @@
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
 
     });
+
 </script>
 
 <script>
@@ -656,10 +674,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -677,10 +695,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'best-seller/' + shop_id,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'best-seller/' + shop_id
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -906,29 +924,29 @@
     function getTableTimeSlot(day, istoday, shop_id, capacity) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'POST',
-            url: base_url + 'api/tabletimeslots',
-            data: {
-                day: day,
-                istoday: istoday,
-                shop_id: shop_id,
-                capacity: capacity
-            },
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'POST'
+            , url: base_url + 'api/tabletimeslots'
+            , data: {
+                day: day
+                , istoday: istoday
+                , shop_id: shop_id
+                , capacity: capacity
+            }
+            , dataType: 'JSON'
+            , success: function(data) {
                 renderTimeSlot(data);
 
-            },
-            statusCode: {
+            }
+            , statusCode: {
                 400: function(data) {
                     showAlertError(data.responseJSON["Error"])
                     renderTimeSlot([]);
                 }
-            },
-            error: function(err) {
+            }
+            , error: function(err) {
                 console.log('Error!', err)
-            },
-        });
+            }
+        , });
     }
 
     function bookTable() {
@@ -944,27 +962,27 @@
             const table_id = $("#table-id").val();
             if (parseInt(table_id) > 0) {
                 $.ajax({
-                    type: 'POST',
-                    url: base_url + 'api/tablebooking',
-                    data: {
-                        date: formated_date,
-                        preftime: fromtime,
-                        table_id: table_id,
-                    },
-                    headers: {
+                    type: 'POST'
+                    , url: base_url + 'api/tablebooking'
+                    , data: {
+                        date: formated_date
+                        , preftime: fromtime
+                        , table_id: table_id
+                    , }
+                    , headers: {
                         "Authorization": 'Bearer ' + bearer_token
-                    },
-                    dataType: 'JSON',
-                    success: function(data) {
+                    }
+                    , dataType: 'JSON'
+                    , success: function(data) {
                         console.log(data)
                         if (data.success) {
                             renderOrderSuccess(data);
                         }
-                    },
-                    error: function(err) {
+                    }
+                    , error: function(err) {
                         console.log('Error!', err)
-                    },
-                });
+                    }
+                , });
             } else {
                 showAlertError("Please choose a table!")
             }
@@ -986,8 +1004,10 @@
         document.getElementById("order-success").innerHTML = templates;
 
     }
+
 </script>
 <script src="js/prodjs.js"></script>
 
 
 @endsection
+
