@@ -39,6 +39,7 @@ class OrderController extends Controller
             }])->get()->filter(function($value) {
                 return  $value->details!= null;
             });
+            return $orders;
             
 
         }
