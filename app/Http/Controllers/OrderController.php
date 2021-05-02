@@ -48,9 +48,9 @@ class OrderController extends Controller
          $shopid=$request->shop_id;
         if(isset($request->shop_id)){
             $orders= Order::with(['details' => function ($details) use($shopid) {
-                return $details->with(['product' => function ($product) use($shopid){
+                return $details->where('shop_id',$shopid)->with(['product' => function ($product) {
                     return $product->with(['images']);
-                }, 'size', 'color'])->where('shop_id',$shopid);
+                }, 'size', 'color']);
             }, 'user','details'=>function($details) use($dt){
                   return $details->whereDate('created_at', '=',$dt->toDateString());
             }])->get();
