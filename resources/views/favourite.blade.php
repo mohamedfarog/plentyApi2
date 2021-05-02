@@ -32,6 +32,7 @@
             width: 100%;
         }
     }
+
 </style>
 
 <!-- Featured Product -->
@@ -64,7 +65,7 @@
     });
 
     function renderFavourites() {
-         
+
         let favourites = getFavouritesLocal().favourite_items
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'storage/products/'
@@ -87,6 +88,15 @@
                 `<h4 class='post-title floatcenter feattitle'><a href='product/${element.id}'>` + element.name_en + "</a></h4>" +
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
+                '<div class="fix featlineicons">' +
+                '<span class="pro-price floatleft" onclick="MakeFavourite(' + element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
+                '</span>' +
+                '</a>' +
+                '<a href="/product/' + element.product_id + '"><span class="pro-rating floatright">' +
+                '<img class="featicons" src="img/nav/bag.png" loading=lazy>' +
+                '</span>' +
+                '</a>' +
+                '</div>' +
                 "</div>" +
                 "</div>"
         });
@@ -96,5 +106,7 @@
         });
 
     }
+
 </script>
 @endsection
+
