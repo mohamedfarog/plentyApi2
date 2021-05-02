@@ -56,9 +56,10 @@ class OrderController extends Controller
             }])->get();
             $arr= array();
             foreach($orders as $order){
-                
+                $orderdetails= $order->details;
+                return $orderdetails;
                 if(count($order->details)>0){
-                    if($order->details['shop_id']== $shopid){
+                    if($order->details->shop_id== $shopid){
                          array_push($arr,$order->details);
                     }
                    
@@ -66,7 +67,6 @@ class OrderController extends Controller
                 }
             }
             $data = $this->paginate($arr);
-            return $data;
             
             
 
