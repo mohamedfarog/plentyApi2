@@ -332,13 +332,32 @@
         box-shadow: 0px 0px 5px 3px #d3d3d3;
         color: white;
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
 <input type="hidden" id="shopid" value={{$shop->id}}>
 <input type="hidden" id="shopname" value="{{$shop->name_en}}">
 <input type="hidden" id="secondary" value={{$style->secondary}}>
+<input type="hidden" id="primary" value={{$style->primary}}>
+
+<div id="orderModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="order-success">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <input type="hidden" id="primary" value={{$style->primary}}>
 <div class="heading-banner-area overlay-bg" style="background: url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
@@ -502,8 +521,12 @@
     </div> <!-- end sada -->
 
     <section id="book-table" style="margin: auto;width:90%;text-align:center;margin-top:100px;margin-bottom:100px;display:none">
+        <input type="hidden" id="date-selected" value="">
+        <input type="hidden" id="table-id" value="">
+        <input type="hidden" id="pref-time" value="">
         <div class="row" id="booking-st1">
             <h4 style="margin-bottom:50px;">Please select the number of people </h4>
+            <input type="hidden" id="usercount" value="1">
             <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-3"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
@@ -521,6 +544,7 @@
             <h4 style="margin-bottom:20px;">Select the Time</h4>
             <div id="day-for-table">
                 <div id="time-slot" class="slider"></div>
+                <button id="table-book" class="button-one submit-button" type="button" onclick="bookTable()" style="height: 100%;background:#001b71;">Book Table</button>
             </div>
 
         </div>
@@ -573,7 +597,6 @@
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
 
     });
-
 </script>
 
 <script>
@@ -605,10 +628,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -626,10 +649,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -683,9 +706,9 @@
                 "<h4 class='post-title floatcenter feattitle'><a href='/product/" + element.product_id + "'>" + element.name_en + "</a></h4>" +
                 "<p style='color:" + primary_color + "'class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
-                
+
                 '<div class="fix featlineicons">' +
-                '<span class="pro-price floatleft" onclick="MakeFavourite('+ element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
+                '<span class="pro-price floatleft" onclick="MakeFavourite(' + element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
                 '</span>' +
                 '</a>' +
                 '<a href="/product/' + element.product_id + '"><span class="pro-rating floatright">' +
@@ -780,30 +803,46 @@
     function onDayClick(ele, day, month, year) {
         console.log(ele);
         $(".day-booking").removeClass("day-select");
-
+        DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         ele.childNodes[0].classList.add("day-select");
-        console.log(day, month + 1, year);
+        var date = new Date(year, month, day);
+        $('#date-selected').val(date);
+        var today = new Date();
+        var day = DaysOfWeek[date.getDay()]
+        var istoday = false;
+        if (today.getDate() === date.getDate()) {
+            istoday = true;
+        }
+        const shop_id = $('#shopid').val();
+        var capacity = $('#usercount').val();
+        getTableTimeSlot(day, istoday, shop_id, capacity)
         $("#booking-st3").css("visibility", "visible");
-        renderTimeSlot();
-        getTableTimeSlot();
+
     }
 
-    function renderTimeSlot() {
+    function renderTimeSlot(data) {
         var template = ""
+        if (data.length > 0) {
+            $("#table-book").css("display", "block");
+            $("#table-book").css("margin", "auto");
+        } else {
+            $("#table-book").css("display", "none");
 
-        for (var i = 0; i < 10; i++) {
-            template = template + "<div  class='time-slot-card' onclick='slotSelected(this," + 1 + ")'><div>" +
-                "10:20" +
+        }
+        for (var i = 0; i < data.length; i++) {
+            var fromtime = data[i].fromtime.replace(":", "_")
+            template = template + "<div  class='time-slot-card' onclick='slotSelected(this," + data[i].table_id + "," + fromtime + ")'><div>" +
+                data[i].fromtime +
                 "</div>" +
                 "<div> to </div>" +
                 "<div>" +
-                "10:40" +
+                data[i].totime +
                 "</div></div>"
         }
         document.getElementById("time-slot").innerHTML = template;
     }
 
-    function slotSelected(ele, n) {
+    function slotSelected(ele, table_id, fromtime) {
 
         $(".time-slot-card").removeClass("slot-select");
         var eles = document.getElementsByClassName("time-slot-card")
@@ -811,6 +850,8 @@
             eles[i].style.backgroundColor = "white";
         }
         ele.classList.add("slot-select");
+        $("#table-id").val(table_id)
+        $("#pref-time").val(fromtime)
         var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
         ele.style.backgroundColor = secondary_color;
 
@@ -822,6 +863,7 @@
             eles[i].style.filter = "none";
         }
         var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        $('#usercount').val(n);
         ele.style.filter = "opacity(0.5) drop-shadow(0 0 0 " + secondary_color + ")";
         $(".nuser-table").removeClass("user-select");
         $("#booking-st2").css("visibility", "hidden");
@@ -833,15 +875,27 @@
 
     }
 
-    function getTableTimeSlot() {
+    function getTableTimeSlot(day, istoday, shop_id, capacity) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
             type: 'POST',
-            url: base_url + 'api/tabletimeslots' + category,
+            url: base_url + 'api/tabletimeslots',
+            data: {
+                day: day,
+                istoday: istoday,
+                shop_id: shop_id,
+                capacity: capacity
+            },
             dataType: 'JSON',
             success: function(data) {
-                console.log(data);
+                renderTimeSlot(data);
 
+            },
+            statusCode: {
+                400: function(data) {
+                    showAlertError(data.responseJSON["Error"])
+                    renderTimeSlot([]);
+                }
             },
             error: function(err) {
                 console.log('Error!', err)
@@ -849,9 +903,63 @@
         });
     }
 
+    function bookTable() {
+        const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=base_url]').attr('content');
+        if (bearer_token) {
+            const date = new Date($("#date-selected").val());
+            console.log(date)
+            const preftime = $("#pref-time").val();
+            var fromtime = preftime.toString();
+            let formated_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+            fromtime = fromtime.slice(0, 2) + ":" + fromtime.slice(2);
+            const table_id = $("#table-id").val();
+            if (parseInt(table_id) > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + 'api/tablebooking',
+                    data: {
+                        date: formated_date,
+                        preftime: fromtime,
+                        table_id: table_id,
+                    },
+                    headers: {
+                        "Authorization": 'Bearer ' + bearer_token
+                    },
+                    dataType: 'JSON',
+                    success: function(data) {
+                        console.log(data)
+                        if (data.success) {
+                            renderOrderSuccess(data);
+                        }
+                    },
+                    error: function(err) {
+                        console.log('Error!', err)
+                    },
+                });
+            } else {
+                showAlertError("Please choose a table!")
+            }
+        } else {
+            window.location.replace(base_url + 'login');
+        }
+
+    }
+
+    function renderOrderSuccess(data) {
+        console.log(data)
+        $('#orderModal').modal({
+            show: 'true'
+        });
+        var templates = `
+        <div style="text-align:center">Hi, ${data.user.name}</div>
+        <div style="text-align:center">Table is booked for you at ${data.order.preftime} on ${data.order.date}</div>
+        `
+        document.getElementById("order-success").innerHTML = templates;
+
+    }
 </script>
 <script src="js/prodjs.js"></script>
 
 
 @endsection
-
