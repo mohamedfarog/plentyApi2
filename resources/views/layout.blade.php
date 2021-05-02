@@ -901,6 +901,7 @@
                 this.favourite_items.push(FavouriteItem)
                 showAlertSuccess(`${FavouriteItem.name_en} added to favorites`)
             } else {
+                
                 showAlertError(`${FavouriteItem.name_en} already added to favorites`)
             }
 
