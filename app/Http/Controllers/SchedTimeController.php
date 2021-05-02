@@ -72,7 +72,7 @@ class SchedTimeController extends Controller
 
             
 
-            if($tables){
+            if(count($arr) > 0){
                     $tablebookings= TableBooking::where('date',$request->date)->get();
                     $schedtimes= SchedTime::where('booked',0)->get();
                     
