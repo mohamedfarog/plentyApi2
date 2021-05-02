@@ -74,7 +74,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('analytics',function (Request $request){
     $users = User::where('typeofuser',"U")->get()->count();
-    $earnings = Order::sum('total_amount')->where('order_status', 3);
+    $earnings = Order::where('order_status', 3)->sum('total_amount');
 
     return response()->json(['users'=>$users,'earnings'=>$earnings]);
 });
