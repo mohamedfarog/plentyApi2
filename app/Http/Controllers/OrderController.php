@@ -38,16 +38,19 @@ class OrderController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
 
     }
+
+
     public function index(Request $request)
     {
         $dt = Carbon::now();
         
          $user = Auth::user();
+         $shopid=$request->shop_id;
         if(isset($request->shop_id)){
-            $orders= Order::with(['details' => function ($details) {
-                return $details->with(['product' => function ($product) {
+            $orders= Order::with(['details' => function ($details) use($shopid) {
+                return $details->with(['product' => function ($product) use($shopid){
                     return $product->with(['images']);
-                }, 'size', 'color']);
+                }, 'size', 'color'])->where('shop_id',$shopid);
             }, 'user','details'=>function($details) use($dt){
                   return $details->whereDate('created_at', '=',$dt->toDateString());
             }])->get();
