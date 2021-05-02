@@ -27,7 +27,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $dt = Carbon::now();
-        return $dt->toDateString();
+        
          $user = Auth::user();
         if(isset($request->shop_id)){
             
