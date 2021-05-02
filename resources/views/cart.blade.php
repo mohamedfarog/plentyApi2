@@ -223,14 +223,10 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
-
+                        </table> 
                     </div>
-                </div> <!-- end col cart totals -->
-
-            </div> <!-- end row -->
-
-
+                </div> <!-- end col cart totals --> 
+            </div> <!-- end row --> 
         </div> <!-- end container -->
     </section> <!-- end cart -->
 
@@ -290,36 +286,23 @@
             var cart = CartSerializer(getCartLocal())
             renderCartList()
             document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
-            document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
-
-
-
-
+            document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal() 
 
             $(".cart-plus-button").on('click', function(event) {
                 let id = $(this).attr("id").slice(4);
                 pro_id = id.split("-")[0]
-                size_id = id.split("-")[1]
-
+                size_id = id.split("-")[1] 
                 let stock = parseInt(document.getElementById('stock' + pro_id + "-" + size_id).value);
                 let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
                 console.log(quantity, stock)
                 if (stock > quantity) {
                     if (parseInt(size_id)) {
-
                         cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
-
                         document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
 
-                    } else {
-
+                    } else { 
                         cart.cart_items.find(item => item.id === pro_id).addQuantity();
-
-                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
-
-
-
-
+                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price(); 
                     }
 
                     storeCartLocal(JsonCartSerializer(cart));
@@ -327,10 +310,7 @@
                     document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                 }
 
-            });
-
-
-
+            }); 
             $(".cart-minus-button").on('click', function(event) {
 
                 let id = $(this).attr("id").slice(5);
@@ -396,7 +376,6 @@
 
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
         @include('footer')
-    </div>
-
+    </div> 
     @endsection
 
