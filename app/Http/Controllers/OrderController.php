@@ -11,6 +11,7 @@ use App\Models\ShopInfo;
 use App\Models\Tier;
 use App\Models\User;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -25,11 +26,11 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $user = Auth::user();
+        $dt = new DateTime();
+         $user = Auth::user();
         if(isset($request->shop_id)){
             
-        return Order::whereDate('created_at',date(Carbon::now()))->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
+        return Order::whereDate('created_at',Carbon::now()->format('Y-m-d'))->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
