@@ -78,7 +78,7 @@ Route::get('analytics', function (Request $request) {
     $sales = Order::where('order_status', 3)->get()->count();
     $brands = Shop::whereNotNull('cat_id')->where('active', 1)->get()->count();
     $earningmonths = 1;
-    if(isset($request->earning_months)){
+    if (isset($request->earning_months)) {
         $earningmonths = $request->earning_months;
     }
 
@@ -86,10 +86,9 @@ Route::get('analytics', function (Request $request) {
 
     $data = [];
     foreach ($period as $date) {
-       $earning=  Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
-        $data[] = [
-            $date->shortMonthName => $earning,
-        ];
+        $earning =  Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
+        $data[$date->shortMonthName] =
+            $earning;
     }
     return $data;
 
