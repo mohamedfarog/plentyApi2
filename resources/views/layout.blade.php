@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
+    <meta name="base_url" content="http://127.0.0.1:8000/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -901,6 +901,7 @@
                 this.favourite_items.push(FavouriteItem)
                 showAlertSuccess(`${FavouriteItem.name_en} added to favorites`)
             } else {
+                
                 showAlertError(`${FavouriteItem.name_en} already added to favorites`)
             }
 
@@ -911,7 +912,9 @@
             let i = this.favourite_items.length;
             while (i--) {
                 if (this.favourite_items[i] && this.favourite_items[i]['id'] === pro_id) {
+                    showAlertSuccess(`${this.favourite_items[i].name_en} removed from favorites !`)
                     this.favourite_items.splice(i, 1);
+                    break;
                 }
             }
             return this.favourite_items;
@@ -928,8 +931,18 @@
 
         }
 
-        function MakeFavourite(id) {
-            let product = getFavouriteProductInfo(id);
+        function MakeFavourite(ele, id) {
+            if ($(ele).children().attr('id-selected') === "1") {
+                let favourites = FavouriteSerializer(getFavouritesLocal())
+                favourites.removeItem(id);
+                storeFavouritesLocal(favourites);
+                $(ele).children().attr('id-selected', "0");
+                $(ele).children().attr('src', "img/nav/fav.png");
+            } else {
+                let product = getFavouriteProductInfo(id);
+                $(ele).children().attr('src', "img/nav/fav2.png");
+                $(ele).children().attr('id-selected', "1");
+            }
 
         }
 
@@ -1107,6 +1120,18 @@
                 showAlertError(`Cart is empty!`);
             }
 
+        }
+
+        function getProductId() {
+            var favourite_item = getFavouritesLocal()
+
+            if (favourite_item.favourite_items.length > 0) {
+
+                var ids = favourite_item.favourite_items.map(item => {
+                    return item.id;
+                })
+            }
+            return ids;
         }
     </script>
 

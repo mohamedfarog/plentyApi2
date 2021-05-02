@@ -64,10 +64,7 @@
     });
 
     function renderFavourites() {
-        console.log(getFavouritesLocal().favourite_items);
-        if (getFavouritesLocal().favourite_items == null){
-            $("#fav-product-panel").html("<div>No Items</div>")
-        }
+         
         let favourites = getFavouritesLocal().favourite_items
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'storage/products/'

@@ -58,7 +58,6 @@
         color: #001b71;
         font-size: 20px;
     }
-
 </style>
 
 <!-- Hero Slider -->
@@ -216,7 +215,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-center">
+                    <div class="section-title text-center">f
                         <h2 class="title-border">Plenty Bazaar</h2>
                     </div>
                 </div>
@@ -300,7 +299,7 @@
                 <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
             </div>
             <div class="fix featlineicons">
-                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                <span class="pro-price floatleft" onclick="MakeFavourite(this,{{$product->id}})"><img class="featicons" data-id="{{$product->id}}" data-selected="0" src="img/nav/fav.png" loading=lazy>
                 </span>
                 </a>
                 <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
@@ -434,8 +433,19 @@
                 'transform': 'scale(1)'
             });
         });
-    });
+        let ids = getProductId();
+        let data = $(".featicons");
+        for (var i = 0; i < data.length; i++) {
 
+            let pid = $(data[i]).data('id');
+            if (ids.includes(pid)) {
+                $(data[i]).attr("src", "img/nav/fav2.png")
+                $(data[i]).attr('id-selected', "1")
+            }
+        }
+
+
+    });
 </script>
 <div style="">
     @include('footer')
