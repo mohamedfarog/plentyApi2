@@ -52,8 +52,8 @@ class SchedTimeController extends Controller
       //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
 
 
-            $tables= Shoptable::with(['timeslots'=>function($timeslots){
-                return $timeslots->where('booked',0);
+            $tables= Shoptable::with(['timeslots'=>function($timeslots) use ($request){
+                return $timeslots->where('fromtime',$request->preftime)->where('booked',0);
             }])->where('capacity',$request->capacity)
             ->orWhere('capacity',($request->capacity+1))
             ->get();
