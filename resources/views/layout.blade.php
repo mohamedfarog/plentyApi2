@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
+    <meta name="base_url" content="/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->

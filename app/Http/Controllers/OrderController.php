@@ -10,6 +10,8 @@ use App\Models\Shop;
 use App\Models\ShopInfo;
 use App\Models\Tier;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -24,8 +26,18 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $user = Auth::user();
+        $dt = Carbon::now();
+        
+         $user = Auth::user();
+        if(isset($request->shop_id)){
+            
+        return Order::whereDate('created_at', '=',$dt->toDateString())->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
+            return $details->with(['product' => function ($product) {
+                return $product->with(['images']);
+            }, 'size', 'color']);
+        }, 'user']);
+        }
+ 
         $orders = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
@@ -105,13 +117,13 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
-                        if($request->order_status ==2){
-                            $logistics=( new Logistics())->create($request->id);
+                        if ($request->order_status == 2) {
+                            $logistics = (new Logistics())->create($request->id);
                         }
-                        if($request->order_status ==3){
-                             //TODO
-                             //Increment user s total purchases
-                             // Tier List Obsever to check the user's tier and update accordingly
+                        if ($request->order_status == 3) {
+                            //TODO
+                            //Increment user s total purchases
+                            // Tier List Obsever to check the user's tier and update accordingly
                             //Add Points to the User
                             //Total Purchases
                             $user = User::find($order->user_id);
@@ -322,16 +334,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order = Order::with(['details' => function ($details) {
+        return Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
             }, 'size', 'color']);
         }, 'user'])->find($order->id);
-        if ($order->aws_no && $order->order_status==2) {
-            $order->order_status = (new Logistics())->getStatusCode($order->aws_no);
-            $order->save();
-        }
-        return $order;
     }
 
     /**

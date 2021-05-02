@@ -25,6 +25,20 @@
         width: 25px !important;
     }
 
+    .single-product {
+        padding: 10px;
+    }
+
+    .contm {
+        width: 1000px;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .contm {
+            width: 100%;
+        }
+    }
+
     @media only screen and (max-width: 600px) {
         .contm {
             width: 100%;
@@ -32,6 +46,7 @@
     }
 
 </style>
+
 
 <!-- Hero Slider -->
 <section class="hero-wrap text-center relative">
@@ -126,7 +141,7 @@
             <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
                 @foreach($products as $product)
 
-                <div class="producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm " style="margin-bottom:30px;">
+                <div class="producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6 " style="margin-bottom:30px;">
                     <div class="product-img frame"><a href="product/{{$product->id}}"><img src="storage/products/{{$product->image}}" alt="" loading="lazy" class="imgz"></a>
                         <div class="fix buttonsshow" style="visibility: visible;"><span class="pro-price "><img class="featicons" src="img/nav/bag.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span>
                             <span class="pro-rating "><img class="featicons" src="img/nav/search.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span></div>
@@ -135,7 +150,7 @@
                     <div class="product-info clearfix">
                         <div class="fix">
                             <h4 class="post-title floatcenter feattitle"><a href="product/{{$product->id}}" style="">{{$product->name_en}} </a></h4>
-                            <p class="floatcenter hidden-sm featsubtitle  post-title">SAR {{$product->price}}</p>
+                            <p class="floatcenter featsubtitle  post-title">SAR {{$product->price}}</p>
                         </div>
                         <div class="fix featlineicons">
                             <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
@@ -222,3 +237,4 @@
     @include('footer')
 </div>
 @endsection
+

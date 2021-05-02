@@ -27,6 +27,10 @@
         width: 25px !important;
     }
 
+    .contm {
+        width: 1000px;
+    }
+
     @media only screen and (max-width: 600px) {
         .contm {
             width: 100%;
@@ -38,7 +42,7 @@
 <!-- Featured Product -->
 <section class="section-wrap-sm new-arrivals ">
     <div class="purchase-online-area ">
-        <div class="container">
+        <div class="container contm">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
@@ -47,9 +51,7 @@
                 </div>
             </div>
             <section style="margin: auto;width:90%;text-align:center;" id="fav-product-panel">
-
             </section>
-
         </div>
     </div>
 </section> <!-- end Featured Product -->
@@ -74,7 +76,7 @@
         favourites.forEach(element => {
 
             prod_element +=
-                "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
+                "<div class='producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6  ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
                 `<a href='/product/${element.id}'><img src='` + url + element.image + "' alt='' loading=lazy  class='imgz'/></a>" +
 
