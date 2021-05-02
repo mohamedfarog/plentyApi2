@@ -48,7 +48,7 @@ class OrderController extends Controller
          $shopid=$request->shop_id;
         if(isset($request->shop_id)){
             $orders= Order::with(['details' => function ($details) use($shopid) {
-                return $details->with(['product' => function ($product) {
+                return $details->where('shop_id',$shopid)->with(['product' => function ($product) {
                     return $product->with(['images']);
                 }, 'size', 'color']);
             }, 'user','details'=>function($details) use($dt){
@@ -56,18 +56,17 @@ class OrderController extends Controller
             }])->get();
             $arr= array();
             foreach($orders as $order){
-                if($order->shop_id==$shopid){
-                     if(count($order->details)>0){
-                    array_push($arr,$order->details);
+                
+                if(count($order->details)>0){
+                    if($order->details->shop_id== $shopid){
+                         array_push($arr,$order->details);
+                    }
+                   
                     
                 }
-                }
-
-               
             }
             $data = $this->paginate($arr);
             return $data;
-
             
             
 
