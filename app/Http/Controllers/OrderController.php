@@ -34,8 +34,8 @@ class OrderController extends Controller
                 return $details->with(['product' => function ($product) {
                     return $product->with(['images']);
                 }, 'size', 'color']);
-            }, 'user','details'=>function() use($dt){
-                  return $this->whereDate('created_at', '=',$dt->toDateString());
+            }, 'user','details'=>function($details) use($dt){
+                  return $details->whereDate('created_at', '=',$dt->toDateString());
             }])->get()->filter(function($value) {
                 return  $value->details!= null;
             });
