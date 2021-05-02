@@ -36,10 +36,11 @@ class OrderController extends Controller
                 }, 'size', 'color']);
             }, 'user','details'=>function($details) use($dt){
                   return $details->whereDate('created_at', '=',$dt->toDateString());
-            }])->get()->filter(function($value) {
+            }])->get();
+
+            return $orders->filter(function($value) {
                 return  $value->details!= null;
             });
-            return $orders;
             
 
         }
