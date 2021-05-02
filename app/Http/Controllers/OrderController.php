@@ -37,10 +37,16 @@ class OrderController extends Controller
             }, 'user','details'=>function($details) use($dt){
                   return $details->whereDate('created_at', '=',$dt->toDateString());
             }])->get();
+            $arr= array();
+            foreach($orders as $order){
+                if(count($order->details)>0){
+                    array_push($arr,$order->details);
+                    
+                }
+            }
+            $data = $this->paginate($arr);
 
-            return $orders->filter(function($value) {
-                return  count($value->details)>0 ;
-            });
+            
             
 
         }
