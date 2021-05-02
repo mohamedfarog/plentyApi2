@@ -31,11 +31,7 @@ class OrderController extends Controller
          $user = Auth::user();
         if(isset($request->shop_id)){
             
-        return Order::whereDate('created_at', '=',$dt->toDateString())->where('shop_id', $request->shop_id)->with(['details' => function ($details) {
-            return $details->with(['product' => function ($product) {
-                return $product->with(['images']);
-            }, 'size', 'color']);
-        }, 'user'])->get();
+        return Detail::whereDate('created_at', '=',$dt->toDateString())->where('shop_id', $request->shop_id)->with(['color','size','product'])->get();
         }
  
         $orders = Order::with(['details' => function ($details) {
