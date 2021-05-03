@@ -13,7 +13,7 @@ class Report extends Model
     {
         $months = 1;
         if (isset($request->earning_months)) {
-            $months = $request->earning_months;
+            $months = intval($request->earning_months);
         }
 
         $period = now()->subMonths($months)->monthsUntil(now());
