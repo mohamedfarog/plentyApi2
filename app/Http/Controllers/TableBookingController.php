@@ -41,10 +41,10 @@ class TableBookingController extends Controller
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-        return $data->orderBy('id','asc')->paginate();
+        // return $data->orderBy('id','asc')->paginate();
         
 
-        return ' does this even work?';
+       
         if (isset($request->shop_id)) {
        
             $shopid = $request->shop_id;
