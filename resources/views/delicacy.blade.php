@@ -249,7 +249,7 @@
 
     .nuser-table {
         padding: 50px;
-
+        filter: opacity(0.5) drop-shadow(rgb(182, 206, 208) 0px 0px 0px);
     }
 
     .nuser-table:hover {
@@ -259,7 +259,7 @@
     }
 
     .user-select {
-
+        background: grey;
         border-radius: 30px;
     }
 
@@ -275,7 +275,35 @@
     .bookpickup {
         width: 50%;
     }
-
+    .pp-product-panel{
+        width:1000px;
+        margin: auto;
+        text-align:center;
+    }
+    .sd-panel{
+        margin: auto;
+        width:1000px;
+        text-align:center;
+        margin-top:100px;
+        margin-bottom:100px;
+    }
+    .table-ppl-panel{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width:1000px;
+    }
+    @media only screen and (max-width: 1000px) {
+        .pp-product-panel{
+            width:100%;
+        }
+        .sd-panel{
+            width:100%;
+        }
+        .table-ppl-panel{
+            width:100%;
+        }
+    }
     @media only screen and (max-width: 600px) {
         .coluser {
             width: 100px;
@@ -556,7 +584,7 @@
                 </button>
                 @endforeach
             </div>
-            <div style="margin: auto;width:90%;text-align:center;" id="product-panel">
+            <div style="" id="product-panel" class="pp-product-panel">
         </section>
     </div>
 
@@ -568,7 +596,7 @@
         <input type="hidden" id="pref-time" value="">
         <div class="row" id="booking-st1">
             <h4 style="margin-bottom:50px;">Please select the number of people </h4>
-            <div class="row" style="text-align: center;margin-left: auto;margin-right: auto;">
+            <div class="row table-ppl-panel" style="">
                 <input type="hidden" id="usercount" value="1">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
@@ -594,7 +622,7 @@
         </div>
     </section>
 
-    <section id="switch-delecacy" style="margin: auto;width:90%;text-align:center;margin-top:100px;margin-bottom:100px">
+    <section id="switch-delecacy" class="sd-panel" style="">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 bookpickup">
                 <div class="panel panel-default" style="border: none;">
