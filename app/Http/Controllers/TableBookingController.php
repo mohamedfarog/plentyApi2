@@ -81,6 +81,7 @@ class TableBookingController extends Controller
                     }
                 }
             }
+            return $arr;
             
             if (count($arr) > 0) {
                 $data = $this->paginate($arr[0]);
