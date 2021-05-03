@@ -109,7 +109,7 @@ class TableBookingController extends Controller
         if (isset($userid)) {
             
             $bookings = TableBookingDetail::where('user_id',$userid)->with(['product','user'])->get();
-            $orders = TableBookingDetail::whereNotNull('booking_date',$userid)->with(['product','user'])->get();
+            $orders = TableBookingDetail::where('user_id',$userid)->with(['product','user'])->get();
             return  array_merge($bookings, $orders);
       
          
