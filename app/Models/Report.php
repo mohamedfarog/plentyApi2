@@ -9,7 +9,7 @@ class Report extends Model
 {
     use HasFactory;
 
-    public static function createGraph($request, $query, $type, $col)
+    public static function createGraph($request, $type)
     {
         $months = 1;
         if (isset($request->earning_months)) {
@@ -19,10 +19,10 @@ class Report extends Model
         $period = now()->subMonths($months)->monthsUntil(now());
         $data = [];
         switch ($type) {
-            case 'sum':
+            case 'earnings':
                 $data = [];
                 foreach ($period as $date) {
-                    $earning = $query->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum($col);;
+                    $earning = Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');;
 
 
                     $data[$date->shortMonthName . " " . $date->year] =

@@ -82,7 +82,7 @@ Route::get('analytics', function (Request $request) {
 
     //earnings graph
 
-    $earninggraph = (new Report())->createGraph($request, Order::where('order_status', 3),"sum","total_amount");
+    $earninggraph = (new Report())->createGraph($request, 'earnings');
     // $earningmonths = 1;
     // if (isset($request->earning_months)) {
     //     $earningmonths = $request->earning_months;
