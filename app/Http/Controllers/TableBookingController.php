@@ -41,9 +41,11 @@ class TableBookingController extends Controller
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
+        
 
-        $shopid = $request->shop_id;
+        
         if (isset($request->shop_id)) {
+            $shopid = $request->shop_id;
             $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
                 return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
             }, 'user'])->get();
@@ -69,6 +71,7 @@ class TableBookingController extends Controller
                 return response()->json(['Errors' => 'No orders found']);
             }
         }
+        
     }
 
 
