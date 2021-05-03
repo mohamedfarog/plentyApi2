@@ -374,7 +374,6 @@
             margin: auto;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -641,8 +640,8 @@
         document.getElementById('breadcrumbshopname2').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
 
-    });
 
+    });
 </script>
 
 <script>
@@ -674,10 +673,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -695,10 +694,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -736,7 +735,15 @@
         url = base_url + 'storage/products/'
         let prod_element = ''
         var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        let ids = getProductId();
         data.forEach(element => {
+            var src = "img/nav/fav.png";
+            var data_selected = "0";
+
+            if (ids && ids.includes(element.product_id)) {
+                src = "img/nav/fav2.png";
+                data_selected = "1";
+            }
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
@@ -754,7 +761,7 @@
                 "</div>" +
 
                 '<div class="fix featlineicons">' +
-                '<span class="pro-price floatleft" onclick="MakeFavourite(' + element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
+                "<span class='pro-price floatleft' onclick='MakeFavourite(this," + element.product_id + ")'><img class='featicons' data-id='" + element.product_id + "' data-selected=" + data_selected + " src=" + src + " loading=lazy>" +
                 '</span>' +
                 '</a>' +
                 '<a href="/product/' + element.product_id + '"><span class="pro-rating floatright">' +
@@ -769,11 +776,11 @@
 
 
 
-
         document.getElementById('product-panel').innerHTML = prod_element
         $('.buttonsshow').css({
             'visibility': 'hidden'
         });
+
     }
 
     function renderNoProduct() {
@@ -924,29 +931,29 @@
     function getTableTimeSlot(day, istoday, shop_id, capacity) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'POST'
-            , url: base_url + 'api/tabletimeslots'
-            , data: {
-                day: day
-                , istoday: istoday
-                , shop_id: shop_id
-                , capacity: capacity
-            }
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'POST',
+            url: base_url + 'api/tabletimeslots',
+            data: {
+                day: day,
+                istoday: istoday,
+                shop_id: shop_id,
+                capacity: capacity
+            },
+            dataType: 'JSON',
+            success: function(data) {
                 renderTimeSlot(data);
 
-            }
-            , statusCode: {
+            },
+            statusCode: {
                 400: function(data) {
                     showAlertError(data.responseJSON["Error"])
                     renderTimeSlot([]);
                 }
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
-            }
-        , });
+            },
+        });
     }
 
     function bookTable() {
@@ -962,27 +969,27 @@
             const table_id = $("#table-id").val();
             if (parseInt(table_id) > 0) {
                 $.ajax({
-                    type: 'POST'
-                    , url: base_url + 'api/tablebooking'
-                    , data: {
-                        date: formated_date
-                        , preftime: fromtime
-                        , table_id: table_id
-                    , }
-                    , headers: {
+                    type: 'POST',
+                    url: base_url + 'api/tablebooking',
+                    data: {
+                        date: formated_date,
+                        preftime: fromtime,
+                        table_id: table_id,
+                    },
+                    headers: {
                         "Authorization": 'Bearer ' + bearer_token
-                    }
-                    , dataType: 'JSON'
-                    , success: function(data) {
+                    },
+                    dataType: 'JSON',
+                    success: function(data) {
                         console.log(data)
                         if (data.success) {
                             renderOrderSuccess(data);
                         }
-                    }
-                    , error: function(err) {
+                    },
+                    error: function(err) {
                         console.log('Error!', err)
-                    }
-                , });
+                    },
+                });
             } else {
                 showAlertError("Please choose a table!")
             }
@@ -1004,10 +1011,8 @@
         document.getElementById("order-success").innerHTML = templates;
 
     }
-
 </script>
 <script src="js/prodjs.js"></script>
 
 
 @endsection
-

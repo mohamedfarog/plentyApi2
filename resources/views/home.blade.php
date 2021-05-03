@@ -69,7 +69,6 @@
         color: #001b71;
         font-size: 20px;
     }
-
 </style>
 
 <!-- Hero Slider -->
@@ -452,16 +451,14 @@
             let pid = $(data[i]).data('id');
             if (ids.includes(pid)) {
                 $(data[i]).attr("src", "img/nav/fav2.png")
-                $(data[i]).attr('id-selected', "1")
+                $(data[i]).attr('data-selected', "1")
             }
         }
 
 
     });
-
 </script>
 <div style="">
     @include('footer')
 </div>
 @endsection
-

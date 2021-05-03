@@ -168,9 +168,6 @@
         }
 
         @media only screen and (max-width: 600px) {
-            .loader {
-                left: 45%;
-            }
 
             .footer-widgets {
                 padding: 0;
@@ -239,7 +236,7 @@
                                 <div class="logo-container">
                                     <div class="logo-wrap">
                                         <a href="/">
-                                            <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:100%;">
+                                            <img class="logo-dark" src="img/logo_dark.png" alt="logo" style="max-height:80%;">
                                         </a>
                                     </div>
                                 </div>
@@ -902,9 +899,6 @@
             }
             if (flag) {
                 this.favourite_items.push(FavouriteItem)
-                showAlertSuccess(`${FavouriteItem.name_en} added to favorites`)
-            } else {
-                showAlertError(`${FavouriteItem.name_en} already added to favorites`)
             }
 
 
@@ -914,7 +908,7 @@
             let i = this.favourite_items.length;
             while (i--) {
                 if (this.favourite_items[i] && this.favourite_items[i]['id'] === pro_id) {
-                    showAlertSuccess(`${this.favourite_items[i].name_en} removed from favorites !`)
+
                     this.favourite_items.splice(i, 1);
                     break;
                 }
@@ -934,16 +928,17 @@
         }
 
         function MakeFavourite(ele, id) {
-            if ($(ele).children().attr('id-selected') === "1") {
+            if ($(ele).children().attr('data-selected') === "1") {
                 let favourites = FavouriteSerializer(getFavouritesLocal())
                 favourites.removeItem(id);
                 storeFavouritesLocal(favourites);
-                $(ele).children().attr('id-selected', "0");
+                $(ele).children().attr('data-selected', "0");
                 $(ele).children().attr('src', "img/nav/fav.png");
             } else {
                 let product = getFavouriteProductInfo(id);
                 $(ele).children().attr('src', "img/nav/fav2.png");
-                $(ele).children().attr('id-selected', "1");
+                $(ele).children().attr('data-selected', "1");
+
             }
 
         }
@@ -1100,7 +1095,10 @@
             e.preventDefault();
             var base_url = $('meta[name=base_url]').attr('content');
             const form = new FormData(document.getElementById('search-form-nav'))
-            window.location.replace(base_url + 'search/' + form.get('search-item'));
+            if (form.get('search-item').trim().length > 0) {
+                window.location.replace(base_url + 'search/' + form.get('search-item').trim());
+            }
+
         }
 
         function logoutUser() {
