@@ -26,7 +26,7 @@ class Report extends Model
 
 
                     $data[$date->shortMonthName . " " . $date->year] =
-                        $earning;
+                        floatval($earning);
                 }
                 break;
             default:
