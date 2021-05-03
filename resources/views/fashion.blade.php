@@ -155,8 +155,20 @@
         margin: auto;
         margin-bottom: 20px;
     }
-
+   .pp-product-panel{
+        width:1000px;
+        margin: auto;
+        text-align:center;
+    }
+    @media only screen and (max-width: 1000px) {
+        .pp-product-panel{
+            width:100%;
+        }
+    }
     @media only screen and (max-width: 600px) {
+        .pp-product-panel{
+            width:100%;
+        } 
         .catmobile {
             font-size: 16px;
         }
@@ -385,7 +397,7 @@
                 @endforeach
             </div>
         </section>
-        <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
+        <section style=" " id="product-panel" class="pp-product-panel">
 
         </section>
 </section>

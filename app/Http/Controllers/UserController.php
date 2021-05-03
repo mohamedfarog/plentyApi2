@@ -506,13 +506,26 @@ class UserController extends Controller
     public function topUpWallet(Request $request)
     {
         $authuser = Auth::user();
+    
         if ($authuser) {
-            if (isset($request->amount)) {
+            if($authuser->typeofuser=='S'){
+                if (isset($request->amount)) {
+                    $user = User::with(['tier'])->find($request->user_id);
+                    $user->wallet = $request->amount;
+                    $user->save();
+                    return response()->json(['success' => !!$user, 'user' => $user,'message' => "The user's wallet balance has been updated"]);
+                }
+            }
+            else{
+                    if (isset($request->amount)) {
                 $user = User::with(['tier'])->find($authuser->id);
                 $user->wallet += $request->amount;
                 $user->save();
                 return response()->json(['success' => !!$user, 'user' => $user]);
             }
+            }
+
+        
         } else {
             return response()->json(["error" => 'Unauthorized User']);
         }
@@ -542,6 +555,7 @@ class UserController extends Controller
             if(isset($request->name)){
                 $newuser->name = $request->name;
             }
+            $newuser-> email_verified_at= now();
             $newuser->typeofuser= 'V';
             $start = '1';
             $end = '';

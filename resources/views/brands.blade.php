@@ -24,6 +24,16 @@
         width: 25px !important;
     }
 
+    .contu {
+        width: 1000px;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .contu {
+            width: 95%;
+        }
+    }
+
     @media only screen and (max-width: 600px) {
         .contu {
             width: 95%;
@@ -40,8 +50,7 @@
             </div>
         </div>
     </div>
-</section>
-
+</section> 
 
 <div class="purchase-online-area ">
     <div class="container contu">
@@ -78,10 +87,6 @@
                                                 <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
 
                                                     <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-
-
-
-
 
                                                     <div class="product-action clearfix">
 
