@@ -50,6 +50,13 @@ class Report extends Model
                 $data['Did Not Set'] = User::where('typeofuser', "U")->whereNull('gender')->get()->count();
 
                 break;
+                case 'ages':
+
+                    $data['Male'] = User::where('typeofuser', "U")->where('gender', 'Male')->get()->count();
+                    $data['Female'] = User::where('typeofuser', "U")->where('gender', 'Female')->get()->count();
+                    $data['Did Not Set'] = User::where('typeofuser', "U")->whereNull('gender')->get()->count();
+    
+                    break;
             default:
                 # code...
                 break;

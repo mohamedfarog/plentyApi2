@@ -41,8 +41,14 @@ class User extends Authenticatable
 
     protected $appends = [
         'loyaltypass',
-        'accesspass'
+        'accesspass',
+        'age'
     ];
+
+    public function getAgeAttributes()
+    {
+        return $this->bday != null ? intval(\Carbon\Carbon::parse($this->bday)->diff(\Carbon\Carbon::now())->format('%y')) : -1;
+    }
 
     public function tier()
     {
@@ -52,20 +58,19 @@ class User extends Authenticatable
 
     public function getLoyaltypassAttribute()
     {
-        if($this->loyaltyidentifier){
-            return env('PASSURL'). $this->loyaltyidentifier;
+        if ($this->loyaltyidentifier) {
+            return env('PASSURL') . $this->loyaltyidentifier;
         }
-        
     }
     public function getAccesspassAttribute()
     {
-        if($this->accessidentifier){
-            return env('PASSURL'). $this->accessidentifier;
+        if ($this->accessidentifier) {
+            return env('PASSURL') . $this->accessidentifier;
         }
     }
     public function shop()
     {
-        return $this->belongsTo(Shop::class,'id','user_id');
+        return $this->belongsTo(Shop::class, 'id', 'user_id');
     }
 
     /**
