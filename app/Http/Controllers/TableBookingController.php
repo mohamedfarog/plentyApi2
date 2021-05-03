@@ -37,24 +37,29 @@ class TableBookingController extends Controller
         $user_id = Auth::id();
         $dt = Carbon::now();
         
-
-        $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
+        if(!isset($request->shop_id)){
+            $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-        return $data->orderBy('id','asc')->paginate();
+             return $data->orderBy('id','asc')->paginate();
+
+
+        }
+        
         
 
-        
+       
         if (isset($request->shop_id)) {
        
             $shopid = $request->shop_id;
+            
             if($request->action=='tablebookings'){
-                $orders = TableBooking::where('table_id','!=',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                $orders = TableBooking::whereNotNull('table_id')->with(['details' => function ($details) use ($shopid, $dt) {
                     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
             if($request->action=='pickup'){
-                $orders = TableBooking::where('table_id',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid, $dt) {
                     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
@@ -77,7 +82,7 @@ class TableBookingController extends Controller
                 }
             }
             
-            if (count($arr[0]) > 0) {
+            if (count($arr) > 0) {
                 $data = $this->paginate($arr[0]);
                 return $data;
             } else {
