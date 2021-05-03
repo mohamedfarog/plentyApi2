@@ -246,7 +246,7 @@ Route::post('test', function (Request $request) {
 Route::get('test', function (Request $request) {
     if(isset($request->user)){
         $user = User::first();
-        return '{"customer_name":"' . $user->name . '","customer_mobile_number":"' . substr($user->contact, 4) . '","mobile_country_code":' . intval(substr($user->contact, 1, 3)) . ',"reward_code":' . $user->invitation_code ."-".$user->id . '}';
+        return '{"customer_name":"' . $user->name . '","customer_mobile_number":"' . substr($user->contact, 4) . '","mobile_country_code":' . intval(substr($user->contact, 1, 3)) . ',"reward_code":"' . $user->invitation_code ."-".$user->id . '"}';
     }
     if (isset($request->mail)) {
 
