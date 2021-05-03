@@ -72,6 +72,7 @@ class OrderController extends Controller
                 }
             }
             $data = $this->paginate($arr);
+            return $arr;
             
             
 
