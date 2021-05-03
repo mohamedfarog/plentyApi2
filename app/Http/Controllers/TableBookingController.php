@@ -37,11 +37,15 @@ class TableBookingController extends Controller
         $user_id = Auth::id();
         $dt = Carbon::now();
         
-
-        $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
+        if(!isset($request->shop_id)){
+            $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-        // return $data->orderBy('id','asc')->paginate();
+             return $data->orderBy('id','asc')->paginate();
+
+
+        }
+        
         
 
        
