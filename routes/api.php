@@ -44,6 +44,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -275,7 +276,7 @@ $client = new Client($authProvider, $production = true);
 $client->addNotifications($notifications);
 $responses = $client->push(); // returns an array of ApnsResponseInterface (one Response per Notification)  
 foreach ($responses as $response) {
-    error_log(   $response->get410Timestamp());
+    Log::info(   $response->get410Timestamp());
     // The device token
     error_log($response->getDeviceToken());
     // A canonical UUID that is the unique ID for the notification.  E.g. 123e4567-e89b-12d3-a456-4266554400a0
