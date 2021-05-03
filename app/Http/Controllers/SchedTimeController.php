@@ -39,16 +39,24 @@ class SchedTimeController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
-
+    
         $schedtime= new SchedTime();
         $day= $request->day;
-        $istoday= $request->istoday;
+        if($request->istoday=="true"){
+            $istoday= true;
+        }
+        else if($request->istoday=="false"){
+            $istoday= false;
+        }
+        else{
+                    $istoday= $request->istoday;
+
+        }
         //Find if the day is today
         //If it is today, then we return the timeslots existing in the database
    
 
-        if($istoday==true || $istoday=='true'){
+        if($istoday==true){
       //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
 
 
