@@ -36,7 +36,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <!-- Featured Product -->
@@ -92,7 +91,7 @@
                 "<p class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 '<div class="fix featlineicons">' +
-                `<span class="pro-price floatleft" onclick="MakeFavourite(this,${element.id})"><img class="featicons" src="img/nav/fav2.png" loading=lazy>` +
+                `<span class="pro-price floatleft" onclick="MakeFavourite(this,${element.id});removeProd(this)"><img class="featicons" data-selected="1" src="img/nav/fav2.png" loading=lazy>` +
                 '</span>' +
                 '</a>' +
                 `<a href='/product/${element.id}'><span class="pro-rating floatright">` +
@@ -110,6 +109,8 @@
 
     }
 
+    function removeProd(ele) {
+        ele.parentElement.parentElement.parentElement.remove();
+    }
 </script>
 @endsection
-

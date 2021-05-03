@@ -573,41 +573,47 @@ class WebsiteHomeController extends Controller
     //Searching
     public function search(Request $request, $item)
     {
-        switch (strtolower($item)) {
-            case 'delicacy':
-                return redirect('delicacy');
-                break;
-            case 'beauty':
-                return redirect('beauty');
-                break;
-            case 'fashion':
-                return redirect('fashion');
-                break;
-            default:
-                break;
-        }
-        //Cheking brand
-        $brand = DB::table('shops')
-            ->where(DB::raw('lower(name_en)'), 'like',  strtolower($item))
-            ->get()->first();
-        if (isset($brand)) {
-            switch ($brand->cat_id) {
-                case '1':
-                    return redirect('delicacy/' . $brand->id);
+        if (isset($item)) {
+
+
+            switch (strtolower($item)) {
+                case 'delicacy':
+                    return redirect('delicacy');
                     break;
-                case '2':
-                    return redirect('beauty/' . $brand->id);
+                case 'beauty':
+                    return redirect('beauty');
                     break;
-                case '3':
-                    return redirect('fashion/' . $brand->id);
+                case 'fashion':
+                    return redirect('fashion');
                     break;
                 default:
                     break;
             }
+            //Cheking brand
+            $brand = DB::table('shops')
+                ->where(DB::raw('lower(name_en)'), 'like',  strtolower($item))
+                ->get()->first();
+            if (isset($brand)) {
+                switch ($brand->cat_id) {
+                    case '1':
+                        return redirect('delicacy/' . $brand->id);
+                        break;
+                    case '2':
+                        return redirect('beauty/' . $brand->id);
+                        break;
+                    case '3':
+                        return redirect('fashion/' . $brand->id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            $data['item'] = $item;
+            $data['products'] = $this->searchProduct($item);
+            return view('/search')->with($data);
         }
-        $data['item'] = $item;
-        $data['products'] = $this->searchProduct($item);
-        return view('/search')->with($data);
+
+        return redirect('/');
     }
 
     private function searchProduct($item)

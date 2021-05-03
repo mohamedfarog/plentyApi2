@@ -222,7 +222,6 @@
             min-width: 0;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -412,7 +411,6 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
@@ -443,10 +441,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     console.log(data)
                     renderProduct(data)
@@ -465,10 +463,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -485,7 +483,14 @@
         url = base_url + 'storage/products/'
         let prod_element = ''
         var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        let ids = getProductId();
         data.forEach(element => {
+            var src = "img/nav/fav.png";
+            var data_selected = "0";
+            if (ids && ids.includes(element.product_id)) {
+                src = "img/nav/fav2.png";
+                data_selected = "1";
+            }
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
@@ -498,7 +503,7 @@
                 "<p style='color:" + primary_color + "'class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 '<div class="fix featlineicons">' +
-                '<span class="pro-price floatleft" onclick="MakeFavourite(' + element.product_id + ')"><img class="featicons" src="img/nav/fav.png" loading=lazy>' +
+                "<span class='pro-price floatleft' onclick='MakeFavourite(this," + element.product_id + ")'><img class='featicons' data-id='" + element.product_id + "' data-selected=" + data_selected + " src=" + src + " loading=lazy>" +
                 '</span>' +
                 '</a>' +
                 '<a href="/product/' + element.product_id + '"><span class="pro-rating floatright">' +
@@ -554,7 +559,6 @@
         });
         console.log('nohover');
     });
-
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
@@ -562,4 +566,3 @@
 </div>
 
 @endsection
-
