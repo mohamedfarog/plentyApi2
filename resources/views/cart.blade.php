@@ -135,7 +135,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -223,10 +222,10 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table> 
+                        </table>
                     </div>
-                </div> <!-- end col cart totals --> 
-            </div> <!-- end row --> 
+                </div> <!-- end col cart totals -->
+            </div> <!-- end row -->
         </div> <!-- end container -->
     </section> <!-- end cart -->
 
@@ -238,6 +237,10 @@
             var base_url = $('meta[name=base_url]').attr('content');
             if (cart.cart_items.length > 0) {
                 cart.cart_items.forEach(item => {
+                    var point_event = "style='pointer-events: auto;'"
+                    if (item.category === "Beauty") {
+                        point_event = "style='pointer-events: none;'"
+                    }
                     template = template +
                         "<tr class='cart_item' >" +
                         "<td class='product-thumbnail'>" +
@@ -256,13 +259,13 @@
                         "</td>" +
                         "<td class='product-quantity'>" +
                         "<div class='quantity buttons_added'>" +
-                        "<input type='number' step='1' min='0' max='" + item.stock + "' id ='quantity" + item.id + "-" + item.size_id + "'value=" + item.quantity + " title='Qty' class='input-text qty text'>" +
+                        "<input type='number' step='1' min='0' max='" + item.stock + "' id ='quantity" + item.id + "-" + item.size_id + "'value=" + item.quantity + " title='Qty' class='input-text qty text' disabled>" +
                         "<input type='hidden' id ='stock" + item.id + "-" + item.size_id + "' value=" + item.stock + ">" +
                         "<div class='quantity-adjust'>" +
-                        "<a id='plus" + item.id + "-" + item.size_id + "' class='plus cart-plus-button'>" +
+                        "<a id='plus" + item.id + "-" + item.size_id + "' class='plus cart-plus-button' data-cat='" + item.category + "'" + point_event + " >" +
                         "<i class='fa fa-angle-up'></i>" +
                         "</a>" +
-                        "<a id='minus" + item.id + "-" + item.size_id + "' class='minus cart-minus-button'>" +
+                        "<a id='minus" + item.id + "-" + item.size_id + "' class='minus cart-minus-button' data-cat='" + item.category + "' " + point_event + " >" +
                         "<i class='fa fa-angle-down'></i>" +
                         "</a>" +
                         "</div>" +
@@ -286,56 +289,58 @@
             var cart = CartSerializer(getCartLocal())
             renderCartList()
             document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
-            document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal() 
+            document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
 
             $(".cart-plus-button").on('click', function(event) {
-                let id = $(this).attr("id").slice(4);
-                pro_id = id.split("-")[0]
-                size_id = id.split("-")[1] 
-                let stock = parseInt(document.getElementById('stock' + pro_id + "-" + size_id).value);
-                let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
-                console.log(quantity, stock)
-                if (stock > quantity) {
-                    if (parseInt(size_id)) {
-                        cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
-                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
+                if ($(this).attr('data-cat') !== "Beauty") {
+                    let id = $(this).attr("id").slice(4);
+                    pro_id = id.split("-")[0]
+                    size_id = id.split("-")[1]
+                    let stock = parseInt(document.getElementById('stock' + pro_id + "-" + size_id).value);
+                    let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
+                    if (stock > quantity) {
+                        if (parseInt(size_id)) {
+                            cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).addQuantity();
+                            document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
 
-                    } else { 
-                        cart.cart_items.find(item => item.id === pro_id).addQuantity();
-                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price(); 
+                        } else {
+                            cart.cart_items.find(item => item.id === pro_id).addQuantity();
+                            document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                        }
+
+                        storeCartLocal(JsonCartSerializer(cart));
+                        document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+                        document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                     }
-
-                    storeCartLocal(JsonCartSerializer(cart));
-                    document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
-                    document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                 }
 
-            }); 
+            });
             $(".cart-minus-button").on('click', function(event) {
+                if ($(this).attr('data-cat') !== "Beauty") {
+                    let id = $(this).attr("id").slice(5);
+                    pro_id = id.split("-")[0]
+                    size_id = id.split("-")[1]
+                    let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
 
-                let id = $(this).attr("id").slice(5);
-                pro_id = id.split("-")[0]
-                size_id = id.split("-")[1]
-                let quantity = parseInt(document.getElementById('quantity' + pro_id + "-" + size_id).value);
+                    if (quantity > 1) {
+                        if (parseInt(size_id)) {
 
-                if (quantity > 1) {
-                    if (parseInt(size_id)) {
+                            cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
 
-                        cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).substractQuantity();
-
-                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
+                            document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => (item.id === pro_id) && (item.size_id === size_id)).total_price();
 
 
-                    } else {
-                        cart.cart_items.find(item => item.id === pro_id).substractQuantity();
+                        } else {
+                            cart.cart_items.find(item => item.id === pro_id).substractQuantity();
 
-                        document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
+                            document.getElementById('cart-item-price' + pro_id + "-" + size_id).innerHTML = 'SAR ' + cart.cart_items.find(item => item.id === pro_id).total_price();
 
+                        }
+                        storeCartLocal(JsonCartSerializer(cart));
+
+                        document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
+                        document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                     }
-                    storeCartLocal(JsonCartSerializer(cart));
-
-                    document.getElementById('sub_total').innerHTML = "SAR " + cart.subTotal()
-                    document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                 }
 
             });
@@ -371,11 +376,9 @@
 
             return template;
         }
-
     </script>
 
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
         @include('footer')
-    </div> 
+    </div>
     @endsection
-
