@@ -46,11 +46,23 @@ class TableBookingController extends Controller
 
         
         if (isset($request->shop_id)) {
+       
             $shopid = $request->shop_id;
-            $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
-                return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
-            }, 'user'])->get();
+            if($request->action=='tablebookings'){
+                $orders = TableBooking::where('table_id','!=',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                    return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
+                }, 'user'])->get();
+            }
+            if($request->action=='pickup'){
+                $orders = TableBooking::where('table_id',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                    return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
+                }, 'user'])->get();
+            }
+            // $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
+            //     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
+            // }, 'user'])->get();
             $arr = array();
+            $tablebookings= array();
             foreach ($orders as $order) {
 
                 if (count($order->details) > 0) {
