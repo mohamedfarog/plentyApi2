@@ -32,7 +32,7 @@ class ApplePass extends Model
             "backgroundColor"   => $project->loyaltybcolor,
             "labelColor" => $project->loyaltyfcolor,
             "barcode" => [
-                "message"   => "{'customer_name':'" . $user->name . "','customer_mobile_number':'" . substr($user->contact, 4) . "',mobile_country_code':'" . intval(substr($user->contact, 1, 3)) . "','reward_code':'" . $pass_identifier . "'",
+                "message"   => "{'customer_name':'" . $user->name . "','customer_mobile_number':'" . substr($user->contact, 4) . "',mobile_country_code':" . intval(substr($user->contact, 1, 3)) . ",'reward_code':'" . $pass_identifier . "'",
                 "format"    => $project->barcodeformat,
                 "altText"   => $pass_identifier,
                 "messageEncoding" => $project->barcodemsgencoding,
