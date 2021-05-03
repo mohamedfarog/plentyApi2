@@ -15,4 +15,8 @@ class TableBooking extends Model
     {
         return $this->hasMany(TableBookingDetail::class,"tablebookingid");
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
