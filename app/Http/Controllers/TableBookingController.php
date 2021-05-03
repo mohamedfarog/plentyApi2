@@ -49,12 +49,12 @@ class TableBookingController extends Controller
        
             $shopid = $request->shop_id;
             if($request->action=='tablebookings'){
-                $orders = TableBooking::where('table_id','!=',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                $orders = TableBooking::whereNotNull('table_id')->with(['details' => function ($details) use ($shopid, $dt) {
                     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
             if($request->action=='pickup'){
-                $orders = TableBooking::where('table_id',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid, $dt) {
                     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
