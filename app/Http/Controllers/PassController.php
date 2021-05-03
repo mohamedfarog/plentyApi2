@@ -215,6 +215,7 @@ class PassController extends Controller
 
     public function logIt(Request $request)
     {
+        Log::info($request->all());
         $log = '';
         if (isset($request->logs)) {
             foreach ($request->logs as $msg) {
