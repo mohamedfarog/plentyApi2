@@ -191,7 +191,7 @@ class PassController extends Controller
                 if ($pass->updateTag == "changed") {
                     $pass->updateTag = "unchanged";
                     $pass->save();
-                    return new Response($pkpass, 200, [
+                    return response($pkpass, 200, [
                         'Content-Transfer-Encoding' => 'binary',
                         'Content-Description' => 'File Transfer',
                         'Content-Disposition' => 'attachment; filename="pass.pkpass"',
