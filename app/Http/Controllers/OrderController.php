@@ -71,9 +71,14 @@ class OrderController extends Controller
                     
                 }
             }
-            $data = $this->paginate($arr[0]);
+            if(count($arr[0])>0){
+                   $data = $this->paginate($arr[0]);
             return $data;
             
+            }
+            else{
+                return response()->json(['Errors'=>'No orders found']);
+            }
             
 
         }
