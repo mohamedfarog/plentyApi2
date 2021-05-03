@@ -105,12 +105,12 @@ class TableBookingController extends Controller
         //
     }
     public function ordersandreservations(Request $request)
-    {
-        if (isset($request->user_id)) {
-            $userid = $request->user_id;
+    {       $userid = Auth::id();
+        if (isset($userid)) {
+            
             $bookings = TableBookingDetail::where('user_id',$userid)->with(['product','user'])->get();
             $orders = TableBookingDetail::whereNotNull('booking_date',$userid)->with(['product','user'])->get();
-            
+            return  array_merge($bookings, $orders);
       
          
          
