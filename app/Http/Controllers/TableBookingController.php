@@ -110,12 +110,12 @@ class TableBookingController extends Controller
         $userid = Auth::id();
         if (isset($userid)) {
             
-            $bookings = TableBooking::where('user_id',$userid)->with(['details'=>function(){
-                return $this->with('product');
+            $bookings = TableBooking::where('user_id',$userid)->with(['details'=>function($details){
+                return $details->with('product');
 
             },'user'])->get();
-            $orders = Order::where('user_id',$userid)->with(['details'=>function(){
-                return $this->with('product');
+            $orders = Order::where('user_id',$userid)->with(['details'=>function($details){
+                return $details->with('product');
             },'user'])->get();
             return  array_merge($bookings, $orders);
       
