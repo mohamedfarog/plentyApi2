@@ -45,7 +45,7 @@ class User extends Authenticatable
         'age'
     ];
 
-    public function getAgeAttributes()
+    public function getAgeAttribute()
     {
         return $this->bday != null ? intval(\Carbon\Carbon::parse($this->bday)->diff(\Carbon\Carbon::now())->format('%y')) : -1;
     }
