@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ApplePass;
 use App\Models\Loyalty;
+use App\Models\Project;
 use App\Models\Tier;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,7 +57,32 @@ class FoodicsController extends Controller
             $userinfo->bday = $customer['birth_date'];
             $userinfo->gender = $customer['gender'];
             $userinfo->contact = "+" . $customer['dial_code'] . $customer['phone'];
-            $userinfo->invitation_code = 'P-' . time();
+
+            $settings = Project::first();
+            $start = '1';
+            $end = '';
+            for ($i = 0; $i < $settings->invcode - 1; $i++) {
+
+                $start .= '0';
+            }
+            for ($i = 0; $i < $settings->invcode; $i++) {
+
+                $end .= '9';
+            }
+            $run = true;
+            $code = 'P-' . rand(intval($start), intval($end));
+
+            while ($run) {
+
+                $user = User::where('invitation_code', $code)->first();
+                if ($user != null) {
+                    $code = 'P-' . rand(intval($start), intval($end));
+                } else {
+                    $userinfo->invitation_code = $code;
+                    $run = false;
+                }
+            }
+            $userinfo->points = 100;
             $userinfo->foodics_unique_id = $foodics_unique_id;
             $userinfo->save();
             (new ApplePass())->createLoyaltyPass($userinfo);
@@ -70,6 +96,7 @@ class FoodicsController extends Controller
     public function createUser(User $user)
     {
         //When New user created in plenty database sending informaions to foodics
+
         $response = Http::withToken($this->token)->post($this->baseUrl . "customers",  [
             "name" => $user->name,
             "dial_code" => 966,
