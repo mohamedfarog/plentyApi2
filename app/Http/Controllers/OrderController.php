@@ -46,43 +46,7 @@ class OrderController extends Controller
         
          $user = Auth::user();
          $shopid=$request->shop_id;
-        if(isset($request->shop_id)){
-            $orders= Order::with(['details' => function ($details) use($shopid) {
-                return $details->where('shop_id',$shopid)->with(['product' => function ($product) {
-                    return $product->with(['images']);
-                }, 'size', 'color']);
-            }, 'user','details'=>function($details) use($dt){
-                  return $details->whereDate('created_at', '=',$dt->toDateString());
-            }])->get();
-            $arr= array();
-            foreach($orders as $order){
-              
-                if(count($order->details)>0){
-                    foreach($order->details as $detail){
-                        if($detail->shop_id==$request->shop_id){
-                            array_push($arr,$order);
-                        }
-
-                    }
-                        
-                         
-                    
-                   
-                    
-                }
-            }
-            return $arr;
-            if(count($arr[0])>0){
-                   $data = $this->paginate($arr[0]);
-            return $data;
-            
-            }
-            else{
-                return response()->json(['Errors'=>'No orders found']);
-            }
-            
-
-        }
+    
  
         $orders = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
