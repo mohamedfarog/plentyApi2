@@ -56,7 +56,7 @@ class Report extends Model
                     if ($user->age <= 17) {
                         return true;
                     }
-                });
+                })->count();
 
                 break;
             default:
