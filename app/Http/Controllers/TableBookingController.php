@@ -106,7 +106,7 @@ class TableBookingController extends Controller
     }
     public function ordersandreservations(Request $request)
     {  
-        return Auth::user();
+        
         $userid = Auth::id();
         if (isset($userid)) {
             
