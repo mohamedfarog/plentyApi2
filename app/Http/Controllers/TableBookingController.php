@@ -41,7 +41,7 @@ class TableBookingController extends Controller
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-        return $data;
+        return $data->get();
         
 
         
@@ -91,8 +91,8 @@ class TableBookingController extends Controller
         if (isset($request->user_id)) {
             $userid = $request->user_id;
             $bookings = TableBookingDetail::where('user_id',$userid)->with(['product','user'])->get();
-            $orders = TableBookingDetail::whereNowhere('user_id',$userid)->with(['product','user'])->get();
-            // whereNotNull
+            $orders = TableBookingDetail::whereNotNull('booking_date',$userid)->with(['product','user'])->get();
+            
       
          
          
