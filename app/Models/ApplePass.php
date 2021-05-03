@@ -32,12 +32,12 @@ class ApplePass extends Model
             "backgroundColor"   => $project->loyaltybcolor,
             "labelColor" => $project->loyaltyfcolor,
             "barcode" => [
-                "message"   => [
-                    "customer_name" => $user->name,
-                    "customer_mobile_number" => $user->contact,
-                    "mobile_country_code" => substr($user->contact, 0, 4),
-                    "reward_code" => $pass_identifier
-                ],
+                "message"   => '{
+                    "customer_name": ' . $user->name . ',
+                    "customer_mobile_number": ' . $user->contact . ',
+                    "mobile_country_code": ' . substr($user->contact, 0, 4) . ',
+                    "reward_code": ' . $pass_identifier . '
+                  }',
                 "format"    => $project->barcodeformat,
                 "altText"   => $pass_identifier,
                 "messageEncoding" => $project->barcodemsgencoding,
@@ -144,12 +144,7 @@ class ApplePass extends Model
             "backgroundColor"   => $project->accessbcolor,
             "labelColor" => $project->accessfcolor,
             "barcode" => [
-                "message"   => [
-                    "customer_name" => $user->name,
-                    "customer_mobile_number" => $user->contact,
-                    "mobile_country_code" => substr($user->contact, 0, 4),
-                    "reward_code" => $pass_identifier
-                ],
+                "message"   => $pass_identifier,
                 "format"    => $project->barcodeformat,
                 "altText"   => $pass_identifier,
                 "messageEncoding" => $project->barcodemsgencoding,
