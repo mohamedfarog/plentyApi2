@@ -58,8 +58,14 @@ class OrderController extends Controller
             foreach($orders as $order){
               
                 if(count($order->details)>0){
+                    foreach($order->details as $detail){
+                        if($detail->shop_id==$request->shop_id){
+                            array_push($arr,$order->details);
+                        }
+
+                    }
                         
-                         array_push($arr,$order->details);
+                         
                     
                    
                     
