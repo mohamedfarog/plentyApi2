@@ -71,6 +71,7 @@ class OrderController extends Controller
                     
                 }
             }
+            return $arr;
             if(count($arr[0])>0){
                    $data = $this->paginate($arr[0]);
             return $data;
