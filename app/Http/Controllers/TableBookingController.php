@@ -41,16 +41,28 @@ class TableBookingController extends Controller
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-        return $data;
+        return $data->orderBy('id','asc')->paginate();
         
 
         
         if (isset($request->shop_id)) {
+       
             $shopid = $request->shop_id;
-            $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
-                return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
-            }, 'user'])->get();
+            if($request->action=='tablebookings'){
+                $orders = TableBooking::where('table_id','!=',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                    return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
+                }, 'user'])->get();
+            }
+            if($request->action=='pickup'){
+                $orders = TableBooking::where('table_id',null)->with(['details' => function ($details) use ($shopid, $dt) {
+                    return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
+                }, 'user'])->get();
+            }
+            // $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
+            //     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
+            // }, 'user'])->get();
             $arr = array();
+            $tablebookings= array();
             foreach ($orders as $order) {
 
                 if (count($order->details) > 0) {
@@ -91,8 +103,8 @@ class TableBookingController extends Controller
         if (isset($request->user_id)) {
             $userid = $request->user_id;
             $bookings = TableBookingDetail::where('user_id',$userid)->with(['product','user'])->get();
-            $orders = TableBookingDetail::whereNowhere('user_id',$userid)->with(['product','user'])->get();
-            // whereNotNull
+            $orders = TableBookingDetail::whereNotNull('booking_date',$userid)->with(['product','user'])->get();
+            
       
          
          
