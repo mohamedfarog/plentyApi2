@@ -127,6 +127,7 @@ Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
 Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
+Route::get('ordersandreservations',[TableBookingController::class,'ordersandreservations']);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
@@ -276,7 +277,7 @@ $client = new Client($authProvider, $production = true);
 $client->addNotifications($notifications);
 $responses = $client->push(); // returns an array of ApnsResponseInterface (one Response per Notification)  
 foreach ($responses as $response) {
-    Log::info(   $response->get410Timestamp());
+    error_log(   $response->get410Timestamp());
     // The device token
     error_log($response->getDeviceToken());
     // A canonical UUID that is the unique ID for the notification.  E.g. 123e4567-e89b-12d3-a456-4266554400a0

@@ -176,6 +176,7 @@ class PassController extends Controller
     }
     public function getPass($passTypeIdentifier, $serialNumber)
     {
+        FacadesLog::info("getPass: $passTypeIdentifier, $serialNumber");
         $pkpass = PassGenerator::getPass($serialNumber);
 
         $pass = Pass::where('serialNumber', $serialNumber)->first();
@@ -190,7 +191,7 @@ class PassController extends Controller
                 if ($pass->updateTag == "changed") {
                     $pass->updateTag = "unchanged";
                     $pass->save();
-                    return new Response($pkpass, 200, [
+                    return response($pkpass, 200, [
                         'Content-Transfer-Encoding' => 'binary',
                         'Content-Description' => 'File Transfer',
                         'Content-Disposition' => 'attachment; filename="pass.pkpass"',
