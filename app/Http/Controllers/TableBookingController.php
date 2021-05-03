@@ -41,6 +41,7 @@ class TableBookingController extends Controller
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
+        return $data;
         
 
         
@@ -63,7 +64,7 @@ class TableBookingController extends Controller
                     }
                 }
             }
-            return $arr;
+            
             if (count($arr[0]) > 0) {
                 $data = $this->paginate($arr[0]);
                 return $data;
@@ -85,7 +86,18 @@ class TableBookingController extends Controller
     {
         //
     }
-
+    public function ordersandreservations(Request $request)
+    {
+        if (isset($request->user_id)) {
+            $userid = $request->user_id;
+            $bookings = TableBookingDetail::where('user_id',$userid)->with(['product','user'])->get();
+            $orders = TableBookingDetail::whereNowhere('user_id',$userid)->with(['product','user'])->get();
+            // whereNotNull
+      
+         
+         
+        }
+    }
     public function store(Request $request)
     {
         //
