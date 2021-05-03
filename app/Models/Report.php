@@ -23,10 +23,10 @@ class Report extends Model
             $earning = $query->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year);
             switch ($type) {
                 case 'sum':
-                    $earning->sum($col);
+                    $earning=   $earning->sum($col);
                     break;
                 case 'count':
-                    $earning->sum($col);
+                    $earning=  $earning->sum($col);
                     break;
                 default:
                     # code...
