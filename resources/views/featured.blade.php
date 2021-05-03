@@ -44,7 +44,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 
@@ -153,7 +152,7 @@
                             <p class="floatcenter featsubtitle  post-title">SAR {{$product->price}}</p>
                         </div>
                         <div class="fix featlineicons">
-                            <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                            <span class="pro-price floatleft" onclick="MakeFavourite(this,{{$product->id}})"><img class="featicons" data-id="{{$product->id}}" data-selected="0" src="img/nav/fav.png" loading=lazy>
                             </span>
                             </a>
                             <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
@@ -230,11 +229,20 @@
                 'transform': 'scale(1)'
             });
         });
-    });
 
+        let ids = getProductId();
+        let data = $(".featicons");
+        for (var i = 0; i < data.length; i++) {
+
+            let pid = $(data[i]).data('id');
+            if (ids.includes(pid)) {
+                $(data[i]).attr("src", "img/nav/fav2.png")
+                $(data[i]).attr('data-selected', "1")
+            }
+        }
+    });
 </script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
 @endsection
-
