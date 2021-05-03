@@ -513,7 +513,7 @@ class UserController extends Controller
                     $user = User::with(['tier'])->find($request->user_id);
                     $user->wallet = $request->amount;
                     $user->save();
-                    return response()->json(['success' => !!$user, 'user' => $user]);
+                    return response()->json(['success' => !!$user, 'user' => $user,'message' => "The user's wallet balance has been updated"]);
                 }
             }
             else{
