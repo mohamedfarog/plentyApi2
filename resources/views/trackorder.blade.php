@@ -54,7 +54,6 @@
             padding: 20px;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -81,28 +80,22 @@
                 <?php
                 $orderstatus = $ord->order_status;
                 $color = 'red';
-                if ($orderstatus == 0){
+                if ($orderstatus == 0) {
                     $color = 'green';
-                }
-                else if ($orderstatus == 1){
+                } else if ($orderstatus == 1) {
                     $color = 'lightgreen';
-                }
-                else if ($orderstatus == 2){
+                } else if ($orderstatus == 2) {
                     $color = 'yellow';
-                }
-                else if ($orderstatus == 3){
+                } else if ($orderstatus == 3) {
                     $color = 'green';
-                }
-                else if ($orderstatus == 4){    
+                } else if ($orderstatus == 4) {
+                    $color = 'red';
+                } else if ($orderstatus == 5) {
+                    $color = 'red';
+                } else {
                     $color = 'red';
                 }
-                else if ($orderstatus == 5){
-                    $color = 'red';
-                }
-                else{
-                    $color = 'red';
-                }
-            ?>
+                ?>
                 <div class="col-md-12 col-sm-12" style="border-left: 5px solid {{$color}}">
                     <div class="row">
                         <div class="col-md-10 col-xs-6" style="padding-left:30px;">
@@ -144,7 +137,7 @@
                                         <a href="/product/{{$orddets->product->id}}">
                                             @foreach($orddets->product->images as $prodimg)
                                             <div style="width:120px;height:120px;padding:5px;border:1px solid black;margin:0 10px;display:table-cell; vertical-align:middle;">
-                                                <img class="imgz" src="storage/products/{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 100%;max-height: 100%;width: 100%;min-width: 100%;" />
+                                                <img class="imgz" src="{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 100%;max-height: 100%;width: 100%;min-width: 100%;" />
                                             </div>
                                             @endforeach
                                         </a>
@@ -242,7 +235,7 @@
                                 <a href="/product/{{$orddets->product->id}}">
                                     @if(isset($orddets->product->images))
                                     @foreach($orddets->product->images as $prodimg)
-                                    <img src="storage/products/{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="width:100%;">
+                                    <img src="{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="width:100%;">
                                     @endforeach
                                     @else
                                     <img src="img/product/plentylogo.png" alt="" loading=lazy style="width:100%;">
@@ -321,7 +314,5 @@
         $(prodordid).show();
 
     });
-
 </script>
 @endsection
-
