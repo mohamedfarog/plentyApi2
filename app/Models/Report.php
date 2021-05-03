@@ -29,7 +29,7 @@ class Report extends Model
                 }
                 break;
             case 'transactions':
-                if(isset($request->trans_months)){
+                if (isset($request->trans_months)) {
                     $months = intval($request->trans_months);
                 }
                 $period = now()->subMonths($months)->monthsUntil(now());
@@ -50,11 +50,15 @@ class Report extends Model
                 $data['Did Not Set'] = User::where('typeofuser', "U")->whereNull('gender')->get()->count();
 
                 break;
-                case 'ages':
-                    $users = User::where('typeofuser', "U")->get();
-                    return $users;
-    
-                    break;
+            case 'ages':
+                $users = User::where('typeofuser', "U")->get();
+                $data['17 & Below'] = $users->filter(function ($user) {
+                    if ($user->age <= 17) {
+                        return true;
+                    }
+                });
+
+                break;
             default:
                 # code...
                 break;
