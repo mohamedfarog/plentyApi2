@@ -12,17 +12,16 @@ class Report extends Model
     public static function createGraph($request, $type)
     {
         $months = 1;
-        if (isset($request->earning_months)) {
-            $months = intval($request->earning_months);
-        }
-        if(isset($request->trans_months)){
-            $months = intval($request->trans_months);
-        }
+  
+        
 
         $period = now()->subMonths($months)->monthsUntil(now());
         $data = [];
         switch ($type) {
             case 'earnings':
+                if (isset($request->earning_months)) {
+                    $months = intval($request->earning_months);
+                }
                 $data = [];
                 foreach ($period as $date) {
                     $earning = Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');;
@@ -33,6 +32,9 @@ class Report extends Model
                 }
                 break;
             case 'transactions':
+                if(isset($request->trans_months)){
+                    $months = intval($request->trans_months);
+                }
                 $data = [];
                 foreach ($period as $date) {
                     $earning = Order::whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->count();
