@@ -7,6 +7,7 @@ use App\Models\Pass;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log as FacadesLog;
 use PDO;
 use Thenextweb\PassGenerator;
 
@@ -215,6 +216,7 @@ class PassController extends Controller
 
     public function logIt(Request $request)
     {
+        FacadesLog::info($request->all());
         $log = '';
         if (isset($request->logs)) {
             foreach ($request->logs as $msg) {

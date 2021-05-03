@@ -46,6 +46,7 @@ class OrderController extends Controller
         
          $user = Auth::user();
          $shopid=$request->shop_id;
+         
     
  
         $orders = Order::with(['details' => function ($details) {
