@@ -15,6 +15,9 @@ class Report extends Model
         if (isset($request->earning_months)) {
             $months = intval($request->earning_months);
         }
+        if(isset($request->trans_months)){
+            $months = intval($request->trans_months);
+        }
 
         $period = now()->subMonths($months)->monthsUntil(now());
         $data = [];
@@ -30,6 +33,14 @@ class Report extends Model
                 }
                 break;
             case 'transactions':
+                $data = [];
+                foreach ($period as $date) {
+                    $earning = Order::whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->count();
+
+
+                    $data[$date->shortMonthName . " " . $date->year] =
+                        intval($earning);
+                }
                 // $data = ;
                 break;
             case 'genders':
