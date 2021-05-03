@@ -34,7 +34,7 @@ class ApplePass extends Model
             "barcode" => [
                 "message"   => '{
                     "customer_name": "' . $user->name . '",
-                    "customer_mobile_number": "' . $user->contact . '",
+                    "customer_mobile_number": "' . substr($user->contact,4) . '",
                     "mobile_country_code": ' . substr($user->contact, 1, 4) . ',
                     "reward_code": ' . $pass_identifier . '
                   }',
