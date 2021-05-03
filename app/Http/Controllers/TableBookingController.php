@@ -36,7 +36,7 @@ class TableBookingController extends Controller
     {
         $user_id = Auth::id();
         $dt = Carbon::now();
-        return $dt->toDateString();
+        
 
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
