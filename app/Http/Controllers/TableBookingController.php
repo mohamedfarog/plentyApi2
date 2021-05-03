@@ -30,45 +30,41 @@ class TableBookingController extends Controller
         $items = $items instanceof Collection ? $items : Collection::make($items);
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-
     }
 
     public function index(Request $request)
     {
         $user_id = Auth::id();
         $dt = Carbon::now();
+        return $dt->toDateString();
 
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-     
-        $shopid= $request->shop_id;
-        if(isset($request->shop_id)){
-            $orders= TableBooking::with(['details' => function ($details) use($shopid, $dt) {
-                return $details->where('shop_id',$shopid)->whereDate('created_at', '=',$dt->toDateString());
+
+        $shopid = $request->shop_id;
+        if (isset($request->shop_id)) {
+            $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
+                return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
             }, 'user'])->get();
-            $arr= array();
-            foreach($orders as $order){
-              
-                if(count($order->details)>0){
-                    foreach($order->details as $detail){
-                        if($detail->shop_id==$request->shop_id){
-                            array_push($arr,$order);
+            $arr = array();
+            foreach ($orders as $order) {
+
+                if (count($order->details) > 0) {
+                    foreach ($order->details as $detail) {
+                        if ($detail->shop_id == $request->shop_id) {
+                            array_push($arr, $order);
                         }
-                    }  
+                    }
                 }
             }
             return $arr;
-            if(count($arr[0])>0){
-                   $data = $this->paginate($arr[0]);
-            return $data;
-            
+            if (count($arr[0]) > 0) {
+                $data = $this->paginate($arr[0]);
+                return $data;
+            } else {
+                return response()->json(['Errors' => 'No orders found']);
             }
-            else{
-                return response()->json(['Errors'=>'No orders found']);
-            }
-            
-
         }
     }
 
@@ -90,7 +86,7 @@ class TableBookingController extends Controller
         $user = Auth::user();
         $order = '';
         $msg = '';
-        
+
         if (isset($request->id)) {
             $order = TableBooking::where('id', $request->id)->first();
             switch ($request->action) {
@@ -157,7 +153,7 @@ class TableBookingController extends Controller
                     break;
             }
         } else {
-        
+
             $data = new TableBooking();
 
             $data->user_id = Auth::id();
@@ -189,15 +185,15 @@ class TableBookingController extends Controller
             }
 
             $order = $data->save();
-            if(isset($request->orderdetails)){
+            if (isset($request->orderdetails)) {
                 foreach ($request->orderdetails as $orderdetails) {
                     $details = new TableBookingDetail();
                     $details->tablebookingid = $data->id;
-    
+
                     if (isset($orderdetails['qty'])) {
                         $details->qty = $orderdetails['qty'];
                     }
-    
+
                     if (isset($orderdetails['product_id'])) {
                         $details->product_id = $orderdetails['product_id'];
                     }
@@ -207,20 +203,19 @@ class TableBookingController extends Controller
                     if (isset($orderdetails['size_id'])) {
                         $details->size_id = $orderdetails['size_id'];
                     }
-    
+
                     if (isset($orderdetails['addons'])) {
                         $details->addons = implode(',', $orderdetails['addons']);
                     }
                     if (isset($orderdetails['price'])) {
                         $details->price = $orderdetails['price'];
                     }
-                    
-    
+
+
                     $details->save();
                 }
-    
             }
-     
+
 
 
 
