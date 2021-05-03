@@ -53,7 +53,10 @@ class TableBookingController extends Controller
                 if (count($order->details) > 0) {
                     foreach ($order->details as $detail) {
                         if ($detail->shop_id == $request->shop_id) {
-                            array_push($arr, $order);
+                            if(!in_array($order,$arr)){
+                                array_push($arr, $order);
+
+                            }
                         }
                     }
                 }
