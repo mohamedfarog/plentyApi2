@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\TableBooking;
 use App\Models\TableBookingDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -17,46 +21,55 @@ class TableBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+
+    {
+
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+
+    }
+
     public function index(Request $request)
     {
         $user_id = Auth::id();
+        $dt = Carbon::now();
 
         $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
-        return $data->orderby('id','desc')->paginate();
+     
         $shopid= $request->shop_id;
-        // if(isset($request->shop_id)){
-        //     $orders= Order::with(['details' => function ($details) use($shopid) {
-        //         return $details->where('shop_id',$shopid)->with(['product' => function ($product) {
-        //             return $product->with(['images']);
-        //         }, 'size', 'color']);
-        //     }, 'user','details'=>function($details) use($dt){
-        //           return $details->whereDate('created_at', '=',$dt->toDateString());
-        //     }])->get();
-        //     $arr= array();
-        //     foreach($orders as $order){
+        if(isset($request->shop_id)){
+            $orders= TableBooking::with(['details' => function ($details) use($shopid, $dt) {
+                return $details->where('shop_id',$shopid)->whereDate('created_at', '=',$dt->toDateString());
+            }, 'user'])->get();
+            $arr= array();
+            foreach($orders as $order){
               
-        //         if(count($order->details)>0){
-        //             foreach($order->details as $detail){
-        //                 if($detail->shop_id==$request->shop_id){
-        //                     array_push($arr,$order);
-        //                 }
-        //             }  
-        //         }
-        //     }
-        //     return $arr;
-        //     if(count($arr[0])>0){
-        //            $data = $this->paginate($arr[0]);
-        //     return $data;
+                if(count($order->details)>0){
+                    foreach($order->details as $detail){
+                        if($detail->shop_id==$request->shop_id){
+                            array_push($arr,$order);
+                        }
+                    }  
+                }
+            }
+            return $arr;
+            if(count($arr[0])>0){
+                   $data = $this->paginate($arr[0]);
+            return $data;
             
-        //     }
-        //     else{
-        //         return response()->json(['Errors'=>'No orders found']);
-        //     }
+            }
+            else{
+                return response()->json(['Errors'=>'No orders found']);
+            }
             
 
-        // }
+        }
     }
 
 
