@@ -127,7 +127,7 @@ Route::get('invnum', [AccessController::class, 'accessNumber']);
 Route::get('getwa', [SupportController::class, 'sendWhatsapp']);
 Route::get('timeslots', [TimeslotController::class, 'index']);
 Route::post('webLogin', [UserController::class, 'dashLogin']);
-Route::get('ordersandreservations',[TableBookingController::class,'ordersandreservations']);
+
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
@@ -141,6 +141,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         //TODO
         return response()->json(['Success' =>  true]);
     });
+    Route::get('ordersandreservations',[TableBookingController::class,'ordersandreservations']);
     Route::post('eventshopregister', [UserController::class, 'vendorsRegister']);
     Route::post('eventcatadd', [EventCatController::class, 'eventcatadd']);
     Route::post('toggleFeatured', [ProductController::class, 'toggleFeatured']);
