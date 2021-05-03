@@ -44,11 +44,11 @@ class TableBookingController extends Controller
         return $data->orderBy('id','asc')->paginate();
         
 
-        
+        return ' does this even work?';
         if (isset($request->shop_id)) {
        
             $shopid = $request->shop_id;
-            return ' does this even work?';
+            
             if($request->action=='tablebookings'){
                 $orders = TableBooking::whereNotNull('table_id')->with(['details' => function ($details) use ($shopid, $dt) {
                     return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
