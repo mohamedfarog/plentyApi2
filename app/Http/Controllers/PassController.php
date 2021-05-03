@@ -117,7 +117,7 @@ class PassController extends Controller
             $arr['serialNumber'] = $serialNumber;
             $cpass = Pass::create($arr);
 
-            return response()->json(['success' => !!$cpass, 'message' => 'Device successfully registered!'], 201);
+            return response()->json(['success' => !!$cpass, 'message' => 'Device successfully registered!',], 201);
         }
     }
 
@@ -164,7 +164,7 @@ class PassController extends Controller
                     array_push($serials, $pass->serialNumber);
                 }
 
-                return new Response(['lastUpdated' => $passes[0]->passesUpdatedSince, 'serialNumbers' => $serials], 200, [
+                return new response(['lastUpdated' => Carbon::now(), 'serialNumbers' => $serials], 200, [
 
                     'Content-Type' => 'application/json',
                     'Pragma' => 'no-cache',
