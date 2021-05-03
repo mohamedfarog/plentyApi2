@@ -169,10 +169,7 @@ class WebsiteHomeController extends Controller
      */
     public function getProductFilter($prodcat_id)
     {
-        $products = DB::table('products')
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('prodcat_id', $prodcat_id)->get();
-        return $products;
+        return Product::where('deleted_at', null)->where('prodcat_id', $prodcat_id)->with(['images'])->get();
     }
 
 
@@ -185,21 +182,22 @@ class WebsiteHomeController extends Controller
     public function getBestSellers($shop_id, Request $request)
     {
         // Checking for popular products 
-        $popular_products = DB::table('products')
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('shop_id', $shop_id)
+        $popular_products = Product::where('deleted_at', null)
             ->where('popular', true)
-            ->take(8)->get();
+            ->take(8)
+            ->with(['images'])
+            ->get();
 
         $no_products = $popular_products->count();
 
         // if not getting products then by sales
         if ($no_products < 8) {
-            $topsale_products = DB::table('products')
-                ->orderBy('sales', 'DESC')
-                ->leftjoin('images', 'images.product_id', '=', 'products.id')
+            $topsale_products = Product::where('deleted_at', null)
                 ->where('shop_id', $shop_id)
-                ->take(8 - $no_products)->get();
+                ->orderBy('sales', 'DESC')
+                ->take(8 - $no_products)
+                ->with(['images'])
+                ->get();
         }
 
 
@@ -781,31 +779,16 @@ class WebsiteHomeController extends Controller
 
     private function getBazaarItems($id)
     {
-        return  DB::table('products')
-            ->select(DB::raw(' products.id as id,
-            products.id as prodid,
-            products.name_ar as name_ar,
-            products.name_en as name_en,
-            products.price as price,
-            products.desc_en as desc_en,
-            products.desc_ar as desc_ar,
-            products.stocks as stock,
-            images.url as image,
-            shop_id as shop_id'))
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('eventcat_id', $id)
-            ->get();
+        return Product::where('deleted_at', null)->where('eventcat_id', $id)->with(['images'])->get();
     }
 
     public function plentybazaar(Request $request, $id)
     {
-
         $data['products'] = $this->getBazaarItems($id);
         $data['cat'] = DB::table('eventcats')
             ->where('id', $id)
             ->get()
             ->first();
-
         return view('bazaar')->with($data);
     }
 }

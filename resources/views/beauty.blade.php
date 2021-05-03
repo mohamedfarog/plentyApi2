@@ -230,7 +230,6 @@
             margin: auto;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -383,14 +382,17 @@
         </section>
         <section style="width: 100%;margin: auto;margin-bottom:40px;">
             <div class="tabprod" style="justify-content: space-evenly;width:100%;display:flex;margin-top:20px;">
-                <button class="tablinkprod" onclick="getBestSeller(this)" id="defaultOpen">
-                    <h2 class="category-name category catmobile">
-                        Best Seller </h2>
-                </button>
                 @foreach($product_categories as $product_category)
+                @if ($loop->first)
+                <button class="tablinkprod" onclick="getProducts(this,{{$product_category->id}})" id="defaultOpen">
+                    <h2 class="category-name category catmobile"> {{$product_category->name_en}} </h2>
+                </button>
+                @else
                 <button class="tablinkprod" onclick="getProducts(this,{{$product_category->id}})">
                     <h2 class="category-name category catmobile"> {{$product_category->name_en}} </h2>
                 </button>
+                @endif
+
                 @endforeach
             </div>
         </section>
@@ -420,7 +422,6 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
@@ -450,10 +451,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -466,24 +467,7 @@
             }
         });
     }
-    //getProducts  //for filtering product based on category
-    function getBestSeller(element) {
-        shop_id = $('#shopid').val();
-        var base_url = $('meta[name=base_url]').attr('content');
-        $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
-                if (data) {
-                    renderProduct(data)
-                    makeCategoryActive(element)
-                } else {
-                    //raise error already exist
-                }
-            }
-        });
-    }
+
 
     // For rendering products in product panel
     function renderProduct(data) {
@@ -495,12 +479,12 @@
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
-                "<a href='booking/" + element.product_id + "'><img src='" + url + element.url + "' alt='' loading=lazy  class='imgz'/></a>" +
+                "<a href='booking/" + element.id + "'><img src='" + element.images[0].imgurl + "' alt='' loading=lazy  class='imgz'/></a>" +
 
                 "<div class='product-action clearfix'></div></div>" +
                 "<div class='product-info clearfix'>" +
                 "<div class='fix'>" +
-                "<h4 class='post-title floatcenter feattitle'><a href='booking/" + element.product_id + "' style=>" + element.name_en + "</a></h4>" +
+                "<h4 class='post-title floatcenter feattitle'><a href='booking/" + element.id + "' style=>" + element.name_en + "</a></h4>" +
                 "<p style='color:" + primary_color + "' class='floatcenter hidden-sm featsubtitle  post-title'>" + "SAR " + element.price + "</p>" +
                 "</div>" +
                 "</div>" +
@@ -544,7 +528,6 @@
         });
         console.log('nohover');
     });
-
 </script>
 <script src="js/prodjs.js"></script>
 
@@ -555,4 +538,3 @@
 </div>
 
 @endsection
-
