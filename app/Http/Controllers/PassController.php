@@ -176,6 +176,7 @@ class PassController extends Controller
     }
     public function getPass($passTypeIdentifier, $serialNumber)
     {
+        FacadesLog::info("getPass: $passTypeIdentifier, $serialNumber");
         $pkpass = PassGenerator::getPass($serialNumber);
 
         $pass = Pass::where('serialNumber', $serialNumber)->first();
