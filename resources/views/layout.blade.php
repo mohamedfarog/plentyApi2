@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="base_url" content="/" />
+    <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -186,7 +186,6 @@
         #user-menu-nav {
             background-color: white;
         }
-
     </style>
 </head>
 
@@ -465,31 +464,31 @@
 
     <script>
         $(".regular").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -497,31 +496,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -530,32 +529,32 @@
 
 
         $(".tryprodslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                breakpoint: 1024
-                , settings: {
-                    slidesToShow: 3
-                    , slidesToScroll: 3
-                    , infinite: true
-                    , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
                 }
             }, {
-                breakpoint: 600
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }, {
-                breakpoint: 480
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }]
         });
@@ -715,14 +714,14 @@
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal
-                , "order_total": cart.order_total
-                , "cart_items": cart_items
-                , "coupon": cart.coupon
-                , "coupon_value": cart.coupon_value
-                , "loyality_point": cart.loyality_point
-                , "plenty_pay": cart.plenty_pay
-                , "is_cash_on_delivery": cart.is_cash_on_delivery
+                "cart_subtotal": cart.cart_subtotal,
+                "order_total": cart.order_total,
+                "cart_items": cart_items,
+                "coupon": cart.coupon,
+                "coupon_value": cart.coupon_value,
+                "loyality_point": cart.loyality_point,
+                "plenty_pay": cart.plenty_pay,
+                "is_cash_on_delivery": cart.is_cash_on_delivery
             }
 
         }
@@ -740,23 +739,23 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , shop_id: element.shop_id
-                        , price: element.price
-                        , name: element.name
-                        , is_product_variant: element.is_product_variant
-                        , size: element.size || null
-                        , size_id: element.size_id || null
-                        , color: element.color || null
-                        , color_id: element.color_id || null
-                        , quantity: element.quantity || null
-                        , date: element.date || null
-                        , time: element.time || null
-                        , timeslot_id: element.timeslot_id || null
-                        , image_url: element.image_url || null
-                        , stock: element.stock || null
-                        , category: element.category || null
-                    , }
+                        id: element.id,
+                        shop_id: element.shop_id,
+                        price: element.price,
+                        name: element.name,
+                        is_product_variant: element.is_product_variant,
+                        size: element.size || null,
+                        size_id: element.size_id || null,
+                        color: element.color || null,
+                        color_id: element.color_id || null,
+                        quantity: element.quantity || null,
+                        date: element.date || null,
+                        time: element.time || null,
+                        timeslot_id: element.timeslot_id || null,
+                        image_url: element.image_url || null,
+                        stock: element.stock || null,
+                        category: element.category || null,
+                    }
 
                     cart.addItem(new CartItem(item))
                 });
@@ -767,32 +766,32 @@
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false
-            , infinite: true
-            , slidesToShow: 6
-            , slidesToScroll: 1
-            , autoplay: false
-            , arrows: true
-            , autoplaySpeed: 10000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: false,
+            infinite: true,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -809,9 +808,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0
-                    , order_total: 0
-                    , cart_items: []
+                    cart_subtotal: 0,
+                    order_total: 0,
+                    cart_items: []
                 }
             }
 
@@ -821,10 +820,10 @@
             var base_url = $('meta[name=base_url]').attr('content');
             let cart = new Cart()
             $.ajax({
-                type: 'GET'
-                , url: base_url + 'shop-category'
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: base_url + 'shop-category',
+                dataType: 'JSON',
+                success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
@@ -952,10 +951,10 @@
         function getFavouriteProductInfo(id) {
             var base_url = $('meta[name=base_url]').attr('content');
             $.ajax({
-                type: 'GET'
-                , url: base_url + 'favourite-product/' + id
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: base_url + 'favourite-product/' + id,
+                dataType: 'JSON',
+                success: function(data) {
                     if (data.Response) {
                         let favourite_item = new FavouriteItem(data.product)
                         let favourites = FavouriteSerializer(getFavouritesLocal())
@@ -967,8 +966,8 @@
                         //
                     }
 
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     console.log('Error!', err)
                 }
 
@@ -998,11 +997,11 @@
             if (data.favourite_items.length > 0) {
                 data.favourite_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , price: element.price
-                        , name_en: element.name_en
-                        , image: element.image || null
-                    , }
+                        id: element.id,
+                        price: element.price,
+                        name_en: element.name_en,
+                        image: element.image || null,
+                    }
 
                     favourites.addItem(new FavouriteItem(item))
                 });
@@ -1049,10 +1048,10 @@
             if (bearer_token) {
                 url = base_url + 'user'
                 $.ajax({
-                    type: 'GET'
-                    , url: url
-                    , dataType: 'JSON'
-                    , headers: {
+                    type: 'GET',
+                    url: url,
+                    dataType: 'JSON',
+                    headers: {
                         "Authorization": 'Bearer ' + bearer_token
                     },
 
@@ -1061,8 +1060,8 @@
 
                         }
 
-                    }
-                    , error: function(err) {
+                    },
+                    error: function(err) {
                         console.log('Error!', err)
                     }
 
@@ -1136,10 +1135,8 @@
             }
             return ids;
         }
-
     </script>
 
 </body>
 
 </html>
-
