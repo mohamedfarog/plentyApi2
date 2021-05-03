@@ -34,7 +34,12 @@ class ApplePass extends Model
             "barcode" => [
                 "message"   => $pass_identifier,
                 "format"    => $project->barcodeformat,
-                "altText"   => $pass_identifier,
+                "altText"   => [
+                    "customer_name" => $user->name,
+                    "customer_mobile_number" => $user->contact,
+                    "mobile_country_code" => substr($user->contact, 0, 4),
+                    "reward_code" => $pass_identifier
+                ],
                 "messageEncoding" => $project->barcodemsgencoding,
             ],
 
@@ -81,7 +86,7 @@ class ApplePass extends Model
                     [
                         "key" => "c-txt2",
                         "label" => "For more information visit",
-                        "value"=>"www.plentyofthings.com",
+                        "value" => "www.plentyofthings.com",
                         "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
                     ],
                 ],
@@ -108,8 +113,7 @@ class ApplePass extends Model
         $user->loyaltyidentifier = $pass_identifier . '.pkpass';
         $user->save();
 
-        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now(),'updateTag'=>'changed']);
-
+        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince' => Carbon::now(), 'updateTag' => 'changed']);
     }
 
     public static function createAccessPass($invitee_id = null, $id = null)
@@ -183,7 +187,7 @@ class ApplePass extends Model
                     [
                         "key" => "c-txt2",
                         "label" => "For more information visit",
-                        "value" =>"www.plentyofthings.com",
+                        "value" => "www.plentyofthings.com",
                         "attributedValue" => "<a href='http://plentyofthings.com/'>www.plentyofthings.com</a>"
                     ],
                 ],
@@ -211,8 +215,7 @@ class ApplePass extends Model
         $user->accessidentifier = $pass_identifier . '.pkpass';
         $user->save();
 
-        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince'=>Carbon::now(), 'updateTag'=>'changed']);
-
+        $passes = Pass::where('serialNumber', $pass_identifier)->update(['passesUpdatedSince' => Carbon::now(), 'updateTag' => 'changed']);
     }
 
     public function sendNotif($pushToken)
