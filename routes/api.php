@@ -32,6 +32,7 @@ use App\Models\Order;
 use App\Models\Pass;
 use App\Models\Prodcat;
 use App\Models\Product;
+use App\Models\Report;
 use App\Models\Schedule;
 use App\Models\Shop;
 use App\Models\Size;
@@ -72,28 +73,38 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('analytics', function (Request $request) {
     $users = User::where('typeofuser', "U")->get()->count();
     $earnings = Order::where('order_status', 3)->sum('total_amount');
     $sales = Order::where('order_status', 3)->get()->count();
     $brands = Shop::whereNotNull('cat_id')->where('active', 1)->get()->count();
-    $earningmonths = 1;
-    if (isset($request->earning_months)) {
-        $earningmonths = $request->earning_months;
-    }
 
-    $period = now()->subMonths($earningmonths)->monthsUntil(now());
+    //earnings graph
 
-    $earningdata = [];
-    foreach ($period as $date) {
-        $earning =  Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
-        $earningdata[$date->shortMonthName ." " . $date->year] =
-            $earning;
-    }
+    $earninggraph = (new Report())->createGraph($request, Order::where('order_status', 3),"sum('total_amount')");
+    // $earningmonths = 1;
+    // if (isset($request->earning_months)) {
+    //     $earningmonths = $request->earning_months;
+    // }
+
+    // $period = now()->subMonths($earningmonths)->monthsUntil(now());
+
+    // $earningdata = [];
+    // foreach ($period as $date) {
+    //     $earning =  Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
+    //     $earningdata[$date->shortMonthName ." " . $date->year] =
+    //         $earning;
+    // }
 
 
-    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands,'earninggraph'=>$earningdata]);
+
+    
+
+
+    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands,'earninggraph'=>$earninggraph]);
 });
+
 Route::get('events', [EventController::class, 'index']);
 Route::get('eventshops', [EventcatController::class, 'index']);
 Route::get('eventproducts', [ProductController::class, 'getProducts']);
