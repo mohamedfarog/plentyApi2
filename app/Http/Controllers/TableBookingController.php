@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\TableBooking;
 use App\Models\TableBookingDetail;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class TableBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = Auth::id();
 
@@ -24,6 +25,38 @@ class TableBookingController extends Controller
             return $details->with('product');
         }]);
         return $data->orderby('id','desc')->paginate();
+        $shopid= $request->shop_id;
+        // if(isset($request->shop_id)){
+        //     $orders= Order::with(['details' => function ($details) use($shopid) {
+        //         return $details->where('shop_id',$shopid)->with(['product' => function ($product) {
+        //             return $product->with(['images']);
+        //         }, 'size', 'color']);
+        //     }, 'user','details'=>function($details) use($dt){
+        //           return $details->whereDate('created_at', '=',$dt->toDateString());
+        //     }])->get();
+        //     $arr= array();
+        //     foreach($orders as $order){
+              
+        //         if(count($order->details)>0){
+        //             foreach($order->details as $detail){
+        //                 if($detail->shop_id==$request->shop_id){
+        //                     array_push($arr,$order);
+        //                 }
+        //             }  
+        //         }
+        //     }
+        //     return $arr;
+        //     if(count($arr[0])>0){
+        //            $data = $this->paginate($arr[0]);
+        //     return $data;
+            
+        //     }
+        //     else{
+        //         return response()->json(['Errors'=>'No orders found']);
+        //     }
+            
+
+        // }
     }
 
 
