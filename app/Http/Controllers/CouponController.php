@@ -16,7 +16,7 @@ class CouponController extends Controller
     {
         $user= Auth::user();
         if($user->typeofuser=='S'){
-            $coupons= Coupon::get();
+            $coupons= Coupon::paginate();
             return response()->json(['Coupons' =>$coupons]);
         }
             
