@@ -93,7 +93,7 @@ class CouponController extends Controller
                     if (isset($request->id)) {
                         $coupon = Coupon::where('id', $request->id)->first();
                         $coupon->update(['expiry' =>  $coupon->expiry->addDays(7)]);
-                        return redirect('/coupons');
+                        
 
                         // return response()->json(['status' => !!$coupon, 'data' => $coupon]);
                     }
