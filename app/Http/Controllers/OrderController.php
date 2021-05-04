@@ -84,7 +84,7 @@ class OrderController extends Controller
             ]
         ]);
         
-        return json_encode($res);
+        return json_decode($res);
     }
 
 
