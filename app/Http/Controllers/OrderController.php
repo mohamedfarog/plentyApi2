@@ -331,7 +331,7 @@ class OrderController extends Controller
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
             }
-            if($request->payment_method=='card'){
+            if($request->payment_method=='CARD'){
                 $trans= new Transaction();
                 $trans->amount= $request->amount_due;
                 $trans->ref= Str::uuid();
