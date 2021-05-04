@@ -183,9 +183,7 @@
 
         .buttonmobile {
             height: 60px;
-        }
-
-
+        } 
         .shoplistmobile>button {
             flex: 25%;
             height: 100% !important;

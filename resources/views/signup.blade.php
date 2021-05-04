@@ -76,16 +76,11 @@
     #otpModal .modal-header {
 
         border-bottom: none;
-    }
-
-
+    } 
     #otpModal .modal-dialog {
 
-        text-align: center;
-
-
-    }
-
+        text-align: center; 
+    } 
     #otpModal .modal-content {
 
         border-radius: 30px;
@@ -409,12 +404,8 @@
                         window.location.href = base_url;
                     } else {
                         register(data)
-                    }
-
-
-                }
-
-
+                    } 
+                } 
             }
         });
     }
@@ -454,5 +445,4 @@
 
 </script>
 
-@endsection
-
+@endsection 
