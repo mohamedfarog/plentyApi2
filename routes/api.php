@@ -22,6 +22,7 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TableschedController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Addon;
 use App\Models\Cat;
@@ -114,8 +115,8 @@ Route::get('eventshops', [EventcatController::class, 'index']);
 Route::get('eventproducts', [ProductController::class, 'getProducts']);
 Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
-Route::post('success');
-Route::get('success');
+Route::resource('success',TransactionController::class);
+
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
