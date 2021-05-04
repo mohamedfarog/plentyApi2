@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "283214b328a3bc36d542f708b00b9329",
+    "content-hash": "92ff26b6d9d81f6708e914540011b24c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2617,6 +2617,60 @@
                 }
             ],
             "time": "2020-12-10T11:35:44+00:00"
+        },
+        {
+            "name": "moathdev/tap",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moathdev/tap.git",
+                "reference": "33de2e9b8c546b85e3a5c8298b244538773d8efa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moathdev/tap/zipball/33de2e9b8c546b85e3a5c8298b244538773d8efa",
+                "reference": "33de2e9b8c546b85e3a5c8298b244538773d8efa",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "illuminate/support": "~7.0 || ~8.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Moathdev\\Tap\\TapServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Moathdev\\Tap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moathdev",
+                    "email": "muath@hey.com"
+                }
+            ],
+            "description": "Tap payment API for Laravel",
+            "keywords": [
+                "laravel",
+                "payment",
+                "tap"
+            ],
+            "support": {
+                "issues": "https://github.com/moathdev/tap/issues",
+                "source": "https://github.com/moathdev/tap/tree/1.1.0"
+            },
+            "time": "2021-03-08T21:15:45+00:00"
         },
         {
             "name": "monolog/monolog",

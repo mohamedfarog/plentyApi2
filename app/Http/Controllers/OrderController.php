@@ -19,6 +19,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Moathdev\Tap\Facades\Tap;
 
 class OrderController extends Controller
 {
@@ -38,6 +39,53 @@ class OrderController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
 
     }
+    public function pay()
+    {
+        $res  = Tap::createCharge([
+            'amount'=> 1,
+            'currency' => 'SAR',
+            'threeDSecure' => true,
+            'save_card' => false,
+            'description' => 'Test Description',
+            'statement_descriptor' => 'Sample',
+            'metadata' => [
+                'udf1' => 'test 1',
+                'udf2' => 'test 2',
+            ],
+            'reference' => [
+                'transaction' => 'txn_0001',
+                'order' => 'ord_0001',
+            ],
+            'receipt' => [
+                'email' => false,
+                'sms' => false,
+            ],
+            'customer' => [
+                'first_name' => "test",
+                'middle_name' => "test",
+                'last_name' => "test",
+                'email' => "test@test.com",
+                'phone' => [
+                    'country_code' => "965",
+                    'number' => "50000000",
+                ],
+            ],
+            'merchant' => [
+                'id' => ''
+            ],
+            'source' => [
+                'id' => 'src_all',
+            ],
+            'post' => [
+                'url' => 'http://your_website.com/post_url'
+            ],
+            'redirect' => [
+                'url' => 'http://your_website.com/post_url'
+            ]
+        ]);
+        
+        return $res;
+    }
 
 
     public function index(Request $request)
@@ -46,7 +94,7 @@ class OrderController extends Controller
         
          $user = Auth::user();
          $shopid=$request->shop_id;
-         
+
     
  
         $orders = Order::with(['details' => function ($details) {

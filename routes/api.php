@@ -51,6 +51,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Moathdev\Tap\Tap;
 use NotificationChannels\Apn\ApnVoipMessage;
 use Thenextweb\Definitions\StoreCard;
 use Thenextweb\PassGenerator;
@@ -152,7 +153,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('shops', ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
-
+    Route::get('/createCharge',[OrderController::class,'pay']);
     Route::resource('users', UserController::class);
     Route::resource('cart', CartController::class);
     Route::resource('orders', OrderController::class);
