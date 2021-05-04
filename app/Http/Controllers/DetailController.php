@@ -53,6 +53,9 @@ class DetailController extends Controller
                     if (isset($request->qty)) {
                         $detail->qty = $request->qty;
                     }
+                    if(isset($request->status)){
+                        $detail->status = $request->status;
+                    }
                     if (isset($request->shop_id)) {
                         $detail->shop_id = $request->shop_id;
                     }

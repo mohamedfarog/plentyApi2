@@ -9,7 +9,7 @@ class Detail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'product_id', 'qty','timeslot_id', 'shop_id', 'order_id', 'price', 'color_id', 'addons', 'size_id', 'booking_date', 'booking_time',
+        'product_id', 'qty','timeslot_id', 'shop_id', 'order_id', 'price', 'color_id', 'addons', 'size_id', 'booking_date', 'booking_time', 'status'
      
     ];
     public function order()
