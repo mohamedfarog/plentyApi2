@@ -522,18 +522,18 @@ class UserController extends Controller
                 $user = User::with(['tier'])->find($authuser->id);
             
                     $trans = new Transaction();
-                    $trans->amount = $request->amount_due;
+                    $trans->amount = $request->amount;
                     $trans->ref = Str::uuid();
                     $trans->order_id =  0;
                     $trans->status = 0;
                     $trans->type = 'Order';
                     $trans->user_id= $authuser->id;
                     $trans->save();
-                    $paygateway = $trans->createpayment($user, $request->amount_due, 0, $trans->id);
+                    $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id);
                     return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $authuser]);
                 
-                $user->wallet += $request->amount;
-                $user->save();
+                // $user->wallet += $request->amount;
+                // $user->save();
                 return response()->json(['success' => !!$user, 'user' => $user]);
             }
             }
