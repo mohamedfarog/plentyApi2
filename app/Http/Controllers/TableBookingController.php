@@ -38,6 +38,7 @@ class TableBookingController extends Controller
         $dt = Carbon::now();
         
         if(!isset($request->shop_id)){
+            return 'This is being callled';
             $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
