@@ -24,11 +24,6 @@ class Transaction extends Model
             $lastname=  $user->name;
         }
         $phonenumber= substr($user->contact, 4,12);
-      
-
-
-
-
         $res  = Tap::createCharge([
             'amount'=> $amount,
             'currency' => 'SAR',
