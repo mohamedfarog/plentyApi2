@@ -122,7 +122,8 @@ class CouponController extends Controller
                         $coupon = Coupon::where('id', $request->id)->update(['expiry' => Carbon::now()]);
                         return redirect('/coupons');
                     }
-                    return response()->json(['error' => "something went wrong"]);
+                    return response()->json(['message' => "Coupon expired"]);
+
                     break;
                 case 'coupon':
 
