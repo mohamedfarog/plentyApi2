@@ -38,6 +38,7 @@ class TableBookingController extends Controller
         $dt = Carbon::now();
         
         if(!isset($request->shop_id)){
+            
             $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
@@ -59,8 +60,8 @@ class TableBookingController extends Controller
                 }, 'user'])->get();
             }
             if($request->action=='pickup'){
-                $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid) {
-                    return $details->where('shop_id', $shopid);
+                $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid,$dt) {
+                    return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
             // $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
@@ -68,6 +69,7 @@ class TableBookingController extends Controller
             // }, 'user'])->get();
             $arr = array();
             $tablebookings= array();
+            
             foreach ($orders as $order) {
 
                 if (count($order->details) > 0) {
@@ -117,7 +119,10 @@ class TableBookingController extends Controller
             $orders = Order::where('user_id',$userid)->with(['details'=>function($details){
                 return $details->with('product');
             },'user'])->get();
-            return  array_merge($bookings, $orders);
+            if(count($bookings) > 0 && count($orders)>0){
+            //    return array_combine($bookings, $orders);
+            }
+           
       
          
          
