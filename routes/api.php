@@ -153,53 +153,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('shops', ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
-    Route::get('/createCharge', function()
-    {
-            $res  = Tap::createCharge([
-                'amount'=> 1,
-                'currency' => 'SAR',
-                'threeDSecure' => true,
-                'save_card' => false,
-                'description' => 'Test Description',
-                'statement_descriptor' => 'Sample',
-                'metadata' => [
-                    'udf1' => 'test 1',
-                    'udf2' => 'test 2',
-                ],
-                'reference' => [
-                    'transaction' => 'txn_0001',
-                    'order' => 'ord_0001',
-                ],
-                'receipt' => [
-                    'email' => false,
-                    'sms' => false,
-                ],
-                'customer' => [
-                    'first_name' => "test",
-                    'middle_name' => "test",
-                    'last_name' => "test",
-                    'email' => "test@test.com",
-                    'phone' => [
-                        'country_code' => "965",
-                        'number' => "50000000",
-                    ],
-                ],
-                'merchant' => [
-                    'id' => ''
-                ],
-                'source' => [
-                    'id' => 'src_all',
-                ],
-                'post' => [
-                    'url' => 'http://your_website.com/post_url'
-                ],
-                'redirect' => [
-                    'url' => 'http://your_website.com/post_url'
-                ]
-            ]);
-            
-            dd($res);
-    });
+    Route::get('/createCharge',[OrderController::class,'pay']);
     Route::resource('users', UserController::class);
     Route::resource('cart', CartController::class);
     Route::resource('orders', OrderController::class);
