@@ -21,7 +21,7 @@ class SchedTime extends Model
     
     public function tblbooking()
     {
-        return $this->hasOne(TableBooking::class);
+        return $this->hasOne(TableBooking::class, 'table_booking_id','id');
     }
 
     public function getFromtimeAttribute()
