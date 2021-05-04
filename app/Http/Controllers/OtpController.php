@@ -146,8 +146,8 @@ class OtpController extends Controller
 
             //send code -- waiting for client's SMS gateway.
 
-            // $msg = (new SMS())->sendSms(substr($otp->contact, 1), 'Hello, thank you for using Plenty of Things, use this OTP ' . $otp->otp . ' This OTP is valid for 30 minutes.');
-            // $msg = 'Otp has been added';
+            $msg = (new SMS())->sendSms(substr($otp->contact, 1), 'Hello, thank you for using Plenty of Things, use this OTP ' . $otp->otp . ' This OTP is valid for 30 minutes.');
+            $msg = 'Otp has been added';
             return response()->json(['success' => !!$otp, 'message' => $msg,  'otp' => $otp->otp]);
         }
     }
