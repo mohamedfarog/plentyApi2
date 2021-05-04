@@ -61,7 +61,7 @@ class TableBookingController extends Controller
             }
             if($request->action=='pickup'){
                 $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid,$dt) {
-                    return $details->where('shop_id', $shopid)->whereDate('date', '=', $dt->toDateString());
+                    return $details->where('shop_id', $shopid)->whereDate('created_at', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
             // $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
@@ -69,7 +69,7 @@ class TableBookingController extends Controller
             // }, 'user'])->get();
             $arr = array();
             $tablebookings= array();
-            return $orders;
+            
             foreach ($orders as $order) {
 
                 if (count($order->details) > 0) {
