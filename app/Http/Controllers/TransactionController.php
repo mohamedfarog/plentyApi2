@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -42,12 +43,25 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-          Mail::send('testpayment', ["data" => $request['reference']['order']], function ($m)   {
-           
-            $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
-      
-        $m->to('mohammed@mvp-apps.ae')->subject('Plenty Support Request');
-    });
+        $orderid=$request['reference']['order'];
+        $transactionid=$request['reference']['transaction'];
+        $status=$request['acquirer']['response']['message'];
+        if($status=='Approved'){
+            if($orderid!= null){
+                $transaction= Transaction::find($transactionid);
+                $transaction->status=1;
+                $transaction->save();
+                $order= Order::find($orderid);
+                $order->order_status=0;
+                $order->save();
+
+
+            }
+        }
+        else{
+
+        }
+
     }
 
     /**

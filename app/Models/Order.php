@@ -51,7 +51,13 @@ class Order extends Model
             case '4':
                 return "Rejected";
                 break;
-
+            case '99':
+                    return "Payment Pending";
+                    break;
+                    case '98':
+                        return "Payment Pending";
+                        break;        
+    
             default:
                 return "Unknown";
                 break;

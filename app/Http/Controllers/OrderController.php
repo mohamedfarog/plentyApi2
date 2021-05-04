@@ -38,20 +38,19 @@ class OrderController extends Controller
         $items = $items instanceof Collection ? $items : Collection::make($items);
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-
     }
- 
+
 
 
     public function index(Request $request)
     {
         $dt = Carbon::now();
-        
-         $user = Auth::user();
-         $shopid=$request->shop_id;
 
-    
- 
+        $user = Auth::user();
+        $shopid = $request->shop_id;
+
+
+
         $orders = Order::with(['details' => function ($details) {
             return $details->with(['product' => function ($product) {
                 return $product->with(['images']);
@@ -216,9 +215,12 @@ class OrderController extends Controller
             $data['delivery_location'] = $request->delivery_location;
 
             //  addPoints
-            if (isset($request->order_status)) {
 
+            if (isset($request->order_status)) {
                 $data['order_status'] = $request->order_status;
+                if ($request->payment_method == 'CARD') {
+                    $data['order_status'] = 99;
+                }
             }
             if (isset($request->payment_method)) {
                 $data['payment_method'] = $request->payment_method;
@@ -270,12 +272,12 @@ class OrderController extends Controller
 
 
             $order = Order::create($data);
-         
-  
+
+
             // $trans->amount;   //todo
             // reg,order_id,ref,status,type,
 
-            
+
 
             //TODO
             //    $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
@@ -331,17 +333,16 @@ class OrderController extends Controller
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
             }
-            if($request->payment_method=='CARD'){
-                $trans= new Transaction();
-                $trans->amount= $request->amount_due;
-                $trans->ref= Str::uuid();
-                $trans->order_id=  $order->id;
-                $trans->status= 0;
-                $trans->type='Order';
+            if ($request->payment_method == 'CARD') {
+                $trans = new Transaction();
+                $trans->amount = $request->amount_due;
+                $trans->ref = Str::uuid();
+                $trans->order_id =  $order->id;
+                $trans->status = 0;
+                $trans->type = 'Order';
                 $trans->save();
-                $paygateway= $trans->createpayment($user,$request->amount_due,$order->id,$trans->id);
+                $paygateway = $trans->createpayment($user, $request->amount_due, $order->id, $trans->id);
                 return response()->json(['success' => !!$order, 'message' => $paygateway, 'user' => User::find($customer->id)]);
-
             }
 
 
