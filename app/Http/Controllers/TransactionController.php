@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TransactionController extends Controller
 {
@@ -12,9 +13,15 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
+           
+                $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
+          
+            $m->to('mohammed@mvp-apps.ae')->subject('Plenty Support Request');
+        });
     }
 
     /**
@@ -35,7 +42,12 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
+           
+            $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
+      
+        $m->to('mohammed@mvp-apps.ae')->subject('Plenty Support Request');
+    });
     }
 
     /**

@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="css/material-design-iconic-font.css" defer>
     <!-- All common css of theme -->
     <link rel="stylesheet" href="css/default.css" defer>
-    <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='css/fontawesome.css' rel='stylesheet' type='text/css'>
     <!-- shortcode css -->
     <link rel="stylesheet" href="css/shortcode.css" defer>
     <!-- responsive css -->
@@ -70,8 +70,7 @@
     <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script> 
     <style type="text/css">
         .slick-slide {
             margin: 0px 20px;
@@ -184,6 +183,7 @@
             background-color: white;
         }
     </style>
+    
 </head>
 
 <body class="relative">
@@ -427,7 +427,7 @@
     <div id="back-to-top">
         <a href="#top"><i class="fa fa-angle-up"></i></a>
     </div>
-
+ 
 
     <script type="text/javascript" src="js/bootstrap.min.js" defer></script>
     <script type="text/javascript" src="js/plugins.js" defer></script>
@@ -814,6 +814,7 @@
         }
 
         $(document).ready(function() {
+               
             var base_url = $('meta[name=base_url]').attr('content');
             let cart = new Cart()
             $.ajax({
@@ -1134,7 +1135,8 @@
             return ids;
         }
     </script>
-
+  
+ 
 </body>
 
 </html>

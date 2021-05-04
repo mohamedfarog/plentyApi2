@@ -60,10 +60,10 @@ class Transaction extends Model
                 'id' => 'src_all',
             ],
             'post' => [
-                'url' => 'http://your_website.com/post_url'
+                'url' => 'https://plentyapp.mvp-apps.ae/api/success'
             ],
             'redirect' => [
-                'url' => 'http://your_website.com/post_url'
+                'url' => 'https://plentyapp.mvp-apps.ae/api/success'
             ]
         ]);
         
