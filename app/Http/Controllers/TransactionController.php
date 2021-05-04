@@ -16,12 +16,12 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
 
-        Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
+        // Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
            
-                $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
+        //         $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
           
-            $m->to('mohammed@mvp-apps.ae')->subject('Plenty Support Request');
-        });
+        //     $m->to('mohammed@mvp-apps.ae')->subject('Plenty Support Request');
+        // });
     }
 
     /**
@@ -42,7 +42,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-          Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
+          Mail::send('testpayment', ["data" =>['rr'=>$request['acquirer']['response']['message']] ], function ($m)   {
            
             $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
       
