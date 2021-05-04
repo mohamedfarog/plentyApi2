@@ -119,6 +119,7 @@ class TableBookingController extends Controller
                 return $details->with('product');
             },'user'])->get();
             if(count($bookings) > 0 && count($orders)>0){
+                return $bookings;
                       return  array_merge($bookings, $orders);
             }
            
