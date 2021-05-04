@@ -12,6 +12,7 @@ class Transaction extends Model
     use HasFactory;
     public function createpayment($user, $amount,$orderid,$transid)
     {
+        
         $user = Auth::user();
         $firstname='';
         $lastname='';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -43,6 +44,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        
         $orderid=$request['reference']['order'];
         $transactionid=$request['reference']['transaction'];
         $status=$request['acquirer']['response']['message'];
@@ -51,9 +53,19 @@ class TransactionController extends Controller
                 $transaction= Transaction::find($transactionid);
                 $transaction->status=1;
                 $transaction->save();
-                $order= Order::find($orderid);
-                $order->order_status=0;
-                $order->save();
+                if($orderid!=0){
+                    $user= User::find($transaction->user_id);
+                    $user->wallet+= $transaction->amount;
+                    $user->save();
+
+                   
+                }
+                else{
+                    $order= Order::find($orderid);
+                    $order->order_status=0;
+                    $order->save(); 
+                }
+                
 
 
             }
