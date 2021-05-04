@@ -19,6 +19,7 @@ class SchedTimeController extends Controller
     public function index()
     {
         //
+        return SchedTime::distinct()->get();
     }
 
     /**
