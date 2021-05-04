@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -13,6 +14,12 @@ class CouponController extends Controller
 
     public function index(Request $request)
     {
+        $user= Auth::user();
+        if($user->typeofuser=='S'){
+            $coupons= Coupon::get();
+            return response()->json(['Coupons' =>$coupons]);
+        }
+            
         $today = Carbon::now();
         if (isset($request->code)) {
             $couponexist = Coupon::where('code', strtoupper($request->code))->first();
