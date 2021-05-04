@@ -84,7 +84,7 @@ class OrderController extends Controller
             ]
         ]);
         
-        dd($res);
+        return $res;
     }
 
 
