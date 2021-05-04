@@ -69,6 +69,7 @@ class TableBookingController extends Controller
             // }, 'user'])->get();
             $arr = array();
             $tablebookings= array();
+            return $orders;
             foreach ($orders as $order) {
 
                 if (count($order->details) > 0) {
@@ -119,7 +120,7 @@ class TableBookingController extends Controller
                 return $details->with('product');
             },'user'])->get();
             if(count($bookings) > 0 && count($orders)>0){
-               return array_combine($bookings, $orders);
+            //    return array_combine($bookings, $orders);
             }
            
       
