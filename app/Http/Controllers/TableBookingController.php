@@ -118,7 +118,10 @@ class TableBookingController extends Controller
             $orders = Order::where('user_id',$userid)->with(['details'=>function($details){
                 return $details->with('product');
             },'user'])->get();
-            return  array_merge($bookings, $orders);
+            if(count($bookings) > 0 && count($orders)>0){
+                      return  array_merge($bookings, $orders);
+            }
+           
       
          
          
