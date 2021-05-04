@@ -618,11 +618,24 @@ class UserController extends Controller
         {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
-                if($user->typeofuser == 'V'){
+                if($user->typeofuser == 'V' ){
                     if ($user->email_verified_at != NULL) {
                         $success["message"] = "Login successful";
                         $success["token"] = $user->createToken('MyApp')->accessToken;
                         $u = User::with('shop')->where('id',$user->id)->first();
+        
+                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                    } else {
+                        return response()->json(["error" => "Please verify the email"]);
+                    }
+                }
+                else if($user->typeofuser == 'B' ){
+                    if ($user->email_verified_at != NULL) {
+                        $success["message"] = "Login successful";
+                        $success["token"] = $user->createToken('MyApp')->accessToken;
+                        $u = User::with(['shop'  =>function  ($shop){
+                            return $shop->whereNotNull('cat_id');
+                        }])->where('id',$user->id)->first();
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {

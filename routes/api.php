@@ -114,6 +114,8 @@ Route::get('eventshops', [EventcatController::class, 'index']);
 Route::get('eventproducts', [ProductController::class, 'getProducts']);
 Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
+Route::post('success');
+Route::get('success');
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
