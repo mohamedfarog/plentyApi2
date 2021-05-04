@@ -161,6 +161,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('products', ProductController::class);
     Route::post('autogenerateslots', [SchedTimeController::class, 'autogenerateslots']);
     Route::resource('tableschedules', TableschedController::class);
+    Route::resource('tabletimes', SchedTimeController::class);
     Route::post('searchProduct', [ProductController::class, "search"]); // This is currently working for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
