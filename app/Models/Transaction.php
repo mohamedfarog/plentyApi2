@@ -10,7 +10,7 @@ use Moathdev\Tap\Facades\Tap;
 class Transaction extends Model
 {
     use HasFactory;
-    public function createpayment($user, $amount)
+    public function createpayment($user, $amount,$orderid,$transid)
     {
         $user = Auth::user();
         $firstname='';
@@ -36,8 +36,8 @@ class Transaction extends Model
                 'udf2' => 'test 2',
             ],
             'reference' => [
-                'transaction' => 'txn_0001',
-                'order' => 'ord_0001',
+                'transaction' => $transid,
+                'order' => $orderid,
             ],
             'receipt' => [
                 'email' => false,
