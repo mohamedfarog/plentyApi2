@@ -160,6 +160,11 @@
         margin: auto;
         text-align:center;
     }
+    .h2-beauty{
+        font-weight:lighter;
+        font-size:60px;
+        padding: 100px 0 100px;
+    }
     @media only screen and (max-width: 1000px) {
         .pp-product-panel{
             width:100%;
@@ -243,11 +248,11 @@
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title">
-                        <h2 style="font-weight:lighter;font-size:60px;padding: 100px 0 100px;">BEAUTY</h2>
+                        <h2 class="h2-beauty">BEAUTY</h2>
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
-                            <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
+                            <li><a href="/" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;">BEAUTY</li>
                             <li style="font-weight:lighter;" id="breadcrumbshopname2">Linen</li>
                         </ul>

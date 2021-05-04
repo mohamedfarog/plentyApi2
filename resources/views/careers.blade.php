@@ -26,7 +26,7 @@
         color: white;
         border-radius: 20px;
         display: inline-block;
-        padding: 6px 20px;
+        padding: 6px 20px;   
         cursor: pointer;
     }
 
@@ -40,7 +40,44 @@
     span {
         color: #001B71;
     }
-
+    #msgbtn{
+        padding: .75rem 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 0;
+        background-color: #001B71;
+        color: white;
+    }
+    .email-pot{
+        font-weight: 900;
+        margin-top:10px;
+    }
+    .scc-content{
+        margin-top:50px;
+        padding-bottom: 1rem;
+    }
+    .an-div{
+        width: 90%;
+        margin: auto;
+    }
+    #name{
+        background-color: #f8f8f8;
+        border:0px solid #ccc;
+        width:100%;
+        padding: 5px;
+    }
+    #mobile{
+        background-color: #f8f8f8;
+        border:0px solid #ccc;
+        width: 100%;
+        padding: 5px;
+    }
+    #email{
+        background-color: #f8f8f8;
+        border:0px solid #ccc;
+        width: 100%;
+        padding: 5px;
+    } 
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -53,10 +90,10 @@
     </div>
 </section>
 
-<div class="animsition" style="width: 90%;margin: auto;">
+<div class="animsition an-div">
     <div class="wrapper" style="margin-bottom: 10rem;">
 
-        <div class="section section-content" style="margin-top:50px;padding-bottom: 1rem;">
+        <div class="section section-content scc-content" >
             <div class="container-fluid" style="padding-right: 0;padding-left:0;">
                 <div class="row" style="padding:20px;">
                     <div class="col-lg-3 col-xs-12">
@@ -65,7 +102,7 @@
                             <br>
                             Join our team and send your CV to
                             <br>
-                            <span style="font-weight: 900;margin-top:10px;"><a href="mailto:hr@plentyofthings.com">hr@plentyofthings.com</a></span>
+                            <span class="email-pot" ><a href="mailto:hr@plentyofthings.com">hr@plentyofthings.com</a></span>
                         </h6>
                     </div>
                     <div class="col-lg-7 col-xs-12">
@@ -76,7 +113,7 @@
                                     <h6>Name:</h6>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" name="name" id="name" style="background-color: #f8f8f8;border:0px solid #ccc;width:100%;padding: 5px;" placeholder="First and Last  " required>
+                                    <input type="text" name="name" id="name" placeholder="First and Last  " required>
                                 </div>
                                 <br>
                             </div>
@@ -85,7 +122,7 @@
                                     <h6>Mobile:</h6>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" name="mobile" id="mobile" style="background-color: #f8f8f8;border:0px solid #ccc;width: 100%;padding: 5px;" placeholder="country code +966" required>
+                                    <input type="text" name="mobile" id="mobile" placeholder="country code +966" required>
                                 </div>
                                 <br>
                             </div>
@@ -94,7 +131,7 @@
                                     <h6> Email:</h6>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" name="email" id="email" style="background-color: #f8f8f8;border:0px solid #ccc;width: 100%;padding: 5px;" placeholder="@gmail @hotmail @windowslive @yahoo @outlook" required>
+                                    <input type="text" name="email" id="email" placeholder="@gmail @hotmail @windowslive @yahoo @outlook" required>
                                 </div>
                                 <br>
                             </div>
@@ -107,7 +144,7 @@
                                     <label for="file-upload" class="custom-file-upload">
                                         Attach File
                                     </label>
-                                    <input type="file" id="file-upload" name="uploadedFile" style="display: none;" accept=".pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="required">
+                                    <input type="file" id="fupload file-upload" name="uploadedFile" style="display: none;" accept=".pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="required">
 
                                     <span id="filenametext"></span>
                                 </div>
@@ -116,7 +153,7 @@
 
                             <div class="row" style="margin:15px 0;direction: ltr !important;text-align: left !important;">
                                 <div class="col-lg-12" style="direction: ltr !important;">
-                                    <button id="msgbtn" class="plenty-form-button" style="padding: .75rem 2rem;font-weight: 700;text-transform: uppercase;border-radius: 0;background-color: #001B71;color: white;">Send</button>
+                                    <button id="msgbtn" class="plenty-form-button" style="">Send</button>
                                 </div>
                             </div>
                             <div class="row" style="margin:15px 0;direction: ltr !important;text-align: left !important;">

@@ -35,8 +35,7 @@
         width: 100%;
         margin: 3em auto;
         padding: 2em;
-        background: #fff;
-
+        background: #fff; 
     }
 
     .calendar-wrapper table {
@@ -45,7 +44,6 @@
         border-radius: 3px;
         border-collapse: collapse;
         color: #000d67;
-
     }
 
     .calendar-wrapper td {
@@ -56,8 +54,7 @@
         vertical-align: middle;
         width: 14.285714285714%;
     }
-
-
+ 
 
     .calendar-wrapper td.not-current {
         color: #c0c0c0;

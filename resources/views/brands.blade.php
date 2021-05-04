@@ -27,7 +27,11 @@
     .contu {
         width: 1000px;
     }
-
+    .brands-sec{
+        margin: auto;
+        width:100%;
+        text-align:center;
+    }
     @media only screen and (max-width: 1000px) {
         .contu {
             width: 95%;
@@ -50,30 +54,27 @@
             </div>
         </div>
     </div>
-</section> 
+</section>
 
 <div class="purchase-online-area ">
     <div class="container contu">
         <div class="row">
-
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
                 <!-- Nav tabs -->
-
             </div>
             <div class="col-lg-12">
                 <!-- Tab panes -->
                 <div class="-">
                     <div class="tab-pane active" id="new-arrivals">
-                        <section style="margin: auto;width:100%;text-align:center;">
+                        <section class="brands-sec">
                             @if(isset($brands))
                             @foreach($brands as $hb)
                             <?php
                             $primary = $hb->primary;
                             $primarycolor = substr($primary, -6);
                             ?>
-
                             <div class="col-lg-3 col-xs-6 brand-slide" style="margin-top:50px;">
                                 @if($hb->cat_id == 1)
                                 <a href="/delicacy/{{$hb->shop_id}}">
@@ -85,30 +86,21 @@
                                             <a href="/">
                                                 @endif
                                                 <div class="product-img frame" style="border: 2px solid #<?php echo $primarycolor ?>">
-
                                                     <img class="imgz" src="storage/styles/{{$hb->brandheader}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 90%;max-height: 90%;width:80%;min-width:80%;" />
-
                                                     <div class="product-action clearfix">
-
                                                     </div>
                                                 </div>
                                             </a>
                             </div>
-
                             @endforeach
                             @endif
-
                         </section>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 <section style="height:50px;">
 </section>
@@ -126,10 +118,6 @@
         </div>
     </div>
 </section>
-
-
-
-
 <script>
     $(document).ready(function() {
         $(".promo-inner").hover(function() {

@@ -218,9 +218,9 @@
             margin: auto;
         }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
-
 <div class="heading-banner-area overlay-bg" style="background: url('storage/{{$cat->image}}') no-repeat scroll center center / cover;margin: 0 5%;">
     <div class="container">
         <div class="row">
@@ -231,7 +231,7 @@
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
-                            <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
+                            <li><a href="/" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;" id="breadcrumbshopname">{{$cat->name}}</li>
                         </ul>
                     </div>
@@ -268,11 +268,8 @@
                                 </span>
                             </a>
                         </div>
-
                     </div>
-
                 </div>
-
                 @endforeach
                 @endif
             </section>
@@ -298,6 +295,7 @@
 
 
     });
+
 </script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')

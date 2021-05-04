@@ -83,7 +83,7 @@
     .qtybutton {
         color: black;
     }
-
+    
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;
@@ -116,7 +116,7 @@
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
-                            <li><a href="index.html">DELICACY</a></li>
+                            <li><a href="/">DELICACY</a></li>
                             @if(isset($shop->name_en))
                             <li>{{$shop->name_en}}</li>
                             @endif
@@ -262,16 +262,11 @@
     <div class="brand-slide " style="border:2px solid transparent;">
         <div class="product-img">
             <div class="frame">
-                {{-- @if ($tw->image)
-                    Remove if there image for addons
-                    <a href="{{ url('/product/' . $tw->id) }}">
-                <img class="imgz" src="storage/products/{{$tw->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy />
-                </a>
-                @else --}}
+
                 <a href="{{ url('/product/' . $tw->id) }}">
                     <img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy />
                 </a>
-                {{-- @endif --}}
+
                 <div class="product-action clearfix">
 
                 </div>

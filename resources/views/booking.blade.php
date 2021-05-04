@@ -426,7 +426,7 @@
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
-                            <li><a href="index.html">BEAUTY</a></li>
+                            <li><a href="/">BEAUTY</a></li>
                             <li>{{$shop->name_en}}</li>
                         </ul>
                     </div>

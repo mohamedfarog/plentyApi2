@@ -233,6 +233,11 @@
         .imgz {
             min-width: 0;
         }
+        .h2-fashion{
+            font-weight:lighter;
+            font-size:60px;
+            padding: 100px 0 100px;
+        }
     }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
@@ -247,11 +252,11 @@
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title">
-                        <h2 style="font-weight:lighter;font-size:60px;padding: 100px 0 100px;">FASHION</h2>
+                        <h2 class="h2-fashion">FASHION</h2>
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
-                            <li><a href="index.html" style="font-weight:lighter;">Home</a></li>
+                            <li><a href="/" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;">FASHION</li>
                             <li style="font-weight:lighter;" id="breadcrumbshopname2">Linen</li>
                         </ul>
