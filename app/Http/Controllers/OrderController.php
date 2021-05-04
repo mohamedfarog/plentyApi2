@@ -41,6 +41,21 @@ class OrderController extends Controller
     }
     public function pay()
     {
+        $user = Auth::user();
+        $firstname='';
+        $lastname='';
+        if(str_contains($user->name,' ')){
+            $firstname= explode(' ', $user->name)[0];
+            $lastname= explode(' ', $user->name)[0];
+        }
+        else{
+            $firstname= $user->name;
+            $lastname=  $user->name;
+        }
+
+
+
+
         $res  = Tap::createCharge([
             'amount'=> 1,
             'currency' => 'SAR',
@@ -61,10 +76,10 @@ class OrderController extends Controller
                 'sms' => false,
             ],
             'customer' => [
-                'first_name' => "test",
-                'middle_name' => "test",
-                'last_name' => "test",
-                'email' => "test@test.com",
+                'first_name' => $user->name,
+                'middle_name' => ".",
+                'last_name' => $user->name,
+                'email' => $user->email,
                 'phone' => [
                     'country_code' => "965",
                     'number' => "50000000",
