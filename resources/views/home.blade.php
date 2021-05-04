@@ -69,6 +69,7 @@
         color: #001b71;
         font-size: 20px;
     }
+
 </style>
 
 <!-- Hero Slider -->
@@ -174,7 +175,7 @@
 
         <div class="row">
 
-            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInDown" >
                 <a href="/delicacy">
                     <div style="">
                     </div>
@@ -191,7 +192,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInUp" >
 
                 <a href="/beauty">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
@@ -205,7 +206,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item">
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInDown"  >
                 <a href="/fashion">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">
@@ -226,7 +227,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-center">f
+                    <div class="section-title text-center"> 
                         <h2 class="title-border">Plenty Bazaar</h2>
                     </div>
                 </div>
@@ -234,7 +235,7 @@
             <div class="row">
                 @if(isset($plenty_category))
                 @foreach($plenty_category as $cat)
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6 wow slideInUp">
                     <div class="panel panel-default">
                         <a href="/bazaar/{{$cat->id}}">
                             <div class="panel-body"><img src="/storage/{{$cat->image}}" alt=""></div>
@@ -457,8 +458,10 @@
 
 
     });
+
 </script>
 <div style="">
     @include('footer')
 </div>
 @endsection
+

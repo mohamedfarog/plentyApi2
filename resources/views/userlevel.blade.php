@@ -244,7 +244,27 @@
     .title-text {
         margin-left: 10%;
     }
-
+    .usrsaph{
+        border-right: 20px solid blue;
+    }
+    .usremr{
+        border-right: 20px solid blue;
+    }
+    .usrtpz{
+        border-right: 20px solid green;
+    }
+    .usrno{
+        border-right: 20px solid #2fc1d1;
+    }
+    .h4-bfont{
+        color:#2257f4;
+        font-family'Avenir Bold';
+        font-family:18px;
+    }
+    .span-userlvl{
+        font-size:18px;
+        font-family:'Avenir Bold';
+    }
     @media only screen and (max-width: 1000px) {
         .userlvlrowuser {
             width: 95%;
@@ -325,25 +345,25 @@
 </section>
 
 <section class="mt-30 mb-30">
-    <div class="row userlvlrowuser" style="">
-        <div class="userlevelimg" style="">
+    <div class="row userlvlrowuser">
+        <div class="userlevelimg">
             @if(isset($userlevel))
             @if($userlevel == 'NA')
             <img src="img/userlevel/sapphire.png">
         </div>
-        <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
+        <div class="align-middle userleveltxt usrsaph">
             @elseif($userlevel == 'Sapphire')
             <img src="img/userlevel/sapphire.png">
         </div>
-        <div class="align-middle userleveltxt" style="border-right: 20px solid blue;">
+        <div class="align-middle userleveltxt usremr">
             @elseif($userlevel == 'Emerald')
             <img src="img/userlevel/emerald.png">
         </div>
-        <div class="align-middle userleveltxt" style="border-right: 20px solid green;">
+        <div class="align-middle userleveltxt usrtpz">
             @elseif($userlevel == 'Topaz')
             <img src="img/userlevel/topaz.png">
         </div>
-        <div class="align-middle userleveltxt" style="border-right: 20px solid #2fc1d1;">
+        <div class="align-middle userleveltxt usrno">
             @endif
             @endif
 
@@ -353,7 +373,7 @@
                 @if($userlevel == 'NA')
                 <span style="font-size:18px;">The more you spend, the better the rewards!</span>
                 @else
-                You are a<span style="font-size:18px;font-family:'Avenir Bold';"> {{$userlevel}}</span>
+                You are a<span class="span-userlvl" style=""> {{$userlevel}}</span>
                 <span style="font-size:18px;">user</span>
                 @endif
                 @endif
@@ -372,7 +392,7 @@
                 </a>
             </div>
             <br>
-            <h4 class="boldfont" style="color:#2257f4;font-family'Avenir Bold';font-family:18px;">Sapphire</h4>
+            <h4 class="boldfont h4-bfont" style="">Sapphire</h4>
             <span>1 SAR</span>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center">

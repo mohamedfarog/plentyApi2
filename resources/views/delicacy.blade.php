@@ -606,10 +606,10 @@
             <h4 style="margin-bottom:50px;">Please select the number of people </h4>
             <div class="row table-ppl-panel" style="">
                 <input type="hidden" id="usercount" value="1">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser wow flipInX"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users1.png" alt="" onclick="userNumber(this,1)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser wow flipInX"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users2.png" alt="" onclick="userNumber(this,2)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser wow flipInX"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users3.png" alt="" onclick="userNumber(this,3)"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3 coluser wow flipInX"><img onmouseout="mouseOutUser(this)" onmouseover="mouseHoverUser(this)" class="nuser-table" src="/img/booking/users4.png" alt="" onclick="userNumber(this,4)"></div>
             </div>
         </div>
 
@@ -617,7 +617,7 @@
             <h4 style="margin-bottom:20px;">Select the Date</h4>
             <div id="day-for-table">
 
-                <div id="date"></div>
+            <div id="date"></div>
             </div>
         </div>
         <div class="row" style="margin-top:100px;visibility:hidden;" id="booking-st3">
@@ -632,7 +632,7 @@
 
     <section id="switch-delecacy" class="sd-panel" style="">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 bookpickup">
+            <div class="col-lg-6 col-md-6 col-sm-6 bookpickup wow slideInUp">
                 <div class="panel panel-default" style="border: none;">
                     <div class="panel-body" id="delicacy-opt1" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="renderBookTable()">
 
@@ -641,7 +641,7 @@
                         Book Table</div>
                 </div>
             </div>
-            <div class=" col-lg-6 col-md-6 col-sm-6 bookpickup">
+            <div class=" col-lg-6 col-md-6 col-sm-6 bookpickup wow slideInUp">
                 <div class="panel panel-default" style="border: none;">
                     <div class="panel-body" id="delicacy-opt2" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="loadProducts()">
 

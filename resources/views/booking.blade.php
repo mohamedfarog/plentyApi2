@@ -333,10 +333,17 @@
         height: 50px;
         width: 50px;
     }
-
+    .h4-fl{
+        font-size:30px;
+        font-weight:100;
+        line-height:200%;
+        font-family:'Avenir bold';
+        color:black;
+        margin:0px;
+    }
     @media only screen and (max-width: 600px) {
         .contmobile {
-            padding-left: 0 !important;
+            padding-left: 0 !imp rtant;
             padding-right: 0 !important;
             width: 350px;
         }
@@ -462,7 +469,7 @@
 
                 <div class="col-lg-7 col-sm-12 coltablpadd" style="">
                     <div class="divtitle" style="">
-                        <h4 class="floatleft" style="font-size:30px;font-weight:100;line-height:200%;font-family:'Avenir bold';color:black;margin:0px">
+                        <h4 class="floatleft h4-fl" style="">
                             {{$product->name_en}}
                             <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR {{$product->price}}</span>
 

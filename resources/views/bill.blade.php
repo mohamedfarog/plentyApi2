@@ -94,7 +94,7 @@
                 <a href="#">
                     <div style="">
                     </div>
-                    <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
+                    <video class="vid-dine" playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/dine.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
