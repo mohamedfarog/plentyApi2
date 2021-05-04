@@ -38,6 +38,7 @@ use App\Models\Shop;
 use App\Models\Size;
 use App\Models\Style;
 use App\Models\Support;
+use App\Models\Tablesched;
 use App\Models\Timeslot;
 use App\Models\User;
 use Carbon\Carbon;
@@ -157,7 +158,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('deleteproduct', [ProductController::class, 'deleteproduct']);
     Route::resource('products', ProductController::class);
     Route::post('autogenerateslots', [SchedTimeController::class, 'autogenerateslots']);
-    Route::get('tableschedules',[SchedTimeController::class,'index']);
+    Route::get('tableschedules',[Tablesched::class,'index']);
     Route::post('searchProduct', [ProductController::class, "search"]); // This is currently working for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
