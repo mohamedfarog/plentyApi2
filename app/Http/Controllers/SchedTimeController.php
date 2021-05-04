@@ -22,7 +22,7 @@ class SchedTimeController extends Controller
         if (isset($request->shop_id)) {
             if (isset($request->fromtime)) {
                 $tables= SchedTime::where('shop_id', $request->shop_id)->where('from', $request->fromtime)->pluck('table_id')->toArray();
-                return $tables;
+                return Shoptable::find($tables);
             }
 
             return SchedTime::select(["from", "to"])->distinct('from')->where('shop_id', $request->shop_id)->get();
