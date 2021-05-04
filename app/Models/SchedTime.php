@@ -15,6 +15,9 @@ class SchedTime extends Model
         'fromtime',
         'totime'
     ];
+    protected $casts =[
+        'table_id'=> 'integer',
+    ];
     
 
 
