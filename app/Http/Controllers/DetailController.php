@@ -53,7 +53,7 @@ class DetailController extends Controller
                     if (isset($request->qty)) {
                         $detail->qty = $request->qty;
                     }
-                    if(isset($request->status)){
+                    if (isset($request->status)) {
                         $detail->status = $request->status;
                     }
                     if (isset($request->shop_id)) {
@@ -83,6 +83,19 @@ class DetailController extends Controller
                     $msg = 'Detail has been updated';
 
                     $detail->save();
+                    return response()->json(['success' => !!$detail, 'message' => $msg]);
+                    break;
+            }
+        } else if (isset($request->ids)) {
+            switch ($request->action) {
+                
+                case 'update':
+                    foreach ($request->ids as $id) {
+                        Detail::find($id)->update(['status'=> 1]);
+                    }
+                    $msg = 'Detail has been updated';
+
+
                     return response()->json(['success' => !!$detail, 'message' => $msg]);
                     break;
             }
