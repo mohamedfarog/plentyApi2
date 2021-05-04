@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->string('ref')->nullable();
             $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->integer('status',1)->default(0);
+            $table->tinyInteger('status')->default(0);
             $table->string('type')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
