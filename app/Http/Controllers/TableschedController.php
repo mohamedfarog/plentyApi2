@@ -14,9 +14,9 @@ class TableschedController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->shop_id){
+        if(isset($request->shop_id)){
             $tablesched= Tablesched::where('shop_id',$request->shop_id)->get();
-
+            return $tablesched;
         }
     }
 
