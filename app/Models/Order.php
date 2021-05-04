@@ -23,10 +23,14 @@ class Order extends Model
     public function getPrepstatusAttribute()
     {
         $details = Detail::where('order_id',$this->id)->pluck('status')->toArray();
-        $status= "Ready for Shipment";
-        if(in_array(0,$details)){
-           $status = "Preparing";
+        $status= "No Order Details";
+        if(count($details) > 0){
+            $status = "Ready for Shipment";
+            if(in_array(0,$details)){
+                $status = "Preparing";
+             }
         }
+     
         return $status;
     }
     public function getOrderstatusvalueAttribute()
