@@ -19,6 +19,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TableschedController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\UserController;
