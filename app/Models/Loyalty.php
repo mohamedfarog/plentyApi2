@@ -9,7 +9,7 @@ class Loyalty extends Model
 {
     use HasFactory;
 
-    public static function addPoints($user,$amount_due,$wallet,$shoplist=null)
+    public static function addPoints($user, $amount_due, $wallet, $shoplist = null)
     {
         //Check the user's tier list and calculate points accordingly
 
@@ -40,19 +40,24 @@ class Loyalty extends Model
     }
 
     //Function  to update the user's tier based on the points
-    public  static function calculateTier ($user,$amount_due,$wallet)
-    {   $purchases = $user->totalpurchases;
-        $purchases= $user->totalpurchases + $amount_due ; 
-        $tierid = $user->tier_id;
-        $tiers = Tier::get();
-        foreach ($tiers as $tier) {
-            if ($purchases >= $tier->requirement) {
-                $tierid = $tier->id;
+    public  static function calculateTier($user, $amount_due, $wallet)
+    {
+        $purchases = $user->totalpurchases;
+        $purchases = $user->totalpurchases + $amount_due;
+
+        if ($user->tier_id != null) {
+            $tierid = $user->tier_id;
+            $tiers = Tier::get();
+            foreach ($tiers as $tier) {
+                if ($purchases >= $tier->requirement) {
+                    $tierid = $tier->id;
+                }
             }
+
+            User::find($user->id)->update(['tier_id' => $tierid, 'totalpurchases' => $purchases]);
+        }else{
+            User::find($user->id)->update(['tier_id' => 1, 'totalpurchases' => $purchases]);
         }
-      
-        User::find($user->id)->update(['tier_id'=>$tierid,'totalpurchases'=>$purchases  ]);
-        
     }
 
     public static function redeemPoints($user, $points)
