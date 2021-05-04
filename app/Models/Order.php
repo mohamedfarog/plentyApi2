@@ -11,7 +11,7 @@ class Order extends Model
     protected $fillable = [
         'ref', 'total_amount', 'amount_due', 'order_status','points_earned', 'payment_method', 'tax', 'delivery_charge', 'delivery_location', 'user_id', 'coupon_value', 'lat', 'lng', 'delivery_note', 'contact_number', 'city', 'label',"booking_time"
     ];
-    protected $appends = ['orderstatusvalue'];
+    protected $appends = ['orderstatusvalue','prepstatus'];
     public function details()
     {
         return $this->hasMany(Detail::class);
@@ -19,6 +19,15 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function getPrepstatusAttribute()
+    {
+        $details = Detail::where('order_id',$this->id)->pluck('status')->toArray();
+        $status= "Ready for Shipment";
+        if(in_array(0,$details)){
+           $status = "Preparing";
+        }
+        return $status;
     }
     public function getOrderstatusvalueAttribute()
     {

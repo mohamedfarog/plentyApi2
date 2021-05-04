@@ -9,8 +9,11 @@ class Detail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'product_id', 'qty','timeslot_id', 'shop_id', 'order_id', 'price', 'color_id', 'addons', 'size_id', 'booking_date', 'booking_time', 'status'
-     
+        'product_id', 'qty', 'timeslot_id', 'shop_id', 'order_id', 'price', 'color_id', 'addons', 'size_id', 'booking_date', 'booking_time', 'status'
+
+    ];
+    protected $casts = [
+        'status' => 'integer'
     ];
     public function order()
     {
@@ -30,6 +33,4 @@ class Detail extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
-    
 }
