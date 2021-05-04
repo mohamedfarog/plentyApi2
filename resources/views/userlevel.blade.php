@@ -244,27 +244,41 @@
     .title-text {
         margin-left: 10%;
     }
-    .usrsaph{
+
+    .usrsaph {
         border-right: 20px solid blue;
     }
-    .usremr{
+
+    .usremr {
         border-right: 20px solid blue;
     }
-    .usrtpz{
+
+    .usrtpz {
         border-right: 20px solid green;
     }
-    .usrno{
+
+    .usrno {
         border-right: 20px solid #2fc1d1;
     }
-    .h4-bfont{
-        color:#2257f4;
+
+    .h4-bfont {
+        color: #2257f4;
         font-family'Avenir Bold';
-        font-family:18px;
+        font-family: 18px;
     }
-    .span-userlvl{
-        font-size:18px;
-        font-family:'Avenir Bold';
+
+    .span-userlvl {
+        font-size: 18px;
+        font-family: 'Avenir Bold';
     }
+    .btn-ok{
+        width:100%;
+        background:#001b71;
+        font-weight:100;
+        font-size:16px;
+        background:#2fc1d1;
+    }
+
     @media only screen and (max-width: 1000px) {
         .userlvlrowuser {
             width: 95%;
@@ -530,8 +544,7 @@
             </div>
             <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
                 <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px;background:green;" data-dismiss="modal"> OKAY </button>
-            </div>
-
+            </div> 
         </div>
     </div>
 </div>
@@ -554,7 +567,7 @@
                 <span style="color:#c8c8c8">(eg. 1000 Points = 30 SAR Discount)</span>
             </div>
             <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
-                <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px;background:#2fc1d1;" data-dismiss="modal"> OKAY </button>
+                <button class="btn btn-ok" style="" data-dismiss="modal"> OKAY </button>
             </div>
 
         </div>

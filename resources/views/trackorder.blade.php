@@ -43,7 +43,15 @@
     .totext {
         color: #001b71 !important;
     }
-
+    .prodimg-div{
+        width:120px;
+        height:120px;
+        padding:5px;
+        border:1px solid black;
+        margin:0 10px;
+        display:table-cell; 
+        vertical-align:middle;
+    }
     @media only screen and (max-width: 600px) {
         .tablemobile {
             width: 95%;
@@ -136,7 +144,7 @@
                                     <div class="product-img frame">
                                         <a href="/product/{{$orddets->product->id}}">
                                             @foreach($orddets->product->images as $prodimg)
-                                            <div style="width:120px;height:120px;padding:5px;border:1px solid black;margin:0 10px;display:table-cell; vertical-align:middle;">
+                                            <div class="prodimg-div" style="">
                                                 <img class="imgz" src="{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 100%;max-height: 100%;width: 100%;min-width: 100%;" />
                                             </div>
                                             @endforeach
