@@ -13,6 +13,18 @@ class Shoptable extends Model
         'name_en', 'name_ar', 'desc_ar', 'desc_en', 'capacity', 'shop_id', 'zone_id',
     ];
 
+    protected $appends = [
+        "booking"
+    ];
+
+    public function getBookingAttribute()
+    {
+        $schedule = SchedTime::with([
+            'tblbooking'
+        ])->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
+        return $schedule->tblbooking;
+    }
+
     public function shop()
     {
         return $this->belongsTo(Shop::class);
@@ -25,6 +37,6 @@ class Shoptable extends Model
 
     public function timeslots()
     {
-        return $this->hasMany(SchedTime::class,'table_id','id');
+        return $this->hasMany(SchedTime::class, 'table_id', 'id');
     }
 }
