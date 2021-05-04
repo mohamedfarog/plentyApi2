@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Shop;
 use App\Models\ShopInfo;
 use App\Models\Tier;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
@@ -39,68 +40,7 @@ class OrderController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
 
     }
-    public function pay()
-    {
-        $user = Auth::user();
-        $firstname='';
-        $lastname='';
-        if(str_contains($user->name,' ')){
-            $firstname= explode(' ', $user->name)[0];
-            $lastname= explode(' ', $user->name)[0];
-        }
-        else{
-            $firstname= $user->name;
-            $lastname=  $user->name;
-        }
-
-
-
-
-        $res  = Tap::createCharge([
-            'amount'=> 1,
-            'currency' => 'SAR',
-            'threeDSecure' => true,
-            'save_card' => false,
-            'description' => 'Test Description',
-            'statement_descriptor' => 'Sample',
-            'metadata' => [
-                'udf1' => 'test 1',
-                'udf2' => 'test 2',
-            ],
-            'reference' => [
-                'transaction' => 'txn_0001',
-                'order' => 'ord_0001',
-            ],
-            'receipt' => [
-                'email' => false,
-                'sms' => false,
-            ],
-            'customer' => [
-                'first_name' => $firstname,
-                'middle_name' => ".",
-                'last_name' => $lastname,
-                'email' => $user->email,
-                'phone' => [
-                    'country_code' => "965",
-                    'number' => "50000000",
-                ],
-            ],
-            'merchant' => [
-                'id' => ''
-            ],
-            'source' => [
-                'id' => 'src_all',
-            ],
-            'post' => [
-                'url' => 'http://your_website.com/post_url'
-            ],
-            'redirect' => [
-                'url' => 'http://your_website.com/post_url'
-            ]
-        ]);
-        
-        return response()->json($res);
-    }
+ 
 
 
     public function index(Request $request)
@@ -330,6 +270,12 @@ class OrderController extends Controller
 
 
             $order = Order::create($data);
+         
+  
+            // $trans->amount;   //todo
+            // reg,order_id,ref,status,type,
+
+            
 
             //TODO
             //    $pointsearned= $loyalty->addPoints($customer,$request->amount_due,$request->wallet??0 ,$shoplist);
@@ -384,6 +330,18 @@ class OrderController extends Controller
                 }
                 $arr['order_id'] =  $order->id;
                 $detail = Detail::create($arr);
+            }
+            if($request->payment_method=='card'){
+                $trans= new Transaction();
+                $trans->amount= $request->amount_due;
+                $trans->ref= Str::uuid();
+                $trans->order_id=  $order->id;
+                $trans->status= 0;
+                $trans->type='Order';
+                $trans->save();
+                $trans->createpayment($user,$request->amount_due);
+                return response()->json(['success' => !!$order, 'message' => $trans, 'user' => User::find($customer->id)]);
+
             }
 
 
