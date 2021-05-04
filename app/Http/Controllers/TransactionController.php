@@ -42,7 +42,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-          Mail::send('testpayment', ["data" =>['rr'=>$request['acquirer']['response']['message']] ], function ($m)   {
+          Mail::send('testpayment', ["data" =>['rr'=>$request['reference']['response']['message'] ], "Order Id"=>$request['reference']['order'], "Transaction Id"=>$request['reference']['transaction']], function ($m)   {
            
             $m->from('noreply@plenty.mvp-apps.ae', 'Plenty User');
       
