@@ -118,8 +118,8 @@ class CouponController extends Controller
                     }
 
                 case 'expire':
-                    if (isset($request->ids)) {
-                        $coupon = Coupon::where('id', $request->ids)->update(['expiry' => Carbon::now()]);
+                    if (isset($request->id)) {
+                        $coupon = Coupon::where('id', $request->id)->update(['expiry' => Carbon::now()]);
                         return redirect('/coupons');
                     }
                     return response()->json(['error' => "something went wrong"]);
