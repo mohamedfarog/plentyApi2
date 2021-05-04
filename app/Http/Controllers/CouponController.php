@@ -85,7 +85,7 @@ class CouponController extends Controller
 
                     $coupon->save();
 
-                    return response()->json(['success' => "Coupons added",'success' => "Coupons added"]);
+                    return response()->json(['success' => "Coupons added",'message' => "Coupon added"]);
                     break;
 
                 case "activate":

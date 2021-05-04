@@ -76,9 +76,9 @@ class OrderController extends Controller
                 'sms' => false,
             ],
             'customer' => [
-                'first_name' => $user->name,
+                'first_name' => $firstname,
                 'middle_name' => ".",
-                'last_name' => $user->name,
+                'last_name' => $lastname,
                 'email' => $user->email,
                 'phone' => [
                     'country_code' => "965",
