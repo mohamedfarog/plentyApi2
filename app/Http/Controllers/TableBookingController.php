@@ -38,7 +38,7 @@ class TableBookingController extends Controller
         $dt = Carbon::now();
         
         if(!isset($request->shop_id)){
-            return 'This is being callled';
+            
             $data = TableBooking::where('user_id', $user_id)->with(['details' => function ($details) {
             return $details->with('product');
         }]);
@@ -60,8 +60,8 @@ class TableBookingController extends Controller
                 }, 'user'])->get();
             }
             if($request->action=='pickup'){
-                $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid) {
-                    return $details->where('shop_id', $shopid);
+                $orders = TableBooking::whereNull('table_id')->with(['details' => function ($details) use ($shopid,$dt) {
+                    return $details->where('shop_id', $shopid)->whereDate('date', '=', $dt->toDateString());
                 }, 'user'])->get();
             }
             // $orders = TableBooking::with(['details' => function ($details) use ($shopid, $dt) {
