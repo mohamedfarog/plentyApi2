@@ -53,7 +53,7 @@ class TransactionController extends Controller
                 $transaction= Transaction::find($transactionid);
                 $transaction->status=1;
                 $transaction->save();
-                if($orderid!=0){
+                if($orderid==0){
                     $user= User::find($transaction->user_id);
                     $user->wallet+= $transaction->amount;
                     $user->save();
