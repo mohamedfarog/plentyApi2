@@ -339,8 +339,8 @@ class OrderController extends Controller
                 $trans->status= 0;
                 $trans->type='Order';
                 $trans->save();
-                $trans->createpayment($user,$request->amount_due);
-                return response()->json(['success' => !!$order, 'message' => $trans, 'user' => User::find($customer->id)]);
+                $paygateway= $trans->createpayment($user,$request->amount_due);
+                return response()->json(['success' => !!$order, 'message' => $paygateway, 'user' => User::find($customer->id)]);
 
             }
 
