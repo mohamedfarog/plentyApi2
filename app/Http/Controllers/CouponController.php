@@ -125,6 +125,7 @@ class CouponController extends Controller
                     return response()->json(['message' => "Coupon expired"]);
 
                     break;
+                    
                 case 'coupon':
 
                     $c = Coupon::with('shop')->where('code', '=', strtoupper($request->coupon))->first();
