@@ -22,7 +22,7 @@ class Shoptable extends Model
         $schedule = SchedTime::with([
             'tblbooking'
         ])->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
-        return $schedule;
+        return $schedule->tblbooking;
     }
 
     public function shop()
