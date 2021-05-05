@@ -7,6 +7,7 @@ use App\Models\ApplePass;
 use App\Models\Otp;
 use App\Models\Project;
 use App\Models\Shop;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -519,8 +520,20 @@ class UserController extends Controller
             else{
                     if (isset($request->amount)) {
                 $user = User::with(['tier'])->find($authuser->id);
-                $user->wallet += $request->amount;
-                $user->save();
+            
+                    $trans = new Transaction();
+                    $trans->amount = $request->amount;
+                    $trans->ref = Str::uuid();
+                    $trans->order_id =  0;
+                    $trans->status = 0;
+                    $trans->type = 'Order';
+                    $trans->user_id= $authuser->id;
+                    $trans->save();
+                    $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id);
+                    return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $authuser]);
+                
+                // $user->wallet += $request->amount;
+                // $user->save();
                 return response()->json(['success' => !!$user, 'user' => $user]);
             }
             }
