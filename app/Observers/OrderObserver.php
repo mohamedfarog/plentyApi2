@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Order;
+use App\Models\User;
+use App\PushNotification;
 
 class OrderObserver
 {
@@ -25,11 +27,27 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
+        $user= User::find($order->user_id);
+        if($user->fcm!=null){
+        
         switch($order->order_status){
             case 0:
-                
+                PushNotification::sendFCM($user->fcm,'Your order has been placed','Order Number: '.$order->id);
                 break;   
+            case 1:
+                    PushNotification::sendFCM($user->fcm,'Your order has been placed','Order Number: '.$order->id);
+                    break; 
+
+        }     
+    
+    
+    
+        
+    
+    
+    
         }
+        
     }
 
     /**
