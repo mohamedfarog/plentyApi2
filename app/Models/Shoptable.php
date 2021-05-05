@@ -23,12 +23,9 @@ class Shoptable extends Model
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
             }
-        ])->where('from', request('fromtime'))->where('shop_id', $this->shop_id)->first();
-        if ($schedule->table_booking_id != null) {
-            return $schedule->tblbooking;
-        }else{
-            return null;
-        }
+        ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
+
+        return $schedule->tblbooking;
     }
 
     public function shop()
