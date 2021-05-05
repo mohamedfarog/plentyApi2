@@ -72,7 +72,7 @@ class OrderController extends Controller
                     if(isset($request->forshipment)){
                         $stat = 1;
                     }
-                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status',$stat)->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
+                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status',$stat)->where('details.shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
                     return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
                         return $product->with(['images']);
                     }, 'size', 'color']);
