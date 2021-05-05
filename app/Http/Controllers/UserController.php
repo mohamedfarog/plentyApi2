@@ -647,7 +647,7 @@ class UserController extends Controller
                         $success["message"] = "Login successful";
                         $success["token"] = $user->createToken('MyApp')->accessToken;
                         $u = User::with(['shop'  =>function  ($shop){
-                            return $shop->whereNotNull('cat_id');
+                            return $shop->with(['style','cat'])->whereNotNull('cat_id');
                         }])->where('id',$user->id)->first();
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
