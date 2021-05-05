@@ -33,4 +33,8 @@ class Detail extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function addons()
+    {
+        return $this->hasMany(Addon::class);
+    }
 }
