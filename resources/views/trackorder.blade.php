@@ -145,13 +145,20 @@
                                 <div class=" trackprodslide  col-lg-3 col-xs-12 hidden-md hidden-sm">
 
                                     <div class="product-img frame">
+                                    @if(isset($orddets->product->id))
                                         <a href="/product/{{$orddets->product->id}}">
+
                                             @foreach($orddets->product->images as $prodimg)
                                             <div class="prodimg-div" style="">
                                                 <img class="imgz" src="{{ $prodimg->imgurl}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy style="max-width: 100%;max-height: 100%;width: 100%;min-width: 100%;" />
                                             </div>
                                             @endforeach
                                         </a>
+                                    @else
+                                        <a href="/">
+
+                                        </a>
+                                    @endif
                                         <div class="product-action clearfix">
 
                                         </div>

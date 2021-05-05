@@ -296,7 +296,10 @@
         margin-right: auto;
         width: 1000px;
     }
-
+    .button-booktable:hover{
+        background:white;
+        color:blue;
+    }
     @media only screen and (max-width: 1000px) {
         .pp-product-panel {
             width: 100%;
@@ -624,7 +627,7 @@
             <h4 style="margin-bottom:20px;">Select the Time</h4>
             <div id="day-for-table">
                 <div id="time-slot" class="slider"></div>
-                <button id="table-book" class="button-one submit-button" type="button" onclick="bookTable()" style="height: 100%;background:#001b71;">Book Table</button>
+                <button id="table-book" class="button-one submit-button button-booktable" type="button" onclick="bookTable()" style="height: 100%;background:#001b71;">Book Table</button>
             </div>
 
         </div>
