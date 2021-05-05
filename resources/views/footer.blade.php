@@ -63,7 +63,9 @@
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">
                         <div class="widget footer-links">
+                        <a href="/">
                             <img class="" src="img/bottom/app.png" style="width:80%;display:block;margin:auto;margin-bottom:20px">
+                        </a>
                         </div>
                         <div class="row" style="justify-content:space-between;display:flex;">
                             <img class="" src="img/bottom/googleplay.png" style="width:40%;float:left">

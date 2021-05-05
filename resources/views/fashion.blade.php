@@ -516,7 +516,7 @@
                 data_selected = "1";
             }
             prod_element +=
-                "<div class='producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm ' style='margin-bottom:30px;'>" +
+                "<div class='producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
                 "<a href='/product/" + element.id + "'><img src='" + element.images[0].imgurl + "' alt='' loading=lazy  class='imgz'/></a>" +
 

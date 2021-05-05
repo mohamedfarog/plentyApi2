@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
+    <meta name="base_url" content="/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -814,21 +814,6 @@
 
         }
 
-        $(document).ready(function() {
-
-            var base_url = $('meta[name=base_url]').attr('content');
-            let cart = new Cart()
-            $.ajax({
-                type: 'GET'
-                , url: base_url + 'shop-category'
-                , dataType: 'JSON'
-                , success: function(data) {
-                    localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
-                }
-            });
-            renderNavCart()
-            initiateTimeOut()
-        });
 
         // for updating input fields by id
         function updateInputField(id, value) {
@@ -1019,14 +1004,7 @@
             }
 
         }
-
-        $(document).ready(function() {
-            if (getUserDetails()) {
-                userIsAuthenticated();
-            } else {
-                userIsNotAuthenticated();
-            }
-        });
+ 
 
 
         function userIsAuthenticated() {
@@ -1136,6 +1114,27 @@
             return ids;
         }
 
+        $(document).ready(function() {
+
+            var base_url = $('meta[name=base_url]').attr('content');
+            let cart = new Cart()
+            $.ajax({
+                type: 'GET'
+                , url: base_url + 'shop-category'
+                , dataType: 'JSON'
+                , success: function(data) {
+                    localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
+                }
+            });
+            renderNavCart();
+            initiateTimeOut();
+            if (getUserDetails()) {
+                userIsAuthenticated();
+            } else {
+                userIsNotAuthenticated();
+            }
+            $(this).scrollTop(0);
+        });
     </script>
 
 
