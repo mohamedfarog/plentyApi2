@@ -68,15 +68,20 @@ class OrderController extends Controller
                 $shop = ShopInfo::where('user_id', $user->id)->first();
                 if (!$shop)
                     return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-                $stat = 0;
-                if (isset($request->forshipment)) {
-                    $stat = 1;
-                }
+
                 $orders = Order::join('details', 'details.order_id', 'orders.id')->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
                     return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
                         return $product->with(['images']);
                     }, 'size', 'color']);
                 },]);
+                if (isset($request->forshipment)) {
+                    $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status', 1)->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
+                        return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
+                            return $product->with(['images']);
+                        }, 'size', 'color']);
+                    },]);
+                }
+                
                 if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4])) {
                     $orders = $orders->where('order_status', $request->order_status);
                 }
