@@ -23,7 +23,7 @@ class Shoptable extends Model
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
             }
-        ])->where('table_id', request('fromtime'))->where('shop_id', $this->shop_id)->first();
+        ])->where('from', request('fromtime'))->where('shop_id', $this->shop_id)->first();
         return $schedule->tblbooking;
     }
 
