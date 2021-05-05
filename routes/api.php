@@ -122,7 +122,7 @@ Route::resource('success',TransactionController::class);
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
 Route::resource('otp', OtpController::class);
-Route::post("/fcm", [UserController::class,'updateFCM']);
+
 
 Route::post('verify', [OtpController::class, 'verify']);
 Route::post('register', [UserController::class, 'register'])->middleware('registration');;
@@ -142,6 +142,7 @@ Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
+    Route::post("/fcm", [UserController::class,"updateFCM"]);
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('sendnotifications',[UserController::class, 'sendNotifications']);
