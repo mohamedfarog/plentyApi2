@@ -691,4 +691,12 @@ class UserController extends Controller
        
         }
 
+        public function updateFCM(Request $request)
+    {
+        $user=Auth::user();
+        User::where("id",$user->id)->update(["fcm"=>$request->fcm]);
+
+        return response()->json(['success' => "true"]);
+    }
+
 }

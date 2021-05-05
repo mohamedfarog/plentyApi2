@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
+use App\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -45,6 +46,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         
+        
         $orderid=$request['reference']['order'];
         $transactionid=$request['reference']['transaction'];
         $status=$request['acquirer']['response']['message'];
@@ -64,6 +66,7 @@ class TransactionController extends Controller
                     $order= Order::find($orderid);
                     $order->order_status=0;
                     $order->save(); 
+                    
                 }
                 
 
