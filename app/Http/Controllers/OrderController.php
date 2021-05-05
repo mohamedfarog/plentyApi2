@@ -81,7 +81,7 @@ class OrderController extends Controller
                         }, 'size', 'color']);
                     },]);
                 }
-                
+
                 // if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4])) {
                 //     $orders = $orders->where('order_status', $request->order_status);
                 // }
@@ -97,8 +97,9 @@ class OrderController extends Controller
             default:
                 break;
         }
-        if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4]))
+        if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4])) {
             $orders = $orders->where('order_status', $request->order_status);
+        }
         return $orders->orderBy('orders.id', 'desc')->paginate();
     }
 
