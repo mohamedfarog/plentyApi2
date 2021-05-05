@@ -16,7 +16,29 @@ class OrderObserver
      */
     public function created(Order $order)
     {
-        
+        $user = User::find($order->user_id);
+        if ($user->fcm != null) {
+
+            switch ($order->order_status) {
+                case 0:
+                    PushNotification::sendFCM($user->fcm, 'Your order has been placed', 'Order Number: ' . $order->id);
+                    break;
+                case 1:
+                    PushNotification::sendFCM($user->fcm, 'Order being prepared for shipment', 'Order Number: ' . $order->id);
+                    break;
+                case 2:
+                    PushNotification::sendFCM($user->fcm, 'Order out for delivery', 'Order Number: ' . $order->id);
+                    break;
+                case 3:
+                    PushNotification::sendFCM($user->fcm, 'Your order has been successfully delivered', 'Order Number: ' . $order->id);
+                    break;
+                case 4:
+                    PushNotification::sendFCM($user->fcm, 'Your order has been rejected', 'Order Number: ' . $order->id);
+                    break;
+                default:
+                    break;    
+            }
+        }
     }
 
     /**
@@ -27,27 +49,29 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
-        $user= User::find($order->user_id);
-        if($user->fcm!=null){
-        
-        switch($order->order_status){
-            case 0:
-                PushNotification::sendFCM($user->fcm,'Your order has been placed','Order Number: '.$order->id);
-                break;   
-            case 1:
-                    PushNotification::sendFCM($user->fcm,'Your order has been placed','Order Number: '.$order->id);
-                    break; 
+        $user = User::find($order->user_id);
+        if ($user->fcm != null) {
 
-        }     
-    
-    
-    
-        
-    
-    
-    
+            switch ($order->order_status) {
+                case 0:
+                    PushNotification::sendFCM($user->fcm, 'Your order has been placed', 'Order Number: ' . $order->id);
+                    break;
+                case 1:
+                    PushNotification::sendFCM($user->fcm, 'Order being prepared for shipment', 'Order Number: ' . $order->id);
+                    break;
+                case 2:
+                    PushNotification::sendFCM($user->fcm, 'Order out for delivery', 'Order Number: ' . $order->id);
+                    break;
+                case 3:
+                    PushNotification::sendFCM($user->fcm, 'Your order has been successfully delivered', 'Order Number: ' . $order->id);
+                    break;
+                case 4:
+                    PushNotification::sendFCM($user->fcm, 'Your order has been rejected', 'Order Number: ' . $order->id);
+                    break;
+                default:
+                    break;    
+            }
         }
-        
     }
 
     /**
