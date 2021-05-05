@@ -83,7 +83,7 @@
     .qtybutton {
         color: black;
     }
-    
+
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !important;

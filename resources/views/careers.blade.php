@@ -26,7 +26,7 @@
         color: white;
         border-radius: 20px;
         display: inline-block;
-        padding: 6px 20px;   
+        padding: 6px 20px;
         cursor: pointer;
     }
 
@@ -40,7 +40,8 @@
     span {
         color: #001B71;
     }
-    #msgbtn{
+
+    #msgbtn {
         padding: .75rem 2rem;
         font-weight: 700;
         text-transform: uppercase;
@@ -48,36 +49,43 @@
         background-color: #001B71;
         color: white;
     }
-    .email-pot{
+
+    .email-pot {
         font-weight: 900;
-        margin-top:10px;
+        margin-top: 10px;
     }
-    .scc-content{
-        margin-top:50px;
+
+    .scc-content {
+        margin-top: 50px;
         padding-bottom: 1rem;
     }
-    .an-div{
+
+    .an-div {
         width: 90%;
         margin: auto;
     }
-    #name{
+
+    #name {
         background-color: #f8f8f8;
-        border:0px solid #ccc;
-        width:100%;
-        padding: 5px;
-    }
-    #mobile{
-        background-color: #f8f8f8;
-        border:0px solid #ccc;
+        border: 0px solid #ccc;
         width: 100%;
         padding: 5px;
     }
-    #email{
+
+    #mobile {
         background-color: #f8f8f8;
-        border:0px solid #ccc;
+        border: 0px solid #ccc;
         width: 100%;
         padding: 5px;
-    } 
+    }
+
+    #email {
+        background-color: #f8f8f8;
+        border: 0px solid #ccc;
+        width: 100%;
+        padding: 5px;
+    }
+
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -93,7 +101,7 @@
 <div class="animsition an-div">
     <div class="wrapper" style="margin-bottom: 10rem;">
 
-        <div class="section section-content scc-content" >
+        <div class="section section-content scc-content">
             <div class="container-fluid" style="padding-right: 0;padding-left:0;">
                 <div class="row" style="padding:20px;">
                     <div class="col-lg-3 col-xs-12">
@@ -102,7 +110,7 @@
                             <br>
                             Join our team and send your CV to
                             <br>
-                            <span class="email-pot" ><a href="mailto:hr@plentyofthings.com">hr@plentyofthings.com</a></span>
+                            <span class="email-pot"><a href="mailto:hr@plentyofthings.com">hr@plentyofthings.com</a></span>
                         </h6>
                     </div>
                     <div class="col-lg-7 col-xs-12">

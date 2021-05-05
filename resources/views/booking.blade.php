@@ -333,14 +333,16 @@
         height: 50px;
         width: 50px;
     }
-    .h4-fl{
-        font-size:30px;
-        font-weight:100;
-        line-height:200%;
-        font-family:'Avenir bold';
-        color:black;
-        margin:0px;
+
+    .h4-fl {
+        font-size: 30px;
+        font-weight: 100;
+        line-height: 200%;
+        font-family: 'Avenir bold';
+        color: black;
+        margin: 0px;
     }
+
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !imp rtant;

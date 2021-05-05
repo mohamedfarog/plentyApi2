@@ -27,11 +27,13 @@
     .contu {
         width: 1000px;
     }
-    .brands-sec{
+
+    .brands-sec {
         margin: auto;
-        width:100%;
-        text-align:center;
+        width: 100%;
+        text-align: center;
     }
+
     @media only screen and (max-width: 1000px) {
         .contu {
             width: 95%;

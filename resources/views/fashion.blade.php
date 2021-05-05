@@ -155,20 +155,24 @@
         margin: auto;
         margin-bottom: 20px;
     }
-   .pp-product-panel{
-        width:1000px;
+
+    .pp-product-panel {
+        width: 1000px;
         margin: auto;
-        text-align:center;
+        text-align: center;
     }
+
     @media only screen and (max-width: 1000px) {
-        .pp-product-panel{
-            width:100%;
+        .pp-product-panel {
+            width: 100%;
         }
     }
+
     @media only screen and (max-width: 600px) {
-        .pp-product-panel{
-            width:100%;
-        } 
+        .pp-product-panel {
+            width: 100%;
+        }
+
         .catmobile {
             font-size: 16px;
         }
@@ -233,12 +237,14 @@
         .imgz {
             min-width: 0;
         }
-        .h2-fashion{
-            font-weight:lighter;
-            font-size:60px;
+
+        .h2-fashion {
+            font-weight: lighter;
+            font-size: 60px;
             padding: 100px 0 100px;
         }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -428,6 +434,7 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
+
 </script>
 
 <script>
@@ -458,10 +465,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     console.log(data)
                     renderProduct(data)
@@ -480,10 +487,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'best-seller/' + shop_id,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'best-seller/' + shop_id
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -576,6 +583,7 @@
         });
         console.log('nohover');
     });
+
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">

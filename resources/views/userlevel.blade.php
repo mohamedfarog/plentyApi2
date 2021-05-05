@@ -271,12 +271,13 @@
         font-size: 18px;
         font-family: 'Avenir Bold';
     }
-    .btn-ok{
-        width:100%;
-        background:#001b71;
-        font-weight:100;
-        font-size:16px;
-        background:#2fc1d1;
+
+    .btn-ok {
+        width: 100%;
+        background: #001b71;
+        font-weight: 100;
+        font-size: 16px;
+        background: #2fc1d1;
     }
 
     @media only screen and (max-width: 1000px) {
@@ -544,7 +545,7 @@
             </div>
             <div style="margin-bottom:20px;padding:0 20px;margin-top:50px;">
                 <button class="btn" style="width:100%;background:#001b71;font-weight:100;font-size:16px;background:green;" data-dismiss="modal"> OKAY </button>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

@@ -36,6 +36,7 @@
             width: 100%;
         }
     }
+
 </style>
 
 <!-- Featured Product -->
@@ -112,5 +113,6 @@
     function removeProd(ele) {
         ele.parentElement.parentElement.parentElement.remove();
     }
+
 </script>
 @endsection
