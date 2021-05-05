@@ -26,6 +26,8 @@ class Shoptable extends Model
         ])->where('from', request('fromtime'))->where('shop_id', $this->shop_id)->first();
         if ($schedule->table_booking_id != null) {
             return $schedule->tblbooking;
+        }else{
+            return null;
         }
     }
 
