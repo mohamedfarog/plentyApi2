@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Shop;
 use App\Models\Transaction;
 use App\Models\User;
+use App\PushNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -663,5 +664,39 @@ class UserController extends Controller
                 return response()->json(["error" => "Invalid Email/Password"]);
             }
         }
+
+
+        public function sendNotifications(Request $request)
+        {
+            $validator = Validator::make($request->all(), [
+                "title" => "required",
+                "subtitle" => "required",
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+            }
+            $user= Auth::user();
+            $title= $request->title;
+            $subtitle= $request->subtitle;
+            if($user->typeofuser=='S'){
+                    PushNotification::sendAllFCM($title,$subtitle); 
+                    return response()->json(["message" => 'Notification has been sent!',"status_code" => 1],);
+
+                }
+            else{
+                return response()->json(["error" =>'Unauthorized User']);
+
+            }    
+       
+        }
+
+        public function updateFCM(Request $request)
+    {
+        $user=Auth::user();
+        User::where("id",$user->id)->update(["fcm"=>$request->fcm]);
+
+        return response()->json(['success' => "true"]);
+    }
 
 }
