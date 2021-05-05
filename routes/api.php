@@ -122,6 +122,8 @@ Route::resource('success',TransactionController::class);
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
 Route::resource('otp', OtpController::class);
+Route::post("/fcm", [UserController::class,'updateFCM']);
+
 Route::post('verify', [OtpController::class, 'verify']);
 Route::post('register', [UserController::class, 'register'])->middleware('registration');;
 Route::get('checkinvitation', [AccessController::class, 'checkList']);
