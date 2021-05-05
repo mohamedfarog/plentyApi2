@@ -57,7 +57,36 @@ class Report extends Model
                         return true;
                     }
                 })->count();
-
+                $data['18 - 24'] = $users->filter(function ($user) {
+                    if ($user->age >= 18 && $user->age <= 24) {
+                        return true;
+                    }
+                })->count();
+                $data['25 - 35'] = $users->filter(function ($user) {
+                    if ($user->age >= 25 && $user->age <= 35) {
+                        return true;
+                    }
+                })->count();
+                $data['36 - 45'] = $users->filter(function ($user) {
+                    if ($user->age >= 36 && $user->age <= 45) {
+                        return true;
+                    }
+                })->count();
+                $data['46 - 55'] = $users->filter(function ($user) {
+                    if ($user->age >= 46 && $user->age <= 55) {
+                        return true;
+                    }
+                })->count();
+                $data['56 - 65'] = $users->filter(function ($user) {
+                    if ($user->age >= 56 && $user->age <= 65) {
+                        return true;
+                    }
+                })->count();
+                $data['66+'] = $users->filter(function ($user) {
+                    if ($user->age >= 66) {
+                        return true;
+                    }
+                })->count();
                 break;
             default:
                 # code...
