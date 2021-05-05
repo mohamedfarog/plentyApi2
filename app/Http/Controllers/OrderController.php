@@ -82,11 +82,11 @@ class OrderController extends Controller
                     },]);
                 }
                 
-                if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4])) {
-                    $orders = $orders->where('order_status', $request->order_status);
-                }
+                // if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4])) {
+                //     $orders = $orders->where('order_status', $request->order_status);
+                // }
 
-                return response()->json(['success' => !!$orders, 'order' => $orders->orderBy('orders.id', 'desc')->paginate()]);
+                // return response()->json(['success' => !!$orders, 'order' => $orders->orderBy('orders.id', 'desc')->paginate()]);
 
                 break;
             case 'S':
