@@ -72,13 +72,14 @@ class OrderController extends Controller
                 if (isset($request->forshipment)) {
                     $stat = 1;
                 }
-                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status', $stat)->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
+                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
                     return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
                         return $product->with(['images']);
                     }, 'size', 'color']);
                 },]);
-                if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4]))
+                if (isset($request->order_status) && in_array($request->order_status, [0, 1, 2, 3, 4])) {
                     $orders = $orders->where('order_status', $request->order_status);
+                }
 
                 return response()->json(['success' => !!$orders, 'order' => $orders->orderBy('orders.id', 'desc')->paginate()]);
 
