@@ -46,16 +46,21 @@ class Loyalty extends Model
         $purchases = $user->totalpurchases + $amount_due;
 
         if ($user->tier_id != null) {
-            $tierid = $user->tier_id;
-            $tiers = Tier::get();
-            foreach ($tiers as $tier) {
-                if ($purchases >= $tier->requirement) {
-                    $tierid = $tier->id;
+            if ($user->tier_id > 0) {
+                $tierid = $user->tier_id;
+                $tiers = Tier::get();
+                foreach ($tiers as $tier) {
+                    if ($purchases >= $tier->requirement) {
+                        $tierid = $tier->id;
+                    }
                 }
-            }
 
-            User::find($user->id)->update(['tier_id' => $tierid, 'totalpurchases' => $purchases]);
-        }else{
+                User::find($user->id)->update(['tier_id' => $tierid, 'totalpurchases' => $purchases]);
+            } else {
+
+                User::find($user->id)->update(['tier_id' => 1, 'totalpurchases' => $purchases]);
+            }
+        } else {
             User::find($user->id)->update(['tier_id' => 1, 'totalpurchases' => $purchases]);
         }
     }
