@@ -296,7 +296,7 @@
         margin-right: auto;
         width: 1000px;
     }
- 
+
     @media only screen and (max-width: 1000px) {
         .pp-product-panel {
             width: 100%;
@@ -635,7 +635,6 @@
             <div class="col-lg-6 col-md-6 col-sm-6 bookpickup wow slideInUp">
                 <div class="panel panel-default" style="border: none;">
                     <div class="panel-body" id="delicacy-opt1" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="renderBookTable()">
-
                     </div>
                     <div class="panel-footer delecacy-opt-text">
                         Book Table</div>
@@ -644,14 +643,11 @@
             <div class=" col-lg-6 col-md-6 col-sm-6 bookpickup wow slideInUp">
                 <div class="panel panel-default" style="border: none;">
                     <div class="panel-body" id="delicacy-opt2" onmouseout="mouseOut(this)" onmouseover="mouseHover(this)" onclick="loadProducts()">
-
                     </div>
                     <div class="panel-footer delecacy-opt-text">
                         Pick Up
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -809,10 +805,7 @@
                 "</div>" +
                 "</div>"
 
-        });
-
-
-
+        }); 
         document.getElementById('product-panel').innerHTML = prod_element
         $('.buttonsshow').css({
             'visibility': 'hidden'
@@ -836,9 +829,7 @@
 
         } else {
             window.location = base_url + 'delicacy/' + shopid;
-        }
-
-
+        } 
     }
 
     $(".producthover").hover(function() {
@@ -885,8 +876,7 @@
                 "<div>" +
                 DaysOfWeek[tomorrow.getDay()] +
                 "</div></div>"
-        }
-
+        } 
         document.getElementById("date").innerHTML = template;
     }
 
@@ -906,8 +896,7 @@
         const shop_id = $('#shopid').val();
         var capacity = $('#usercount').val();
         getTableTimeSlot(day, istoday, shop_id, capacity)
-        $("#booking-st3").css("visibility", "visible");
-
+        $("#booking-st3").css("visibility", "visible"); 
     }
 
     function renderTimeSlot(data) {
@@ -916,8 +905,7 @@
             $("#table-book").css("display", "block");
             $("#table-book").css("margin", "auto");
         } else {
-            $("#table-book").css("display", "none");
-
+            $("#table-book").css("display", "none"); 
         }
         for (var i = 0; i < data.length; i++) {
             var fromtime = data[i].fromtime.replace(":", "_")

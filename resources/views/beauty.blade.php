@@ -488,8 +488,8 @@
         data.forEach(element => {
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6' style='margin-bottom:30px;'>" +
-                "<div class='product-img frame'>" +
-                "<a href='booking/" + element.id + "'><img src='" + element.images[0].imgurl + "' alt='' loading=lazy  class='imgz'/></a>" +
+                "<a href='booking/" + element.id + "'><div class='product-img frame'>" +
+                "<img src='" + element.images[0].imgurl + "' alt='' loading=lazy  class='imgz'/></a>" +
 
                 "<div class='product-action clearfix'></div></div>" +
                 "<div class='product-info clearfix'>" +

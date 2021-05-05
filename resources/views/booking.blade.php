@@ -37,7 +37,6 @@
     .addtobagbtn {
         border: 2px solid green;
         border-radius: 20px;
-
         padding: 10px 40px !important;
         font-size: 20px !important;
         background-color: transparent !important;
@@ -59,9 +58,7 @@
         box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         z-index: 100;
-        position: relative;
-
-
+        position: relative; 
     }
 
     .calendar-wrapper table {
@@ -74,8 +71,7 @@
         font-size: 18px;
         font-weight: 100;
         margin: auto;
-        font-family: 'Avenir Bold'
-
+        font-family: 'Avenir Bold';
     }
 
     .calendar-wrapper td {
@@ -89,9 +85,6 @@
     .calendar-wrapper td:hover {
         cursor: pointer;
     }
-
-
-
     .calendar-wrapper .today:hover,
     .calendar-wrapper .normal:hover {
         background-color: #edbddb;
@@ -158,8 +151,7 @@
         font-size: 15px;
         color: #c0c0c0;
         cursor: pointer;
-        transition: all 0.3s ease;
-        =
+        transition: all 0.3s ease; 
     }
 
     .calendar-wrapper #btnPrev {
@@ -211,107 +203,85 @@
         height: 50px;
         background-color: white;
         color: #edbddb;
-        border: 2px solid #c31c4a;
+        border: 2px solid black;
         border-radius: 30px;
         margin: 0px 5px 20px 5px;
 
     }
-
     .time-btn-inactive {
         color: red;
         background-color: #009eb3;
     }
-
-
-
     .time-shedule::-webkit-scrollbar {
         width: 5px;
     }
-
     .time-shedule::-webkit-scrollbar-track {
         box-shadow: none
     }
-
     .time-shedule::-webkit-scrollbar-thumb {
         background: pink;
         border-radius: 10px;
     }
-
     .time-shedule::-webkit-scrollbar-thumb:hover {
         background: #009eb3;
     }
-
     .your-booking {
         height: 100px;
     }
-
     .booking-item {
         font-size: 20px;
         margin: 20px;
     }
-
     .booking-item span {
         font-size: 20px;
         color: #edbddb;
     }
-
     .day-status {
         text-align: center;
         margin: 10px;
     }
-
     .day-status span {
         border-radius: 10px;
         padding: 5px 30px;
         font-size: 15px;
     }
-
     .day-status .booking-available {
         background-color: #edbddb;
         color: white;
     }
-
     .day-status .booked {
         background-color: #c31c4a;
         color: white
     }
-
     .calendar-btn-left {
         margin-left: 30px
     }
-
     .calendar-btn-right {
         margin-right: 30px
     }
-
     .activemonthtd {
         font-family: 'Avenir';
         font-weight: 100;
     }
-
     .homebrandtitle {
         width: 30%;
         padding: 50px 0;
         filter: brightness(0) invert(1);
     }
-
     .coltablpadd {
         padding: 0 30px 0 0;
     }
-
     .contimgu {
         background-color: #f2f3f8;
         padding-top: 50px;
         margin-top: 20px
     }
-
     .divtitle {
         position: relative;
         display: block;
         height: 20px;
         text-align: center;
     }
-
     .bktitle {
         font-size: 24px;
         color: black !important;
@@ -319,21 +289,16 @@
         display: block;
         float: left;
     }
-
     .bkprice {}
-
     .day-clicked>span {
         color: black;
     }
-
     .calendar-col {}
-
     td.normal {
         text-align: center;
         height: 50px;
         width: 50px;
     }
-
     .h4-fl {
         font-size: 30px;
         font-weight: 100;
@@ -342,48 +307,39 @@
         color: black;
         margin: 0px;
     }
-
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !imp rtant;
             padding-right: 0 !important;
             width: 350px;
         }
-
         .product-info {
             width: 100% !important;
         }
-
         .cart-plus-minus {
             width: 100% !important;
         }
-
         .homebrandtitle {
             width: 100%;
             padding: 50px 0;
             filter: brightness(0) invert(1);
         }
-
         .coltablpadd {
             padding: 0;
             margin: auto;
         }
-
         .calendar-wrapper #btnNext {
             position: absolute;
             right: 0;
         }
-
         .calendar-wrapper #btnPrev {
             position: absolute;
             left: 0;
         }
-
         .contimgu {
             padding-top: 0;
             margin-top: 0;
         }
-
         .divtitle {
             padding-left: 20px;
             position: relative;
@@ -391,40 +347,37 @@
             height: 20px;
             text-align: center;
         }
-
         .time-shedule-wrapper {
             padding: 100px 10px;
         }
-
         .bktitle {
             width: 100%;
         }
-
         .bkprice {
             width: 100%;
         }
-
         .ffaddbag {
             width: 100%;
             float: none !important;
             padding: 10px !important;
         }
     }
-
     .day-clicked {
         font-size: larger;
         background-color: #edbddb;
         border-radius: 50%;
     }
-
     .slot-clicked {
         background-color: #edbddb;
         color: black;
         border: 2px solid #edbddb;
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
+<input type="hidden" id="shopid" value={{$shop->id}}>
+<input type="hidden" id="shopname" value="{{$shop->name_en}}">
+<input type="hidden" id="secondary" value={{$style->secondary}}>
+<input type="hidden" id="primary" value={{$style->primary}}>
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
     <div class="container">
         <div class="row">
@@ -473,7 +426,7 @@
                     <div class="divtitle" style="">
                         <h4 class="floatleft h4-fl" style="">
                             {{$product->name_en}}
-                            <span style="color:#edbddb; font-weight:100;font-family:'Avenir'">SAR {{$product->price}}</span>
+                            <span id="price-primary-color" style="font-weight:100;font-family:'Avenir'">SAR {{$product->price}}</span>
 
                         </h4>
                     </div>
@@ -484,8 +437,8 @@
                         </div>
                         <div id="divCal"></div>
                         <div class="day-status">
-                            <span class="booking-available" style="font-weight:100;margin-right:10px;">Available</span>
-                            <span class="booked" style="font-weight:100;">Booked</span>
+                            <span id="avail-book-primarycolor" class="booking-available" style="font-weight:100;margin-right:10px;">Available</span>
+                            <span id="avail-book-seccolor" class="booked" style="font-weight:100;">Booked</span>
                         </div>
                     </div>
                     <div class="time-shedule-wrapper">
@@ -516,7 +469,7 @@
 
                 <div class="booking-item">
                     <span class="bktitle" style="">{{$product->name_en}} </span>
-                    <span class="bkprice" style="font-size:24px;">SAR {{$product->price}}</span>
+                    <span id="price2-primary-color" class="bkprice" style="font-size:24px;">SAR {{$product->price}}</span>
                 </div>
                 <div class="booking-item" style="font-size:24px;">
                     <span class="bktitle" id="date-selected" style=""> </span>
@@ -554,20 +507,24 @@
 
 
 <script>
-    $(document).ready(function() {
-
-        $(".active").css("background-color", "black");
+    $(document).ready(function() { 
+        $(".active").css("background-color", "black"); 
         let today = new Date();
-        let formated_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
-        getSlots(formated_date)
-    });
-
-
+        let formatted_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
+        getSlots(formatted_date);
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4); 
+        $('#price-primary-color').css({'color': primary_color});
+        $('#price2-primary-color').css({'color': primary_color});
+        $('#avail-book-primarycolor').css({'background': primary_color});
+        $('#avail-book-seccolor').css({'background': secondary_color});
+        $('.time-btn').css({'border': '2px solid ' + secondary_color + ' !important'});
+    });  
     var month;
     var year;
     var day;
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var booked = [1, 16, 21]
+    var booked = [1, 16, 21];
 
     var Cal = function(divId) {
 
@@ -769,9 +726,9 @@
         day = day_ele.id;
         $('#calendar').find("*").removeClass("day-clicked");
         day_ele.classList.add("day-clicked");
-        let formated_date = `${year}-${month+1}-${day}`
-        getSlots(formated_date)
-        document.getElementById("day").value = formated_date
+        let formatted_date = `${year}-${month+1}-${day}`
+        getSlots(formatted_date)
+        document.getElementById("day").value = formatted_date;
     }
 
     function getSlots(date) {
@@ -801,10 +758,10 @@
         let template = ''
         data.forEach(item => {
             if (item.available) {
-                template = template + `<button class="time-btn" onclick= "slotSelect(${item.id},this)">` + `${item.timeslot}</button>`
+                template = template + `<button id="" class="time-btn btntime-ss" onclick= "slotSelect(${item.id},this)">` + `${item.timeslot}</button>`
 
             } else {
-                template = template + `<button class="time-btn time-btn-inactive">${item.timeslot}</button>`
+                template = template + `<button id="" class="time-btn btntime-ss time-btn-inactive">${item.timeslot}</button>`
 
             }
 
