@@ -617,7 +617,7 @@
             <h4 style="margin-bottom:20px;">Select the Date</h4>
             <div id="day-for-table">
 
-            <div id="date"></div>
+                <div id="date"></div>
             </div>
         </div>
         <div class="row" style="margin-top:100px;visibility:hidden;" id="booking-st3">
@@ -1054,3 +1054,4 @@
 
 
 @endsection
+

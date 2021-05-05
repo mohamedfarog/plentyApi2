@@ -175,7 +175,7 @@
 
         <div class="row">
 
-            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInDown" >
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInDown">
                 <a href="/delicacy">
                     <div style="">
                     </div>
@@ -192,7 +192,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInUp" >
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInUp">
 
                 <a href="/beauty">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
@@ -206,7 +206,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInDown"  >
+            <div class="col-xs-4 col-xxs-4 mb-30 promo-banner pm-cat-item wow slideInDown">
                 <a href="/fashion">
                     <video playsinline="" autoplay="" muted="" loop="" style="border-radius: 1px;object-fit:cover;overflow:hidden;width:100%;height:100%;">
                         <source src="img/category/fashion.mp4" type="video/mp4">
@@ -227,7 +227,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title text-center"> 
+                    <div class="section-title text-center">
                         <h2 class="title-border">Plenty Bazaar</h2>
                     </div>
                 </div>

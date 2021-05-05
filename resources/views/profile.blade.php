@@ -35,7 +35,7 @@
         width: 100%;
         margin: 3em auto;
         padding: 2em;
-        background: #fff; 
+        background: #fff;
     }
 
     .calendar-wrapper table {
@@ -54,7 +54,7 @@
         vertical-align: middle;
         width: 14.285714285714%;
     }
- 
+
 
     .calendar-wrapper td.not-current {
         color: #c0c0c0;
@@ -80,6 +80,7 @@
         background-color: #f2f3f8;
         box-shadow: inset 0px 0px 0px 8px white;
     }
+
 </style>
 
 <section style="text-align:center;">
@@ -322,14 +323,11 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            ,
-            firstDayOfMonth = new Date(y, m, 1).getDay()
+            , firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            ,
-            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            ,
-            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table>';
@@ -427,6 +425,7 @@
     function getId(id) {
         return document.getElementById(id);
     }
+
 </script>
 
 @endsection

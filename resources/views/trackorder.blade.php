@@ -43,15 +43,17 @@
     .totext {
         color: #001b71 !important;
     }
-    .prodimg-div{
-        width:120px;
-        height:120px;
-        padding:5px;
-        border:1px solid black;
-        margin:0 10px;
-        display:table-cell; 
-        vertical-align:middle;
+
+    .prodimg-div {
+        width: 120px;
+        height: 120px;
+        padding: 5px;
+        border: 1px solid black;
+        margin: 0 10px;
+        display: table-cell;
+        vertical-align: middle;
     }
+
     @media only screen and (max-width: 600px) {
         .tablemobile {
             width: 95%;
@@ -62,6 +64,7 @@
             padding: 20px;
         }
     }
+
 </style>
 
 <section class="page-title text-center bg-light">
@@ -322,5 +325,6 @@
         $(prodordid).show();
 
     });
+
 </script>
 @endsection

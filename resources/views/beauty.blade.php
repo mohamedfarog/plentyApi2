@@ -155,25 +155,29 @@
         margin-bottom: 20px;
     }
 
-   .pp-product-panel{
-        width:1000px;
+    .pp-product-panel {
+        width: 1000px;
         margin: auto;
-        text-align:center;
+        text-align: center;
     }
-    .h2-beauty{
-        font-weight:lighter;
-        font-size:60px;
+
+    .h2-beauty {
+        font-weight: lighter;
+        font-size: 60px;
         padding: 100px 0 100px;
     }
+
     @media only screen and (max-width: 1000px) {
-        .pp-product-panel{
-            width:100%;
+        .pp-product-panel {
+            width: 100%;
         }
     }
+
     @media only screen and (max-width: 600px) {
-        .pp-product-panel{
-            width:100%;
+        .pp-product-panel {
+            width: 100%;
         }
+
         .catmobile {
             font-size: 16px;
         }
@@ -235,6 +239,7 @@
             margin: auto;
         }
     }
+
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -427,6 +432,7 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
+
 </script>
 
 <script>
@@ -456,10 +462,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET',
-            url: base_url + 'product-by-category/' + category,
-            dataType: 'JSON',
-            success: function(data) {
+            type: 'GET'
+            , url: base_url + 'product-by-category/' + category
+            , dataType: 'JSON'
+            , success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -533,6 +539,7 @@
         });
         console.log('nohover');
     });
+
 </script>
 <script src="js/prodjs.js"></script>
 
