@@ -49,6 +49,10 @@ Route::get('/signup', function () {
 Route::get('/login', function () {
     return view('/signup');
 });
+Route::get('/login', function () {
+    return view('/signup');
+})->name('login');
+
 // Route::get('/booking', function () {
 //     return view('/booking');
 // });

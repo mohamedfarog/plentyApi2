@@ -247,29 +247,28 @@
 
             <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
                 @if(isset($products))
-                @foreach($products as $product)
+                    @foreach($products as $product) 
+                        <div class="producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm " style="margin-bottom:30px;">
+                            <div class="product-img frame"><a href="product/{{$product->id}}"><img src="{{$product->images->first()->img_url}}" alt="" loading="lazy" class="imgz"></a>
 
-                <div class="producthover single-product col-lg-3 col-xs-6 hidden-md hidden-sm " style="margin-bottom:30px;">
-                    <div class="product-img frame"><a href="product/{{$product->id}}"><img src="{{$product->images->first()->img_url}}" alt="" loading="lazy" class="imgz"></a>
-
-                    </div>
-                    <div class="product-info clearfix">
-                        <div class="fix">
-                            <h4 class="post-title floatcenter feattitle"><a href="product/{{$product->id}}" style="">{{$product->name_en}} </a></h4>
-                            <p class="floatcenter hidden-sm featsubtitle  post-title">SAR {{$product->price}}</p>
+                            </div>
+                            <div class="product-info clearfix">
+                                <div class="fix">
+                                    <h4 class="post-title floatcenter feattitle"><a href="product/{{$product->id}}" style="">{{$product->name_en}} </a></h4>
+                                    <p class="floatcenter hidden-sm featsubtitle  post-title">SAR {{$product->price}}</p>
+                                </div>
+                                <div class="fix featlineicons">
+                                    <span class="pro-price floatleft" onclick="MakeFavourite(this,{{$product->id}})"><img class="featicons" src="img/nav/fav.png" data-id="{{$product->id}}" data-selected="0" loading=lazy>
+                                    </span>
+                                    </a>
+                                    <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
+                                            <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="fix featlineicons">
-                            <span class="pro-price floatleft" onclick="MakeFavourite(this,{{$product->id}})"><img class="featicons" src="img/nav/fav.png" data-id="{{$product->id}}" data-selected="0" loading=lazy>
-                            </span>
-                            </a>
-                            <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
-                                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
                 @endif
             </section>
 
