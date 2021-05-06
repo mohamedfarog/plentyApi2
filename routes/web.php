@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -75,7 +76,7 @@ Route::get('/lang', function () {
         return redirect('/');
     }
 });
-
+Route::get('/receipt',[OrderController::class,'viewreceipt']);
 // Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getProductFilter']);
