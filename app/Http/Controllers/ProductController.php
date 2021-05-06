@@ -554,9 +554,13 @@ class ProductController extends Controller
                 } else {
                     if (($requestproduct['color'] == -1)  && ($requestproduct['size'] != -1)) {
                         $size = Size::find($requestproduct['size']);
+                        if($size->stocks != null){
                         if ($size->stocks >= $requestproduct['qty']) {
-                            array_push($arr, ["id" => $requestproduct['id'], "stock" => $size->stocks]);
+                                            array_push($arr, ["id" => $requestproduct['id'], "stock" => $size->stocks]);
+                                        }
+
                         }
+                        
                     }
 
                     if (($requestproduct['color']  == -1) && ($requestproduct['size'] == -1)) {
