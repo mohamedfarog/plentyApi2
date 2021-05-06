@@ -87,8 +87,8 @@ class TableBookingController extends Controller
             
             
             if (count($arr) > 0) {
-                $data = $this->paginate($arr);
-                return $data;
+                // $data = $this->paginate($arr);
+                return $arr;
             } else {
                 return response()->json(['Errors' => 'No orders found']);
             }
