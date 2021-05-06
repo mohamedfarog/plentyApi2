@@ -349,8 +349,7 @@ class ProductController extends Controller
                                 $arr['product_id'] = $product->id;
                                 $arr['value'] = $color['value'];
                                 $arr['others'] = $color['others'];
-                                $
-        
+                                $arr['size_id'] = $sizes->id;
                                 $sizes = Color::create($arr);
                             }
                         }
