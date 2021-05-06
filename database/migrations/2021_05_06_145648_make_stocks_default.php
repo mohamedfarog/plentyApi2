@@ -14,7 +14,7 @@ class MakeStocksDefault extends Migration
     public function up()
     {
         Schema::table('sizes', function (Blueprint $table) {
-          $table->stocks->default(0)->change();
+          $table->integer('stocks')->default(0)->change();
         });
     }
 
