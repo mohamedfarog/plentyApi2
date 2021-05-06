@@ -117,7 +117,7 @@ Route::get('eventshops', [EventcatController::class, 'index']);
 Route::get('eventproducts', [ProductController::class, 'getProducts']);
 Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
-Route::resource('success',TransactionController::class);
+Route::resource('success', TransactionController::class);
 
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
@@ -141,14 +141,16 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::resources('sizes', SizeController::class);
+
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
-    Route::post("/fcm", [UserController::class,"updateFCM"]);
+    Route::post("/fcm", [UserController::class, "updateFCM"]);
     Route::resource('tablecapacity', TableCapacityController::class);
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
-    Route::post('sendnotifications',[UserController::class, 'sendNotifications']);
-    
+    Route::post('sendnotifications', [UserController::class, 'sendNotifications']);
+
 
     Route::post('autologin', [UserController::class, 'autologin']);
     Route::post('addpoints', function () {
@@ -164,7 +166,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('shops', ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
     Route::resource('support', SupportController::class);
-    Route::get('/createCharge',[OrderController::class,'pay']);
+    Route::get('/createCharge', [OrderController::class, 'pay']);
     Route::resource('users', UserController::class);
     Route::resource('cart', CartController::class);
     Route::resource('orders', OrderController::class);
