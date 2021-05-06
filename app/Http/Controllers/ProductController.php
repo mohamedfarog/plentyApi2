@@ -337,13 +337,15 @@ class ProductController extends Controller
                             $arr['others'] = $size['others'];
                         }
                         $arr['price'] = $size['price'];
-                        $arr['stocks'] = $size['stocks'];
+                        if (isset($size['stocks'])) {
+                            $arr['stocks'] = $size['stocks'];
+                        }
                         if (isset($size['image']) && $size['image'] != null) {
                             $arr['image'] = $helper->store($size['image']);
                         }
                         $sizes = Size::create($arr);
 
-                        if(isset($size['color'])){
+                        if (isset($size['color'])) {
                             foreach ($size['color'] as $color) {
                                 $arr = array();
                                 $arr['product_id'] = $product->id;
@@ -353,7 +355,6 @@ class ProductController extends Controller
                                 $sizes = Color::create($arr);
                             }
                         }
-
                     }
                 }
                 if (isset($request->addons)) {
