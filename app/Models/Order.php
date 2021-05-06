@@ -36,7 +36,7 @@ class Order extends Model
     public function getOrderreceiptAttribute()
     {
 
-        return  ENV('PROJECTURL').'receipt?order_id='.$this->id;
+        return  ENV('PROJECTURL').'orderreceipt?order_id='.$this->id;
     }
     
     public function getOrderstatusvalueAttribute()
