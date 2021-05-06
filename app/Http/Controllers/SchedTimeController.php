@@ -21,7 +21,7 @@ class SchedTimeController extends Controller
         //
         if (isset($request->shop_id)) {
             if (isset($request->fromtime)) {
-                $tables= SchedTime::where('shop_id', $request->shop_id)->where('from', $request->fromtime)->pluck('table_id')->toArray();
+                $tables = SchedTime::where('shop_id', $request->shop_id)->where('from', $request->fromtime)->pluck('table_id')->toArray();
                 return Shoptable::find($tables);
             }
 
@@ -47,6 +47,20 @@ class SchedTimeController extends Controller
      */
     public function store(Request $request)
     {
+        if (isset($request->id)) {
+            if (isset($request->action)) {
+                switch ($request->action) {
+                    case 'update':
+                        $timeslot = SchedTime::find($request->id);
+                        if (isset($request->seatingstatus)) {
+                            $timeslot->status = $request->seatingstatus;
+                        }
+                        $timeslot->save();
+                        return response()->json(['success' => !!$timeslot, 'message' => "Status has been updated"]);
+                        break;
+                }
+            }
+        }
 
         $schedtime = new SchedTime();
         $day = $request->day;
