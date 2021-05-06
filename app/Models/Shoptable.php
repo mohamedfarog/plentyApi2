@@ -25,7 +25,7 @@ class Shoptable extends Model
             }
         ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
-        return $schedule->tblbooking;
+        return [$schedule->tblbooking, $schedule->status];
     }
 
     public function shop()
