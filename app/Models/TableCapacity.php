@@ -12,7 +12,7 @@ class TableCapacity extends Model
     public function getImageurlAttribute()
     {
         if ($this->image != null) {
-            return env('PRODUCTURL') . $this->url;
+            return env('PRODUCTURL') . $this->image;
         }
     }
 
