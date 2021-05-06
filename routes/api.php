@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\EjackController;
@@ -142,6 +143,8 @@ Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sizes', SizeController::class);
+    Route::resource('colors', ColorController::class);
+
 
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);

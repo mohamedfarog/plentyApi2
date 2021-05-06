@@ -17,6 +17,7 @@ class Shoptable extends Model
         "booking",
         "bookingstatus"
     ];
+    
 
     public function getBookingAttribute()
     {
