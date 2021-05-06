@@ -19,7 +19,7 @@ class Coupon extends Model
                 return 'Expired';
             }
             else{
-                return $this->expiry->format('d M Y');
+                return $this->expiry;
             }
         }
     }
