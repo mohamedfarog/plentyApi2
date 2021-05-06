@@ -413,6 +413,15 @@ class OrderController extends Controller
         //
     }
 
+    public function viewreceipt(Request $request)
+    {
+        if($request->order_id){
+            $order= Order::with(['user','details'])->find($request->order_id);
+            return view('receipt')->with(['data'=>$order]);
+        }
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      *
