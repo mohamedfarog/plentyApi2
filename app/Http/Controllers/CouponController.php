@@ -116,6 +116,9 @@ class CouponController extends Controller
                         if (isset($request->value)) {
                             $coupon->value = $request->value;
                         }
+                        if (isset($request->code)) {
+                            $coupon->code = $request->code;
+                        }
                         if (isset($request->shop_id)) {
                           
                                 $coupon->shop_id = $request->shop_id;
