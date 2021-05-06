@@ -60,89 +60,91 @@ class SchedTimeController extends Controller
                         break;
                 }
             }
+        }else{
+            
+        }
+
+        $schedtime = new SchedTime();
+        $day = $request->day;
+        if ($request->istoday == "true") {
+            $istoday = true;
+        } else if ($request->istoday == "false") {
+            $istoday = false;
         } else {
-            $schedtime = new SchedTime();
-            $day = $request->day;
-            if ($request->istoday == "true") {
-                $istoday = true;
-            } else if ($request->istoday == "false") {
-                $istoday = false;
-            } else {
-                $istoday = $request->istoday;
+            $istoday = $request->istoday;
+        }
+        //Find if the day is today
+        //If it is today, then we return the timeslots existing in the database
+
+
+        if ($istoday == true) {
+            //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
+
+
+            $tables = Shoptable::with(['timeslots' => function ($timeslots) use ($request) {
+                return $timeslots->where('from', $request->preftime)->where('booked', 0);
+            }])->where('capacity', $request->capacity)
+                ->orWhere('capacity', ($request->capacity + 1))
+                ->get();
+            $arr = array();
+
+            foreach ($tables as $table) {
+                if (count($table->timeslots) > 0) {
+                    $table['bookingcount'] = count($table->timeslots);
+                    array_push($arr, $table);
+                }
             }
-            //Find if the day is today
-            //If it is today, then we return the timeslots existing in the database
+            $newarr = array_column($arr, 'bookingcount');
 
-
-            if ($istoday == true) {
-                //TODO: Instead of assigning the first table, we need to assign one with the fewest amount of bookings
-
-
-                $tables = Shoptable::with(['timeslots' => function ($timeslots) use ($request) {
-                    return $timeslots->where('from', $request->preftime)->where('booked', 0);
-                }])->where('capacity', $request->capacity)
-                    ->orWhere('capacity', ($request->capacity + 1))
-                    ->get();
-                $arr = array();
-
-                foreach ($tables as $table) {
-                    if (count($table->timeslots) > 0) {
-                        $table['bookingcount'] = count($table->timeslots);
-                        array_push($arr, $table);
-                    }
-                }
-                $newarr = array_column($arr, 'bookingcount');
-
-                array_multisort($newarr, SORT_ASC, $arr);
-                return $arr;
+            array_multisort($newarr, SORT_ASC, $arr);
+            return $arr;
 
 
 
-                if (count($arr) > 0) {
-                    $tablebookings = TableBooking::where('date', $request->date)->get();
-                    $schedtimes = SchedTime::where('booked', 0)->get();
+            if (count($arr) > 0) {
+                $tablebookings = TableBooking::where('date', $request->date)->get();
+                $schedtimes = SchedTime::where('booked', 0)->get();
 
-                    return $schedtimes;
-                } else {
-                    return response()->json(['Error' => 'No tables available'], 400);
-                }
-
-
-
-                //Return timeslots from the DB with the given slot
-
+                return $schedtimes;
             } else {
-                // $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
-                // return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
+                return response()->json(['Error' => 'No tables available'], 400);
+            }
 
 
-                //Fetch tables
-                $tables = Shoptable::where('capacity', $request->capacity)->orWhere('capacity', ($request->capacity + 1))->first();
-                $ts =  $schedtime->generateTimeSlots('10:00:00', '12:00:00', 15, $tables->id);
-                $timeslotarray = array();
 
-                if ($tables) {
-                    //Generate Time Slots for that ID
-                    foreach ($ts as $timeslot) {
-                        //   return $timeslot;
-                        //Find if any prev bookings have been made
-                        $booking = TableBooking::where('date', date('YYYY-MM-DD', strtotime($request->date)))->where('table_id', $timeslot['table_id'])->where('preftime', $timeslot['fromtime'])->count();
-                        if ($booking > 0) {
+            //Return timeslots from the DB with the given slot
 
-                            $timeslot['booked'] = "1";
+        } else {
+            // $tablescheds= Tablesched::where('shop_id',$request->shop_id)->where('day',$request->day)->first();  
+            // return $schedtime->generateTimeSlots ($tablescheds->opening,$tablescheds->closing,$tablescheds->seating_time,$request->table_id);
 
 
-                            array_push($timeslotarray, $timeslot);
-                        } else {
-                            $timeslot['booked'] = "0";
+            //Fetch tables
+            $tables = Shoptable::where('capacity', $request->capacity)->orWhere('capacity', ($request->capacity + 1))->first();
+            $ts =  $schedtime->generateTimeSlots('10:00:00', '12:00:00', 15, $tables->id);
+            $timeslotarray = array();
 
-                            array_push($timeslotarray, $timeslot);
-                        }
+            if ($tables) {
+                //Generate Time Slots for that ID
+                foreach ($ts as $timeslot) {
+                    //   return $timeslot;
+                    //Find if any prev bookings have been made
+                    $booking = TableBooking::where('date', date('YYYY-MM-DD', strtotime($request->date)))->where('table_id', $timeslot['table_id'])->where('preftime', $timeslot['fromtime'])->count();
+                    if ($booking > 0) {
+
+                        $timeslot['booked'] = "1";
+
+
+                        array_push($timeslotarray, $timeslot);
+                    } else {
+                        $timeslot['booked'] = "0";
+
+                        array_push($timeslotarray, $timeslot);
                     }
-                    return $timeslotarray;
-                } else {
-                    return response()->json(['Error' => 'No tables available'], 400);
                 }
+                return $timeslotarray;
+            } else {
+                return response()->json(['Error' => 'No tables available'], 400);
             }
         }
     }
