@@ -22,7 +22,7 @@ class TableBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    public function paginate($items, $perPage = 1, $page = null, $options = [])
 
     {
 
@@ -87,8 +87,8 @@ class TableBookingController extends Controller
             
             
             if (count($arr) > 0) {
-                $data = $this->paginate($arr);
-                return $data;
+                // $data = $this->paginate($arr);
+                return $arr;
             } else {
                 return response()->json(['Errors' => 'No orders found']);
             }

@@ -110,10 +110,22 @@ class CouponController extends Controller
                     if (isset($request->id)) {
 
                         $coupon =  Coupon::findorfail($request->id);
-                        $coupon->value = $request->value;
-                        if (isset($request->shop_id)) {
-                            $coupon->shop_id = $request->shop_id;
+                        if (isset($request->expiry)) {
+                            $coupon->expiry = $request->expiry;
                         }
+                        if (isset($request->value)) {
+                            $coupon->value = $request->value;
+                        }
+                        if (isset($request->code)) {
+                            $coupon->code = strtoupper($request->code);
+                        }
+                        if (isset($request->shop_id)) {
+                          
+                                $coupon->shop_id = $request->shop_id;
+                            
+                        } 
+
+                        
                         if (isset($request->expiry)) {
                             $coupon->expiry = $request->expiry;
                         }
