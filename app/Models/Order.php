@@ -11,7 +11,7 @@ class Order extends Model
     protected $fillable = [
         'ref', 'total_amount', 'amount_due', 'order_status','points_earned', 'payment_method', 'tax', 'delivery_charge', 'delivery_location', 'user_id', 'coupon_value', 'lat', 'lng', 'delivery_note', 'contact_number', 'city', 'label',"booking_time"
     ];
-    protected $appends = ['orderstatusvalue','prepstatus'];
+    protected $appends = ['orderstatusvalue','prepstatus','orderreceipt'];
     public function details()
     {
         return $this->hasMany(Detail::class);
@@ -33,6 +33,12 @@ class Order extends Model
      
         return $status;
     }
+    public function getOrderreceiptAttribute()
+    {
+
+        return  ENV('PROJECTURL').'receipt?order_id='.$this->id;
+    }
+    
     public function getOrderstatusvalueAttribute()
     {
         switch ($this->order_status) {

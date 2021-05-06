@@ -76,7 +76,7 @@ Route::get('/lang', function () {
         return redirect('/');
     }
 });
-Route::get('/receipt',[OrderController::class,'viewreceipt']);
+Route::get('/orderreceipt',[OrderController::class,'viewreceipt']);
 // Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getProductFilter']);
