@@ -136,12 +136,10 @@
 <body class="clean-body" style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #FFFFFF;">
 
 <div style="height:10px;"></div>
-<!--[if IE]><div class="ie-browser"><![endif]-->
 <table class="nl-container" role="presentation" style="table-layout: fixed; vertical-align: top; min-width: 320px; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF; width: 100%;" valign="top" width="100%" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 <tbody>
 <tr style="vertical-align: top;" valign="top">
 <td style="word-break: break-word; vertical-align: top;" valign="top">
-<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color:#FFFFFF"><![endif]-->
 
 </div>
 
@@ -149,18 +147,13 @@
 <div style="background-color:transparent;">
 <div class="block-grid three-up" style="min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; Margin: 0 auto; background-color: #8cc0e8;">
 <div style="border-collapse: collapse;display: table;width: 100%;background-color:#8cc0e8;">
-<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:640px"><tr class="layout-full-width" style="background-color:#8cc0e8"><![endif]-->
-<!--[if (mso)|(IE)]><td align="center" width="213" style="background-color:#8cc0e8;width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:25px; padding-bottom:15px;"><![endif]-->
+
 <div class="col num4" style="display: table-cell; vertical-align: top; max-width: 320px; min-width: 212px; width: 213px;">
 <div class="col_cont" style="width:100% !important;">
-<!--[if (!mso)&(!IE)]><!-->
 <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:25px; padding-bottom:15px; padding-right: 0px; padding-left: 0px;">
-<!--<![endif]-->
 <div class="img-container center autowidth" style="padding-right: 0px;padding-left: 0px;" align="center">
-<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]--><img alt="Image" class="center autowidth" src="data:image/png;base64, {{base64_encode(file_get_contents(asset('/orderimages/icon-01_2.png')))}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 24px; display: block;" title="Image" width="24" border="0" align="middle">
-<!--[if mso]></td></tr></table><![endif]-->
+
 </div>
-<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 15px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 <div style="color:#ffffff;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;line-height:1.5;padding-top:15px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
 <div class="txtTinyMce-wrapper" style="font-size: 14px; line-height: 1.5; color: #ffffff; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 21px;">
 <p style="font-size: 14px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 21px; margin: 0;">Invoice No:</p>
@@ -173,8 +166,7 @@
 </strong></p>
 </div>
 </div>
-<!--[if mso]></td></tr></table><![endif]-->
-<!--[if (!mso)&(!IE)]><!-->
+
 </div>
 <!--<![endif]-->
 </div>
