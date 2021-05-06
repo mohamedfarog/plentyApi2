@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\TableBooking;
 use App\Models\TableBookingDetail;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -273,7 +274,7 @@ class TableBookingController extends Controller
 
 
 
-            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => Auth::user(), "order" => $data]);
+            return response()->json(['success' => !!$order, 'message' => $msg, 'user' => User::with(['tier'])->find(Auth::id()), "order" => $data]);
         }
     }
 }
