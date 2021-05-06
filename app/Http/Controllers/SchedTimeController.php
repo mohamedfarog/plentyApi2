@@ -51,7 +51,7 @@ class SchedTimeController extends Controller
             if (isset($request->action)) {
                 switch ($request->action) {
                     case 'update':
-                        $timeslot = SchedTime::where('id', $request->id)->where;
+                        $timeslot = SchedTime::find($request->id);
                         if (isset($request->seatingstatus)) {
                             $timeslot->status = $request->seatingstatus;
                         }
