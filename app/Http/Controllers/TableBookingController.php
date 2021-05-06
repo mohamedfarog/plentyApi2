@@ -22,7 +22,7 @@ class TableBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    public function paginate($items, $perPage = 1, $page = null, $options = [])
 
     {
 
