@@ -615,7 +615,6 @@
 <div style="color:#555555;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
 <div class="txtTinyMce-wrapper" style="font-size: 14px; line-height: 1.2; color: #555555; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
 <p style="font-size: 11px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;"><span style="font-size: 11px;">Copyright © 2021 All Rights Reserved</span></p>
-<p style="font-size: 11px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;"><span style="font-size: 11px;">You are receiving this email because you have ordered from <a href="https://plenty.mvp-apps.ae" rel="noopener" style="text-decoration: underline; color: #0068A5;" target="_blank">Plenty of Things</a>&nbsp;.<br></span></p>
 <p style="font-size: 11px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;"><span style="font-size: 11px;">Al Diyafa Building, Second Floor, Northern Ring Road, Exit 2, Riyadh, Saudi Arabia</span></p>
 </div>
 </div>
