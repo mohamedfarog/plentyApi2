@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -43,6 +44,7 @@ class SizeController extends Controller
             $size = Size::where('id', $request->id)->first();
             switch ($request->action) {
                 case 'delete':
+                    $colors = Color::where('size_id',$request->id)->delete();
                     $size->delete();
                     $msg = 'Size has been deleted';
                     return response()->json(['success' => !!$size, 'message' => $msg]);
