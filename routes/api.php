@@ -20,6 +20,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TableCapacityController;
 use App\Http\Controllers\TableschedController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
@@ -143,6 +144,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
     Route::post("/fcm", [UserController::class,"updateFCM"]);
+    Route::resource('tablecapacity', TableCapacityController::class);
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('sendnotifications',[UserController::class, 'sendNotifications']);
