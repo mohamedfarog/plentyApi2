@@ -18,6 +18,7 @@ use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SchedTimeController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ShoptableController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
@@ -164,7 +165,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('eventshopregister', [UserController::class, 'vendorsRegister']);
     Route::post('eventcatadd', [EventCatController::class, 'eventcatadd']);
     Route::post('toggleFeatured', [ProductController::class, 'toggleFeatured']);
-
+    Route::resource('shoptables', ShoptableController::class);
     Route::post('invitation', [AccessController::class, 'invite']);
     Route::resource('shops', ShopController::class);
     Route::get('invstatus', [AccessController::class, 'checkAccess']);
