@@ -355,6 +355,7 @@ class ProductController extends Controller
                                 if (isset($color['others'])) {
                                     $arr['others'] = $color['others'];
                                 }
+                                $arr['stock'] = $color['stock'];
                                 $arr['size_id'] = $sizes->id;
                                 $color = Color::create($arr);
                             }
