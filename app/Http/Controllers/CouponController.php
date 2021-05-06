@@ -58,6 +58,12 @@ class CouponController extends Controller
 
         if (isset($request->action)) {
             switch ($request->action) {
+                case 'delete':
+                    $coupon = Coupon::find($request->id);
+                    $coupon->delete();
+                    return response()->json(['success' => "Coupons added",'message' => "Coupon Deleted"]);
+
+
                 case 'create':
 
                     $coupon = new Coupon();
@@ -101,9 +107,9 @@ class CouponController extends Controller
                     break;
 
                 case "update":
-                    if (isset($request->update_id)) {
+                    if (isset($request->id)) {
 
-                        $coupon =  Coupon::findorfail($request->update_id);
+                        $coupon =  Coupon::findorfail($request->id);
                         $coupon->value = $request->value;
                         if (isset($request->shop_id)) {
                             $coupon->shop_id = $request->shop_id;
@@ -114,7 +120,8 @@ class CouponController extends Controller
                         $coupon->ispercentage = $request->ispercentage;
 
                         $coupon->save();
-                        return back();
+                        return response()->json(['success' => "Coupons added",'message' => "Coupon updated"]);
+
                     }
 
                 case 'expire':
