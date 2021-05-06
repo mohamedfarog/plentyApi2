@@ -51,7 +51,9 @@ class ProductController extends Controller
                 $shop = ShopInfo::where('user_id', $user->id)->first();
                 if (!$shop)
                     return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-                return Product::where('deleted_at', null)->where("shop_id", $shop->id)->with(['sizes', 'colors', 'addons', 'images', 'designer'])->paginate();
+                return Product::where('deleted_at', null)->where("shop_id", $shop->id)->with(['sizes'=>function($sizes){
+                    return $sizes->with(['color']);
+                }, 'colors', 'addons', 'images', 'designer'])->paginate();
                 break;
             default:
                 # code...
