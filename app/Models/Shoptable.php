@@ -14,7 +14,8 @@ class Shoptable extends Model
     ];
 
     protected $appends = [
-        "booking"
+        "booking",
+        "bookingstatus"
     ];
 
     public function getBookingAttribute()
@@ -23,11 +24,19 @@ class Shoptable extends Model
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
             }
-        ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first()->select(
-            ['tblbooking', 'status']
-        );
+        ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
-        return $schedule;
+        return $schedule->tblbooking;
+    }
+    public function getBookingstatusAttribute()
+    {
+        $schedule = SchedTime::with([
+            'tblbooking' => function ($booking) {
+                return $booking->with(['user']);
+            }
+        ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
+
+        return $schedule->status;
     }
 
     public function shop()
