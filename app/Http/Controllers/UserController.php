@@ -718,7 +718,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Your account is not yet appoved."]);
+                        return response()->json(["error" => "Your account is not yet appoved. Please contact the admin for approval."]);
                     }
                 }
                 else if($user->typeofuser == 'B' ){
@@ -731,7 +731,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Your account is not yet appoved."]);
+                        return response()->json(["error" => "Your account is not yet appoved. Please contact the admin for approval."]);
                     }
                 }
                 else{
