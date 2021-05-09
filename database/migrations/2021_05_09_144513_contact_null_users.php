@@ -15,7 +15,7 @@ class ContactNullUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('contact')->unique()->nullable()->change();
+            $table->string('contact')->nullable()->change();
         });
     }
 
