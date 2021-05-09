@@ -653,7 +653,7 @@ class UserController extends Controller
             if(isset($request->active)){
                 $newuser->active = $request->active;
             }
-            $newuser-> email_verified_at= now();
+            // $newuser-> email_verified_at= now();
             $newuser->typeofuser= 'V';
             $start = '1';
             $end = '';
@@ -718,7 +718,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Please verify the email"]);
+                        return response()->json(["error" => "Your account is not yet appoved."]);
                     }
                 }
                 else if($user->typeofuser == 'B' ){
@@ -731,7 +731,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Please verify the email"]);
+                        return response()->json(["error" => "Your account is not yet appoved."]);
                     }
                 }
                 else{
