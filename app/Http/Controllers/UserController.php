@@ -650,6 +650,9 @@ class UserController extends Controller
             if(isset($request->name)){
                 $newuser->name = $request->name;
             }
+            if(isset($request->active)){
+                $newuser->active = $request->active;
+            }
             $newuser-> email_verified_at= now();
             $newuser->typeofuser= 'V';
             $start = '1';
