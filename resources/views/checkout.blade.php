@@ -499,7 +499,7 @@
                                                     <!-- Accordion end -->
 
                                                     <h3 class="payment-accordion" style="background:white">
-                                                        <input type="checkbox" id="plentypay" name="plentypay" value="1" onchange="plentyPaySelect(this)"><label for="plentypay">Pay with Plenty Pay</label>
+                                                        <input type="checkbox" id="plentypay" name="plentypayed" value="1" onchange="plentyPaySelect(this)"><label for="plentypay">Pay with Plenty Pay</label>
                                                         <input type="hidden" id="plenty-balance" name="plenty-balance">
                                                         <input type="hidden" id="plenty-payed" name="plentypay">
                                                     </h3>
@@ -696,6 +696,7 @@
         cart.loyality_point = 0;
         cart.coupon = '';
         cart.coupon_value = 0;
+        cart.plenty_pay = 0;
         storeCartLocal(JsonCartSerializer(cart));
         let template = ''
 
@@ -787,6 +788,7 @@
         document.getElementById("pointOutputId").value = 0;
         document.getElementById("plenty-balance-show").innerHTML = 0;
         ele = document.getElementById("plentypay")
+        ele.value = 0;
         ele.checked = false;
     }
 
@@ -848,7 +850,11 @@
 
             success: function(data) {
                 if (data.Response.original.success) {
+
                     showAlertSuccess(data.Response.original.message);
+                    storeCartLocal("");
+                    renderOrderedProduct();
+                    renderNavCart();
                 }
             },
             error: function(err) {
@@ -973,6 +979,9 @@
     }
 
     function plentyPaySelect(ele) {
+        var cart = CartSerializer(getCartLocal())
+
+
         if (parseFloat(document.getElementById('plenty-balance').value) > 0) {
 
             if (ele.checked) {
@@ -986,6 +995,7 @@
                     } else {
                         document.getElementById("plenty-balance-show").innerText = balance.toFixed(2) + " SAR"
                         document.getElementById("plentypay").value = balance;
+                        cart.plenty_pay = balance;
                         document.getElementById("balance").value = 0;
                     }
                 }
@@ -996,13 +1006,14 @@
                     document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(document.getElementById("plentypay").value);
                 }
                 document.getElementById("plenty-balance-show").innerText = "-"
+                cart.plenty_pay = 0;
             }
 
             changeTotalPrice()
         } else {
             showAlertError(`Your plenty wallet is empty!`);
         }
-
+        storeCartLocal(JsonCartSerializer(cart));
     }
 
 
@@ -1014,7 +1025,7 @@
 
     function changeTotalPrice() {
         const balance = document.getElementById("balance").value
-        document.getElementById("order_total").innerText = balance.toFixed(2)
+        document.getElementById("order_total").innerText = parseFloat(balance).toFixed(2)
     }
 
     function removeCoupon() {

@@ -630,10 +630,16 @@
             pro_id = id.split("-")[0]
             size_id = id.split("-")[1]
             timeslot_id = id.split("-")[2]
+            color_id = id.split("-")[3]
+            console.log(color_id)
             let i = this.cart_items.length;
             while (i--) {
                 if (this.cart_items[i] && this.cart_items[i]['id'] === pro_id) {
-                    if (size_id > 0) {
+                    if (color_id > 0) {
+                        if (this.cart_items[i]['color_id'] === color_id) {
+                            this.cart_items.splice(i, 1);
+                        }
+                    } else if (size_id > 0) {
                         if (this.cart_items[i]['size_id'] === size_id) {
                             this.cart_items.splice(i, 1);
                         }
@@ -704,6 +710,7 @@
                 item['size_id'] = element.size_id
                 item['is_product_variant'] = element.is_product_variant
                 item['color'] = element.color
+                item['color_id'] = element.color_id
                 item['quantity'] = element.quantity
                 item['time'] = element.time
                 item['date'] = element.date
@@ -761,8 +768,8 @@
                     cart.addItem(new CartItem(item))
                 });
             }
-
             return cart;
+
         }
 
         // cart manager end here
@@ -834,7 +841,7 @@
                         "<div class='nav-cart-item clearfix'>" +
                         "<div class='nav-cart-img'>" +
                         "<a href='" + base_url + "product/" + item.id + "'>" +
-                        "<img src='" + base_url + "storage/products/" + item.image_url + "' alt=''>" +
+                        "<img src='" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</div>" +
                         "<div class='nav-cart-title'>" +
@@ -845,7 +852,7 @@
                         "</div>" +
                         "</div>" +
                         "<div class='nav-cart-remove'>" +
-                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + "," + item.timeslot_id + ")' class='remove'><i class='ui-close'></i></a>" +
+                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + "," + item.timeslot_id + "," + item.color_id + ")' class='remove'><i class='ui-close'></i></a>" +
                         "</div>" +
                         "</div>" +
                         "</div>"
@@ -859,9 +866,9 @@
             $('#nav-cart-total').html(cart.subTotal() + ' SAR')
         }
 
-        function removeNavCartItem(prd_id, size_id, timeslot_id) {
+        function removeNavCartItem(prd_id, size_id, timeslot_id, color_id) {
             var cart = CartSerializer(getCartLocal())
-            let id = prd_id + "-" + size_id + "-" + timeslot_id
+            let id = prd_id + "-" + size_id + "-" + timeslot_id + "-" + color_id;
             cart.removeItem(id)
             storeCartLocal(JsonCartSerializer(cart));
             renderNavCart();

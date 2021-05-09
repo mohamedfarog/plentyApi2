@@ -245,7 +245,7 @@
                         "<tr class='cart_item' >" +
                         "<td class='product-thumbnail'>" +
                         "<a href='/product/" + item.id + "'>" +
-                        "<img src= '" + base_url + "storage/products/" + item.image_url + "' alt=''>" +
+                        "<img src= '" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</td>" +
                         "<td class='product-name'>" +
@@ -275,7 +275,7 @@
                         "<span class='amount' id= 'cart-item-price" + item.id + "-" + item.size_id + "'>SAR " + item.total_price() + "</span>" +
                         "</td>" +
                         "<td class='product-remove'>" +
-                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + "-" + item.size_id + "-" + item.timeslot_id + "'>" +
+                        "<a class='remove product-remove-button' title='Remove this item'id= 'cart-item-remove" + item.id + "-" + item.size_id + "-" + item.timeslot_id + "-" + item.color_id + "'>" +
                         "<i class='ui-close'></i>" +
                         "</a>" +
                         "</td>" +
@@ -313,6 +313,7 @@
                         document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                     }
                 }
+                renderNavCart();
 
             });
             $(".cart-minus-button").on('click', function(event) {
@@ -342,6 +343,7 @@
                         document.getElementById('order_total').innerHTML = "SAR " + cart.orderTotal()
                     }
                 }
+                renderNavCart();
 
             });
 
@@ -351,7 +353,6 @@
                 cart.removeItem(id);
 
                 storeCartLocal(JsonCartSerializer(cart));
-
                 // problem with innerHTML so reloading
                 location.reload();
 

@@ -52,7 +52,6 @@
     .addtobagbtn {
         border: 2px solid green;
         border-radius: 20px;
-
         padding: 10px 40px !important;
         font-size: 20px !important;
         background-color: transparent !important;
@@ -60,7 +59,7 @@
         font-weight: lighter;
     }
 
-    .addtobagbtn :hover {
+    .addtobagbtn:hover {
         cursor: pointer;
     }
 
@@ -103,8 +102,24 @@
             text-align: center;
         }
     }
+
+    input[type="radio"]+label:before {
+        content: none;
+        color: white;
+    }
+
+    input[type="radio"]:checked+label:before {
+        content: "";
+        position: relative;
+        top: 18px;
+        left: 16px;
+        background-color: #fff;
+        border: 5px solid #fff;
+        padding: 1px;
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
+@if(isset($style))
 <div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
     <div class="container">
         <div class="row">
@@ -127,10 +142,11 @@
         </div>
     </div>
 </div>
-
+@endif
 
 
 @if(isset($product))
+<input type="hidden" id="product_data" value="{{$product}}" />
 <div class="product-area single-pro-area pt-30 pb-30 product-style-2">
     <div class="container contmobile" style="background-color:#f2f3f8">
         <div class="row shop-list single-pro-info no-sidebar">
@@ -142,8 +158,8 @@
                         <div class="single-pro-slider single-big-photo view-lightbox slider-for frame" style="width:100% !important">
                             <div>
                                 <div class="frame">
-                                    @if ($product->image)
-                                    <img class="imgz" src="storage/products/{{$product->image}}" alt="" loading=lazy />
+                                    @if ($product->images)
+                                    <img class="imgz" src="{{$product->images[0]->imgurl}}" alt="" loading=lazy />
                                     @else
                                     <img class="imgz" src="img/product/Main.png" alt="" loading=lazy />
                                     @endif
@@ -183,20 +199,28 @@
                             <input type="hidden" id="name" name="name" value="{{$product->name_en}}">
                             <input type="hidden" id="shop_id" name="shop_id" value="{{$product->shop_id}}">
                             <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
-                            <input type="hidden" id="image_url" name="image_url" value="{{$product->image}}">
+                            @if(isset($product->images[0]))
+                            <input type="hidden" id="image_url" name="image_url" value="{{$product->images[0]->imgurl}}">
+                            @endif
                             @if($shop->cat_id)
                             <input type="hidden" id="cat_id" name="cat_id" value="{{$shop->cat_id}}">
                             @endif
-                            @if($sizes->count())
-                            <input type="hidden" id="size_id" name="size_id" value="{{$sizes->first()->id}}">
-                            <input type="hidden" id="size" name="size" value="{{$sizes->first()->value}}">
-                            <input type="hidden" id="price" name="price" value="{{$sizes->first()->price}}">
-                            <input type="hidden" id="stock" name="stock" value="{{$sizes->first()->stocks}}">
+                            @if($product->sizes->count())
+                            <input type="hidden" id="size_id" name="size_id" value="{{$product->sizes->first()->id}}">
+                            <input type="hidden" id="size" name="size" value="{{$product->sizes->first()->value}}">
+                            <input type="hidden" id="price" name="price" value="{{$product->sizes->first()->price}}">
+                            <input type="hidden" id="stock" name="stock" value="{{$product->sizes->first()->stocks}}">
                             <input type="hidden" id="is_product_variant" name="is_product_variant" value=true>
+                            @if($product->colors->count())
+                            <input type="hidden" id="color_id" name="color_id" value="{{$product->colors->first()->id}}">
+                            @else
+                            <input type="hidden" id="color_id" name="color_id">
+                            @endif
+                            <input type="hidden" id="color" name="color">
                             <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
                                 <ul>
-                                    <select name="sizes" id="sizes" onchange="changePriceOnSize({{$sizes}})">
-                                        @foreach($sizes as $size)
+                                    <select name="sizes" id="sizes" onchange="changePriceOnSize({{$product->sizes}},{{$product->colors}})">
+                                        @foreach($product->sizes as $size)
                                         @if ($loop->first)
                                         <option value="{{$size->id}}" selected>{{$size->value }}</option>
                                         @else
@@ -206,10 +230,12 @@
                                     </select>
                                 </ul>
                             </div>
+                            <div id="color-section"></div>
+
                             @else
 
                             <input type="hidden" id="price" name="price" value="{{$product->price}}">
-                            <input type="hidden" id="stock" name="stock" value="{{$product->stock}}">
+                            <input type="hidden" id="stock" name="stock" value="{{$product->stocks}}">
                             @endif
                             <div class="clearfix">
                                 <div class="cart-plus-minus" style="width:50%;background:#e1e0e5;">
@@ -297,6 +323,9 @@
 
         if (perfEntries[0].type === "back_forward") {
             location.reload(true);
+        }
+        if ($("#color_id").val()) {
+            renderColor(JSON.parse($("#product_data").val()).colors, $("#size_id").val())
         }
 
 
@@ -400,56 +429,65 @@
             category: shop_category[0].name_en || null,
         }
         let product = new CartItem(item)
-        console.log(product)
-        let cart = CartSerializer(getCartLocal());
-        if (cart.cart_items.length > 0) {
-            if (product.category == "Fine Dining" || product.category == "Fashion" || product.category == "Bazaar") {
-                let flag = false;
-                for (i = 0; i < cart.cart_items.length; i++) {
-                    if (cart.cart_items[i].id === product.id && product.size_id === cart.cart_items[i].size_id) {
-                        let quantity = parseInt(cart.cart_items[i].quantity) + parseInt(product.quantity);
-                        if (quantity <= cart.cart_items[i].stock) {
-                            cart.cart_items[i].quantity = quantity;
-                        } else {
-                            document.getElementById("stock-error").innerHTML = "Out of stock";
-                            document.getElementById("stock-error").style.display = "block";
-                            showAlertError(`Out of stock`)
 
+        if (product.stock > 0) {
+
+            let cart = CartSerializer(getCartLocal());
+            if (cart.cart_items.length > 0) {
+                if (product.category == "Eateries" || product.category == "Shopping" || product.category == "Bazaar") {
+                    let flag = false;
+                    for (i = 0; i < cart.cart_items.length; i++) {
+                        if (cart.cart_items[i].id === product.id && product.size_id === cart.cart_items[i].size_id && product.color_id === cart.cart_items[i].color_id) {
+                            let quantity = parseInt(cart.cart_items[i].quantity) + parseInt(product.quantity);
+                            if (quantity <= cart.cart_items[i].stock) {
+                                cart.cart_items[i].quantity = quantity;
+                            } else {
+                                document.getElementById("stock-error").innerHTML = "Out of stock";
+                                document.getElementById("stock-error").style.display = "block";
+                                showAlertError(`Out of stock`)
+
+                            }
+
+                            flag = true;
+                            break
                         }
-
-                        flag = true;
-                        break
                     }
+                    if (flag) {
+                        storeCartLocal(JsonCartSerializer(cart));
+                        renderNavCart()
+                        showAlertSuccess(`${item.name} added X ${item.quantity}`)
+
+                        return;
+
+                    } else {
+                        cart.addItem(product);
+                        showAlertSuccess(`${item.name} added X ${item.quantity}`)
+
+                    }
+
                 }
-                if (flag) {
-                    storeCartLocal(JsonCartSerializer(cart));
-                    renderNavCart()
-                    showAlertSuccess(`${item.name} added X ${item.quantity}`)
-
-                    return;
-
-                } else {
-                    cart.addItem(product);
-                    showAlertSuccess(`${item.name} added X ${item.quantity}`)
-
-                }
+            } else {
+                cart.addItem(product);
+                showAlertSuccess(`${item.name} added`)
 
             }
-        } else {
-            cart.addItem(product);
-            showAlertSuccess(`${item.name} added`)
 
+            storeCartLocal(JsonCartSerializer(cart));
+            renderNavCart()
+        } else {
+            showAlertError(`Out of stock`)
         }
 
-        storeCartLocal(JsonCartSerializer(cart));
-        renderNavCart()
 
     }
 
 
 
-    function changePriceOnSize(sizes) {
+    function changePriceOnSize(sizes, colors) {
+
+
         const size = document.getElementById("sizes").value
+        renderColor(colors, size);
         const form = new FormData(document.getElementById("product-form"))
         var currentSize = sizes.filter(function(sz) {
             return sz.id == size;
@@ -468,6 +506,49 @@
                 currentSize[0].price;
 
         }
+    }
+
+    function renderColor(colors, size) {
+
+
+        var currentColors = colors.filter(function(color) {
+            return color.size_id == size;
+        });
+        if (currentColors.length) {
+            var template = `<div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
+                            <ul>
+                            `
+            var flag = true;
+            currentColors.forEach(ele => {
+                let cols = ele.value.slice(4);
+                if (flag) {
+                    template += `<input type="radio" style="opacity: 0;" id="${ele.id}" name="color" value="${ele.id}" checked/>
+                    <label for="${ele.id}" onclick="colorChange(${ele.id},'${cols}',${ele.stock})" style="background-color: #${cols}; border-radius: 50%;width:50px;height:50px;"></label>`
+                    colorChange(ele.id, cols, ele.stock);
+                    flag = false;
+                } else {
+                    template += `<input type="radio" style="opacity: 0;" id="${ele.id}" name="color" value="${ele.id}"/>
+                    <label for="${ele.id}" onclick="colorChange(${ele.id},'${cols}',${ele.stock})" style="background-color: #${cols}; border-radius: 50%;width:50px;height:50px;"></label>`
+                }
+
+
+            });
+            template += ` </ul>
+                    </div>`
+            document.getElementById("color-section").innerHTML = template;
+
+        } else {
+            document.getElementById("color-section").innerHTML = "";
+        }
+
+
+    }
+
+    function colorChange(id, cols, stock) {
+        document.getElementById("stock").value = stock;
+        document.getElementById("color").value = "#" + cols;
+        document.getElementById("color_id").value = id;
+
     }
 </script>
 <script src="js/prodjs.js"></script>

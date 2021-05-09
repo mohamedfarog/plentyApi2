@@ -76,7 +76,7 @@ Route::get('/lang', function () {
         return redirect('/');
     }
 });
-Route::get('/orderreceipt',[OrderController::class,'viewreceipt']);
+Route::get('/orderreceipt', [OrderController::class, 'viewreceipt']);
 // Route::get('/product/{id}',  [WebsiteHomeController::class, 'product']);
 Route::get('/delicacy/{shop?}/{category?}',  [WebsiteHomeController::class, 'delicacy']);
 Route::get('/product-by-category/{id}',  [WebsiteHomeController::class, 'getProductFilter']);
@@ -89,9 +89,7 @@ Route::get('/cart', function () {
 });
 
 
-Route::get('/checkout', function () {
-    return view('/checkout');
-});
+
 
 
 
@@ -129,6 +127,9 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/userlevel', [WebsiteHomeController::class, "userLevel"]);
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
+    Route::get('/checkout', function () {
+        return view('/checkout');
+    });
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);
@@ -147,10 +148,10 @@ Route::get('/timeslot/{id}',  [WebsiteHomeController::class, 'timeslot']);
 Route::get('/bazaar/{id}',  [WebsiteHomeController::class, 'plentybazaar']);
 
 
-Route::get('/supportimages/{filename}', function($filename){
+Route::get('/supportimages/{filename}', function ($filename) {
     $path = resource_path() . '/assets/supportimages/' . $filename;
 
-    if(!File::exists($path)) {
+    if (!File::exists($path)) {
         return response()->json(['message' => 'Image not found.'], 404);
     }
 
@@ -163,10 +164,10 @@ Route::get('/supportimages/{filename}', function($filename){
     return $response;
 });
 
-Route::get('/orderimages/{filename}', function($filename){
+Route::get('/orderimages/{filename}', function ($filename) {
     $path = resource_path() . '/assets/orderimages/' . $filename;
 
-    if(!File::exists($path)) {
+    if (!File::exists($path)) {
         return response()->json(['message' => 'Image not found.'], 404);
     }
 

@@ -85,20 +85,11 @@ class WebsiteHomeController extends Controller
 
     private function getProduct($id)
     {
-        return  DB::table('products')
-            ->select(DB::raw(' products.id as id,
-                products.id as prodid,
-                products.name_ar as name_ar,
-                products.name_en as name_en,
-                products.price as price,
-                products.desc_en as desc_en,
-                products.desc_ar as desc_ar,
-                products.stocks as stock,
-                images.url as image,
-                shop_id as shop_id'))
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('products.id', '=', $id)
+
+        $products = Product::where('id', $id)
+            ->with(['images', 'sizes', 'colors'])
             ->get();
+        return $products;
     }
 
 
@@ -172,7 +163,7 @@ class WebsiteHomeController extends Controller
      */
     public function getProductFilter($prodcat_id)
     {
-        return Product::where('deleted_at', null)->where('prodcat_id', $prodcat_id)->with(['images'])->get();
+        return Product::where('deleted_at', null)->where('prodcat_id', $prodcat_id)->with(['images', 'colors'])->get();
     }
 
 
@@ -680,6 +671,11 @@ class WebsiteHomeController extends Controller
         }
 
         $total_amount = $this->calculateTotalPrice($items);
+        if (!isset($cart["plenty_pay"])) {
+            $cart["plenty_pay"] = 0;
+        }
+
+
         $loyality_pointSAR = $this->convertToCurrency($user, $cart["loyality_point"]);
         $amount_due = $this->amountDue($total_amount, $loyality_pointSAR, $cart["plenty_pay"], $cart["coupon_value"]);
         $m_request = new Request([
@@ -696,7 +692,7 @@ class WebsiteHomeController extends Controller
 
             'payment_method' =>  $pay_mode,
             'points' => $cart["loyality_point"],
-            'wallet' => $cart["plenty_pay"],
+            'wallet' =>  $cart["plenty_pay"],
             'coupon_value' => $cart["coupon_value"],
 
             'orderdetails' => $items,
@@ -716,7 +712,7 @@ class WebsiteHomeController extends Controller
     {
         $amount = 0;
         foreach ($items as $item) {
-            $amount = $amount + $item['price'] * $item['price'];
+            $amount = $amount + $item['price'] * $item['qty'];
         }
         return $amount;
     }

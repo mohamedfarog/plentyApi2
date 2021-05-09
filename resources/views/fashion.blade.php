@@ -263,7 +263,7 @@
                         <ul>
                             <li><a href="/" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;">FASHION</li>
-                            <li style="font-weight:lighter;" id="breadcrumbshopname2">Linen</li>
+                            <li style="font-weight:lighter;" id="breadcrumbshopname">Linen</li>
                         </ul>
                     </div>
                 </div>
@@ -563,10 +563,16 @@
 
     }
     $(document).ready(function() {
-        console.log("100%");
-        document.getElementById('breadcrumbshopname').innerHTML = localStorage.shopname;
-        document.getElementById('mobileheadershop').src = localStorage.shopimg;
-        $('.shopsidselect').find('option[value=]' + localStorage.shop).attr('selected', 'selected');
+        document.getElementById("defaultOpen").click();
+        $(".active").css("background-color", "black");
+        const shop_id = $('#shopid').val();
+        const shop_name = $('#shopname').val();
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        makeShopActive(shop_id, secondary_color);
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname2').style.color = secondary_color;
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
 
     });
 
