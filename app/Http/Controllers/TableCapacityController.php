@@ -15,10 +15,9 @@ class TableCapacityController extends Controller
      */
     public function index()
     {
-        $user=Auth::user();
-        if($user){
+       
             return TableCapacity::get();
-        }
+       
     }
 
     /**
