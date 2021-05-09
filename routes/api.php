@@ -142,6 +142,7 @@ Route::post('webLogin', [UserController::class, 'dashLogin']);
 Route::resource('tablecapacity', TableCapacityController::class);
 Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
+Route::post('vendorsignup', [UserController::class, 'vendorSignup']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('colors', ColorController::class);
