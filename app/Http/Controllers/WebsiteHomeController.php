@@ -14,6 +14,9 @@ use App\Models\Prodcat;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Tier;
+use App\Models\TableBooking;
+
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
@@ -216,6 +219,7 @@ class WebsiteHomeController extends Controller
     {
         $data['product'] = $this->getProduct($id)->first();
         $data['shop'] = $this->getShop($data['product']->shop_id);
+        $data['style'] = $this->getStyle($data['shop']->id);
         $data['sizes'] = $this->getProductSize($id);
         $data['addons'] = $this->getAddons($id);
         $data['trywith'] = $this->gettry($id);
@@ -238,6 +242,17 @@ class WebsiteHomeController extends Controller
     public function profile(Request $request)
     {
         $user = Auth::user();
+        $userid = Auth::id();
+        if (isset($userid)) {
+
+            $bookings = TableBooking::where('user_id', $userid)->with(['details' => function ($details) {
+                return $details->with('product');
+            },])->get();
+            $orders = Order::where('user_id', $userid)->with(['details' => function ($details) {
+                return $details->with('product');
+            },])->get();
+        }
+        $data["orders"] = $bookings->concat($orders);
         $data['user'] = $user;
         return view('profile')->with($data);
     }
@@ -306,24 +321,7 @@ class WebsiteHomeController extends Controller
         return response()->json(['Response' => !!$user, 'point' =>  $user->points]);
     }
 
-    function loyalityPointSAR($user)
-    {
-        switch (true) {
-            case $user['totalpurchases'] > 29999:
-                $sar = $user['totalpurchases'];
-                break;
-            case $user['totalpurchases'] > 19999:
-                $sar = $user['totalpurchases'];
-                break;
-            case $user['totalpurchases'] > 0:
-                $sar = $user['totalpurchases'];
-                break;
-            default:
-                $sar = $user['totalpurchases'];
-                break;
-        }
-        return 1;
-    }
+
 
     // getting coupon code
     public function cacluateCoupon(Request $request)
@@ -656,6 +654,7 @@ class WebsiteHomeController extends Controller
     function placeOreder(Request $request)
     {
         $cart = $request->cart;
+        $user = Auth::user();
         //  $products_filter = $this->filterProducts($cart);
         // $a = $this->validateShedule($products_filter);
         //$b = $this->validateProduct($products_filter);
@@ -675,15 +674,16 @@ class WebsiteHomeController extends Controller
             ));
         }
 
-        $pay_mode = 'cash';
+        $pay_mode = 'CASH';
         if (!$cart["is_cash_on_delivery"]) {
-            $pay_mode = 'card';
+            $pay_mode = 'CARD';
         }
 
-
+        $total_amount = $this->calculateTotalPrice($items);
+        $loyality_pointSAR = $this->convertToCurrency($user, $cart["loyality_point"]);
+        $amount_due = $this->amountDue($total_amount, $loyality_pointSAR, $cart["plenty_pay"], $cart["coupon_value"]);
         $m_request = new Request([
-
-            'delivery_location' => $request->address,
+            'delivery_location' => $request->address || -1,
             'city' => $request->city,
             'lat' => $request->lat,
             'lng' => $request->lng,
@@ -691,8 +691,8 @@ class WebsiteHomeController extends Controller
             'delivery_note' => $request->othernotes,
             'contact_number' => $request->contact,
 
-            'total_amount'   => 100,
-            'amount_due' => 0,
+            'total_amount'   => $total_amount,
+            'amount_due' =>  $amount_due,
 
             'payment_method' =>  $pay_mode,
             'points' => $cart["loyality_point"],
@@ -704,15 +704,46 @@ class WebsiteHomeController extends Controller
         ]);
         $order = new OrderController();
         try {
-            $order->store($m_request);
+            $res = $order->store($m_request);
         } catch (Exception $e) {
-            return response()->json(['Response' => $e]);
+            return response()->json(['Response' =>  $m_request]);
         }
 
-        return response()->json(['Response' => $m_request]);
+        return response()->json(['Response' => $res]);
     }
 
+    function calculateTotalPrice($items)
+    {
+        $amount = 0;
+        foreach ($items as $item) {
+            $amount = $amount + $item['price'] * $item['price'];
+        }
+        return $amount;
+    }
 
+    function amountDue($total_amount, $loyality_pointSAR, $plenty_pay, $coupon_value)
+    {
+        $amount = $total_amount - ($loyality_pointSAR + $plenty_pay + $coupon_value);
+        if ($amount < 0) {
+            return 0.0;
+        }
+        return $amount;
+    }
+
+    function convertToCurrency($user, $points)
+    {
+        //Converting points to amount
+        $tier = $user->tier_id;
+        if (isset($tier)) {
+            $tierData = Tier::find($tier);
+        }
+        $tierData = Tier::find(1);
+        if ($tierData) {
+            $tierValueInPerc = ($tierData->value) / 100;
+            return $points * $tierValueInPerc;
+        }
+        return 0.0;
+    }
 
     // Checkout proceed
     function checkoutProceed()

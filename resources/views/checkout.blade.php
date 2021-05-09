@@ -216,7 +216,6 @@
     .chip .closebtn:hover {
         color: #000;
     }
-
 </style>
 
 
@@ -643,8 +642,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -652,8 +651,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -675,7 +674,7 @@
         var cart = CartSerializer(getCartLocal());
 
         for (var i = 0; i < cart.cart_items.length; i++) {
-            if (cart.cart_items[i].category === 'Fashion') {
+            if (cart.cart_items[i].category === 'Fashion' || cart.cart_items[i].category === 'Bazaar') {
                 document.getElementById("address-show").style.visibility = "visible";
                 document.getElementById("address").setAttribute("required", true);
                 document.getElementById("city").setAttribute("required", true);
@@ -733,15 +732,15 @@
             let code = $('#coupon-code').val()
             url = base_url + 'coupon'
             $.ajax({
-                type: 'POST'
-                , url: url
-                , dataType: 'JSON'
-                , data: {
-                    "_token": "{{ csrf_token() }}"
-                    , "couponcode": code
-                    , "cart": getCartLocal()
-                }
-                , headers: {
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "couponcode": code,
+                    "cart": getCartLocal()
+                },
+                headers: {
 
                     "Authorization": 'Bearer ' + bearer_token
                 },
@@ -764,8 +763,8 @@
                     } else {
                         $("#coupon_error").html("This coupon is not applicable ! ")
                     }
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     let error = err.responseJSON.message;
                     $("#coupon_error").html(error)
 
@@ -797,13 +796,13 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
                 "_token": "{{ csrf_token() }}"
-            }
-            , headers: {
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
@@ -814,8 +813,8 @@
                     max: data.point
                 })
                 $("#loyality-point").val(data.point);
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -829,28 +828,30 @@
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'place-order'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                "_token": "{{ csrf_token() }}"
-                , "cart": getCartLocal()
-                , "address": form.get("address") || null
-                , "city": form.get("city") || null
-                , "contact": form.get("contact") || null
-                , "addresslabel": form.get("adresslabel") || null
-                , "othernotes": form.get("othernotes") || null
-                , "lang": form.get("lng") || null
-                , "lat": form.get("lat") || null
-            }
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "cart": getCartLocal(),
+                "address": form.get("address") || null,
+                "city": form.get("city") || null,
+                "contact": form.get("contact") || null,
+                "addresslabel": form.get("adresslabel") || null,
+                "othernotes": form.get("othernotes") || null,
+                "lang": form.get("lng") || null,
+                "lat": form.get("lat") || null
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
             success: function(data) {
-                console.log(data)
-            }
-            , error: function(err) {
+                if (data.Response.original.success) {
+                    showAlertSuccess(data.Response.original.message);
+                }
+            },
+            error: function(err) {
 
                 console.log('Error!', err)
             }
@@ -943,10 +944,10 @@
         if (bearer_token) {
             url = base_url + 'plenty-balance'
             $.ajax({
-                type: 'GET'
-                , url: url
-                , dataType: 'JSON'
-                , headers: {
+                type: 'GET',
+                url: url,
+                dataType: 'JSON',
+                headers: {
 
                     "Authorization": 'Bearer ' + bearer_token
                 },
@@ -959,8 +960,8 @@
                         document.getElementById('plenty-balance').value = 0;
                     }
 
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     console.log('Error!', err)
                 }
 
@@ -1027,7 +1028,6 @@
         storeCartLocal(JsonCartSerializer(cart));
         $("#coupon_error").html("");
     }
-
 </script>
 
 <script src="js/jquery.geocoder.js"></script>
@@ -1037,4 +1037,3 @@
 </script>
 <script src="js/map.js" defer></script>
 @endsection
-

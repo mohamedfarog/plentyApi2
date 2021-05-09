@@ -103,16 +103,15 @@
             text-align: center;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
-<div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('img/product/Banner.png') no-repeat scroll center center / cover;">
+<div class="heading-banner-area overlay-bg" style="margin: 0 5%;background: rgba(0, 0, 0, 0) url('storage/styles/{{$style->banner}}') no-repeat scroll center center / cover;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title" style="text-align:center">
-                        <img src="img/homebrands/Sada.png" style="width:30%;padding: 50px 0">
+                        <img src='storage/styles/{{$style->brandheader}}' style="width:30%;padding: 50px 0">
                     </div>
                     <div class="breadcumbs pb-15">
                         <ul>
@@ -372,32 +371,39 @@
             const cat_id = form.get('cat_id')
             return cat_id;
         }
-
-        let shop_category = JSON.parse(localStorage.getItem('shop_category')).filter(function(category) {
-            return category.id == shop_id();
-        });
+        let shop_category;
+        if (shop_id()) {
+            shop_category = JSON.parse(localStorage.getItem('shop_category')).filter(function(category) {
+                return category.id == shop_id();
+            });
+        } else {
+            shop_category = [{
+                name_en: "Bazaar"
+            }]
+        }
 
         let item = {
-            id: form.get('product_id')
-            , price: form.get('price')
-            , name: form.get('name')
-            , image_url: form.get('image_url') || null
-            , is_product_variant: form.get('is_product_variant') || false
-            , size: form.get('size') || null
-            , size_id: form.get('size_id') || null
-            , color: form.get('color') || null
-            , color_id: form.get('color_id') || null
-            , quantity: form.get('quantity') || null
-            , date: form.get('date') || null
-            , time: form.get('time') || null
-            , stock: form.get('stock') || null
-            , shop_id: form.get('shop_id') || null
-            , category: shop_category[0].name_en || null
-        , }
+            id: form.get('product_id'),
+            price: form.get('price'),
+            name: form.get('name'),
+            image_url: form.get('image_url') || null,
+            is_product_variant: form.get('is_product_variant') || false,
+            size: form.get('size') || null,
+            size_id: form.get('size_id') || null,
+            color: form.get('color') || null,
+            color_id: form.get('color_id') || null,
+            quantity: form.get('quantity') || null,
+            date: form.get('date') || null,
+            time: form.get('time') || null,
+            stock: form.get('stock') || null,
+            shop_id: form.get('shop_id') || null,
+            category: shop_category[0].name_en || null,
+        }
         let product = new CartItem(item)
+        console.log(product)
         let cart = CartSerializer(getCartLocal());
         if (cart.cart_items.length > 0) {
-            if (product.category == "Fine Dining" || product.category == "Fashion") {
+            if (product.category == "Fine Dining" || product.category == "Fashion" || product.category == "Bazaar") {
                 let flag = false;
                 for (i = 0; i < cart.cart_items.length; i++) {
                     if (cart.cart_items[i].id === product.id && product.size_id === cart.cart_items[i].size_id) {
@@ -463,11 +469,9 @@
 
         }
     }
-
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
 @endsection
-

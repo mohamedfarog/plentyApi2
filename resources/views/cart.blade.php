@@ -135,7 +135,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 <section class="page-title text-center bg-light">
@@ -246,7 +245,7 @@
                         "<tr class='cart_item' >" +
                         "<td class='product-thumbnail'>" +
                         "<a href='/product/" + item.id + "'>" +
-                        "<img src= '" + base_url + "/storage/products/" + item.image_url + "' alt=''>" +
+                        "<img src= '" + base_url + "storage/products/" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</td>" +
                         "<td class='product-name'>" +
@@ -377,7 +376,6 @@
 
             return template;
         }
-
     </script>
 
     <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
