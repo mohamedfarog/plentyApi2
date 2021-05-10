@@ -294,11 +294,7 @@
     function renderBookings(limit = 2) {
         template = '';
 
-        if (limit > 2) {
-            limit = orders.length
-        }
-
-        for (var i = 0; i < limit; i++) {
+        for (var i = 0; i < orders.length; i++) {
             template += `<div class="leftpane" style="padding:20px;background:#f2f3f8;display:block">
                         <div class="" style="padding-bottom:10px;">
                             <div style="width:40%;">
@@ -309,6 +305,9 @@
                             </div>
                         </div>
                     </div>`
+            if (i == 1 && limit > 2) {
+                break;
+            }
         }
 
         document.getElementById("my-orders").innerHTML = template;
