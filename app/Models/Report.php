@@ -95,10 +95,10 @@ class Report extends Model
     
                     break;
                     case 'shopearnings':
-                        $brandsid = Shop::whereNotNull('cat_id')->where('active',1)->pluck('id','name_en')->toArray();
-return $brandsid;
-                        foreach ($brandsid as $brand) {
-                            $data[$brand['name_en']] = floatval(Order::join('details','orders.id','=','details.order_id')->where('order_status', 3)->sum('details.price'));
+                        $brands = Shop::whereNotNull('cat_id')->where('active',1)->get();
+
+                        foreach ($brands as $brand) {
+                            $data[$brand->name_en] = floatval(Order::join('details','orders.id','=','details.order_id')->where('details.shop_id',$brand->id)->where('order_status', 3)->sum('details.price'));
                         }
                         break;
             default:
