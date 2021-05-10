@@ -99,6 +99,10 @@ class Report extends Model
 
                         foreach ($brands as $brand) {
                             $data[$brand->name_en] = floatval(Order::join('details','orders.id','=','details.order_id')->where('details.shop_id',$brand->id)->where('order_status', 3)->sum('details.price'));
+                            if($brand->cat_id == 1){
+                                $data[$brand->name_en] = floatval(TableBooking::join('table_booking_details','table_bookings.id','=','table_booking_details.order_id')->where('table_booking_details.shop_id',$brand->id)->where('order_status', 3)->sum('table_booking_details.price'));
+                            }
+                            
                         }
                         break;
             default:
