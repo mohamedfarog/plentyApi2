@@ -132,7 +132,9 @@ class SchedTimeController extends Controller
                     }
                 }
 
-                ksort($array);
+
+
+                uasort($array,'timecomp');
                 return $array;
                 // return $schedtimes;
             } else {
@@ -177,6 +179,16 @@ class SchedTimeController extends Controller
             }
         }
     }
+
+
+    function timecomp($a,$b)
+{
+    // Subtracting the UNIX timestamps from each other.
+    // Returns a negative number if $b is a date before $a,
+    // otherwise positive.
+    return strtotime($b[0])-strtotime($a[0]);
+}
+
 
 
 
