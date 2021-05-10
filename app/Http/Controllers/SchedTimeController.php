@@ -60,8 +60,7 @@ class SchedTimeController extends Controller
                         break;
                 }
             }
-        }else{
-            
+        } else {
         }
 
         $schedtime = new SchedTime();
@@ -84,8 +83,9 @@ class SchedTimeController extends Controller
             $tables = Shoptable::with(['timeslots' => function ($timeslots) use ($request) {
                 return $timeslots->where('booked', 0);
             }])->where('capacity', $request->capacity)
-                ->orWhere('capacity', ($request->capacity + 1))
-                ->get();
+                ->where('shop_id', $request->shop_id)
+                ->orWhere('capacity', ($request->capacity + 1))->get();
+
 
             // $tables = Shoptable::with(['timeslots' => function ($timeslots) use ($request) {
             //     return $timeslots->where('from', $request->preftime)->where('booked', 0);
@@ -93,26 +93,29 @@ class SchedTimeController extends Controller
             //     ->orWhere('capacity', ($request->capacity + 1))
             //     ->get();
 
-            $arr = array();
+            // $arr = array();
 
-            foreach ($tables as $table) {
-                if (count($table->timeslots) > 0) {
-                    $table['bookingcount'] = count($table->timeslots);
-                    array_push($arr, $table);
+            // foreach ($tables as $table) {
+            //     if (count($table->timeslots) > 0) {
+            //         $table['bookingcount'] = count($table->timeslots);
+            //         array_push($arr, $table);
+            //     }
+            // }
+            // $newarr = array_column($arr, 'bookingcount');
+
+            // array_multisort($newarr, SORT_ASC, $arr);
+
+
+
+            if (count($tables) > 0) {
+                // $tablebookings = TableBooking::where('date', $request->date)->get();
+                // $schedtimes = SchedTime::where('booked', 0)->get();
+                $array = array();
+                foreach ($tables as $table){
+                    $array[$table->id]= SchedTime::where('shop_id', $request->shop_id)->where('table_id',$table->id)->where('booked',0);
                 }
-            }
-            $newarr = array_column($arr, 'bookingcount');
-
-            array_multisort($newarr, SORT_ASC, $arr);
-           
-return $newarr;
-
-
-            if (count($arr) > 0) {
-                $tablebookings = TableBooking::where('date', $request->date)->get();
-                $schedtimes = SchedTime::where('booked', 0)->get();
-
-                return $schedtimes;
+                return $array;
+                // return $schedtimes;
             } else {
                 return response()->json(['Error' => 'No tables available'], 400);
             }
