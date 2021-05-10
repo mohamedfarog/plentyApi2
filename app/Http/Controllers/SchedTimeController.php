@@ -112,7 +112,7 @@ class SchedTimeController extends Controller
                 // $schedtimes = SchedTime::where('booked', 0)->get();
                 $array = array();
                 $alldata = array();
-                $array = ['fromtime'=>"10:00:00"];
+                $array = ['fromtime'=>"12:30"];
                 foreach ($tables as $table) {
                     $timeslots = SchedTime::where('table_id', $table->id)->where('booked', 0)->get();
 
@@ -125,7 +125,7 @@ class SchedTimeController extends Controller
                         //         array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
                         //     }
                         // }
-                        return $fromarray[0] . ":" . $fromarray[1];
+
                             return array_search($fromarray[0] . ":" . $fromarray[1], $array);
                         // if (!in_array($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1]])) {
                         //     array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
