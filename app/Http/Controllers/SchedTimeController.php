@@ -132,7 +132,7 @@ class SchedTimeController extends Controller
                     }
                 }
 
-
+                asort($array);
                 return $array;
                 // return $schedtimes;
             } else {
