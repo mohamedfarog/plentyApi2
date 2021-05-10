@@ -46,7 +46,7 @@ class UserController extends Controller
                 }
                 if(isset($request->search)){
                     return User::where(function($user) use($request){
-                        return $user->where('name','LIKE',$request->search)->orWhere('email','LIKE',$request->search)->orWhere('contact','LIKE',$request->search);
+                        return $user->where('name','LIKE','%'.$request->search.'%')->orWhere('email','LIKE','%'.$request->search.'%')->orWhere('contact','LIKE','%'.$request->search.'%');
                     })->with(['tier'])->paginate($perpage);
                 }
                 return User::with(['tier'])->paginate($perpage);
