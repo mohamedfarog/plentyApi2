@@ -99,7 +99,7 @@ class SchedTimeController extends Controller
 
             array_multisort($newarr, SORT_ASC, $arr);
            
-            return $arr;
+            return $newarr;
 
 
             if (count($arr) > 0) {
