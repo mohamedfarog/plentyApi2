@@ -112,6 +112,7 @@ class SchedTimeController extends Controller
                 // $schedtimes = SchedTime::where('booked', 0)->get();
                 $array = array();
                 $alldata = array();
+                $array = ['fromtime'=>"10:00:00"];
                 foreach ($tables as $table) {
                     $timeslots = SchedTime::where('table_id', $table->id)->where('booked', 0)->get();
 
