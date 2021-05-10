@@ -136,7 +136,7 @@ class SchedTimeController extends Controller
                                     array_push($exists, true);
                                 }
                             }
-                            if (in_array(false, $exists)) {
+                            if (!in_array(true, $exists)) {
                                 array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
                             }
                         } else {
