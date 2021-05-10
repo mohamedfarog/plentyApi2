@@ -38,15 +38,16 @@ class UserController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                    if(isset($request->search)){
-                        return User::where(function($user) use($request){
-                            return $user->where('name','LIKE',$request->search)->orWhere('email','LIKE',$request->search)->orWhere('contact','LIKE',$request->search);
-                        })->with(['tier'])->get();
-                    }
-                    else{
-                      return User::with(['tier'])->get();  
-                    }
+                   
+                   
+                    return User::with(['tier'])->get();  
                     
+                    
+                }
+                if(isset($request->search)){
+                    return User::where(function($user) use($request){
+                        return $user->where('name','LIKE',$request->search)->orWhere('email','LIKE',$request->search)->orWhere('contact','LIKE',$request->search);
+                    })->with(['tier'])->paginate($perpage);
                 }
                 return User::with(['tier'])->paginate($perpage);
                 break;
