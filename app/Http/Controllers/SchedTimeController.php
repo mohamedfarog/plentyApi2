@@ -112,7 +112,7 @@ class SchedTimeController extends Controller
                 // $schedtimes = SchedTime::where('booked', 0)->get();
                 $array = array();
                 $alldata = array();
-                $array = ['fromtime'=>"12:30"];
+
                 foreach ($tables as $table) {
                     $timeslots = SchedTime::where('table_id', $table->id)->where('booked', 0)->get();
 
@@ -133,17 +133,7 @@ class SchedTimeController extends Controller
                         }
                     }
                 }
-
-
-
-                // uasort($array, function ($a, $b) {
-                //     // Subtracting the UNIX timestamps from each other.
-                //     // Returns a negative number if $b is a date before $a,
-                //     // otherwise positive.
-                //     return strtotime($b[0]) - strtotime($a[0]);
-                // });
                 return $array;
-                // return $schedtimes;
             } else {
                 return response()->json(['Error' => 'No tables available'], 400);
             }
