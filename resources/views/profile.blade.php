@@ -77,10 +77,9 @@
     }
 
     .booked {
-        background-color: #f2f3f8;
+        background-color: #dddef3;
         box-shadow: inset 0px 0px 0px 8px white;
     }
-
 </style>
 
 <section style="text-align:center;">
@@ -236,34 +235,14 @@
                                 </div>
                             </div>
 
-                            <div style="background:#f2f3f8;height:300px;">
-                                <div class="leftpane" style="padding:20px;background:#f2f3f8;">
-                                    <div class="" style="padding-bottom:10px;">
-                                        <div style="width:40%;float:left;">
-                                            <h3 class="norm-text bold-text">Shave</h3>
-                                            <h3 class="norm-text">Manners</h3>
-                                            <h3 class="norm-text">Thursday, 18 March</h3>
-                                            <h3 class="norm-text">4:30 p.m.</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br><br> <br><br>
-                                <div class="leftpane" style="padding:20px;background:#f2f3f8;">
-                                    <div class="" style="padding-bottom:10px;">
-                                        <div style="width:40%;float:left;">
-                                            <h3 class="norm-text bold-text">Hair Cut</h3>
-                                            <h3 class="norm-text">Manners</h3>
-                                            <h3 class="norm-text">Friday, 19 March</h3>
-                                            <h3 class="norm-text">3:30 p.m.</h3>
-                                        </div>
-
-                                    </div>
-
+                            <div style="background:#f2f3f8;min-height:300px;">
+                                <div id="my-orders">
                                 </div>
 
                             </div>
                             <div class="" style="background:#f2f3f8;text-align:center;padding-bottom:20px;">
-                                <a href="/">
+
+                                <a onclick="renderBookings(3)" style="cursor:pointer">
                                     <h2 class="norm-text" style="text-decoration: underline;">view all</h2>
                                 </a>
                             </div>
@@ -287,6 +266,8 @@
     @include('footer')
 </div>
 <script>
+    var orders = <?php echo ($orders); ?>;
+    var dates = <?php echo ($dates); ?>;
     var booked = [1, 16, 21]
     var Cal = function(divId) {
 
@@ -310,6 +291,43 @@
 
     };
 
+    function renderBookings(limit = 2) {
+        template = '';
+
+        if (limit > 2) {
+            limit = orders.length
+        }
+
+        for (var i = 0; i < limit; i++) {
+            template += `<div class="leftpane" style="padding:20px;background:#f2f3f8;display:block">
+                        <div class="" style="padding-bottom:10px;">
+                            <div style="width:40%;">
+                                <h3 class="norm-text bold-text">Beauty</h3>
+                                <h3 class="norm-text">${orders[i].product.name_en}</h3>
+                                <h3 class="norm-text">${orders[i].booking_date}</h3>
+                                <h3 class="norm-text">${orders[i].booking_time}</h3>
+                            </div>
+                        </div>
+                    </div>`
+        }
+
+        document.getElementById("my-orders").innerHTML = template;
+    }
+
+    function getCurrentMonthBooking() {
+
+        var dateObj = new Date();
+        var currDates = [];
+        dates.forEach(ele => {
+            if (ele.split("-")[1] == dateObj.getMonth() + 1) {
+                currDates.push(parseInt(ele.split("-")[2]))
+            }
+        });
+
+        return currDates;
+
+    }
+
 
 
     // Show current month
@@ -323,11 +341,14 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            , firstDayOfMonth = new Date(y, m, 1).getDay()
+            ,
+            firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            ,
+            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            ,
+            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table>';
@@ -365,6 +386,7 @@
             var chk = new Date();
             var chkY = chk.getFullYear();
             var chkM = chk.getMonth();
+            var booked = getCurrentMonthBooking();
             if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
                 if (dow == 0) {
                     if (booked.includes(i)) {
@@ -425,7 +447,11 @@
     function getId(id) {
         return document.getElementById(id);
     }
+    $(document).ready(function() {
+        renderBookings();
+        getCurrentMonthBooking();
 
+    });
 </script>
 
 @endsection

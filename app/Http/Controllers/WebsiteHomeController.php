@@ -235,18 +235,35 @@ class WebsiteHomeController extends Controller
         $user = Auth::user();
         $userid = Auth::id();
         if (isset($userid)) {
-
-            $bookings = TableBooking::where('user_id', $userid)->with(['details' => function ($details) {
-                return $details->with('product');
-            },])->get();
             $orders = Order::where('user_id', $userid)->with(['details' => function ($details) {
-                return $details->with('product');
+                return $details->whereDate('booking_date', '>=', Carbon::now())->with('product');
             },])->get();
         }
-        $data["orders"] = $bookings->concat($orders);
+
+        $data["orders"] = [];
+        $data['dates'] = [];
+        if ($orders) {
+            foreach ($orders as $order) {
+
+                if ($order->details) {
+                    foreach ($order->details as $detail) {
+                        array_push($data['dates'], $detail->booking_date);
+                        array_push($data["orders"], $detail);
+                    }
+                    $data['dates'] = array_unique($data['dates']);
+                }
+            }
+        }
+        $data["orders"] = collect($data["orders"])->sortBy(function ($booking_date) {
+            return $booking_date;
+        })->values()->all();
+        $data["orders"] = json_encode($data["orders"]);
+        $data['dates'] = json_encode($data['dates']);
         $data['user'] = $user;
         return view('profile')->with($data);
     }
+
+
 
 
     //  Beauty
@@ -660,6 +677,7 @@ class WebsiteHomeController extends Controller
                 'color_id' => $item['color'],
                 'size_id' => $item['size_id'],
                 'booking_date' => $item['date'],
+                'booking_time' => $item['time'],
                 'timeslot_id' => $item['timeslot_id'],
                 'qty' => $item['quantity'],
             ));
