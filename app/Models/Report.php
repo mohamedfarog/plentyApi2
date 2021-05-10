@@ -88,6 +88,12 @@ class Report extends Model
                     }
                 })->count();
                 break;
+
+                case 'topten':
+
+                    $data = User::where('typeofuser', "U")->orderBy('points','desc')->take(10)->get();
+    
+                    break;
             default:
                 # code...
                 break;
