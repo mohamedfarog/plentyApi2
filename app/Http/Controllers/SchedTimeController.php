@@ -82,10 +82,16 @@ class SchedTimeController extends Controller
 
 
             $tables = Shoptable::with(['timeslots' => function ($timeslots) use ($request) {
-                return $timeslots->where('from', $request->preftime)->where('booked', 0);
+                return $timeslots->where('booked', 0);
             }])->where('capacity', $request->capacity)
                 ->orWhere('capacity', ($request->capacity + 1))
                 ->get();
+
+            // $tables = Shoptable::with(['timeslots' => function ($timeslots) use ($request) {
+            //     return $timeslots->where('from', $request->preftime)->where('booked', 0);
+            // }])->where('capacity', $request->capacity)
+            //     ->orWhere('capacity', ($request->capacity + 1))
+            //     ->get();
 
             $arr = array();
 
