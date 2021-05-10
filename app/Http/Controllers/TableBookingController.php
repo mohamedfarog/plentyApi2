@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\SchedTime;
 use App\Models\TableBooking;
 use App\Models\TableBookingDetail;
 use App\Models\User;
@@ -229,8 +230,10 @@ class TableBookingController extends Controller
             if (isset($request->preftime)) {
                 $data->preftime = $request->preftime;
             }
+            //Assigning table id
             if (isset($request->table_id)) {
                 $data->table_id = $request->table_id;
+                SchedTime::where('from',$request->preftime.":00")->where('table_id',$request->table_id)->update(['booked'=>1]);
             }
 
             $order = $data->save();
