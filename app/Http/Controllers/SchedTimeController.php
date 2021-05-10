@@ -97,7 +97,7 @@ class SchedTimeController extends Controller
             $newarr = array_column($arr, 'bookingcount');
 
             array_multisort($newarr, SORT_ASC, $arr);
-            return $arr;
+           
 
 
 
