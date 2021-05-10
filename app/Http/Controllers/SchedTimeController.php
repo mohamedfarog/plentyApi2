@@ -112,7 +112,7 @@ class SchedTimeController extends Controller
                 // $schedtimes = SchedTime::where('booked', 0)->get();
                 $array = array();
                 foreach ($tables as $table){
-                    $array[$table->id]= SchedTime::where('shop_id', $request->shop_id)->where('table_id',$table->id)->where('booked',0);
+                    $array[$table->id]= SchedTime::where('table_id',$table->id)->where('booked',0)->get();
                 }
                 return $array;
                 // return $schedtimes;
