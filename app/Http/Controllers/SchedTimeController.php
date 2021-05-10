@@ -137,7 +137,7 @@ class SchedTimeController extends Controller
                     // Subtracting the UNIX timestamps from each other.
                     // Returns a negative number if $b is a date before $a,
                     // otherwise positive.
-                    return strtotime($b[0]['fromtime']) - strtotime($a[0]['fromtime']);
+                    return strtotime($b[0]) - strtotime($a[0]);
                 });
                 return $array;
                 // return $schedtimes;
