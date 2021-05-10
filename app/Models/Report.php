@@ -21,7 +21,7 @@ class Report extends Model
                 $period = now()->subMonths($months)->monthsUntil(now());
                 $data = [];
                 foreach ($period as $date) {
-                    $earning = Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');;
+                    $earning = Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
 
 
                     $data[$date->shortMonthName . " " . $date->year] =
@@ -94,6 +94,13 @@ class Report extends Model
                     $data = User::where('typeofuser', "U")->orderBy('points','desc')->take(10)->get();
     
                     break;
+                    case 'shopearnings':
+                        $brandsid = Shop::whereNotNull('cat_id')->where('active',1)->pluck('id','name_en')->toArray();
+
+                        foreach ($brandsid as $brand) {
+                            $data[$brand['name_en']] = floatval(Order::where('order_status', 3)->sum('total_amount'));
+                        }
+                        break;
             default:
                 # code...
                 break;
