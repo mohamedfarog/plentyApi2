@@ -132,8 +132,8 @@ class SchedTimeController extends Controller
                     }
                 }
 
-                asort($array);
-                return $array->toArray();
+                ksort($array);
+                return $array;
                 // return $schedtimes;
             } else {
                 return response()->json(['Error' => 'No tables available'], 400);
