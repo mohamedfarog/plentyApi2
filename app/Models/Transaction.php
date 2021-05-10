@@ -30,7 +30,7 @@ class Transaction extends Model
             'currency' => 'SAR',
             'threeDSecure' => true,
             'save_card' => false,
-            'description' => 'Test Description',
+            'description' => 'Payment',
             'statement_descriptor' => 'Sample',
             'metadata' => [
                 'udf1' => 'test 1',

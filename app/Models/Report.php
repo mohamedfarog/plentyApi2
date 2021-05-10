@@ -21,7 +21,7 @@ class Report extends Model
                 $period = now()->subMonths($months)->monthsUntil(now());
                 $data = [];
                 foreach ($period as $date) {
-                    $earning = Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');;
+                    $earning = Order::where('order_status', 3)->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->sum('total_amount');
 
 
                     $data[$date->shortMonthName . " " . $date->year] =
@@ -88,8 +88,26 @@ class Report extends Model
                     }
                 })->count();
                 break;
+
+                case 'topten':
+
+                    $data = User::where('typeofuser', "U")->orderBy('points','desc')->take(10)->get();
+    
+                    break;
+                    case 'shopearnings':
+                        $brands = Shop::whereNotNull('cat_id')->where('active',1)->get();
+
+                        foreach ($brands as $brand) {
+                            $data[$brand->name_en] = floatval(Order::join('details','orders.id','=','details.order_id')->where('details.shop_id',$brand->id)->where('order_status', 3)->sum('details.price'));
+                            if($brand->cat_id == 1){
+                                $data[$brand->name_en] = floatval(TableBooking::join('table_booking_details','table_bookings.id','=','table_booking_details.tablebookingid')->where('table_booking_details.shop_id',$brand->id)->where('status', 3)->whereNull('date')->sum('table_bookings.total_amount'));
+                            }
+                            
+                        }
+                        break;
             default:
                 # code...
+         
                 break;
         }
 

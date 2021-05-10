@@ -23,16 +23,20 @@ class Shoptable extends Model
 
     public function getBookingAttribute()
     {
-        $schedule = SchedTime::with([
+        if(request('fromtime')!= ""){
+             $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
             }
         ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
         return $schedule->tblbooking;
+        }
+       
     }
     public function getBookingstatusAttribute()
     {
+        if(request('fromtime')!= ""){
         $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
@@ -40,9 +44,11 @@ class Shoptable extends Model
         ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
         return $schedule->booked;
+        }
     }
     public function getSchedidAttribute()
     {
+        if(request('fromtime')!= ""){
         $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
@@ -50,9 +56,11 @@ class Shoptable extends Model
         ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
         return $schedule->id;
+        }
     }
     public function getSeatingstatusAttribute()
     {
+        if(request('fromtime')!= ""){
         $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
@@ -60,6 +68,7 @@ class Shoptable extends Model
         ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
         return $schedule->status;
+        }
     }
 
     public function shop()
