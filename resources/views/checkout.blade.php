@@ -216,7 +216,6 @@
     .chip .closebtn:hover {
         color: #000;
     }
-
 </style>
 
 
@@ -500,7 +499,7 @@
                                                     <!-- Accordion end -->
 
                                                     <h3 class="payment-accordion" style="background:white">
-                                                        <input type="checkbox" id="plentypay" name="plentypay" value="1" onchange="plentyPaySelect(this)"><label for="plentypay">Pay with Plenty Pay</label>
+                                                        <input type="checkbox" id="plentypay" name="plentypayed" value="1" onchange="plentyPaySelect(this)"><label for="plentypay">Pay with Plenty Pay</label>
                                                         <input type="hidden" id="plenty-balance" name="plenty-balance">
                                                         <input type="hidden" id="plenty-payed" name="plentypay">
                                                     </h3>
@@ -643,8 +642,8 @@
     $('.payment-accordion-toggle').on('click', function(event) {
 
         $(this).siblings('.active').css({
-            'background': '#f6f6f6'
-            , 'color': '#1d2767'
+            'background': '#f6f6f6',
+            'color': '#1d2767'
         });
         $(this).siblings('.active').children('.spanh3').css({
             'color': '#1d2767'
@@ -652,8 +651,8 @@
         $(this).siblings('.active').removeClass('active');
         $(this).addClass('active');
         $(this).css({
-            'background': '#ffa400'
-            , 'color': 'white'
+            'background': '#ffa400',
+            'color': 'white'
         });
         $(this).children('.spanh3').css({
             'color': 'white'
@@ -675,7 +674,7 @@
         var cart = CartSerializer(getCartLocal());
 
         for (var i = 0; i < cart.cart_items.length; i++) {
-            if (cart.cart_items[i].category === 'Fashion') {
+            if (cart.cart_items[i].category === 'Fashion' || cart.cart_items[i].category === 'Bazaar') {
                 document.getElementById("address-show").style.visibility = "visible";
                 document.getElementById("address").setAttribute("required", true);
                 document.getElementById("city").setAttribute("required", true);
@@ -697,6 +696,7 @@
         cart.loyality_point = 0;
         cart.coupon = '';
         cart.coupon_value = 0;
+        cart.plenty_pay = 0;
         storeCartLocal(JsonCartSerializer(cart));
         let template = ''
 
@@ -733,15 +733,15 @@
             let code = $('#coupon-code').val()
             url = base_url + 'coupon'
             $.ajax({
-                type: 'POST'
-                , url: url
-                , dataType: 'JSON'
-                , data: {
-                    "_token": "{{ csrf_token() }}"
-                    , "couponcode": code
-                    , "cart": getCartLocal()
-                }
-                , headers: {
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "couponcode": code,
+                    "cart": getCartLocal()
+                },
+                headers: {
 
                     "Authorization": 'Bearer ' + bearer_token
                 },
@@ -764,8 +764,8 @@
                     } else {
                         $("#coupon_error").html("This coupon is not applicable ! ")
                     }
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     let error = err.responseJSON.message;
                     $("#coupon_error").html(error)
 
@@ -788,6 +788,7 @@
         document.getElementById("pointOutputId").value = 0;
         document.getElementById("plenty-balance-show").innerHTML = 0;
         ele = document.getElementById("plentypay")
+        ele.value = 0;
         ele.checked = false;
     }
 
@@ -797,13 +798,13 @@
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
                 "_token": "{{ csrf_token() }}"
-            }
-            , headers: {
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
@@ -814,8 +815,8 @@
                     max: data.point
                 })
                 $("#loyality-point").val(data.point);
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -829,28 +830,34 @@
         var base_url = $('meta[name=base_url]').attr('content');
         url = base_url + 'place-order'
         $.ajax({
-            type: 'POST'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                "_token": "{{ csrf_token() }}"
-                , "cart": getCartLocal()
-                , "address": form.get("address") || null
-                , "city": form.get("city") || null
-                , "contact": form.get("contact") || null
-                , "addresslabel": form.get("adresslabel") || null
-                , "othernotes": form.get("othernotes") || null
-                , "lang": form.get("lng") || null
-                , "lat": form.get("lat") || null
-            }
-            , headers: {
+            type: 'POST',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "cart": getCartLocal(),
+                "address": form.get("address") || null,
+                "city": form.get("city") || null,
+                "contact": form.get("contact") || null,
+                "addresslabel": form.get("adresslabel") || null,
+                "othernotes": form.get("othernotes") || null,
+                "lang": form.get("lng") || null,
+                "lat": form.get("lat") || null
+            },
+            headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
 
             success: function(data) {
-                console.log(data)
-            }
-            , error: function(err) {
+                if (data.Response.original.success) {
+
+                    showAlertSuccess(data.Response.original.message);
+                    storeCartLocal("");
+                    renderOrderedProduct();
+                    renderNavCart();
+                }
+            },
+            error: function(err) {
 
                 console.log('Error!', err)
             }
@@ -943,10 +950,10 @@
         if (bearer_token) {
             url = base_url + 'plenty-balance'
             $.ajax({
-                type: 'GET'
-                , url: url
-                , dataType: 'JSON'
-                , headers: {
+                type: 'GET',
+                url: url,
+                dataType: 'JSON',
+                headers: {
 
                     "Authorization": 'Bearer ' + bearer_token
                 },
@@ -959,8 +966,8 @@
                         document.getElementById('plenty-balance').value = 0;
                     }
 
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     console.log('Error!', err)
                 }
 
@@ -972,6 +979,9 @@
     }
 
     function plentyPaySelect(ele) {
+        var cart = CartSerializer(getCartLocal())
+
+
         if (parseFloat(document.getElementById('plenty-balance').value) > 0) {
 
             if (ele.checked) {
@@ -985,6 +995,7 @@
                     } else {
                         document.getElementById("plenty-balance-show").innerText = balance.toFixed(2) + " SAR"
                         document.getElementById("plentypay").value = balance;
+                        cart.plenty_pay = balance;
                         document.getElementById("balance").value = 0;
                     }
                 }
@@ -995,13 +1006,14 @@
                     document.getElementById("balance").value = parseFloat(document.getElementById("balance").value) + parseFloat(document.getElementById("plentypay").value);
                 }
                 document.getElementById("plenty-balance-show").innerText = "-"
+                cart.plenty_pay = 0;
             }
 
             changeTotalPrice()
         } else {
             showAlertError(`Your plenty wallet is empty!`);
         }
-
+        storeCartLocal(JsonCartSerializer(cart));
     }
 
 
@@ -1013,7 +1025,7 @@
 
     function changeTotalPrice() {
         const balance = document.getElementById("balance").value
-        document.getElementById("order_total").innerText = balance.toFixed(2)
+        document.getElementById("order_total").innerText = parseFloat(balance).toFixed(2)
     }
 
     function removeCoupon() {
@@ -1027,7 +1039,6 @@
         storeCartLocal(JsonCartSerializer(cart));
         $("#coupon_error").html("");
     }
-
 </script>
 
 <script src="js/jquery.geocoder.js"></script>
@@ -1037,4 +1048,3 @@
 </script>
 <script src="js/map.js" defer></script>
 @endsection
-

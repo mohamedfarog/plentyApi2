@@ -244,7 +244,6 @@
             padding: 100px 0 100px;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -264,7 +263,7 @@
                         <ul>
                             <li><a href="/" style="font-weight:lighter;">Home</a></li>
                             <li style="font-weight:lighter;">FASHION</li>
-                            <li style="font-weight:lighter;" id="breadcrumbshopname2">Linen</li>
+                            <li style="font-weight:lighter;" id="breadcrumbshopname">Linen</li>
                         </ul>
                     </div>
                 </div>
@@ -391,7 +390,7 @@
         <section class="mt-30 mb-30">
             <div style="text-align:center;">
                 <h1 style="font-weight:lighter;color:#288248" id="breadcrumbshopname2">
-                    Simply Put.
+
                 </h1>
             </div>
         </section>
@@ -434,7 +433,6 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
@@ -465,10 +463,10 @@
     function getProducts(element, category = 0) {
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     console.log(data)
                     renderProduct(data)
@@ -487,10 +485,10 @@
         shop_id = $('#shopid').val();
         var base_url = $('meta[name=base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -565,10 +563,16 @@
 
     }
     $(document).ready(function() {
-        console.log("100%");
-        document.getElementById('breadcrumbshopname').innerHTML = localStorage.shopname;
-        document.getElementById('mobileheadershop').src = localStorage.shopimg;
-        $('.shopsidselect').find('option[value=]' + localStorage.shop).attr('selected', 'selected');
+        document.getElementById("defaultOpen").click();
+        $(".active").css("background-color", "black");
+        const shop_id = $('#shopid').val();
+        const shop_name = $('#shopname').val();
+        var primary_color = "#" + document.getElementById("primary").value.slice(4);
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        makeShopActive(shop_id, secondary_color);
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
+        document.getElementById('breadcrumbshopname2').style.color = secondary_color;
+        document.getElementById('breadcrumbshopname').innerHTML = shop_name;
 
     });
 
@@ -583,7 +587,6 @@
         });
         console.log('nohover');
     });
-
 </script>
 <script src="js/prodjs.js"></script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">

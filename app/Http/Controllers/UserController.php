@@ -636,6 +636,84 @@ class UserController extends Controller
         }
     }
 
+    public function vendorSignup(Request $request)
+    {   
+        
+
+        $settings = Project::first();
+      
+            $newuser= new User();
+            if(isset($request->name)){
+                $newuser->name = $request->name;
+            }
+            if(isset($request->email)){
+                $newuser->email = $request->email;
+            }
+            if(isset($request->password)){
+                $newuser->password =  Hash::make($request->password);
+            }
+            if(isset($request->contact)){
+                $newuser->contact = $request->contact;
+            }
+            if(isset($request->name)){
+                $newuser->name = $request->name;
+            }
+            if(isset($request->active)){
+                $newuser->active = $request->active;
+            }
+            // $newuser-> email_verified_at= now();
+            $newuser->typeofuser= 'V';
+            $start = '1';
+            $end = '';
+            for ($i = 0; $i < $settings->invcode - 1; $i++) {
+
+                $start .= '0';
+            }
+            for ($i = 0; $i < $settings->invcode; $i++) {
+
+                $end .= '9';
+            }
+            $run = true;
+            $code = 'P-' . rand(intval($start), intval($end));
+
+            while ($run) {
+
+                $user = User::where('invitation_code', $code)->first();
+                if ($user != null) {
+                    $code = 'P-' . rand(intval($start), intval($end));
+                } else {
+                    $newuser->invitation_code = $code;
+                    $run = false;
+                }
+            }
+            
+            $newuser->save();
+            $shop = new Shop();
+            if(isset($request->name_en)){
+                $shop->name_en  = $request->name_en;
+            }
+            if(isset($request->name_ar)){
+                $shop->name_ar  = $request->name_ar;
+            }
+            if(isset($request->desc_en)){
+                $shop->desc_en  = $request->desc_en;
+            }
+            if(isset($request->desc_ar)){
+                $shop->desc_ar  = $request->desc_ar;
+            }
+            if(isset($request->eventcat_id)){
+                $shop->eventcat_id  = $request->eventcat_id;
+            }
+            if(isset($request->active)){
+                $shop->active  = $request->active;
+            }
+            $shop->user_id=$newuser->id;
+            $shop->isvendor=1;
+       
+            $shop->save();
+            return response()->json(['success' => !!$user, 'Vendor' => $shop]);
+    }
+
         public function vendorslogin(Request $request)
         {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -648,7 +726,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Please verify the email"]);
+                        return response()->json(["error" => "Your account is not yet appoved. Please contact the admin for approval."]);
                     }
                 }
                 else if($user->typeofuser == 'B' ){
@@ -661,7 +739,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Please verify the email"]);
+                        return response()->json(["error" => "Your account is not yet appoved. Please contact the admin for approval."]);
                     }
                 }
                 else{

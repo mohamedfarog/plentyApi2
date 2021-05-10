@@ -14,6 +14,9 @@ use App\Models\Prodcat;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Tier;
+use App\Models\TableBooking;
+
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
@@ -82,20 +85,11 @@ class WebsiteHomeController extends Controller
 
     private function getProduct($id)
     {
-        return  DB::table('products')
-            ->select(DB::raw(' products.id as id,
-                products.id as prodid,
-                products.name_ar as name_ar,
-                products.name_en as name_en,
-                products.price as price,
-                products.desc_en as desc_en,
-                products.desc_ar as desc_ar,
-                products.stocks as stock,
-                images.url as image,
-                shop_id as shop_id'))
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('products.id', '=', $id)
+
+        $products = Product::where('id', $id)
+            ->with(['images', 'sizes', 'colors'])
             ->get();
+        return $products;
     }
 
 
@@ -169,7 +163,7 @@ class WebsiteHomeController extends Controller
      */
     public function getProductFilter($prodcat_id)
     {
-        return Product::where('deleted_at', null)->where('prodcat_id', $prodcat_id)->with(['images'])->get();
+        return Product::where('deleted_at', null)->where('prodcat_id', $prodcat_id)->with(['images', 'colors'])->get();
     }
 
 
@@ -216,6 +210,7 @@ class WebsiteHomeController extends Controller
     {
         $data['product'] = $this->getProduct($id)->first();
         $data['shop'] = $this->getShop($data['product']->shop_id);
+        $data['style'] = $this->getStyle($data['shop']->id);
         $data['sizes'] = $this->getProductSize($id);
         $data['addons'] = $this->getAddons($id);
         $data['trywith'] = $this->gettry($id);
@@ -238,9 +233,37 @@ class WebsiteHomeController extends Controller
     public function profile(Request $request)
     {
         $user = Auth::user();
+        $userid = Auth::id();
+        if (isset($userid)) {
+            $orders = Order::where('user_id', $userid)->with(['details' => function ($details) {
+                return $details->whereDate('booking_date', '>=', Carbon::now())->with('product');
+            },])->get();
+        }
+
+        $data["orders"] = [];
+        $data['dates'] = [];
+        if ($orders) {
+            foreach ($orders as $order) {
+
+                if ($order->details) {
+                    foreach ($order->details as $detail) {
+                        array_push($data['dates'], $detail->booking_date);
+                        array_push($data["orders"], $detail);
+                    }
+                    $data['dates'] = array_unique($data['dates']);
+                }
+            }
+        }
+        $data["orders"] = collect($data["orders"])->sortBy(function ($booking_date) {
+            return $booking_date;
+        })->values()->all();
+        $data["orders"] = json_encode($data["orders"]);
+        $data['dates'] = json_encode($data['dates']);
         $data['user'] = $user;
         return view('profile')->with($data);
     }
+
+
 
 
     //  Beauty
@@ -306,24 +329,7 @@ class WebsiteHomeController extends Controller
         return response()->json(['Response' => !!$user, 'point' =>  $user->points]);
     }
 
-    function loyalityPointSAR($user)
-    {
-        switch (true) {
-            case $user['totalpurchases'] > 29999:
-                $sar = $user['totalpurchases'];
-                break;
-            case $user['totalpurchases'] > 19999:
-                $sar = $user['totalpurchases'];
-                break;
-            case $user['totalpurchases'] > 0:
-                $sar = $user['totalpurchases'];
-                break;
-            default:
-                $sar = $user['totalpurchases'];
-                break;
-        }
-        return 1;
-    }
+
 
     // getting coupon code
     public function cacluateCoupon(Request $request)
@@ -656,6 +662,7 @@ class WebsiteHomeController extends Controller
     function placeOreder(Request $request)
     {
         $cart = $request->cart;
+        $user = Auth::user();
         //  $products_filter = $this->filterProducts($cart);
         // $a = $this->validateShedule($products_filter);
         //$b = $this->validateProduct($products_filter);
@@ -670,20 +677,27 @@ class WebsiteHomeController extends Controller
                 'color_id' => $item['color'],
                 'size_id' => $item['size_id'],
                 'booking_date' => $item['date'],
+                'booking_time' => $item['time'],
                 'timeslot_id' => $item['timeslot_id'],
                 'qty' => $item['quantity'],
             ));
         }
 
-        $pay_mode = 'cash';
+        $pay_mode = 'CASH';
         if (!$cart["is_cash_on_delivery"]) {
-            $pay_mode = 'card';
+            $pay_mode = 'CARD';
+        }
+
+        $total_amount = $this->calculateTotalPrice($items);
+        if (!isset($cart["plenty_pay"])) {
+            $cart["plenty_pay"] = 0;
         }
 
 
+        $loyality_pointSAR = $this->convertToCurrency($user, $cart["loyality_point"]);
+        $amount_due = $this->amountDue($total_amount, $loyality_pointSAR, $cart["plenty_pay"], $cart["coupon_value"]);
         $m_request = new Request([
-
-            'delivery_location' => $request->address,
+            'delivery_location' => $request->address || -1,
             'city' => $request->city,
             'lat' => $request->lat,
             'lng' => $request->lng,
@@ -691,12 +705,12 @@ class WebsiteHomeController extends Controller
             'delivery_note' => $request->othernotes,
             'contact_number' => $request->contact,
 
-            'total_amount'   => 100,
-            'amount_due' => 0,
+            'total_amount'   => $total_amount,
+            'amount_due' =>  $amount_due,
 
             'payment_method' =>  $pay_mode,
             'points' => $cart["loyality_point"],
-            'wallet' => $cart["plenty_pay"],
+            'wallet' =>  $cart["plenty_pay"],
             'coupon_value' => $cart["coupon_value"],
 
             'orderdetails' => $items,
@@ -704,15 +718,46 @@ class WebsiteHomeController extends Controller
         ]);
         $order = new OrderController();
         try {
-            $order->store($m_request);
+            $res = $order->store($m_request);
         } catch (Exception $e) {
-            return response()->json(['Response' => $e]);
+            return response()->json(['Response' =>  $m_request]);
         }
 
-        return response()->json(['Response' => $m_request]);
+        return response()->json(['Response' => $res]);
     }
 
+    function calculateTotalPrice($items)
+    {
+        $amount = 0;
+        foreach ($items as $item) {
+            $amount = $amount + $item['price'] * $item['qty'];
+        }
+        return $amount;
+    }
 
+    function amountDue($total_amount, $loyality_pointSAR, $plenty_pay, $coupon_value)
+    {
+        $amount = $total_amount - ($loyality_pointSAR + $plenty_pay + $coupon_value);
+        if ($amount < 0) {
+            return 0.0;
+        }
+        return $amount;
+    }
+
+    function convertToCurrency($user, $points)
+    {
+        //Converting points to amount
+        $tier = $user->tier_id;
+        if (isset($tier)) {
+            $tierData = Tier::find($tier);
+        }
+        $tierData = Tier::find(1);
+        if ($tierData) {
+            $tierValueInPerc = ($tierData->value) / 100;
+            return $points * $tierValueInPerc;
+        }
+        return 0.0;
+    }
 
     // Checkout proceed
     function checkoutProceed()

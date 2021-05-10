@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <!-- <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" /> -->
-     <meta name="base_url" content="/" />
+    <meta name="base_url" content="http://127.0.0.1:8000/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -183,7 +182,8 @@
         #user-menu-nav {
             background-color: white;
         }
-        button{
+
+        button {
             cursor: pointer !important;
         }
     </style>
@@ -465,31 +465,31 @@
 
     <script>
         $(".regular").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -497,31 +497,31 @@
         });
 
         $(".brandsslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , autoplaySpeed: 2000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -530,32 +530,32 @@
 
 
         $(".tryprodslider").slick({
-            dots: true
-            , infinite: true
-            , slidesToShow: 4
-            , slidesToScroll: 1
-            , autoplay: true
-            , arrows: false
-            , autoplaySpeed: 2000
-            , responsive: [{
-                breakpoint: 1024
-                , settings: {
-                    slidesToShow: 3
-                    , slidesToScroll: 3
-                    , infinite: true
-                    , dots: true
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
                 }
             }, {
-                breakpoint: 600
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }, {
-                breakpoint: 480
-                , settings: {
-                    slidesToShow: 2
-                    , slidesToScroll: 2
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
                 }
             }]
         });
@@ -630,10 +630,16 @@
             pro_id = id.split("-")[0]
             size_id = id.split("-")[1]
             timeslot_id = id.split("-")[2]
+            color_id = id.split("-")[3]
+            console.log(color_id)
             let i = this.cart_items.length;
             while (i--) {
                 if (this.cart_items[i] && this.cart_items[i]['id'] === pro_id) {
-                    if (size_id > 0) {
+                    if (color_id > 0) {
+                        if (this.cart_items[i]['color_id'] === color_id) {
+                            this.cart_items.splice(i, 1);
+                        }
+                    } else if (size_id > 0) {
                         if (this.cart_items[i]['size_id'] === size_id) {
                             this.cart_items.splice(i, 1);
                         }
@@ -704,6 +710,7 @@
                 item['size_id'] = element.size_id
                 item['is_product_variant'] = element.is_product_variant
                 item['color'] = element.color
+                item['color_id'] = element.color_id
                 item['quantity'] = element.quantity
                 item['time'] = element.time
                 item['date'] = element.date
@@ -715,14 +722,14 @@
                 cart_items.push(item)
             });
             return {
-                "cart_subtotal": cart.cart_subtotal
-                , "order_total": cart.order_total
-                , "cart_items": cart_items
-                , "coupon": cart.coupon
-                , "coupon_value": cart.coupon_value
-                , "loyality_point": cart.loyality_point
-                , "plenty_pay": cart.plenty_pay
-                , "is_cash_on_delivery": cart.is_cash_on_delivery
+                "cart_subtotal": cart.cart_subtotal,
+                "order_total": cart.order_total,
+                "cart_items": cart_items,
+                "coupon": cart.coupon,
+                "coupon_value": cart.coupon_value,
+                "loyality_point": cart.loyality_point,
+                "plenty_pay": cart.plenty_pay,
+                "is_cash_on_delivery": cart.is_cash_on_delivery
             }
 
         }
@@ -740,59 +747,59 @@
             if (data.cart_items.length > 0) {
                 data.cart_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , shop_id: element.shop_id
-                        , price: element.price
-                        , name: element.name
-                        , is_product_variant: element.is_product_variant
-                        , size: element.size || null
-                        , size_id: element.size_id || null
-                        , color: element.color || null
-                        , color_id: element.color_id || null
-                        , quantity: element.quantity || null
-                        , date: element.date || null
-                        , time: element.time || null
-                        , timeslot_id: element.timeslot_id || null
-                        , image_url: element.image_url || null
-                        , stock: element.stock || null
-                        , category: element.category || null
-                    , }
+                        id: element.id,
+                        shop_id: element.shop_id,
+                        price: element.price,
+                        name: element.name,
+                        is_product_variant: element.is_product_variant,
+                        size: element.size || null,
+                        size_id: element.size_id || null,
+                        color: element.color || null,
+                        color_id: element.color_id || null,
+                        quantity: element.quantity || null,
+                        date: element.date || null,
+                        time: element.time || null,
+                        timeslot_id: element.timeslot_id || null,
+                        image_url: element.image_url || null,
+                        stock: element.stock || null,
+                        category: element.category || null,
+                    }
 
                     cart.addItem(new CartItem(item))
                 });
             }
-
             return cart;
+
         }
 
         // cart manager end here
         $(".trackorderslider").slick({
-            dots: false
-            , infinite: true
-            , slidesToShow: 6
-            , slidesToScroll: 1
-            , autoplay: false
-            , arrows: true
-            , autoplaySpeed: 10000
-            , responsive: [{
-                    breakpoint: 1024
-                    , settings: {
-                        slidesToShow: 3
-                        , slidesToScroll: 3
-                        , infinite: true
-                        , dots: true
+            dots: false,
+            infinite: true,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: false,
+            arrows: true,
+            autoplaySpeed: 10000,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
                     }
                 }, {
-                    breakpoint: 600
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }, {
-                    breakpoint: 480
-                    , settings: {
-                        slidesToShow: 2
-                        , slidesToScroll: 2
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
                     }
                 }
 
@@ -809,9 +816,9 @@
                 return JSON.parse(localStorage.getItem('cart'))
             } else {
                 return {
-                    cart_subtotal: 0
-                    , order_total: 0
-                    , cart_items: []
+                    cart_subtotal: 0,
+                    order_total: 0,
+                    cart_items: []
                 }
             }
 
@@ -834,7 +841,7 @@
                         "<div class='nav-cart-item clearfix'>" +
                         "<div class='nav-cart-img'>" +
                         "<a href='" + base_url + "product/" + item.id + "'>" +
-                        "<img src='" + base_url + "storage/products/" + item.image_url + "' alt=''>" +
+                        "<img src='" + item.image_url + "' alt=''>" +
                         "</a>" +
                         "</div>" +
                         "<div class='nav-cart-title'>" +
@@ -845,7 +852,7 @@
                         "</div>" +
                         "</div>" +
                         "<div class='nav-cart-remove'>" +
-                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + "," + item.timeslot_id + ")' class='remove'><i class='ui-close'></i></a>" +
+                        "<a onclick = 'removeNavCartItem(" + item.id + "," + item.size_id + "," + item.timeslot_id + "," + item.color_id + ")' class='remove'><i class='ui-close'></i></a>" +
                         "</div>" +
                         "</div>" +
                         "</div>"
@@ -859,9 +866,9 @@
             $('#nav-cart-total').html(cart.subTotal() + ' SAR')
         }
 
-        function removeNavCartItem(prd_id, size_id, timeslot_id) {
+        function removeNavCartItem(prd_id, size_id, timeslot_id, color_id) {
             var cart = CartSerializer(getCartLocal())
-            let id = prd_id + "-" + size_id + "-" + timeslot_id
+            let id = prd_id + "-" + size_id + "-" + timeslot_id + "-" + color_id;
             cart.removeItem(id)
             storeCartLocal(JsonCartSerializer(cart));
             renderNavCart();
@@ -936,10 +943,10 @@
         function getFavouriteProductInfo(id) {
             var base_url = $('meta[name=base_url]').attr('content');
             $.ajax({
-                type: 'GET'
-                , url: base_url + 'favourite-product/' + id
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: base_url + 'favourite-product/' + id,
+                dataType: 'JSON',
+                success: function(data) {
                     if (data.Response) {
                         let favourite_item = new FavouriteItem(data.product)
                         let favourites = FavouriteSerializer(getFavouritesLocal())
@@ -951,8 +958,8 @@
                         //
                     }
 
-                }
-                , error: function(err) {
+                },
+                error: function(err) {
                     console.log('Error!', err)
                 }
 
@@ -982,11 +989,11 @@
             if (data.favourite_items.length > 0) {
                 data.favourite_items.forEach(element => {
                     let item = {
-                        id: element.id
-                        , price: element.price
-                        , name_en: element.name_en
-                        , image: element.image || null
-                    , }
+                        id: element.id,
+                        price: element.price,
+                        name_en: element.name_en,
+                        image: element.image || null,
+                    }
 
                     favourites.addItem(new FavouriteItem(item))
                 });
@@ -1007,7 +1014,7 @@
             }
 
         }
- 
+
 
 
         function userIsAuthenticated() {
@@ -1026,10 +1033,10 @@
             if (bearer_token) {
                 url = base_url + 'user'
                 $.ajax({
-                    type: 'GET'
-                    , url: url
-                    , dataType: 'JSON'
-                    , headers: {
+                    type: 'GET',
+                    url: url,
+                    dataType: 'JSON',
+                    headers: {
                         "Authorization": 'Bearer ' + bearer_token
                     },
 
@@ -1038,8 +1045,8 @@
 
                         }
 
-                    }
-                    , error: function(err) {
+                    },
+                    error: function(err) {
                         console.log('Error!', err)
                     }
 
@@ -1122,10 +1129,10 @@
             var base_url = $('meta[name=base_url]').attr('content');
             let cart = new Cart()
             $.ajax({
-                type: 'GET'
-                , url: base_url + 'shop-category'
-                , dataType: 'JSON'
-                , success: function(data) {
+                type: 'GET',
+                url: base_url + 'shop-category',
+                dataType: 'JSON',
+                success: function(data) {
                     localStorage.setItem("shop_category", JSON.stringify(data.shop_category));
                 }
             });
