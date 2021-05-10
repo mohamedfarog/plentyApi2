@@ -107,6 +107,7 @@ class Report extends Model
                         break;
             default:
                 # code...
+         
                 break;
         }
 

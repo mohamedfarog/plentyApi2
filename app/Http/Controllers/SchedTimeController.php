@@ -86,7 +86,7 @@ class SchedTimeController extends Controller
             }])->where('capacity', $request->capacity)
                 ->orWhere('capacity', ($request->capacity + 1))
                 ->get();
-                return $tables;
+
             $arr = array();
 
             foreach ($tables as $table) {
@@ -96,7 +96,7 @@ class SchedTimeController extends Controller
                 }
             }
             $newarr = array_column($arr, 'bookingcount');
-
+return $arr;
             array_multisort($newarr, SORT_ASC, $arr);
            
 
