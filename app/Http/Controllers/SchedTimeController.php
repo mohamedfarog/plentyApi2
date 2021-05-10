@@ -117,8 +117,8 @@ class SchedTimeController extends Controller
                         $fromarray = explode(':', $timeslot->from);
                         $toarray = explode(':', $timeslot->to);
 
-                        foreach ($array as $time) {
-                            if($time['fromtime'] !=$fromarray[0] . ":" . $fromarray[1] ){
+                        foreach ($array as $key=>$value) {
+                            if($value['fromtime'] !=$fromarray[0] . ":" . $fromarray[1] ){
                                 array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
                             }
                         }
