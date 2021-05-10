@@ -98,7 +98,7 @@ class Report extends Model
                         $brandsid = Shop::whereNotNull('cat_id')->where('active',1)->pluck('id','name_en')->toArray();
 
                         foreach ($brandsid as $brand) {
-                            $data[$brand['name_en']] = floatval(Order::where('order_status', 3)->sum('total_amount'));
+                            $data[$brand['name_en']] = floatval(Order::join('details','orders.id','=','details.order_id')->where('order_status', 3)->sum('details.price'));
                         }
                         break;
             default:
