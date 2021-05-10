@@ -128,13 +128,17 @@ class SchedTimeController extends Controller
                         if (!in_array($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1]])) {
                             array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
                         }
-                        
                     }
                 }
 
 
 
-                uasort($array,'timecomp');
+                uasort($array, function ($a, $b) {
+                    // Subtracting the UNIX timestamps from each other.
+                    // Returns a negative number if $b is a date before $a,
+                    // otherwise positive.
+                    return strtotime($b[0]['fromtime']) - strtotime($a[0]['fromtime']);
+                });
                 return $array;
                 // return $schedtimes;
             } else {
@@ -181,13 +185,6 @@ class SchedTimeController extends Controller
     }
 
 
-    function timecomp($a,$b)
-{
-    // Subtracting the UNIX timestamps from each other.
-    // Returns a negative number if $b is a date before $a,
-    // otherwise positive.
-    return strtotime($b[0])-strtotime($a[0]);
-}
 
 
 
