@@ -133,7 +133,7 @@ class SchedTimeController extends Controller
                 }
 
                 asort($array);
-                return $array;
+                return $array->toArray();
                 // return $schedtimes;
             } else {
                 return response()->json(['Error' => 'No tables available'], 400);
