@@ -126,10 +126,11 @@ class SchedTimeController extends Controller
                         //     }
                         // }
 
-                            return array_search($fromarray[0] . ":" . $fromarray[1], $array);
-                        // if (!in_array($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1]])) {
-                        //     array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
-                        // }
+                            // return array_search($fromarray[0] . ":" . $fromarray[1], $array);
+                            $exist = array_search($fromarray[0] . ":" . $fromarray[1], $array);
+                        if ($exist != "fromtime") {
+                            array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
+                        }
                     }
                 }
 
