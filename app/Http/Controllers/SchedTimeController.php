@@ -117,14 +117,14 @@ class SchedTimeController extends Controller
                         $fromarray = explode(':', $timeslot->from);
                         $toarray = explode(':', $timeslot->to);
 
-                        foreach ($array as $key=>$value) {
-                            if($value['fromtime'] !=$fromarray[0] . ":" . $fromarray[1] ){
-                                array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
-                            }
-                        }
-                        // if (!in_array($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0])) {
-                            
+                        // foreach ($array as $key=>$value) {
+                        //     if($value['fromtime'] !=$fromarray[0] . ":" . $fromarray[1] ){
+                        //         array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
+                        //     }
                         // }
+                        if (!in_array($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1]])) {
+                            array_push($array, ['fromtime' => $fromarray[0] . ":" . $fromarray[1], 'totime' => $toarray[0] . ":" . $toarray[1], 'table_id' => $timeslot->table_id, 'booked' => 0]);
+                        }
                     }
                 }
 
