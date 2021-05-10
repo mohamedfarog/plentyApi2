@@ -111,9 +111,17 @@ class SchedTimeController extends Controller
                 // $tablebookings = TableBooking::where('date', $request->date)->get();
                 // $schedtimes = SchedTime::where('booked', 0)->get();
                 $array = array();
-                foreach ($tables as $table){
-                    $array[$table->id]= SchedTime::where('table_id',$table->id)->where('booked',0)->get();
+                foreach ($tables as $table) {
+                    $timeslots = SchedTime::where('table_id', $table->id)->where('booked', 0)->get();
+                    foreach($timeslots as $timeslot){
+                        if (!in_array($array, ['from' => $timeslot->from, 'to' => $timeslot->to])) {
+                            array_push($array, ['from' => $timeslot->from, 'to' => $timeslot->to]);
+                        }
+                    }
+                  
                 }
+
+
                 return $array;
                 // return $schedtimes;
             } else {
