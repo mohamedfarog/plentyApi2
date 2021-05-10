@@ -146,7 +146,8 @@ class SchedTimeController extends Controller
                 }
 
 
-                return usort($array, function($a, $b) {return strcmp($a['fromtime'], $b['fromtime']);});
+                 usort($array, function($a, $b) {return strcmp($a['fromtime'], $b['fromtime']);});
+                 return $array;
             } else {
                 return response()->json(['Error' => 'No tables available'], 400);
             }
