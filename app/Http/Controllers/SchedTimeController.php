@@ -86,6 +86,7 @@ class SchedTimeController extends Controller
             }])->where('capacity', $request->capacity)
                 ->orWhere('capacity', ($request->capacity + 1))
                 ->get();
+                return $tables;
             $arr = array();
 
             foreach ($tables as $table) {
