@@ -23,7 +23,7 @@ class Shoptable extends Model
 
     public function getBookingAttribute()
     {
-        if(isset(request('fromtime'))){
+        if(request('fromtime')!= ""){
              $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
@@ -36,7 +36,7 @@ class Shoptable extends Model
     }
     public function getBookingstatusAttribute()
     {
-        if(isset(request('fromtime'))){
+        if(request('fromtime')!= ""){
         $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
@@ -48,7 +48,7 @@ class Shoptable extends Model
     }
     public function getSchedidAttribute()
     {
-        if(isset(request('fromtime'))){
+        if(request('fromtime')!= ""){
         $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
@@ -60,7 +60,7 @@ class Shoptable extends Model
     }
     public function getSeatingstatusAttribute()
     {
-        if(isset(request('fromtime'))){
+        if(request('fromtime')!= ""){
         $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
