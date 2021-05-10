@@ -23,13 +23,16 @@ class Shoptable extends Model
 
     public function getBookingAttribute()
     {
-        $schedule = SchedTime::with([
+        if(isset(request('fromtime')){
+             $schedule = SchedTime::with([
             'tblbooking' => function ($booking) {
                 return $booking->with(['user']);
             }
         ])->where('from', request('fromtime'))->where('table_id', $this->id)->where('shop_id', $this->shop_id)->first();
 
         return $schedule->tblbooking;
+        }
+       
     }
     public function getBookingstatusAttribute()
     {
