@@ -45,7 +45,9 @@ class OrderController extends Controller
     public function orderReady(Request $request)
     {
         if(isset($request->order_id)){
-            $order = TableBooking::where('id', $request->order_id)->update(['ready'=>1]);
+            $order = TableBooking::where('id', $request->order_id)->first();
+            $order->ready = 1;
+            $order->save();
             $user = User::find($order->user_id);
             PushNotification::sendFCM($user->fcm, 'Your order is ready for pickup.', 'Order Number: ' . $order->id);
             return response()->json(['success'=>!!$order, 'message'=>'Order is ready for pickup.']);
