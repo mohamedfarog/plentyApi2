@@ -49,7 +49,10 @@ class OrderController extends Controller
             $order->ready = 1;
             $order->save();
             $user = User::find($order->user_id);
-            PushNotification::sendFCM($user->fcm, 'Your order is ready for pickup.', 'Order Number: ' . $order->id);
+            if($user->fcm != null){
+                PushNotification::sendFCM($user->fcm, 'Your order is ready for pickup.', 'Order Number: ' . $order->id);
+
+            }
             return response()->json(['success'=>!!$order, 'message'=>'Order is ready for pickup.']);
         }
     }
