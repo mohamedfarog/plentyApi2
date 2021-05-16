@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplePass;
 use App\Models\Detail;
 use App\Models\Logistics;
 use App\Models\Loyalty;
@@ -161,9 +162,9 @@ class OrderController extends Controller
                         $order->order_status = $request->order_status;
                         if ($request->order_status == 1 || $request->order_status == 0) {
                             Detail::where('order_id', $request->id)->update(['status' => 0]);
-                        } else if($request->order_status == 4){
+                        } else if ($request->order_status == 4) {
                             Detail::where('order_id', $request->id)->update(['status' => 99]);
-                        } else{
+                        } else {
                             Detail::where('order_id', $request->id)->update(['status' => 1]);
                         }
                         if ($request->order_status == 2) {
@@ -183,8 +184,24 @@ class OrderController extends Controller
 
 
                             $loyalty->calculateTier($user, Order::find($request->id)->amount_due, $request->wallet ?? 0);
-                            $pointsearned = $loyalty->addPoints(User::find($user->id), 0, Order::find($request->id)->amount_due);
+                            $pointsearned = $loyalty->addPoints(User::find($user->id), Order::find($request->id)->amount_due, 0);
                             $order->points_earned = $pointsearned;
+                            if ($order->order_status != $request->order_status) {
+                                $user->points += $pointsearned;
+                                $user->save();
+                                $updateduser = User::find($user->id);
+                                ApplePass::createLoyaltyPass($updateduser);
+                                Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
+                            }
+                        }else{
+                            if ($order->order_status != $request->order_status) {
+                                $user = User::find($order->user_id);
+                                $user->points -= $order->points_earned;
+                                $user->save();
+                                $updateduser = User::find($user->id);
+                                ApplePass::createLoyaltyPass($updateduser);
+                                Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
+                            }
                         }
                     }
                     if (isset($request->coupon_value)) {
