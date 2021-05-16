@@ -33,7 +33,7 @@ class ProdcatController extends Controller
         if ($request->shop_id == 12) {
 
             if (isset($request->filter)) {
-                switch ($request->filter) {
+                switch (strtolower($request->filter)) {
                     case 'low to high':
                         $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
                             if ($eventcatid) {
