@@ -159,7 +159,7 @@ class OrderController extends Controller
                         $order->amount_due = $request->amount_due;
                     }
                     if (isset($request->order_status)) {
-                        $order->order_status = $request->order_status;
+                        
                         if ($request->order_status == 1 || $request->order_status == 0) {
                             Detail::where('order_id', $request->id)->update(['status' => 0]);
                         } else if ($request->order_status == 4) {
@@ -204,6 +204,7 @@ class OrderController extends Controller
                                 Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
                             }
                         }
+                        $order->order_status = $request->order_status;
                     }
                     if (isset($request->coupon_value)) {
                         $order->coupon_value = $request->coupon_value;
