@@ -44,16 +44,15 @@ class OrderController extends Controller
 
     public function orderReady(Request $request)
     {
-        if(isset($request->order_id)){
+        if (isset($request->order_id)) {
             $order = TableBooking::where('id', $request->order_id)->first();
             $order->ready = 1;
             $order->save();
             $user = User::find($order->user_id);
-            if($user->fcm != null){
+            if ($user->fcm != null) {
                 PushNotification::sendFCM($user->fcm, 'Your order is ready for pickup.', 'Order Number: ' . $order->id);
-
             }
-            return response()->json(['success'=>!!$order, 'message'=>'Order is ready for pickup.']);
+            return response()->json(['success' => !!$order, 'message' => 'Order is ready for pickup.']);
         }
     }
 
@@ -160,11 +159,10 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
-                        if($request->order_status == 1 || $request->order_status == 0){
-                            Detail::where('order_id', $request->id)->update(['status'=> 0]);
-                        }else{
-                            Detail::where('order_id', $request->id)->update(['status'=> 1]);
-
+                        if ($request->order_status == 1 || $request->order_status == 0) {
+                            Detail::where('order_id', $request->id)->update(['status' => 0]);
+                        } else {
+                            Detail::where('order_id', $request->id)->update(['status' => 1]);
                         }
                         if ($request->order_status == 2) {
                             $logistics = (new Logistics())->create($request->id);
@@ -229,7 +227,7 @@ class OrderController extends Controller
                     $msg = 'Order has been updated';
 
                     $order->save();
-                    return response()->json(['success' => !!$order, 'message' => $msg]);
+                    return response()->json(['success' => !!$order, 'message' => $msg, 'order' => $order]);
                     break;
             }
         } else {
@@ -436,11 +434,10 @@ class OrderController extends Controller
 
     public function viewreceipt(Request $request)
     {
-        if($request->order_id){
-            $order= Order::with(['user','details'])->find($request->order_id);
-            return view('receipt')->with(['data'=>$order]);
+        if ($request->order_id) {
+            $order = Order::with(['user', 'details'])->find($request->order_id);
+            return view('receipt')->with(['data' => $order]);
         }
-        
     }
 
     /**
