@@ -8,9 +8,11 @@ use App\Models\Loyalty;
 use App\Models\Order;
 use App\Models\Shop;
 use App\Models\ShopInfo;
+use App\Models\TableBooking;
 use App\Models\Tier;
 use App\Models\Transaction;
 use App\Models\User;
+use App\PushNotification;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Collection;
@@ -40,7 +42,20 @@ class OrderController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    public function orderReady(Request $request)
+    {
+        if(isset($request->order_id)){
+            $order = TableBooking::where('id', $request->order_id)->first();
+            $order->ready = 1;
+            $order->save();
+            $user = User::find($order->user_id);
+            if($user->fcm != null){
+                PushNotification::sendFCM($user->fcm, 'Your order is ready for pickup.', 'Order Number: ' . $order->id);
 
+            }
+            return response()->json(['success'=>!!$order, 'message'=>'Order is ready for pickup.']);
+        }
+    }
 
     public function index(Request $request)
     {
