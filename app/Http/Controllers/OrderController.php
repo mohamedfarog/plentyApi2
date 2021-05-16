@@ -161,7 +161,9 @@ class OrderController extends Controller
                         $order->order_status = $request->order_status;
                         if ($request->order_status == 1 || $request->order_status == 0) {
                             Detail::where('order_id', $request->id)->update(['status' => 0]);
-                        } else {
+                        } else if($request->order_status == 4){
+                            Detail::where('order_id', $request->id)->update(['status' => 99]);
+                        } else{
                             Detail::where('order_id', $request->id)->update(['status' => 1]);
                         }
                         if ($request->order_status == 2) {
