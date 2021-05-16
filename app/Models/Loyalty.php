@@ -114,6 +114,8 @@ class Loyalty extends Model
 
                 if ($purchases >= $tier->requirement) {
                     $tierid++;
+                }else{
+                    $tierid--;
                 }
 
 
