@@ -16,6 +16,10 @@ class ProdcatController extends Controller
     public function index(Request $request)
     {
         $eventcatid = $request->eventcat_id;
+        $perpage = 15;
+        if (isset($request->perpage)) {
+            $perpage = $request->perpage;
+        }
         $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
             if ($eventcatid) {
                 return $prod->where('eventcat_id', $eventcatid)->with(['sizes' => function ($sizes) {
@@ -25,22 +29,54 @@ class ProdcatController extends Controller
             return $prod->with(['sizes' => function ($sizes) {
                 return $sizes->with(['color']);
             }, 'colors', 'addons', 'images', 'designer']);
-        }])->where('shop_id', $request->shop_id)->get();
-        if (isset($request->filter)) {
-            switch ($request->filter) {
-                case 'low to high':
-                    
-                    break;
-                case 'high to low':
-                    break;
-                case 'name asc':
-                    break;
-                case 'name desc':
-                    break;
-                case 'new arrival':
-                    break;
+        }])->where('shop_id', $request->shop_id);
+        if ($request->shop_id == 12) {
+
+            if (isset($request->filter)) {
+                switch ($request->filter) {
+                    case 'low to high':
+                        $cats = $cats->orderBy('price', 'asc');
+                        break;
+                    case 'high to low':
+                        $cats = $cats->orderBy('price', 'desc');
+
+                        break;
+                    case 'name asc':
+                        $cats = $cats->orderBy('name_en', 'asc');
+
+                        break;
+                    case 'name desc':
+                        $cats = $cats->orderBy('name_en', 'desc');
+
+                        break;
+                    case 'new arrival':
+                        $days = 7;
+                        $period = now()->subDays($days)->daysUntil(now());
+                        $days = array();
+                        foreach ($period as $date) {
+                            array_push($days,$date);
+                        }
+                        return $days;
+                        break;
+                    default:
+                        $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
+                            if ($eventcatid) {
+                                return $prod->where('eventcat_id', $eventcatid)->with(['sizes' => function ($sizes) {
+                                    return $sizes->with(['color']);
+                                }, 'colors', 'addons', 'images', 'designer']);
+                            }
+                            return $prod->with(['sizes' => function ($sizes) {
+                                return $sizes->with(['color']);
+                            }, 'colors', 'addons', 'images', 'designer']);
+                        }])->where('shop_id', $request->shop_id);
+                        break;
+                }
             }
+            $cats->paginate($perpage);
+        } else {
+            $cats->get();
         }
+
         return $cats;
     }
 

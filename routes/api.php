@@ -107,13 +107,6 @@ Route::get('analytics', function (Request $request) {
     //tables
     $topten = (new Report())->createGraph($request, 'topten');
 
-
-
-
-
-
-
-
     return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten' => $topten]);
 });
 
