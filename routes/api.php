@@ -273,54 +273,55 @@ Route::post('test', function (Request $request) {
     }
 });
 Route::get('test', function (Request $request) {
-    $options = [
-        'key_id' => env('APN_KEY_ID'), // The Key ID obtained from Apple developer account
-        'team_id' => env('APN_TEAM_ID'), // The Team ID obtained from Apple developer account
-        'app_bundle_id' => env('APN_BUNDLE_ID'), // The bundle ID for app obtained from Apple developer account
-        'private_key_path' =>  '../AuthKey_6B79HKA3UL.p8', // Path to private key
-        'private_key_secret' => null // Private key secret
-    ];
-    $authProvider = AuthProvider\Token::create($options);
-    $alert = Alert::create()->setTitle('Hello!');
-    $alert = $alert->setBody('First push notification');
+    // $options = [
+    //     'key_id' => env('APN_KEY_ID'), // The Key ID obtained from Apple developer account
+    //     'team_id' => env('APN_TEAM_ID'), // The Team ID obtained from Apple developer account
+    //     'app_bundle_id' => env('APN_BUNDLE_ID'), // The bundle ID for app obtained from Apple developer account
+    //     'private_key_path' =>  '../AuthKey_6B79HKA3UL.p8', // Path to private key
+    //     'private_key_secret' => null // Private key secret
+    // ];
+    // $authProvider = AuthProvider\Token::create($options);
+    // $alert = Alert::create()->setTitle('Hello!');
+    // $alert = $alert->setBody('First push notification');
 
-    $payload = Payload::create()->setAlert($alert);
-    //set notification sound to default
-    $payload->setSound('default');
-    $deviceTokens = Pass::where('serialNumber', 'P-967270-091492-216')->pluck('pushToken')->toArray();
-    // $deviceTokens = ["1381f1abe861d9e70b20afb6628261dd19983e123afcd4e351e2803ec3a6ad2e"];
-    // return $deviceTokens;
-    $notifications = [];
-    foreach ($deviceTokens as $deviceToken) {
-        $notifications[] = new Notification($payload, $deviceToken);
-    }
+    // $payload = Payload::create()->setAlert($alert);
+    // //set notification sound to default
+    // $payload->setSound('default');
+    // $deviceTokens = Pass::where('serialNumber', 'P-967270-091492-216')->pluck('pushToken')->toArray();
+    // // $deviceTokens = ["1381f1abe861d9e70b20afb6628261dd19983e123afcd4e351e2803ec3a6ad2e"];
+    // // return $deviceTokens;
+    // $notifications = [];
+    // foreach ($deviceTokens as $deviceToken) {
+    //     $notifications[] = new Notification($payload, $deviceToken);
+    // }
 
-    $client = new Client($authProvider, $production = true);
-    $client->addNotifications($notifications);
-    $responses = $client->push(); // returns an array of ApnsResponseInterface (one Response per Notification)  
-    foreach ($responses as $response) {
-        error_log($response->get410Timestamp());
-        // The device token
-        error_log($response->getDeviceToken());
-        // A canonical UUID that is the unique ID for the notification.  E.g. 123e4567-e89b-12d3-a456-4266554400a0
-        error_log($response->getApnsId());
+    // $client = new Client($authProvider, $production = true);
+    // $client->addNotifications($notifications);
+    // $responses = $client->push(); // returns an array of ApnsResponseInterface (one Response per Notification)  
+    // foreach ($responses as $response) {
+    //     error_log($response->get410Timestamp());
+    //     // The device token
+    //     error_log($response->getDeviceToken());
+    //     // A canonical UUID that is the unique ID for the notification.  E.g. 123e4567-e89b-12d3-a456-4266554400a0
+    //     error_log($response->getApnsId());
 
-        // Status code. E.g. 200 (Success), 410 (The device token is no longer active for the topic.)
-        error_log($response->getStatusCode());
-        // E.g. The device token is no longer active for the topic.
-        error_log($response->getReasonPhrase());
-        // E.g. Unregistered
-        error_log($response->getErrorReason());
-        // E.g. The device token is inactive for the specified topic.
-        error_log($response->getErrorDescription());
-        error_log($response->get410Timestamp());
-    }
+    //     // Status code. E.g. 200 (Success), 410 (The device token is no longer active for the topic.)
+    //     error_log($response->getStatusCode());
+    //     // E.g. The device token is no longer active for the topic.
+    //     error_log($response->getReasonPhrase());
+    //     // E.g. Unregistered
+    //     error_log($response->getErrorReason());
+    //     // E.g. The device token is inactive for the specified topic.
+    //     error_log($response->getErrorDescription());
+    //     error_log($response->get410Timestamp());
+    // }
 
 
-    // $ap= ApnVoipMessage::create()->pushType('background')->badge(2)
-    // ->title('Account approved')
-    // ->body("Your  account was approved!");
-    return response()->json(['success' => $responses]);
+    // // $ap= ApnVoipMessage::create()->pushType('background')->badge(2)
+    // // ->title('Account approved')
+    // // ->body("Your  account was approved!");
+    // return response()->json(['success' => $responses]);
+    return Loyalty::notifyApple($request->serialNumber);
     if (isset($request->user)) {
         $user = User::first();
         return '{"customer_name":"' . $user->name . '","customer_mobile_number":"' . substr($user->contact, 4) . '","mobile_country_code":' . intval(substr($user->contact, 1, 3)) . ',"reward_code":"' . $user->invitation_code . "-" . $user->id . '"}';

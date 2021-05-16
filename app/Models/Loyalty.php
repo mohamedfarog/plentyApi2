@@ -66,7 +66,7 @@ class Loyalty extends Model
         // $ap= ApnVoipMessage::create()->pushType('background')->badge(2)
         // ->title('Account approved')
         // ->body("Your  account was approved!");
-        return response()->json(['success' => $responses]);
+        return  $responses;
     }
 
     public static function addPoints($user, $amount_due, $wallet, $shoplist = null)
