@@ -108,7 +108,7 @@ class Loyalty extends Model
 
         if ($user->tier_id != null) {
             if ($user->tier_id > 0) {
-                $tierid = $user->tier_id;
+                $tierid = $user->tier_id; //1
                 $tier = Tier::find($user->tier_id);
 
 
