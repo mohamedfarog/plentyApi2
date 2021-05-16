@@ -287,7 +287,7 @@ Route::get('test', function (Request $request) {
     $payload = Payload::create()->setAlert($alert);
     //set notification sound to default
     $payload->setSound('default');
-    $deviceTokens = Pass::where('serialNumber', 'P-633397-091492-206')->pluck('pushToken')->toArray();
+    $deviceTokens = Pass::where('serialNumber', 'P-967270-091492-216')->pluck('pushToken')->toArray();
     // $deviceTokens = ["1381f1abe861d9e70b20afb6628261dd19983e123afcd4e351e2803ec3a6ad2e"];
     // return $deviceTokens;
     $notifications = [];
