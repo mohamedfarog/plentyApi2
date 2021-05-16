@@ -145,6 +145,12 @@ class OrderController extends Controller
                     }
                     if (isset($request->order_status)) {
                         $order->order_status = $request->order_status;
+                        if($request->order_status == 1){
+                            Detail::where('order_id', $request->id)->update(['status', 0]);
+                        }else{
+                            Detail::where('order_id', $request->id)->update(['status', 1]);
+
+                        }
                         if ($request->order_status == 2) {
                             $logistics = (new Logistics())->create($request->id);
                         }
