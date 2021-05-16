@@ -38,6 +38,7 @@ use App\Models\Order;
 use App\Models\Pass;
 use App\Models\Prodcat;
 use App\Models\Product;
+use App\Models\Project;
 use App\Models\Report;
 use App\Models\Schedule;
 use App\Models\Shop;
@@ -83,7 +84,9 @@ Route::get('webhooks', [FoodicsController::class, 'webhooks']); // this url is u
 Route::post('webhooks', [FoodicsController::class, 'webhooks']); // this url is used under foodics webserver
 Route::post('loyality/reward', [FoodicsController::class, 'loyalityRewards']);
 Route::post('loyality/redeem', [FoodicsController::class, 'loyalityRedeem']);
-
+Route::get('filesize', function (Request $request) {
+    return Project::first()->imagesize;
+});
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -111,7 +114,7 @@ Route::get('analytics', function (Request $request) {
 
 
 
-    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten'=>$topten]);
+    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten' => $topten]);
 });
 
 Route::get('events', [EventController::class, 'index']);
@@ -151,7 +154,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
     Route::post("/fcm", [UserController::class, "updateFCM"]);
-    
+
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('sendnotifications', [UserController::class, 'sendNotifications']);
