@@ -206,6 +206,7 @@ class PassController extends Controller
                 }
             }
         } else {
+            FacadesLog::info("There is no File found",$serialNumber);
             return response()->json(['message' => 'No passes were found.'], 400);
         }
     }
