@@ -56,7 +56,7 @@ class ProdcatController extends Controller
                         // foreach ($period as $date) {
                         //     array_push($days,$date);
                         // }
-                        $cats = $cats->whereBetween('created_at',now()->subDays($days), now());
+                        $cats = $cats->whereBetween('created_at',array(now()->subDays($days), now()));
                         // return $days;
                         break;
                     default:
