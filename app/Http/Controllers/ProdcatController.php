@@ -20,18 +20,18 @@ class ProdcatController extends Controller
         if (isset($request->perpage)) {
             $perpage = $request->perpage;
         }
-        $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
-            if ($eventcatid) {
-                return $prod->where('eventcat_id', $eventcatid)->with(['sizes' => function ($sizes) {
+       
+        if ($request->shop_id == 12) {
+            $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
+                if ($eventcatid) {
+                    return $prod->where('eventcat_id', $eventcatid)->with(['sizes' => function ($sizes) {
+                        return $sizes->with(['color']);
+                    }, 'colors', 'addons', 'images', 'designer']);
+                }
+                return $prod->with(['sizes' => function ($sizes) {
                     return $sizes->with(['color']);
                 }, 'colors', 'addons', 'images', 'designer']);
-            }
-            return $prod->with(['sizes' => function ($sizes) {
-                return $sizes->with(['color']);
-            }, 'colors', 'addons', 'images', 'designer']);
-        }])->where('shop_id', $request->shop_id);
-        if ($request->shop_id == 12) {
-
+            }])->where('shop_id', $request->shop_id);
             if (isset($request->filter)) {
                 switch (strtolower($request->filter)) {
                     case 'low to high':
@@ -110,6 +110,16 @@ class ProdcatController extends Controller
             }
             return $cats->paginate($perpage);
         } else {
+            $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
+                if ($eventcatid) {
+                    return $prod->where('eventcat_id', $eventcatid)->with(['sizes' => function ($sizes) {
+                        return $sizes->with(['color']);
+                    }, 'colors', 'addons', 'images', 'designer']);
+                }
+                return $prod->with(['sizes' => function ($sizes) {
+                    return $sizes->with(['color']);
+                }, 'colors', 'addons', 'images', 'designer']);
+            }])->where('shop_id', $request->shop_id);
             return $cats->get();
         }
     }
