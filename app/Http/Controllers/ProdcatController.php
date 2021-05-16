@@ -108,7 +108,7 @@ class ProdcatController extends Controller
                         break;
                 }
             }
-            return $cats->paginate($perpage);
+            return $cats->get();
         } else {
             return $cats->get();
         }
