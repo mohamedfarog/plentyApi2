@@ -97,7 +97,10 @@ class FoodicsController extends Controller
     {
         //When New user created in plenty database sending informaions to foodics
 
-        $response = Http::withToken($this->token)->post($this->baseUrl . "customers",  [
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type'=>'application/json'
+        ])->withToken($this->token)->post($this->baseUrl . "customers",  [
             "name" => $user->name,
             "dial_code" => 966,
             "phone" => last(explode("+966", $user->contact)),
