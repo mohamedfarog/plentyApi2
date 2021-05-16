@@ -289,7 +289,7 @@ Route::get('test', function (Request $request) {
     $payload->setSound('default');
     $deviceTokens = Pass::where('serialNumber', 'P-967270-091492-216')->pluck('pushToken')->toArray();
     // $deviceTokens = ["1381f1abe861d9e70b20afb6628261dd19983e123afcd4e351e2803ec3a6ad2e"];
-    return $deviceTokens;
+    // return $deviceTokens;
     $notifications = [];
     foreach ($deviceTokens as $deviceToken) {
         $notifications[] = new Notification($payload, $deviceToken);
