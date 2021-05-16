@@ -191,8 +191,7 @@ class PassController extends Controller
 
 
                 if ($pass->updateTag == "changed") {
-                    $pass->updateTag = "unchanged";
-                    $pass->save();
+                    Pass::where('serialNumber', $serialNumber)->update(['updateTag'=>'unchanged']);
                     return response($pkpass, 200, [
                         'Content-Transfer-Encoding' => 'binary',
                         'Content-Description' => 'File Transfer',
