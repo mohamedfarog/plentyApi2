@@ -10,6 +10,7 @@ use Pushok\Client;
 use Pushok\Notification;
 use Pushok\Payload;
 use Pushok\Payload\Alert;
+
 class Loyalty extends Model
 {
     use HasFactory;
@@ -108,12 +109,15 @@ class Loyalty extends Model
         if ($user->tier_id != null) {
             if ($user->tier_id > 0) {
                 $tierid = $user->tier_id;
-                $tiers = Tier::get();
-                foreach ($tiers as $tier) {
-                    if ($purchases >= $tier->requirement) {
-                        $tierid = $tier->id;
-                    }
+                $tier = Tier::find($user->tier_id);
+
+
+                if ($purchases >= $tier->requirement) {
+                    $tierid++;
                 }
+
+
+
 
                 User::find($user->id)->update(['tier_id' => $tierid, 'totalpurchases' => $purchases]);
             } else {
