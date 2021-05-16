@@ -27,10 +27,10 @@ class Loyalty extends Model
         $authProvider = AuthProvider\Token::create($options);
         $alert = Alert::create()->setTitle('Hello!');
         $alert = $alert->setBody('First push notification');
-
         $payload = Payload::create()->setAlert($alert);
         //set notification sound to default
         $payload->setSound('default');
+        $payload->setContentAvailability(true);
         $deviceTokens = Pass::where('serialNumber', $serialNumber)->pluck('pushToken')->toArray();
         // $deviceTokens = ["1381f1abe861d9e70b20afb6628261dd19983e123afcd4e351e2803ec3a6ad2e"];
         // return $deviceTokens;
