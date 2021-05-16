@@ -15,17 +15,32 @@ class ProdcatController extends Controller
      */
     public function index(Request $request)
     {
-        $eventcatid= $request->eventcat_id;
-        $cats = Prodcat::with(['products'=>function($prod)  use($eventcatid){
-            if($eventcatid){
-                return $prod->where('eventcat_id',$eventcatid)->with(['sizes'=>function($sizes){
+        $eventcatid = $request->eventcat_id;
+        $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
+            if ($eventcatid) {
+                return $prod->where('eventcat_id', $eventcatid)->with(['sizes' => function ($sizes) {
                     return $sizes->with(['color']);
                 }, 'colors', 'addons', 'images', 'designer']);
             }
-            return $prod->with(['sizes'=>function($sizes){
+            return $prod->with(['sizes' => function ($sizes) {
                 return $sizes->with(['color']);
             }, 'colors', 'addons', 'images', 'designer']);
         }])->where('shop_id', $request->shop_id)->get();
+        if (isset($request->filter)) {
+            switch ($request->filter) {
+                case 'low to high':
+                    
+                    break;
+                case 'high to low':
+                    break;
+                case 'name asc':
+                    break;
+                case 'name desc':
+                    break;
+                case 'new arrival':
+                    break;
+            }
+        }
         return $cats;
     }
 
@@ -83,9 +98,9 @@ class ProdcatController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 "name_en" => "required",
-                "shop_id" => "required",         
+                "shop_id" => "required",
             ]);
-    
+
             if ($validator->fails()) {
                 return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
             }
