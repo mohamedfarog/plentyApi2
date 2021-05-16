@@ -194,7 +194,7 @@ class OrderController extends Controller
                                 Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
                             }
                         }else{
-                            if ($order->order_status != $request->order_status) {
+                            if ($order->order_status == 3) {
                                 $user = User::find($order->user_id);
                                 $user->points -= $order->points_earned;
                                 $user->save();
