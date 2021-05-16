@@ -201,7 +201,7 @@ class OrderController extends Controller
                                 $user->totalpurchases -= $order->points_earned;
                                 
                                 $user->save();
-                                Loyalty::calculateTier($user, Order::find($request->id)->amount_due, $request->wallet ?? 0);
+                                Loyalty::calculateTier($user, 0, $request->wallet ?? 0);
                                 $updateduser = User::find($user->id);
                                 ApplePass::createLoyaltyPass($updateduser);
                                 Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
