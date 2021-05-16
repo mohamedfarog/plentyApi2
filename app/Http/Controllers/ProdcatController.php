@@ -50,13 +50,14 @@ class ProdcatController extends Controller
 
                         break;
                     case 'new arrival':
-                        $days = 7;
-                        $period = now()->subDays($days)->daysUntil(now());
-                        $days = array();
-                        foreach ($period as $date) {
-                            array_push($days,$date);
-                        }
-                        return $days;
+                        $days = 6;
+                        // $period = now()->subDays($days)->daysUntil(now());
+                        // $days = array();
+                        // foreach ($period as $date) {
+                        //     array_push($days,$date);
+                        // }
+                        $cats = $cats->whereBetween('created_at',now()->subDays($days), now());
+                        // return $days;
                         break;
                     default:
                         $cats = Prodcat::with(['products' => function ($prod)  use ($eventcatid) {
