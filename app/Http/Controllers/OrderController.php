@@ -186,6 +186,7 @@ class OrderController extends Controller
                             $loyalty->calculateTier($user, Order::find($request->id)->amount_due, $request->wallet ?? 0);
                             $pointsearned = $loyalty->addPoints(User::find($user->id), Order::find($request->id)->amount_due, 0);
                             $order->points_earned = $pointsearned;
+                            return $order->order_status . " - ". $request->order_status;
                             if ($order->order_status != $request->order_status) {
                                 $user->points += $pointsearned;
                                 $user->save();
