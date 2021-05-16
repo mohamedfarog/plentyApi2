@@ -174,12 +174,14 @@ class PassController extends Controller
             }
         }
     }
-    public function getPass($passTypeIdentifier, $serialNumber)
+    public function getPass($passTypeIdentifier, $serialNumber, Request $request)
     {
+        FacadesLog::info("Request info: $request");
+        
         FacadesLog::info("getPass: $passTypeIdentifier, $serialNumber");
         $pkpass = PassGenerator::getPass($serialNumber);
 
-        $pass = Pass::where('serialNumber', $serialNumber)->where('updateTag','changed')->first();
+        $pass = Pass::where('serialNumber', $serialNumber)->first();
         $arr = array();
         if ($pass) {
             if ($pass->passesUpdatedSince == null) {

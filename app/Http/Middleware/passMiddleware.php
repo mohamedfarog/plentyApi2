@@ -22,6 +22,7 @@ class passMiddleware
         if ($request->header('Authorization') != null) {
             $key = explode(' ', $request->header('Authorization'));
             if (in_array($key[1], ['NgBeW4dQFsiGiTiDUOlcam6H', 'JEvmfd9hfiURvdqXMYE39r4E', 'eT7JV88G9El3888Eu6gnoGFB'])) {
+                // $key[1] =NgBeW4dQFsiGiTiDUOlcam6H-5c970f5fa69af5dcdd7434a7c4660abb
                 return $next($request);
             }
         } elseif ($request->header('authorization') != null) {
