@@ -146,7 +146,7 @@
 
                 success: function(data) {
                     if (data.success) {
-                        if (data.message.original.original.transaction) {
+                        if (data.message.original.transaction) {
                             const transaction_url = data.message.original.transaction.url;
                             window.location.replace(transaction_url);
 
