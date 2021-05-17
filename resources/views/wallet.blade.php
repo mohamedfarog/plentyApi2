@@ -129,7 +129,7 @@
     function addPlentyBalance() {
         const bearer_token = getCookie('bearer_token');
         var base_url = $('meta[name=api_base_url]').attr('content');
-        url = base_url + 'wallet/topup'
+        url = base_url + 'api/wallet/topup'
         const topup = $("#topup").val();
         if (parseInt(topup) > 0) {
             $.ajax({
