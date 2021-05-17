@@ -77,7 +77,6 @@
         border-top: 2px solid #b2bad4;
         margin-top: 30px;
     }
-
 </style>
 <div class="div-cont-aboutus">
     <h3 class="h3-aboutus">About us</h3>
@@ -119,4 +118,3 @@
     @include('footer')
 </div>
 @endsection
-

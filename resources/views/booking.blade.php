@@ -58,7 +58,7 @@
         box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         z-index: 100;
-        position: relative; 
+        position: relative;
     }
 
     .calendar-wrapper table {
@@ -85,6 +85,7 @@
     .calendar-wrapper td:hover {
         cursor: pointer;
     }
+
     .calendar-wrapper .today:hover,
     .calendar-wrapper .normal:hover {
         background-color: #edbddb;
@@ -151,7 +152,7 @@
         font-size: 15px;
         color: #c0c0c0;
         cursor: pointer;
-        transition: all 0.3s ease; 
+        transition: all 0.3s ease;
     }
 
     .calendar-wrapper #btnPrev {
@@ -208,80 +209,100 @@
         margin: 0px 5px 20px 5px;
 
     }
+
     .time-btn-inactive {
         color: red;
         background-color: #009eb3;
     }
+
     .time-shedule::-webkit-scrollbar {
         width: 5px;
     }
+
     .time-shedule::-webkit-scrollbar-track {
         box-shadow: none
     }
+
     .time-shedule::-webkit-scrollbar-thumb {
         background: pink;
         border-radius: 10px;
     }
+
     .time-shedule::-webkit-scrollbar-thumb:hover {
         background: #009eb3;
     }
+
     .your-booking {
         height: 100px;
     }
+
     .booking-item {
         font-size: 20px;
         margin: 20px;
     }
+
     .booking-item span {
         font-size: 20px;
         color: #edbddb;
     }
+
     .day-status {
         text-align: center;
         margin: 10px;
     }
+
     .day-status span {
         border-radius: 10px;
         padding: 5px 30px;
         font-size: 15px;
     }
+
     .day-status .booking-available {
         background-color: #edbddb;
         color: white;
     }
+
     .day-status .booked {
         background-color: #c31c4a;
         color: white
     }
+
     .calendar-btn-left {
         margin-left: 30px
     }
+
     .calendar-btn-right {
         margin-right: 30px
     }
+
     .activemonthtd {
         font-family: 'Avenir';
         font-weight: 100;
     }
+
     .homebrandtitle {
         width: 30%;
         padding: 50px 0;
         filter: brightness(0) invert(1);
     }
+
     .coltablpadd {
         padding: 0 30px 0 0;
     }
+
     .contimgu {
         background-color: #f2f3f8;
         padding-top: 50px;
         margin-top: 20px
     }
+
     .divtitle {
         position: relative;
         display: block;
         height: 20px;
         text-align: center;
     }
+
     .bktitle {
         font-size: 24px;
         color: black !important;
@@ -289,16 +310,21 @@
         display: block;
         float: left;
     }
+
     .bkprice {}
+
     .day-clicked>span {
         color: black;
     }
+
     .calendar-col {}
+
     td.normal {
         text-align: center;
         height: 50px;
         width: 50px;
     }
+
     .h4-fl {
         font-size: 30px;
         font-weight: 100;
@@ -307,39 +333,48 @@
         color: black;
         margin: 0px;
     }
+
     @media only screen and (max-width: 600px) {
         .contmobile {
             padding-left: 0 !imp rtant;
             padding-right: 0 !important;
             width: 350px;
         }
+
         .product-info {
             width: 100% !important;
         }
+
         .cart-plus-minus {
             width: 100% !important;
         }
+
         .homebrandtitle {
             width: 100%;
             padding: 50px 0;
             filter: brightness(0) invert(1);
         }
+
         .coltablpadd {
             padding: 0;
             margin: auto;
         }
+
         .calendar-wrapper #btnNext {
             position: absolute;
             right: 0;
         }
+
         .calendar-wrapper #btnPrev {
             position: absolute;
             left: 0;
         }
+
         .contimgu {
             padding-top: 0;
             margin-top: 0;
         }
+
         .divtitle {
             padding-left: 20px;
             position: relative;
@@ -347,26 +382,32 @@
             height: 20px;
             text-align: center;
         }
+
         .time-shedule-wrapper {
             padding: 100px 10px;
         }
+
         .bktitle {
             width: 100%;
         }
+
         .bkprice {
             width: 100%;
         }
+
         .ffaddbag {
             width: 100%;
             float: none !important;
             padding: 10px !important;
         }
     }
+
     .day-clicked {
         font-size: larger;
         background-color: #edbddb;
         border-radius: 50%;
     }
+
     .slot-clicked {
         background-color: #edbddb;
         color: black;
@@ -507,19 +548,29 @@
 
 
 <script>
-    $(document).ready(function() { 
-        $(".active").css("background-color", "black"); 
+    $(document).ready(function() {
+        $(".active").css("background-color", "black");
         let today = new Date();
         let formatted_date = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
         getSlots(formatted_date);
         var primary_color = "#" + document.getElementById("primary").value.slice(4);
-        var secondary_color = "#" + document.getElementById("secondary").value.slice(4); 
-        $('#price-primary-color').css({'color': primary_color});
-        $('#price2-primary-color').css({'color': primary_color});
-        $('#avail-book-primarycolor').css({'background': primary_color});
-        $('#avail-book-seccolor').css({'background': secondary_color});
-        $('.time-btn').css({'border': '2px solid ' + secondary_color + ' !important'});
-    });  
+        var secondary_color = "#" + document.getElementById("secondary").value.slice(4);
+        $('#price-primary-color').css({
+            'color': primary_color
+        });
+        $('#price2-primary-color').css({
+            'color': primary_color
+        });
+        $('#avail-book-primarycolor').css({
+            'background': primary_color
+        });
+        $('#avail-book-seccolor').css({
+            'background': secondary_color
+        });
+        $('.time-btn').css({
+            'border': '2px solid ' + secondary_color + ' !important'
+        });
+    });
     var month;
     var year;
     var day;
@@ -594,11 +645,14 @@
 
         var d = new Date()
             // First day of the week in the selected month
-            , firstDayOfMonth = new Date(y, m, 1).getDay()
+            ,
+            firstDayOfMonth = new Date(y, m, 1).getDay()
             // Last day of the selected month
-            , lastDateOfMonth = new Date(y, m + 1, 0).getDate()
+            ,
+            lastDateOfMonth = new Date(y, m + 1, 0).getDate()
             // Last day of the previous month
-            , lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+            ,
+            lastDayOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
 
 
         var html = '<table style="width:100% !important;" id="calendar">';
@@ -733,21 +787,21 @@
 
     function getSlots(date) {
         let prod_id = document.getElementById('product_id').value
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         url = base_url + 'api/timeslots'
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , data: {
-                product_id: prod_id
-                , date: date
-            }
-            , success: function(data) {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            data: {
+                product_id: prod_id,
+                date: date
+            },
+            success: function(data) {
                 renderSlots(data)
 
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -772,13 +826,13 @@
     function slotSelect(id, ele) {
         $('#time-slots').find("*").removeClass("slot-clicked");
         ele.classList.add("slot-clicked");
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         url = base_url + 'timeslot/' + id
         $.ajax({
-            type: 'GET'
-            , url: url
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: url,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.Response) {
                     document.getElementById('timeslot').value = data.timeslot.timeslot
                     document.getElementById('timeslot_id').value = data.timeslot.id
@@ -788,8 +842,8 @@
                 }
 
 
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
             }
 
@@ -814,16 +868,16 @@
                 return category.id == shop_id();
             });
             let item = {
-                id: form.get('product_id')
-                , price: form.get('product_price')
-                , name: form.get('product_name')
-                , shop_id: form.get('shop_id')
-                , image_url: form.get('product_image') || null
-                , timeslot_id: form.get('timeslot_id') || null
-                , time: form.get('timeslot') || null
-                , date: form.get('day') || null
-                , category: shop_category[0].name_en || null
-                , quantity: 1
+                id: form.get('product_id'),
+                price: form.get('product_price'),
+                name: form.get('product_name'),
+                shop_id: form.get('shop_id'),
+                image_url: form.get('product_image') || null,
+                timeslot_id: form.get('timeslot_id') || null,
+                time: form.get('timeslot') || null,
+                date: form.get('day') || null,
+                category: shop_category[0].name_en || null,
+                quantity: 1
             }
             let product = new CartItem(item)
             let cart = CartSerializer(getCartLocal());
@@ -854,7 +908,6 @@
             showAlertError("Please select a slot!")
         }
     }
-
 </script>
 <script src="js/prodjs.js"></script>
 
@@ -862,4 +915,3 @@
     @include('footer')
 </div>
 @endsection
-

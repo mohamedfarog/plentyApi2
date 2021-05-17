@@ -674,7 +674,7 @@
         var cart = CartSerializer(getCartLocal());
 
         for (var i = 0; i < cart.cart_items.length; i++) {
-            if (cart.cart_items[i].category === 'Fashion' || cart.cart_items[i].category === 'Bazaar') {
+            if (cart.cart_items[i].category === 'Shopping' || cart.cart_items[i].category === 'Bazaar') {
                 document.getElementById("address-show").style.visibility = "visible";
                 document.getElementById("address").setAttribute("required", true);
                 document.getElementById("city").setAttribute("required", true);
@@ -722,7 +722,7 @@
 
     function checkCouponValid() {
         $("#coupon_error").html("");
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         var cart = CartSerializer(getCartLocal())
         if (cart.coupon_value > 0) {
             $("#coupon_error").html("You applied coupon already!");
@@ -794,7 +794,7 @@
 
 
     function getLoyalityPoint() {
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         const bearer_token = getCookie('bearer_token');
         url = base_url + 'plenty-points'
         $.ajax({
@@ -827,7 +827,7 @@
         e.preventDefault();
         const form = new FormData(document.getElementById("cart-form"))
         const bearer_token = getCookie('bearer_token');
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         url = base_url + 'place-order'
         $.ajax({
             type: 'POST',
@@ -850,7 +850,10 @@
 
             success: function(data) {
                 if (data.Response.original.success) {
-
+                    if (data.Response.original.message.original) {
+                        const transaction_url = data.Response.original.message.original.transaction.url;
+                        window.location.replace(transaction_url);
+                    }
                     showAlertSuccess(data.Response.original.message);
                     storeCartLocal("");
                     renderOrderedProduct();
@@ -946,7 +949,7 @@
 
     function getPlentyBalance() {
         const bearer_token = getCookie('bearer_token');
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         if (bearer_token) {
             url = base_url + 'plenty-balance'
             $.ajax({

@@ -409,7 +409,6 @@
             margin: auto;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -674,7 +673,6 @@
 
 
     });
-
 </script>
 
 <script>
@@ -704,12 +702,12 @@
 
     //for filtering product based on category
     function getProducts(element, category = 0) {
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -725,12 +723,12 @@
     //getProducts  //for filtering product based on category
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'best-seller/' + shop_id
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'best-seller/' + shop_id,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -805,7 +803,7 @@
                 "</div>" +
                 "</div>"
 
-        }); 
+        });
         document.getElementById('product-panel').innerHTML = prod_element
         $('.buttonsshow').css({
             'visibility': 'hidden'
@@ -829,7 +827,7 @@
 
         } else {
             window.location = base_url + 'delicacy/' + shopid;
-        } 
+        }
     }
 
     $(".producthover").hover(function() {
@@ -876,7 +874,7 @@
                 "<div>" +
                 DaysOfWeek[tomorrow.getDay()] +
                 "</div></div>"
-        } 
+        }
         document.getElementById("date").innerHTML = template;
     }
 
@@ -896,7 +894,7 @@
         const shop_id = $('#shopid').val();
         var capacity = $('#usercount').val();
         getTableTimeSlot(day, istoday, shop_id, capacity)
-        $("#booking-st3").css("visibility", "visible"); 
+        $("#booking-st3").css("visibility", "visible");
     }
 
     function renderTimeSlot(data) {
@@ -905,7 +903,7 @@
             $("#table-book").css("display", "block");
             $("#table-book").css("margin", "auto");
         } else {
-            $("#table-book").css("display", "none"); 
+            $("#table-book").css("display", "none");
         }
         for (var i = 0; i < data.length; i++) {
             var fromtime = data[i].fromtime.replace(":", "_")
@@ -954,36 +952,36 @@
     }
 
     function getTableTimeSlot(day, istoday, shop_id, capacity) {
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
-            type: 'POST'
-            , url: base_url + 'api/tabletimeslots'
-            , data: {
-                day: day
-                , istoday: istoday
-                , shop_id: shop_id
-                , capacity: capacity
-            }
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'POST',
+            url: base_url + 'api/tabletimeslots',
+            data: {
+                day: day,
+                istoday: istoday,
+                shop_id: shop_id,
+                capacity: capacity
+            },
+            dataType: 'JSON',
+            success: function(data) {
                 renderTimeSlot(data);
 
-            }
-            , statusCode: {
+            },
+            statusCode: {
                 400: function(data) {
                     showAlertError(data.responseJSON["Error"])
                     renderTimeSlot([]);
                 }
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 console.log('Error!', err)
-            }
-        , });
+            },
+        });
     }
 
     function bookTable() {
         const bearer_token = getCookie('bearer_token');
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         if (bearer_token) {
             const date = new Date($("#date-selected").val());
             console.log(date)
@@ -994,32 +992,32 @@
             const table_id = $("#table-id").val();
             if (parseInt(table_id) > 0) {
                 $.ajax({
-                    type: 'POST'
-                    , url: base_url + 'api/tablebooking'
-                    , data: {
-                        date: formated_date
-                        , preftime: fromtime
-                        , table_id: table_id
-                    , }
-                    , headers: {
+                    type: 'POST',
+                    url: base_url + 'api/tablebooking',
+                    data: {
+                        date: formated_date,
+                        preftime: fromtime,
+                        table_id: table_id,
+                    },
+                    headers: {
                         "Authorization": 'Bearer ' + bearer_token
-                    }
-                    , dataType: 'JSON'
-                    , success: function(data) {
+                    },
+                    dataType: 'JSON',
+                    success: function(data) {
                         console.log(data)
                         if (data.success) {
                             renderOrderSuccess(data);
                         }
-                    }
-                    , error: function(err) {
+                    },
+                    error: function(err) {
                         console.log('Error!', err)
-                    }
-                , });
+                    },
+                });
             } else {
                 showAlertError("Please choose a table!")
             }
         } else {
-            window.location.replace(base_url + 'login');
+            window.location.replace($('meta[name=base_url]').attr('content') + 'login');
         }
 
     }
@@ -1036,10 +1034,8 @@
         document.getElementById("order-success").innerHTML = templates;
 
     }
-
 </script>
 <script src="js/prodjs.js"></script>
 
 
 @endsection
-

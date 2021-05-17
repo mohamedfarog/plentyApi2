@@ -239,7 +239,6 @@
             margin: auto;
         }
     }
-
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 
@@ -270,52 +269,52 @@
 <!-- Tab links -->
 <section class="regular slider wholetabs">
     @if(isset($featured_products))
-        @foreach($featured_products as $product) 
-            <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
-                <div class="product-img frame">
+    @foreach($featured_products as $product)
+    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
+        <div class="product-img frame">
 
-                    @if ($product->image)
-                    <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
-                    @else
-                    <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
-                    @endif
+            @if ($product->image)
+            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+            @else
+            <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
+            @endif
 
-                    <div class="product-action clearfix">
-                    </div>
-                </div>
-                <div class="product-info clearfix">
-                    <div class="fix">
-                        <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
-                        <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
-                    </div>
-                    <div class="fix featlineicons">
-                        <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
-                        </span>
-                        <span class="pro-rating floatright">
-                            <img class="featicons" src="img/nav/bag.png" loading=lazy>
-                        </span>
-                    </div>
-                </div>
+            <div class="product-action clearfix">
             </div>
-        @endforeach
+        </div>
+        <div class="product-info clearfix">
+            <div class="fix">
+                <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
+                <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
+            </div>
+            <div class="fix featlineicons">
+                <span class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" loading=lazy>
+                </span>
+                <span class="pro-rating floatright">
+                    <img class="featicons" src="img/nav/bag.png" loading=lazy>
+                </span>
+            </div>
+        </div>
+    </div>
+    @endforeach
     @endif
 </section>
 
 <section class="wholetabs tabsshops">
     <div class="tab shoplistmobile" style="">
         @if(isset($shops))
-            @foreach($shops as $shop)
-                @if ($loop->first)
-                    <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-                        <img class="delicacy-shop-logo imgz" src="{{ $shop->style->header}}" style="max-height: 100%;">
-                    </button>
-                    @else
+        @foreach($shops as $shop)
+        @if ($loop->first)
+        <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
+            <img class="delicacy-shop-logo imgz" src="{{ $shop->style->header}}" style="max-height: 100%;">
+        </button>
+        @else
 
-                    <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
-                        <img class="delicacy-shop-logo" src="{{ $shop->style->header }}" style="max-height: 100%;">
-                    </button>
-                @endif
-            @endforeach
+        <button class="tablink activetab buttonmobile frame" onclick="shopname({{$shop->id}},'{{$shop->name_en}}','{{$shop->style->header}}')" id="shop{{$shop->id}}">
+            <img class="delicacy-shop-logo" src="{{ $shop->style->header }}" style="max-height: 100%;">
+        </button>
+        @endif
+        @endforeach
         @endif
     </div>
 </section>
@@ -431,7 +430,6 @@
         document.getElementById('breadcrumbshopname').style.color = secondary_color;
         document.getElementById('breadcrumbshopname').innerHTML = shop_name;
     });
-
 </script>
 
 <script>
@@ -459,12 +457,12 @@
 
     //for ing product based on category
     function getProducts(element, category = 0) {
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
-            type: 'GET'
-            , url: base_url + 'product-by-category/' + category
-            , dataType: 'JSON'
-            , success: function(data) {
+            type: 'GET',
+            url: base_url + 'product-by-category/' + category,
+            dataType: 'JSON',
+            success: function(data) {
                 if (data.length) {
                     renderProduct(data)
                     makeCategoryActive(element)
@@ -538,7 +536,6 @@
         });
         console.log('nohover');
     });
-
 </script>
 <script src="js/prodjs.js"></script>
 
