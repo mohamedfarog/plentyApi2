@@ -24,7 +24,9 @@ use App\Http\Controllers\WebsiteHomeController;
 
 Route::get('/',  [WebsiteHomeController::class, 'home']);
 Route::get('/home',  [WebsiteHomeController::class, 'home']);
-
+Route::get('/success',function(){
+    echo 'SUCCESS';
+});
 /*
 Route::get('/delicacy', function () {
     return view('/delicacy');
