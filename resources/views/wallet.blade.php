@@ -108,7 +108,7 @@
             </div>
             <div class="center wallet-balance">
                 <div style="margin-bottom:10px;">Wallet Balance</div>
-                <div>SAR<span style="font-size:30px;font-weight:900;margin-left:5px">78797</span> <img src="img/payment/plenty-pay-logo.png" width="30px" alt="plenty" style="position:relative;margin-top:-10px"> </div>
+                <div>SAR<span style="font-size:30px;font-weight:900;margin-left:5px">{{$user->wallet}}</span> <img src="img/payment/plenty-pay-logo.png" width="30px" alt="plenty" style="position:relative;margin-top:-10px"> </div>
             </div>
             <div class="center" style="margin-top:50x;">
                 <p style="color:white;text-align:center;font-size:18px;font-weight:600;">Top Up</p>

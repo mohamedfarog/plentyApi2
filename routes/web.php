@@ -109,9 +109,7 @@ Route::get('/success', function () {
     return view('/success');
 });
 
-Route::get('/wallet', function () {
-    return view('/wallet');
-});
+
 
 
 Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
@@ -139,6 +137,7 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/checkout', function () {
         return view('/checkout');
     });
+    Route::get('/wallet', [WebsiteHomeController::class, "wallet"]);
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);

@@ -837,4 +837,11 @@ class WebsiteHomeController extends Controller
             ->first();
         return view('bazaar')->with($data);
     }
+
+    public function wallet(Request $request)
+    {
+        $user = Auth::user();
+        $data['user'] = $user;
+        return view('wallet')->with($data);
+    }
 }
