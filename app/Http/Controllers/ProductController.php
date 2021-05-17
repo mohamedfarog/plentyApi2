@@ -138,8 +138,8 @@ class ProductController extends Controller
                                 $product->designer_id = $request->designer_id;
                             }
                             if (isset($request->sizes)) {
-                                Size::where('product_id', $request->productid)->delete();
-                                Color::where('product_id', $request->productid)->delete();
+                                Size::where('product_id', $request->id)->delete();
+                                Color::where('product_id', $request->id)->delete();
                                 foreach ($request->sizes as $size) {
                                     $arr = array();
                                     $arr['product_id'] = $product->id;
