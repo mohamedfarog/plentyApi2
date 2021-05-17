@@ -18,6 +18,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        return $request->all();
         return view('success')->with(['data'=>$request->all()]);
 
         // Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
