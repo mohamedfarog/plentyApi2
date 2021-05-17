@@ -18,7 +18,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        return redirect()->view('success');
+        return view('success');
 
         // Mail::send('testpayment', ["data" => $request->all()], function ($m)   {
            
