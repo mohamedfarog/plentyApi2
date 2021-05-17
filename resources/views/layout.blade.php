@@ -256,7 +256,7 @@
                                     <div class="nav-cart-outer">
                                         <div class="nav-cart-inner">
                                             <a href="/cart" class="nav-cart-icon">
-                                                <span class="nav-cart-badge">2</span>
+                                                <span class="nav-cart-badge"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -295,12 +295,12 @@
 
                                         </li> <!-- end elements -->
 
-                                        <li class="hidden-lg hidden-md"><a href="/profile">Profile</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/trackorder">Track Order</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/userlevel">User Level</a></li><br>
-                                        <li class="hidden-lg hidden-md"><a href="/login">Logout</a></li>
+                                        <li class="hidden-lg hidden-md" id="auth1"><a href="/profile">Profile</a></li><br>
+                                        <li class="hidden-lg hidden-md" id="auth2"><a href="/trackorder">Track Order</a></li><br>
+                                        <li class="hidden-lg hidden-md" id="auth3"><a href="/userlevel">User Level</a></li><br>
+                                        <li class="hidden-lg hidden-md" id="auth4"><a href="/login">Logout</a></li>
 
-                                        <li class="hidden-lg hidden-md"><a href="/login">Login</a></li>
+                                        <li class="hidden-lg hidden-m" id="no-auth1"><a href="/login">Login</a></li>
 
 
                                         <!-- Mobile search -->
@@ -1019,13 +1019,22 @@
 
 
         function userIsAuthenticated() {
+            console.log("not authenticated!")
             document.getElementById('user-menu-nav').style = " display: block;";
             document.getElementById('nav-username').innerHTML = getUserDetails().name;
-
+            document.getElementById('auth1').style = " display: block;";
+            document.getElementById('no-auth1').style = " display: none;";
         }
 
         function userIsNotAuthenticated() {
+            console.log("not authenticated!")
             document.getElementById('user-menu-nav').style = " display: none;";
+            document.getElementsByClassName("on-auth").style = " display: none;";
+            document.getElementById('auth1').style = " display: none;";
+            document.getElementById('auth2').style = " display: none;";
+            document.getElementById('auth3').style = " display: none;";
+            document.getElementById('auth4').style = " display: none;";
+            document.getElementById('no-auth1').style = " display: block;";
         }
 
         function getUser() {
