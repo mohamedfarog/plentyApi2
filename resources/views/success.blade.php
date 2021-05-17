@@ -2,6 +2,9 @@
 @section('content')
 
 
+@php
+var_dump($data);
+@endphp
 <div class="container" style="display: flex;
   justify-content: center;
   align-items: center;height: 50rem;
