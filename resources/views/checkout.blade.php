@@ -850,8 +850,10 @@
 
             success: function(data) {
                 if (data.Response.original.success) {
-
-                    console.log(data);
+                    if (data.Response.original.message.original) {
+                        const transaction_url = data.Response.original.message.original.transaction.url;
+                        window.location.replace(transaction_url);
+                    }
                     showAlertSuccess(data.Response.original.message);
                     storeCartLocal("");
                     renderOrderedProduct();
