@@ -51,7 +51,7 @@ class ProductController extends Controller
                 $shop = ShopInfo::where('user_id', $user->id)->first();
                 if (!$shop)
                     return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-                return Product::where('deleted_at', null)->where("shop_id", $shop->id)->with(['sizes'=>function($sizes){
+                return Product::where('deleted_at', null)->where("shop_id", $shop->id)->with(['sizes' => function ($sizes) {
                     return $sizes->with(['color']);
                 }, 'colors', 'addons', 'images', 'designer'])->paginate();
                 break;
@@ -201,12 +201,13 @@ class ProductController extends Controller
                             $arr = array();
                             $arr['product_id'] = $product->id;
                             $arr['value'] = $size['value'];
-                            if(isset($size['others'])){
+                            if (isset($size['others'])) {
                                 $arr['others'] = $size['others'];
-
                             }
                             $arr['price'] = $size['price'];
-                            $arr['stocks'] = $size['stocks'];
+                            if (isset($size['stocks'])) {
+                                $arr['stocks'] = $size['stocks'];
+                            }
                             if (isset($size['image']) && $size['image'] != null) {
                                 $arr['image'] = $helper->store($size['image']);
                             }
@@ -557,13 +558,11 @@ class ProductController extends Controller
                 } else {
                     if (($requestproduct['color'] == -1)  && ($requestproduct['size'] != -1)) {
                         $size = Size::find($requestproduct['size']);
-                        if($size->stocks != null){
-                        if ($size->stocks >= $requestproduct['qty']) {
-                                            array_push($arr, ["id" => $requestproduct['id'], "stock" => $size->stocks]);
-                                        }
-
+                        if ($size->stocks != null) {
+                            if ($size->stocks >= $requestproduct['qty']) {
+                                array_push($arr, ["id" => $requestproduct['id'], "stock" => $size->stocks]);
+                            }
                         }
-                        
                     }
 
                     if (($requestproduct['color']  == -1) && ($requestproduct['size'] == -1)) {
