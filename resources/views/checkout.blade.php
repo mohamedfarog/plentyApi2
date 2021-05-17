@@ -854,10 +854,9 @@
                         const transaction_url = data.Response.original.message.original.transaction.url;
                         window.location.replace(transaction_url);
                     }
-                    showAlertSuccess(data.Response.original.message);
                     storeCartLocal("");
-                    renderOrderedProduct();
                     renderNavCart();
+                    window.location.replace($('meta[name=base_url]').attr('content') + "success");
                 }
             },
             error: function(err) {
@@ -962,7 +961,6 @@
                 },
 
                 success: function(data) {
-                    console.log(data)
                     if (data.Response) {
                         document.getElementById('plenty-balance').value = data.wallet;
                     } else {

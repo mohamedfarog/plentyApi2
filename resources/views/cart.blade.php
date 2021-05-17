@@ -134,6 +134,25 @@
         .chkbtn {
             width: 100%;
         }
+
+        #check-button {
+            width: 100%;
+            margin-top: 10px;
+
+        }
+    }
+
+    #check-button {
+        background-color: #001b71;
+        color: white;
+        height: 46px;
+    }
+
+
+    #check-button:hover {
+        background-color: white;
+        border: 1px solid #001b71;
+        color: #001b71;
     }
 </style>
 
@@ -182,9 +201,11 @@
 
 
                                 <a href="/brands" class="btn btn-lg  chkbtn zzbtnproc" style="border: 1px solid #001b71;"><span class="proceedbtn" style="">add item</span></a>
-                                <div class="wc-proceed-to-checkout checkoutbtn" style="margin-left:0;">
-                                    <a onclick="proceedCheckout()" class="btn btn-lg btn-dark chkbtn procchks"><span class="proceedbtnz">proceed to checkout</span></a>
-                                </div>
+
+                                <a onclick="proceedCheckout()" id="check-button" class="btn btn-lg">
+                                    <div style="line-height:50px;">proceed to checkout</div>
+                                </a>
+
                             </div>
                         </div>
                     </div>
