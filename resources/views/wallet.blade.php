@@ -19,7 +19,7 @@
 
     .plenty-pay-wrapper {
         padding-top: 100px;
-        background-color: #151d4c;
+        background-image: linear-gradient(#252f65, #151d4c);
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         border-bottom-left-radius: 35%;
