@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
+    <meta name="api_base_url" content="https://plentyapp.mvp-apps.ae/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -941,7 +942,7 @@
         }
 
         function getFavouriteProductInfo(id) {
-            var base_url = $('meta[name=base_url]').attr('content');
+            var base_url = $('meta[name=api_base_url]').attr('content');
             $.ajax({
                 type: 'GET',
                 url: base_url + 'favourite-product/' + id,
@@ -1029,7 +1030,7 @@
 
         function getUser() {
             const bearer_token = getCookie('bearer_token');
-            var base_url = $('meta[name=base_url]').attr('content');
+            var base_url = $('meta[name=api_base_url]').attr('content');
             if (bearer_token) {
                 url = base_url + 'user'
                 $.ajax({
@@ -1126,7 +1127,7 @@
 
         $(document).ready(function() {
 
-            var base_url = $('meta[name=base_url]').attr('content');
+            var base_url = $('meta[name=api_base_url]').attr('content');
             let cart = new Cart()
             $.ajax({
                 type: 'GET',

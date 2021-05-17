@@ -85,7 +85,6 @@
         width: 100%;
         padding: 5px;
     }
-
 </style>
 <section class="page-title text-center bg-light">
     <div class="container relative clearfix">
@@ -201,7 +200,6 @@
         background: white;
 
     }
-
 </style>
 <script>
     $(document).ready(function() {
@@ -239,31 +237,29 @@
 
     function submitCareer(e) {
         const form = new FormData(e)
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
-            type: 'POST'
-            , url: base_url + 'career-contact'
-            , enctype: 'multipart/form-data'
-            , processData: false
-            , contentType: false
-            , cache: false
-            , timeout: 600000
-            , data: form
-            , success: function(data) {
+            type: 'POST',
+            url: base_url + 'career-contact',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            data: form,
+            success: function(data) {
                 if (data.Response.status === true) {
                     msg = 'Thank you, your request has been received';
                     document.getElementById('msgsent').style.color = "green"
                     document.getElementById('msgsent').innerText = msg
                 }
-            }
-            , error: function(err) {
+            },
+            error: function(err) {
                 msg = 'Please, try again!';
                 document.getElementById('msgsent').style.color = "red"
                 document.getElementById('msgsent').innerText = msg
             }
         });
     }
-
 </script>
 @endsection
-

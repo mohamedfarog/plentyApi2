@@ -461,7 +461,7 @@
 
     //for filtering product based on category
     function getProducts(element, category = 0) {
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
             type: 'GET',
             url: base_url + 'product-by-category/' + category,

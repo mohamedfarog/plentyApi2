@@ -674,7 +674,7 @@ class WebsiteHomeController extends Controller
                 'product_id' => $item['id'],
                 'shop_id' => $item['shop_id'],
                 'price' => $item['price'],
-                'color_id' => $item['color'],
+                'color_id' => $item['color_id'],
                 'size_id' => $item['size_id'],
                 'booking_date' => $item['date'],
                 'booking_time' => $item['time'],
@@ -684,12 +684,13 @@ class WebsiteHomeController extends Controller
         }
 
         $pay_mode = 'CASH';
-        if (!$cart["is_cash_on_delivery"]) {
+
+        if ($cart["is_cash_on_delivery"] == "false") {
             $pay_mode = 'CARD';
         }
 
         $total_amount = $this->calculateTotalPrice($items);
-        if (!isset($cart["plenty_pay"])) {
+        if (!$cart["plenty_pay"]) {
             $cart["plenty_pay"] = 0;
         }
 
