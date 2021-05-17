@@ -211,23 +211,56 @@ class ProductController extends Controller
                             if (isset($size['image']) && $size['image'] != null) {
                                 $arr['image'] = $helper->store($size['image']);
                             }
-
-                            $sizequery = Size::create($arr);
+                            $sizes = Size::create($arr);
+    
+                            if (isset($size['color'])) {
+                                foreach ($size['color'] as $color) {
+                                    $arr = array();
+                                    $arr['product_id'] = $product->id;
+                                    $arr['value'] = $color['value'];
+                                    if (isset($color['others'])) {
+                                        $arr['others'] = $color['others'];
+                                    }
+                                    $arr['stock'] = $color['stock'];
+                                    $arr['size_id'] = $sizes->id;
+                                    $color = Color::create($arr);
+                                }
+                            }
                         }
                     }
-                    if (isset($request->colors)) {
-                        foreach ($request->colors as $color) {
-                            $arr = array();
-                            $arr['product_id'] = $product->id;
-                            $arr['value'] = $color['value'];
-                            $arr['others'] = $color['others'];
-                            $arr['stock'] = $color['stock'];
-                            $arr['size_id'] = $sizequery->id;
+
+                    // if (isset($request->sizes)) {
+                    //     foreach ($request->sizes as $size) {
+                    //         $arr = array();
+                    //         $arr['product_id'] = $product->id;
+                    //         $arr['value'] = $size['value'];
+                    //         if (isset($size['others'])) {
+                    //             $arr['others'] = $size['others'];
+                    //         }
+                    //         $arr['price'] = $size['price'];
+                    //         if (isset($size['stocks'])) {
+                    //             $arr['stocks'] = $size['stocks'];
+                    //         }
+                    //         if (isset($size['image']) && $size['image'] != null) {
+                    //             $arr['image'] = $helper->store($size['image']);
+                    //         }
+
+                    //         $sizequery = Size::create($arr);
+                    //     }
+                    // }
+                    // if (isset($request->colors)) {
+                    //     foreach ($request->colors as $color) {
+                    //         $arr = array();
+                    //         $arr['product_id'] = $product->id;
+                    //         $arr['value'] = $color['value'];
+                    //         $arr['others'] = $color['others'];
+                    //         $arr['stock'] = $color['stock'];
+                    //         $arr['size_id'] = $sizequery->id;
 
 
-                            $sizes = Color::create($arr);
-                        }
-                    }
+                    //         $sizes = Color::create($arr);
+                    //     }
+                    // }
                     if (isset($request->addons)) {
                         foreach ($request->addons as $addon) {
                             $arr = array();
