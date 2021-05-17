@@ -856,7 +856,7 @@
                     }
                     storeCartLocal("");
                     renderNavCart();
-                    window.location.replace($('meta[name=base_url]').attr('content') + "success");
+                    //window.location.replace($('meta[name=base_url]').attr('content') + "success");
                 }
             },
             error: function(err) {
