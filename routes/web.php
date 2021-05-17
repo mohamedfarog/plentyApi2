@@ -109,6 +109,11 @@ Route::get('/success', function () {
     return view('/success');
 });
 
+Route::get('/wallet', function () {
+    return view('/wallet');
+});
+
+
 Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
 Route::get('/favourites', function () {
     return view('/favourite');

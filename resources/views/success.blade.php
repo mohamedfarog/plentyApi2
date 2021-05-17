@@ -17,7 +17,11 @@
             </svg>
         </div>
         <h3 style="text-align:center;margin-top:10px"><span>Thank you for your time.</span></h3>
+        @if(isset($data))
         <h4 style="text-align:center;"><span>payment sent successfully !</span></h4>
+        @else
+        <h4 style="text-align:center;"><span>Order sent successfully!</span></h4>
+        @endif
         <hr>
         <div style="display: flex;
   justify-content: center;"><img src="img/logo_dark.png" style='width:100px' /></div>
