@@ -22,9 +22,10 @@
         background-color: #151d4c;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
-        border-bottom-left-radius: 40%;
-        border-bottom-right-radius: 40%;
+        border-bottom-left-radius: 35%;
+        border-bottom-right-radius: 35%;
         position: relative;
+        padding-bottom: 50px;
     }
 
     .add-balance {
@@ -34,10 +35,22 @@
         display: block;
         background-color: white;
         border-radius: 10px;
-        padding: 10px 40px;
+        padding: 10px 50px;
         font-weight: 600;
         color: #001b71;
 
+    }
+
+    .redeem-point {
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        margin: auto;
+        display: block;
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        color: #001b71;
     }
 
     .center {
@@ -66,20 +79,32 @@
         text-align: center;
         font-weight: 700;
         font-size: 22px;
-        height: 60px;
+        height: 50px;
     }
 
     #topup:focus {
         color: #151d4c;
         background-color: white;
     }
+
+    .redeem {
+        position: absolute;
+        right: 20px;
+        top: 15px
+    }
+
+    @media only screen and (max-width: 700px) {
+        .redeem {
+            right: 120px;
+        }
+    }
 </style>
 
 <div class="parent">
     <div class="child">
         <div class="plenty-pay-wrapper">
-            <div style="position:absolute;right:20px;top:30px">
-                <button class="add-balance"><i class="fas fa-gift" style="margin-right:5px;"></i>Redeem Gift</button>
+            <div class="redeem">
+                <button class="redeem-point"><i class="fas fa-gift" style="margin-right:5px;"></i>Redeem Gift</button>
             </div>
             <div class="center wallet-balance">
                 <div style="margin-bottom:10px;">Wallet Balance</div>
@@ -91,13 +116,49 @@
             </div>
         </div>
         <div>
-            <button class="add-balance" style="position:relative;margin-top:-18px;">Add Balance</button>
+            <button class="add-balance" style="position:relative;margin-top:-18px;" onclick="addPlentyBalance()">Add Balance</button>
         </div>
     </div>
 </div>
 
-
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
 </div>
+
+<script>
+    function addPlentyBalance() {
+        const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=api_base_url]').attr('content');
+        url = base_url + 'wallet/topup'
+        const topup = $("#topup").val();
+        if (parseInt(topup) > 0) {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "amount": topup
+                },
+                headers: {
+                    "Authorization": 'Bearer ' + bearer_token
+                },
+
+                success: function(data) {
+
+                },
+                error: function(err) {
+
+                    console.log('Error!', err)
+                }
+
+            });
+        } else {
+            console.log("error!")
+        }
+
+
+    }
+</script>
+
 @endsection
