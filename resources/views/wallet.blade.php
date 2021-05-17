@@ -145,6 +145,18 @@
                 },
 
                 success: function(data) {
+                    if (data.success) {
+                        if (data.Response.original.message.original) {
+                            const transaction_url = data.Response.original.message.original.transaction.url;
+                            window.location.replace(transaction_url);
+                            storeCartLocal("");
+                            renderNavCart();
+                        } else {
+                            storeCartLocal("");
+                            renderNavCart();
+                            window.location.replace($('meta[name=base_url]').attr('content') + "success");
+                        }
+                    }
 
                 },
                 error: function(err) {
