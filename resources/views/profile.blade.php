@@ -203,7 +203,7 @@
                                         <h3 class="norm-text">My Wallet:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text" style="text-decoration: underline;">view details</h2>
+                                        <h2 class="norm-text" style="text-decoration: underline;"> <a href="/wallet">view details</a> </h2>
                                     </div>
                                 </div>
                             </div>
