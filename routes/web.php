@@ -105,6 +105,10 @@ Route::get('/careers', function () {
     return view('/careers');
 });
 
+Route::get('/success', function () {
+    return view('/success');
+});
+
 Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
 Route::get('/favourites', function () {
     return view('/favourite');
