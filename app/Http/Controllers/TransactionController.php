@@ -48,10 +48,10 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
-        Mail::send('datadata', ['data' => $request->all()], function ($m) {
+        Mail::send('datadata', ['data' => $request->all], function ($m) {
             $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
 
-            $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
         });
         
         
@@ -63,28 +63,26 @@ class TransactionController extends Controller
                 $transaction= Transaction::find($transactionid);
                 $transaction->status=1;
                 $transaction->save();
-                // if(strlen($orderid>20)){
-                //     $user= User::find($transaction->user_id);
-                //     $user->wallet+= $transaction->amount;
-                //     $user->save();
+                if($orderid==0){
+                    $user= User::find($transaction->user_id);
+                    $user->wallet+= $transaction->amount;
+                    $user->save();
 
                    
-                // }
-                // else{
+                }
+                else{
                     $order= Order::find($orderid);
                     $order->order_status=0;
                     $order->save(); 
                     
-                // }
+                }
                 
 
 
             }
         }
         else{
-            $user= User::find($transaction->user_id);
-            $user->wallet+= $transaction->amount;
-            $user->save();
+
         }
 
     }
