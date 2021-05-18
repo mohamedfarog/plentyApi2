@@ -24,6 +24,7 @@ use App\Http\Controllers\WebsiteHomeController;
 
 Route::get('/',  [WebsiteHomeController::class, 'home']);
 Route::get('/home',  [WebsiteHomeController::class, 'home']);
+Route::resource('success', TransactionController::class);
 
 /*
 Route::get('/delicacy', function () {
@@ -105,9 +106,9 @@ Route::get('/careers', function () {
     return view('/careers');
 });
 
-Route::get('/success', function () {
-    return view('/success');
-});
+// Route::get('/success', function () {
+//     return view('/success');
+// });
 
 Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
 Route::get('/favourites', function () {
