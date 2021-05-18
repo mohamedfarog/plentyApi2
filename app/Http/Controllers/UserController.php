@@ -549,7 +549,7 @@ class UserController extends Controller
                         });
 
                     }
-                    $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id,true);
+                    $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
                     return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $authuser]);
                 
                 // $user->wallet += $request->amount;
