@@ -296,6 +296,9 @@ class OrderController extends Controller
             if (isset($request->contact_number)) {
                 $data['contact_number'] = $request->contact_number;
             }
+            if (isset($request->wallet)) {
+                $data['wallet'] = $request->wallet;
+            }
             if (isset($request->city)) {
                 $data['city'] = $request->city;
             }

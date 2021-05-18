@@ -218,6 +218,9 @@ class TableBookingController extends Controller
             if (isset($request->coupon_value)) {
                 $data->coupon_value = $request->coupon_value;
             }
+            if (isset($request->wallet)) {
+                $data->wallet = $request->wallet;
+            }
             if (isset($request->coupon_code)) {
                 $data->coupon_code = $request->coupon_code;
             }

@@ -9,7 +9,7 @@ class TableBooking extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ref', 'date', 'preftime', 'table_id', 'status', 'amount_due','total_amount','coupon_value','points'
+        'ref', 'date','wallet', 'preftime', 'table_id', 'status', 'amount_due','total_amount','coupon_value','points'
     ];
     public function details()
     {

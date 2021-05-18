@@ -219,6 +219,7 @@
     <div class="txtTinyMce-wrapper" style="font-size: 14px; line-height: 1.5; color: #ffffff; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 21px;">
     <p style="font-size: 14px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 21px; margin: 0;">Amount Due:</p>
     <p style="font-size: 14px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 21px; margin: 0;"><strong>{{$data->amount_due}} AED</strong></p>
+
     </div>
     </div>
     <!--[if mso]></td></tr></table><![endif]-->
@@ -522,7 +523,12 @@
     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
     <div style="color:#ffffff;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;line-height:1.8;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
     <div class="txtTinyMce-wrapper" style="font-size: 14px; line-height: 1.8; color: #ffffff; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 25px;">
-    <p style="font-size: 16px; line-height: 1.8; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;"><span style="font-size: 16px;">Subtotal:<strong> {{$data->amount_due}}</strong></span><br><span style="font-size: 16px;">Delivery Charge:<strong> {{$data->delivery_charge}}</strong></span></p>
+    <p style="font-size: 16px; line-height: 1.8; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;"><span style="font-size: 16px;">Subtotal:<strong> {{$data->amount_due}}</strong></span><br><span style="font-size: 16px;">Delivery:<strong> {{$data->delivery_charge}}</strong></span>
+    <br>
+
+    @if($data->coupon_value>0)<span style="font-size: 16px;">Coupon:<strong> {{$data->coupon_value}}</strong></span>@endif
+<br> @if($data->wallet>0) <span style="font-size: 16px;">Wallet:<strong> {{$data->wallet}}</strong></span>@endif
+</p>
     </div>
     </div>
     <!--[if mso]></td></tr></table><![endif]-->
