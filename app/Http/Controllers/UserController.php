@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Thenextweb\Definitions\StoreCard;
@@ -541,6 +542,11 @@ class UserController extends Controller
                     $trans->save();
                     if(isset($request->web)){
                         $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id,true);
+                        Mail::send('datadata', ['data' => $paygateway], function ($m) {
+                            $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
+                
+                            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+                        });
 
                     }
                     $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id,true);
