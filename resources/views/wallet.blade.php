@@ -139,7 +139,7 @@
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "amount": topup,
-                    "web": true
+                    "web": "1"
                 },
                 headers: {
                     "Authorization": 'Bearer ' + bearer_token

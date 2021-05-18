@@ -711,7 +711,7 @@ class WebsiteHomeController extends Controller
             'points' => $cart["loyality_point"],
             'wallet' =>  $cart["plenty_pay"],
             'coupon_value' => $cart["coupon_value"],
-            'web' => true,
+            'web' => "1",
             'orderdetails' => $items,
 
         ]);
