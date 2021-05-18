@@ -537,7 +537,7 @@ class UserController extends Controller
                     $trans->ref = Str::uuid();
                     $trans->order_id =  Str::uuid();
                     $trans->status = 0;
-                    $trans->type = 'Order';
+                    $trans->type = 'Wallet';
                     $trans->user_id= $authuser->id;
                     $trans->save();
                     if(isset($request->web)){
