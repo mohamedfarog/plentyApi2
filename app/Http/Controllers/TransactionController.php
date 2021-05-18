@@ -49,9 +49,9 @@ class TransactionController extends Controller
     {
 
         Mail::send('datadata', ['data' => $request->all], function ($m) {
-            $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
+            $m->from('info@mvp-apps.ae', 'PLENTY WALLET TEST');
 
-            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+            $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
         });
         
         
