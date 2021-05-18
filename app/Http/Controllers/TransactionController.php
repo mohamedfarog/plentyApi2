@@ -63,26 +63,28 @@ class TransactionController extends Controller
                 $transaction= Transaction::find($transactionid);
                 $transaction->status=1;
                 $transaction->save();
-                if(strlen($orderid>20)){
-                    $user= User::find($transaction->user_id);
-                    $user->wallet+= $transaction->amount;
-                    $user->save();
+                // if(strlen($orderid>20)){
+                //     $user= User::find($transaction->user_id);
+                //     $user->wallet+= $transaction->amount;
+                //     $user->save();
 
                    
-                }
-                else{
+                // }
+                // else{
                     $order= Order::find($orderid);
                     $order->order_status=0;
                     $order->save(); 
                     
-                }
+                // }
                 
 
 
             }
         }
         else{
-
+            $user= User::find($transaction->user_id);
+            $user->wallet+= $transaction->amount;
+            $user->save();
         }
 
     }
