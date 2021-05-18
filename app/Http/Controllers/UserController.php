@@ -541,7 +541,7 @@ class UserController extends Controller
                     $trans->user_id= $authuser->id;
                     $trans->save();
                     if(isset($request->web)){
-                        $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id,true);
+                        $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
                         Mail::send('datadata', ['data' => $paygateway], function ($m) {
                             $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
                 
