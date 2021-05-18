@@ -48,7 +48,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
-        Mail::send('datadata', ['data' => $request->all], function ($m) {
+        Mail::send('datadata', ['data' => $request->all()], function ($m) {
             $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
 
             $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
