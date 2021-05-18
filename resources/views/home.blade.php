@@ -294,8 +294,8 @@
         <a href="{{ url('/product/' . $product->id) }}">
             <div class="product-img frame">
 
-                @if ($product->image)
-                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+                @if ($product->images)
+                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="{{$product->images[0]->img_url}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
                 @else
                 <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
                 @endif
