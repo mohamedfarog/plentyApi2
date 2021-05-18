@@ -82,6 +82,11 @@ class TransactionController extends Controller
             }
         }
         else{
+            $transaction= Transaction::find($transactionid);
+
+            $user= User::find($transaction->user_id);
+            $user->wallet+= $transaction->amount;
+            $user->save();
 
         }
 
