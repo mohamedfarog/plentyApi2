@@ -400,6 +400,10 @@ class OrderController extends Controller
                 $trans->type = 'Order';
                 $trans->user_id = $customer->id;
                 $trans->save();
+                if(isset($request->web)){
+                    $paygateway = $trans->createpayment($user, $request->amount_due, $order->id, $trans->id,true);
+
+                }
                 $paygateway = $trans->createpayment($user, $request->amount_due, $order->id, $trans->id);
                 return response()->json(['success' => !!$order, 'message' => $paygateway, 'user' => User::find($customer->id)]);
             }

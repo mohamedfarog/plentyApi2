@@ -10,7 +10,7 @@ use Moathdev\Tap\Facades\Tap;
 class Transaction extends Model
 {
     use HasFactory;
-    public function createpayment($user, $amount,$orderid,$transid)
+    public function createpayment($user, $amount,$orderid,$transid,$web=false)
     {
         
         $user = Auth::user();
@@ -61,10 +61,10 @@ class Transaction extends Model
                 'id' => 'src_all',
             ],
             'post' => [
-                'url' => 'https://plentyapp.mvp-apps.ae/api/success'
+                'url' => $web? 'https://plentyapp.mvp-apps.ae/success'  :'https://plentyapp.mvp-apps.ae/api/success'
             ],
             'redirect' => [
-                'url' => 'https://plentyapp.mvp-apps.ae/api/success'
+                'url' => $web? 'https://plentyapp.mvp-apps.ae/success'  :  'https://plentyapp.mvp-apps.ae/api/success'
             ]
         ]);
         
