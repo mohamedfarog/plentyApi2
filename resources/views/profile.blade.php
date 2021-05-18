@@ -83,9 +83,10 @@
 </style>
 
 <section style="text-align:center;">
-    <img src="img/profile/profilepic.png" style="width:100px;margin-bottom:20px;">
-
-    <h1 style="font-weight:100">Welcome,
+    <!--
+    <img src="img/logo_dark.png" style="width:100px;margin-bottom:20px;">
+    -->
+    <h1 style="font-weight:100;margin-top:100px">Welcome,
         @if($user->name)
         <span style="font-weight:400;font-family:'Avenir Bold'">{{$user->name}}</span>
         @endif
@@ -203,7 +204,7 @@
                                         <h3 class="norm-text">My Wallet:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text" style="text-decoration: underline;">view details</h2>
+                                        <h2 class="norm-text" style="text-decoration: underline;"> <a href="/wallet">view details</a> </h2>
                                     </div>
                                 </div>
                             </div>

@@ -44,7 +44,6 @@
             width: 100%;
         }
     }
-
 </style>
 
 
@@ -142,7 +141,11 @@
                 @foreach($products as $product)
 
                 <div class="producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6 " style="margin-bottom:30px;">
-                    <div class="product-img frame"><a href="product/{{$product->id}}"><img src="storage/products/{{$product->image}}" alt="" loading="lazy" class="imgz"></a>
+                    <div class="product-img frame"><a href="product/{{$product->id}}">
+                            @if($product->images)
+                            <img src="{{$product->images[0]->img_url}}" alt="" loading="lazy" class="imgz">
+                            @endif
+                        </a>
                         <div class="fix buttonsshow" style="visibility: visible;"><span class="pro-price "><img class="featicons" src="img/nav/bag.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span>
                             <span class="pro-rating "><img class="featicons" src="img/nav/search.png" loading="lazy" style="width:25px;min-width:25px;filter: brightness(0) invert(1);"></span></div>
                         <div class="product-action clearfix"></div>
@@ -242,7 +245,6 @@
             }
         }
     });
-
 </script>
 <div style="border-top: 2px solid #b2bad4;margin-top: 30px;">
     @include('footer')
