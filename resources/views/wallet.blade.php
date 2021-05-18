@@ -138,7 +138,8 @@
                 dataType: 'JSON',
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "amount": topup
+                    "amount": topup,
+                    "web": true
                 },
                 headers: {
                     "Authorization": 'Bearer ' + bearer_token
