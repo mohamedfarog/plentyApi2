@@ -256,7 +256,7 @@
                                     <div class="nav-cart-outer">
                                         <div class="nav-cart-inner">
                                             <a href="/cart" class="nav-cart-icon">
-                                                <span class="nav-cart-badge"></span>
+                                                <span class="nav-cart-badge"><span id="nav-cart-size2"></span></span>
                                             </a>
                                         </div>
                                     </div>
@@ -863,6 +863,7 @@
 
             }
             $('#nav-cart-size').html(cart.cart_items.length)
+            $('#nav-cart-size2').html(cart.cart_items.length)
             $('#nav-cart-products').html(template)
             $('#nav-cart-total').html(cart.subTotal() + ' SAR')
         }

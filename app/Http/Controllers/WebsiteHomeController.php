@@ -443,7 +443,10 @@ class WebsiteHomeController extends Controller
 
     public function booking(Request $request, $id)
     {
-        $data['product'] = $this->getProduct($id)->first();
+        $products = Product::where('id', $id)
+            ->with(['images'])
+            ->get()->first();
+        $data['product'] = $products;
         $data['style'] = $this->getStyle($data['product']->shop_id);
         $data['shop'] = $this->getShop($data['product']->shop_id);
         return view('/booking')->with($data);

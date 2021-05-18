@@ -117,6 +117,20 @@
         border: 5px solid #fff;
         padding: 1px;
     }
+
+    @media only screen and (max-width: 1024px) {
+        #padding-product-details {
+            margin-top: 230px;
+        }
+
+        #padding-product-details img {
+            margin-right: 10px;
+        }
+    }
+
+    .slick-slide {
+        margin: 0px 10px;
+    }
 </style>
 <link rel="stylesheet" href="css/hurst.css">
 @if(isset($style))
@@ -151,121 +165,149 @@
     <div class="container contmobile" style="background-color:#f2f3f8">
         <div class="row shop-list single-pro-info no-sidebar">
             <!-- Single-product start -->
-            <div class="col-lg-12" style="padding:0;">
-                <div class="single-product clearfix" style="background-color:#f2f3f8;padding: 10px;">
-                    <!-- Single-pro-slider Big-photo start -->
-                    <div class="col-lg-4">
-                        <div class="single-pro-slider single-big-photo view-lightbox slider-for frame" style="width:100% !important">
-                            <div>
-                                <div class="frame">
-                                    @if ($product->images)
-                                    <img class="imgz" src="{{$product->images[0]->imgurl}}" alt="" loading=lazy />
-                                    @else
-                                    <img class="imgz" src="img/product/Main.png" alt="" loading=lazy />
-                                    @endif
-                                </div>
-                                <div class="fix featlineicons">
-                                    <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Single-pro-slider Big-photo end -->
-                    <div class="product-info mt-50" style="padding:0 15px">
-                        <div class="fix">
-                            <h4 class="post-title floatleft" style="font-size:24px;font-weight:bolder;line-height:200%;font-family:'Avenir';color:black;">
-                                {{$product->name_en}}</h4>
-                        </div>
-                        <div class="fix mb-30">
-                            @if($sizes->count())
-                            <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
-                                {{$sizes->first()->price}}</span>
-                            @else
-                            <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
-                                {{$product->price}}</span>
-                            @endif
-                        </div>
-                        <div class="product-description">
-                            <p style="font-size:18px;color:black;"> {{$product->desc_en}}</p>
-                        </div>
-                        <!-- color start -->
-
-                        <!-- color end -->
-                        <!-- Size start -->
-                        <span class="color-title text-capitalize mb-20" style="font-size:18px;text-transform:uppercase">size</span>
-                        <form id="product-form">
-                            <input type="hidden" id="name" name="name" value="{{$product->name_en}}">
-                            <input type="hidden" id="shop_id" name="shop_id" value="{{$product->shop_id}}">
-                            <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
-                            @if(isset($product->images[0]))
-                            <input type="hidden" id="image_url" name="image_url" value="{{$product->images[0]->imgurl}}">
-                            @endif
-                            @if($shop->cat_id)
-                            <input type="hidden" id="cat_id" name="cat_id" value="{{$shop->cat_id}}">
-                            @endif
-                            @if($product->sizes->count())
-                            <input type="hidden" id="size_id" name="size_id" value="{{$product->sizes->first()->id}}">
-                            <input type="hidden" id="size" name="size" value="{{$product->sizes->first()->value}}">
-                            <input type="hidden" id="price" name="price" value="{{$product->sizes->first()->price}}">
-                            <input type="hidden" id="stock" name="stock" value="{{$product->sizes->first()->stocks}}">
-                            <input type="hidden" id="is_product_variant" name="is_product_variant" value=true>
-                            @if($product->colors->count())
-                            <input type="hidden" id="color_id" name="color_id" value="{{$product->colors->first()->id}}">
-                            @else
-                            <input type="hidden" id="color_id" name="color_id">
-                            @endif
-                            <input type="hidden" id="color" name="color">
-                            <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
-                                <ul>
-                                    <select name="sizes" id="sizes" onchange="changePriceOnSize({{$product->sizes}},{{$product->colors}})">
-                                        @foreach($product->sizes as $size)
-                                        @if ($loop->first)
-                                        <option value="{{$size->id}}" selected>{{$size->value }}</option>
-                                        @else
-                                        <option value="{{$size->id}}">{{$size->value }}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
-                                </ul>
-                            </div>
-                            <div id="color-section"></div>
-
-                            @else
-
-                            <input type="hidden" id="price" name="price" value="{{$product->price}}">
-                            <input type="hidden" id="stock" name="stock" value="{{$product->stocks}}">
-                            @endif
-                            <div class="clearfix">
-                                <div class="cart-plus-minus" style="width:50%;background:#e1e0e5;">
-                                    <div class="dec qtybutton" onclick="substractQuantity()">-</div>
-                                    <input type="text" id="quantity" value="1" name="quantity" class="cart-plus-minus-box" style="background: #e1e0e5 none repeat scroll 0 0;">
-                                    <div class="inc qtybutton" onclick="addQuantity()">+</div>
+            <div class="single-product clearfix" style="background-color:#f2f3f8;padding: 10px;">
+                <!-- Single-pro-slider Big-photo start -->
+                <div class="col-lg-4">
+                    <div class="single-pro-slider single-big-photo view-lightbox slider-for frame" style="width:100% !important">
+                        <div>
+                            @if ($product->images)
+                            @if ($product->images->count()>1)
+                            <div class="product-image-section">
+                                <div class="product-image-content clearfix">
+                                    <div class="product-image-slider">
+                                        <div class="slider-for">
+                                            @foreach($product->images as $img)
+                                            <div class="slider-banner-image">
+                                                <img class="imgz" src="{{$img->imgurl}}" style="max-width:200px" alt="product image">
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="slider-nav thumb-image">
+                                            @foreach($product->images as $img)
+                                            <div class="thumbnail-image">
+                                                <div class="thumbImg">
+                                                    <img src="{{$img->imgurl}}" style="max-width:80px" alt="product image">
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="stock-error" id="stock-error">
-
-                                Out of stock
-
+                            @else
+                            <div class="frame">
+                                <img class="imgz" src="{{$product->images[0]->imgurl}}" alt="" loading=lazy />
                             </div>
-                            <!-- Size end -->
-                            <div style="height:30px;">
-                            </div>
-                            <div class="centermobile" style="margin-top:30px;">
-                                <a class=" addtobagbtn" onclick="addProductBag()">
-                                    <span class="addtobagheader" style="padding-top:10px !important;">
-                                        Add to Bag
-                                    </span>
-                                    <img src="img/product/bag.png" style="width:30px;margin-left:10px;">
 
-                                </a>
+                            @endif
+
+                            @else
+                            <img class="imgz" src="img/product/Main.png" alt="" loading=lazy />
+                            @endif
+
+                            <div class="fix featlineicons">
+                                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
+                                </span>
                             </div>
-                        </form>
-                        <!-- Single-pro-slider Small-photo end -->
+                        </div>
                     </div>
                 </div>
+
+                <!-- Single-pro-slider Big-photo end -->
+                <div class="col-lg-4 product-info mt-50" id="padding-product-details" style="padding:0 15px">
+                    <div class="fix">
+                        <h4 class="post-title floatleft" style="font-size:24px;font-weight:bolder;line-height:200%;font-family:'Avenir';color:black;">
+                            {{$product->name_en}}</h4>
+                    </div>
+                    <div class="fix mb-30">
+                        @if($sizes->count())
+                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                            {{$sizes->first()->price}}</span>
+                        @else
+                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                            {{$product->price}}</span>
+                        @endif
+                    </div>
+                    <div class="product-description">
+                        <p style="font-size:18px;color:black;"> {{$product->desc_en}}</p>
+                    </div>
+                    <!-- color start -->
+
+                    <!-- color end -->
+                    <!-- Size start -->
+                    <span class="color-title text-capitalize mb-20" style="font-size:18px;text-transform:uppercase">size</span>
+                    <form id="product-form">
+                        <input type="hidden" id="name" name="name" value="{{$product->name_en}}">
+                        <input type="hidden" id="shop_id" name="shop_id" value="{{$product->shop_id}}">
+                        <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+                        @if(isset($product->images[0]))
+                        <input type="hidden" id="image_url" name="image_url" value="{{$product->images[0]->imgurl}}">
+                        @endif
+                        @if($shop->cat_id)
+                        <input type="hidden" id="cat_id" name="cat_id" value="{{$shop->cat_id}}">
+                        @endif
+                        @if($product->sizes->count())
+                        <input type="hidden" id="size_id" name="size_id" value="{{$product->sizes->first()->id}}">
+                        <input type="hidden" id="size" name="size" value="{{$product->sizes->first()->value}}">
+                        <input type="hidden" id="price" name="price" value="{{$product->sizes->first()->price}}">
+                        <input type="hidden" id="stock" name="stock" value="{{$product->sizes->first()->stocks}}">
+                        <input type="hidden" id="is_product_variant" name="is_product_variant" value=true>
+                        @if($product->colors->count())
+                        <input type="hidden" id="color_id" name="color_id" value="{{$product->colors->first()->id}}">
+                        @else
+                        <input type="hidden" id="color_id" name="color_id">
+                        @endif
+                        <input type="hidden" id="color" name="color">
+                        <div class="size-filter single-pro-size mb-35 ml-30 clearfix row">
+                            <ul>
+                                <select name="sizes" id="sizes" onchange="changePriceOnSize({{$product->sizes}},{{$product->colors}})">
+                                    @foreach($product->sizes as $size)
+                                    @if ($loop->first)
+                                    <option value="{{$size->id}}" selected>{{$size->value }}</option>
+                                    @else
+                                    <option value="{{$size->id}}">{{$size->value }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                            </ul>
+                        </div>
+                        <div id="color-section"></div>
+
+                        @else
+
+                        <input type="hidden" id="price" name="price" value="{{$product->price}}">
+                        <input type="hidden" id="stock" name="stock" value="{{$product->stocks}}">
+                        @endif
+                        <div class="clearfix">
+                            <div class="cart-plus-minus" style="width:50%;background:#e1e0e5;">
+                                <div class="dec qtybutton" onclick="substractQuantity()">-</div>
+                                <input type="text" id="quantity" value="1" name="quantity" class="cart-plus-minus-box" style="background: #e1e0e5 none repeat scroll 0 0;">
+                                <div class="inc qtybutton" onclick="addQuantity()">+</div>
+                            </div>
+                        </div>
+                        <div class="stock-error" id="stock-error">
+
+                            Out of stock
+
+                        </div>
+                        <!-- Size end -->
+                        <div style="height:30px;">
+                        </div>
+                        <div class="centermobile" style="margin-top:30px;">
+                            <a class=" addtobagbtn" onclick="addProductBag()">
+                                <span class="addtobagheader" style="padding-top:10px !important;">
+                                    Add to Bag
+                                </span>
+                                <img src="img/product/bag.png" style="width:30px;margin-left:10px;">
+
+                            </a>
+                        </div>
+                    </form>
+                    <!-- Single-pro-slider Small-photo end -->
+                </div>
             </div>
+
             <!-- Single-product end -->
         </div>
         <!-- single-product-tab start -->
@@ -327,7 +369,6 @@
         if ($("#color_id").val()) {
             renderColor(JSON.parse($("#product_data").val()).colors, $("#size_id").val())
         }
-
 
     });
 
