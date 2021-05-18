@@ -47,6 +47,12 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
+        Mail::send('datadata', ['data' => $request->all], function ($m) {
+            $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
+
+            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+        });
         
         
         $orderid=$request['reference']['order'];
