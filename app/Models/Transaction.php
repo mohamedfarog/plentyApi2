@@ -36,7 +36,7 @@ class Transaction extends Model
             'amount'=> $amount,
             'currency' => 'SAR',
             'threeDSecure' => true,
-            'save_card' => false,
+            'save_card' => true,
             'description' => 'Payment',
             'statement_descriptor' => 'Sample',
             'metadata' => [

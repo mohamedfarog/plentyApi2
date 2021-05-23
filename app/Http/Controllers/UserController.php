@@ -687,7 +687,7 @@ class UserController extends Controller
             }
             $run = true;
             $code = 'P-' . rand(intval($start), intval($end));
-
+            
             while ($run) {
 
                 $user = User::where('invitation_code', $code)->first();
