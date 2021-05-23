@@ -117,7 +117,8 @@ Route::get('eventproducts', [ProductController::class, 'getProducts']);
 Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
 Route::resource('success', TransactionController::class);
-
+Route::post('giftsuccess',[TransactionController::class,'giftsuccess']);
+Route::resource('giftcard',[GIftCardController::class]);
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 

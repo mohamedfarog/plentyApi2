@@ -31,14 +31,9 @@ class WebsiteHomeController extends Controller
 
     private function featuredItems()
     {
-        return  DB::table('products')
-            ->select(DB::raw(' products.id as id,
-            products.name_ar as name_ar,
-            products.name_en as name_en,
-            products.price as price,
-            images.url as image'))
-            ->leftjoin('images', 'images.product_id', '=', 'products.id')
-            ->where('products.featured', '==', 1)->limit(12)
+        return Product::where('featured', 1)
+            ->with(['images'])
+            ->limit(12)
             ->get();
     }
     private function homebrands()
@@ -443,7 +438,10 @@ class WebsiteHomeController extends Controller
 
     public function booking(Request $request, $id)
     {
-        $data['product'] = $this->getProduct($id)->first();
+        $products = Product::where('id', $id)
+            ->with(['images'])
+            ->get()->first();
+        $data['product'] = $products;
         $data['style'] = $this->getStyle($data['product']->shop_id);
         $data['shop'] = $this->getShop($data['product']->shop_id);
         return view('/booking')->with($data);
@@ -713,7 +711,7 @@ class WebsiteHomeController extends Controller
             'points' => $cart["loyality_point"],
             'wallet' =>  $cart["plenty_pay"],
             'coupon_value' => $cart["coupon_value"],
-
+            'web' => "1",
             'orderdetails' => $items,
 
         ]);
@@ -836,5 +834,12 @@ class WebsiteHomeController extends Controller
             ->get()
             ->first();
         return view('bazaar')->with($data);
+    }
+
+    public function wallet(Request $request)
+    {
+        $user = Auth::user();
+        $data['user'] = $user;
+        return view('wallet')->with($data);
     }
 }

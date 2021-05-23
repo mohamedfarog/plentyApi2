@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ref', 'total_amount', 'amount_due', 'order_status', 'points_earned', 'payment_method', 'tax', 'delivery_charge', 'delivery_location', 'user_id', 'coupon_value', 'lat', 'lng', 'delivery_note', 'contact_number', 'city', 'label', "booking_time"
+        'ref', 'total_amount','wallet', 'amount_due', 'order_status', 'points_earned', 'payment_method', 'tax', 'delivery_charge', 'delivery_location', 'user_id', 'coupon_value', 'lat', 'lng', 'delivery_note', 'contact_number', 'city', 'label', "booking_time"
     ];
     protected $appends = ['orderstatusvalue', 'prepstatus', 'orderreceipt'];
     public function details()

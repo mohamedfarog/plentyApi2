@@ -527,6 +527,9 @@
                 <input type="hidden" name="timeslot" id="timeslot" autocomplete="off">
                 <input type="hidden" name="timeslot_id" id="timeslot_id" autocomplete="off">
                 <input type="hidden" name="day" id="day" autocomplete="off">
+                @if(isset($product->images[0]))
+                <input type="hidden" id="image_url" name="image_url" value="{{$product->images[0]->imgurl}}">
+                @endif
                 <div class="col-lg-6 col-xs-12">
                     <button class=" addtobagbtn floatright ffaddbag" style="margin-top: 40px;margin-right:40px;border-color:#c31c4a;vertical-align:bottom">
                         <span class="addtobagheader" style="padding-top:10px !important; color:#c31c4a;font-size:24px;">
@@ -872,7 +875,7 @@
                 price: form.get('product_price'),
                 name: form.get('product_name'),
                 shop_id: form.get('shop_id'),
-                image_url: form.get('product_image') || null,
+                image_url: form.get('image_url') || null,
                 timeslot_id: form.get('timeslot_id') || null,
                 time: form.get('timeslot') || null,
                 date: form.get('day') || null,

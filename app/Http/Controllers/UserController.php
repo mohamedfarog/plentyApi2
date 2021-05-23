@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Thenextweb\Definitions\StoreCard;
@@ -534,12 +535,22 @@ class UserController extends Controller
                     $trans = new Transaction();
                     $trans->amount = $request->amount;
                     $trans->ref = Str::uuid();
-                    $trans->order_id =  0;
+                    // $trans->order_id = 0;
                     $trans->status = 0;
-                    $trans->type = 'Order';
+                    $trans->type = 'Wallet';
                     $trans->user_id= $authuser->id;
                     $trans->save();
-                    $paygateway = $trans->createpayment($user, $request->amount, 0, $trans->id);
+                    if(isset($request->web)){
+                        $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
+                 
+
+                    }
+                    $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
+                    Mail::send('datadata', ['data' => $paygateway], function ($m) {
+                        $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
+            
+                        $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+                    });
                     return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $authuser]);
                 
                 // $user->wallet += $request->amount;
@@ -676,7 +687,7 @@ class UserController extends Controller
             }
             $run = true;
             $code = 'P-' . rand(intval($start), intval($end));
-
+            
             while ($run) {
 
                 $user = User::where('invitation_code', $code)->first();

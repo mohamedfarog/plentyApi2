@@ -69,7 +69,6 @@
         color: #001b71;
         font-size: 20px;
     }
-
 </style>
 
 <!-- Hero Slider -->
@@ -295,8 +294,8 @@
         <a href="{{ url('/product/' . $product->id) }}">
             <div class="product-img frame">
 
-                @if ($product->image)
-                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="storage/products/{{$product->image}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+                @if ($product->images)
+                <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="{{$product->images[0]->img_url}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
                 @else
                 <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
                 @endif
@@ -450,7 +449,7 @@
         for (var i = 0; i < data.length; i++) {
 
             let pid = $(data[i]).data('id');
-            if (ids.includes(pid)) {
+            if (ids && ids.includes(pid)) {
                 $(data[i]).attr("src", "img/nav/fav2.png")
                 $(data[i]).attr('data-selected', "1")
             }
@@ -458,10 +457,8 @@
 
 
     });
-
 </script>
 <div style="">
     @include('footer')
 </div>
 @endsection
-

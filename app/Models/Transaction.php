@@ -5,15 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Moathdev\Tap\Facades\Tap;
 
 class Transaction extends Model
 {
     use HasFactory;
-    public function createpayment($user, $amount,$orderid,$transid)
-    {
+    public function createpayment($user, $amount,$orderid,$transid,$web=false,$giftcard=false)
+    {   
+
+        Mail::send('datadata', ['data' => ['user'=>$user, 'amount'=>$amount, 'orderid'=>$orderid,'transid'=>$transid,'web'=>$web]], function ($m) {
+            $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
+
+            $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+        });
         
-        $user = Auth::user();
+        // $user = Auth::user();
         $firstname='';
         $lastname='';
         if(str_contains($user->name,' ')){
@@ -61,10 +68,10 @@ class Transaction extends Model
                 'id' => 'src_all',
             ],
             'post' => [
-                'url' => 'https://plentyapp.mvp-apps.ae/api/success'
+                'url' =>        $giftcard? 'https://plentyapp.mvp-apps.ae/api/giftsuccess'  :'https://plentyapp.mvp-apps.ae/api/success'
             ],
             'redirect' => [
-                'url' => 'https://plentyapp.mvp-apps.ae/api/success'
+                'url' => $giftcard? 'https://plentyapp.mvp-apps.ae/api/giftsuccess'  :  'https://plentyapp.mvp-apps.ae/api/success'
             ]
         ]);
         

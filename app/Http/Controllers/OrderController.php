@@ -299,6 +299,9 @@ class OrderController extends Controller
             if (isset($request->contact_number)) {
                 $data['contact_number'] = $request->contact_number;
             }
+            if (isset($request->wallet)) {
+                $data['wallet'] = $request->wallet;
+            }
             if (isset($request->city)) {
                 $data['city'] = $request->city;
             }
@@ -403,7 +406,11 @@ class OrderController extends Controller
                 $trans->type = 'Order';
                 $trans->user_id = $customer->id;
                 $trans->save();
-                $paygateway = $trans->createpayment($user, $request->amount_due, $order->id, $trans->id);
+                if(isset($request->web)){
+                    $paygateway = $trans->createpayment($user, $request->amount_due, $order->id, $trans->id,true);
+
+                }
+                $paygateway = $trans->createpayment($user, $request->amount_due, $order->id, $trans->id,false);
                 return response()->json(['success' => !!$order, 'message' => $paygateway, 'user' => User::find($customer->id)]);
             }
 

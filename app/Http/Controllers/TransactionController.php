@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Giftcard;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
@@ -39,14 +40,56 @@ class TransactionController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function giftsuccess(Request $request)
+    {
+
+        Mail::send('datadata', ['data' => $request->all], function ($m) {
+            $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
+
+            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+        });
+        
+        
+        $orderid=$request['reference']['order'];
+        $transactionid=$request['reference']['transaction'];
+        $status=$request['acquirer']['response']['message'];
+        if($status=='Approved'){
+            if($orderid!= null){
+                $transaction= Giftcard::find($transactionid);
+                $transaction->status=1;
+                $transaction->save();
+                // if($orderid==0){
+                //     $user= User::find($transaction->user_id);
+                //     $user->wallet+= $transaction->amount;
+                //     $user->save();
+
+                   
+                // }
+               
+
+
+            }
+        }
+        else{
+            // $transaction= Transaction::find($transactionid);
+
+            // $user= User::find($transaction->user_id);
+            // $user->wallet+= $transaction->amount;
+            // $user->save();
+
+        }
+
+    }
+
+    
     public function store(Request $request)
     {
+
+        Mail::send('datadata', ['data' => $request->all], function ($m) {
+            $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
+
+            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+        });
         
         
         $orderid=$request['reference']['order'];
@@ -76,6 +119,11 @@ class TransactionController extends Controller
             }
         }
         else{
+            $transaction= Transaction::find($transactionid);
+
+            $user= User::find($transaction->user_id);
+            $user->wallet+= $transaction->amount;
+            $user->save();
 
         }
 

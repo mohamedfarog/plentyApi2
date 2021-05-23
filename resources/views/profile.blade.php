@@ -83,9 +83,10 @@
 </style>
 
 <section style="text-align:center;">
-    <img src="img/profile/profilepic.png" style="width:100px;margin-bottom:20px;">
-
-    <h1 style="font-weight:100">Welcome,
+    <!--
+    <img src="img/logo_dark.png" style="width:100px;margin-bottom:20px;">
+    -->
+    <h1 style="font-weight:100;margin-top:100px">Welcome,
         @if($user->name)
         <span style="font-weight:400;font-family:'Avenir Bold'">{{$user->name}}</span>
         @endif

@@ -19,7 +19,7 @@
 
     .plenty-pay-wrapper {
         padding-top: 100px;
-        background-color: #151d4c;
+        background-image: linear-gradient(#252f65, #151d4c);
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         border-bottom-left-radius: 35%;
@@ -108,7 +108,7 @@
             </div>
             <div class="center wallet-balance">
                 <div style="margin-bottom:10px;">Wallet Balance</div>
-                <div>SAR<span style="font-size:30px;font-weight:900;margin-left:5px">78797</span> <img src="img/payment/plenty-pay-logo.png" width="30px" alt="plenty" style="position:relative;margin-top:-10px"> </div>
+                <div>SAR<span style="font-size:30px;font-weight:900;margin-left:5px">{{$user->wallet}}</span> <img src="img/payment/plenty-pay-logo.png" width="30px" alt="plenty" style="position:relative;margin-top:-10px"> </div>
             </div>
             <div class="center" style="margin-top:50x;">
                 <p style="color:white;text-align:center;font-size:18px;font-weight:600;">Top Up</p>
@@ -129,7 +129,7 @@
     function addPlentyBalance() {
         const bearer_token = getCookie('bearer_token');
         var base_url = $('meta[name=api_base_url]').attr('content');
-        url = base_url + 'wallet/topup'
+        url = base_url + 'api/wallet/topup'
         const topup = $("#topup").val();
         if (parseInt(topup) > 0) {
             $.ajax({
@@ -138,13 +138,23 @@
                 dataType: 'JSON',
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "amount": topup
+                    "amount": topup,
+                    "web": "1"
                 },
                 headers: {
                     "Authorization": 'Bearer ' + bearer_token
                 },
 
                 success: function(data) {
+                    if (data.success) {
+                        if (data.message.original.transaction) {
+                            const transaction_url = data.message.original.transaction.url;
+                            window.location.replace(transaction_url);
+
+                        } else {
+
+                        }
+                    }
 
                 },
                 error: function(err) {

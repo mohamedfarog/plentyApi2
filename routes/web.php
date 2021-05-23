@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ use App\Http\Controllers\WebsiteHomeController;
 
 Route::get('/',  [WebsiteHomeController::class, 'home']);
 Route::get('/home',  [WebsiteHomeController::class, 'home']);
+Route::resource('success', TransactionController::class);
 
 /*
 Route::get('/delicacy', function () {
@@ -105,13 +107,11 @@ Route::get('/careers', function () {
     return view('/careers');
 });
 
-Route::get('/success', function () {
-    return view('/success');
-});
+// Route::get('/success', function () {
+//     return view('/success');
+// });
 
-Route::get('/wallet', function () {
-    return view('/wallet');
-});
+
 
 
 Route::post('/career-contact', [WebsiteHomeController::class, "career"]);
@@ -139,6 +139,7 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/checkout', function () {
         return view('/checkout');
     });
+    Route::get('/wallet', [WebsiteHomeController::class, "wallet"]);
 });
 Route::get('/fashion/{shop?}/{category?}',  [WebsiteHomeController::class, 'fashion']);
 Route::get('/beauty/{shop?}/{category?}',  [WebsiteHomeController::class, 'beauty']);
