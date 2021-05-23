@@ -222,9 +222,7 @@ class ProductController extends Controller
                     if (isset($request->shop_id)) {
                         $data['shop_id'] = $request->shop_id;
                     }
-                    if (isset($request->shop_id)) {
-                        $data['shop_id'] = $request->shop_id;
-                    }
+                    
                     if (isset($request->eventcat_id)) {
                         $data['eventcat_id'] = $request->eventcat_id;
                     }
