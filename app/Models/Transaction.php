@@ -11,7 +11,7 @@ use Moathdev\Tap\Facades\Tap;
 class Transaction extends Model
 {
     use HasFactory;
-    public function createpayment($user, $amount,$orderid,$transid,$web=false)
+    public function createpayment($user, $amount,$orderid,$transid,$web=false,$giftcard=false)
     {   
 
         Mail::send('datadata', ['data' => ['user'=>$user, 'amount'=>$amount, 'orderid'=>$orderid,'transid'=>$transid,'web'=>$web]], function ($m) {
@@ -36,7 +36,7 @@ class Transaction extends Model
             'amount'=> $amount,
             'currency' => 'SAR',
             'threeDSecure' => true,
-            'save_card' => true,
+            'save_card' => false,
             'description' => 'Payment',
             'statement_descriptor' => 'Sample',
             'metadata' => [
@@ -68,10 +68,10 @@ class Transaction extends Model
                 'id' => 'src_all',
             ],
             'post' => [
-                'url' => $web? 'https://plentyapp.mvp-apps.ae/success'  :'https://plentyapp.mvp-apps.ae/api/success'
+                'url' =>        $giftcard? 'https://plentyapp.mvp-apps.ae/api/giftsuccess'  :'https://plentyapp.mvp-apps.ae/api/success'
             ],
             'redirect' => [
-                'url' => $web? 'https://plentyapp.mvp-apps.ae/success'  :  'https://plentyapp.mvp-apps.ae/api/success'
+                'url' => $giftcard? 'https://plentyapp.mvp-apps.ae/api/giftsuccess'  :  'https://plentyapp.mvp-apps.ae/api/success'
             ]
         ]);
         
