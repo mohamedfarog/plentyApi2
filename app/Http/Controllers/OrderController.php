@@ -182,29 +182,40 @@ class OrderController extends Controller
                             $loyalty = new Loyalty();
 
 
-
+                                // became tier 2
                             $loyalty->calculateTier($user, Order::find($request->id)->amount_due, $request->wallet ?? 0);
 
-
+                                // points x2 = 2280
                             $pointsearned = $loyalty->addPoints(User::find($user->id), Order::find($request->id)->amount_due, 0);
-
+                                // set to 2280 for points_earned
                             $order->points_earned = $pointsearned;
-
+                                //check if the current status is not equal to new status
+                                //prevent from adding more points when status is already 3-delivered
                             if ($order->order_status != $request->order_status) {
+                                //add user points = 2280
                                 $user->points += $pointsearned;
                                 $user->save();
+                                //regenerate loyalty card and notify apple to update
                                 $updateduser = User::find($user->id);
                                 ApplePass::createLoyaltyPass($updateduser);
                                 Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
                             }
                         }else{
+                            //if order_status is 1/2/4/5/6
+                            //check if current status is equal to 3
+                            //this prevents from deduction of points multiple times.
+                            //only deduct if the order was delivered = order status 3
                             if ($order->order_status == 3) {
+                                //find user and deduct points earned from total purchase and points
                                 $user = User::find($order->user_id);
                                 $user->points -= $order->points_earned;
-                                $user->totalpurchases -= $order->points_earned;
-                                
+                                $tier = Tier::find($user->tier_id);
+                                $user->totalpurchases -= $order->points_earned/ $tier->acquisition;
                                 $user->save();
-                                Loyalty::calculateTier($user, 0, $request->wallet ?? 0);
+
+                                //recalculate user tier info
+                                Loyalty::calculateTier($user, 0, 0);
+                                //regenerate loyalty card and notify apple to update
                                 $updateduser = User::find($user->id);
                                 ApplePass::createLoyaltyPass($updateduser);
                                 Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
