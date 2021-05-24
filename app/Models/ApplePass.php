@@ -28,9 +28,9 @@ class ApplePass extends Model
             "serialNumber"      =>  $pass_identifier,
             "teamIdentifier"    => $project->teamid,
             // "logoText" => "Loyalty Card",
-            "foregroundColor"   => $project->loyaltyfcolor,
-            "backgroundColor"   => $project->loyaltybcolor,
-            "labelColor" => $project->loyaltyfcolor,
+            "foregroundColor"   => $project->accessfcolor,
+            "backgroundColor"   => $project->accessbcolor,
+            "labelColor" => $project->accessfcolor,
             "barcode" => [
                 "message"   => '{"customer_name":"' . $user->name . '","customer_mobile_number":"' . substr($user->contact, 4) . '","mobile_country_code":' . intval(substr($user->contact, 1, 3)) . ',"reward_code":"' . $pass_identifier . '"}',
                 
