@@ -478,7 +478,9 @@ class ProductController extends Controller
                     }
                 }
 
-                $product = Product::with(['addons', 'sizes', 'colors', 'designer', 'images'])->find($product->id);
+                $product = Product::with(['addons', 'sizes'=> function ($sizes) {
+                    return $sizes->with(['color']);
+                }, 'colors', 'designer', 'images'])->find($product->id);
 
                 $msg = 'Product has been added';
                 return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
