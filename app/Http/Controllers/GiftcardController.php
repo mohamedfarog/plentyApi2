@@ -41,7 +41,7 @@ class GiftcardController extends Controller
         while ($run) {
             $card = Giftcard::where('code', $code)->first();
             if ($card != null) {
-                $code = Str::random(6);
+                $code =  Str::random(6);
             } else {
                 $gift->code = $code;
                 $run = false;
