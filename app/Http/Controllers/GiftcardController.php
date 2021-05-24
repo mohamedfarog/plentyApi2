@@ -35,7 +35,8 @@ class GiftcardController extends Controller
         $user = Auth::user();
         $gift = new Giftcard();
         $code = Str::random(6);
-
+        $gift->user_id = $user->id;
+        $gift->amount = $request->amount;
         $run = true;
         while ($run) {
             $card = Giftcard::where('code', $code)->first();
@@ -46,8 +47,7 @@ class GiftcardController extends Controller
                 $run = false;
             }
         }
-        $gift->user_id = $user->id;
-        $gift->amount = $request->amount;
+        
 
         $gift->save();
 

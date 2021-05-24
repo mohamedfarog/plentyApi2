@@ -119,7 +119,7 @@ Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
 Route::resource('success', TransactionController::class);
 Route::post('giftsuccess',[TransactionController::class,'giftsuccess']);
-Route::resource('giftcard',GiftcardController::class);
+
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
@@ -145,7 +145,7 @@ Route::post('vendorsignup', [UserController::class, 'vendorSignup']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('colors', ColorController::class);
-
+    Route::resource('giftcard',GiftcardController::class);
 
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
