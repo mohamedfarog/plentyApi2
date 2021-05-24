@@ -95,15 +95,25 @@ class ApplePass extends Model
 
 
         $pass->setPassDefinition($pass_definition);
-        $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/icon@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip@2x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
-        $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/icon.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/logo.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/strip.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/icon@2x.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/logo@2x.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/strip@2x.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/icon@3x.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/logo@3x.png'));
+        // $pass->addAsset(base_path('resources/assets/wallet/strip@3x.png'));
+
+        $pass->addAsset(base_path('resources/assets/access/icon.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip@2x.png'));
+        $pass->addAsset(base_path('resources/assets/access/icon@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/logo@3x.png'));
+        $pass->addAsset(base_path('resources/assets/access/strip@3x.png'));
         $pkpass = $pass->create();
 
         $user->loyaltyidentifier = $pass_identifier . '.pkpass';
