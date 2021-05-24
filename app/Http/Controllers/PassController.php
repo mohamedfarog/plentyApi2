@@ -176,9 +176,9 @@ class PassController extends Controller
     }
     public function getPass($passTypeIdentifier, $serialNumber, Request $request)
     {
-        FacadesLog::info("Request info: $request");
+        // FacadesLog::info("Request info: $request");
         
-        FacadesLog::info("getPass: $passTypeIdentifier, $serialNumber");
+        // FacadesLog::info("getPass: $passTypeIdentifier, $serialNumber");
         $pkpass = PassGenerator::getPass($serialNumber);
 
         $pass = Pass::where('serialNumber', $serialNumber)->where("updateTag","changed")->first();
@@ -208,7 +208,7 @@ class PassController extends Controller
                 }
             }
         } else {
-            FacadesLog::info("There is no File found",$serialNumber);
+            // FacadesLog::info("There is no File found",$serialNumber);
             return response()->json(['message' => 'No passes were found.'], 400);
         }
     }
@@ -221,7 +221,7 @@ class PassController extends Controller
 
     public function logIt(Request $request)
     {
-        FacadesLog::info($request->all());
+        // FacadesLog::info($request->all());
         $log = '';
         if (isset($request->logs)) {
             foreach ($request->logs as $msg) {
