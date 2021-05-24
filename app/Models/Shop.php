@@ -22,10 +22,11 @@ class Shop extends Model
 
     public function getEarningsAttribute()
     {
-        return floatval(Order::join('details', 'orders.id', '=', 'details.order_id')->where('details.shop_id', $this->id)->where('order_status', 3)->sum('details.price'));
+        $earnings =   floatval(Order::join('details', 'orders.id', '=', 'details.order_id')->where('details.shop_id', $this->id)->where('order_status', 3)->sum('details.price'));
         if ($this->cat_id == 1) {
-            return floatval(TableBooking::join('table_booking_details', 'table_bookings.id', '=', 'table_booking_details.tablebookingid')->where('table_booking_details.shop_id', $this->id)->where('status', 3)->whereNull('date')->sum('table_bookings.total_amount'));
+            $earnings =  floatval(TableBooking::join('table_booking_details', 'table_bookings.id', '=', 'table_booking_details.tablebookingid')->where('table_booking_details.shop_id', $this->id)->where('status', 3)->whereNull('date')->sum('table_bookings.total_amount'));
         }
+        return $earnings;
     }
 
     public function style()
