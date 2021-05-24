@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Giftcard;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,6 +19,7 @@ class GiftcardController extends Controller
     public function index()
     {
         //
+
     }
     /*
      $table->string('code')->nullable();
@@ -27,6 +29,32 @@ class GiftcardController extends Controller
             $table->double('amount');
             $table->tinyInteger('status')->default(0);
      */
+
+
+     public function redeem(Request $request)
+     {
+         $user= Auth::user();
+         if($user){
+            if(isset($request->code)){
+                $gift = Giftcard::where('code', $request->code)->where('status',1)->first();
+                if($gift){
+                    $redeemuser = User::find($user->id);
+                    $redeemuser->wallet += $gift->amount;
+                    $redeemuser->save();
+                    $gift->redeemed_user_id = $user->id;
+                    $gift->status= 2;
+                    $gift->save();
+                    $gifter = User::find($gift->user_id);
+
+                    return response()->json(['success' =>!!$gift, 'message'=>'You have successfully redemeed SAR '.$gift->amount . ' from '.$gifter->name.'.']);
+                }
+         return response()->json(['success' =>false,'message'=>'Gift card not available.']);
+
+            }
+         }
+         
+         return response()->json(['success' =>false,'message'=>'You are not authorized!']);
+     }
 
 
     public function store(Request $request)

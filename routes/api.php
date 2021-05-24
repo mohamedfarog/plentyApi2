@@ -151,6 +151,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('colors', ColorController::class);
     Route::resource('giftcard',GiftcardController::class);
+    Route::post('redeemgift',[GiftcardController::class,'redeem']);
+
 
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
