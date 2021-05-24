@@ -10,6 +10,7 @@ use App\Http\Controllers\EjackController;
 use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FoodicsController;
+use App\Http\Controllers\GiftcardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TableBookingController;
 use App\Http\Controllers\OtpController;
@@ -118,7 +119,7 @@ Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
 Route::resource('success', TransactionController::class);
 Route::post('giftsuccess',[TransactionController::class,'giftsuccess']);
-Route::resource('giftcard',GiftCardController::class);
+Route::resource('giftcard',GiftcardController::class);
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
