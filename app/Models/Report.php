@@ -117,8 +117,9 @@ class Report extends Model
 
                 break;
             case 'topbrand':
+                $brands = Shop::whereNotNull('cat_id')->where('active', 1)->get();
 
-                $data = Shop::whereNotNull('cat_id')->where('active', 1)->sortBy('earnings', 'desc')->take(10)->get();
+                $data = $brands->sortBy('earnings', 'desc');
 
                 break;
             case 'topprod':
