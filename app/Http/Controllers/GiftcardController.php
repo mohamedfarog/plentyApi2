@@ -28,24 +28,32 @@ class GiftcardController extends Controller
             $table->tinyInteger('status')->default(0);
      */
 
-  
+
     public function store(Request $request)
-    { 
-        
-        $user= Auth::user();
-        $gift= new Giftcard();
-        $code= Str::uuid();
-        $gift->user_id= $user->id;
-        $gift->amount= $request->amount;
-        $gift->code= $code;
+    {
+
+        $user = Auth::user();
+        $gift = new Giftcard();
+        $code = Str::random(6);
+
+        $run = true;
+        while ($run) {
+            $card = Giftcard::where('code', $code)->first();
+            if ($card != null) {
+                $code = Str::random(6);
+            } else {
+                $gift->code = $code;
+                $run = false;
+            }
+        }
+        $gift->user_id = $user->id;
+        $gift->amount = $request->amount;
+
         $gift->save();
 
-        $trans= new Transaction();
-       
-        $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id,false,true);
-        return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $user]);
+        $trans = new Transaction();
 
+        $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id, false, true);
+        return response()->json(['success' => true, 'trans' => $paygateway, 'user' => $user]);
     }
-
-   
 }
