@@ -105,6 +105,18 @@ class Report extends Model
                             
                         }
                         break;
+
+                case 'shopcustomers':
+                    $brands = Shop::whereNotNull('cat_id')->where('active',1)->get();
+
+                    foreach ($brands as $brand) {
+                        $data[$brand->name_en] = floatval(Order::join('details','orders.id','=','details.order_id')->where('details.shop_id',$brand->id)->where('order_status', 3)->count('details.price'));
+                        if($brand->cat_id == 1){
+                            $data[$brand->name_en] = floatval(TableBooking::join('table_booking_details','table_bookings.id','=','table_booking_details.tablebookingid')->where('table_booking_details.shop_id',$brand->id)->where('status', 3)->whereNull('date')->sum('table_bookings.total_amount'));
+                        }
+                        
+                    }
+                    break;
             default:
                 # code...
          
