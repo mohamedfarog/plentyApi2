@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Access;
 use App\Models\ApplePass;
+use App\Models\Loyalty;
 use App\Models\Otp;
 use App\Models\Project;
 use App\Models\Shop;
@@ -418,6 +419,7 @@ class UserController extends Controller
                             if (!is_null($newuser->name) && !is_null($newuser->contact) && !is_null($newuser->email)) {
 
                                 (new ApplePass())->createLoyaltyPass($newuser);
+                                Loyalty::notifyApple(explode('.',$newuser->loyaltyidentifier)[0]);
                             }
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
