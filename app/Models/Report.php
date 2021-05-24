@@ -119,7 +119,7 @@ class Report extends Model
             case 'topbrand':
                 $brands = Shop::whereNotNull('cat_id')->where('active', 1)->get();
 
-                $data = $brands->sortBy('earnings', 'desc');
+                $data = $brands->sortByDesc('earnings');
 
                 break;
             case 'topprod':
