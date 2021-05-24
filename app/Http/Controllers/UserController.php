@@ -236,6 +236,8 @@ class UserController extends Controller
                     $user->save();
 
                     (new ApplePass())->createLoyaltyPass($user);
+                    Loyalty::notifyApple(explode('.',$user->loyaltyidentifier)[0]);
+
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
                     }
@@ -506,6 +508,8 @@ class UserController extends Controller
                     if (!is_null($user->name) && !is_null($user->contact) && !is_null($user->email)) {
 
                         (new ApplePass())->createLoyaltyPass($user);
+
+
                     }
                     return response()->json(['success' => !!$user, 'message' => $msg]);
                 }
