@@ -109,8 +109,9 @@ Route::get('analytics', function (Request $request) {
     $shopcustomers = (new Report())->createGraph($request, 'shopcustomers');
     //tables
     $topten = (new Report())->createGraph($request, 'topten');
-
-    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten' => $topten]);
+    $topbrand= (new Report())->createGraph($request, 'topbrand');
+    $topprod = (new Report())->createGraph($request, 'topprod');
+    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten' => $topten, 'topbrands'=>$topbrand, 'topprods'=>$topprod]);
 });
 
 Route::get('events', [EventController::class, 'index']);
