@@ -119,6 +119,8 @@ Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
 Route::resource('success', TransactionController::class);
 Route::post('giftsuccess',[TransactionController::class,'giftsuccess']);
+Route::get('giftsuccess',[TransactionController::class,'giftsuccess']);
+
 
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
