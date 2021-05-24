@@ -11,6 +11,7 @@ use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FoodicsController;
 use App\Http\Controllers\GiftcardController;
+use App\Http\Controllers\GifttransController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TableBookingController;
 use App\Http\Controllers\OtpController;
@@ -118,8 +119,10 @@ Route::get('eventproducts', [ProductController::class, 'getProducts']);
 Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
 Route::resource('success', TransactionController::class);
-Route::post('giftsuccess',[TransactionController::class,'giftsuccess']);
-Route::get('giftsuccess',[TransactionController::class,'giftsuccess']);
+Route::resource('giftsuccess', GifttransController::class);
+
+
+
 
 
 
