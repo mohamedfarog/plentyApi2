@@ -17,7 +17,7 @@ class CouponController extends Controller
         $user= Auth::user();
         if($user->typeofuser=='S'){
             $coupons= Coupon::with('shop')->paginate(2);
-            return response()->json(['Coupons' =>$coupons]);
+            return $coupons;
         }
             
         $today = Carbon::now();
