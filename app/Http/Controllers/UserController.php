@@ -12,6 +12,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\PushNotification;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,20 @@ use Thenextweb\PassGenerator;
 
 class UserController extends Controller
 {
+    use SendsPasswordResetEmails;
+    public function forgetPassword(Request $request)
+    {
+        if(isset($request->email)){
+            $user = User::where('email',$request->email)->whereNotNull('email_verified_at')->first();
+            if($user){
+                $user->sendResetLinkEmail($request);
+                return response()->json(['response'=>"If the email you specified exists in our system, we\'ve sent a password reset link to it."]);
+            }
+            return response()->json(['error'=>"The email you specified was not found in our system"]);
+
+        }
+
+    }
     /**
      * Display a listing of the resource.
      *

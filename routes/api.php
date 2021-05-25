@@ -94,6 +94,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('store/forgetpassword',[UserController::class, 'forgetPassword']);
+
 
 Route::get('analytics', function (Request $request) {
     $users = User::where('typeofuser', "U")->get()->count();
