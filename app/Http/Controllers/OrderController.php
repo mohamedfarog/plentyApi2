@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Moathdev\Tap\Facades\Tap;
@@ -84,13 +85,13 @@ class OrderController extends Controller
                 if (!$shop)
                     return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
 
-                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status', 0)->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
+                $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status', 0)->where('shop_id', $shop->id)->select(DB::RAW('DISTINCT(orders.id)'),"orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
                     return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
                         return $product->with(['images']);
                     }, 'size', 'color']);
                 },]);
                 if (isset($request->forshipment)) {
-                    $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status', 1)->where('shop_id', $shop->id)->select("orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
+                    $orders = Order::join('details', 'details.order_id', 'orders.id')->where('details.status', 1)->where('shop_id', $shop->id)->select(DB::RAW('DISTINCT(orders.id)'),"orders.*", "details.shop_id")->with(['details' => function ($details) use ($shop) {
                         return $details->where('shop_id', $shop->id)->with(['product' => function ($product) {
                             return $product->with(['images']);
                         }, 'size', 'color']);
