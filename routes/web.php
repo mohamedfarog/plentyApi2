@@ -12,6 +12,8 @@ use App\Http\Middleware\AuthWeb;
 
 
 use App\Http\Controllers\WebsiteHomeController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
