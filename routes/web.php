@@ -193,6 +193,6 @@ Route::get('/orderimages/{filename}', function ($filename) {
     return $response;
 });
 
-Auth::routes();
+Auth::routes(['register'=>false,'login'=>false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
