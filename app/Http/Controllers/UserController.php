@@ -30,7 +30,7 @@ class UserController extends Controller
         if(isset($request->email)){
             $user = User::where('email',$request->email)->whereNotNull('email_verified_at')->first();
             if($user){
-                $user->sendResetLinkEmail($request);
+                $this->sendResetLinkEmail($request);
                 return response()->json(['response'=>"If the email you specified exists in our system, we\'ve sent a password reset link to it."]);
             }
             return response()->json(['error'=>"The email you specified was not found in our system"]);
