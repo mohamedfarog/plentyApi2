@@ -82,9 +82,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group">
+                            <div class="passreset-button">
+                                <button type="submit" class="btn btn-primary passreset-button">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
