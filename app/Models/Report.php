@@ -124,7 +124,7 @@ class Report extends Model
                 break;
             case 'topprod':
 
-                $data = Product::with(['sizes', 'colors', 'addons', 'images', 'designer'])->orderBy('sales', 'desc')->take(10)->get();
+                $data = Product::with(['sizes', 'colors', 'addons', 'images', 'designer', 'shop'])->orderBy('sales', 'desc')->take(10)->get();
 
                 break;
             default:
