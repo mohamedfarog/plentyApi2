@@ -495,7 +495,7 @@ class ProductController extends Controller
     {
         $user= Auth::user();
         if(isset($request->id)){
-            $undo = Product::find($request->id)->update(['deleted_at', null]);
+            $undo = Product::find($request->id)->update(['deleted_at', NULL]);
 
             return response()->json(['success'=>!!$undo, 'message'=>'done']);
         }
