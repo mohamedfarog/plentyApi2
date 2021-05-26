@@ -490,6 +490,18 @@ class ProductController extends Controller
                 break;
         }
     }
+    
+    public function undoDelete(Request $request)
+    {
+        $user= Auth::user();
+        if(isset($request->id)){
+            $undo = Product::find($request->id)->update(['deleted_at', null]);
+
+            return response()->json(['success'=>!!$undo, 'message'=>'done']);
+        }
+
+        return response()->json(['error'=>'You are not permitted']);
+    }
 
     public function toggleFeatured(Request $request)
     {
