@@ -776,7 +776,7 @@ class UserController extends Controller
                     }
                 }
                 else{
-                    return response()->json(["error" => "The user is not a vendor"]);
+                    return response()->json(["error" => "You do not have permissions to log in. Please contact the administrator for more information."]);
                 }
              
             } else {
