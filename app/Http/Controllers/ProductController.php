@@ -525,6 +525,7 @@ class ProductController extends Controller
 
                $myuser = User::with('designer')->find($user->id);
                 $data = array();
+                $data['shop_id'] = 12;
                 if (isset($request->name_en)) {
                     $data['name_en'] = $request->name_en;
                 }
@@ -553,7 +554,7 @@ class ProductController extends Controller
                     $data['prodcat_id'] = $request->prodcat_id;
                 }
                 if (isset($request->shop_id)) {
-                    $data['shop_id'] = 12;
+                    $data['shop_id'] = $request->shop_id;
                 }
                 
                 if (isset($request->eventcat_id)) {
