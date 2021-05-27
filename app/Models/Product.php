@@ -29,9 +29,7 @@ class Product extends Model
             }
             return Product::whereIn('id',$productsarray)->with(['sizes' => function ($sizes) {
                 return $sizes->with(['color']);
-            }, 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
-                return $tags->with(['tag']);
-            }])->get();
+            }, 'colors', 'addons', 'images', 'designer'])->get();
         }
 
        
