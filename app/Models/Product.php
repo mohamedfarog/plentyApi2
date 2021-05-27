@@ -12,9 +12,7 @@ class Product extends Model
         'name_en', 'name_ar','eventcat_id', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id', 'prodcat_id', 'sales', 'designer_id'
     ];
 
-    protected $casts = [
-        'isoffer'=>'boolean',
-    ];
+
 
     public function sizes()
     {
