@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Productag;
 use App\Models\ShopInfo;
 use App\Models\Size;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -522,7 +523,7 @@ class ProductController extends Controller
                 }
 
 
-
+               $myuser = User::with('designer')->find($user->id);
                 $data = array();
                 if (isset($request->name_en)) {
                     $data['name_en'] = $request->name_en;
@@ -552,11 +553,9 @@ class ProductController extends Controller
                     $data['prodcat_id'] = $request->prodcat_id;
                 }
                 if (isset($request->shop_id)) {
-                    $data['shop_id'] = $request->shop_id;
+                    $data['shop_id'] = 12;
                 }
-                if (isset($request->shop_id)) {
-                    $data['shop_id'] = $request->shop_id;
-                }
+                
                 if (isset($request->eventcat_id)) {
                     $data['eventcat_id'] = $request->eventcat_id;
                 }
@@ -564,7 +563,7 @@ class ProductController extends Controller
                     $data['isoffer'] = 0;
                 }
                 if (isset($request->designer_id)) {
-                    $data['designer_id'] = $request->designer_id;
+                    $data['designer_id'] = $myuser->designer->id;
                 }
                 if (isset($request->productid)) {
                     $product = Product::find($request->productid);
