@@ -29,7 +29,7 @@ class Product extends Model
             $productsarray = array();
             $related = array();
             foreach ($products as $key => $value) {
-                if($this->id == $key){
+                if($this->id == intval($key)){
                 array_push($related, $this);
 
                 }
