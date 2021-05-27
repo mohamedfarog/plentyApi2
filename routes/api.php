@@ -26,6 +26,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TableCapacityController;
 use App\Http\Controllers\TableschedController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\TransactionController;
@@ -156,7 +157,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('giftcard',GiftcardController::class);
     Route::post('redeemgift',[GiftcardController::class,'redeem']);
     Route::post('undodelete', [ProductController::class, 'undoDelete']);
-
+    Route::resource('tags', TagController::class);
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
     Route::post("/fcm", [UserController::class, "updateFCM"]);
