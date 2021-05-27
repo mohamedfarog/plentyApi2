@@ -42,8 +42,9 @@ class Product extends Model
     public function getProductTagsAttribute()
     {
         if($this->shop_id == 12 && $this->designer_id != null){
-
-        return $this->tags->pluck('tag');
+            $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
+        // return $this->tags->pluck('tag');
+        return Tag::find($tags);
         }
     }
 
