@@ -38,7 +38,8 @@ class Product extends Model
 
     public function getTagsAttribute()
     {
-        return $this->tags->tag;
+        $tags = $this->tags->pluck('tag_id')->toArray();
+        return Tag::find($tags);
     }
 
     public function sizes()
