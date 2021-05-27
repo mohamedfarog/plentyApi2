@@ -81,8 +81,7 @@ class TagController extends Controller
                 $data['active'] = $request->active;
             }
             $checktag= Tag::where('tag' ,$request->tag)->first();
-            $tag = '';
-            $msg = '';
+      
             if($checktag){
                 $tag= $checktag;
                 $msg = 'Tag has been retrieved';
