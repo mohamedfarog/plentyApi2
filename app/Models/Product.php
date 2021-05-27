@@ -17,7 +17,7 @@ class Product extends Model
     public function getRelatedProductsAttribute()
     {
         if($this->shop_id == 12 && $this->designer_id != null){
-            $tags = $this->tags();
+            $tags = $this->tags;
             return $tags;
         }
 
