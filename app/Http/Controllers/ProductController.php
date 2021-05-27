@@ -59,17 +59,17 @@ class ProductController extends Controller
                 }, 'colors', 'addons', 'images', 'designer'])->paginate();
                 break;
 
-            case 'D':
-            case 'd':
-                $designer = Designer::where('user_id', $user->id)->first();
-                if (!$designer)
-                    return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-                return Product::where('deleted_at', null)->where("designer_id", $designer->id)->where('shop_id', 12)->with(['sizes' => function ($sizes) {
-                    return $sizes->with(['color']);
-                }, 'colors', 'addons', 'images', 'designer', 'tags' => function ($tags) {
-                    return $tags->with(['tag']);
-                }])->paginate();
-                break;
+                case 'D':
+                    case 'd':
+                        $designer = Designer::where('user_id', $user->id)->first();
+                        if (!$designer)
+                            return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+                        return Product::where('deleted_at', null)->where("designer_id", $designer->id)->where('shop_id',12)->with(['sizes' => function ($sizes) {
+                            return $sizes->with(['color']);
+                        }, 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
+                            return $tags->with(['tag']);
+                        }])->paginate();
+                        break;
             default:
                 # code...
                 break;
@@ -525,7 +525,7 @@ class ProductController extends Controller
                 }
 
 
-                $myuser = User::with('designer')->find($user->id);
+               $myuser = User::with('designer')->find($user->id);
                 $data = array();
                 $data['shop_id'] = 12;
                 $data['designer_id'] = $myuser->designer->id;
@@ -559,7 +559,7 @@ class ProductController extends Controller
                 if (isset($request->shop_id)) {
                     $data['shop_id'] = $request->shop_id;
                 }
-
+                
                 if (isset($request->eventcat_id)) {
                     $data['eventcat_id'] = $request->eventcat_id;
                 }
@@ -575,7 +575,7 @@ class ProductController extends Controller
                 } else {
                     $product = Product::create($data);
                 }
-
+                
 
                 if (isset($request->productid)) {
                     Size::where('product_id', $request->productid)->delete();
@@ -789,14 +789,9 @@ class ProductController extends Controller
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
-        $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer', 'tags' => function ($tags) {
-            $tagss = $tags->with(['tag']);
-            $arr = array();
-            foreach($tagss as $tag){
-                array_push($arr, $tag->tag);
-            }
-            return $arr;
-        }]);
+        $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
+                            return $tags->with(['tag']);
+                        }]);
 
         if (isset($request->delete)) {
 
