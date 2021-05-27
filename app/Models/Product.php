@@ -35,7 +35,7 @@ class Product extends Model
             //     return $sizes->with(['color']);
             // }, 'colors', 'addons', 'images', 'designer'])->get();
 
-            return Product::find($productsarray);
+            return $this->whereIn('id',$productsarray);
         }
 
        
