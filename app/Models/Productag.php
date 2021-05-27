@@ -11,4 +11,9 @@ class Productag extends Model
     protected $fillable = [
         'product_id', 'tag_id', 'active', 'deleted_at',
     ];
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }
