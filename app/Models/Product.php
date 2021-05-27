@@ -22,7 +22,7 @@ class Product extends Model
 
             $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->orderBy('total', 'asc')->selectRaw('product_id, count(*) as total')
             ->groupBy('product_id')
-            ->pluck('total','product_id');
+            ->pluck('total','product_id')->toArray();
             return  $products;
         }
 
