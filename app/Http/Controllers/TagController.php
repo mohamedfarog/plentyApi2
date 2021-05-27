@@ -82,13 +82,15 @@ class TagController extends Controller
             }
             $checktag= Tag::where('tag' ,$request->tag)->first();
             $tag = '';
+            $msg = '';
             if($checktag){
                 $tag= $checktag;
+                $msg = 'Tag has been retrieved';
             }else{
                 $tag = Tag::create($data);
-
+                $msg = 'Tag has been added';
             }
-            $msg = 'Tag has been added';
+            
             return response()->json(['success' => !!$tag, 'message' => $msg, 'tag'=>$tag]);
         }
     }
