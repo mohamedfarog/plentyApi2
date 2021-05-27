@@ -526,6 +526,7 @@ class ProductController extends Controller
                $myuser = User::with('designer')->find($user->id);
                 $data = array();
                 $data['shop_id'] = 12;
+                $data['designer_id'] = $myuser->designer->id;
                 if (isset($request->name_en)) {
                     $data['name_en'] = $request->name_en;
                 }
@@ -564,7 +565,7 @@ class ProductController extends Controller
                     $data['isoffer'] = 0;
                 }
                 if (isset($request->designer_id)) {
-                    $data['designer_id'] = $myuser->designer->id;
+                    $data['designer_id'] = $request->designer_id;
                 }
                 if (isset($request->productid)) {
                     $product = Product::find($request->productid);
