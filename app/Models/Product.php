@@ -38,8 +38,10 @@ class Product extends Model
 
     public function getProductTagsAttribute()
     {
+        if($this->shop_id == 12 && $this->designer_id != null){
         $tags = $this->tags->pluck('tag_id')->toArray();
         return Tag::find($tags);
+        }
     }
 
     public function sizes()
