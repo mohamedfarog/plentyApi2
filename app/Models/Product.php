@@ -23,7 +23,11 @@ class Product extends Model
             $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->orderBy('total', 'desc')->selectRaw('product_id, count(*) as total')
             ->groupBy('product_id')
             ->pluck('total','product_id')->toArray();
-            return  $products;
+            $productsarray = array();
+            foreach ($products as $key => $value) {
+                array_push($productsarray, $key);
+            }
+            return  $productsarray;
         }
 
        
