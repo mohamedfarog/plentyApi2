@@ -27,7 +27,11 @@ class Product extends Model
             foreach ($products as $key => $value) {
                 array_push($productsarray, $key);
             }
-            return  $productsarray;
+            return Product::whereIn('id',$productsarray)->with(['sizes' => function ($sizes) {
+                return $sizes->with(['color']);
+            }, 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
+                return $tags->with(['tag']);
+            }])->get();
         }
 
        
