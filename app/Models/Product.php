@@ -27,15 +27,21 @@ class Product extends Model
             ->groupBy('product_id')
             ->pluck('total','product_id')->toArray();
             $productsarray = array();
+            $related = array();
             foreach ($products as $key => $value) {
-                array_push($productsarray, $key);
+                if($this->id == $key){
+                array_push($related, $this);
+
+                }
             }
             // return $productsarray;
             // return Product::whereIn('id',$productsarray)->with(['sizes' => function ($sizes) {
             //     return $sizes->with(['color']);
             // }, 'colors', 'addons', 'images', 'designer'])->get();
+         
 
-            return $this->whereIn('id',$productsarray);
+
+            return $related;
         }
 
        
