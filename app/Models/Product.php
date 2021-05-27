@@ -12,6 +12,17 @@ class Product extends Model
         'name_en', 'name_ar','eventcat_id', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id', 'prodcat_id', 'sales', 'designer_id'
     ];
 
+    protected $appends = ['relatedproducts'];
+
+    public function getRelatedProductsAttribute()
+    {
+        if($this->shop_id == 12 && $this->designer_id != null){
+            $tags = $this->tags();
+            return $tags;
+        }
+
+       
+    }
 
 
     public function sizes()
@@ -46,4 +57,6 @@ class Product extends Model
     {
         return $this->hasMany(Productag::class);
     }
+
+    
 }
