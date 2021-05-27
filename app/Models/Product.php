@@ -20,7 +20,7 @@ class Product extends Model
         if($this->shop_id == 12 && $this->designer_id != null){
             // $tags = $this->tags->pluck('tag_id')->toArray();
 
-            $tags = Tag::where('product_id', $this->id)->pluck('tag_id')->toArray();
+            $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
 
             $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->orderBy('total', 'desc')->selectRaw('product_id, count(*) as total')
             ->groupBy('product_id')
@@ -41,7 +41,7 @@ class Product extends Model
     public function getProductTagsAttribute()
     {
         if($this->shop_id == 12 && $this->designer_id != null){
-            $tags = Tag::where('product_id', $this->id)->pluck('tag_id')->toArray();
+            $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
         return Tag::find($tags);
         }
     }
