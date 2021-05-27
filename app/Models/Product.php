@@ -20,7 +20,7 @@ class Product extends Model
         if($this->shop_id == 12 && $this->designer_id != null){
             $tags = $this->tags->pluck('tag_id')->toArray();
 
-            $products = Productag::whereIn('tag_id', $tags)->get();
+            $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->get();
             return  $products;
         }
 
