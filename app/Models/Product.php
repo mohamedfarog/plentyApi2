@@ -31,9 +31,10 @@ class Product extends Model
                 array_push($productsarray, $key);
             }
             // return $productsarray;
-            return self::whereIn('id',$productsarray)->with(['sizes' => function ($sizes) {
-                return $sizes->with(['color']);
-            }, 'colors', 'addons', 'images', 'designer'])->get();
+            return self::find(378);
+            // return self::whereIn('id',$productsarray)->with(['sizes' => function ($sizes) {
+            //     return $sizes->with(['color']);
+            // }, 'colors', 'addons', 'images', 'designer'])->get();
         }
 
        
