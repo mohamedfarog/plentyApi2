@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\UploadHelper;
 use App\Models\Addon;
 use App\Models\Color;
+use App\Models\Designer;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Productag;
@@ -59,10 +60,10 @@ class ProductController extends Controller
 
                 case 'D':
                     case 'd':
-                        $shop = ShopInfo::where('user_id', $user->id)->first();
-                        if (!$shop)
+                        $designer = Designer::where('user_id', $user->id)->first();
+                        if (!$designer)
                             return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
-                        return Product::where('deleted_at', null)->where("shop_id", $shop->id)->with(['sizes' => function ($sizes) {
+                        return Product::where('deleted_at', null)->where("designer_id", $designer->id)->where('shop_id',12)->with(['sizes' => function ($sizes) {
                             return $sizes->with(['color']);
                         }, 'colors', 'addons', 'images', 'designer'])->paginate();
                         break;
