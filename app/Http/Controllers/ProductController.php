@@ -66,9 +66,7 @@ class ProductController extends Controller
                             return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
                         return Product::where('deleted_at', null)->where("designer_id", $designer->id)->where('shop_id',12)->with(['sizes' => function ($sizes) {
                             return $sizes->with(['color']);
-                        }, 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
-                            return $tags->with(['tag']);
-                        }])->paginate();
+                        }, 'colors', 'addons', 'images', 'designer'])->paginate();
                         break;
             default:
                 # code...
