@@ -80,7 +80,14 @@ class TagController extends Controller
             if (isset($request->active)) {
                 $data['active'] = $request->active;
             }
-            $tag = Tag::create($data);
+            $checktag= Tag::where('tag' ,$request->tag)->first();
+            $tag = '';
+            if($checktag){
+                $tag= $checktag;
+            }else{
+                $tag = Tag::create($data);
+
+            }
             $msg = 'Tag has been added';
             return response()->json(['success' => !!$tag, 'message' => $msg, 'tag'=>$tag]);
         }
