@@ -789,9 +789,7 @@ class ProductController extends Controller
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
-        $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
-                            return $tags->tag;
-                        }]);
+        $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->tags->with(['sizes', 'colors', 'addons', 'images', 'designer']);
 
         if (isset($request->delete)) {
 
