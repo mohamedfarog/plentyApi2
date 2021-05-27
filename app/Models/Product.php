@@ -21,7 +21,7 @@ class Product extends Model
             $tags = $this->tags->pluck('tag_id')->toArray();
 
             $products = Productag::whereIn('id', $tags)->get();
-            return  $products;
+            return  $tags;
         }
 
        
