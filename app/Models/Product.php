@@ -14,6 +14,7 @@ class Product extends Model
 
     protected $appends = ['relatedproducts', 'producttags'];
     protected $casts = ['id'=>'integer'];
+    protected $hidden = ['tags'];
 
     public function getRelatedProductsAttribute()
     {
