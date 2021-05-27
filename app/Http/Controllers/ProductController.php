@@ -790,7 +790,9 @@ class ProductController extends Controller
             $sortOrder = "asc";
         }
         $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer', 'tags'=>function($tags){
-                            return $tags->with(['tag'])['tag'];
+                            return $tags->with(['tag'=>function($tag){
+                                return $tag->tag;
+                            }]);
                         }]);
 
         if (isset($request->delete)) {
