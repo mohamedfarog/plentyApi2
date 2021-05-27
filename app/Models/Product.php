@@ -20,7 +20,9 @@ class Product extends Model
         if($this->shop_id == 12 && $this->designer_id != null){
             $tags = $this->tags->pluck('tag_id')->toArray();
 
-            $products = Productag::groupBy('product_id')->whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->get();
+            $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->selectRaw('product_id, count(*) as total')
+            ->groupBy('product_id')
+            ->pluck('total','product_id')->all();
             return  $products;
         }
 
