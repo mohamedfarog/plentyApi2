@@ -13,12 +13,15 @@ class Product extends Model
     ];
 
     protected $appends = ['relatedproducts'];
+    protected $casts = ['id'=>'integer'];
 
     public function getRelatedProductsAttribute()
     {
         if($this->shop_id == 12 && $this->designer_id != null){
             $tags = $this->tags->pluck('tag_id')->toArray();
-            return $tags;
+
+            $products = Productag::whereIn('id', $tags)->get();
+            return  $products;
         }
 
        
