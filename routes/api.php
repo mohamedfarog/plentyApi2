@@ -162,6 +162,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('orderdetails', DetailController::class);
     Route::post("/fcm", [UserController::class, "updateFCM"]);
 
+
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);
     Route::post('sendnotifications', [UserController::class, 'sendNotifications']);

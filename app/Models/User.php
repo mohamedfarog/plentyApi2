@@ -72,7 +72,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Shop::class, 'id', 'user_id');
     }
-
+    public function designer()
+    {
+        return $this->belongsTo(Designer::class, 'id', 'user_id');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
