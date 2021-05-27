@@ -18,7 +18,7 @@ class TagController extends Controller
 
         $tags = Tag::where('active', 1)->whereNull('deleted_at')->get();
         if(isset($request->search)){
-            $tags = Tag::where('active', 1)->whereNull('deleted_at')->where('tag',$request->search)->get();
+            $tags = Tag::where('active', 1)->whereNull('deleted_at')->where('tag','LIKE',"%" .$request->search."%")->get();
         }
         return $tags;
     }
