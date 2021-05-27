@@ -19,29 +19,21 @@ class Product extends Model
     public function getRelatedProductsAttribute()
     {
         if($this->shop_id == 12 && $this->designer_id != null){
-            // $tags = $this->tags->pluck('tag_id')->toArray();
+            $tags = $this->tags->pluck('tag_id')->toArray();
 
-            $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
+            // $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
 
             $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->orderBy('total', 'desc')->selectRaw('product_id, count(*) as total')
             ->groupBy('product_id')
             ->pluck('total','product_id')->toArray();
             $productsarray = array();
-            $related = array();
             foreach ($products as $key => $value) {
-                if(intval($this->id) == intval($key)){
-                array_push($related, $this);
-
-                }
+                array_push($productsarray, $key);
             }
-            // return $productsarray;
+            return $productsarray;
             // return Product::whereIn('id',$productsarray)->with(['sizes' => function ($sizes) {
             //     return $sizes->with(['color']);
             // }, 'colors', 'addons', 'images', 'designer'])->get();
-         
-
-
-            return $related;
         }
 
        
@@ -50,9 +42,8 @@ class Product extends Model
     public function getProductTagsAttribute()
     {
         if($this->shop_id == 12 && $this->designer_id != null){
-            $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
-        // return $this->tags->pluck('tag');
-        return Tag::find($tags);
+            // $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
+        return $this->tags->pluck('tag');
         }
     }
 
