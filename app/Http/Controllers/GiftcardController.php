@@ -63,6 +63,7 @@ class GiftcardController extends Controller
         $user = Auth::user();
         $gift = new Giftcard();
         $code = Str::random(6);
+        $gift->name = $request->name;
         $gift->user_id = $user->id;
         $gift->amount = $request->amount;
         $run = true;
