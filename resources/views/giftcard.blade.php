@@ -108,13 +108,13 @@
 
     .flex-container>div {
         background-color: #fff;
-        width: 100px;
+        width: 150px;
+        height: 50px;
         margin: 10px;
         text-align: center;
         line-height: 50px;
         font-size: 12px;
         justify-content: space-between;
-        border-radius: 30px;
         box-shadow: 0 0px 5px 1px rgb(0 0 0 / 20%);
         transition: 0.3s;
     }
@@ -164,6 +164,23 @@
     .get-gift-code {
         margin-top: -120px;
     }
+
+    #custom-amount {
+        display: inline;
+        width: 100px;
+        background-color: #f1f1f1;
+        border: none;
+        margin: 2px 10px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    #custom-amount:focus {
+        background-color: #fff;
+        color: black;
+        padding: 0px 5px;
+    }
 </style>
 
 <div class="parent">
@@ -186,30 +203,31 @@
                 section the gift amount will be credited to the receiver in App Wallet.
             </p>
         </div>
-        <div style="margin-top:32px;">
+        <div style="margin-top:32px;overflow:auto;">
             <div style="text-align:center;color:black;font-size:16px;font-weight:600">
                 Please select the gift amount
             </div>
+            <input type="hidden" id="gift-amount-data">
             <div class="flex-container">
-                <div class="gift-amount">SAR <span>100</span></div>
-                <div class="gift-amount">SAR <span>150</span></div>
-                <div class="gift-amount">SAR <span>200</span></div>
-                <div class="gift-amount">SAR <span>250</span></div>
+                <div class="gift-amount" data-id="100">SAR <span>100</span></div>
+                <div class="gift-amount" data-id="150">SAR <span>150</span></div>
+                <div class="gift-amount" data-id="200">SAR <span>200</span></div>
+                <div class="gift-amount" data-id="250">SAR <span>250</span></div>
             </div>
             <div class="flex-container">
-                <div class="gift-amount">SAR <span>300</span></div>
-                <div class="gift-amount">SAR <span>350</span></div>
-                <div class="gift-amount">SAR <span>400</span></div>
-                <div class="gift-amount">SAR <span>450</span></div>
+                <div class="gift-amount" data-id="300">SAR <span>300</span></div>
+                <div class="gift-amount" data-id="350">SAR <span>350</span></div>
+                <div class="gift-amount" data-id="400">SAR <span>400</span></div>
+                <div class="gift-amount" data-id="450">SAR <span>450</span></div>
             </div>
             <div class="flex-container">
-                <div class="gift-amount">SAR <span>500</span></div>
-                <div class="gift-amount">SAR <span>550</span></div>
-                <div class="gift-amount">SAR <span>600</span></div>
-                <div class="gift-amount">SAR <span>650</span></div>
+                <div class="gift-amount" data-id="500">SAR <span>500</span></div>
+                <div class="gift-amount" data-id="550">SAR <span>550</span></div>
+                <div class="gift-amount" data-id="600">SAR <span>600</span></div>
+                <div class="gift-amount" data-id="650">SAR <input type="number" id="custom-amount" /></div>
             </div>
         </div>
-        <input type="submit" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
+        <input onclick="generateGiftCard()" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
 
     </div>
 </div>
@@ -225,8 +243,56 @@
         $(".gift-amount").on('click', function(event) {
             $(".gift-amount").css('backgroundColor', '#fff');
             event.currentTarget.style.backgroundColor = "#f1f1f1";
+            const amount = $(event.currentTarget).data("id");
+            $("#gift-amount-data").val(amount);
         });
     });
+
+    function generateGiftCard() {
+        const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=api_base_url]').attr('content');
+        url = base_url + 'api/giftcard'
+        const amount = $("#gift-amount-data").val();
+        const receiver = $("#receiver").val();
+        console.log(amount, receiver);
+        // if (parseInt(topup) > 0) {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: url,
+        //         dataType: 'JSON',
+        //         data: {
+        //             "_token": "{{ csrf_token() }}",
+        //             "amount": topup,
+        //             "web": "1"
+        //         },
+        //         headers: {
+        //             "Authorization": 'Bearer ' + bearer_token
+        //         },
+
+        //         success: function(data) {
+        //             if (data.success) {
+        //                 if (data.message.original.transaction) {
+        //                     const transaction_url = data.message.original.transaction.url;
+        //                     window.location.replace(transaction_url);
+
+        //                 } else {
+
+        //                 }
+        //             }
+
+        //         },
+        //         error: function(err) {
+
+        //             console.log('Error!', err)
+        //         }
+
+        //     });
+        // } else {
+        //     console.log("error!")
+        // }
+
+
+    }
 </script>
 
 @endsection
