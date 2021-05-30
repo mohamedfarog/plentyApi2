@@ -139,8 +139,13 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/userlevel', [WebsiteHomeController::class, "userLevel"]);
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
+    Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
+    Route::get('/giftcardsuccess', [WebsiteHomeController::class, "giftCardSuccess"]);
     Route::get('/checkout', function () {
         return view('/checkout');
+    });
+    Route::get('/giftcardredeem', function () {
+        return view('/giftcardredeem');
     });
     Route::get('/wallet', [WebsiteHomeController::class, "wallet"]);
 });
@@ -193,6 +198,6 @@ Route::get('/orderimages/{filename}', function ($filename) {
     return $response;
 });
 
-Auth::routes(['login'=>false,'register'=>false]);
+Auth::routes(['login' => false, 'register' => false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

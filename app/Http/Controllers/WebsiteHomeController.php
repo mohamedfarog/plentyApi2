@@ -856,4 +856,13 @@ class WebsiteHomeController extends Controller
         $data['user'] = $user;
         return view('wallet')->with($data);
     }
+
+    public function giftCard(Request $request)
+    {
+        return view('giftcard');
+    }
+    public function giftCardSuccess(Request $request)
+    {
+        return view('giftcardsuccess');
+    }
 }
