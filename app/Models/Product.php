@@ -9,23 +9,23 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_en', 'name_ar','eventcat_id', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id', 'prodcat_id', 'sales', 'designer_id'
+        'name_en', 'name_ar', 'eventcat_id', 'desc_en', 'desc_ar', 'price', 'offerprice', 'isoffer', 'stocks', 'shop_id', 'prodcat_id', 'sales', 'designer_id'
     ];
 
     protected $appends = ['relatedproducts', 'producttags'];
-    protected $casts = ['id'=>'integer'];
+    protected $casts = ['id' => 'integer'];
     protected $hidden = ['tags'];
 
     public function getRelatedProductsAttribute()
     {
-        if($this->shop_id == 12 && $this->designer_id != null){
+        if ($this->shop_id == 12 && $this->designer_id != null) {
             $tags = $this->tags->pluck('tag_id')->toArray();
 
             // $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
 
-            $products = Productag::whereIn('tag_id', $tags)->where('product_id','!=',$this->id)->orderBy('total', 'desc')->selectRaw('product_id, count(*) as total')
-            ->groupBy('product_id')
-            ->pluck('total','product_id')->toArray();
+            $products = Productag::whereIn('tag_id', $tags)->where('product_id', '!=', $this->id)->orderBy('total', 'desc')->selectRaw('product_id, count(*) as total')
+                ->groupBy('product_id')
+                ->pluck('total', 'product_id')->toArray();
             $productsarray = array();
             foreach ($products as $key => $value) {
                 array_push($productsarray, $key);
@@ -35,15 +35,13 @@ class Product extends Model
             //     return $sizes->with(['color']);
             // }, 'colors', 'addons', 'images', 'designer'])->get();
         }
-
-       
     }
 
     public function getProductTagsAttribute()
     {
-        if($this->shop_id == 12 && $this->designer_id != null){
+        if ($this->shop_id == 12 && $this->designer_id != null) {
             // $tags = Productag::where('product_id', $this->id)->pluck('tag_id')->toArray();
-        return $this->tags->pluck('tag');
+            return $this->tags->pluck('tag');
         }
     }
 
@@ -68,7 +66,7 @@ class Product extends Model
     }
     public function shop()
     {
-        return $this->hasOne(Shop::class, 'id','shop_id');
+        return $this->hasOne(Shop::class, 'id', 'shop_id');
     }
     public function images()
     {
@@ -79,6 +77,4 @@ class Product extends Model
     {
         return $this->hasMany(Productag::class);
     }
-
-    
 }
