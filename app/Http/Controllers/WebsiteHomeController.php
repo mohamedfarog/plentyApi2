@@ -86,6 +86,14 @@ class WebsiteHomeController extends Controller
             ->get();
         return $products;
     }
+    private function getProducts($ids)
+    {
+
+        $products = Product::whereIn('id', $ids)
+            ->with(['images', 'sizes', 'colors'])
+            ->get();
+        return $products;
+    }
 
 
     private function getProductSize($id)
@@ -207,8 +215,14 @@ class WebsiteHomeController extends Controller
         $data['shop'] = $this->getShop($data['product']->shop_id);
         $data['style'] = $this->getStyle($data['shop']->id);
         $data['sizes'] = $this->getProductSize($id);
-        $data['addons'] = $this->getAddons($id);
+        $data['addons'] = $data['product']->addons;
         $data['trywith'] = $this->gettry($id);
+        if (isset($data['product']->relatedproducts)) {
+            $data['related_products'] = $this->getProducts($data['product']->relatedproducts);
+        } else {
+            $data['related_products'] = null;
+        }
+
         return view('/product')->with($data);
     }
 

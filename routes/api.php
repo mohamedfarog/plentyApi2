@@ -10,6 +10,8 @@ use App\Http\Controllers\EjackController;
 use App\Http\Controllers\EventcatController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FoodicsController;
+use App\Http\Controllers\GiftcardController;
+use App\Http\Controllers\GifttransController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TableBookingController;
 use App\Http\Controllers\OtpController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TableCapacityController;
 use App\Http\Controllers\TableschedController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\TransactionController;
@@ -92,6 +95,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('store/forgetpassword',[UserController::class, 'forgetPassword']);
+
 
 Route::get('analytics', function (Request $request) {
     $users = User::where('typeofuser', "U")->get()->count();
@@ -107,8 +112,9 @@ Route::get('analytics', function (Request $request) {
     $shopcustomers = (new Report())->createGraph($request, 'shopcustomers');
     //tables
     $topten = (new Report())->createGraph($request, 'topten');
-
-    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten' => $topten]);
+    $topbrand= (new Report())->createGraph($request, 'topbrand');
+    $topprod = (new Report())->createGraph($request, 'topprod');
+    return response()->json(['users' => $users, 'earnings' => $earnings, 'sales' => $sales, 'brands' => $brands, 'earninggraph' => $earningsgraph, 'transgraph' => $transactions, 'gendergraph' => $genders, 'agegraph' => $ages, 'shopearninggraph' => $shopearnings, 'shopcustomersgraph' => $shopcustomers, 'topten' => $topten, 'topbrands'=>$topbrand, 'topprods'=>$topprod]);
 });
 
 Route::get('events', [EventController::class, 'index']);
@@ -117,8 +123,12 @@ Route::get('eventproducts', [ProductController::class, 'getProducts']);
 Route::post('stockcheck', [ProductController::class, 'stockcheck']);
 Route::get('banners', [SliderController::class, 'index']);
 Route::resource('success', TransactionController::class);
-Route::post('giftsuccess',[TransactionController::class,'giftsuccess']);
-Route::resource('giftcard',GiftCardController::class);
+Route::resource('giftsuccess', GifttransController::class);
+
+
+
+
+
 
 Route::post('vendorslogin', [UserController::class, 'vendorslogin']);
 
@@ -144,11 +154,14 @@ Route::post('vendorsignup', [UserController::class, 'vendorSignup']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('sizes', SizeController::class);
     Route::resource('colors', ColorController::class);
-
-
+    Route::resource('giftcard',GiftcardController::class);
+    Route::post('redeemgift',[GiftcardController::class,'redeem']);
+    Route::post('undodelete', [ProductController::class, 'undoDelete']);
+    Route::resource('tags', TagController::class);
     Route::resource('tablebooking', TableBookingController::class);
     Route::resource('orderdetails', DetailController::class);
     Route::post("/fcm", [UserController::class, "updateFCM"]);
+
 
     Route::resource('sliders', SliderController::class);
     Route::post('profile', [UserController::class, 'myProfile']);

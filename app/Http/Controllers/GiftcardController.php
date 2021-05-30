@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Giftcard;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,6 +19,7 @@ class GiftcardController extends Controller
     public function index()
     {
         //
+
     }
     /*
      $table->string('code')->nullable();
@@ -28,24 +30,58 @@ class GiftcardController extends Controller
             $table->tinyInteger('status')->default(0);
      */
 
-  
+
+     public function redeem(Request $request)
+     {
+         $user= Auth::user();
+         if($user){
+            if(isset($request->code)){
+                $gift = Giftcard::where('code', $request->code)->where('status',1)->first();
+                if($gift){
+                    $redeemuser = User::find($user->id);
+                    $redeemuser->wallet += $gift->amount;
+                    $redeemuser->save();
+                    $gift->redeemed_user_id = $user->id;
+                    $gift->status= 2;
+                    $gift->save();
+                    $gifter = User::find($gift->user_id);
+
+                    return response()->json(['success' =>!!$gift, 'message'=>'You have successfully redemeed SAR '.$gift->amount . ' from '.$gifter->name.'.']);
+                }
+         return response()->json(['success' =>false,'message'=>'Gift card not available.']);
+
+            }
+         }
+         
+         return response()->json(['success' =>false,'message'=>'You are not authorized!']);
+     }
+
+
     public function store(Request $request)
-    { 
+    {
+
+        $user = Auth::user();
+        $gift = new Giftcard();
+        $code = Str::random(6);
+        $gift->user_id = $user->id;
+        $gift->amount = $request->amount;
+        $run = true;
+        while ($run) {
+            $card = Giftcard::where('code', $code)->first();
+            if ($card != null) {
+                $code =  Str::random(6);
+            } else {
+                $gift->code = $code;
+                $run = false;
+            }
+        }
         
-        $user= Auth::user();
-        $gift= new Giftcard();
-        $code= Str::uuid();
-        $gift->user_id= $user->id;
-        $gift->amount= $request->amount;
-        $gift->code= $code;
+
         $gift->save();
 
-        $trans= new Transaction();
-       
-        $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id,false,true);
-        return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $user]);
+        $trans = new Transaction();
 
+        $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id, false, true);
+        return response()->json(['success' => true, 'trans' => $paygateway, 'user' => $user]);
     }
-
-   
 }

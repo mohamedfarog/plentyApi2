@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Access;
 use App\Models\ApplePass;
+use App\Models\Loyalty;
 use App\Models\Otp;
 use App\Models\Project;
 use App\Models\Shop;
@@ -11,6 +12,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\PushNotification;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +24,20 @@ use Thenextweb\PassGenerator;
 
 class UserController extends Controller
 {
+    use SendsPasswordResetEmails;
+    public function forgetPassword(Request $request)
+    {
+        if(isset($request->email)){
+            $user = User::where('email',$request->email)->whereNotNull('email_verified_at')->first();
+            if($user){
+                $this->sendResetLinkEmail($request);
+                return response()->json(['response'=>"If the email you specified was in our system, we sent it a password reset link."]);
+            }
+            return response()->json(['error'=>"The email you specified was not found in our system"]);
+
+        }
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -235,6 +251,8 @@ class UserController extends Controller
                     $user->save();
 
                     (new ApplePass())->createLoyaltyPass($user);
+                    Loyalty::notifyApple(explode('.',$user->loyaltyidentifier)[0]);
+
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
                     }
@@ -250,7 +268,11 @@ class UserController extends Controller
     public function autologin(Request $request)
     {
         $user = Auth::user();
-        $user = User::with(['tier','shop'])->find($user->id);
+
+        
+        $user = User::with(['tier','shop'=>function  ($shop){
+            return $shop->with(['style','cat'])->whereNotNull('cat_id');
+        }])->find($user->id);
         return response()->json(['user' => $user]);
     }
 
@@ -279,7 +301,7 @@ class UserController extends Controller
                     if ($user->email_verified_at != NULL) {
                         $success["message"] = "Login successful";
                         $success["token"] = $user->createToken('MyApp')->accessToken;
-                        $u = User::with(['tier'])->find($user->id);
+                        $u = User::with(['tier','designer'])->find($user->id);
 
                         return response()->json(["success" => $success, "user" => $u]);
                     } else {
@@ -418,6 +440,7 @@ class UserController extends Controller
                             if (!is_null($newuser->name) && !is_null($newuser->contact) && !is_null($newuser->email)) {
 
                                 (new ApplePass())->createLoyaltyPass($newuser);
+                                Loyalty::notifyApple(explode('.',$newuser->loyaltyidentifier)[0]);
                             }
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
@@ -504,6 +527,8 @@ class UserController extends Controller
                     if (!is_null($user->name) && !is_null($user->contact) && !is_null($user->email)) {
 
                         (new ApplePass())->createLoyaltyPass($user);
+
+
                     }
                     return response()->json(['success' => !!$user, 'message' => $msg]);
                 }
@@ -738,7 +763,7 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Your account is not yet appoved. Please contact the admin for approval."]);
+                        return response()->json(["error" => "Your account has not been approved yet. Please contact the administrator to obtain approval."]);
                     }
                 }
                 else if($user->typeofuser == 'B' ){
@@ -751,11 +776,11 @@ class UserController extends Controller
         
                         return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
                     } else {
-                        return response()->json(["error" => "Your account is not yet appoved. Please contact the admin for approval."]);
+                        return response()->json(["error" => "Your account has not been approved yet. Please contact the administrator to obtain approval."]);
                     }
                 }
                 else{
-                    return response()->json(["error" => "The user is not a vendor"]);
+                    return response()->json(["error" => "You do not have permissions to log in. Please contact the administrator for more information."]);
                 }
              
             } else {

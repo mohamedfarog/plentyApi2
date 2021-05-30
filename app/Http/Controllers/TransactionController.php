@@ -43,13 +43,7 @@ class TransactionController extends Controller
     public function giftsuccess(Request $request)
     {
 
-        // Mail::send('datadata', ['data' => $request->all], function ($m) {
-        //     $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
 
-        //     $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
-        // });
-        
-        
         $orderid=$request['reference']['order'];
         $transactionid=$request['reference']['transaction'];
         $status=$request['acquirer']['response']['message'];

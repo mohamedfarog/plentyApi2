@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Actions\UploadHelper;
 use App\Models\Addon;
 use App\Models\Color;
+use App\Models\Designer;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\Productag;
 use App\Models\ShopInfo;
 use App\Models\Size;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +58,16 @@ class ProductController extends Controller
                     return $sizes->with(['color']);
                 }, 'colors', 'addons', 'images', 'designer'])->paginate();
                 break;
+
+                case 'D':
+                    case 'd':
+                        $designer = Designer::where('user_id', $user->id)->first();
+                        if (!$designer)
+                            return response()->json(['success' => false, 'message' => "You dont't have enough perimission to access the data",], 400);
+                        return Product::where('deleted_at', null)->where("designer_id", $designer->id)->where('shop_id',12)->with(['sizes' => function ($sizes) {
+                            return $sizes->with(['color']);
+                        }, 'colors', 'addons', 'images', 'designer'])->paginate();
+                        break;
             default:
                 # code...
                 break;
@@ -155,7 +168,7 @@ class ProductController extends Controller
                                         $arr['image'] = $helper->store($size['image']);
                                     }
                                     $sizes = Size::create($arr);
-            
+
                                     if (isset($size['color'])) {
                                         foreach ($size['color'] as $color) {
                                             $arr = array();
@@ -222,9 +235,7 @@ class ProductController extends Controller
                     if (isset($request->shop_id)) {
                         $data['shop_id'] = $request->shop_id;
                     }
-                    if (isset($request->shop_id)) {
-                        $data['shop_id'] = $request->shop_id;
-                    }
+
                     if (isset($request->eventcat_id)) {
                         $data['eventcat_id'] = $request->eventcat_id;
                     }
@@ -246,7 +257,7 @@ class ProductController extends Controller
                                 $arr['image'] = $helper->store($size['image']);
                             }
                             $sizes = Size::create($arr);
-    
+
                             if (isset($size['color'])) {
                                 foreach ($size['color'] as $color) {
                                     $arr = array();
@@ -329,7 +340,9 @@ class ProductController extends Controller
                         }
                     }
 
-                    $product = Product::with(['addons', 'sizes', 'colors', 'designer', 'images'])->find($product->id);
+                    $product = Product::with(['addons', 'sizes' => function ($sizes) {
+                        return $sizes->with(['color']);
+                    }, 'colors', 'designer', 'images'])->find($product->id);
 
                     $msg = 'Product has been added';
                     return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
@@ -478,7 +491,185 @@ class ProductController extends Controller
                     }
                 }
 
-                $product = Product::with(['addons', 'sizes', 'colors', 'designer', 'images'])->find($product->id);
+                // if (isset($request->tags)) {
+                //     foreach ($request->tags as $tags) {
+                //         $arr = array();
+                //         $arr['product_id'] = $product->id;
+                //         $arr['tag_id'] = $tags;
+
+                //         $tags = Productag::create($arr);
+                //     }
+                // }
+
+
+                $product = Product::with(['addons', 'sizes' => function ($sizes) {
+                    return $sizes->with(['color']);
+                }, 'colors', 'designer', 'images'])->find($product->id);
+
+                $msg = 'Product has been added';
+                return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
+                break;
+
+            case 'D':
+                $validator = Validator::make($request->all(), [
+                    "name_en" => "required",
+                    "price" => "required",
+                    "desc_en" => "required",
+
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+                }
+
+
+               $myuser = User::with('designer')->find($user->id);
+                $data = array();
+                $data['shop_id'] = 12;
+                $data['designer_id'] = $myuser->designer->id;
+                if (isset($request->name_en)) {
+                    $data['name_en'] = $request->name_en;
+                }
+                if (isset($request->name_ar)) {
+                    $data['name_ar'] = $request->name_ar;
+                }
+                if (isset($request->desc_en)) {
+                    $data['desc_en'] = $request->desc_en;
+                }
+                if (isset($request->desc_ar)) {
+                    $data['desc_ar'] = $request->desc_ar;
+                }
+                if (isset($request->price)) {
+                    $data['price'] = $request->price;
+                }
+                if (isset($request->offerprice)) {
+                    $data['offerprice'] = $request->offerprice;
+                }
+                if (isset($request->isoffer)) {
+                    $data['isoffer'] = $request->isoffer;
+                }
+                if (isset($request->stocks)) {
+                    $data['stocks'] = $request->stocks;
+                }
+                if (isset($request->prodcat_id)) {
+                    $data['prodcat_id'] = $request->prodcat_id;
+                }
+                if (isset($request->shop_id)) {
+                    $data['shop_id'] = $request->shop_id;
+                }
+                
+                if (isset($request->eventcat_id)) {
+                    $data['eventcat_id'] = $request->eventcat_id;
+                }
+                if ($request->offerprice == 0) {
+                    $data['isoffer'] = 0;
+                }
+                if (isset($request->designer_id)) {
+                    $data['designer_id'] = $request->designer_id;
+                }
+                if (isset($request->productid)) {
+                    $product = Product::find($request->productid);
+                    $product->update($data);
+                } else {
+                    $product = Product::create($data);
+                }
+                
+
+                if (isset($request->productid)) {
+                    Size::where('product_id', $request->productid)->delete();
+                    Color::where('product_id', $request->productid)->delete();
+                }
+                if (isset($request->sizes)) {
+                    foreach ($request->sizes as $size) {
+                        $arr = array();
+                        $arr['product_id'] = $product->id;
+                        $arr['value'] = $size['value'];
+                        if (isset($size['others'])) {
+                            $arr['others'] = $size['others'];
+                        }
+                        $arr['price'] = $size['price'];
+                        if (isset($size['stocks'])) {
+                            $arr['stocks'] = $size['stocks'];
+                        }
+                        if (isset($size['image']) && $size['image'] != null) {
+                            $arr['image'] = $helper->store($size['image']);
+                        }
+                        $sizes = Size::create($arr);
+
+                        if (isset($size['color'])) {
+                            foreach ($size['color'] as $color) {
+                                $arr = array();
+                                $arr['product_id'] = $product->id;
+                                $arr['value'] = $color['value'];
+                                if (isset($color['others'])) {
+                                    $arr['others'] = $color['others'];
+                                }
+                                $arr['stock'] = $color['stock'];
+                                $arr['size_id'] = $sizes->id;
+                                $color = Color::create($arr);
+                            }
+                        }
+                    }
+                }
+                if (isset($request->addons)) {
+                    foreach ($request->addons as $addon) {
+                        $arr = array();
+                        $arr['product_id'] = $product->id;
+                        $arr['name_en'] = $addon['name_en'];
+                        if (isset($addon['name_ar'])) {
+
+                            $arr['name_ar'] = $addon['name_ar'];
+                        }
+
+                        $arr['desc_en'] = $addon['desc_en'];
+                        if (isset($addon['desc_ar'])) {
+
+                            $arr['desc_ar'] = $addon['desc_ar'];
+                        }
+                        $arr['others'] = $addon['others'];
+                        $arr['price'] = $addon['price'];
+                        $sizes = Addon::create($arr);
+                    }
+                }
+                // if (isset($request->colors)) {
+                //     foreach ($request->colors as $color) {
+                //         $arr = array();
+                //         $arr['product_id'] = $product->id;
+                //         $arr['value'] = $color['value'];
+                //         $arr['others'] = $color['others'];
+
+
+                //         $sizes = Color::create($arr);
+                //     }
+                // }
+
+                if (isset($request->images)) {
+                    foreach ($request->images as $image) {
+                        $arr = array();
+                        $arr['product_id'] = $product->id;
+                        $arr['url'] = $helper->store($image['img']);
+
+
+                        $sizes = Image::create($arr);
+                        // return response()->json(['Sizes' => !!$sizes , 'message' => $msg, 'Size'=>$sizes]);
+
+                    }
+                }
+
+                if (isset($request->tags)) {
+                    foreach ($request->tags as $tags) {
+                        $arr = array();
+                        $arr['product_id'] = $product->id;
+                        $arr['tag_id'] = $tags;
+
+                        $tags = Productag::create($arr);
+                    }
+                }
+
+
+                $product = Product::with(['addons', 'sizes' => function ($sizes) {
+                    return $sizes->with(['color']);
+                }, 'colors', 'designer', 'images'])->find($product->id);
 
                 $msg = 'Product has been added';
                 return response()->json(['success' => !!$product, 'message' => $msg, 'product' => $product]);
@@ -487,6 +678,20 @@ class ProductController extends Controller
                 # code...
                 break;
         }
+    }
+
+    public function undoDelete(Request $request)
+    {
+        $user = Auth::user();
+        if (isset($request->id)) {
+            $undo = Product::find($request->id);
+            $undo->deleted_at = NULL;
+            $undo->save();
+
+            return response()->json(['success' => !!$undo, 'message' => 'done']);
+        }
+
+        return response()->json(['error' => 'You are not permitted']);
     }
 
     public function toggleFeatured(Request $request)
@@ -582,7 +787,7 @@ class ProductController extends Controller
         if (isset($request->order) && $request->order == "asc") {
             $sortOrder = "asc";
         }
-        $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer']);
+        $product = Product::where('deleted_at', null)->where("stocks", ">", 0)->with(['sizes', 'colors', 'addons', 'images', 'designer', ]);
 
         if (isset($request->delete)) {
 

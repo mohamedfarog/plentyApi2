@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\File;
@@ -12,6 +13,8 @@ use App\Http\Middleware\AuthWeb;
 
 
 use App\Http\Controllers\WebsiteHomeController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -189,3 +192,7 @@ Route::get('/orderimages/{filename}', function ($filename) {
 
     return $response;
 });
+
+Auth::routes(['login'=>false,'register'=>false]);
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
