@@ -57,7 +57,7 @@ class GiftcardController extends Controller
                     $gift->save();
                     $gifter = User::find($gift->user_id);
 
-                    return response()->json(['success' =>!!$gift, 'message'=>'Hello, '.$gift->name.'! You have successfully redemeed SAR '.$gift->amount . ' from '.$gifter->name.'.']);
+                    return response()->json(['success' =>!!$gift,'amount'=>$gift->amount, 'message'=>'Hello, '.$gift->name.'! You have successfully redemeed SAR '.$gift->amount . ' from '.$gifter->name.'.']);
                 }
          return response()->json(['success' =>false,'message'=>'Gift card not available.']);
 
@@ -93,7 +93,7 @@ class GiftcardController extends Controller
 
         $trans = new Transaction();
         if(isset($request->web)){
-            $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id, true, true);
+            $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id, false, true);
             return response()->json(['success' => true, 'trans' => $paygateway, 'user' => $user, 'giftcard'=>$gift]);
         }
         $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id, false, true);
