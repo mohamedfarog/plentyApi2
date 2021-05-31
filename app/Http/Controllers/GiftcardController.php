@@ -82,6 +82,6 @@ class GiftcardController extends Controller
         $trans = new Transaction();
 
         $paygateway = $trans->createpayment($user, $request->amount, $gift->id, $gift->id, false, true);
-        return response()->json(['success' => true, 'trans' => $paygateway, 'user' => $user]);
+        return response()->json(['success' => true, 'trans' => $paygateway, 'user' => $user, 'giftcard'=>$gift]);
     }
 }
