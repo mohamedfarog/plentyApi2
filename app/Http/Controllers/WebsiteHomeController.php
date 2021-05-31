@@ -861,8 +861,4 @@ class WebsiteHomeController extends Controller
     {
         return view('giftcard');
     }
-    public function giftCardSuccess(Request $request)
-    {
-        return view('giftcardsuccess');
-    }
 }
