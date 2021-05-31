@@ -21,7 +21,7 @@ class GifttransController extends Controller
         $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
     });
      
-        return redirect('success')->with(['data'=>'Cash']);
+        return view('success')->with(['data'=>'Cash']);
 
        
         if($request->status=='CAPTURED' || $request['status'] == "CAPTURED"){
