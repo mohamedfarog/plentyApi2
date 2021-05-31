@@ -16,21 +16,22 @@ class GifttransController extends Controller
      */
     public function index(Request $request)
     {
+        return redirect('success')->with(['data'=>'Cash']);
 
-        //  Mail::send('datadata', ['data' => $request->all()], function ($m) {
-        //     $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
+         Mail::send('datadata', ['data' => $request->all()], function ($m) {
+            $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
 
-        //     $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
-        // });
+            $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+        });
          
-        // if($request->status=='CAPTURED' || $request['status'] == "CAPTURED"){
-        //     $giftcard= Giftcard::find($request['reference']['transaction']);
-        //     return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
+        if($request->status=='CAPTURED' || $request['status'] == "CAPTURED"){
+            $giftcard= Giftcard::find($request['reference']['transaction']);
+            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
 
-        // }
-        //     else{
-        //         return redirect('transactionfailed');
-        //     }
+        }
+            else{
+                return redirect('transactionfailed');
+            }
     }
 
     /**
@@ -58,8 +59,7 @@ class GifttransController extends Controller
 
             $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
         });
-        return redirect('success')->with(['data'=>'Cash']);
-
+        
         
         $orderid=$request['reference']['order'];
         $transactionid=$request['reference']['transaction'];
