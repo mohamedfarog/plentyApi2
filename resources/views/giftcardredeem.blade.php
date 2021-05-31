@@ -133,7 +133,7 @@
             <input type="text" name="gift-code" id="gift-code">
             <div class="share-button"><i class="fas fa-share"></i></div>
         </div>
-        <input data-toggle="modal" data-target="#myModal" type="submit" class="btn btn-lg btn-dark redeem-btn" value="Redeem Gift Code" style="font-weight:500;font-size:14px">
+        <input onclick="RedeemGiftCard()" type="button" class="btn btn-lg btn-dark redeem-btn" value="Redeem Gift Code" style="font-weight:500;font-size:14px">
 
     </div>
 </div>
@@ -153,7 +153,7 @@
                 <p style="color:#91aebf;font-size: 18px;">You have earned</p>
                 <p style="color:#f7ad29;font-size: 34px;">SAR <span style="font-weight: 900">400</span></p>
                 <p style="color:#91aebf;font-size: 18px;">The amount is credited to your wallet</p>
-                <input data-toggle="modal" data-target="#myModal" class="btn btn-lg" id="code-modal-btn" value="Okay">
+                <input type="button" data-toggle="modal" data-target="#myModal" class="btn btn-lg" id="code-modal-btn" value="Okay">
             </div>
         </div>
 
@@ -171,6 +171,43 @@
             event.currentTarget.style.backgroundColor = "#f1f1f1";
         });
     });
+
+
+    function RedeemGiftCard() {
+        const bearer_token = getCookie('bearer_token');
+        var base_url = $('meta[name=api_base_url]').attr('content');
+        url = base_url + 'api/redeemgift'
+        const code = $("#gift-code").val();
+        if (code.length > 0) {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "code": code,
+                },
+                headers: {
+                    "Authorization": 'Bearer ' + bearer_token
+                },
+
+                success: function(data) {
+                    if (data.success) {
+                        console.log(data);
+                    } else {
+                        showAlertError('Error occurred, sorry for the inconvenience!');
+                    }
+                },
+                error: function(err) {
+                    showAlertError('Error occurred, sorry for the inconvenience!');
+                }
+
+            });
+
+        } else {
+            showAlertError('Please provide a valid voucher code!')
+        }
+    }
 </script>
 
 @endsection
