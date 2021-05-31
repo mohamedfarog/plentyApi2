@@ -23,7 +23,7 @@ class GifttransController extends Controller
         });
         if($request->status=='CAPTURED' || $request['status'] == "CAPTURED"){
             $giftcard= Giftcard::find($request['reference']['transaction']);
-            return view('giftcardsuccess')->with(['data'=>$giftcard]);
+            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
 
         }
             else{
