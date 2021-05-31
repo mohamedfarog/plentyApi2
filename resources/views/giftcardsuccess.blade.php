@@ -83,7 +83,7 @@
     <div class="child">
 
         <img src="img/giftcard/people.jpg" alt="" />
-        <input type="text" value="{{$data->code}}" id="gift-code" style="visibilty:hidden" />
+        <input type="text" value="{{$data->code}}" id="gift-code" style="display:none" />
         <div class="gift-code" onclick="copyToClipBoard()">
             <div class="left-circle"></div>
             <div class="right-circle"></div>
