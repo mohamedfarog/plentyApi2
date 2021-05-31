@@ -77,7 +77,7 @@
         border-radius: 10px;
     }
 </style>
-{{session('data')->name}}
+{{session('data')}}
 <div class="parent">
     <div class="child">
 
