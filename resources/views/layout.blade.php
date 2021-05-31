@@ -922,7 +922,7 @@
             this.id = item.id;
             this.price = item.price;
             this.name_en = item.name_en;
-            this.image = item.image;
+            this.images = item.images;
             this.shop_id = item.shop_id;
 
         }
@@ -951,10 +951,11 @@
                 dataType: 'JSON',
                 success: function(data) {
                     if (data.Response) {
-                        let favourite_item = new FavouriteItem(data.product)
-                        let favourites = FavouriteSerializer(getFavouritesLocal())
+                        console.log(data);
+                        let favourite_item = new FavouriteItem(data.product);
+                        let favourites = FavouriteSerializer(getFavouritesLocal());
                         favourites.addItem(favourite_item);
-                        storeFavouritesLocal(favourites)
+                        storeFavouritesLocal(favourites);
 
 
                     } else {
@@ -995,7 +996,7 @@
                         id: element.id,
                         price: element.price,
                         name_en: element.name_en,
-                        image: element.image || null,
+                        images: element.images || null,
                     }
 
                     favourites.addItem(new FavouriteItem(item))

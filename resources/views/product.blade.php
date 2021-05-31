@@ -414,6 +414,17 @@
             renderColor(JSON.parse($("#product_data").val()).colors, $("#size_id").val())
         }
 
+        let ids = getProductId();
+        let data = $(".featicons");
+        for (var i = 0; i < data.length; i++) {
+
+            let pid = $(data[i]).data('id');
+            if (ids && ids.includes(pid)) {
+                $(data[i]).attr("src", "img/nav/fav2.png")
+                $(data[i]).attr('data-selected', "1")
+            }
+        }
+
     });
 
 
