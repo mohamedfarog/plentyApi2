@@ -77,7 +77,7 @@
         border-radius: 10px;
     }
 </style>
-{{session('data')}}
+
 <div class="parent">
     <div class="child">
 
@@ -93,6 +93,7 @@
             <div style="text-align:center">
                 SAR <span style="font-size:22px;font-weight:900;">400</span>
             </div>
+            <div style="text-align:center">{{Session::get('data')}}</div>
             <div style="max-width:400px;margin:auto; margin-top:10px;text-align: center;">
                 The gift code can only be used once The amount will be credited to the user's Plenty Wallet
             </div>
