@@ -27,7 +27,7 @@ class GifttransController extends Controller
 
         }
             else{
-                return view('transactionfailed');
+                return redirect('transactionfailed');
             }
     }
 
