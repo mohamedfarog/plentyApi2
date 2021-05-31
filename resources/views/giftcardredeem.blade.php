@@ -196,8 +196,7 @@
                         $('#earned-amount').html(data.amount)
                         $('#successModal').modal('show');
                     } else {
-                        console.log(data);
-                        showAlertError('Error occurred, sorry for the inconvenience!');
+                        showAlertError(data.message);
                     }
                 },
                 error: function(err) {
