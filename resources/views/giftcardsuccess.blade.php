@@ -77,7 +77,7 @@
         border-radius: 10px;
     }
 </style>
-{{$data}}
+{{$data->name}}
 <div class="parent">
     <div class="child">
 
