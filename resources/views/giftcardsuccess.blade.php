@@ -83,7 +83,7 @@
     <div class="child">
 
         <img src="img/giftcard/people.jpg" alt="" />
-        <input type="text" value="{{$data->code}}" id="gift-code">
+        <input type="hidden" value="{{$data->code}}" id="gift-code">
         <div class="gift-code" onclick="copyToClipBoard()">
             <div class="left-circle"></div>
             <div class="right-circle"></div>
@@ -119,6 +119,7 @@
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
+        showAlertSuccess(msg = 'Copied to clipboard')
     }
 </script>
 
