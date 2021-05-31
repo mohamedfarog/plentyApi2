@@ -57,7 +57,7 @@ class GiftcardController extends Controller
                     $gift->save();
                     $gifter = User::find($gift->user_id);
 
-                    return response()->json(['success' =>!!$gift, 'message'=>'You have successfully redemeed SAR '.$gift->amount . ' from '.$gifter->name.'.']);
+                    return response()->json(['success' =>!!$gift, 'message'=>'Hello, '.$gift->name.'! You have successfully redemeed SAR '.$gift->amount . ' from '.$gifter->name.'.']);
                 }
          return response()->json(['success' =>false,'message'=>'Gift card not available.']);
 
