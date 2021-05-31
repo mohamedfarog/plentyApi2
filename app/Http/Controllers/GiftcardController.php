@@ -16,9 +16,20 @@ class GiftcardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $user = Auth::user();
+        $perpage = 15;
+        if(isset($request->perpage)){
+            $perpage = $request->perpage;
+        }
+        $giftcards = Giftcard::where('user_id', $user->id)->paginate($perpage);
+        if(isset($request->status)){
+            $giftcards = Giftcard::where('user_id',$user->id)->where('status', $request->status)->paginate($perpage);
+        }
+
+        return $giftcards;
 
     }
     /*

@@ -59,6 +59,7 @@ class GifttransController extends Controller
             }
         }
         else{
+            Giftcard::find($transactionid)->delete();
             // $transaction= Transaction::find($transactionid);
             // $user= User::find($transaction->user_id);
             // $user->wallet+= $transaction->amount;
