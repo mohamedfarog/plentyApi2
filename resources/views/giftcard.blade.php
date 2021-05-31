@@ -252,7 +252,7 @@
                 </div>
             </div>
         </div>
-        <input onclick="generateGiftCard()" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
+        <input type="button" onclick="generateGiftCard()" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
 
     </div>
 </div>
