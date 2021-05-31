@@ -27,7 +27,7 @@ class GifttransController extends Controller
 
         }
             else{
-                echo 'PAYMENT DECLINED';
+                return view('transactionfailed');
             }
     }
 
