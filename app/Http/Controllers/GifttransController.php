@@ -22,7 +22,8 @@ class GifttransController extends Controller
             $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
         });
         if($request->status=='CAPTURED'){
-            return view('giftcardsuccess')->with(['data'=>'Cash']);
+            $giftcard= Giftcard::find($request['reference']['transaction']);
+            return view('giftcardsuccess')->with(['data'=>$giftcard]);
 
         }
             else{
