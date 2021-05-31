@@ -16,7 +16,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Tier;
 use App\Models\TableBooking;
-
+use App\Models\Giftcard;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
@@ -859,6 +859,8 @@ class WebsiteHomeController extends Controller
 
     public function giftCard(Request $request)
     {
-        return view('giftcard');
+        $user = Auth::user();
+        $data["giftcards"] = Giftcard::where('user_id', $user->id)->get();
+        return view('giftcard')->with($data);
     }
 }
