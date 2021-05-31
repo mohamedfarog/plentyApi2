@@ -64,10 +64,11 @@ class GifttransController extends Controller
         $orderid=$request['reference']['order'];
         $transactionid=$request['reference']['transaction'];
         $status=$request['acquirer']['response']['message'];
-        if($status=='Approved'){
+        if($request->status =='CAPTURED' || $request['status'] =='CAPTURED'){
             if($orderid!= null){
                 $transaction= Giftcard::find($transactionid);
                 $transaction->status=1;
+                // $transaction->ref
                 $transaction->save();
                 return redirect('giftcardsuccess')->with(['data'=>$transaction]);
 
