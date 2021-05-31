@@ -13,6 +13,7 @@ use App\Http\Middleware\AuthWeb;
 
 
 use App\Http\Controllers\WebsiteHomeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -140,8 +141,8 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
     Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
-    Route::get('/giftcardsuccess', function () {
-        return view('/giftcardsuccess');
+    Route::get('/giftcardsuccess', function (Request $request) {
+        return view('/giftcardsuccess')->with(['data'=>$request->data]);
     });
     Route::get('/checkout', function () {
         return view('/checkout');
