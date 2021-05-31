@@ -17,7 +17,7 @@ class GifttransController extends Controller
     public function index()
     {
         //
-        return view('success')->with(['data'=>'Cash']);
+        return view('giftcardsuccess')->with(['data'=>'Cash']);
     }
 
     /**
