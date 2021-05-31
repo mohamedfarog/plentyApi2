@@ -299,8 +299,8 @@
 
                 success: function(data) {
                     if (data.success) {
-                        if (data.message.original.transaction) {
-                            const transaction_url = data.message.original.transaction.url;
+                        if (data.message) {
+                            console.log(data.message);
                             window.location.replace(transaction_url);
 
                         } else {
