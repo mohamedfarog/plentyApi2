@@ -142,8 +142,8 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
     Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
-    Route::get('/giftcardsuccess?id={id}', function (Request $request) {
-        $giftcard = Giftcard::find($request->id);
+    Route::get('/giftcardsuccess/{id?}', function ($id) {
+        $giftcard = Giftcard::find($id);
         return view('/giftcardsuccess')->with(['data'=>$giftcard]);
     });
     Route::get('/checkout', function () {
