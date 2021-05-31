@@ -16,7 +16,7 @@ class GifttransController extends Controller
      */
     public function index(Request $request)
     {
-         Mail::send('datadata', ['data' => $request->all()], function ($m) {
+         Mail::send('datadata', ['data' => $request->status], function ($m) {
             $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
 
             $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
