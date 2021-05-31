@@ -119,7 +119,7 @@
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
-        showAlertSuccess('Copied to clipboard')
+        showAlertSuccess('Copied to clipboard');
     }
 </script>
 
