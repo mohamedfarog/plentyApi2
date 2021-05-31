@@ -138,7 +138,7 @@
     </div>
 </div>
 
-<div id="myModal" class="modal fade" role="dialog">
+<div id="successModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -153,7 +153,7 @@
                 <p style="color:#91aebf;font-size: 18px;">You have earned</p>
                 <p style="color:#f7ad29;font-size: 34px;">SAR <span style="font-weight: 900">400</span></p>
                 <p style="color:#91aebf;font-size: 18px;">The amount is credited to your wallet</p>
-                <input type="button" data-toggle="modal" data-target="#myModal" class="btn btn-lg" id="code-modal-btn" value="Okay">
+                <input type="button" data-toggle="modal" data-target="#successModal" class="btn btn-lg" id="code-modal-btn" value="Okay">
             </div>
         </div>
 
@@ -194,6 +194,7 @@
                 success: function(data) {
                     if (data.success) {
                         console.log(data);
+                        $('#successModal').modal('show');
                     } else {
                         showAlertError('Error occurred, sorry for the inconvenience!');
                     }
