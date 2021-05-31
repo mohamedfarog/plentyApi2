@@ -67,10 +67,10 @@ class GifttransController extends Controller
                 $transaction= Giftcard::find($transactionid);
                 $transaction->status=1;
                 $transaction->save();
-                
+                return redirect('giftcardsuccess')->with(['data'=>$transaction]);
+
             }
-            $giftcard= Giftcard::find($request['reference']['transaction']);
-            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
+            
         }
         else{
             Giftcard::find($transactionid)->delete();
