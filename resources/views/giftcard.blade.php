@@ -285,35 +285,36 @@
         const receiver = $("#receiver").val();
         if (parseFloat(amount) > 0 && receiver.length > 0) {
             $.ajax({
-                    type: 'POST',
-                    url: url,
-                    dataType: 'JSON',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "amount": amount,
-                        "name": receiver
-                    },
-                    headers: {
-                        "Authorization": 'Bearer ' + bearer_token
-                    },
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "amount": amount,
+                    "name": receiver
+                },
+                headers: {
+                    "Authorization": 'Bearer ' + bearer_token
+                },
 
-                    success: function(data) {
-                        if (data.success) {
-                            const trans_url = data.trans.original.transaction.url;
-                            window.location.replace(trans_url);
+                success: function(data) {
+                    if (data.success) {
+                        const trans_url = data.trans.original.transaction.url;
+                        window.location.replace(trans_url);
+                    } else {
+                        showAlertError('Error occurred, sorry for the inconvenience!');
+                    }
+                },
+                error: function(err) {
+                    showAlertError('Error occurred, sorry for the inconvenience!');
+                }
 
-                        },
-                        error: function(err) {
-                            showAlertError('Error occurred, sorry for the inconvenience!');
-                        }
+            });
 
-                    });
-
-            }
-            else {
-                showAlertError('Please provide Receiver Name & Choose a gift amount!')
-            }
+        } else {
+            showAlertError('Please provide Receiver Name & Choose a gift amount!')
         }
+    }
 </script>
 
 @endsection
