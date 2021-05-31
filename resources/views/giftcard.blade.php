@@ -300,7 +300,7 @@
                 success: function(data) {
                     if (data.success) {
                         if (data) {
-                            console.log(data.message);
+                            console.log(data);
                             // window.location.replace(transaction_url);
 
                         } else {
