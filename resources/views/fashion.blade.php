@@ -483,7 +483,7 @@
     //getProducts  //for filtering product based on category
     function getBestSeller(element) {
         shop_id = $('#shopid').val();
-        var base_url = $('meta[name=base_url]').attr('content');
+        var base_url = $('meta[name=api_base_url]').attr('content');
         $.ajax({
             type: 'GET',
             url: base_url + 'best-seller/' + shop_id,

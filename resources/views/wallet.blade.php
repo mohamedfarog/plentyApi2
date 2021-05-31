@@ -104,7 +104,7 @@
     <div class="child">
         <div class="plenty-pay-wrapper">
             <div class="redeem">
-                <button class="redeem-point"><i class="fas fa-gift" style="margin-right:5px;"></i>Redeem Gift</button>
+                <button onClick="window.location = '/giftcardredeem';" class="redeem-point"><i class="fas fa-gift" style="margin-right:5px;"></i>Redeem Gift</button>
             </div>
             <div class="center wallet-balance">
                 <div style="margin-bottom:10px;">Wallet Balance</div>

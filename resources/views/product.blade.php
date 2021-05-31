@@ -158,7 +158,6 @@
 </div>
 @endif
 
-
 @if(isset($product))
 <input type="hidden" id="product_data" value="{{$product}}" />
 <div class="product-area single-pro-area pt-30 pb-30 product-style-2">
@@ -348,6 +347,51 @@
 
 </section>
 @endif
+
+@if(isset($related_products))
+<section style="width:90%;text-align:left;margin:auto; background-color:#f2f3f8">
+    <h1 style="padding: 30px;margin-bottom: 0;padding-bottom:0;font-size:28px;color:black;font-weight: lighter;">
+        Related Product
+    </h1>
+    <section class="regular slider contm" style="">
+        @foreach($related_products as $product)
+        <div class="single-product ssproduct  col-lg-4 col-xs-12">
+            <a href="{{ url('/product/' . $product->id) }}">
+                <div class="product-img frame">
+
+                    @if ($product->images)
+                    <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="{{$product->images[0]->img_url}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
+                    @else
+                    <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="img/product/plentylogo.png" alt="" loading=lazy /></a>
+                    @endif
+
+                    <div class="product-action clearfix">
+                    </div>
+                </div>
+            </a>
+            <div class="product-info clearfix">
+                <div class="fix">
+                    <h4 class="post-title floatcenter feattitle"><a href="{{ url('/product/' . $product->id) }}">{{$product->name_en}}</a></h4>
+                    <p class="floatcenter hidden-sm featsubtitle">SAR {{$product->price}}</p>
+                </div>
+                <div class="fix featlineicons">
+                    <span class="pro-price floatleft" onclick="MakeFavourite(this,{{$product->id}})"><img style="width:auto" class="featicons" data-id="{{$product->id}}" data-selected="0" src="img/nav/fav.png" loading=lazy>
+                    </span>
+                    </a>
+                    <a href="{{ url('/product/' . $product->id) }}"><span class="pro-rating floatright">
+                            <img style="width:auto" class="featicons" src="img/nav/bag.png" loading=lazy>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </section>
+</section>
+
+@endif
+
+
 <script>
     $(document).ready(function() {
         $(".brand-slide").hover(function() {

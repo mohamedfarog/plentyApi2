@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="css/sliders.css" defer />
     <link rel="stylesheet" href="css/style.css" defer />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="base_url" content="https://plentyapp.mvp-apps.ae/" />
-    <meta name="api_base_url" content="https://plentyapp.mvp-apps.ae/" />
+    <meta name="base_url" content="http://127.0.0.1:8000/" />
+    <meta name="api_base_url" content="http://127.0.0.1:8000/" />
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
     <!-- animate css -->
@@ -298,8 +298,8 @@
                                         <li class="hidden-lg hidden-md" id="auth1"><a href="/profile">Profile</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth2"><a href="/trackorder">Track Order</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth3"><a href="/userlevel">User Level</a></li><br>
+                                        <li class="hidden-lg hidden-md" id="auth5"><a href="/giftcard">Gift Card</a></li>
                                         <li class="hidden-lg hidden-md" id="auth4"><a href="/login">Logout</a></li>
-
                                         <li class="hidden-lg hidden-m" id="no-auth1"><a href="/login">Login</a></li>
 
 
@@ -380,6 +380,7 @@
                                             <li><a class="dropdownanch" href="/profile">Profile</a></li><br>
                                             <li><a class="dropdownanch" href="/trackorder">Track Order</a></li><br>
                                             <li><a class="dropdownanch" href="/userlevel">User Level</a></li><br>
+                                            <li><a class="dropdownanch" href="/giftcard">Gift Card</a></li><br>
                                             <li><a class="dropdownanch" onclick="logoutUser()">Logout</a></li>
                                         </ul>
 
@@ -1020,7 +1021,6 @@
 
 
         function userIsAuthenticated() {
-            console.log("not authenticated!")
             document.getElementById('user-menu-nav').style = " display: block;";
             document.getElementById('nav-username').innerHTML = getUserDetails().name;
             document.getElementById('auth1').style = " display: block;";
@@ -1028,13 +1028,13 @@
         }
 
         function userIsNotAuthenticated() {
-            console.log("not authenticated!")
             document.getElementById('user-menu-nav').style = " display: none;";
             document.getElementsByClassName("on-auth").style = " display: none;";
             document.getElementById('auth1').style = " display: none;";
             document.getElementById('auth2').style = " display: none;";
             document.getElementById('auth3').style = " display: none;";
             document.getElementById('auth4').style = " display: none;";
+            document.getElementById('auth5').style = " display: none;";
             document.getElementById('no-auth1').style = " display: block;";
         }
 

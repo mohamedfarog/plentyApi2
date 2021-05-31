@@ -14,11 +14,11 @@ class Transaction extends Model
     public function createpayment($user, $amount,$orderid,$transid,$web=false,$giftcard=false)
     {   
 
-        Mail::send('datadata', ['data' => ['user'=>$user, 'amount'=>$amount, 'orderid'=>$orderid,'transid'=>$transid,'web'=>$web]], function ($m) {
-            $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
+        // Mail::send('datadata', ['data' => ['user'=>$user, 'amount'=>$amount, 'orderid'=>$orderid,'transid'=>$transid,'web'=>$web]], function ($m) {
+        //     $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
 
-            $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
-        });
+        //     $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+        // });
         
         // $user = Auth::user();
         $firstname='';

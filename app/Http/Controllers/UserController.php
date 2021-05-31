@@ -571,11 +571,11 @@ class UserController extends Controller
 
                     }
                     $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
-                    Mail::send('datadata', ['data' => $paygateway], function ($m) {
-                        $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
+                    // Mail::send('datadata', ['data' => $paygateway], function ($m) {
+                    //     $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
             
-                        $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
-                    });
+                    //     $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
+                    // });
                     return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $authuser]);
                 
                 // $user->wallet += $request->amount;
