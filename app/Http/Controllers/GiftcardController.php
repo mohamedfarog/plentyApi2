@@ -24,9 +24,9 @@ class GiftcardController extends Controller
         if(isset($request->perpage)){
             $perpage = $request->perpage;
         }
-        $giftcards = Giftcard::where('user_id', $user->id)->paginate($perpage);
+        $giftcards = Giftcard::where('user_id', $user->id)->orderBy('id','DESC')->paginate($perpage);
         if(isset($request->status)){
-            $giftcards = Giftcard::where('user_id',$user->id)->where('status', $request->status)->paginate($perpage);
+            $giftcards = Giftcard::where('user_id',$user->id)->where('status', $request->status)->orderBy('id','DESC')->paginate($perpage);
         }
 
         return $giftcards;
