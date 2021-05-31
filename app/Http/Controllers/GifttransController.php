@@ -69,6 +69,8 @@ class GifttransController extends Controller
                 $transaction->save();
                 
             }
+            $giftcard= Giftcard::find($request['reference']['transaction']);
+            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
         }
         else{
             Giftcard::find($transactionid)->delete();
@@ -76,15 +78,11 @@ class GifttransController extends Controller
             // $user= User::find($transaction->user_id);
             // $user->wallet+= $transaction->amount;
             // $user->save();
+            return redirect('transactionfailed');
         }
-        if($request->status=='CAPTURED' || $request['status'] == "CAPTURED"){
-            $giftcard= Giftcard::find($request['reference']['transaction']);
-            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
 
-        }
-            else{
-                return redirect('transactionfailed');
-            }
+
+       
     }
 
     /**
