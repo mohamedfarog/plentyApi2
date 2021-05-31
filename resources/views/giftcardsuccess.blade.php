@@ -83,8 +83,8 @@
     <div class="child">
 
         <img src="img/giftcard/people.jpg" alt="" />
-
-        <div class="gift-code">
+        <input type="text" value="{{$data->code}}" id="gift-code">
+        <div class="gift-code" onclick="copyToClipBoard()">
             <div class="left-circle"></div>
             <div class="right-circle"></div>
             {{$data->code}}
@@ -113,5 +113,13 @@
     @include('footer')
 </div>
 
+<script>
+    function copyToClipBoard() {
+        var copyText = document.getElementById("gift-code");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+</script>
 
 @endsection
