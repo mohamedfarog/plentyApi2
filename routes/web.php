@@ -13,6 +13,7 @@ use App\Http\Middleware\AuthWeb;
 
 
 use App\Http\Controllers\WebsiteHomeController;
+use App\Models\Giftcard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -141,8 +142,9 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
     Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
-    Route::get('/giftcardsuccess', function (Request $request) {
-        return view('/giftcardsuccess');
+    Route::get('/giftcardsuccess?id={id}', function (Request $request) {
+        $giftcard = Giftcard::find($request->id);
+        return view('/giftcardsuccess')->with(['data'=>$giftcard]);
     });
     Route::get('/checkout', function () {
         return view('/checkout');
