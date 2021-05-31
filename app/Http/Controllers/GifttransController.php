@@ -15,23 +15,15 @@ class GifttransController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {  Mail::send('datadata', ['data' => $request->all()], function ($m) {
-        $m->from('mohammed@mvp-apps.ae', 'PLENTY WALLET TEST');
-
-        $m->to('mohammed@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
-    });
-     
-        return view('success')->with(['data'=>'Cash']);
-
-       
-        if($request->status=='CAPTURED' || $request['status'] == "CAPTURED"){
-            $giftcard= Giftcard::find($request['reference']['transaction']);
-            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
-
+    {
+        $giftcard= Giftcard::where('ref',$request->tap_id)->first();
+        if($giftcard){
+            return view('success')->with(['data'=>'Cash']);
         }
-            else{
-                return redirect('transactionfailed');
-            }
+        else{
+            return redirect('transactionfailed');
+        }
+          
     }
 
     /**
@@ -68,7 +60,7 @@ class GifttransController extends Controller
             if($orderid!= null){
                 $transaction= Giftcard::find($transactionid);
                 $transaction->status=1;
-                // $transaction->ref
+                $transaction->ref= $request->id;
                 $transaction->save();
                 return redirect('giftcardsuccess')->with(['data'=>$transaction]);
 
