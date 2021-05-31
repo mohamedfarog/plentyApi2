@@ -115,8 +115,8 @@
         line-height: 50px;
         font-size: 12px;
         justify-content: space-between;
-        box-shadow: 0 0px 5px 1px rgb(0 0 0 / 20%);
-        transition: 0.3s;
+        border-radius: 30px;
+        color: black !important;
     }
 
     .flex-container span {
@@ -124,7 +124,7 @@
         font-weight: 600;
     }
 
-    .flex-container div:hover {
+    .flex-container>div:hover {
         box-shadow: 0 0px 5px 3px rgb(0 0 0 / 20%);
         cursor: pointer;
     }
@@ -166,20 +166,43 @@
     }
 
     #custom-amount {
-        display: inline;
-        width: 100px;
+        display: inline-block;
+        position: absolute;
+        width: 90px;
         background-color: #f1f1f1;
         border: none;
-        margin: 2px 10px;
+        margin: 6px 10px;
         font-size: 18px;
         font-weight: 600;
         text-align: left;
+        padding: 0px 5px;
+        right: -6px;
+        height: 35px;
+        border-radius: 30px;
     }
 
     #custom-amount:focus {
         background-color: #fff;
         color: black;
-        padding: 0px 5px;
+
+    }
+
+    .gift-amount {
+        position: relative;
+    }
+
+    .sar-title {
+        display: inline-block;
+        position: absolute;
+        left: 30px;
+        top: 1px;
+    }
+
+    #custom-amount::placeholder {
+        color: black;
+        font-size: 15px;
+        text-align: center;
+        font-weight: 100;
     }
 </style>
 
@@ -224,7 +247,9 @@
                 <div class="gift-amount" data-id="500">SAR <span>500</span></div>
                 <div class="gift-amount" data-id="550">SAR <span>550</span></div>
                 <div class="gift-amount" data-id="600">SAR <span>600</span></div>
-                <div class="gift-amount" data-id="650">SAR <input type="number" id="custom-amount" /></div>
+                <div class="gift-amount" id="dynamic-amount" data-id="600">
+                    <div class="sar-title"> SAR </div> <input type="number" id="custom-amount" placeholder="Amount?" />
+                </div>
             </div>
         </div>
         <input onclick="generateGiftCard()" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
@@ -241,10 +266,14 @@
 <script>
     $(document).ready(function() {
         $(".gift-amount").on('click', function(event) {
-            $(".gift-amount").css('backgroundColor', '#fff');
-            event.currentTarget.style.backgroundColor = "#f1f1f1";
+            $(".gift-amount").css('border', '1px solid #fff');
+            event.currentTarget.style.border = '1px solid #f8b237';
             const amount = $(event.currentTarget).data("id");
             $("#gift-amount-data").val(amount);
+        });
+        $("#custom-amount").on("input", function() {
+            $("#dynamic-amount").data("id", $(this).val());
+            $("#gift-amount-data").val($("#dynamic-amount").data("id"));
         });
     });
 
@@ -254,44 +283,41 @@
         url = base_url + 'api/giftcard'
         const amount = $("#gift-amount-data").val();
         const receiver = $("#receiver").val();
-        console.log(amount, receiver);
-        // if (parseInt(topup) > 0) {
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: url,
-        //         dataType: 'JSON',
-        //         data: {
-        //             "_token": "{{ csrf_token() }}",
-        //             "amount": topup,
-        //             "web": "1"
-        //         },
-        //         headers: {
-        //             "Authorization": 'Bearer ' + bearer_token
-        //         },
+        if (parseFloat(amount) > 0 && receiver.length > 0) {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'JSON',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "amount": amount,
+                    "name": receiver
+                },
+                headers: {
+                    "Authorization": 'Bearer ' + bearer_token
+                },
 
-        //         success: function(data) {
-        //             if (data.success) {
-        //                 if (data.message.original.transaction) {
-        //                     const transaction_url = data.message.original.transaction.url;
-        //                     window.location.replace(transaction_url);
+                success: function(data) {
+                    if (data.success) {
+                        if (data.message.original.transaction) {
+                            const transaction_url = data.message.original.transaction.url;
+                            window.location.replace(transaction_url);
 
-        //                 } else {
+                        } else {
+                            showAlertError('Error occurred, sorry for the inconvenience!');
+                        }
+                    }
 
-        //                 }
-        //             }
+                },
+                error: function(err) {
+                    showAlertError('Error occurred, sorry for the inconvenience!');
+                }
 
-        //         },
-        //         error: function(err) {
+            });
 
-        //             console.log('Error!', err)
-        //         }
-
-        //     });
-        // } else {
-        //     console.log("error!")
-        // }
-
-
+        } else {
+            showAlertError('Please provide Receiver Name & Choose a gift amount!')
+        }
     }
 </script>
 
