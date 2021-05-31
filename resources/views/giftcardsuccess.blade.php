@@ -78,6 +78,7 @@
     }
 </style>
 
+@if(isset($data))
 <div class="parent">
     <div class="child">
 
@@ -86,12 +87,12 @@
         <div class="gift-code">
             <div class="left-circle"></div>
             <div class="right-circle"></div>
-            DiHy27zs
+            {{$data->code}}
             <div class="share-button"><i class="fas fa-share"></i></div>
         </div>
         <div style="margin-top:40px;color:#98b4c3">
             <div style="text-align:center">
-                SAR <span style="font-size:22px;font-weight:900;">400</span>
+                SAR <span style="font-size:22px;font-weight:900;">{{$data->amount}}</span>
             </div>
             <div style="text-align:center">{{$data->name}}</div>
             <div style="max-width:400px;margin:auto; margin-top:10px;text-align: center;">
@@ -105,6 +106,7 @@
 
     </div>
 </div>
+@endif
 
 
 
