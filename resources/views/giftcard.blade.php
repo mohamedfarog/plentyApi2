@@ -299,9 +299,9 @@
 
                 success: function(data) {
                     if (data.success) {
-                        if (data.message) {
+                        if (data) {
                             console.log(data.message);
-                            window.location.replace(transaction_url);
+                            // window.location.replace(transaction_url);
 
                         } else {
                             showAlertError('Error occurred, sorry for the inconvenience!');
