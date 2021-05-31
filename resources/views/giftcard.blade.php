@@ -18,87 +18,6 @@
 
     }
 
-    .plenty-pay-wrapper {
-        padding-top: 100px;
-        background-image: linear-gradient(#252f65, #151d4c);
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        border-bottom-left-radius: 35%;
-        border-bottom-right-radius: 35%;
-        position: relative;
-        padding-bottom: 50px;
-    }
-
-    .add-balance {
-        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        margin: auto;
-        display: block;
-        background-color: white;
-        border-radius: 10px;
-        padding: 10px 50px;
-        font-weight: 600;
-        color: #001b71;
-
-    }
-
-    .redeem-point {
-        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        margin: auto;
-        display: block;
-        background-color: white;
-        border-radius: 10px;
-        padding: 10px 20px;
-        font-weight: 600;
-        color: #001b71;
-    }
-
-    .center {
-        margin: auto;
-        display: block;
-        max-width: 300px;
-    }
-
-    .wallet-balance {
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        margin-bottom: 50px;
-    }
-
-    .wallet-balance img {
-        display: inline;
-    }
-
-    #topup {
-        background-color: #2c3b9c;
-        border: none;
-        color: white;
-        border-radius: 10px;
-        text-align: center;
-        font-weight: 700;
-        font-size: 22px;
-        height: 50px;
-    }
-
-    #topup:focus {
-        color: #151d4c;
-        background-color: white;
-    }
-
-    .redeem {
-        position: absolute;
-        right: 20px;
-        top: 15px
-    }
-
-    @media only screen and (max-width: 700px) {
-        .redeem {
-            right: 120px;
-        }
-    }
 
     .flex-container {
         justify-content: center;
@@ -232,6 +151,22 @@
         font-weight: 600;
         margin-top: 18px;
         color: #001b71;
+    }
+
+    @media only screen and (max-width: 650px) {
+        .flex-container>div {
+            width: 70px;
+            line-height: 50px;
+        }
+
+        #custom-amount {
+            width: 60px;
+            font-size: 12px;
+        }
+
+        #custom-amount::placeholder {
+            font-size: 12px;
+        }
     }
 </style>
 
