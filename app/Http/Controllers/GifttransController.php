@@ -18,7 +18,7 @@ class GifttransController extends Controller
     {
         $giftcard= Giftcard::where('ref',$request->tap_id)->first();
         if($giftcard){
-            return redirect('giftcardsuccess')->with(['data'=>'Cash']);
+            return redirect('giftcardsuccess')->with(['data'=>$giftcard]);
         }
         else{
             return redirect('transactionfailed');
