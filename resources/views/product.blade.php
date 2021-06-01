@@ -205,8 +205,8 @@
                             <img class="imgz" src="img/product/Main.png" alt="" loading=lazy />
                             @endif
 
-                            <div class="fix featlineicons">
-                                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
+                            <div class="fix featlineicons" style="position:absolute;top: 0px;background-color: white;border-radius: 5px;margin: 2px;">
+                                <span onclick="MakeFavourite(this,{{$product->id}})" class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
                                 </span>
                             </div>
                         </div>

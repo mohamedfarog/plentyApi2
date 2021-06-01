@@ -439,9 +439,15 @@
         });
     }
     $(document).ready(function() {
-        eraseCookie('bearer_token');
-        eraseCookie('user');
-        console.log('logged out');
+        const user = getCookie('user');
+        if (!user) {
+            eraseCookie('bearer_token');
+            eraseCookie('user');
+        } else {
+            var base_url = $('meta[name=base_url]').attr('content');
+            window.location.replace(base_url);
+        }
+
     });
 </script>
 
