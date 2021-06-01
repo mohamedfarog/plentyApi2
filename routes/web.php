@@ -144,12 +144,14 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
     Route::get('/giftcardsuccess/{id?}', function ($id) {
         $user = Auth::user();
-       
         $giftcard = Giftcard::find($id);
-        if($user->id == $giftcard->user_id) {
-        return view('/giftcardsuccess')->with(['data'=>$giftcard]);
-
-        }else{
+        if (isset($giftcard)) {
+            if ($user->id == $giftcard->user_id) {
+                return view('/giftcardsuccess')->with(['data' => $giftcard]);
+            } else {
+                return view('nopermission');
+            }
+        } else {
             return view('nopermission');
         }
     });
