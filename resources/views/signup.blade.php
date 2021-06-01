@@ -220,6 +220,7 @@
     <div class="signup-logo">
         <img class="logo-dark loginlogo" src="img/logo_dark.png" alt="logo">
     </div>
+    <input type="hidden" id="previous_url" value="{{ url()->previous() }}">
 
     <form class="signup-form" id="signup-form">
 
@@ -402,7 +403,12 @@
                             "typeofuser": data.user.typeofuser
                         }
                         setCookie('user', JSON.stringify(user), 1);
-                        window.location.href = $('meta[name=base_url]').attr('content');
+                        if ($("#previous_url").val()) {
+                            window.location.href = $("#previous_url").val();
+                        } else {
+                            window.location.href = $('meta[name=base_url]').attr('content');
+                        }
+
                     } else {
                         register(data)
                     }

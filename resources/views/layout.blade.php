@@ -299,7 +299,7 @@
                                         <li class="hidden-lg hidden-md" id="auth2"><a href="/trackorder">Track Order</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth3"><a href="/userlevel">User Level</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth5"><a href="/giftcard">Gift Card</a></li>
-                                        <li class="hidden-lg hidden-md" id="auth4"><a href="/login">Logout</a></li>
+                                        <li class="hidden-lg hidden-md" id="auth4"><a onclick="logoutUser()">Logout</a></li>
                                         <li class="hidden-lg hidden-m" id="no-auth1"><a href="/login">Login</a></li>
 
 
@@ -1107,7 +1107,7 @@
             eraseCookie('bearer_token');
             eraseCookie('user');
             var base_url = $('meta[name=base_url]').attr('content');
-            window.location.replace(base_url + 'login');
+            window.location.replace(base_url);
         }
 
         function eraseCookie(name) {
