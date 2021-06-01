@@ -142,17 +142,21 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
     Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
-    Route::get('/giftcardsuccess/{id?}', function ($id) {
-        $user = Auth::user();
-        $giftcard = Giftcard::find($id);
-        if (isset($giftcard)) {
-            if ($user->id == $giftcard->user_id) {
-                return view('/giftcardsuccess')->with(['data' => $giftcard]);
+    Route::get('/giftcardsuccess/{id?}', function ($id = null) {
+        if (isset($id)) {
+            $user = Auth::user();
+            $giftcard = Giftcard::find($id);
+            if (isset($giftcard)) {
+                if ($user->id == $giftcard->user_id) {
+                    return view('/giftcardsuccess')->with(['data' => $giftcard]);
+                } else {
+                    return view('nopermission');
+                }
             } else {
                 return view('nopermission');
             }
         } else {
-            return view('nopermission');
+            return view('pagenotfound');
         }
     });
     Route::get('/checkout', function () {
