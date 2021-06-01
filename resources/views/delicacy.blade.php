@@ -708,7 +708,9 @@
             url: base_url + 'product-by-category/' + category,
             dataType: 'JSON',
             headers: {
-                'Access-Control-Allow-Origin': 'https://plentyapp.mvp-apps.ae'
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+
             },
             success: function(data) {
                 if (data.length) {
