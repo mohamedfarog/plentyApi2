@@ -707,6 +707,7 @@
             type: 'GET',
             url: base_url + 'product-by-category/' + category,
             dataType: 'JSON',
+            crossDomain: true,
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': '*',
