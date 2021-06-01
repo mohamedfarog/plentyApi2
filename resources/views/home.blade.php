@@ -289,7 +289,7 @@
     @if(isset($featured_products))
     @foreach($featured_products as $product)
 
-    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
+    <div class="single-product ssproduct  col-lg-4 col-xs-12">
 
         <a href="{{ url('/product/' . $product->id) }}">
             <div class="product-img frame">
@@ -359,7 +359,7 @@
     $primarycolor = substr($primary, -6);
     ?>
 
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
+    <div class="brand-slide  col-lg-4 col-xs-12" style="margin:0 5px;">
         @if($hb->cat_id == 1)
         <a href="/delicacy/{{$hb->shop_id}}">
             @elseif($hb->cat_id == 2)
