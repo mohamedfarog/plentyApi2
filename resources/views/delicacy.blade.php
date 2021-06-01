@@ -709,7 +709,7 @@
             dataType: 'JSON',
             crossDomain: true,
             headers: {
-                'Access-Control-Allow-Origin': base_url,
+                'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': '*',
 
             },
