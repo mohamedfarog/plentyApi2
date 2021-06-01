@@ -292,7 +292,7 @@
     <div class="single-product ssproduct  col-lg-4 col-xs-12">
 
         <a href="{{ url('/product/' . $product->id) }}">
-            <div class="product-img frame">
+            <div class="product-img frame" style="margin: auto;width: 100%">
 
                 @if ($product->images)
                 <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="{{$product->images[0]->img_url}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
