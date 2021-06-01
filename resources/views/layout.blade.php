@@ -187,6 +187,11 @@
         button {
             cursor: pointer !important;
         }
+
+        .mobile-nav>li:hover {
+            cursor: pointer;
+
+        }
     </style>
 
 </head>
@@ -266,7 +271,7 @@
                             <div class="nav-wrap flex-child" style="flex: 3 0 0;">
                                 <div class="collapse navbar-collapse text-center" id="navbar-collapse">
 
-                                    <ul class="nav navbar-nav">
+                                    <ul class="nav navbar-nav mobile-nav">
 
                                         <li class="">
                                             <a class="mainanc" href="/">Home</a>
@@ -299,6 +304,7 @@
                                         <li class="hidden-lg hidden-md" id="auth2"><a href="/trackorder">Track Order</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth3"><a href="/userlevel">User Level</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth5"><a href="/giftcard">Gift Card</a></li>
+                                        <li class="hidden-lg hidden-md" id="auth5"><a href="/favourites">Favourites</a></li>
                                         <li class="hidden-lg hidden-md" id="auth4"><a onclick="logoutUser()">Logout</a></li>
                                         <li class="hidden-lg hidden-m" id="no-auth1"><a href="/login">Login</a></li>
 
