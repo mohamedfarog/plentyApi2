@@ -1157,6 +1157,12 @@
             }
             $(this).scrollTop(0);
         });
+
+
+        function goHome() {
+            var base_url = $('meta[name=base_url]').attr('content');
+            window.location.replace(base_url);
+        }
     </script>
 
 

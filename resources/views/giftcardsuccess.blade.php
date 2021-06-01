@@ -99,7 +99,7 @@
             </div>
         </div>
         <div class="home-button">
-            <input class="btn btn-lg btn-dark" value="Home" style="font-weight:500;font-size:14px">
+            <input onclick="goHome()" class="btn btn-lg btn-dark" value="Home" style="font-weight:500;font-size:14px">
         </div>
 
 
