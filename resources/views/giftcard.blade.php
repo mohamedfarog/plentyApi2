@@ -168,6 +168,10 @@
             font-size: 12px;
         }
     }
+
+    .gift-cards:hover {
+        cursor: pointer;
+    }
 </style>
 
 <div class="container">
@@ -226,14 +230,13 @@
             </div>
         </div>
         <div class="col-lg-5 col-md-5">
-
             @if(isset($giftcards))
             <div class="gift-card-header">
                 Gift History
             </div>
             <div class="gift-card-right">
                 @foreach($giftcards as $giftcard)
-                <div class="gift-cards">
+                <div class="gift-cards" onclick='goGiftCardSuccess( {{$giftcard->id}})'>
                     <div class="row">
                         <div class="col-sm-4">
                             <span>Name:</span> {{$giftcard->name}}
@@ -317,6 +320,11 @@
         } else {
             showAlertError('Please provide Receiver Name & Choose a gift amount!')
         }
+    }
+
+    function goGiftCardSuccess(id) {
+        var base_url = $('meta[name=base_url]').attr('content');
+        window.location.replace(base_url + 'giftcardsuccess/' + id);
     }
 </script>
 
