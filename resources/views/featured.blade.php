@@ -44,6 +44,12 @@
             width: 100%;
         }
     }
+
+    .pp-product-panel {
+        width: 1000px;
+        margin: auto;
+        text-align: center;
+    }
 </style>
 
 
@@ -137,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <section style="margin: auto;width:90%;text-align:center;" id="product-panel">
+            <section style="margin: auto;width:90%;text-align:center;" class="pp-product-panel" id="product-panel">
                 @foreach($products as $product)
 
                 <div class="producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6 " style="margin-bottom:30px;">

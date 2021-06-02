@@ -36,6 +36,12 @@
             width: 100%;
         }
     }
+
+    .pp-product-panel {
+        width: 1000px;
+        margin: auto;
+        text-align: center;
+    }
 </style>
 
 <!-- Featured Product -->
@@ -49,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <section style="margin: auto;width:90%;text-align:center;" id="fav-product-panel">
+            <section style="margin: auto;width:90%;text-align:center;" class="pp-product-panel" id="fav-product-panel">
             </section>
         </div>
     </div>

@@ -65,6 +65,9 @@
         }
     }
 
+    .track-order-hover:hover {
+        cursor: pointer !important;
+    }
 </style>
 
 <section class="page-title text-center bg-light">
@@ -127,7 +130,7 @@
                                 <div class="row" style="text-align: right;">
                                     <img src="img/nav/delivery.png" style="padding-right:20px;">
                                 </div>
-                                <div class="row " style="text-align: right;margin-top:10px;">
+                                <div class="row track-order-hover" style="text-align: right;margin-top:10px;">
                                     Track Order >
                                 </div>
                             </a>
@@ -145,7 +148,7 @@
                                 <div class=" trackprodslide  col-lg-3 col-xs-12 hidden-md hidden-sm">
 
                                     <div class="product-img frame">
-                                    @if(isset($orddets->product->id))
+                                        @if(isset($orddets->product->id))
                                         <a href="/product/{{$orddets->product->id}}">
 
                                             @foreach($orddets->product->images as $prodimg)
@@ -154,11 +157,11 @@
                                             </div>
                                             @endforeach
                                         </a>
-                                    @else
+                                        @else
                                         <a href="/">
 
                                         </a>
-                                    @endif
+                                        @endif
                                         <div class="product-action clearfix">
 
                                         </div>
@@ -249,6 +252,7 @@
 
                     <div class="prodsingle prod-{{$orddets->order_id}}">
                         <div class="row" style="width:100%;border-bottom:2px solid grey;padding:20px 0;">
+                            @if(isset($orddets->product))
                             <div class="col-lg-2 col-xs-6">
                                 <a href="/product/{{$orddets->product->id}}">
                                     @if(isset($orddets->product->images))
@@ -260,6 +264,7 @@
                                     @endif
                                 </a>
                             </div>
+
                             <div class="col-lg-6 col-xs-6">
                                 <a href="/product/{{$orddets->product->id}}" class="itemtitle">{{$orddets->product->name_en}}<br></a>
                                 <span class="amount" style="font-family:'Avenir Bold'">SAR {{$orddets->product->price}}</span>
@@ -276,6 +281,7 @@
                                 </ul>
 
                             </div>
+                            @endif
                         </div>
                     </div>
                     @endforeach
@@ -332,6 +338,5 @@
         $(prodordid).show();
 
     });
-
 </script>
 @endsection
