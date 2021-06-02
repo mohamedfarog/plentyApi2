@@ -142,6 +142,7 @@ Route::group(['middleware' => [AuthWeb::class, 'auth:api']], function () {
     Route::post('/place-order', [WebsiteHomeController::class, "placeOreder"]);
     Route::get('/trackorder', [WebsiteHomeController::class, "trackorder"]);
     Route::get('/giftcard', [WebsiteHomeController::class, "giftCard"]);
+    Route::get('/myreservations', [WebsiteHomeController::class, "myReservation"]);
     Route::get('/giftcardsuccess/{id?}', function ($id = null) {
         if (isset($id)) {
             $user = Auth::user();

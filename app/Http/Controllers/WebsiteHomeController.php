@@ -863,4 +863,8 @@ class WebsiteHomeController extends Controller
         $data["giftcards"] = Giftcard::where('user_id', $user->id)->get();
         return view('giftcard')->with($data);
     }
+    public function myReservation(Request $request)
+    {
+        return view('myreservation');
+    }
 }
