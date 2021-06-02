@@ -50,12 +50,12 @@
     }
 
     .addtobagbtn {
-        border: 2px solid green;
+        border: 2px solid #001b71;
         border-radius: 20px;
         padding: 10px 40px !important;
         font-size: 20px !important;
         background-color: transparent !important;
-        color: green !important;
+        color: #001b71 !important;
         font-weight: lighter;
     }
 
@@ -75,7 +75,7 @@
     }
 
     #quantity {
-        color: green;
+        color: #001b71;
         font-size: 18px;
     }
 
@@ -221,10 +221,10 @@
                     </div>
                     <div class="fix mb-30">
                         @if($sizes->count())
-                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#001b71;font-weight:lighter;">AED
                             {{$sizes->first()->price}}</span>
                         @else
-                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#001b71;font-weight:lighter;">AED
                             {{$product->price}}</span>
                         @endif
                     </div>
