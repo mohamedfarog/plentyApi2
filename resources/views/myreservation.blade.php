@@ -89,6 +89,14 @@
         font-size: 14px;
         font-weight: 600;
     }
+
+    .pager {
+        padding: 10px 10px;
+    }
+
+    .pager>li:hover {
+        cursor: pointer;
+    }
 </style>
 <div class="myreservations">
     <h3>My Reservation</h3>
@@ -99,6 +107,12 @@
     <div class="grid-container" id="reservation-panel">
 
     </div>
+    <nav>
+        <ul class="pager">
+            <li class="previous" id="previous"><a onclick="paginate(this)" data-page="1" id="prev-page">Previous</a></li>
+            <li class="next" id="next"><a data-page="1" onclick="paginate(this)" id="next-page">Next</a></li>
+        </ul>
+    </nav>
 </section>
 
 <div class="top-footer">
@@ -107,6 +121,10 @@
 
 <script>
     $(document).ready(function() {
+        loadReservation()
+    });
+
+    function loadReservation(page = 1) {
         var base_url = $('meta[name=api_base_url]').attr('content');
         const bearer_token = getCookie('bearer_token');
         $.ajax({
@@ -114,19 +132,33 @@
             url: base_url + 'api/tablebooking',
             dataType: 'JSON',
             data: {
-                page: 1,
+                page: page,
             },
             headers: {
                 "Authorization": 'Bearer ' + bearer_token
             },
             success: function(data) {
+                const currentPage = data.current_page;
+                const lastPage = data.last_page;
+                let prev = currentPage;
+                if (currentPage === 1) {
+                    prev = currentPage;
+                } else if (currentPage >= lastPage) {
+                    prev = lastPage - 1;
+                } else {
+                    prev = currentPage - 1;
+                }
+
+                const next = (currentPage >= lastPage ? lastPage : currentPage + 1);
+                $("#prev-page").attr("data-page", prev);
+                $("#next-page").attr("data-page", next);
                 renderReservations(data.data);
             },
             error: function(err) {
                 console.log(err)
             }
         });
-    });
+    }
 
     function renderReservations(data) {
         var template = ""
@@ -155,6 +187,10 @@
             $("#no-reservation").html('No Reservations')
         }
 
+    }
+
+    function paginate(ele) {
+        loadReservation($(ele).data("page"));
     }
 </script>
 @endsection
