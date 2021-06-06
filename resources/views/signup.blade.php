@@ -215,16 +215,42 @@
             padding: 0 !important;
         }
     }
+
+    #contactnumbersignin {
+        padding-left: 75px;
+
+    }
+
+    .number-prefix {
+        position: absolute;
+        top: 1.3rem;
+        left: 25px;
+        color: black;
+    }
+
+    .number-error {
+        color: red;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: 8px;
+        visibility: hidden;
+    }
 </style>
 <section class="signup container" style="background:transparent">
     <div class="signup-logo">
         <img class="logo-dark loginlogo" src="img/logo_dark.png" alt="logo">
     </div>
+    <input type="hidden" id="previous_url" value="{{ url()->previous() }}">
 
     <form class="signup-form" id="signup-form">
 
+        <div style="position:relative;">
+            <div class="number-prefix"><span style="padding:4px 8px;">+966</span></div>
+            <input id="contactnumbersignin" type="text" name="contact" placeholder="MOBILE NO." />
+            <div class="number-error" id="contact-error">Please provide a valid number!</div>
+        </div>
 
-        <input id="contactnumbersignin" type="text" name="contact" placeholder="MOBILE NO." />
 
         <!-- 2 column grid layout for inline styling -->
         <div>
@@ -259,7 +285,7 @@
                 </div>
                 <div>
                     <p class="modaltextp">
-                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to <span id="modalinputnumber">+915 00 000 0000</span>
+                        Please enter the One-Time Password(OTP) to verify your account. An OTP has been sent to <span id="modalinputnumber">+966 00 000 0000</span>
                     </p>
                 </div>
                 <div class="modal-body">
@@ -366,19 +392,24 @@
         document.getElementById('modalinputnumber').innerHTML = cc;
         e.preventDefault();
         const form = new FormData(document.getElementById("signup-form"))
+        const error = checkPhoneNumber('+966' + form.get('contact'));
+        contactError(error);
         var base_url = $('meta[name=base_url]').attr('content');
-        $.ajax({
-            type: 'POST',
-            url: base_url + 'api/otp',
-            data: {
-                contact: form.get('contact')
-            },
-            dataType: 'JSON',
-            success: function(data) {
-                $('#otpModal').modal('show');
-                console.log(data)
-            }
-        });
+        if (error) {
+            $.ajax({
+                type: 'POST',
+                url: base_url + 'api/otp',
+                data: {
+                    contact: form.get('contact')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    $('#otpModal').modal('show');
+                    console.log(data)
+                }
+            });
+        }
+
     }
 
     function verifyOTP() {
@@ -402,7 +433,12 @@
                             "typeofuser": data.user.typeofuser
                         }
                         setCookie('user', JSON.stringify(user), 1);
-                        window.location.href = $('meta[name=base_url]').attr('content');
+                        if ($("#previous_url").val()) {
+                            window.location.href = $("#previous_url").val();
+                        } else {
+                            window.location.href = $('meta[name=base_url]').attr('content');
+                        }
+
                     } else {
                         register(data)
                     }
@@ -439,10 +475,30 @@
         });
     }
     $(document).ready(function() {
-        eraseCookie('bearer_token');
-        eraseCookie('user');
-        console.log('logged out');
+        const user = getCookie('user');
+        if (!user) {
+            eraseCookie('bearer_token');
+            eraseCookie('user');
+        } else {
+            var base_url = $('meta[name=base_url]').attr('content');
+            window.location.replace(base_url);
+        }
+
     });
+
+    function checkPhoneNumber(number) {
+        var regex = new RegExp(/^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/);
+        return regex.test(number);
+    }
+
+    function contactError(status = false) {
+        if (status) {
+            $('#contact-error').css("visibility", "hidden");
+        } else {
+            $('#contact-error').css("visibility", "visible");
+        }
+
+    }
 </script>
 
 @endsection

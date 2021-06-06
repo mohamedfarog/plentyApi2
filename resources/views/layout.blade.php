@@ -143,6 +143,7 @@
 
         .dropdownanch:hover {
             color: black !important;
+            cursor: pointer;
         }
 
         .mainanc:hover {
@@ -186,6 +187,11 @@
 
         button {
             cursor: pointer !important;
+        }
+
+        .mobile-nav>li:hover {
+            cursor: pointer;
+
         }
     </style>
 
@@ -266,7 +272,7 @@
                             <div class="nav-wrap flex-child" style="flex: 3 0 0;">
                                 <div class="collapse navbar-collapse text-center" id="navbar-collapse">
 
-                                    <ul class="nav navbar-nav">
+                                    <ul class="nav navbar-nav mobile-nav">
 
                                         <li class="">
                                             <a class="mainanc" href="/">Home</a>
@@ -299,7 +305,8 @@
                                         <li class="hidden-lg hidden-md" id="auth2"><a href="/trackorder">Track Order</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth3"><a href="/userlevel">User Level</a></li><br>
                                         <li class="hidden-lg hidden-md" id="auth5"><a href="/giftcard">Gift Card</a></li>
-                                        <li class="hidden-lg hidden-md" id="auth4"><a href="/login">Logout</a></li>
+                                        <li class="hidden-lg hidden-md" id="auth5"><a href="/favourites">Favourites</a></li>
+                                        <li class="hidden-lg hidden-md" id="auth4"><a onclick="logoutUser()">Logout</a></li>
                                         <li class="hidden-lg hidden-m" id="no-auth1"><a href="/login">Login</a></li>
 
 
@@ -922,7 +929,7 @@
             this.id = item.id;
             this.price = item.price;
             this.name_en = item.name_en;
-            this.image = item.image;
+            this.images = item.images;
             this.shop_id = item.shop_id;
 
         }
@@ -951,10 +958,11 @@
                 dataType: 'JSON',
                 success: function(data) {
                     if (data.Response) {
-                        let favourite_item = new FavouriteItem(data.product)
-                        let favourites = FavouriteSerializer(getFavouritesLocal())
+                        console.log(data);
+                        let favourite_item = new FavouriteItem(data.product);
+                        let favourites = FavouriteSerializer(getFavouritesLocal());
                         favourites.addItem(favourite_item);
-                        storeFavouritesLocal(favourites)
+                        storeFavouritesLocal(favourites);
 
 
                     } else {
@@ -995,7 +1003,7 @@
                         id: element.id,
                         price: element.price,
                         name_en: element.name_en,
-                        image: element.image || null,
+                        images: element.images || null,
                     }
 
                     favourites.addItem(new FavouriteItem(item))
@@ -1106,7 +1114,7 @@
             eraseCookie('bearer_token');
             eraseCookie('user');
             var base_url = $('meta[name=base_url]').attr('content');
-            window.location.replace(base_url + 'login');
+            window.location.replace(base_url);
         }
 
         function eraseCookie(name) {
@@ -1156,6 +1164,12 @@
             }
             $(this).scrollTop(0);
         });
+
+
+        function goHome() {
+            var base_url = $('meta[name=base_url]').attr('content');
+            window.location.replace(base_url);
+        }
     </script>
 
 

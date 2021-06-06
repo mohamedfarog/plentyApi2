@@ -50,12 +50,12 @@
     }
 
     .addtobagbtn {
-        border: 2px solid green;
+        border: 2px solid #001b71;
         border-radius: 20px;
         padding: 10px 40px !important;
         font-size: 20px !important;
         background-color: transparent !important;
-        color: green !important;
+        color: #001b71 !important;
         font-weight: lighter;
     }
 
@@ -75,7 +75,7 @@
     }
 
     #quantity {
-        color: green;
+        color: #001b71;
         font-size: 18px;
     }
 
@@ -205,8 +205,8 @@
                             <img class="imgz" src="img/product/Main.png" alt="" loading=lazy />
                             @endif
 
-                            <div class="fix featlineicons">
-                                <span class="pro-price floatleft" onclick="MakeFavourite({{$product->id}})"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
+                            <div class="fix featlineicons" style="position:absolute;top: 0px;background-color: white;border-radius: 5px;margin: 2px;">
+                                <span onclick="MakeFavourite(this,{{$product->id}})" class="pro-price floatleft"><img class="featicons" src="img/nav/fav.png" style="width:25px;" loading=lazy>
                                 </span>
                             </div>
                         </div>
@@ -221,10 +221,10 @@
                     </div>
                     <div class="fix mb-30">
                         @if($sizes->count())
-                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#001b71;font-weight:lighter;">AED
                             {{$sizes->first()->price}}</span>
                         @else
-                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#2c864d;font-weight:lighter;">AED
+                        <span class="pro-price" id="pro-price" style="font-size:24px;color:#001b71;font-weight:lighter;">AED
                             {{$product->price}}</span>
                         @endif
                     </div>
@@ -412,6 +412,17 @@
         }
         if ($("#color_id").val()) {
             renderColor(JSON.parse($("#product_data").val()).colors, $("#size_id").val())
+        }
+
+        let ids = getProductId();
+        let data = $(".featicons");
+        for (var i = 0; i < data.length; i++) {
+
+            let pid = $(data[i]).data('id');
+            if (ids && ids.includes(pid)) {
+                $(data[i]).attr("src", "img/nav/fav2.png")
+                $(data[i]).attr('data-selected', "1")
+            }
         }
 
     });

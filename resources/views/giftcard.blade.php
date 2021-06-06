@@ -18,87 +18,6 @@
 
     }
 
-    .plenty-pay-wrapper {
-        padding-top: 100px;
-        background-image: linear-gradient(#252f65, #151d4c);
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        border-bottom-left-radius: 35%;
-        border-bottom-right-radius: 35%;
-        position: relative;
-        padding-bottom: 50px;
-    }
-
-    .add-balance {
-        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        margin: auto;
-        display: block;
-        background-color: white;
-        border-radius: 10px;
-        padding: 10px 50px;
-        font-weight: 600;
-        color: #001b71;
-
-    }
-
-    .redeem-point {
-        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        margin: auto;
-        display: block;
-        background-color: white;
-        border-radius: 10px;
-        padding: 10px 20px;
-        font-weight: 600;
-        color: #001b71;
-    }
-
-    .center {
-        margin: auto;
-        display: block;
-        max-width: 300px;
-    }
-
-    .wallet-balance {
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        margin-bottom: 50px;
-    }
-
-    .wallet-balance img {
-        display: inline;
-    }
-
-    #topup {
-        background-color: #2c3b9c;
-        border: none;
-        color: white;
-        border-radius: 10px;
-        text-align: center;
-        font-weight: 700;
-        font-size: 22px;
-        height: 50px;
-    }
-
-    #topup:focus {
-        color: #151d4c;
-        background-color: white;
-    }
-
-    .redeem {
-        position: absolute;
-        right: 20px;
-        top: 15px
-    }
-
-    @media only screen and (max-width: 700px) {
-        .redeem {
-            right: 120px;
-        }
-    }
 
     .flex-container {
         justify-content: center;
@@ -194,7 +113,7 @@
     .sar-title {
         display: inline-block;
         position: absolute;
-        left: 30px;
+        left: 10px;
         top: 1px;
     }
 
@@ -204,59 +123,146 @@
         text-align: center;
         font-weight: 100;
     }
+
+    .gift-card-right {
+        height: 750px;
+        border-radius: 10px;
+        padding: 15px 20px;
+        overflow-y: auto;
+    }
+
+    .gift-cards {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-bottom: 8px;
+        box-shadow: 0 0px 4px 1px rgb(0 0 0 / 20%);
+        transition: 0.3s;
+    }
+
+    .gift-cards span {
+        color: black;
+        font-weight: 100px;
+    }
+
+    .gift-card-header {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 18px;
+        color: #001b71;
+    }
+
+    @media only screen and (max-width: 650px) {
+        .flex-container>div {
+            width: 70px;
+            line-height: 50px;
+        }
+
+        #custom-amount {
+            width: 60px;
+            font-size: 12px;
+        }
+
+        #custom-amount::placeholder {
+            font-size: 12px;
+        }
+    }
+
+    .gift-cards:hover {
+        cursor: pointer;
+    }
 </style>
 
-<div class="parent">
-    <div class="child">
+<div class="container">
+    <div class="row">
 
-        <img src="img/giftcard/gift-card.png" width="100%" alt="" />
+        <div class="col-lg-7 col-md-7">
+            <div class="parent">
+                <div class="child">
 
-        <div class="get-gift-code">
+                    <img src="img/giftcard/gift-card.png" width="100%" alt="" />
 
-            <div class="receiver-name">
-                <label>Receiver Name</label>
-                <input type="text" name="receiver" id="receiver" />
-            </div>
+                    <div class="get-gift-code">
+
+                        <div class="receiver-name">
+                            <label>Receiver Name</label>
+                            <input type="text" name="receiver" id="receiver" />
+                        </div>
 
 
-        </div>
-        <div style="max-width:445px;margin:auto;background-color:#fff4e0;padding: 5px 8px;">
-            <p style="color:#e2b159;">
-                The receiver should redeem the gift code in "Plenty Wallet"
-                section the gift amount will be credited to the receiver in App Wallet.
-            </p>
-        </div>
-        <div style="margin-top:32px;overflow:auto;">
-            <div style="text-align:center;color:black;font-size:16px;font-weight:600">
-                Please select the gift amount
-            </div>
-            <input type="hidden" id="gift-amount-data">
-            <div class="flex-container">
-                <div class="gift-amount" data-id="100">SAR <span>100</span></div>
-                <div class="gift-amount" data-id="150">SAR <span>150</span></div>
-                <div class="gift-amount" data-id="200">SAR <span>200</span></div>
-                <div class="gift-amount" data-id="250">SAR <span>250</span></div>
-            </div>
-            <div class="flex-container">
-                <div class="gift-amount" data-id="300">SAR <span>300</span></div>
-                <div class="gift-amount" data-id="350">SAR <span>350</span></div>
-                <div class="gift-amount" data-id="400">SAR <span>400</span></div>
-                <div class="gift-amount" data-id="450">SAR <span>450</span></div>
-            </div>
-            <div class="flex-container">
-                <div class="gift-amount" data-id="500">SAR <span>500</span></div>
-                <div class="gift-amount" data-id="550">SAR <span>550</span></div>
-                <div class="gift-amount" data-id="600">SAR <span>600</span></div>
-                <div class="gift-amount" id="dynamic-amount" data-id="600">
-                    <div class="sar-title"> SAR </div> <input type="number" id="custom-amount" placeholder="Amount?" />
+                    </div>
+                    <div style="max-width:445px;margin:auto;background-color:#fff4e0;padding: 5px 8px;">
+                        <p style="color:#e2b159;">
+                            The receiver should redeem the gift code in "Plenty Wallet"
+                            section the gift amount will be credited to the receiver in App Wallet.
+                        </p>
+                    </div>
+                    <div style="margin-top:32px;overflow:auto;">
+                        <div style="text-align:center;color:black;font-size:16px;font-weight:600">
+                            Please select the gift amount
+                        </div>
+                        <input type="hidden" id="gift-amount-data">
+                        <div class="flex-container">
+                            <div class="gift-amount" data-id="100">SAR <span>100</span></div>
+                            <div class="gift-amount" data-id="150">SAR <span>150</span></div>
+                            <div class="gift-amount" data-id="200">SAR <span>200</span></div>
+                            <div class="gift-amount" data-id="250">SAR <span>250</span></div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="gift-amount" data-id="300">SAR <span>300</span></div>
+                            <div class="gift-amount" data-id="350">SAR <span>350</span></div>
+                            <div class="gift-amount" data-id="400">SAR <span>400</span></div>
+                            <div class="gift-amount" data-id="450">SAR <span>450</span></div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="gift-amount" data-id="500">SAR <span>500</span></div>
+                            <div class="gift-amount" data-id="550">SAR <span>550</span></div>
+                            <div class="gift-amount" data-id="600">SAR <span>600</span></div>
+                            <div class="gift-amount" id="dynamic-amount" data-id="600">
+                                <div class="sar-title"> SAR </div> <input type="number" id="custom-amount" placeholder="Amount?" />
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" onclick="generateGiftCard()" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
+
                 </div>
             </div>
         </div>
-        <input type="button" onclick="generateGiftCard()" class="btn btn-lg btn-dark" value="Get Gift Code" style="font-weight:500;font-size:14px">
-
+        <div class="col-lg-5 col-md-5">
+            @if(isset($giftcards))
+            <div class="gift-card-header">
+                Gift History
+            </div>
+            <div class="gift-card-right">
+                @foreach($giftcards as $giftcard)
+                <div class="gift-cards" onclick='goGiftCardSuccess( {{$giftcard->id}})'>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Name:</span> {{$giftcard->name}}
+                        </div>
+                        <div class="col-sm-4">
+                            <span>Code:</span> {{$giftcard->code}} <br />
+                            <span>Amount:</span> {{$giftcard->amount}}
+                        </div>
+                        <div class="col-sm-4">
+                            <span>Status:</span>
+                            @if($giftcard->status == 0)
+                            Invalid
+                            @elseif($giftcard->status == 1)
+                            Paid
+                            @elseif($giftcard->status == 2)
+                            Redeem
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
+        </div>
     </div>
 </div>
-
 
 
 <div class="top-footer">
@@ -314,6 +320,11 @@
         } else {
             showAlertError('Please provide Receiver Name & Choose a gift amount!')
         }
+    }
+
+    function goGiftCardSuccess(id) {
+        var base_url = $('meta[name=base_url]').attr('content');
+        window.location.replace(base_url + 'giftcardsuccess/' + id);
     }
 </script>
 

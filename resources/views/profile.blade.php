@@ -215,7 +215,7 @@
                                         <h3 class="norm-text">Track My Order:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text"> Delivering</h2>
+                                        <h2 class="norm-text" style="text-decoration: underline;"> <a href="/trackorder">view orders</a> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -223,10 +223,10 @@
                             <div class="leftpane" style="padding:20px;">
                                 <div class="row" style=" ">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h3 class="norm-text">My Bookings:</h3>
+                                        <h3 class="norm-text">My Reservation:</h3>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h2 class="norm-text" style="text-decoration: underline;">add booking</h2>
+                                        <h2 class="norm-text" style="text-decoration: underline;"> <a href="/myreservations">view details</a> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -235,18 +235,20 @@
                                     <div id="divCal"></div>
                                 </div>
                             </div>
-
+                            @if(isset($orders))
                             <div style="background:#f2f3f8;min-height:300px;">
                                 <div id="my-orders">
                                 </div>
 
                             </div>
+
                             <div class="" style="background:#f2f3f8;text-align:center;padding-bottom:20px;">
 
                                 <a onclick="renderBookings(3)" style="cursor:pointer">
                                     <h2 class="norm-text" style="text-decoration: underline;">view all</h2>
                                 </a>
                             </div>
+                            @endif
                         </div>
                     </div>
 
@@ -294,9 +296,11 @@
 
     function renderBookings(limit = 2) {
         template = '';
-
-        for (var i = 0; i < orders.length; i++) {
-            template += `<div class="leftpane" style="padding:20px;background:#f2f3f8;display:block">
+        if (orders.length < 1) {
+            template = "<div style='text-align:center;margin-top:120px;position:absolute;width:100%;'><h3>No items</h3></div>"
+        } else {
+            for (var i = 0; i < orders.length; i++) {
+                template += `<div class="leftpane" style="padding:20px;background:#f2f3f8;display:block">
                         <div class="" style="padding-bottom:10px;">
                             <div style="width:40%;">
                                 <h3 class="norm-text bold-text">Beauty</h3>
@@ -306,10 +310,13 @@
                             </div>
                         </div>
                     </div>`
-            if (i == 1 && limit > 2) {
-                break;
+                if (i == 1 && limit > 2) {
+                    break;
+                }
             }
         }
+
+
 
         document.getElementById("my-orders").innerHTML = template;
     }

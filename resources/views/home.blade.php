@@ -289,10 +289,10 @@
     @if(isset($featured_products))
     @foreach($featured_products as $product)
 
-    <div class="single-product ssproduct  col-lg-4 col-xs-12 hidden-md hidden-sm">
+    <div class="single-product ssproduct  col-lg-4 col-xs-12">
 
         <a href="{{ url('/product/' . $product->id) }}">
-            <div class="product-img frame">
+            <div class="product-img frame" style="margin: auto;width: 100%">
 
                 @if ($product->images)
                 <a href="{{ url('/product/' . $product->id) }}"><img class="imgz" src="{{$product->images[0]->img_url}}" onerror="this.src='img/product/plentylogo.png'" alt="" loading=lazy /></a>
@@ -359,7 +359,7 @@
     $primarycolor = substr($primary, -6);
     ?>
 
-    <div class="brand-slide  col-lg-4 col-xs-12 hidden-md hidden-sm" style="margin:0 5px;">
+    <div class="brand-slide  col-lg-4 col-xs-12" style="margin:0 5px;">
         @if($hb->cat_id == 1)
         <a href="/delicacy/{{$hb->shop_id}}">
             @elseif($hb->cat_id == 2)

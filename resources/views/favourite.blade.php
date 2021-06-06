@@ -37,6 +37,11 @@
         }
     }
 
+    .pp-product-panel {
+        width: 1000px;
+        margin: auto;
+        text-align: center;
+    }
 </style>
 
 <!-- Featured Product -->
@@ -50,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <section style="margin: auto;width:90%;text-align:center;" id="fav-product-panel">
+            <section style="margin: auto;width:90%;text-align:center;" class="pp-product-panel" id="fav-product-panel">
             </section>
         </div>
     </div>
@@ -78,7 +83,7 @@
             prod_element +=
                 "<div class='producthover single-product col-lg-3 col-xs-6 col-md-6 col-sm-6  ' style='margin-bottom:30px;'>" +
                 "<div class='product-img frame'>" +
-                `<a href='/product/${element.id}'><img src='` + url + element.image + "' alt='' loading=lazy  class='imgz'/></a>" +
+                `<a href='/product/${element.id}'><img src='` + element.images[0].imgurl + "' alt='' loading=lazy  class='imgz'/></a>" +
 
                 "<div class='fix buttonsshow' style=''>" +
                 "<span class='pro-price '><img class='featicons' src='img/nav/bag.png' loading=lazy style='width:25px;min-width:25px;filter: brightness(0) invert(1);'></span>" +
@@ -113,6 +118,5 @@
     function removeProd(ele) {
         ele.parentElement.parentElement.parentElement.remove();
     }
-
 </script>
 @endsection

@@ -78,33 +78,34 @@
     }
 </style>
 
+@if(isset($data))
 <div class="parent">
     <div class="child">
 
         <img src="img/giftcard/people.jpg" alt="" />
-
-        <div class="gift-code">
+        <input type="text" value="{{$data->code}}" id="gift-code" style="display:none" />
+        <div class="gift-code" onclick="copyToClipBoard()">
             <div class="left-circle"></div>
             <div class="right-circle"></div>
-            DiHy27zs
+            {{$data->code}}
             <div class="share-button"><i class="fas fa-share"></i></div>
         </div>
         <div style="margin-top:40px;color:#98b4c3">
             <div style="text-align:center">
-                SAR <span style="font-size:22px;font-weight:900;">400</span>
+                SAR <span style="font-size:22px;font-weight:900;">{{$data->amount}}</span>
             </div>
-            <div style="text-align:center">{{$data->name}}</div>
             <div style="max-width:400px;margin:auto; margin-top:10px;text-align: center;">
                 The gift code can only be used once The amount will be credited to the user's Plenty Wallet
             </div>
         </div>
         <div class="home-button">
-            <input class="btn btn-lg btn-dark" value="Home" style="font-weight:500;font-size:14px">
+            <input onclick="goHome()" class="btn btn-lg btn-dark" value="Home" style="font-weight:500;font-size:14px">
         </div>
 
 
     </div>
 </div>
+@endif
 
 
 
@@ -112,5 +113,14 @@
     @include('footer')
 </div>
 
+<script>
+    function copyToClipBoard() {
+        var copyText = document.getElementById("gift-code");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        showAlertSuccess('Copied to clipboard');
+    }
+</script>
 
 @endsection
