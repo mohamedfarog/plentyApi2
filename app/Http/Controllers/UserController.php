@@ -271,9 +271,7 @@ class UserController extends Controller
 
 
         
-        $userl = User::with(['tier','shop'=>function  ($shop){
-            return $shop->with(['style','cat'])->whereNotNull('cat_id');
-        }])->where('id',$user->id)->first();
+        $userl = User::with('shop')->where('id',$user->id)->first();
 
         
         return response()->json(['user' => $userl]);
