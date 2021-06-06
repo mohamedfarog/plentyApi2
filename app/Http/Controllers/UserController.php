@@ -269,11 +269,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
+
         
-        $user = User::with(['tier','shop'=>function  ($shop){
+        $userl = User::with(['tier','shop'=>function  ($shop){
             return $shop->with(['style','cat'])->whereNotNull('cat_id');
-        }])->find($user->id);
-        return response()->json(['user' => $user]);
+        }])->where('id',$user->id)->first();
+
+        
+        return response()->json(['user' => $userl]);
     }
 
     public function dashLogin(Request $request)
