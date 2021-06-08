@@ -18,6 +18,7 @@ use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\ProdcatController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchedTimeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShoptableController;
@@ -152,6 +153,7 @@ Route::get('eventcatlist', [EventcatController::class, 'eventcatlist']);
 Route::resource('tabletimeslots', SchedTimeController::class);
 Route::post('vendorsignup', [UserController::class, 'vendorSignup']);
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::resource('roles', RoleController::class);
     Route::resource('sizes', SizeController::class);
     Route::resource('colors', ColorController::class);
     Route::resource('giftcard',GiftcardController::class);
