@@ -12,6 +12,8 @@ class Role extends Model
         'name_en', 'name_ar', 'desc_en', 'desc_ar',
     ];
 
+    protected $hidden = ['created_at', 'updated_at',];
+
     public function screens()
     {
         return $this->hasMany(Rolescreen::class);
