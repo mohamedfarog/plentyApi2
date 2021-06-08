@@ -14,6 +14,6 @@ class Role extends Model
 
     public function screens()
     {
-        return $this->hasMany(RoleScreen::class);
+        return $this->hasMany(Rolescreen::class);
     }
 }
