@@ -11,4 +11,9 @@ class Role extends Model
     protected $fillable = [
         'name_en', 'name_ar', 'desc_en', 'desc_ar',
     ];
+
+    public function screens()
+    {
+        return $this->hasMany(RoleScreen::class);
+    }
 }
