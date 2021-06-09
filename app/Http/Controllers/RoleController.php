@@ -27,7 +27,9 @@ class RoleController extends Controller
             $sort = $request->sort;
         }
 
-        return response()->json(['roles'=>Role::with(['screens'])->orderBy($col,$sort)->paginate($perpage), 'sort'=>$sort, 'col'=>$col ]);
+
+        return response()->json(['roles'=>Role::with(['screens'])->orderBy($col,$sort)->get(), 'sort'=>$sort, 'col'=>$col ]);
+        
     }
 
     /**
