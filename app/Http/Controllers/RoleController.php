@@ -12,9 +12,22 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Role::with(['screens'])->get();
+        $perpage = 15;
+        $col = 'id';
+        $sort = 'DESC';
+        if(isset($request->per_page)){
+            $perpage = $request->per_page;
+        }
+        if(isset($request->sort_col)){
+            $col = $request->sort_col;
+        }
+        if(isset($request->sort)){
+            $sort = $request->sort;
+        }
+
+        return response()->json(['roles'=>Role::with(['screens'])->orderBy($col,$sort)->paginate($perpage), 'sort'=>$sort, 'col'=>$col ]);
     }
 
     /**
