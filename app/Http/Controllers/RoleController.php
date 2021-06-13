@@ -114,6 +114,8 @@ class RoleController extends Controller
                         $arr['read_permission'] = $screen['read_permission'];
                     }
                     $arr['role_id'] = $role->id;
+                    
+                    $arr['role_id'] = $role->id;
                     Rolescreen::create($arr);
                 }
             }
