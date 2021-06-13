@@ -103,7 +103,7 @@ class RoleController extends Controller
 
                     $role->save();
                     $newrole = Role::with(['screens'])->find($role->id);
-                    return response()->json(['success' => !!$role, 'message' => $msg, 'role' => $role]);
+                    return response()->json(['success' => !!$role, 'message' => $msg, 'role' => $newrole]);
                     break;
             }
         } else {
