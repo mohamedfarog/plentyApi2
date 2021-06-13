@@ -77,7 +77,8 @@ class RoleController extends Controller
                     $msg = 'Role has been updated';
 
                     $role->save();
-                    return response()->json(['success' => !!$role, 'message' => $msg]);
+                    $newrole = Role::with(['screens'])->find($role->id);
+                    return response()->json(['success' => !!$role, 'message' => $msg, 'role' => $role]);
                     break;
             }
         } else {
