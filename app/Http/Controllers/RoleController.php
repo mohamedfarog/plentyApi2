@@ -113,7 +113,7 @@ class RoleController extends Controller
                     if(isset($screen['read_permission'])){
                         $arr['read_permission'] = $screen['read_permission'];
                     }
-                    $arr['role_id'] = $role->id;
+
                     
                     $arr['role_id'] = $role->id;
                     Rolescreen::create($arr);
