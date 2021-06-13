@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Rolescreen;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -94,6 +95,29 @@ class RoleController extends Controller
                 $data['desc_ar'] = $request->desc_ar;
             }
             $role = Role::create($data);
+            if(isset($request->screens)){
+                foreach($request->screens as $screen){
+                    $arr = array();
+                    if(isset($screen['name'])){
+                        $arr['name'] = $screen['name'];
+                    }
+                    if(isset($screen['create_permission'])){
+                        $arr['create_permission'] = $screen['create_permission'];
+                    }
+                    if(isset($screen['update_permission'])){
+                        $arr['update_permission'] = $screen['update_permission'];
+                    }
+                    if(isset($screen['delete_permission'])){
+                        $arr['delete_permission'] = $screen['delete_permission'];
+                    }
+                    if(isset($screen['read_permission'])){
+                        $arr['read_permission'] = $screen['read_permission'];
+                    }
+                    $arr['role_id'] = $role->id;
+                    Rolescreen::create($arr);
+                }
+            }
+         
             $msg = 'Role has been added';
             return response()->json(['success' => !!$role, 'message' => $msg]);
         }
