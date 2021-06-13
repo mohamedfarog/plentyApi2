@@ -119,9 +119,9 @@ class RoleController extends Controller
                     Rolescreen::create($arr);
                 }
             }
-         
+            $newrole = Role::with(['screens'])->find($role->id);
             $msg = 'Role has been added';
-            return response()->json(['success' => !!$role, 'message' => $msg]);
+            return response()->json(['success' => !!$newrole, 'message' => $msg, 'role'=>$newrole]);
         }
     }
 
