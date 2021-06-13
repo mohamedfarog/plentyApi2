@@ -390,6 +390,6 @@ Route::get('models', function (Request $request) {
 });
 
 Route::get('/updates', function () {
-    $output = shell_exec('cd ../ && git pull && php artisan migrate');
+    $output = shell_exec('cd ../ && git pull && php artisan migrate && yes');
     echo "<pre>$output</pre>";;
 });
