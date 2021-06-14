@@ -55,6 +55,9 @@ class User extends Authenticatable
                 foreach ($ids as $id) {
                     $role = Role::with(['screens'])->find($id);
                     foreach ($role->screens as $screen) {
+                        if(array_key_exists($screen->name, $rolearr)){
+                            return $screen->name;
+                        }
                         $rolearr[$screen->name] = [
                             "create_permission" => $screen->create_permission,
                             "read_permission" => $screen->read_permission,
