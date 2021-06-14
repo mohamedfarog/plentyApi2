@@ -301,7 +301,7 @@ class UserController extends Controller
                             $success["token"] = $user->createToken('MyApp')->accessToken;
                             $u = User::with(['tier', 'designer', 'roles' => function ($roles) {
                                 return $roles->with(['rolescreens'=>function($screen){
-                                    return $screen->with('screens');
+                                    return $screen->with(['screens']);
                                 }]);
                             }])->find($user->id);
 
