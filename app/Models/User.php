@@ -76,6 +76,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Designer::class, 'id', 'user_id');
     }
+
+    public function roles()
+    {
+        return $this->hasMany(Userrole::class);
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

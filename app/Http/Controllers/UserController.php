@@ -299,7 +299,7 @@ class UserController extends Controller
                         if ($user->email_verified_at != NULL) {
                             $success["message"] = "Login successful";
                             $success["token"] = $user->createToken('MyApp')->accessToken;
-                            $u = User::with(['tier', 'designer'])->find($user->id);
+                            $u = User::with(['tier', 'designer', 'roles'])->find($user->id);
 
                             return response()->json(["success" => $success, "user" => $u]);
                         } else {
