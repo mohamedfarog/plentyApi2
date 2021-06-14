@@ -49,15 +49,16 @@ class User extends Authenticatable
     public function getRolesAttribute()
     {
         if($this->typeofuser !="U"){
-            $roles = Userrole::where('user_id', $this->id)->get();
+            $ids = Userrole::where('user_id', $this->id)->pluck('role_id')->toArray();
             $rolearr = array();
-            if($roles){
-                foreach($roles as $role){
+            if(count($ids) > 0){
+                foreach($ids as $id){
+                    $role = Role::with(['screens'])->find($id);
                     $rolearr[$role->name] = $role->screens;
                 }
             }
 
-            return $roles;
+            return $rolearr;
         }
     }
 
