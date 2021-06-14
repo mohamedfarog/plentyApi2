@@ -303,7 +303,7 @@ class UserController extends Controller
 
                             return response()->json(["success" => $success, "user" => $u]);
                         } else {
-                            return response()->json(["error" => "Please verify the email"]);
+                            return response()->json(["error" => "Please verify the email"], 400);
                         }
                     } else {
                         return response()->json(["error" => "You don't have enough permissions."], 400);
