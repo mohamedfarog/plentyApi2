@@ -42,8 +42,24 @@ class User extends Authenticatable
     protected $appends = [
         'loyaltypass',
         'accesspass',
-        'age'
+        'age',
+        'roles'
     ];
+
+    public function getRolesAttribute()
+    {
+        if($this->typeofuser !="U"){
+            $roles = Userrole::where('user_id', $this->id)->get();
+            $rolearr = array();
+            if($roles){
+                foreach($roles as $role){
+                    $rolearr[$role->name] = $role->screens;
+                }
+            }
+
+            return $rolearr;
+        }
+    }
 
     public function getAgeAttribute()
     {
