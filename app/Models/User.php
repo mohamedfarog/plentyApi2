@@ -55,15 +55,40 @@ class User extends Authenticatable
                 foreach ($ids as $id) {
                     $role = Role::with(['screens'])->find($id);
                     foreach ($role->screens as $screen) {
-                        if(array_key_exists($screen->name, $rolearr)){
-                            return $screen->name;
+                        if (array_key_exists($screen->name, $rolearr)) {
+                            $create = $rolearr[$screen->name]['create_permission'];
+                            $read = $rolearr[$screen->name]['read_permission'];
+                            $update = $rolearr[$screen->name]['update_permission'];
+                            $delete = $rolearr[$screen->name]['delete_permission'];
+
+                            $updcreate = false;
+                            $updread = false;
+                            $updupdate = false;
+                            $upddelete = false;
+                            if ($create || $screen->create_permission) {
+                                $updcreate = true;
+                            }if ($read || $screen->read_permission) {
+                                $updread = true;
+                            }if ($update || $screen->update_permission) {
+                                $updupdate = true;
+                            }if ($delete || $screen->delete_permission) {
+                                $upddelete = true;
+                            }
+
+                            $rolearr[$screen->name] = [
+                                "create_permission" => $updcreate,
+                                "read_permission" => $updread,
+                                "update_permission" => $updupdate,
+                                "delete_permission" => $upddelete,
+                            ];
+                        } else {
+                            $rolearr[$screen->name] = [
+                                "create_permission" => $screen->create_permission,
+                                "read_permission" => $screen->read_permission,
+                                "update_permission" => $screen->update_permission,
+                                "delete_permission" => $screen->delete_permission,
+                            ];
                         }
-                        $rolearr[$screen->name] = [
-                            "create_permission" => $screen->create_permission,
-                            "read_permission" => $screen->read_permission,
-                            "update_permission" => $screen->update_permission,
-                            "delete_permission" => $screen->delete_permission,
-                        ];
                     }
                 }
             }
