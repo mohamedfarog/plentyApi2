@@ -57,7 +57,7 @@ class User extends Authenticatable
                 }
             }
 
-            return $rolearr;
+            return $roles;
         }
     }
 
