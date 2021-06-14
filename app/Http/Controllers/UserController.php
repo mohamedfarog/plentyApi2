@@ -27,16 +27,14 @@ class UserController extends Controller
     use SendsPasswordResetEmails;
     public function forgetPassword(Request $request)
     {
-        if(isset($request->email)){
-            $user = User::where('email',$request->email)->whereNotNull('email_verified_at')->first();
-            if($user){
+        if (isset($request->email)) {
+            $user = User::where('email', $request->email)->whereNotNull('email_verified_at')->first();
+            if ($user) {
                 $this->sendResetLinkEmail($request);
-                return response()->json(['response'=>"If the email you specified was in our system, we sent it a password reset link."]);
+                return response()->json(['response' => "If the email you specified was in our system, we sent it a password reset link."]);
             }
-            return response()->json(['error'=>"The email you specified was not found in our system"]);
-
+            return response()->json(['error' => "The email you specified was not found in our system"]);
         }
-
     }
     /**
      * Display a listing of the resource.
@@ -55,15 +53,13 @@ class UserController extends Controller
                     $perpage = $request->perpage;
                 }
                 if (isset($request->all)) {
-                   
-                   
-                    return User::with(['tier'])->get();  
-                    
-                    
+
+
+                    return User::with(['tier'])->get();
                 }
-                if(isset($request->search)){
-                    return User::where(function($user) use($request){
-                        return $user->where('name','LIKE','%'.$request->search.'%')->orWhere('email','LIKE','%'.$request->search.'%')->orWhere('contact','LIKE','%'.$request->search.'%');
+                if (isset($request->search)) {
+                    return User::where(function ($user) use ($request) {
+                        return $user->where('name', 'LIKE', '%' . $request->search . '%')->orWhere('email', 'LIKE', '%' . $request->search . '%')->orWhere('contact', 'LIKE', '%' . $request->search . '%');
                     })->with(['tier'])->paginate($perpage);
                 }
                 return User::with(['tier'])->paginate($perpage);
@@ -92,7 +88,7 @@ class UserController extends Controller
             if ($user->email_verified_at != NULL) {
                 $success["message"] = "Login successful";
                 $success["token"] = $user->createToken('MyApp')->accessToken;
-                $u = User::with(['tier','shop'])->find($user->id);
+                $u = User::with(['tier', 'shop'])->find($user->id);
 
                 return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
             } else {
@@ -251,13 +247,13 @@ class UserController extends Controller
                     $user->save();
 
                     (new ApplePass())->createLoyaltyPass($user);
-                    Loyalty::notifyApple(explode('.',$user->loyaltyidentifier)[0]);
+                    Loyalty::notifyApple(explode('.', $user->loyaltyidentifier)[0]);
 
                     if ($user->accessidentifier != null) {
                         (new ApplePass())->createAccessPass($user->id, null);
                     }
                     // (new FoodicsController())->createUser($user);
-                    
+
                     $msg = 'Account details updated successfully.';
                     return response()->json(['success' => !!$user, 'message' => $msg, 'user' => $user]);
                     break;
@@ -270,10 +266,10 @@ class UserController extends Controller
         $user = Auth::user();
 
 
-        
-        $userl = User::with('shop')->where('id',$user->id)->first();
 
-        
+        $userl = User::with('shop')->where('id', $user->id)->first();
+
+
         return response()->json(['user' => $userl]);
     }
 
@@ -299,14 +295,18 @@ class UserController extends Controller
                 }
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                     $user = Auth::user();
-                    if ($user->email_verified_at != NULL) {
-                        $success["message"] = "Login successful";
-                        $success["token"] = $user->createToken('MyApp')->accessToken;
-                        $u = User::with(['tier','designer'])->find($user->id);
+                    if ($user->typeofuser != "U") {
+                        if ($user->email_verified_at != NULL) {
+                            $success["message"] = "Login successful";
+                            $success["token"] = $user->createToken('MyApp')->accessToken;
+                            $u = User::with(['tier', 'designer'])->find($user->id);
 
-                        return response()->json(["success" => $success, "user" => $u]);
+                            return response()->json(["success" => $success, "user" => $u]);
+                        } else {
+                            return response()->json(["error" => "Please verify the email"]);
+                        }
                     } else {
-                        return response()->json(["error" => "Please verify the email"]);
+                        return response()->json(["error" => "You don't have enough permissions."]);
                     }
                 } else {
                     return response()->json(["error" => "Invalid Email/Password"], 400);
@@ -335,11 +335,15 @@ class UserController extends Controller
                             $otp->save();
 
                             $user = User::with(['tier'])->where('contact', $request->contact)->first();
-                            Auth::login($user);
-                            $loggeduser = Auth::user();
-                            if ($user) {
-                                $success['message'] = $msg;
-                                $success['token'] = $loggeduser->createToken('MyApp')->accessToken;
+                            if ($user->typeofuser != "U") {
+                                Auth::login($user);
+                                $loggeduser = Auth::user();
+                                if ($user) {
+                                    $success['message'] = $msg;
+                                    $success['token'] = $loggeduser->createToken('MyApp')->accessToken;
+                                }
+                            } else {
+                                return response()->json(["error" => "You don't have enough permissions."], 400);
                             }
                         } else {
                             $verified = false;
@@ -441,7 +445,7 @@ class UserController extends Controller
                             if (!is_null($newuser->name) && !is_null($newuser->contact) && !is_null($newuser->email)) {
 
                                 (new ApplePass())->createLoyaltyPass($newuser);
-                                Loyalty::notifyApple(explode('.',$newuser->loyaltyidentifier)[0]);
+                                Loyalty::notifyApple(explode('.', $newuser->loyaltyidentifier)[0]);
                             }
                             return response()->json(['success' => !!$user, 'message' => $msg]);
                             break;
@@ -528,8 +532,6 @@ class UserController extends Controller
                     if (!is_null($user->name) && !is_null($user->contact) && !is_null($user->email)) {
 
                         (new ApplePass())->createLoyaltyPass($user);
-
-
                     }
                     return response()->json(['success' => !!$user, 'message' => $msg]);
                 }
@@ -544,79 +546,74 @@ class UserController extends Controller
     public function topUpWallet(Request $request)
     {
         $authuser = Auth::user();
-    
+
         if ($authuser) {
-            if($authuser->typeofuser=='S'){
+            if ($authuser->typeofuser == 'S') {
                 if (isset($request->amount)) {
                     $user = User::with(['tier'])->find($request->user_id);
                     $user->wallet = $request->amount;
                     $user->save();
-                    return response()->json(['success' => !!$user, 'user' => $user,'message' => "The user's wallet balance has been updated"]);
+                    return response()->json(['success' => !!$user, 'user' => $user, 'message' => "The user's wallet balance has been updated"]);
                 }
-            }
-            else{
-                    if (isset($request->amount)) {
-                $user = User::with(['tier'])->find($authuser->id);
-            
+            } else {
+                if (isset($request->amount)) {
+                    $user = User::with(['tier'])->find($authuser->id);
+
                     $trans = new Transaction();
                     $trans->amount = $request->amount;
                     $trans->ref = Str::uuid();
                     // $trans->order_id = 0;
                     $trans->status = 0;
                     $trans->type = 'Wallet';
-                    $trans->user_id= $authuser->id;
+                    $trans->user_id = $authuser->id;
                     $trans->save();
-                    if(isset($request->web)){
-                        $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
-                 
-
+                    if (isset($request->web)) {
+                        $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id, true);
                     }
-                    $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id,true);
+                    $paygateway = $trans->createpayment($user, $request->amount, Str::uuid(), $trans->id, true);
                     // Mail::send('datadata', ['data' => $paygateway], function ($m) {
                     //     $m->from('noreply@dark.ae', 'PLENTY WALLET TEST');
-            
+
                     //     $m->to('abubakar@mvp-apps.ae')->subject(`'PLENTY WALLET TEST`);
                     // });
-                    return response()->json(['success' =>true, 'message' => $paygateway, 'user' => $authuser]);
-                
-                // $user->wallet += $request->amount;
-                // $user->save();
-                return response()->json(['success' => !!$user, 'user' => $user]);
-            }
-            }
+                    return response()->json(['success' => true, 'message' => $paygateway, 'user' => $authuser]);
 
-        
+                    // $user->wallet += $request->amount;
+                    // $user->save();
+                    return response()->json(['success' => !!$user, 'user' => $user]);
+                }
+            }
         } else {
             return response()->json(["error" => 'Unauthorized User']);
         }
     }
     // Vendors sign up and login  for the Bazar
     public function vendorsRegister(Request $request)
-    {   
-        
-        $user= Auth::user();
+    {
+
+        $user = Auth::user();
         $settings = Project::first();
-        
-        if($user->typeofuser=='S'){
-     
-            $newuser= new User();
-            if(isset($request->name)){
+
+        if ($user->typeofuser == 'S') {
+
+            $newuser = new User();
+            if (isset($request->name)) {
                 $newuser->name = $request->name;
             }
-            if(isset($request->email)){
+            if (isset($request->email)) {
                 $newuser->email = $request->email;
             }
-            if(isset($request->password)){
+            if (isset($request->password)) {
                 $newuser->password =  Hash::make($request->password);
             }
-            if(isset($request->contact)){
+            if (isset($request->contact)) {
                 $newuser->contact = $request->contact;
             }
-            if(isset($request->name)){
+            if (isset($request->name)) {
                 $newuser->name = $request->name;
             }
-            $newuser-> email_verified_at= now();
-            $newuser->typeofuser= 'V';
+            $newuser->email_verified_at = now();
+            $newuser->typeofuser = 'V';
             $start = '1';
             $end = '';
             for ($i = 0; $i < $settings->invcode - 1; $i++) {
@@ -640,187 +637,174 @@ class UserController extends Controller
                     $run = false;
                 }
             }
-            
+
             $newuser->save();
             $shop = new Shop();
-            if(isset($request->name_en)){
+            if (isset($request->name_en)) {
                 $shop->name_en  = $request->name_en;
             }
-            if(isset($request->name_ar)){
+            if (isset($request->name_ar)) {
                 $shop->name_ar  = $request->name_ar;
             }
-            if(isset($request->desc_en)){
+            if (isset($request->desc_en)) {
                 $shop->desc_en  = $request->desc_en;
             }
-            if(isset($request->desc_ar)){
+            if (isset($request->desc_ar)) {
                 $shop->desc_ar  = $request->desc_ar;
             }
-            if(isset($request->eventcat_id)){
+            if (isset($request->eventcat_id)) {
                 $shop->eventcat_id  = $request->eventcat_id;
             }
-            if(isset($request->active)){
+            if (isset($request->active)) {
                 $shop->active  = $request->active;
             }
-            $shop->user_id=$newuser->id;
-            $shop->isvendor=1;
-       
+            $shop->user_id = $newuser->id;
+            $shop->isvendor = 1;
+
             $shop->save();
             return response()->json(['success' => !!$user, 'Vendor' => $shop]);
-
-
-
-
-
         }
     }
 
     public function vendorSignup(Request $request)
-    {   
-        
+    {
+
 
         $settings = Project::first();
-      
-            $newuser= new User();
-            if(isset($request->name)){
-                $newuser->name = $request->name;
-            }
-            if(isset($request->email)){
-                $newuser->email = $request->email;
-            }
-            if(isset($request->password)){
-                $newuser->password =  Hash::make($request->password);
-            }
-            if(isset($request->contact)){
-                $newuser->contact = $request->contact;
-            }
-            if(isset($request->name)){
-                $newuser->name = $request->name;
-            }
-            if(isset($request->active)){
-                $newuser->active = $request->active;
-            }
-            // $newuser-> email_verified_at= now();
-            $newuser->typeofuser= 'V';
-            $start = '1';
-            $end = '';
-            for ($i = 0; $i < $settings->invcode - 1; $i++) {
 
-                $start .= '0';
-            }
-            for ($i = 0; $i < $settings->invcode; $i++) {
+        $newuser = new User();
+        if (isset($request->name)) {
+            $newuser->name = $request->name;
+        }
+        if (isset($request->email)) {
+            $newuser->email = $request->email;
+        }
+        if (isset($request->password)) {
+            $newuser->password =  Hash::make($request->password);
+        }
+        if (isset($request->contact)) {
+            $newuser->contact = $request->contact;
+        }
+        if (isset($request->name)) {
+            $newuser->name = $request->name;
+        }
+        if (isset($request->active)) {
+            $newuser->active = $request->active;
+        }
+        // $newuser-> email_verified_at= now();
+        $newuser->typeofuser = 'V';
+        $start = '1';
+        $end = '';
+        for ($i = 0; $i < $settings->invcode - 1; $i++) {
 
-                $end .= '9';
-            }
-            $run = true;
-            $code = 'P-' . rand(intval($start), intval($end));
-            
-            while ($run) {
+            $start .= '0';
+        }
+        for ($i = 0; $i < $settings->invcode; $i++) {
 
-                $user = User::where('invitation_code', $code)->first();
-                if ($user != null) {
-                    $code = 'P-' . rand(intval($start), intval($end));
-                } else {
-                    $newuser->invitation_code = $code;
-                    $run = false;
-                }
+            $end .= '9';
+        }
+        $run = true;
+        $code = 'P-' . rand(intval($start), intval($end));
+
+        while ($run) {
+
+            $user = User::where('invitation_code', $code)->first();
+            if ($user != null) {
+                $code = 'P-' . rand(intval($start), intval($end));
+            } else {
+                $newuser->invitation_code = $code;
+                $run = false;
             }
-            
-            $newuser->save();
-            $shop = new Shop();
-            if(isset($request->name_en)){
-                $shop->name_en  = $request->name_en;
-            }
-            if(isset($request->name_ar)){
-                $shop->name_ar  = $request->name_ar;
-            }
-            if(isset($request->desc_en)){
-                $shop->desc_en  = $request->desc_en;
-            }
-            if(isset($request->desc_ar)){
-                $shop->desc_ar  = $request->desc_ar;
-            }
-            if(isset($request->eventcat_id)){
-                $shop->eventcat_id  = $request->eventcat_id;
-            }
-            if(isset($request->active)){
-                $shop->active  = $request->active;
-            }
-            $shop->user_id=$newuser->id;
-            $shop->isvendor=1;
-       
-            $shop->save();
-            return response()->json(['success' => !!$user, 'Vendor' => $shop]);
+        }
+
+        $newuser->save();
+        $shop = new Shop();
+        if (isset($request->name_en)) {
+            $shop->name_en  = $request->name_en;
+        }
+        if (isset($request->name_ar)) {
+            $shop->name_ar  = $request->name_ar;
+        }
+        if (isset($request->desc_en)) {
+            $shop->desc_en  = $request->desc_en;
+        }
+        if (isset($request->desc_ar)) {
+            $shop->desc_ar  = $request->desc_ar;
+        }
+        if (isset($request->eventcat_id)) {
+            $shop->eventcat_id  = $request->eventcat_id;
+        }
+        if (isset($request->active)) {
+            $shop->active  = $request->active;
+        }
+        $shop->user_id = $newuser->id;
+        $shop->isvendor = 1;
+
+        $shop->save();
+        return response()->json(['success' => !!$user, 'Vendor' => $shop]);
     }
 
-        public function vendorslogin(Request $request)
-        {
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                $user = Auth::user();
-                if($user->typeofuser == 'V' ){
-                    if ($user->email_verified_at != NULL) {
-                        $success["message"] = "Login successful";
-                        $success["token"] = $user->createToken('MyApp')->accessToken;
-                        $u = User::with('shop')->where('id',$user->id)->first();
-        
-                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
-                    } else {
-                        return response()->json(["error" => "Your account has not been approved yet. Please contact the administrator to obtain approval."]);
-                    }
-                }
-                else if($user->typeofuser == 'B' ){
-                    if ($user->email_verified_at != NULL) {
-                        $success["message"] = "Login successful";
-                        $success["token"] = $user->createToken('MyApp')->accessToken;
-                        $u = User::with(['shop'  =>function  ($shop){
-                            return $shop->with(['style','cat'])->whereNotNull('cat_id');
-                        }])->where('id',$user->id)->first();
-        
-                        return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
-                    } else {
-                        return response()->json(["error" => "Your account has not been approved yet. Please contact the administrator to obtain approval."]);
-                    }
-                }
-                else{
-                    return response()->json(["error" => "You do not have permissions to log in. Please contact the administrator for more information."]);
-                }
-             
-            } else {
-                return response()->json(["error" => "Invalid Email/Password"]);
-            }
-        }
-
-
-        public function sendNotifications(Request $request)
-        {
-            $validator = Validator::make($request->all(), [
-                "title" => "required",
-                "subtitle" => "required",
-            ]);
-    
-            if ($validator->fails()) {
-                return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
-            }
-            $user= Auth::user();
-            $title= $request->title;
-            $subtitle= $request->subtitle;
-            if($user->typeofuser=='S'){
-                    PushNotification::sendAllFCM($title,$subtitle); 
-                    return response()->json(["message" => 'Notification has been sent!',"status_code" => 1],);
-
-                }
-            else{
-                return response()->json(["error" =>'Unauthorized User']);
-
-            }    
-       
-        }
-
-        public function updateFCM(Request $request)
+    public function vendorslogin(Request $request)
     {
-        $user=Auth::user();
-        User::where("id",$user->id)->update(["fcm"=>$request->fcm]);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            if ($user->typeofuser == 'V') {
+                if ($user->email_verified_at != NULL) {
+                    $success["message"] = "Login successful";
+                    $success["token"] = $user->createToken('MyApp')->accessToken;
+                    $u = User::with('shop')->where('id', $user->id)->first();
+
+                    return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                } else {
+                    return response()->json(["error" => "Your account has not been approved yet. Please contact the administrator to obtain approval."]);
+                }
+            } else if ($user->typeofuser == 'B') {
+                if ($user->email_verified_at != NULL) {
+                    $success["message"] = "Login successful";
+                    $success["token"] = $user->createToken('MyApp')->accessToken;
+                    $u = User::with(['shop'  => function ($shop) {
+                        return $shop->with(['style', 'cat'])->whereNotNull('cat_id');
+                    }])->where('id', $user->id)->first();
+
+                    return response()->json(["success" => $success, "user" => $u, "status_code" => 1],);
+                } else {
+                    return response()->json(["error" => "Your account has not been approved yet. Please contact the administrator to obtain approval."]);
+                }
+            } else {
+                return response()->json(["error" => "You do not have permissions to log in. Please contact the administrator for more information."]);
+            }
+        } else {
+            return response()->json(["error" => "Invalid Email/Password"]);
+        }
+    }
+
+
+    public function sendNotifications(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "title" => "required",
+            "subtitle" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["error" => $validator->errors(),  "status_code" => 0]);
+        }
+        $user = Auth::user();
+        $title = $request->title;
+        $subtitle = $request->subtitle;
+        if ($user->typeofuser == 'S') {
+            PushNotification::sendAllFCM($title, $subtitle);
+            return response()->json(["message" => 'Notification has been sent!', "status_code" => 1],);
+        } else {
+            return response()->json(["error" => 'Unauthorized User']);
+        }
+    }
+
+    public function updateFCM(Request $request)
+    {
+        $user = Auth::user();
+        User::where("id", $user->id)->update(["fcm" => $request->fcm]);
 
         return response()->json(['success' => "true"]);
     }
-
 }
