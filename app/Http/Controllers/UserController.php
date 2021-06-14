@@ -300,7 +300,7 @@ class UserController extends Controller
                             $success["message"] = "Login successful";
                             $success["token"] = $user->createToken('MyApp')->accessToken;
                             $u = User::with(['tier', 'designer', 'roles' => function ($roles) {
-                                return $roles->rolescreens->screens;
+                                return $roles->rolescreens()->screens();
                             }])->find($user->id);
 
                             return response()->json(["success" => $success, "user" => $u]);
