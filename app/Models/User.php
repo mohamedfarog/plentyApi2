@@ -43,7 +43,8 @@ class User extends Authenticatable
         'loyaltypass',
         'accesspass',
         'age',
-        'roles'
+        'roles',
+        'activeroles'
     ];
 
     public function getRolesAttribute()
@@ -90,6 +91,20 @@ class User extends Authenticatable
                             ];
                         }
                     }
+                }
+            }
+
+            return $rolearr;
+        }
+    }public function getActiverolesAttribute()
+    {
+        if ($this->typeofuser != "U") {
+            $ids = Userrole::where('user_id', $this->id)->pluck('role_id')->toArray();
+            $rolearr = array();
+            if (count($ids) > 0) {
+                foreach ($ids as $id) {
+                    $role = Role::with(['screens'])->find($id);
+                    $rolearr[$role->name_en] = $role->desc_en;
                 }
             }
 
