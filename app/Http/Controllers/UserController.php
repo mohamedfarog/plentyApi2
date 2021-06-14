@@ -306,7 +306,7 @@ class UserController extends Controller
                             return response()->json(["error" => "Please verify the email"]);
                         }
                     } else {
-                        return response()->json(["error" => "You don't have enough permissions."]);
+                        return response()->json(["error" => "You don't have enough permissions."], 400);
                     }
                 } else {
                     return response()->json(["error" => "Invalid Email/Password"], 400);
