@@ -11,6 +11,6 @@ class Userrole extends Model
 
     public function rolescreens()   
     {
-        return $this->belongsTo(Role::class);
+        return $this->hasMany(Role::class);
     }
 }
