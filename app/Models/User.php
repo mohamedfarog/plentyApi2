@@ -54,7 +54,9 @@ class User extends Authenticatable
             $rolearr = array();
             if (count($ids) > 0) {
                 foreach ($ids as $id) {
-                    $role = Role::with(['screens'])->find($id);
+                    $role = Role::with(['screens'=>function($screens){
+                        return $screens->orderBy('rank','ASC');
+                    }])->find($id);
                     foreach ($role->screens as $screen) {
                         if (array_key_exists($screen->name, $rolearr)) {
                             $create = $rolearr[$screen->name]['create_permission'];
