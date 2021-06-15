@@ -81,6 +81,7 @@ class User extends Authenticatable
                                 "read_permission" => $updread,
                                 "update_permission" => $updupdate,
                                 "delete_permission" => $upddelete,
+                                "rank"=>$screen->rank
                             ];
                         } else {
                             $rolearr[$screen->name] = [
@@ -88,6 +89,7 @@ class User extends Authenticatable
                                 "read_permission" => $screen->read_permission,
                                 "update_permission" => $screen->update_permission,
                                 "delete_permission" => $screen->delete_permission,
+                                "rank"=>$screen->rank
                             ];
                         }
                     }
