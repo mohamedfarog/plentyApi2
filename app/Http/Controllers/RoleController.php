@@ -17,7 +17,7 @@ class RoleController extends Controller
     {
         $perpage = 15;
         $col = 'id';
-        $sort = 'DESC';
+        $sort = 'ASC';
         if(isset($request->per_page)){
             $perpage = $request->per_page;
         }
@@ -92,6 +92,8 @@ class RoleController extends Controller
                             }
                             if(isset($screen['read_permission'])){
                                 $arr['read_permission'] = $screen['read_permission'];
+                            }if(isset($screen['rank'])){
+                                $arr['rank'] = $screen['rank'];
                             }
         
                             
@@ -139,7 +141,9 @@ class RoleController extends Controller
                     if(isset($screen['read_permission'])){
                         $arr['read_permission'] = $screen['read_permission'];
                     }
-
+                    if(isset($screen['rank'])){
+                        $arr['rank'] = $screen['rank'];
+                    }
                     
                     $arr['role_id'] = $role->id;
                     Rolescreen::create($arr);
