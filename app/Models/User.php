@@ -110,9 +110,12 @@ class User extends Authenticatable
                     $role = Role::with(['screens'])->find($id);
                     $rolearr[$role->name_en] = $role->desc_en;
                 }
+                return $rolearr;
+            }else{
+                return null;
             }
 
-            return $rolearr;
+            
         }
     }
 
