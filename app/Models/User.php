@@ -95,7 +95,6 @@ class User extends Authenticatable
                     }
                 }
             }
-
             return $rolearr;
         }
     }public function getActiverolesAttribute()
