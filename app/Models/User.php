@@ -55,7 +55,7 @@ class User extends Authenticatable
             if (count($ids) > 0) {
                 foreach ($ids as $id) {
                     $role = Role::with(['screens'=>function($screens){
-                        return $screens->orderBy('rank','ASC');
+                        return $screens->orderBy('rank','DESC');
                     }])->find($id);
                     foreach ($role->screens as $screen) {
                         if (array_key_exists($screen->name, $rolearr)) {
