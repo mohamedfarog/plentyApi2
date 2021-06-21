@@ -49,7 +49,7 @@ class CouponController extends Controller
     {
         $coupons = Coupon::get();
 
-        return response()->jsom(['success'=>!!$coupons, 'coupons'=>$coupons]);
+        return response()->json(['success'=>!!$coupons, 'coupons'=>$coupons]);
     }
 
 
