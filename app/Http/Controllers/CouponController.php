@@ -45,6 +45,13 @@ class CouponController extends Controller
         return response()->json(['Response' => !!$q, 'Coupon' => $q->first()]);
     }
 
+    public function getAllCoupons(Request $request)
+    {
+        $coupons = Coupon::get();
+
+        return response()->jsom(['success'=>!!$coupons, 'coupons'=>$coupons]);
+    }
+
 
     public function store(Request $request)
     {

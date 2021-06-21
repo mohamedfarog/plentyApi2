@@ -196,6 +196,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('searchProduct', [ProductController::class, "search"]); // This is currently working for vendors in mobile app
     Route::post('tier', [TierController::class, 'store']);
     Route::resource('coupons', CouponController::class);
+    Route::get('getcoupons',[CouponController::class,'getAllCoupons']);
     Route::post('wallet/topup', [UserController::class, 'topUpWallet']);
 });
 
