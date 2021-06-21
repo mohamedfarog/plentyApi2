@@ -26,7 +26,7 @@ class Coupon extends Model
 
     
     public function getShopnameAttribute(){
-        if(isset(request('getshops'))){
+        if(request('getshops')!=''){
             if($this->shop_id!=null){
             $shop = Shop::find($this->shop_id);
                 return $shop->name_en;
