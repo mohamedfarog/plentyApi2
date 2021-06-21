@@ -47,9 +47,10 @@ class CouponController extends Controller
 
     public function getAllCoupons(Request $request)
     {
-        $coupons = Coupon::get();
+        $col='id';$sort='ASC';
+        $coupons = Coupon::orderBy($col,$sort)->get();
 
-        return response()->json(['success'=>!!$coupons, 'coupons'=>$coupons]);
+        return response()->json(['success'=>!!$coupons, 'coupons'=>$coupons,'sort'=>$sort, 'col'=>$col ]);
     }
 
 
