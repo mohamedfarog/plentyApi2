@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {   
-    protected $appends = ['expired'];
+    protected $appends = ['expired','shopname'];
     public function shop()
     {
         return $this->hasOne(Shop::class,'id','shop_id');
