@@ -80,7 +80,7 @@ class CouponController extends Controller
 
                     if (Coupon::where('code', '=', strtoupper($request->code))->first()) {
 
-                        return response()->json(["error" => 'The coupon already exists',  "status_code" => 0]);
+                        return response()->json(["error" => 'The coupon already exists',  "status_code" => 0],400);
                     } else {
                         $coupon->code = strtoupper($request->code);
                         $coupon->value = $request->value;
