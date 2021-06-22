@@ -28,6 +28,9 @@ class Coupon extends Model
     public function getShopnameAttribute(){
         if(request('getshops')!=''){
             if($this->shop_id!=null){
+                if($this->shop_id == 0){
+                    return 'Plenty Bazaar';
+                }
             $shop = Shop::find($this->shop_id);
                 return $shop->name_en;
             }else{
