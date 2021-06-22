@@ -25,7 +25,7 @@ class ShopController extends Controller
     }
     public function allBrands(Request $request)
     {
-        return Shop::whereNotNull('cat_id')->where('isvendor', 1)->get();
+        return Shop::whereNotNull('cat_id')->where('isvendor', 0)->get();
     }
     /**
      * Show the form for creating a new resource.
