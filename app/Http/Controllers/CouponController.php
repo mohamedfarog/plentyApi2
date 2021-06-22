@@ -99,9 +99,10 @@ class CouponController extends Controller
                         $coupon->ispercentage = $request->ispercentage;
                     }
 
-                    $coupon->save();
+                    $coupon->save();    
+                    $newcoupon = Coupon::find($coupon->id);
 
-                    return response()->json(['success' => "Coupons added",'message' => "Coupon added"]);
+                    return response()->json(['success' => "Coupons added",'message' => "Coupon added", 'coupon'=>$newcoupon]);
                     break;
 
                 case "activate":
