@@ -24,8 +24,14 @@ class ShopController extends Controller
         
     }
     public function allBrands(Request $request)
-    {
-        return Shop::whereNotNull('cat_id')->where('isvendor', 0)->get();
+    {   $list = array();
+        $shops = Shop::whereNotNull('cat_id')->where('isvendor', 0)->get();
+        foreach($shops as $shop){
+            array_push($list,['id'=>$shop->id, "name_en"=> $shop->name_en,
+            "name_ar"=>$shop->name_ar,]);
+        }
+
+        return $list;
     }
     /**
      * Show the form for creating a new resource.
