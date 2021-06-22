@@ -86,7 +86,9 @@ class CouponController extends Controller
                         $coupon->value = $request->value;
                     }
                     if (isset($request->shop_id)) {
-                        if ($request->shop_id == '0') { } else {
+                        if ($request->shop_id == '0') {
+                            $coupon->shop_id = 0;
+                         } else {
                             $coupon->shop_id = $request->shop_id;
                         }
                     } else { }
