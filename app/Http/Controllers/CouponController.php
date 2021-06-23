@@ -88,6 +88,8 @@ class CouponController extends Controller
                     if (isset($request->shop_id)) {
                         if ($request->shop_id == '0') {
                             $coupon->shop_id = 0;
+                         }else if($request->shop_id == 'all'){
+                             
                          } else {
                             $coupon->shop_id = $request->shop_id;
                         }
